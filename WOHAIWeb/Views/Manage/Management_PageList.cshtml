@@ -1,0 +1,83 @@
+﻿@using Webdiyer.WebControls.Mvc;
+@using GL.Data.Model;
+@model PagedList<ManagerInfo>
+
+<div class="widget-title">
+    <span class="icon"><i class="icon-th"></i></span>
+    <h5>管理员列表</h5>
+</div>
+<div class="widget-content nopadding">
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>IDs</th>
+                <th>账号</th>
+                <th>密码</th>
+                @*<th>权限</th>*@
+                <th>基本操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.Count == 0)
+            {
+                <tr class="gradeX">
+                    <td class="colspan" align="center" colspan="0">
+                        没有找到相关记录！
+                    </td>
+                </tr>
+            }
+            @foreach (ManagerInfo m in Model)
+            {
+                <tr class="gradeA">
+                    <td>@m.AdminID</td>
+                    <td>@m.AdminAccount</td>
+                    <td>******</td>
+                    @*<td>@m.AdminMasterRight</td>*@
+                    <td style="text-align:center">
+                        <input id="btnDel" type="button" value="删除" class="btn btn-danger btn-mini" onclick="return ConfirmDelUser(this);" />
+                        <input id="btnDel" type="button" value="编辑" class="btn btn-inverse btn-mini" onclick="return UpdateUser(this);" />
+                    </td>
+                </tr>
+
+            }
+
+
+
+
+        </tbody>
+    </table>
+</div>
+<div class="widget-content">
+
+    @Ajax.Pager(
+    Model,
+    new PagerOptions()
+    {
+        CssClass = "pager",
+        ShowMorePagerItems = true,
+        PageIndexParameterName = "page",
+        ShowDisabledPagerItems = true,
+        AlwaysShowFirstLastPageNumber = true,
+        //ShowRecordCountItems = true,
+        HorizontalAlign = "right",
+        //SeparatorHtml = "",
+        CurrentPagerItemWrapperFormatString = "<li class=\"disabled\"><span>{0}</span></li>",
+        NumericPagerItemWrapperFormatString = "<li>{0}</li>",
+        PagerItemWrapperFormatString = "<li>{0}</li>",
+        //RecordCountText = string.Format("共{0}条记录, {1}页", Model.TotalItemCount, Model.TotalPageCount),
+        //RecordCountFormatString = "<li><span>{0}</span></li>",
+        //DisabledPagerItemsFormatString = "<li class=\"disabled\"><span>{0}</span></li>",
+        FirstPageText = "第一页",
+        LastPageText = "最后一页",
+        ContainerTagName = "ul"
+    },
+    new MvcAjaxOptions
+    {
+        HttpMethod = "POST",
+        UpdateTargetId = "box",
+        InsertionMode = InsertionMode.Replace,
+        OnFailure = "errFunc",
+        OnSuccess = "successPageFun"
+    }, new object { })
+</div>
+

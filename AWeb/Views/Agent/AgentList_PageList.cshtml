@@ -1,0 +1,88 @@
+﻿@using Webdiyer.WebControls.Mvc;
+@model PagedList<AgentUser>
+
+@*<h5><a href="/Manage/Member?id=@ViewBag.AgentID">切换到会员列表</a></h5>*@
+<table id="wdt_0" class="table table-striped table-bordered table-hover" width="100%">
+    <thead>
+        <tr>
+
+            <th data-class="expand" >ID</th>
+            <th data-class="expand" >帐号</th>
+            <th data-hide="phone,tablet" >昵称</th>
+            <th data-hide="phone,tablet" >代理等级</th>
+            <th data-class="expand" >可用金额</th>
+            <th data-hide="phone,tablet" >手机</th>
+            <th data-hide="expand" >基本操作</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.Count == 0)
+        {
+            <tr>
+                <td class="colspan" align="center" colspan="0">
+                    没有找到相关记录！
+                </td>
+            </tr>
+        }
+        @foreach (AgentUser m in Model)
+        {
+            <tr>
+                <td>
+                @if (m.AgentLv == GL.Data.agentLv.代理)
+                {
+                    <a href="/Member/Member?id=@m.Id">@(m.OnlineState > 0 ? "在线" : "离线")|@m.Id</a>
+                }
+                else
+                {
+                    <a href="/Agent/AgentList?id=@m.Id">@(m.OnlineState > 0 ? "在线" : "离线")|@m.Id</a>
+                }
+                </td>
+                <td>@m.UserName</td>
+                <td>@m.AgentName</td>
+                <td>@m.AgentLv</td>
+                <td>@m.AmountAvailable.ToString("0.")</td>
+                <td>@m.PhoneNumber</td>
+                <td style="text-align:center">
+                    @*<input type="button" value=" 删 除 " class="btn btn-danger btn-xs" onclick="return ConfirmDelUser(@m.Id)" />
+                    <input type="button" value=" 编 辑 " class="btn btn-warning btn-xs" onclick="return UpdateUser(@m.Id)" />*@
+                    <input id="btnRole" type="button" value="权限" class="btn btn-inverse btn-mini" onclick="return RoleUser(@m.Id);" />
+                    @*<input id="btnAgentShift" type="button" value="代理转移" class=" btn btn-warning btn-mini" />*@
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<div class="dt-toolbar-footer">
+    <div class="col-sm-6 col-xs-12 hidden-xs">
+        <div class="dataTables_info" id="dt_basic_info" role="status" aria-live="polite">Showing <span class="txt-color-darken">@Model.StartItemIndex</span> to <span class="txt-color-darken">@Model.EndItemIndex</span> of <span class="text-primary">@Model.TotalItemCount</span> entries</div>
+    </div>
+    <div class="col-xs-12 col-sm-6">
+        <div class="dataTables_paginate paging_simple_numbers" id="dt_basic_paginate">
+            @Ajax.Pager(
+                Model,
+                new PagerOptions()
+                {
+                    CssClass = "pagination pagination-sm",
+                    ShowMorePagerItems = true,
+                    PageIndexParameterName = "page",
+                    ShowDisabledPagerItems = true,
+                    AlwaysShowFirstLastPageNumber = true,
+                    HorizontalAlign = "right",
+                    CurrentPagerItemTemplate = "<li class=\"paginate_button active\"><span>{0}</span></li>",
+                    DisabledPagerItemTemplate = "<li class=\"paginate_button disabled\"><span>{0}</span></li>",
+                    PagerItemTemplate = "<li class=\"paginate_button\">{0}</li>",
+                    FirstPageText = "第一页",
+                    LastPageText = "最后一页",
+                    ContainerTagName = "ul"
+                },
+                new MvcAjaxOptions
+                {
+                    HttpMethod = "POST",
+                    UpdateTargetId = "box",
+                    InsertionMode = InsertionMode.Replace
+                })
+        </div>
+    </div>
+</div>
+
+

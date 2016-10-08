@@ -1,0 +1,307 @@
+﻿
+
+@using GL.Data.Model
+@using GL.Data.View
+@model ResourceView
+@{
+    ViewBag.Title = "给用户分配权限";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+ 
+
+}
+
+<div id="content">
+
+    <!-- widget grid -->
+    <section id="widget-grid" class="">
+
+        <!-- row -->
+        <div class="row">
+
+
+
+            <!-- NEW WIDGET START -->
+            <article class="col-sm-12 col-md-12 col-lg-5">
+
+                <!-- Widget ID (each widget will need unique ID)-->
+                <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-1" data-widget-editbutton="false">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-sitemap"></i> </span>
+                        <h2>给用户分配权限</h2>
+                    </header>
+                    <div>
+                        <div class="jarviswidget-editbox">
+                            <!-- This area used as dropdown edit box -->
+
+                        </div>
+                        <!-- widget div-->
+                        <!-- widget edit box -->
+                        <!-- end widget edit box -->
+                        <!-- widget content -->
+                        <div class="widget-body">
+                            <form id="subfrom" class="smart-form" action="/SU/SaveUserResource" method="post">
+                                <input type="hidden" id="userid" name="userid" value="@Model.UserID" />
+                                <fieldset>
+                                    <div class="tree smart-form">
+                                        <ul>
+                                            @{
+                                                IEnumerable<Resource> datalist = (IEnumerable<Resource>)Model.DataList;
+                                                IEnumerable<Resource> datalistL1 = datalist.Where(m => m.Level == 1);
+                                                foreach (Resource item1 in datalistL1)
+                                                {
+                                                    <li>
+                                                        <span><i class="fa fa-lg fa-plus-circle"></i> @item1.Name</span>
+                                                        @{
+                                                            IEnumerable<Resource> datalistL2 = datalist.Where(m => m.PNo == item1.No);
+                                                            if (datalistL2.Count() != 0)
+                                                            {
+                                                                <ul>
+                                                                    @{
+                                                                        foreach (Resource item2 in datalistL2)
+                                                                        {
+                                                                            IEnumerable<Resource> datalistL3 = datalist.Where(m => m.PNo == item2.No);
+                                                                            if (datalistL3.Count() != 0)
+                                                                            {
+                                                                                <li style="display:none">
+                                                                                    <span><i class="fa fa-lg fa-plus-circle"></i> @item2.Name</span>
+                                                                                    <ul>
+                                                                                        @{
+                                                                                            foreach (Resource item3 in datalistL3)
+                                                                                            {
+
+                                                                                                IEnumerable<Resource> datalistL4 = datalist.Where(m => m.PNo == item3.No);
+                                                                                                if (datalistL4.Count() != 0)
+                                                                                                {
+                                                                                                    <li style="display:none">
+                                                                                                        <span><i class="fa fa-lg fa-plus-circle"></i> @item3.Name</span>
+                                                                                                        <ul>
+                                                                                                            @{
+                                                                                                                foreach (Resource item4 in datalistL4)
+                                                                                                                {
+                                                                                                                    <li style="display:none">
+                                                                                                                        <span>
+                                                                                                                            <label class="checkbox inline-block">
+                                                                                                                                @{
+                                                                                                                                    if (item4.Checked)
+                                                                                                                                    {
+                                                                                                                                        <input type="checkbox" checked="checked" value="@item4.No" name="checkbox-inline" /><i></i>@item4.Name
+
+                                                                                                                                    }
+                                                                                                                                    else
+                                                                                                                                    {
+
+                                                                                                                                        <input type="checkbox" value="@item4.No" name="checkbox-inline" /><i></i>@item4.Name
+                                                                                                                                    }
+                                                                                                                                }
+                                                                                                                            </label>
+                                                                                                                        </span>
+                                                                                                                    </li>
+                                                                                                                                    }
+                                                                                                            }
+                                                                                                        </ul>
+                                                                                                    </li>
+                                                                                                                                    }
+                                                                                                                                    else
+                                                                                                                                    {
+                                                                                                    <li style="display:none">
+                                                                                                        <span>
+                                                                                                            <label class="checkbox inline-block">
+                                                                                                                @{
+                                                                                                                    if (item3.Checked)
+                                                                                                                    {
+                                                                                                                        <input type="checkbox" checked="checked" value="@item3.No" name="checkbox-inline" /><i></i>@item3.Name
+                                                                                                                    }
+                                                                                                                    else
+                                                                                                                    {
+                                                                                                                        <input type="checkbox" value="@item3.No" name="checkbox-inline" /><i></i>@item3.Name
+                                                                                                                    }
+                                                                                                                }
+                                                                                                            </label>
+                                                                                                        </span>
+                                                                                                    </li>
+                                                                                                                        }
+
+                                                                                                                    }
+                                                                                        }
+                                                                                    </ul>
+                                                                                </li>
+                                                                                                                }
+                                                                                                                else
+                                                                                                                {
+                                                                                                                    <li style="display:none">
+                                                                                                                        <span>
+                                                                                                                            <label class="checkbox inline-block">
+                                                                                                                                @{
+                                                                                                                                    if (item2.Checked)
+                                                                                                                                    {
+                                                                                                                                        <input type="checkbox" checked="checked" value="@item2.No" name="checkbox-inline" /><i></i>@item2.Name
+                                                                                                                                    }
+                                                                                                                                    else
+                                                                                                                                    {
+                                                                                                                                        <input type="checkbox" value="@item2.No" name="checkbox-inline" /><i></i>@item2.Name
+                                                                                                                                    }
+
+                                                                                                                                }
+                                                                                                                            </label>
+                                                                                                                        </span>
+                                                                                                                    </li>
+                                                                                                                                        }
+                                                                                                                                    }
+                                                                    }
+                                                                </ul>
+                                                                                                                                    }
+                                                        }
+
+
+                                                    </li>
+                                                                                                                                    }
+
+                                            }
+
+
+                                            @*<li>
+                                                    <span><i class="fa fa-lg fa-folder-open"></i> Parent</span>
+                                                    <ul>
+                                                        <li>
+                                                            <span><i class="fa fa-lg fa-plus-circle"></i> Administrators</span>
+                                                            <ul>
+                                                                <li style="display:none">
+                                                                    <span>
+                                                                        <label class="checkbox inline-block">
+                                                                            <input type="checkbox" name="checkbox-inline">
+                                                                            <i></i>Michael.Jackson
+                                                                        </label>
+                                                                    </span>
+                                                                </li>
+                                                                <li style="display:none">
+                                                                    <span>
+                                                                        <label class="checkbox inline-block">
+                                                                            <input type="checkbox" checked="checked" name="checkbox-inline">
+                                                                            <i></i>Sunny.Ahmed
+                                                                        </label>
+                                                                    </span>
+                                                                </li>
+                                                                <li style="display:none">
+                                                                    <span>
+                                                                        <label class="checkbox inline-block">
+                                                                            <input type="checkbox" checked="checked" name="checkbox-inline">
+                                                                            <i></i>Jackie.Chan
+                                                                        </label>
+                                                                    </span>
+                                                                </li>
+                                                            </ul>
+                                                        </li>
+                                                        <li>
+                                                            <span><i class="fa fa-lg fa-minus-circle"></i> Child</span>
+                                                            <ul>
+                                                                <li>
+                                                                    <span><i class="icon-leaf"></i> Grand Child</span>
+                                                                </li>
+                                                                <li>
+                                                                    <span><i class="icon-leaf"></i> Grand Child</span>
+                                                                </li>
+                                                                <li>
+                                                                    <span><i class="fa fa-lg fa-plus-circle"></i> Grand Child</span>
+                                                                    <ul>
+                                                                        <li style="display:none">
+                                                                            <span><i class="fa fa-lg fa-plus-circle"></i> Great Grand Child</span>
+                                                                            <ul>
+                                                                                <li style="display:none">
+                                                                                    <span><i class="icon-leaf"></i> Great great Grand Child</span>
+                                                                                </li>
+                                                                                <li style="display:none">
+                                                                                    <span><i class="icon-leaf"></i> Great great Grand Child</span>
+                                                                                </li>
+                                                                            </ul>
+                                                                        </li>
+                                                                        <li style="display:none">
+                                                                            <span><i class="icon-leaf"></i> Great Grand Child</span>
+                                                                        </li>
+                                                                        <li style="display:none">
+                                                                            <span><i class="icon-leaf"></i> Great Grand Child</span>
+                                                                        </li>
+                                                                    </ul>
+                                                                </li>
+                                                            </ul>
+                                                        </li>
+                                                    </ul>
+                                                </li>
+
+
+
+                                                    <li>
+                                                    <span><i class="fa fa-lg fa-folder-open"></i> Parent2</span>
+                                                    <ul>
+                                                        <li>
+                                                            <span><i class="icon-leaf"></i> Child</span>
+                                                        </li>
+                                                    </ul>
+                                                </li>*@
+                                        </ul>
+                                    </div>
+                                </fieldset>
+                                <footer>
+                                    <input id="btnGoBack" type="button" value="返回列表" class=" btn btn-warning" />
+                                    <button type="submit" class="btn btn-primary" id="btnKick" onclick="return btnSubmit(this)">
+                                        提交
+                                    </button>
+
+                                </footer>
+                            </form>
+                        </div>
+                        <!-- end widget content -->
+                        <!-- end widget div -->
+
+
+
+                    </div>
+
+                </div>
+                <!-- end widget -->
+
+            </article>
+            <!-- WIDGET END -->
+
+        </div>
+
+        <!-- end row -->
+        <!-- row -->
+
+        <div class="row">
+
+        </div>
+
+        <!-- end row -->
+
+    </section>
+    <!-- end widget grid -->
+</div>
+<script src="~/js/SmartAdmin/js/libs/jquery-2.0.2.min.js"></script>
+<script type="text/javascript">
+	// DO NOT REMOVE : GLOBAL FUNCTIONS!
+    $(function () {
+        // PAGE RELATED SCRIPTS
+
+        $('.tree > ul').attr('role', 'tree').find('ul').attr('role', 'group');
+        $('.tree').find('li:has(ul)').addClass('parent_li').attr('role', 'treeitem').find(' > span').attr('title', 'Collapse this branch').on('click', function (e) {
+            var children = $(this).parent('li.parent_li').find(' > ul > li');
+            if (children.is(':visible')) {
+                children.hide('fast');
+                $(this).attr('title', 'Expand this branch').find(' > i').removeClass().addClass('fa fa-lg fa-plus-circle');
+            } else {
+                children.show('fast');
+                $(this).attr('title', 'Collapse this branch').find(' > i').removeClass().addClass('fa fa-lg fa-minus-circle');
+            }
+            e.stopPropagation();
+        });
+
+        $("#btnGoBack").click(function () {
+            location.href = "/SU/Management";
+        });
+
+    })
+
+
+
+</script>

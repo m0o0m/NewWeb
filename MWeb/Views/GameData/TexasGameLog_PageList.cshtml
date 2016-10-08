@@ -1,0 +1,370 @@
+﻿@using Webdiyer.WebControls.Mvc;
+@using GL.Data.Model;
+@using GL.Data.BLL;
+
+@model PagedList<TexasGameRecord>
+
+
+
+
+<style type="text/css">
+ 
+</style>
+
+
+<section id="widget-grid" class="">
+    <div class="row">
+        <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-0" data-widget-editbutton="false" data-widget-colorbutton="false"
+                 data-widget-togglebutton="false"
+                 data-widget-deletebutton="false"
+                 data-widget-fullscreenbutton="false"
+                 data-widget-custombutton="false"
+                 data-widget-collapsed="false"
+                 data-widget-sortable="false">
+                <header>
+                    <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                    <h2>@ViewBag.Title</h2>
+                </header>
+                <!-- widget div-->
+                <div>
+                    <!-- widget edit box -->
+                    <div class="jarviswidget-editbox">
+                        <!-- This area used as dropdown edit box -->
+                    </div>
+                    <!-- end widget edit box -->
+                    <!-- widget content -->
+                    <div class="widget-body no-padding">
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                               
+                                <tbody>
+                                    @if (Model.Count == 0)
+            {
+                                        <tr class="gradeX">
+                                            <td class="colspan" align="center" colspan="0">
+                                                没有找到相关记录！
+                                            </td>
+                                        </tr>
+            }
+                                                                                                          @foreach (TexasGameRecord m in Model)
+                                                                                                          {
+                                                                                                              List<int> giveups = new List<int>();
+                                                                                                              int maxGiveUp = -1;
+                                                                                                              if (!string.IsNullOrEmpty(m.GiveUP))
+                                                                                                              {
+                                                                                                                  string[] gives = m.GiveUP.Trim('_').Split('_');
+                                                                                                                  for (int ii = 0; ii < gives.Length; ii++)
+                                                                                                                  {
+                                                                                                                      giveups.Add(Convert.ToInt32(gives[ii]));
+                                                                                                                  }
+                                                                                                                  maxGiveUp = giveups.Max();
+                                                                                                              }
+
+
+
+                                                                                                              var userList = m.UserData.Split('_').ToList();
+                                                                                                              userList.RemoveAt(userList.Count - 1);
+                                                                                                              var j = userList.Count;
+
+
+                                                                                                              //尝试解析
+                                                                                                              byte[] recordByte = m.Record;
+                                                                                                              proto.db515.TexasGameRecord tgr = null;
+                                                                                                              IList<proto.db515.TexasRole> texasRoles = null;
+                                                                                                              if (recordByte != null)
+                                                                                                              {
+                                                                                                                  tgr =
+                                                                                                                  proto.db515.TexasGameRecord.ParseFrom(recordByte);
+                                                                                                                  texasRoles =
+                                                                                                                  tgr.RolesList;
+                                                                                                              }
+                                                                                                              IList<string> cardList = null;
+                                                                                                              if (tgr != null)
+                                                                                                              {
+                                                                                                                  cardList = tgr.TableCardsList;
+                                                                                                              }
+                                                                                                              else
+                                                                                                              {
+
+                                                                                                                  cardList = new List<string>();
+
+
+                                                                                                                  var bb = System.Text.RegularExpressions.Regex.Matches(m.BankCard, @"\w{2}", System.Text.RegularExpressions.RegexOptions.IgnoreCase);
+                                                                                                                  for (int k = 0; k < bb.Count; k++)
+                                                                                                                  {
+                                                                                                                   
+                                                                                                                      cardList.Add(bb[k].Value);
+                                                                                                                  }
+
+
+                                                                                                               
+                                                                                                              }
+
+
+
+
+
+
+
+                                                                                                            <tr style="background-color:#e4e0e0">
+                                                                                                                <td style="text-align:center;vertical-align:middle;font-weight:bold">时间</td>
+                                                                                                                <td  style="text-align:center;vertical-align:middle;font-weight:bold">房间ID</td>
+                                                                                                                <td style="text-align:center;vertical-align:middle;font-weight:bold">牌局号</td>
+                                                                                                                <td style="text-align:center;vertical-align:middle;font-weight:bold">盲注</td>
+                                                                                                                <td style="text-align:center;vertical-align:middle;font-weight:bold">服务费</td>
+                                                                                                                <td style="text-align:center;vertical-align:middle;font-weight:bold">总资产</td>
+                                                                                                                <td style="text-align:center;vertical-align:middle;font-weight:bold">牌局携带</td>
+                                                                                                                <td style="text-align:center;vertical-align:middle;font-weight:bold">玩家昵称</td>
+                                                                                                                <td style="text-align:center;vertical-align:middle;font-weight:bold">底牌</td>
+
+                                                                                                                <td style="text-align:center;vertical-align:middle;font-weight:bold">
+
+                                                                                                                翻牌前
+                                                                                                                </td>
+                                                                                                                <td style="text-align:center;vertical-align:middle;font-weight:bold">
+                                                                                                                    翻牌圈 <br>
+                                                                                                                    <i class="game game-@cardList[0]"></i>
+                                                                                                                    <i class="game game-@cardList[1]"></i>
+                                                                                                                    <i class="game game-@cardList[2]"></i>
+                                                                                                                  
+                                                                                                               </td>
+                                                                                                                <td style="text-align:center;vertical-align:middle;font-weight:bold">
+                                                                                                                    转牌圈 <br>
+                                                                                                                    <i class="game game-@cardList[3]"></i>  
+                                                                                                              </td>
+                                                                                                                <td style="text-align:center;vertical-align:middle;font-weight:bold">
+                                                                                                                    河牌圈<br>
+                                                                                                                    <i class="game game-@cardList[4]"></i>
+                                                                                                               </td>
+                                                                                                                <td style="text-align:center;vertical-align:middle;font-weight:bold">比牌结果</td>
+                                                                                                            </tr>
+                                                                                                              for (int i = 0; i < j; i++)
+                                                                                                              {
+                                                                                                                  var userData = userList[i].Split(',').ToList();
+
+
+                                            <tr class="gradeA">
+                                            @if (i == 0)
+                                                                                                                  {
+                                                <td rowspan="@j">@m.CreateTime</td>
+                                                <td rowspan="@j">@m.RoomID</td>
+                                                <td rowspan="@j">@m.Round</td>
+                                                <td rowspan="@j">@m.BaseScore</td>
+                                                <td rowspan="@j">@m.Service</td>
+                    }
+                                            <td>@userData[0]</td>
+                                            <td>@userData[1]</td>
+                                            <td>@{
+
+                                                int id = 0;
+                                                                                                                  var wj = "";
+                                                if (int.TryParse(userData[2], out id))
+                                                {
+                                                    Role u = RoleBLL.GetModelByID(new Role { ID = Convert.ToInt64(id) });
+
+                                                    if (u != null)
+                                                    {
+                                                        wj = u.NickName + "(" + userData[2] + ")";
+                                                    }
+                                                    else
+                                                    {
+                                                        wj = userData[2];
+                                                    }
+                                                }
+                                                else {
+                                                    wj = userData[2];
+                                                }
+
+
+
+                                            }
+                                            @wj</td>
+                                          
+                                            <td>  @*对应列手牌*@
+                                                @{
+                       var aa = System.Text.RegularExpressions.Regex.Matches(userData[3], @"\w{2}", System.Text.RegularExpressions.RegexOptions.IgnoreCase);
+                        for (int k = 0; k < aa.Count; k++)
+                        {
+                                                    <i class="game game-@aa[k]"></i>
+                        }
+                                            }
+                                        </td>
+                                     
+                                                                                                                              @{
+                                                                                                                                  proto.db515.TexasRole texasR = null;
+                                                                                                                                  IList<proto.db515.TexasRound> x = null;
+                                                                                                                                  if (texasRoles != null)
+                                                                                                                                  {
+                                                                                                                                      texasR = texasRoles.FirstOrDefault(km => km.UserID == Convert.ToInt32(userData[2]));
+                                                                                                                                      x = texasR.RoundsList;
+                                                                                                                                      for (int jk = 1; jk <= 4; jk++)
+                                                                                                                                      {
+                                                                                                                                          proto.db515.TexasRound texasRound = x.FirstOrDefault(kk => kk.RoundIndex == jk);
+
+                                                                                                                                          IList<proto.db515.TexasOperate> toper = texasRound.TexasOperatesList;
+                                                                                                                                        <td>
+                                                                                                                                            @{
+                                                                                                                                                foreach (var item in toper)
+                                                                                                                                                {
+                                                                                                                                                    string iIndex = "";
+                                                                                                                                                    if (item.OperateIndex < 10)
+                                                                                                                                                    {
+                                                                                                                                                        iIndex = "" + item.OperateIndex + "  . ";
+                                                                                                                                                    }
+                                                                                                                                                    else
+                                                                                                                                                    {
+                                                                                                                                                        iIndex = item.OperateIndex + ". ";
+                                                                                                                                                    }
+                                                                                                                                                    OperateRecordKind kin = (OperateRecordKind)item.OperateKind;
+                                                                                                                                                    long iscore = item.Score;
+                                                                                                                                                    @iIndex  @kin   if (iscore > 0)
+                                                                                                                                                    {
+                                                                                                                                                        @iscore
+                                                                                                                                                    }<br>
+                                                                                                                                                }
+                                                                                                                                            }
+
+                                                                                                                                        </td>
+                                                                                                                                                    }
+                                                                                                                                                }
+                                                                                                                                                else { <td></td><td></td><td></td>
+                                                                                                                              
+                                                                                                                                                <td>
+                                                                                                                                                       
+                                                                                                                                                </td>}
+
+
+
+
+                                                                                                                            }
+
+                                             
+                                                    @*<td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>*@
+
+                                                    @*<td>@userData[4] </td>*@
+                                                @if (texasR != null)
+                                                {
+                                                    <td>
+                                                        @{
+
+                                                            string res = "";
+                                                            if (texasR.CardType == 0)
+                                                            {
+
+                                                            }
+                                                            else
+                                                            {
+                                                                res = ((CardType)texasR.CardType).ToString();
+                                                            }
+                                                        } @res <br> @texasR.WinScore
+                                                    </td>
+                                                            }
+                                                            else
+                                                            {
+
+                                                                <td>@userData[4]</td>
+                                                            }
+
+
+</tr>
+                }
+            }
+                                </tbody>
+                            </table>
+                        </div>
+
+
+
+
+
+
+
+
+                        <div class="widget-content">
+
+                            @Ajax.Pager(
+    Model,
+    new PagerOptions()
+    {
+        CssClass = "pager",
+        ShowMorePagerItems = true,
+        PageIndexParameterName = "page",
+        ShowDisabledPagerItems = true,
+        AlwaysShowFirstLastPageNumber = true,
+        //ShowRecordCountItems = true,
+        HorizontalAlign = "right",
+        //SeparatorHtml = "",
+
+        CurrentPagerItemTemplate = "<li class=\"disabled\"><span>{0}</span></li>",
+        DisabledPagerItemTemplate = "<li class=\"disabled\"><span>{0}</span></li>",
+        PagerItemTemplate = "<li>{0}</li>",
+        //CurrentPagerItemWrapperFormatString = "<li class=\"disabled\"><span>{0}</span></li>",
+        //NumericPagerItemWrapperFormatString = "<li>{0}</li>",
+        //PagerItemWrapperFormatString = "<li>{0}</li>",
+        //RecordCountText = string.Format("共{0}条记录, {1}页", Model.TotalItemCount, Model.TotalPageCount),
+        //RecordCountFormatString = "<li><span>{0}</span></li>",
+        //DisabledPagerItemsFormatString = "<li class=\"disabled\"><span>{0}</span></li>",
+        //PageIndexBoxType = Webdiyer.WebControls.Mvc.PageIndexBoxType.TextBox,
+        //GoButtonText = "跳转到",
+        ShowPrevNext = true,
+        FirstPageText = "第一页",
+        LastPageText = "最后一页",
+        ContainerTagName = "ul",
+        PageIndexBoxId = "pageindexcm",
+        WYWPageIndexString = @"<li><input style='width:50px;' type='text' value='' id='{0}' name = '{1}'></li>
+                                 <li><a id='goto' name='goto' style='margin-right:10px' >跳转</a><li>
+                             ",
+        GoToButtonId = "goto"
+    },
+    new MvcAjaxOptions
+    {
+        HttpMethod = "POST",
+        UpdateTargetId = "box",
+        InsertionMode = InsertionMode.Replace,
+        OnFailure = "errFunc",
+        OnSuccess = "successPageFun"
+    })
+                        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    </div>
+                    <!-- end widget content -->
+                </div>
+                <!-- end widget div -->
+            </div>
+            <!-- end widget -->
+
+        </article>
+    </div>
+</section>
+
+
+@*<script src="~/js/SmartAdmin/js/libs/jquery-2.0.2.min.js"></script>
+<script src="~/js/SmartAdmin/js/libs/jquery-ui-1.11.4-utf8.js"></script>*@
+
+
+
+
+
+
+
+

@@ -1,0 +1,60 @@
+﻿@using GL.Data.Model
+@using GL.Data.View
+@model GameRecordView
+@{
+    ViewBag.Title = "在线列表";
+ 
+
+    ViewBag.Format = "yyyy-MM-dd";
+    if (Request.IsAjaxRequest())
+    {
+        Layout = null;
+
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+}
+
+
+
+
+<div id="content">
+    
+
+    <form id="comment-form" class="smart-form" novalidate="novalidate">
+     
+        <div class="row">
+            <div class="widget-body">
+                <section class="col col-1.2">
+                    <label class="label">会员ID</label>
+                    <label class="input">
+                        @Html.TextBoxFor(m => m.SearchExt, new { @class = "span2", style = "border-radius:4px;width:120px" })
+                    </label>
+                </section>
+            
+
+
+                <section class="col col-1">
+                    <label class="label">&nbsp;</label>
+                    @*<button type="submit" class="btn btn-success btn-sm">查询</button>*@
+                    <input type="button" onclick="search()" class="btn btn-success btn-sm" value="查询" />
+                </section>
+
+            </div>
+        </div>
+    </form>
+
+    <div class="row-fluid">
+        <div class="widget-box" id="box">
+            @Html.Partial("OnLineList_PageList",Model.Data)
+        </div>
+    </div>
+</div>
+
+@section scripts{
+
+    @{Html.RegisterMvcPagerScriptResource();}
+
+}

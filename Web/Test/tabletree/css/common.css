@@ -1,0 +1,51 @@
+BODY {
+	SCROLLBAR-FACE-COLOR: #c9ebff; FONT-SIZE: 12px; MARGIN: 0px; SCROLLBAR-HIGHLIGHT-COLOR: #c9ebff; SCROLLBAR-SHADOW-COLOR: #0099cd; COLOR: #000000; SCROLLBAR-3DLIGHT-COLOR: #0099cd; SCROLLBAR-ARROW-COLOR: #0099cd; SCROLLBAR-TRACK-COLOR: #c9ebff; SCROLLBAR-DARKSHADOW-COLOR: #c9ebff; SCROLLBAR-BASE-COLOR: #c9ebff
+}
+.width100 {
+	WIDTH: 100%
+}
+A {
+	COLOR: #000000; TEXT-DECORATION: none
+}
+A:hover {
+	COLOR: #ff6600; TEXT-DECORATION: underline
+}
+.right_topbar {
+	PADDING-LEFT: 5px; FONT-WEIGHT: 500; FONT-SIZE: 13px; BACKGROUND-IMAGE: url(../images/right_topbar.gif); COLOR: #071e81; LINE-HEIGHT: 33px; BACKGROUND-REPEAT: repeat-x; HEIGHT: 33px; BACKGROUND-COLOR: #c2dcf7
+}
+.listable {
+	BORDER-TOP: #9eb850 2px solid; BACKGROUND-COLOR: #fcfcfc
+}
+.listable .leftd {
+	BORDER-RIGHT: #cccccc 1px solid; PADDING-RIGHT: 5px; PADDING-LEFT: 5px; FONT-SIZE: 12px; PADDING-BOTTOM: 5px; BORDER-LEFT: #cccccc 1px solid; PADDING-TOP: 5px; BORDER-BOTTOM: #cccccc 1px solid; BACKGROUND-COLOR: #edf5fe; TEXT-ALIGN: right
+}
+.listable .rightd {
+	BORDER-RIGHT: #cccccc 1px solid; PADDING-RIGHT: 2px; PADDING-LEFT: 2px; FONT-SIZE: 12px; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; BORDER-BOTTOM: #cccccc 1px solid
+}
+.listimportant {
+	FONT-WEIGHT: normal; FONT-SIZE: 12px; COLOR: #ff0000; MARGIN-RIGHT: 5px
+}
+.listbutton {
+	BORDER-RIGHT: #3b6592 1px solid; BACKGROUND-POSITION: 50% bottom; BORDER-TOP: #3b6592 1px solid; FONT-SIZE: 12px; BACKGROUND-IMAGE: url(../images/buttonbg.gif); BORDER-LEFT: #3b6592 1px solid; CURSOR: hand; PADDING-TOP: 2px; BORDER-BOTTOM: #3b6592 1px solid; BACKGROUND-REPEAT: repeat-x; HEIGHT: 21px; BACKGROUND-COLOR: #ece9d8
+}
+.submit {
+	border-size: 1px
+}
+.label {
+	
+}
+.errorLabel {
+	COLOR: red; FONT-STYLE: italic
+}
+.errorMessage {
+	FONT-WEIGHT: bold; COLOR: red; TEXT-ALIGN: center
+}
+.checkboxLabel {
+	
+}
+.checkboxErrorLabel {
+	COLOR: red
+}
+.required {
+	COLOR: red
+}

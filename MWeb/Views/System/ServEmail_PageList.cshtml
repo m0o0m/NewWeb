@@ -1,0 +1,164 @@
+﻿@using Webdiyer.WebControls.Mvc;
+@using GL.Data.Model;
+@model PagedList<ServEmail>
+
+
+
+
+
+
+
+<section id="widget-grid" class="">
+    <div class="row">
+        <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-0" data-widget-editbutton="false" data-widget-colorbutton="false"
+                 data-widget-togglebutton="false"
+                 data-widget-deletebutton="false"
+                 data-widget-fullscreenbutton="false"
+                 data-widget-custombutton="false"
+                 data-widget-collapsed="false"
+                 data-widget-sortable="false">
+                <header>
+                    <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                    <h2>游戏公告列表</h2>
+                </header>
+                <!-- widget div-->
+                <div>
+                    <!-- widget edit box -->
+                    <div class="jarviswidget-editbox">
+                        <!-- This area used as dropdown edit box -->
+                    </div>
+                    <!-- end widget edit box -->
+                    <!-- widget content -->
+                    <div class="widget-body no-padding">
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <tbody>
+                                  @if (Model.Count == 0)
+        {
+    <tr>
+        <td>
+            <span class="user-info"> Date: @DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") </span>
+            <p><a href="#">没有找到相关记录！</a> </p>
+        </td>
+    </tr>
+                                      }
+@foreach (ServEmail m in Model)
+        {
+
+    <tr>
+        <td>
+            <div class="form-group">
+
+                <div class="col-md-1 control-label">
+                    <div class="user-thumb"> <img width="40" height="40" alt="公告" src="~/img/demo/av1.jpg"> </div>
+                </div>
+                <div class="col-md-10">
+                    <span class="user-info">Title：@m.ServEmailTitle By: @m.ServEmailAuthor Date: @m.ServEmailTime.ToString("yyyy-MM-dd HH:mm:ss")</span>
+                    <p>Content:<a href="#">@m.ServEmailContent</a> </p>
+                </div>
+                <div>
+                    <input type="hidden" value="@m.ServEmailID" />
+                    <div class="fr"><a href="#" class="btn btn-danger btn-mini" onclick="return btnDelete(this);">Delete</a></div>
+                </div>
+            </div>
+        </td>
+    </tr>
+
+                                    }
+                                     
+                          
+                                </tbody>
+                            </table>
+                        </div>
+
+
+
+
+
+
+
+
+                        <div class="widget-content">
+
+                            @Ajax.Pager(
+    Model,
+    new PagerOptions()
+    {
+        CssClass = "pager",
+        ShowMorePagerItems = true,
+        PageIndexParameterName = "page",
+        ShowDisabledPagerItems = true,
+        AlwaysShowFirstLastPageNumber = true,
+        //ShowRecordCountItems = true,
+        HorizontalAlign = "right",
+        //SeparatorHtml = "",
+
+        CurrentPagerItemTemplate = "<li class=\"disabled\"><span>{0}</span></li>",
+        DisabledPagerItemTemplate = "<li class=\"disabled\"><span>{0}</span></li>",
+        PagerItemTemplate = "<li>{0}</li>",
+        //CurrentPagerItemWrapperFormatString = "<li class=\"disabled\"><span>{0}</span></li>",
+        //NumericPagerItemWrapperFormatString = "<li>{0}</li>",
+        //PagerItemWrapperFormatString = "<li>{0}</li>",
+        //RecordCountText = string.Format("共{0}条记录, {1}页", Model.TotalItemCount, Model.TotalPageCount),
+        //RecordCountFormatString = "<li><span>{0}</span></li>",
+        //DisabledPagerItemsFormatString = "<li class=\"disabled\"><span>{0}</span></li>",
+        //PageIndexBoxType = Webdiyer.WebControls.Mvc.PageIndexBoxType.TextBox,
+        //GoButtonText = "跳转到",
+        ShowPrevNext = true,
+        FirstPageText = "第一页",
+        LastPageText = "最后一页",
+        ContainerTagName = "ul",
+        PageIndexBoxId = "pageindexcm",
+        WYWPageIndexString = @"<li><input style='width:50px;' type='text' value='' id='{0}' name = '{1}'></li>
+                                 <li><a id='goto' name='goto' style='margin-right:10px' >跳转</a><li>
+                             ",
+        GoToButtonId = "goto"
+    },
+    new MvcAjaxOptions
+    {
+        HttpMethod = "POST",
+        UpdateTargetId = "box",
+        InsertionMode = InsertionMode.Replace,
+        OnFailure = "errFunc",
+        OnSuccess = "successPageFun"
+    })
+                        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    </div>
+                    <!-- end widget content -->
+                </div>
+                <!-- end widget div -->
+            </div>
+            <!-- end widget -->
+
+        </article>
+    </div>
+</section>
+
+
+
+
+
+
+
+
+
+
+

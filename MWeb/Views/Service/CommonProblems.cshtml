@@ -1,0 +1,111 @@
+﻿@using GL.Data.Model;
+@model IEnumerable<FAQ>
+@{
+    ViewBag.Title = "常见问题--列表";
+
+    if (Request.IsAjaxRequest())
+    {
+        Layout =null;
+    }
+    else {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+}
+
+<!--breadcrumbs-->
+
+<!--End-breadcrumbs-->
+<div class="container-fluid">
+    @*<div class="row-fluid">
+        <div class="span6">
+            <div id="search2">
+                <input id="btnAddFAQ" type="button" value="添加常见问题" onclick="return AddFAQ()" class=" btn btn-warning" />
+            </div>
+        </div>
+
+    </div>*@
+
+
+
+        <div class="row-fluid">
+            <div class="widget-box" id="box">
+                @Html.Partial("CommonProblems_PageList", Model)
+            </div>
+        </div>
+
+
+    </div>
+
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/select2.min.js"></script>
+<script src="/js/matrix.chat.js"></script>
+
+
+<script type="text/javascript">
+
+        function AddFAQ() {
+          
+            location.href = "/Service/CommonProblemsForAdd";
+        }
+        function UpdateUser(obj) {
+            location.href = "/Service/CommonProblemsForUpdate?id=" + obj;
+        }
+
+        function ConfirmDelUser(obj) {
+            if (confirm("你确定要删除此记录吗？")) {
+                //_this = $(obj).parent().parent();
+                //var _UserID = $(_this).find("td").eq(0).html();
+
+                $.ajax({
+                    url: "/api/CommonProblemsApi/",
+                    type: "DELETE",
+                    dataType: "JSON",
+                    data: { "Id": obj },
+                    success: function (data) {
+                        if (data == 2020) {
+                            window.location.reload();
+                            return false;
+                        }
+
+                        switch (data.result) {
+
+
+                            case 0:
+                                location.reload();
+                                break;
+                            case 1:
+                                alert("删除失败，请稍后再试");
+                                break;
+                            case 10200:
+                                alert("账号的下级代理必须为空，请清空账号或转移账号");
+                                break;
+                            case 10201:
+                                alert("账号的下级会员必须为空，请清空账号或转移账号");
+                                break;
+                            default:
+                                alert('未知错误');
+                                break;
+                        }
+                    }
+                }).fail(function (xhr, textStatus, err) {
+                    alert('Error: ' + err);
+                });
+            }
+            else {
+                return false;
+            }
+
+            return false;
+        }
+
+
+
+</script>
+@section scripts{
+
+@{Html.RegisterMvcPagerScriptResource();}
+   
+
+
+
+}

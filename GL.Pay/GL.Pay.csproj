@@ -1,0 +1,227 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{F68EA311-556B-4085-9E66-39AE29C33F71}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>GL.Pay</RootNamespace>
+    <AssemblyName>GL.Pay</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;Debug</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE;Release</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == '17|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\17\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;P17</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Test|AnyCPU'">
+    <OutputPath>bin\Test\</OutputPath>
+    <DefineConstants>TRACE;Test</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="BouncyCastle.Crypto">
+      <HintPath>..\packages\netjavarts\BouncyCastle.Crypto.dll</HintPath>
+    </Reference>
+    <Reference Include="Gma.QrCodeNet.Encoding, Version=0.4.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\QrCode.Net.0.4.0.0\lib\net45\Gma.QrCodeNet.Encoding.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="LitJson, Version=0.7.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\LitJson.0.7.0\lib\LitJson.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="log4net, Version=1.2.14.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.4\lib\net45-full\log4net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="ThoughtWorks.QRCode, Version=1.0.4778.30637, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ThoughtWorks.QRCode.1.1.0\lib\ThoughtWorks.QRCode.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AliPay\AlipayConfig.cs" />
+    <Compile Include="AliPay\AlipayCore.cs" />
+    <Compile Include="AliPay\AlipayNotify.cs" />
+    <Compile Include="AliPay\RSA.cs" />
+    <Compile Include="AppStore\AppleHttpRequest.cs" />
+    <Compile Include="AppStore\Converters\AppleDateTimeConverter.cs" />
+    <Compile Include="AppStore\Converters\EpochDateTimeConverter.cs" />
+    <Compile Include="AppStore\Environments.cs" />
+    <Compile Include="AppStore\Interfaces\IAppleHttpRequest.cs" />
+    <Compile Include="AppStore\Interfaces\IReceiptManager.cs" />
+    <Compile Include="AppStore\Models\Receipt.cs" />
+    <Compile Include="AppStore\Models\Response.cs" />
+    <Compile Include="AppStore\ReceiptManager.cs" />
+    <Compile Include="AppTreasure\OpenApi.cs" />
+    <Compile Include="AppTreasure\OpenApiHelper.cs" />
+    <Compile Include="AppTreasure\ReciveMsg.cs" />
+    <Compile Include="AppTreasure\SnsNetWork.cs" />
+    <Compile Include="AppTreasure\SnsSigCheck.cs" />
+    <Compile Include="AppTreasure\SnsStat.cs" />
+    <Compile Include="Baidu\BaiduPay.cs" />
+    <Compile Include="Baidu\DeliverReceiveReturn.cs" />
+    <Compile Include="Baidu\Utility.cs" />
+    <Compile Include="Config.cs" />
+    <Compile Include="Hippocampi\HippocampiSigCheck.cs" />
+    <Compile Include="HuaWei\HuaWeiSignCheck.cs" />
+    <Compile Include="MeiZu\MeiZuModel.cs" />
+    <Compile Include="MeiZu\MeiZuSignCheck.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QQ\QQConfig.cs" />
+    <Compile Include="QQ\OpenApi.cs" />
+    <Compile Include="QQ\SnsNetWork.cs" />
+    <Compile Include="QQ\SnsSigCheck.cs" />
+    <Compile Include="QQ\SnsStat.cs" />
+    <Compile Include="XY\XYSigCheck.cs" />
+    <Compile Include="Unicom\UnicomConfig.cs" />
+    <Compile Include="Unicom\UnicomPay.cs" />
+    <Compile Include="Unicom\UnicomPayData.cs" />
+    <Compile Include="Unicom\UnicomResultNotify.cs" />
+    <Compile Include="Unicom\UnicomUtils.cs" />
+    <Compile Include="WeiXin\mvc\AppPay.cs" />
+    <Compile Include="WeiXin\business\DownloadBill.cs" />
+    <Compile Include="WeiXin\business\JsApiPay.cs" />
+    <Compile Include="WeiXin\business\MicroPay.cs" />
+    <Compile Include="WeiXin\business\NativeNotify.cs" />
+    <Compile Include="WeiXin\business\NativePay.cs" />
+    <Compile Include="WeiXin\business\OrderQuery.cs" />
+    <Compile Include="WeiXin\business\Refund.cs" />
+    <Compile Include="WeiXin\business\RefundQuery.cs" />
+    <Compile Include="WeiXin\business\ResultNotify.cs" />
+    <Compile Include="WeiXin\mvc\Config.cs" />
+    <Compile Include="WeiXin\mvc\Data.cs" />
+    <Compile Include="WeiXin\mvc\Exception.cs" />
+    <Compile Include="WeiXin\mvc\HttpService.cs" />
+    <Compile Include="WeiXin\lib\Notify.cs" />
+    <Compile Include="WeiXin\lib\WxPayApi.cs" />
+    <Compile Include="WeiXin\mvc\HttpClientHelper.cs" />
+    <Compile Include="Log.cs" />
+    <Compile Include="WeiXin\mvc\MvcNotify.cs" />
+    <Compile Include="WeiXin\mvc\MvcResultNotify.cs" />
+    <Compile Include="WeiXin\mvc\MvcWxPayApi.cs" />
+    <Compile Include="XY\XYConfig.cs" />
+    <Compile Include="YeePay\AES.cs" />
+    <Compile Include="YeePay\APIURLConfig.cs" />
+    <Compile Include="YeePay\Config.cs" />
+    <Compile Include="YeePay\EncryptUtil.cs" />
+    <Compile Include="YeePay\HttpUtil.cs" />
+    <Compile Include="YeePay\RespondJson.cs" />
+    <Compile Include="YeePay\RSA.cs" />
+    <Compile Include="YeePay\YJPay.cs" />
+    <Compile Include="YeePay\YJPayUtil.cs" />
+    <Compile Include="YiDong\OpenApi.cs" />
+    <Compile Include="YiDong\RstArray.cs" />
+    <Compile Include="YiDong\XMLHelp.cs" />
+    <Compile Include="YiDong\XmlResult.cs" />
+    <Compile Include="YYH\Base64.cs" />
+    <Compile Include="YYH\BigInteger.cs" />
+    <Compile Include="YYH\RSAUtil.cs" />
+    <Compile Include="YYH\TransData.cs" />
+    <Compile Include="YYH\YYHSignCheck.cs" />
+    <Compile Include="ZY\ZYSignCheck.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\GL.Comm\GL.Common.csproj">
+      <Project>{b1253b40-d947-4ed0-b656-c8b8be0b6333}</Project>
+      <Name>GL.Common</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

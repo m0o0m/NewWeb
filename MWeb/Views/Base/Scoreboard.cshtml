@@ -1,0 +1,29 @@
+﻿@using GL.Data.Model
+@model PagedList<JiFen>
+@{
+    ViewBag.Title = "积分排行榜";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+
+   
+
+
+}
+<div id="content">
+    <div class="row-fluid">
+        <div class="widget-box" id="box">
+            @Html.Partial("Scoreboard_PageList", Model)
+        </div>
+    </div>
+</div>
+
+@section scripts{
+
+    @{Html.RegisterMvcPagerScriptResource();}
+
+}
+
+
+
+
+

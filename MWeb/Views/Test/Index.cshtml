@@ -1,0 +1,49 @@
+﻿@{
+    
+    Layout = null;
+}
+<link href="~/js/taginputs/jquery.tagsinput.css" rel="stylesheet" />
+<script src="~/js/SmartAdmin/js/libs/jquery-2.0.2.min.js"></script>
+<script src="~/js/taginputs/jquery.tagsinput.js"></script>
+<script src="~/js/SmartAdmin/js/libs/jquery-ui-1.11.4-utf8.js"></script>
+
+
+<script type="text/javascript">
+
+    function onAddTag(tag) {
+      alert("Added a tag: " + tag);
+    }
+    function onRemoveTag(tag) {
+      alert("Removed a tag: " + tag);
+    }
+
+    function onChangeTag(input,tag) {
+      alert("Changed a tag: " + tag);
+    }
+
+    $(function() {
+
+    
+      $('#tags_2').tagsInput({
+        width: 'auto',
+        onChange: function(elem, elem_tags)
+        {
+            return false;
+          //var languages = ['php','ruby','javascript'];
+          //$('.tag', elem_tags).each(function()
+          //{
+          //    alert($(this).text());
+          //  if($(this).text().search(new RegExp('\\b(' + languages.join('|') + ')\\b')) >= 0)
+          //    $(this).css('background-color', 'red');
+          //});
+        }
+      });
+
+
+      $('#tags_2').tagsInput('add', 'some tag');
+    });
+
+</script>
+<form>
+        <input id="tags_2" type="text" class="tags" value="" />
+</form>

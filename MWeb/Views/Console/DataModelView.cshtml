@@ -1,0 +1,156 @@
+﻿@using GL.Data.View
+@model ModelBaseData
+@{
+    ViewBag.Title = Model.ModelName;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    List<object> bdl = (List<object>)Model.DataList;
+}
+<div id="content">
+    <form id="comment-form" class="smart-form" novalidate="novalidate" method="get">
+        <div class="row">
+            <section class="col col-1">
+                <label class="label">模版ID</label>
+                <label class="input">
+                    @Html.TextBox("id", ViewData["id"], new { @class = "span2", @readonly = "true", style = "border-radius:4px" })
+                </label>
+            </section>
+
+            @if (Model.Para != "")
+            {
+                string title = "";
+                string[] s = Model.Para.Split('_');
+                for (int i = 0; i < s.Length; i++)
+                {
+                    string[] sArray = s[i].ToString().Split(':');
+                    switch (sArray[0])
+                    {
+                        case "1": //时间控件
+                            title = (sArray[2] == string.Empty) ? sArray[1] : sArray[2];
+                            <section class="col col-1.2">
+                                <label class="label">@title</label>
+                                <label class="input">
+                                    <i class="icon-append fa fa-calendar"></i>
+                                    @Html.TextBox(sArray[1], ViewData[sArray[1]], new Dictionary<string, object>() { { "class", "form-control datepicker" }, { "data-dateformat", "yy-mm-dd 00:00:00" } })
+                                </label>
+                            </section>
+                            continue;
+                        case "2": //输入框
+                            title = (sArray[2] == string.Empty) ? sArray[1] : sArray[2];
+                            <section class="col col-1">
+                                <label class="label">@title</label>
+                                <label class="input">
+                                    @Html.TextBox(sArray[1], ViewData[sArray[1]], new { @class = "span2", style = "border-radius:4px" })
+                                </label>
+                            </section>
+                            continue;
+                        default:
+                            break;
+                    }
+                }
+            }
+            <section class="col col-0">
+                <label class="label">&nbsp;</label>
+                <input type="button" onclick="search()" class="btn btn-success btn-sm" value="查询" />
+            </section>
+            <section class="col col-0">
+                <label class="label">&nbsp;</label>
+                <input type="button" value="返回" onclick="return btnReturn()" class="btn btn-warning btn-sm">
+            </section>
+            <section class="col col-0">
+                <label class="label">&nbsp;</label>
+                <input type="button" value="导出" onclick="return btnLoadData('@Model.ModelName')" class="btn btn-warning btn-sm">
+            </section>
+
+        </div>
+    </form>
+
+    <section id="widget-grid" class="">
+        <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-0"
+             data-widget-editbutton="false" data-widget-colorbutton="false" data-widget-togglebutton="false" data-widget-deletebutton="false"
+             data-widget-fullscreenbutton="false" data-widget-custombutton="false" data-widget-collapsed="false" data-widget-sortable="false"
+             style="">
+            <header role="heading">
+                <span class="widget-icon" > <i class="fa fa-table"></i></span>
+            </header>
+            <table class="table table-bordered">
+                @if (Model.ID != 0 && ((bdl == null) ? 0 : bdl.Count) >0 )
+                {
+                    for (int i = 0; i < bdl.Count; i++)
+                    {
+                        String[] con = bdl[i].ToString().TrimEnd('}').Split(',');
+                        if (i == 0)
+                        {
+                            <thead id="headColumn">
+                                <tr>
+                                    @for (int j = 1; j < con.Length; j++)
+                                    {
+                                        <td>
+                                            @con[j].Substring(0, con[j].IndexOf("="))
+                                        </td>
+                                    }
+                                </tr>
+                            </thead>
+                        }
+                        <tbody>
+                            <tr>
+                                @for (int j = 1; j < con.Length; j++)
+                                {
+                                    <td>
+                                        @con[j].Substring(con[j].IndexOf("=") + 3, con[j].Length - con[j].IndexOf("=") - 4)
+                                    </td>
+                                }
+                            </tr>
+                        </tbody>
+                    }
+                }
+                else {
+                    <tr><td align="center">@Model.isError</td></tr>
+                }
+            </table>
+        </div>
+    </section>
+</div>
+
+<script src="~/js/SmartAdmin/js/libs/jquery-2.0.2.min.js"></script>
+<script type="text/javascript">
+
+    function btnLoadData(modelname) {
+        var str = "";
+        //str = "博客, 域名\nBlog, 2\njb51.net, 3";
+        //列头
+        var _thead = document.getElementById("headColumn");
+        var _theadTD = _thead.getElementsByTagName("td");
+        for (var i = 0; i < _theadTD.length; i++) {
+            if (i == 0) {
+                str = _theadTD[i].innerText;
+            } else {
+                str = str + "," + _theadTD[i].innerText;
+            }  
+        }
+        var _tbody = document.getElementsByTagName("tbody");
+        for (var j = 0; j < _tbody.length; j++) {
+            str = str + "\n";
+            var _tbodyTD = _tbody[j].getElementsByTagName("td");
+            for (var k = 0; k < _tbodyTD.length; k++) {
+                if (k == 0) {
+                    str = str + _tbodyTD[k].innerText;
+                } else {
+                    str = str + "," + _tbodyTD[k].innerText;
+                }   
+            }
+        }
+        str = encodeURIComponent(str);
+        var uri = 'data:text/csv;charset=utf-8,\ufeff' + str;
+        var downloadLink = document.createElement("a");
+        downloadLink.href = uri;
+        downloadLink.download = modelname + ".csv";
+        document.body.appendChild(downloadLink);
+        downloadLink.click();
+        document.body.removeChild(downloadLink);
+    }
+
+    function btnReturn() {
+        location.href = "/Console/Model?Value=";
+    }
+
+</script>

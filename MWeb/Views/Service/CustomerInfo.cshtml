@@ -1,0 +1,93 @@
+﻿@model object
+@{
+    ViewBag.Title = "客服管理 -- 列表";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<!--End-breadcrumbs-->
+<div class="container-fluid">
+    <div class="row-fluid">
+        @*<div class="span6">
+            <div id="search2">
+                <input id="btnAddCustomer" type="button" value="添加客服" onclick="return AddCustomer()" class=" btn btn-success" />
+            </div>
+        </div>*@
+
+        <div  id="box">
+            @Html.Partial("CustomerInfo_PageList", Model)
+        </div>
+    </div>
+</div>
+
+
+@section scripts{
+    @{Html.RegisterMvcPagerScriptResource();}
+
+
+    <script src="/js/bootstrap.min.js"></script>
+
+    <script type="text/javascript">
+
+        // resets the menu selection upon entry to this page:
+        function resetMenu() {
+            document.gomenu.selector.selectedIndex = 2;
+        }
+
+
+
+        function errFunc(res) {
+            alert(res["responseText"]);
+        }
+        function successPageFun() {
+
+        }
+        function AddCustomer(obj) {
+            location.href = "/Service/CustomerForAdd";
+        }
+
+        function UpdateUser(obj) {
+            //_this = $(obj).parent().parent();
+            //var _UserID = $(_this).find("td").eq(0).html();
+            location.href = "/Service/CustomerForUpdate?id=" + obj;
+        }
+
+
+        function ConfirmDelUser(id, obj) {
+            if (confirm("你确定要删除此记录吗？")) {
+                //_this = $(obj).parent().parent();
+                //var _UserID = $(_this).find("td").eq(0).html();
+
+                $.ajax({
+                    url: "/Service/CustomerForDelete/",
+                    type: "POST",
+                    dataType: "JSON",
+                    data: { "Id": id },
+                    success: function (data) {
+                        switch (data.result) {
+                            case 0:
+                                location.reload();
+                                break;
+                            case 1:
+                                alert("删除失败，请稍后再试");
+                                break;
+                            default:
+                                alert('未知错误');
+                                break;
+                        }
+                    }
+                }).fail(function (xhr, textStatus, err) {
+                    alert('Error: ' + err);
+                });
+            }
+            else {
+                return false;
+            }
+
+            return false;
+        }
+
+
+    </script>
+}

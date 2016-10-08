@@ -1,0 +1,50 @@
+﻿@model object
+@{
+    ViewBag.Title = "充值列表";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div id="content-header">
+    <div id="breadcrumb"> <a href="#" title="" class="current"><i class="icon-home"></i> 充值列表</a></div>
+</div>
+
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="widget-box" id="box">
+            @Html.Partial("List_PageList", Model)
+        </div>
+    </div>
+</div>
+
+
+@section scripts{
+    @{Html.RegisterMvcPagerScriptResource();}
+
+
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/select2.min.js"></script>
+    <script src="/js/matrix.tables.js"></script>
+
+    <script type="text/javascript">
+
+        // resets the menu selection upon entry to this page:
+        function resetMenu() {
+            document.gomenu.selector.selectedIndex = 2;
+        }
+
+
+        function ConfirmDelUser() {
+            return confirm("你确认要执行此操作吗？");
+        }
+
+        function errFunc(res) {
+            alert(res["responseText"]);
+        }
+        function successPageFun() {
+
+        }
+
+    </script>
+}
+

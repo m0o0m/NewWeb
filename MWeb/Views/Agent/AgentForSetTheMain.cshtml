@@ -1,0 +1,140 @@
+﻿@using GL.Data.Model;
+@model List<SelectListItem>
+@{
+    ViewBag.Title = "设置主站";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+
+
+}
+
+    
+
+    <article class="col-sm-12 col-md-12 col-lg-7">
+        <div class="jarviswidget" id="wid-id-4" data-widget-editbutton="false" data-widget-custombutton="false">
+            <header>
+                <span class="widget-icon"> <i class="fa fa-edit"></i> </span>
+                <h2>@(ViewBag.Title)</h2>
+            </header>
+            <div>
+                <div class="jarviswidget-editbox">
+                </div>
+                <div class="widget-body no-padding">
+                    <form id="submitForm" class="smart-form" action="" method="post">
+                        <fieldset>
+                            <div class="row">
+                                <section class="col col-7">
+                                    <label>选择设为主站的代理 :</label>
+                                    <label class="select">
+                                        @Html.DropDownList("AgentList", Model, new { })<i></i>
+                                    </label>
+                                </section>
+                            </div>
+
+                            </fieldset>
+
+
+
+                                <footer>
+
+                                    <input id="btnGoBack" type="button" value="返回列表" onclick="return GoBack()" class=" btn btn-warning" />
+                                    <input id="btnKick" type="submit" value="提交" class="btn btn-danger" />
+                                </footer>
+</form>
+
+                </div>
+                <!-- end widget content -->
+
+            </div>
+            <!-- end widget div -->
+
+        </div>
+
+    </article>
+
+
+
+
+
+
+
+
+    @section scripts{
+        @{Html.RegisterMvcPagerScriptResource();}
+
+
+        @*<script src="/js/bootstrap.min.js"></script>
+        <script src="/js/select2.min.js"></script>
+        @Scripts.Render("~/bundles/jqueryval")*@
+        <script type="text/javascript">
+
+            function GoBack(obj) {
+                location.href = "/Agent/Agent";
+            }
+
+            $(function () {
+
+
+             //   $('select').select2();
+
+
+
+                $.validator.setDefaults({
+                    submitHandler: function (form) {
+                        //form.submit();
+                        //location.href = "/Manage/MemberForAdd?id=" + $("#AgentList").val();
+
+                        $.ajax({
+                            url: "/Agent/AgentForSetTheMain/",
+                            type: "POST",
+                            dataType: "JSON",
+                            data: { "AgentID": $("#AgentList").val() },
+                            success: function (data) {
+                                switch (data.result) {
+                                    case 0:
+                                        alert('已将主站设置为代理' + $("#AgentList option:selected").text());
+                                        location.href = "/Agent/Agent";
+                                        break;
+                                    default:
+                                        alert('添加失败,请与管理员联系');
+                                        break;
+                                }
+                            }
+                        }).fail(function (xhr, textStatus, err) {
+                            alert('Error: ' + err);
+                        });
+                        return false;
+                    }
+                });
+
+                // 字符验证
+
+
+                $('#submitForm').validate({
+                    /* 设置验证规则 */
+                    errorElement: "span",
+                    rules: {
+                    },
+
+                    /* 设置错误信息 */
+                    messages: {
+                    },
+
+                    /* 设置验证触发事件 */
+                    focusInvalid: false,
+                    onkeyup: false,
+
+                    /* 设置错误信息提示DOM */
+                    errorPlacement: function (error, element) {
+                        error.appendTo(element.parent());
+                    }
+
+                });
+
+
+
+            })
+
+
+        </script>
+    }

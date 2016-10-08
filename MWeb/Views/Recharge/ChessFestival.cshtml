@@ -1,0 +1,80 @@
+﻿@using GL.Data.Model
+@model FestivalBaseData
+@{
+    ViewBag.Title = "515棋牌节";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    ViewBag.Format = "yyyy-MM-dd";
+}
+
+
+
+
+
+<div id="content">
+    <form id="comment-form" class="smart-form" novalidate="novalidate">
+        <div class="row">
+            <div class="widget-body">
+                <section class="col col-1.2">
+                    <label class="label">起始日期</label>
+                    <label class="input">
+                        <i class="icon-append fa fa-calendar"></i>
+                        @Html.TextBoxFor(m => m.StartTime, new Dictionary<string, object>() { { "class", "form-control datepicker" }, { "data-dateformat", "yy-mm-dd 00:00:00" } })
+                    </label>
+                </section>
+                <section class="col col-1.2">
+                    <label class="label"> 截止日期</label>
+                    <label class="input">
+                        <i class="icon-append fa fa-calendar"></i>
+                        @Html.TextBoxFor(m => m.ExpirationDate, new Dictionary<string, object>() {
+                           { "class", "form-control datepicker" },
+                           { "data-dateformat", "yy-mm-dd 00:00:00" }
+                       })
+                    </label>
+                </section>
+
+                <section class="col col-1">
+                    <label class="label">终端类型</label>
+                    <label class="select">
+                        @Html.DropDownListFor(m => m.ClientType, new List<SelectListItem>
+                {
+                    new SelectListItem { Text= "所有", Value = "0" },
+                    new SelectListItem { Text= "PC", Value = "1" },
+                       new SelectListItem { Text= "IOS", Value = "2" },
+                          new SelectListItem { Text= "Android", Value = "3" }
+                })<i></i>
+                    </label>
+                </section>
+
+                <section class="col col-1">
+                    <label class="label">&nbsp;</label>
+                    <input type="button" onclick="search()" class="btn btn-success btn-sm" value="查询" />
+                </section>
+
+            </div>
+        </div>
+    </form>
+
+    <div class="row-fluid">
+        <div class="widget-box" id="box">
+            @Html.Partial("ChessFestival_PageList", Model)
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+@section scripts{
+    @{Html.RegisterMvcPagerScriptResource();}
+
+}
+
+
+

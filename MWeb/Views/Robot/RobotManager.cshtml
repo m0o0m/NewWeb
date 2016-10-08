@@ -1,0 +1,758 @@
+﻿@using GL.Data.View
+@model RobotControl
+@{
+    ViewBag.Title = "RobotManager";
+    string TexasLimits = "";
+
+    List<uint> TexasLimit = Model.RobotPlayerLimit.TexasLimit;
+    for (int i = 0; i < TexasLimit.Count(); i++) {
+        TexasLimits += TexasLimit[i] + ",";
+    }
+    string CARSLimits = "";
+    List<uint> CARSLimit = Model.RobotPlayerLimit.CARSLimit;
+    for (int i = 0; i < CARSLimit.Count(); i++)
+    {
+        CARSLimits += CARSLimit[i] + ",";
+    }
+
+    string ZFBLimits = "";
+    List<uint> ZFBLimit = Model.RobotPlayerLimit.ZFBLimit;
+    for (int i = 0; i < ZFBLimit.Count(); i++)
+    {
+        ZFBLimits += ZFBLimit[i] + ",";
+    }
+
+    string ZODIACLimits = "";
+    List<uint> ZODIACLimit = Model.RobotPlayerLimit.ZODIACLimit;
+    for (int i = 0; i < ZODIACLimit.Count(); i++)
+    {
+        ZODIACLimits += ZODIACLimit[i] + ",";
+    }
+
+
+    string TEXTPROLimits = "";
+    List<uint> TEXTPROLimit = Model.RobotPlayerLimit.TEXAS_EXLimit;
+    for (int i = 0; i < TEXTPROLimit.Count(); i++)
+    {
+        TEXTPROLimits += TEXTPROLimit[i] + ",";
+    }
+
+}
+
+<input type="hidden" id="hid100" value="@TexasLimits.Trim(',')" />
+<input type="hidden" id="hid102" value="@CARSLimits.Trim(',')" />
+<input type="hidden" id="hid101" value="@ZFBLimits.Trim(',')" />
+<input type="hidden" id="hid103" value="@ZODIACLimits.Trim(',')" />
+<input type="hidden" id="hid104" value="@TEXTPROLimits.Trim(',')" />
+<div id="content">
+
+    <section id="widget-grid" class="col-sm-12 col-md-12 col-lg-12">
+        <div class="row">
+            <article class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-0" data-widget-editbutton="false" data-widget-colorbutton="false"
+                     data-widget-togglebutton="false"
+                     data-widget-deletebutton="false"
+                     data-widget-fullscreenbutton="false"
+                     data-widget-custombutton="false"
+                     data-widget-collapsed="false"
+                     data-widget-sortable="false">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                        <h2 s>安全数据监控</h2>
+                    </header>
+                    <!-- widget div-->
+                    <div>
+                        <!-- widget edit box -->
+                        <div class="jarviswidget-editbox">
+                            <!-- This area used as dropdown edit box -->
+                        </div>
+                        <!-- end widget edit box -->
+                        <!-- widget content -->
+                        <div class="widget-body no-padding">
+                            <div class="table-responsive">
+                                <table class="table table-bordered">
+                                    <tbody>
+
+                                        <tr class="gradeA" >
+                                            <td>cpu使用</td>
+                                            <td id="tdcpu">
+                                           @{ 
+                                               string per = Model.RobotSystemStatu.CPUPercent + "‰";
+                                           }@per
+                                              </td>
+                                        </tr>
+                                        <tr class="gradeA">
+                                            <td>程序内存占用/总内存占用</td>
+                                            <td id="tdMem">@{
+                                                string zhanyong = Model.RobotSystemStatu.MemUsed + "k/" + Model.RobotSystemStatu.MemTotal+"k";
+                                            }@zhanyong</td>
+                                        </tr>
+                                        <tr class="gradeA">
+                                            <td>端口流量</td>
+                                            <td id="tdflow">
+                                            @{ 
+                                                string rys = Model.RobotSystemStatu.FlowRate + "b";
+                                            }@rys
+                                            </td>
+                                        </tr>
+                                        <tr class="gradeA">
+                                            <td>程序连接数/总连接数</td>
+                                            <td id="tdconn">@{
+                                                string lianjie = Model.RobotSystemStatu.ConnCnt + "/" + Model.RobotSystemStatu.ConnLimit;
+                                            }@lianjie</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <!-- end widget content -->
+                    </div>
+                    <!-- end widget div -->
+                </div>
+                <!-- end widget -->
+
+            </article>
+      
+        
+            <article class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-aa" data-widget-editbutton="false" data-widget-colorbutton="false"
+                     data-widget-togglebutton="false"
+                     data-widget-deletebutton="false"
+                     data-widget-fullscreenbutton="false"
+                     data-widget-custombutton="false"
+                     data-widget-collapsed="false"
+                     data-widget-sortable="false">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                        <h2 s>007在线人数</h2>
+                    </header>
+                    <!-- widget div-->
+                    <div>
+                        <!-- widget edit box -->
+                        <div class="jarviswidget-editbox">
+                            <!-- This area used as dropdown edit box -->
+                        </div>
+                        <!-- end widget edit box -->
+                        <!-- widget content -->
+                        <div class="widget-body no-padding">
+                            <div class="table-responsive">
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <td>游戏名</td>
+                                            <td>在线人数</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                        <tr class="gradeA">
+                                            <td>所有游戏之和</td>
+                                            <td id="tdAll">@Model.RobotGameStatu.All</td>
+                                        </tr>
+                                        <tr class="gradeA">
+                                            <td>德州扑克</td>
+                                            <td id="tdTexas">@Model.RobotGameStatu.Texas</td>
+                                        </tr>
+                                        <tr class="gradeA">
+                                            <td>中发白</td>
+                                            <td id="tdZFB">@Model.RobotGameStatu.ZFB</td>
+                                        </tr>
+                                        <tr class="gradeA">
+                                            <td>十二生肖</td>
+                                            <td id="tdZodiac">@Model.RobotGameStatu.ZODIAC</td>
+                                        </tr>
+                                        <tr class="gradeA">
+                                            <td>奔驰宝马</td>
+                                            <td id="tdCars">@Model.RobotGameStatu.CARS</td>
+                                        </tr>
+                                        <tr class="gradeA">
+                                            <td>百人德州</td>
+                                            <td id="tdTextPro">@Model.RobotGameStatu.TEXAS_EX</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <!-- end widget content -->
+                    </div>
+                    <!-- end widget div -->
+                </div>
+                <!-- end widget -->
+
+            </article>
+          </div>
+    </section>
+
+    @*表单*@
+    <article class="col-sm-12 col-md-12 col-lg-6">
+
+        <!-- Widget ID (each widget will need unique ID)-->
+        <div class="jarviswidget" id="wid-id-1" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-custombutton="false">
+            <!-- widget options:
+            usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+
+            data-widget-colorbutton="false"
+            data-widget-editbutton="false"
+            data-widget-togglebutton="false"
+            data-widget-deletebutton="false"
+            data-widget-fullscreenbutton="false"
+            data-widget-custombutton="false"
+            data-widget-collapsed="true"
+            data-widget-sortable="false"
+
+            -->
+            <header style="background-color:#4C4F53 ;color:white">
+                <span class="widget-icon"> <i class="fa fa-edit"></i> </span>
+                <h2>启动007</h2>
+
+            </header>
+
+            <!-- widget div-->
+            <div>
+
+                <!-- widget edit box -->
+                <div class="jarviswidget-editbox">
+                    <!-- This area used as dropdown edit box -->
+
+                </div>
+                <!-- end widget edit box -->
+                <!-- widget content -->
+                <div class="widget-body no-padding">
+
+                    <form action="" class="smart-form">
+                        <header>
+                            <div class="form-group col-md-6">
+                             
+                                <label class="select ">
+                                    <select id="gameSelect" class="input" onchange="change()">
+                                        <option value="100">德州扑克</option>
+                                        <option value="101">中发白</option>
+                                        <option value="103">十二生肖</option>
+                                        <option value="102">奔驰宝马</option>
+                                        <option value="104">百人德州</option>
+                                    </select> <i></i>
+                                </label>
+                            </div><br><br>
+</header>
+
+                        <fieldset>
+                            <div class="widget-body">
+                                <div class="table-responsive">
+                                    <table border="1" class="table table-bordered col-md-12">
+                                     
+                                        <tr>
+                                            <td>当前总人数</td>
+                                            <td id="tdcurTotal">@Model.RobotGameStatu.Texas</td>
+                                        </tr>
+                                        <tr id="trModule">
+                                            <td>开启模式</td>
+                                            <td>
+                                              
+                                                <section>
+                                                    <input checked="checked" name="myradio" type="radio" value="1"/>随机进桌
+                                                    <input name="myradio" type="radio"  value="2"/>快速开始
+                                                    <input name="myradio" type="radio"  value="3"/>外网模式
+                                                </section>
+                                            </td>
+                                        </tr>
+                                        <tr id="xiazhuTr" style="display:none">
+                                           <td>是否下注</td>
+                                            <td>
+                                                <div class="form-group col-md-6">
+                                                  
+                                                    <label class="select ">
+                                                        <select id="zfbSelect" class="input" style="display:none" onchange="changeXiaZhu(0)" >
+                                                            @if (Model.RobotDown.ZFB)
+                                                            {
+                                                                <option value="1" selected="selected">是</option>
+                                                                <option value="0">否</option>
+                                                            }
+                                                            else
+                                                            {
+                                                                <option value="1" >是</option>
+                                                                <option value="0" selected="selected">否</option>
+                                                            }
+
+                                                        </select> <i></i>
+                                                        <select id="zodicSelect" class="input" onchange="changeXiaZhu(1)" style="display:none">
+                                                            @if (Model.RobotDown.ZODIAC)
+                                                            {
+                                                                <option value="1" selected="selected">是</option>
+                                                                <option value="0">否</option>
+                                                            }
+                                                            else
+                                                            {
+                                                                <option value="1">是</option>
+                                                                <option value="0" selected="selected">否</option>
+                                                            }
+                                                        </select> <i></i>
+                                                        <select id="carSelect" class="input" onchange="changeXiaZhu(2)" style="display:none">
+                                                            @if (Model.RobotDown.CARS)
+                                                            {
+                                                                <option value="1" selected="selected">是</option>
+                                                                <option value="0">否</option>
+                                                            }
+                                                            else
+                                                            {
+                                                                <option value="1">是</option>
+                                                                <option value="0" selected="selected">否</option>
+                                                            }
+                                                        </select> <i></i>
+                                                        <select id="texasExSelect" class="input" style="display:none" onchange="changeXiaZhu(4)">
+                                                            @if (Model.RobotDown.TEXAS_EX)
+                                                            {
+                                                                <option value="1" selected="selected">是</option>
+                                                                <option value="0">否</option>
+                                                            }
+                                                            else
+                                                            {
+                                                                <option value="1">是</option>
+                                                                <option value="0" selected="selected">否</option>
+                                                            }
+
+                                                        </select> <i></i>
+                                                    </label>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>登陆/登出间隔毫秒</td>
+                                            <td>
+                                                <div class="form-group">
+
+                                                    <div class="col-md-5">
+                                                        <input id="mysecond" class="form-control" placeholder="" type="text">
+                                                    </div>
+                                                </div>
+
+                                            </td>
+
+                                        </tr>
+                                        <tr>
+                                            <td>开启/关闭人数</td>
+                                            <td>
+                                                <div class="form-group">
+
+                                                    <div class="col-md-5">
+                                                        <input id="num" class="form-control" placeholder="" type="text">
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2" style="padding-left:300px">
+                                                <a class="btn btn-default" href="javascript:void(0);" onclick="logon(1)">登录</a>
+                                                <a class="btn btn-default" href="javascript:void(0);" onclick="logon(-1)">登出</a>
+                                            </td>
+
+                                        </tr>
+                                    </table>
+                                </div>
+                             </div>
+</fieldset>
+
+                       
+                  
+                  
+
+                       
+                    </form>
+
+                  
+                    <form action="" class="smart-form">
+                        <fieldset>
+                            <div class="widget-body">
+                                <div class="table-responsive">
+                                    <table border="1" class="table table-bordered col-md-12">
+                                        <tr>
+                                            <td>时间段</td>
+                                            <td >3点-7点</td>
+                                            <td >7点-11点</td>
+                                            <td >11点-20点</td>
+                                            <td >20点-23点</td>
+                                            <td >23点-3点</td>
+                                        </tr>
+                                        <tr>
+                                            <td>人数下限</td>
+                                            @for (int i = 0; i < Model.RobotPlayerLimit.TexasLimit.Count(); i++)
+                                            {
+                                                var item = Model.RobotPlayerLimit.TexasLimit[i];
+                                                <td><input id="input_@i" class=" col-md-7" type="text" value="@item" /></td>
+                                            }
+                                            
+
+                                        </tr>
+                                        <tr>
+                                            <td style="padding-left:300px" colspan="6">
+                                                <a class="btn btn-default" href="javascript:void(0);" onclick="update()">确认修改</a>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </fieldset>
+
+
+
+
+
+
+                    </form>
+                    
+                    
+                    
+                    
+                  
+                    </div>
+                <!-- end widget content -->
+
+            </div>
+            <!-- end widget div -->
+
+        </div>
+        <!-- end widget -->
+
+    </article>
+</div>
+
+
+<script type="text/javascript">
+    function update() {
+        var input0 = $("#input_0").val();
+        var input1 = $("#input_1").val();
+        var input2 = $("#input_2").val();
+        var input3 = $("#input_3").val();
+        var input4 = $("#input_4").val();
+       // alert("input0=" + input0 + "," + "input1=" + input1 + ","+"input2=" + input2+","+"input3=" + input3+","+"input4=" + input4);
+        var re = /^[0-9]+[0-9]*]*$/;
+        var b0 = re.test(input0);
+        var b1 = re.test(input1);
+        var b2 = re.test(input2);
+        var b3 = re.test(input3);
+        var b4 = re.test(input4);
+        if ((!b0)||(!b1)||(!b2)||(!b3)||(!b4)) {
+            alert("人数下限必须输入非负数!");
+            return false;
+        }
+
+
+
+
+
+        var v = $("#gameSelect").find("option:selected").val();
+        $.ajax({
+            url: "/Robot/RobotUpdateLimit/",
+            type: "Post",
+            dataType: "JSON",
+            data: { "gametype":v, "limit0": input0, "limit1": input1, "limit2": input2, "limit3": input3, "limit4": input4},
+            success: function (data) {
+                switch (data.res) {
+                    case 1:
+                        var s = input0 + ',' + input1 + "," + input2 + "," + input3 + "," + input4;
+                      
+                        switch (v) {
+                            case "100": $("#hid100").val(s); break; //德州扑克
+                            case "101": $("#hid101").val(s); break;//中发白
+                            case "103": $("#hid103").val(s); break;//十二生肖
+                            case "102": $("#hid102").val(s); break;//奔驰宝马
+                        }
+
+                    
+                        alert("修改成功!");
+                        break;
+                 
+                    default:
+                        alert('修改失败!');
+                        break;
+                }
+            }
+        });
+
+
+    }
+
+    function logon(type) {
+        var gametype = $("#gameSelect").find("option:selected").val();
+        var downtype = $("#xiazhuSelect").find("option:selected").val();
+        var openmodule = $("input[name='myradio']:checked").val();
+        var second = $("#mysecond").val();
+        var num = $("#num").val();
+        if (openmodule == undefined) {
+            alert("请选择开启模式!");
+            return false;
+        }
+        var re = /^[1-9]+[0-9]*]*$/;
+        var  b = re.test(second)
+        if (!b) {
+            alert("登录/登出间隔时间必须为正整数!");
+            return false;
+        }
+
+        var n = re.test(num)
+        if (!n) {
+            alert("开启/关闭人数必须为正整数!");
+            return false;
+        }
+     
+
+
+
+        if (type == 1) {
+            num = num;
+        } else {
+            num = num * -1;
+        }
+        var obj = {
+            gametype: gametype,
+            second: second,
+            num: num
+           
+        };
+        if (gametype == 100) {
+            obj.openmodule = openmodule;
+        } 
+        $.ajax({
+            url: "/Robot/RobotLogon/",
+            type: "Post",
+            dataType: "JSON",
+            data: obj,
+            success: function (data) {
+                switch (data.res) {
+                    case 1:
+                        alert('操作成功!');
+                        break;
+
+                    default:
+                        alert(data.Data);
+                        break;
+                }
+            }
+        });
+
+    }
+
+    function change() {
+        var v = $("#gameSelect").find("option:selected").val();
+      
+        var hidV = eval('$("#hid' + v + '").val()');
+    
+        var hidVs = hidV.split(',');
+        $("#input_0").val(hidVs[0]);
+        $("#input_1").val(hidVs[1]);
+        $("#input_2").val(hidVs[2]);
+        $("#input_3").val(hidVs[3]);
+        $("#input_4").val(hidVs[4]);
+
+        switch (v) {
+            case "100"://德州
+                $("#trModule").css("display", "");
+                $("#xiazhuTr").css("display", "none");
+                $("#zfbSelect").css("display", "none");
+                $("#zodicSelect").css("display", "none");
+                $("#carSelect").css("display", "none");
+                $("#texasExSelect").css("display", "none");
+                $("#tdcurTotal").html($("#tdTexas").html());
+              
+                break;
+            case "101"://中发白
+                $("#trModule").css("display", "none");
+                $("#xiazhuTr").css("display", "");
+                $("#zfbSelect").css("display", "");
+                $("#zodicSelect").css("display", "none");
+                $("#carSelect").css("display", "none");
+                $("#texasExSelect").css("display", "none");
+                $("#tdcurTotal").html($("#tdZFB").html());
+                break;
+            case "103"://十二生肖
+                $("#trModule").css("display", "none");
+                $("#xiazhuTr").css("display", "");
+                $("#zfbSelect").css("display", "none");
+                $("#zodicSelect").css("display", "");
+                $("#carSelect").css("display", "none");
+                $("#texasExSelect").css("display", "none");
+                $("#tdcurTotal").html($("#tdZodiac").html());
+                break;
+            case "102"://奔驰宝马
+                $("#trModule").css("display", "none");
+                $("#trModule").css("display", "none");
+                $("#xiazhuTr").css("display", "");
+                $("#zfbSelect").css("display", "none");
+                $("#zodicSelect").css("display", "none");
+                $("#carSelect").css("display", "");
+                $("#texasExSelect").css("display", "none");
+                $("#tdcurTotal").html($("#tdCars").html());
+                break;
+            case "104"://百人德州 
+               
+                $("#trModule").css("display", "none");
+                $("#xiazhuTr").css("display", "");
+                $("#zfbSelect").css("display", "none");
+                $("#zodicSelect").css("display", "none");
+                $("#carSelect").css("display", "none");
+                $("#texasExSelect").css("display", "");
+                $("#tdcurTotal").html($("#tdTextPro").html());
+
+                break;
+            default:
+                
+                break;
+        }
+
+        
+    }
+
+
+    function changeXiaZhu(t) {
+        var gametype = $("#gameSelect").find("option:selected").val();
+        var downtype;
+        switch (t) {
+            case 0: 
+                downtype = $("#zfbSelect").find("option:selected").val();
+                break;
+            case 1:
+                downtype = $("#zodicSelect").find("option:selected").val();
+                break;
+            case 2:
+                downtype = $("#carSelect").find("option:selected").val();
+                break;
+            case 4:
+                downtype = $("#texasExSelect").find("option:selected").val();
+                break;
+        }
+        var obj = {
+            gametype: gametype,
+            downtype: downtype
+        };
+
+        $.ajax({
+            url: "/Robot/RobotDown/",
+            type: "Post",
+            dataType: "JSON",
+            data:obj,
+            success: function (data) {
+                switch (data.res) {
+                    case 1:
+                        switch (t) {
+                            case 0:
+                                $("#zfbSelect").val(data.down);
+                                break;
+                            case 1:
+                                $("#zodicSelect").val(data.down);
+                                break;
+                            case 2:
+                                $("#carSelect").val(data.down);
+                                break;
+                            case 4:
+                                $("#texasExSelect").val(data.down);
+                                break;
+                        }
+                        alert('操作成功!');
+                        break;
+                    default:
+                        alert('操作失败!');
+                        break;
+                }
+            }
+        });
+    }
+
+    //$(function () { setInterval(init, 2000); })
+    
+
+    setInterval(initData, 5000);
+
+    function init0(RobotSystemStatu) {
+       // alert(JSON.stringify(RobotSystemStatu));
+        $("#tdcpu").html(RobotSystemStatu.CPUPercent+"‰");
+        $("#tdMem").html(RobotSystemStatu.MemUsed + "k/" + RobotSystemStatu.MemTotal+"k");
+        $("#tdflow").html(RobotSystemStatu.FlowRate+"b");
+        $("#tdconn").html(RobotSystemStatu.ConnCnt + "/" + RobotSystemStatu.ConnLimit);
+       
+    }
+
+    function init1(RobotGameStatu) {
+     
+        $("#tdAll").html(RobotGameStatu.All);
+        $("#tdTexas").html(RobotGameStatu.Texas);
+        $("#tdZFB").html(RobotGameStatu.ZFB);
+        $("#tdZodiac").html(RobotGameStatu.ZODIAC);
+        $("#tdCars").html(RobotGameStatu.CARS);
+        $("#tdTextPro").html(RobotGameStatu.TEXAS_EX);
+        //tdTextPro
+        var v = $("#gameSelect").find("option:selected").val();
+
+        switch (v) {
+            case "100"://德州
+               
+                $("#tdcurTotal").html($("#tdTexas").html());
+
+                break;
+            case "101"://中发白
+              
+                $("#tdcurTotal").html($("#tdZFB").html());
+                break;
+            case "103"://十二生肖
+              
+                $("#tdcurTotal").html($("#tdZodiac").html());
+                break;
+            case "102"://奔驰宝马
+             
+                $("#tdcurTotal").html($("#tdCars").html());
+                break;
+            case "104"://tdTextPro
+                $("#tdcurTotal").html($("#tdTextPro").html());
+                break;
+            default:
+
+                break;
+        }
+
+
+     
+    }
+
+    //function init2(RobotPlayerLimit) {
+    //    alert(JSON.stringify(RobotPlayerLimit));
+
+    //    var TexasLimit = RobotPlayerLimit.TexasLimit;
+    //    var ZFBLimit = RobotPlayerLimit.ZFBLimit;
+    //    var ZODIACLimit = RobotPlayerLimit.ZODIACLimit;
+    //    var CARSLimit = RobotPlayerLimit.CARSLimit;
+    //}
+
+    function initData() {
+        $.ajax({
+            url: "/Robot/RobotManager/",
+            type: "Post",
+            dataType: "JSON",
+            success: function (data) {
+                switch (data.res) {
+                    case 1:
+                        var data = data.data;
+                        var RobotSystemStatu = data.RobotSystemStatu;
+                      
+                        init0(RobotSystemStatu);
+                        var RobotGameStatu = data.RobotGameStatu;
+
+                        init1(RobotGameStatu);
+
+                       // var RobotPlayerLimit = data.RobotPlayerLimit;
+
+                       // init2(RobotPlayerLimit)
+
+                        // var contentJson = JSON.stringify(data.y);
+                        //alert(y.TexasLimit[0]);
+                        //var arr = y.RobotPlayerLimit.AllLimit;
+                        //alert(arr);
+                        //alert('操作成功!');
+                        break;
+
+                    default:
+                        alert('操作失败!');
+                        break;
+                }
+            }
+        });
+    }
+
+</script>

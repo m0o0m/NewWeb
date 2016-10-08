@@ -1,0 +1,246 @@
+﻿
+@using GL.Data.Model
+@model BaseDataView
+@{
+    ViewBag.Title = "活跃用户数";
+    ViewBag.Format = "yyyy-MM-dd";
+    bool isWeek = false;
+    switch (Model.Groupby)
+    {
+        case groupby.按日:
+            break;
+        case groupby.按月:
+            ViewBag.Format = "yyyy-MM";
+            break;
+        default:
+            isWeek = true;
+            break;
+    }
+
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    Layout = null;
+    List<BaseDataInfo> bdl = (List<BaseDataInfo>)Model.BaseDataList;
+
+}
+<link rel="stylesheet" type="text/css" media="screen" href="~/js/SmartAdmin/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" media="screen" href="~/js/SmartAdmin/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" media="screen" href="~/js/SmartAdmin/css/smartadmin-production.css">
+<link rel="stylesheet" type="text/css" media="screen" href="~/js/SmartAdmin/css/smartadmin-skins.css">
+<link rel="stylesheet" type="text/css" media="screen" href="~/js/SmartAdmin/css/demo.css">
+<link rel="shortcut icon" href="~/js/SmartAdmin/img/favicon/favicon.ico" type="image/x-icon">
+<link rel="icon" href="~/js/SmartAdmin/img/favicon/favicon.ico" type="image/x-icon">
+<link href="~/js/SmartAdmin/css/mygame.css" rel="stylesheet" />
+<script data-pace-options='{ "restartOnRequestAfter": true }' src="~/js/SmartAdmin/js/plugin/pace/pace.min.js"></script>
+
+<script src="~/js/SmartAdmin/js/libs/jquery-2.0.2.min.js"></script>
+<script src="~/Scripts/jquery.history.js"></script>
+
+@*<script src="~/js/SmartAdmin/js/libs/jquery-ui-1.10.3.min.js"></script>*@
+<script src="~/js/SmartAdmin/js/libs/jquery-ui-1.11.4-utf8.js"></script>
+<script src="~/js/SmartAdmin/js/bootstrap/bootstrap.min.js"></script>
+<script src="~/js/SmartAdmin/js/notification/SmartNotification.min.js"></script>
+<script src="~/js/SmartAdmin/js/smartwidgets/jarvis.widget.min.js"></script>
+<script src="~/js/SmartAdmin/js/plugin/easy-pie-chart/jquery.easy-pie-chart.min.js"></script>
+<script src="~/js/SmartAdmin/js/plugin/sparkline/jquery.sparkline.min.js"></script>
+@*<script src="~/js/SmartAdmin/js/plugin/jquery-validate/jquery.validate.min.js"></script>*@
+<script src="~/js/JqueryValidate/jquery.validate.min.js"></script>
+<script src="~/js/SmartAdmin/js/plugin/masked-input/jquery.maskedinput.min.js"></script>
+<script src="~/js/SmartAdmin/js/plugin/select2/select2.min.js"></script>
+<script src="~/js/SmartAdmin/js/plugin/bootstrap-slider/bootstrap-slider.min.js"></script>
+<script src="~/js/SmartAdmin/js/plugin/msie-fix/jquery.mb.browser.min.js"></script>
+<script src="~/js/SmartAdmin/js/plugin/fastclick/fastclick.js"></script>
+<script src="~/js/SmartAdmin/js/demo.js"></script>
+<script src="~/js/SmartAdmin/js/app.js"></script>
+<script src="~/js/SmartAdmin/js/plugin/flot/jquery.flot.cust.js"></script>
+<script src="~/js/SmartAdmin/js/plugin/flot/jquery.flot.resize.js"></script>
+<script src="~/js/SmartAdmin/js/plugin/flot/jquery.flot.tooltip.js"></script>
+<script src="~/js/SmartAdmin/js/plugin/vectormap/jquery-jvectormap-1.2.2.min.js"></script>
+<script src="~/js/SmartAdmin/js/plugin/vectormap/jquery-jvectormap-world-mill-en.js"></script>
+<script src="~/js/SmartAdmin/js/plugin/fullcalendar/jquery.fullcalendar.min.js"></script>
+
+<script>
+        $(document).ready(function () {
+            // $("#allbody").removeClass("hide-menu");
+            pageSetUp();
+            setTab();
+            //if (IsPC() == false) {//是手机，并且是第一次进来
+            //    var beforeurl = document.referrer;
+            //    var url = window.location.href
+            //    if (beforeurl == null || beforeurl == "") {//如果上一页为空
+            //        $('body').toggleClass("hidden-menu");
+            //    } else {
+            //        var beforearr = beforeurl.split('.');
+            //        var arr = url.split('.');
+            //        if()
+            //    }
+
+
+            //}
+
+        });
+    </script>
+<div id="content">
+
+    <!-- Widget ID (each widget will need unique ID)-->
+
+
+
+
+    <form id="comment-form" class="smart-form" novalidate="novalidate">
+        <div class="row">
+
+
+            <section class="col col-1.2">
+                <label class="input">
+                    <i class="icon-append fa fa-calendar"></i>
+                    @Html.TextBoxFor(m => m.StartDate, new Dictionary<string, object>() {
+                           { "class", "form-control datepicker" },
+                           { "data-dateformat", "yy-mm-dd 00:00:00" }
+                       })
+                </label>
+            </section>
+            <section class="col col-1.2">
+                <label class="input">
+                    <i class="icon-append fa fa-calendar"></i>
+                    @Html.TextBoxFor(m => m.ExpirationDate, new Dictionary<string, object>() {
+                           { "class", "form-control datepicker" },
+                           { "data-dateformat", "yy-mm-dd 00:00:00" }
+                       })
+                </label>
+            </section>
+
+
+
+            <section class="col col-1">
+                <button type="submit" class="btn btn-success btn-sm">查询</button>
+            </section>
+
+        </div>
+    </form>
+
+    <section id="widget-grid" class="">
+        <div class="row">
+            <article class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
+                <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-0" data-widget-editbutton="false" data-widget-colorbutton="false"
+                     data-widget-togglebutton="false"
+                     data-widget-deletebutton="false"
+                     data-widget-fullscreenbutton="false"
+                     data-widget-custombutton="false"
+                     data-widget-collapsed="false"
+                     data-widget-sortable="false">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                        <h2>活跃用户数统计</h2>
+                    </header>
+                    <!-- widget div-->
+                    <div>
+                        <!-- widget edit box -->
+                        <div class="jarviswidget-editbox">
+                            <!-- This area used as dropdown edit box -->
+                        </div>
+                        <!-- end widget edit box -->
+                        <!-- widget content -->
+                        <div class="widget-body no-padding" style="min-height: 70px;">
+                            <div class="table-responsive">
+                                <table class="table table-bordered">
+                                    <thead>
+                                        @*<tr><th colspan="2">活跃用户数</th></tr>*@
+                                        <tr>
+                                            <th>日期</th>
+                                            <th>日登录活跃数</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @if (bdl.Count == 0)
+                                        {
+                                            <tr>
+                                                <td class="colspan" align="center" colspan="0">
+                                                    没有找到相关记录！
+                                                </td>
+                                            </tr>
+                                        }
+                                        @for (int k = 0; k < bdl.Count(); k++)
+                                        {
+                                            BaseDataInfo item = bdl[k];
+                                            <tr>
+                                                @if (isWeek)
+                                                {
+                                                    string timeView = item.date.ToString(ViewBag.Format);
+                                                    string left = "";
+                                                    string right = "";
+                                                    DateTime dts = item.date;
+                                                    <td>
+                                                        @if (k == 0)
+                                                        {
+                                                            var arr = Model.StartDate.Replace("00:00:00", "").Trim().Split('-');
+                                                            dts = new DateTime(Convert.ToInt32(arr[0]), Convert.ToInt32(arr[1]), Convert.ToInt32(arr[2]), 0, 0, 0);
+                                                        }
+                                                        @{
+                                                            string leftTimeCheck = dts.DayOfWeek.ToString();
+                                                            switch (leftTimeCheck)
+                                                            {
+                                                                case "Monday": left = dts.ToString(ViewBag.Format); right = dts.AddDays(6).ToString(ViewBag.Format); break; //周一
+                                                                case "Tuesday": left = dts.AddDays(-1).ToString(ViewBag.Format); right = dts.AddDays(5).ToString(ViewBag.Format); break; //周二
+                                                                case "Wednesday": left = dts.AddDays(-2).ToString(ViewBag.Format); right = dts.AddDays(4).ToString(ViewBag.Format); break; //周三
+                                                                case "Thursday": left = dts.AddDays(-3).ToString(ViewBag.Format); right = dts.AddDays(3).ToString(ViewBag.Format); break; //周四
+                                                                case "Friday": left = dts.AddDays(-4).ToString(ViewBag.Format); right = dts.AddDays(2).ToString(ViewBag.Format); break; //周五
+                                                                case "Saturday": left = dts.AddDays(-5).ToString(ViewBag.Format); right = dts.AddDays(1).ToString(ViewBag.Format); break; //周六
+                                                                case "Sunday": left = dts.AddDays(-6).ToString(ViewBag.Format); right = dts.AddDays(0).ToString(ViewBag.Format); break; //周日
+                                                            }
+                                                            if (k == 0) { left = Model.StartDate.Replace("00:00:00", "").Trim(); }
+                                                            else if (k == bdl.Count - 1) { right = Model.ExpirationDate.Replace("00:00:00", "").Trim(); }
+                                                            else { }
+
+                                                            if (left == right)
+                                                            {
+                                                                timeView = left;
+                                                            }
+                                                            else
+                                                            {
+                                                                timeView = left + "  到  " + right;
+                                                            }
+                                                        }
+
+                                                        @timeView
+                                                    </td>
+                                                    <td>@item.count</td>
+                                                            }
+                                                            else
+                                                            {
+                                                                <td>@item.date.ToString(ViewBag.Format)</td>
+                                                                <td>@item.count</td>
+                                                            }
+
+                                            </tr>
+                                                            }
+                                        @*@foreach (var item in bdl)
+                                            {
+                                                <tr>
+                                                    @if (isWeek)
+                                                    {
+                                                        <td>@item.date.ToString(ViewBag.Format)</td>
+                                                        <td>@item.count</td>
+                                                    }
+                                                    else
+                                                    {
+                                                        <td>@item.date.ToString(ViewBag.Format)</td>
+                                                        <td>@item.count</td>
+                                                    }
+
+                                                </tr>
+                                            }*@
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <!-- end widget content -->
+                    </div>
+                    <!-- end widget div -->
+                </div>
+                <!-- end widget -->
+
+            </article>
+        </div>
+    </section>
+</div>

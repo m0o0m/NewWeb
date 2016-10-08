@@ -1,0 +1,331 @@
+﻿@using GL.Data.Model
+@model BaseDataView
+@{
+    ViewBag.Title = "在线在玩";
+    ViewBag.Format = "yyyy-MM-dd HH:mm";
+    switch (Model.Groupby)
+    {
+        case groupby.按日:
+            break;
+        case groupby.按月:
+            ViewBag.Format = "yyyy-MM-dd";
+            break;
+    }
+
+    List<BaseDataInfoForOnlinePlay> bdl = (List<BaseDataInfoForOnlinePlay>)Model.BaseDataList;
+
+}
+
+@*<script src="~/js/jquery.min.js"></script>*@
+
+
+
+
+<div id="content">
+
+    <!-- Widget ID (each widget will need unique ID)-->
+
+
+
+
+    <form id="comment-form" class="smart-form" novalidate="novalidate">
+        <div class="row">
+          
+        
+           <section class="col col-1" style="width:210px">
+                <label class="select">
+                    @Html.GetAllAgentGroupList("Channels", Model.Channels)<i></i>
+                </label>
+            </section>
+                <section class="col col-1.2">
+                    <label class="input">
+                        <i class="icon-append fa fa-calendar"></i>
+                        @Html.TextBoxFor(m => m.StartDate, new Dictionary<string, object>() {
+                           { "class", "form-control datepicker" },
+                           { "data-dateformat", "yy-mm-dd 00:00:00" }
+                       })
+                    </label>
+                </section>
+
+
+                <section class="col col-1">
+                    <label class="select">
+                        @Html.DropDownList("groupby") <i></i>
+                    </label>
+                </section>
+
+
+                <section class="col col-1">
+                    <button type="submit" class="btn btn-success btn-sm">查询</button>
+                </section>
+
+</div>
+    </form>
+
+
+    <div class="row-fluid">
+        <div class="widget-box" id="box">
+            <section id="widget-grid" class="">
+                <div class="row">
+                    <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <div class="jarviswidget" id="wid-id-7" data-widget-editbutton="false">
+                            <header>
+                                <span class="widget-icon"> <i class="fa fa-bar-chart-o"></i> </span>
+                                <h2>在线在玩统计</h2>
+                            </header>
+                            <div>
+                                <div class="jarviswidget-editbox">
+                                </div>
+                                <div class="widget-body no-padding" style="min-height: 70px;">
+                                    <div id="site-stats" class="chart has-legend"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+
+
+<script src="~/js/jquery.min.js"></script>
+
+
+<script type="text/javascript">
+			
+			/* chart colors default */
+			var $chrt_border_color = "#efefef";
+			var $chrt_grid_color = "#DDD"
+			var $chrt_main = "#E24913";
+			/* red       */
+			var $chrt_second = "#6595b4";
+			/* blue      */
+			var $chrt_third = "#FF9F01";
+			/* orange    */
+			var $chrt_fourth = "#7e9d3a";
+			/* green     */
+			var $chrt_fifth = "#BD362F";
+			/* dark red  */
+			var $chrt_mono = "#000";
+			function sup ( n ) { return (n<10) ? '0'+n : n; }
+			$(document).ready(function() {
+
+				// DO NOT REMOVE : GLOBAL FUNCTIONS!
+				pageSetUp();
+
+				/* site stats chart */
+
+				if ($("#site-stats").length) {
+				    var sin = [], cos = [];time= [];
+				     @{
+				        int max = 0;
+				        int max1 = 0;
+				        int max2 = 0;
+
+
+				        for (int i = 0; i < bdl.Count; i++)
+				        {
+				            <text>sin.push([@GL.Common.Utils.GetTimeStampL(bdl[i].date), @bdl[i].online])</text>
+                            <text>cos.push([@GL.Common.Utils.GetTimeStampL(bdl[i].date), @bdl[i].playing])</text>
+                            <text>time.push([@i, @GL.Common.Utils.GetTimeStampL(bdl[i].date)])</text>
+
+				            max1 = max1 > bdl[i].online ? max1 : bdl[i].online;
+				            max2 = max2 > bdl[i].playing ? max2 : bdl[i].playing;
+				        }
+				        max = max1 > max2 ? max1 : max2;
+				    }
+
+				    plot_2 = $.plot($("#site-stats"), [{
+				        data : sin,
+				        label : "在线", color: "#ee7951"
+				    }, {
+				        data : cos,
+				        label : "在玩", color: "#4fb9f0"
+				    }], {
+				        series : {
+				            lines : {
+				                show : true
+				            },
+				            points : {
+				                show : true
+				            }
+				        },
+				        yaxes : [{
+				         
+				            tickFormatter : function(v) {
+				                return v + "人";
+				            }
+				        }],
+				        grid : {
+				            hoverable : true,
+				            clickable : true,
+				            //tickColor : $chrt_border_color,
+				            borderWidth : 1,
+				            //borderColor : $chrt_border_color,
+				        },
+				        tooltip : true,
+				        tooltipOpts : {
+				            content : "%s%y人",
+				            //dateFormat : "%H-%M",
+				           
+
+				            //content : "%s for <b>%x:00 hrs</b> was %y",
+				            //dateFormat : "%y-%0m-%0d",
+
+				            defaultTheme : false
+				        },
+				      
+				      //  colors : [$chrt_main, $chrt_second],
+				        yaxis : {
+				            ticks : 5,
+				            tickDecimals : 0,
+				            axisLabelUseCanvas: true,
+				            color: "black",
+				            axisLabelFontSizePixels: 12,
+				            axisLabelFontFamily: '宋体,Verdana, Arial',
+				            axisLabelPadding: 5
+				        },
+				        xaxis : {
+				            //ticks : 15,
+				            //tickDecimals : 2,
+				            mode: "time",     
+				            color: "black",
+				            axisLabel: "Date",
+				            axisLabelUseCanvas: true,
+				            axisLabelFontSizePixels: 12,
+				            axisLabelFontFamily: '宋体,Verdana, Arial',
+				            axisLabelPadding: 10,   
+				            //min : '00:00',
+				            //max : '24:00',
+				            //from : '00:00',
+				            //to : '24:00',
+				            tickFormatter: function (val,axis) {
+				                var d = new Date(val); 
+				              
+				                return d.toLocaleTimeString();  
+
+				            }
+				        }
+				    });
+	
+				  
+				}
+
+
+
+
+				if ($("#site-stats2").length) {
+
+
+                    @{
+                        string onLineStr = "";
+                        string playingStr = "";
+
+                        foreach (BaseDataInfoForOnlinePlay item in bdl)
+                        {
+                            long time = GL.Common.Utils.GetTimeStampL(item.date);
+                            int online = item.online;
+                            int playing = item.playing;
+
+                            onLineStr += "[" + time + "," + online + "],";
+                            playingStr += "[" + time + "," + playing + "],";
+
+                        }
+                        onLineStr = "[" + onLineStr.Trim(',') + "]";
+                        playingStr = "[" + playingStr.Trim(',') + "]";
+                    }
+
+				    var pageviews = @onLineStr;
+				    var visitors = @playingStr;
+                  
+					var plot = $.plot($("#site-stats"), [{
+						data : pageviews,
+						label : "在线"
+					}, {
+						data : visitors,
+						label : "在玩"
+					}], {
+						series : {
+							lines : {
+								show : true,
+								lineWidth : 1,
+								fill : true,
+								fillColor : {
+									colors : [{
+										opacity : 0.1
+									}, {
+										opacity : 0.15
+									}]
+								}
+							},
+							points : {
+								show : true
+							},
+							shadowSize : 0
+						},
+						xaxis : {
+							mode : "time",
+							tickLength : 10,
+
+							axisLabel: "Date"
+
+						},
+
+						yaxes : [{
+							//min : 20,
+							tickLength : 5,
+							tickFormatter : function(v) {
+							    return v + "人";
+							}
+						}],
+						grid : {
+							hoverable : true,
+							clickable : true,
+							tickColor : $chrt_border_color,
+							borderWidth : 0,
+							borderColor : $chrt_border_color,
+						},
+						tooltip : true,
+						tooltipOpts : {
+						    content : "%s%y人",
+						    //dateFormat : "%y-%0m-%0d",
+							defaultTheme : false
+						},
+						colors : [$chrt_main, $chrt_second],
+						xaxis : {
+							ticks : 15,
+							tickDecimals : 2,
+							
+							tickFormatter: function (val) {
+                               
+							    var d = new Date(val);
+							
+							    var time = sup(d.getHours()) + ":" + sup(d.getMinutes()) ;
+							    return time;
+
+							
+							}
+						},
+						yaxis : {
+							ticks : 5,
+							tickDecimals : 0
+						},
+					});
+
+				}
+
+
+			    $("#baseLi").addClass("open");
+			    $("#baseLi #nav1").each(function(){
+			        
+			        $(this).show();
+			        $("#lionlineplay").addClass("active");
+			    });
+
+			});
+
+</script>
+
+
+

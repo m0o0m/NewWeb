@@ -1,0 +1,59 @@
+﻿@using GL.Data.Model;
+@using Mweb;
+@model BaseDataView
+@{
+    ViewBag.Title = "SystemExpend";
+    Layout = "~/Views/Shared/_LayoutJR.cshtml";
+}
+
+
+
+@Html.PartialSearch(new Search()
+{
+    SearchFunc = "mysearch",
+    Items = new List<MWeb.Control>() {
+         new MWeb.DateTimeControl { ID="StartDate", Name="StartDate", ViewName="开始时间" },
+          new MWeb.DateTimeControl { ID="ExpirationDate", Name="ExpirationDate", ViewName="结束时间" },
+    }
+})
+<br>
+@Html.PartialBarAndLine(new BarAndLine()
+{
+    ID = "myGraph",
+    URL = "/Statistics/SystemExpend/",
+    Title = "万(单位)",
+    BindXField = "RecordTime",
+    Unit = "万",
+    BandRate = 10000,
+    GraphItems = new List<GraphItem>() {
+         new GraphItem { Display=true, BindYField="Chip", ViewName="系统消耗" },
+         new GraphItem { Display=true, BindYField="ChipScale", ViewName="中发白消耗" },
+         new GraphItem { Display=true, BindYField="ChipScale1", ViewName="十二生肖消耗" },
+         new GraphItem { Display=false, BindYField="ChipHorse", ViewName="小马快跑消耗" },
+         new GraphItem { Display=false, BindYField="ChipTexas", ViewName="德州扑克消耗" },
+         new GraphItem { Display=false, BindYField="ChipSpell", ViewName="拼手牌消耗" },
+         new GraphItem { Display=false, BindYField="ChipTools", ViewName="互动道具消耗" },
+         new GraphItem { Display=false, BindYField="ChipGift", ViewName="购买礼物消耗" },
+         new GraphItem { Display=false, BindYField="ChipLoud", ViewName="喇叭消耗" },
+       
+    },
+    GirdsItems = new List<GirdsItem>() {
+        new GirdsItem { Display=true, BindYField="RecordTime", ViewName="时间" },
+           new GirdsItem { Display=true, BindYField="Chip", ViewName="系统消耗" },
+         new GirdsItem { Display=true, BindYField="ChipScale", ViewName="中发白消耗" },
+         new GirdsItem { Display=true, BindYField="ChipScale1", ViewName="十二生肖消耗" },
+         new GirdsItem { Display=true, BindYField="ChipHorse", ViewName="小马快跑消耗" },
+         new GirdsItem { Display=true, BindYField="ChipTexas", ViewName="德州扑克消耗" },
+         new GirdsItem { Display=true, BindYField="ChipSpell", ViewName="拼手牌消耗" },
+         new GirdsItem { Display=true, BindYField="ChipTools", ViewName="互动道具消耗" },
+         new GirdsItem { Display=true, BindYField="ChipGift", ViewName="购买礼物消耗" },
+         new GirdsItem { Display=true, BindYField="ChipLoud", ViewName="喇叭消耗" },
+    }
+})
+
+<script type="text/javascript">
+    function mysearch(obj) {
+
+       myGraph_init(obj);
+    }
+</script>

@@ -1,0 +1,484 @@
+﻿@using GL.Data.Model
+@using GL.Data.View
+@model GameRecordView
+@{
+    ViewBag.Title = "牌局细节";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+
+
+
+
+<div id="content">
+    <form id="comment-form" class="smart-form" novalidate="novalidate">
+        <div class="row">
+            <div class="widget-body">
+
+
+                <section class="col col-12" style="width:210px;padding-top:5px">
+                    <label>渠道</label>
+                    <label class="select">
+                        @Html.GetAllAgentGroupList("Channels", Model.Channels)
+                        <i></i>
+                    </label>
+                </section>
+
+
+
+                <section class="col col-1">
+                    <label class="label">用户类型</label>
+                    <label class="select">
+                        @Html.DropDownList("UserType", new List<SelectListItem>
+                {
+                    new SelectListItem { Text= "登陆用户", Value = "1" },
+                    new SelectListItem { Text= "新增用户", Value = "2" },
+                    new SelectListItem { Text= "活跃用户", Value = "3" },
+                    new SelectListItem { Text= "历史付费用户", Value = "4" },
+                    new SelectListItem { Text= "付费用户", Value = "5" },
+                    new SelectListItem { Text= "玩牌用户", Value = "6" },
+                    new SelectListItem { Text= "俱乐部用户", Value = "7" },
+                    new SelectListItem { Text= "登陆俱乐部用户", Value = "8" }
+                })<i></i>
+                    </label>
+                </section>
+
+                <section class="col col-1.2">
+                    <label class="label">起始日期</label>
+                    <label class="input">
+                        <i class="icon-append fa fa-calendar"></i>
+                        @Html.TextBoxFor(m => m.StartDate, new Dictionary<string, object>() { { "class", "form-control datepicker" }, { "data-dateformat", "yy-mm-dd 00:00:00" } })
+                    </label>
+                </section>
+                <section class="col col-1.2">
+                    <label class="label"> 截止日期</label>
+                    <label class="input">
+                        <i class="icon-append fa fa-calendar"></i>
+                        @Html.TextBoxFor(m => m.ExpirationDate, new Dictionary<string, object>() {
+                           { "class", "form-control datepicker" },
+                           { "data-dateformat", "yy-mm-dd 00:00:00" }
+                       })
+                    </label>
+                </section>
+
+
+            </div>
+
+        </div>
+     
+        <div class="row">
+            <div class="widget-body">
+                <section class="col col-5">
+                    <label class="label">游戏维度</label>
+                    <div class="row">
+                        <div class="col col-1.5">
+                            @if (ViewData["GametypeS"].ToString() == "15") {
+                            <label class="radio state-error"><input checked="checked" value="15" mark2="1" mark="0" type="radio" name="Gametype"><i></i>德州扑克</label>
+                            }
+                            else
+                            {
+                                <label class="radio state-error"><input  value="15" mark2="1" mark="0" type="radio" name="Gametype"><i></i>德州扑克</label>
+                            }
+                        </div>
+                        <div class="col col-1.5">
+@if (ViewData["GametypeS"].ToString() == "18")
+{ <label class="radio state-error"><input checked="checked" value="18" mark2="1" mark="0" type="radio" name="Gametype"><i></i>百人德州</label>
+}
+else
+{
+    <label class="radio state-error"><input value="18" mark2="1" mark="0" type="radio" name="Gametype"><i></i>百人德州</label>
+}
+                           
+                        </div>
+                        <div class="col col-1.5">
+@if (ViewData["GametypeS"].ToString() == "13")
+{
+    <label class="radio state-error"><input checked="checked" value="13" mark2="2" mark="1" type="radio" name="Gametype"><i></i>中发白</label>
+}
+else
+{
+    <label class="radio state-error"><input value="13" mark2="2" mark="1" type="radio" name="Gametype"><i></i>中发白</label>
+}
+                         
+                        </div>
+                        <div class="col col-1.5">
+@if (ViewData["GametypeS"].ToString() == "17")
+{
+    <label class="radio state-error"><input checked="checked" value="17" mark2="3" mark="0" type="radio" name="Gametype"><i></i>奔驰宝马</label>
+}
+else
+{
+    <label class="radio state-error"><input value="17" mark2="3" mark="0" type="radio" name="Gametype"><i></i>奔驰宝马</label>
+}
+                       
+                        </div>
+                        <div class="col col-1.5">
+@if (ViewData["GametypeS"].ToString() == "14")
+{
+    <label class="radio state-error"><input checked="checked" value="14" mark2="4" mark="0" type="radio" name="Gametype"><i></i>十二生肖</label>
+}
+else
+{
+    <label class="radio state-error"><input value="14" mark2="4" mark="0" type="radio" name="Gametype"><i></i>十二生肖</label>
+}
+                        
+                        </div>
+                    </div>
+                   
+                </section>
+
+
+
+
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="widget-body">
+                <section class="col col-30" style="width:100%">
+                    <label class="label">底注维度</label>
+                    <div class="row" id="divchuji">
+                        <div class="col col-1.5">
+                            <label class="checkbox state-error"><input value="0/0" mark2="1" mark="0" type="checkbox" name="chujiItemk"><i></i>初级场</label>
+                        </div>
+                        <div class="col col-1">
+                            <label class="checkbox state-error"><input  value="5/10" mark2="1" mark="0" type="checkbox" name="chujiItemk"><i></i>5/10</label>
+                        </div>
+                        <div class="col col-1">
+                            <label class="checkbox state-error"><input  value="10/20" mark2="2" mark="1" type="checkbox" name="chujiItemk"><i></i>10/20</label>
+                        </div>
+                       
+                     
+                    </div>
+                    <div class="row" id="divzhongji">
+                        <div class="col col-1.5">
+                            <label class="checkbox state-error"><input value="1/1" mark2="1" mark="1/1" type="checkbox" name="chujiItemk"><i></i>中级场</label>
+                        </div>
+                        <div class="col col-1">
+                            <label class="checkbox state-error"><input value="25/50" mark2="2" mark="1" type="checkbox" name="chujiItemk"><i></i>25/50</label>
+                        </div>
+                        <div class="col col-1">
+                            <label class="checkbox state-error"><input value="50/100" mark2="2" mark="1" type="checkbox" name="chujiItemk"><i></i>50/100</label>
+                        </div>
+                        <div class="col col-1">
+                            <label class="checkbox state-error"><input value="100/20" mark2="3" mark="0" type="checkbox" name="chujiItemk"><i></i>100/200</label>
+                        </div>
+                        <div class="col col-1">
+                            <label class="checkbox state-error"><input value="200/400" mark2="4" mark="0" type="checkbox" name="chujiItemk"><i></i>200/400</label>
+                        </div>
+                        <div class="col col-1">
+                            <label class="checkbox state-error"><input value="500/1000" mark2="4" mark="0" type="checkbox" name="chujiItemk"><i></i>500/1000</label>
+                        </div>
+                    </div>
+                    <div class="row" id="divgaoji">
+                        <div class="col col-1.5">
+                            <label class="checkbox state-error"><input value="2/2" mark2="1" mark="0" type="checkbox" name="chujiItemk"><i></i>高级场</label>
+                        </div>
+                        <div class="col col-1">
+                            <label class="checkbox state-error"><input value="1000/2000" mark2="3" mark="0" type="checkbox" name="chujiItemk"><i></i>1000/2000</label>
+                        </div>
+                        <div class="col col-1">
+                            <label class="checkbox state-error"><input value="2000/4000" mark2="4" mark="0" type="checkbox" name="chujiItemk"><i></i>2000/4000</label>
+                        </div>
+                        <div class="col col-1">
+                            <label class="checkbox state-error"><input value="50000/10000" mark2="1" mark="0" type="checkbox" name="chujiItemk"><i></i>50000/10000</label>
+                        </div>
+                        <div class="col col-1">
+                            <label class="checkbox state-error"><input value="20000/40000" mark2="2" mark="1" type="checkbox" name="chujiItemk"><i></i>20000/40000</label>
+                        </div>
+                        <div class="col col-1">
+                            <label class="checkbox state-error"><input value="50000/100000" mark2="3" mark="0" type="checkbox" name="chujiItemk"><i></i>50000/100000</label>
+                        </div>
+                        <div class="col col-1">
+                            <label class="checkbox state-error"><input value="100000/200000" mark2="4" mark="0" type="checkbox" name="chujiItemk"><i></i>100000/200000</label>
+                        </div>
+                        <div class="col col-1">
+                            <label class="checkbox state-error"><input value="200000/400000" mark2="4" mark="0" type="checkbox" name="chujiItemk"><i></i>200000/400000</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col col-1.5" id="divzhongfabai" style="display:none">
+                            <label class="checkbox state-error"><input disabled="disabled" readonly="readonly" checked="checked" value="13" mark2="1" mark="0" type="checkbox" name="zhongfabai"><i></i>中发白</label>
+                        </div>
+                        <div class="col col-1" id="divbenchibaoma" style="display:none">
+                            <label class="checkbox state-error"><input  disabled="disabled" readonly="readonly" checked="checked" value="17" mark2="1" mark="0" type="checkbox" name="benchibaoma"><i></i>奔驰宝马</label>
+                        </div>
+                        <div class="col col-1" id="divshiershengxiao" style="display:none">
+                            <label class="checkbox state-error"><input  disabled="disabled"  readonly="readonly" checked="checked" value="14" mark2="2" mark="1" type="checkbox" name="shiershengxiao"><i></i>十二生肖</label>
+                        </div>
+                        <div class="col col-1" id="divbairendezhou" style="display:none">
+                            <label class="checkbox state-error"><input  disabled="disabled" readonly="readonly" checked="checked" value="18" mark2="2" mark="1" type="checkbox" name="bairendezhou"><i></i>百人德州</label>
+                        </div>
+
+                    </div>
+                </section>
+
+            </div>
+        </div>
+   
+    
+    
+        <div class="row">
+            <div class="widget-body">
+                <section class="col col-30" style="width:100%">
+                    <label class="label">统计维度</label>
+                    <div class="row">
+                        <div class="col col-1">
+                            <label class="checkbox state-error"><input value="1" mark2="1" mark="0" type="checkbox" name="tongji"><i></i>牌局总数
+                              
+                            </label>
+                        </div>
+                        <div class="col col-1">
+                            <label class="checkbox state-error"><input value="2" mark2="2" mark="1" type="checkbox" name="tongji"><i></i>玩牌人数</label>
+                        </div>
+                        <div class="col col-1">
+                            <label class="checkbox state-error"><input value="3" mark2="2" mark="1" type="checkbox" name="tongji"><i></i>玩牌率</label>
+                        </div>
+                        <div class="col col-1">
+                            <label class="checkbox state-error"><input value="4" mark2="3" mark="0" type="checkbox" name="tongji"><i></i>牌局比例</label>
+                        </div>
+                        <div class="col col-1">
+                            <label class="checkbox state-error"><input value="5" mark2="4" mark="0" type="checkbox" name="tongji"><i></i>人均牌局数</label>
+                        </div>
+                        <div class="col col-1">
+                            <label class="checkbox state-error"><input value="6" mark2="4" mark="0" type="checkbox" name="tongji"><i></i>人均牌局时长</label>
+                        </div>
+                        <div class="col col-1">
+                            <label class="checkbox state-error"><input value="7" mark2="1" mark="0" type="checkbox" name="tongji"><i></i>牌局平均时长</label>
+                        </div>
+                        <div class="col col-1" id="divPaiJuLiuTong">
+                            <label class="checkbox state-error"><input value="8" mark2="3" mark="0" type="checkbox" name="tongji"><i></i>牌局平均流通</label>
+                        </div>
+                        <div class="col col-1">
+                            <label class="checkbox state-error"><input value="9" mark2="4" mark="0" type="checkbox" name="tongji"><i></i>回收</label>
+                        </div>
+                        <input type="hidden" name="ispostback" value="1" />
+
+                        <div class="col col-1">
+                            <input type="button"  onclick="search()" class="btn btn-success btn-sm" value="查询" />
+                        </div>
+                    </div>
+                  
+               
+                </section>
+
+            </div>
+        </div>
+    
+     </form>
+
+    <div class="row-fluid">
+        <div class="widget-box" id="box">
+            @if (ViewData["GametypeS"].ToString() == "15")
+            {
+                @Html.Partial("DeZhouBoardDetail_PageList", Model)
+            }
+            else
+            {
+                @Html.Partial("BoardDetail_PageList", Model)
+            }
+
+
+        </div>
+    </div>
+</div>
+
+
+
+
+
+@section scripts{
+    @{Html.RegisterMvcPagerScriptResource();}
+
+
+    @*<script src="/js/bootstrap.min.js"></script>
+        <script src="/js/select2.min.js"></script>
+        @Styles.Render("~/Style/bootstrap-datetimepicker")
+        @Scripts.Render("~/bundles/bootstrap-datetimepicker")*@
+
+
+    <script type="text/javascript">
+
+
+        $(function () {
+
+
+
+            //$("[name=chuji]").change(function () {
+            //    var $svalue = $("input[name=chuji]:checked").val();
+            //    if ($svalue == "") {
+            //        $("input[name='chujiItemk']").prop("checked", true);
+            //    } else {
+            //        $("[name=chujiItemk]").each(function () {
+            //            $(this).removeAttr("checked");
+            //        });
+            //    }
+            //});
+
+            //$("[name=zhongji]").change(function () {
+            //    var $svalue = $("input[name=zhongji]:checked").val();
+            //    if ($svalue == "") {
+            //        $("input[name='zhongjiItem']").prop("checked", true);
+            //    } else {
+            //        $("[name=zhongjiItem]").each(function () {
+            //            $(this).removeAttr("checked");
+            //        });
+            //    }
+            //});
+
+            //$("[name=gaoji]").change(function () {
+            //    var $svalue = $("input[name=gaoji]:checked").val();
+            //    if ($svalue == "") {
+            //        $("input[name='gaojiItem']").prop("checked", true);
+            //    } else {
+            //        $("[name=gaojiItem]").each(function () {
+            //            $(this).removeAttr("checked");
+            //        });
+            //    }
+            //});
+
+
+            //$("[name=chujiItemk]").change(function () {
+            //    var ck = $(this).prop("checked");
+            //    if (ck == false) {
+            //        $("[name=chuji]").removeAttr("checked");
+            //    }
+            //});
+            //$("[name=zhongjiItem]").change(function () {
+            //    var ck = $(this).prop("checked");
+            //    if (ck == false) {
+            //        $("[name=zhongji]").removeAttr("checked");
+            //    }
+            //});
+
+            //$("[name=gaojiItem]").change(function () {
+            //    var ck = $(this).prop("checked");
+            //    if (ck == false) {
+            //        $("[name=gaoji]").removeAttr("checked");
+            //    }
+            //});
+
+
+
+            $("[name=Gametype]").change(function () {
+                HidDiZhuWeidu();
+            });
+
+
+            var tongjiR = '@ViewData["tongji"].ToString()';
+            if(tongjiR!=""){
+                $("[name=tongji]").each(function () {
+                    var s = tongjiR.split(',');
+                    var thisV = $(this).val();
+                    for (var i = 0; i < s.length; i++) {
+                        if (thisV == s[i]) {
+                            $(this).prop("checked", true);
+                        }
+                    }
+                });
+            }
+           
+          
+
+            var dizhuItem = '@ViewData["chujiItemk"].ToString()';
+            if (tongjiR != "") {
+                $("[name=chujiItemk]").each(function () {
+                    var ss = dizhuItem.split(',');
+                    var thisV = $(this).val();
+                    for (var j = 0; j < ss.length; j++) {
+                        if (thisV == ss[j]) {
+                            $(this).prop("checked", true);
+                        }
+                    }
+                });
+            }
+
+
+            HidDiZhuWeidu();
+
+            initColumn();
+        });
+
+        function HidDiZhuWeidu() {
+            var $selectedvalue = $("input[name=Gametype]:checked").val();
+
+            if ($selectedvalue == 15) {//德州扑克
+                $("#divchuji").css("display", "");
+                $("#divzhongji").css("display", "");
+                $("#divgaoji").css("display", "");
+                $("#divzhongfabai").css("display", "none");
+                $("#divbenchibaoma").css("display", "none");
+                $("#divshiershengxiao").css("display", "none");
+                $("#divbairendezhou").css("display", "none");
+                $("#divPaiJuLiuTong").css("display", "none");
+                
+            }
+            else if ($selectedvalue == 18) {//百人德州
+                $("#divchuji").css("display", "none");
+                $("#divzhongji").css("display", "none");
+                $("#divgaoji").css("display", "none");
+                $("#divzhongfabai").css("display", "none");
+                $("#divbenchibaoma").css("display", "none");
+                $("#divshiershengxiao").css("display", "none");
+                $("#divbairendezhou").css("display", "");
+                $("#divPaiJuLiuTong").css("display", "");
+            }
+            else if ($selectedvalue == 13) {//中发白
+                $("#divchuji").css("display", "none");
+                $("#divzhongji").css("display", "none");
+                $("#divgaoji").css("display", "none");
+                $("#divzhongfabai").css("display", "");
+                $("#divbenchibaoma").css("display", "none");
+                $("#divshiershengxiao").css("display", "none");
+                $("#divbairendezhou").css("display", "none");
+                $("#divPaiJuLiuTong").css("display", "");
+            }
+            else if ($selectedvalue == 17) {//奔驰宝马
+                $("#divchuji").css("display", "none");
+                $("#divzhongji").css("display", "none");
+                $("#divgaoji").css("display", "none");
+                $("#divzhongfabai").css("display", "none");
+                $("#divbenchibaoma").css("display", "");
+                $("#divshiershengxiao").css("display", "none");
+                $("#divbairendezhou").css("display", "none");
+                $("#divPaiJuLiuTong").css("display", "");
+            }
+            else if ($selectedvalue == 14) {//十二生肖
+                $("#divchuji").css("display", "none");
+                $("#divzhongji").css("display", "none");
+                $("#divgaoji").css("display", "none");
+                $("#divzhongfabai").css("display", "none");
+                $("#divbenchibaoma").css("display", "none");
+                $("#divshiershengxiao").css("display", "");
+                $("#divbairendezhou").css("display", "none");
+                $("#divPaiJuLiuTong").css("display", "");
+            }
+            else {
+                alert('错误');
+            }
+        }
+
+
+
+        function initColumn() {
+
+            //hid1
+            var viewCol = '@ViewData["tongji"].ToString()';
+            if (viewCol == "") {
+
+            } else {
+                $("[name=hid0]").css("display", "");
+                var viewCols = viewCol.split(',');
+                for (var i = 0; i < viewCols.length; i++) {
+                    var jqi = eval('$("[name=hid' + viewCols[i] + ']")');
+                    jqi.css("display", "");
+                }
+
+            
+            }
+         
+        }
+    </script>
+
+}

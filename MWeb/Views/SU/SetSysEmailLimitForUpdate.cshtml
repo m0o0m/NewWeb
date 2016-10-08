@@ -1,0 +1,295 @@
+﻿
+@using GL.Data.Model;
+@model UserLimit
+@{
+    ViewBag.Title = "发送邮件额度配置";
+
+
+    Dictionary<int, string> dic = (Dictionary<int, string>)ViewData["dic"];
+
+    if (Request.IsAjaxRequest())
+    {
+        Layout = null;
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+
+
+
+}
+
+
+
+<article class="col-sm-12 col-md-12 col-lg-7">
+    <div class="jarviswidget" id="wid-id-4" data-widget-editbutton="false" data-widget-custombutton="false">
+        <header>
+            <span class="widget-icon"> <i class="fa fa-edit"></i> </span>
+            <h2>发送邮件额度配置</h2>
+        </header>
+        <div>
+            <div class="jarviswidget-editbox">
+            </div>
+            <div class="widget-body no-padding">
+                <form id="submitForm" class="smart-form" action="/SU/SaveSysEmailUpdate" method="post">
+                    <input type="hidden" id="Id" name="Id" class="span4" value="@ViewData["id"]" />
+                    <fieldset>
+                        <section>
+                            <label class="label">附件选择</label>
+                            <div class="row">
+                                <div class="col col-1.5">
+                                  @if (Model.AccessNo.Contains(",1:"))
+                                  {
+                                    <label class="checkbox state-error"><input value="1" mark2="1" mark="1" type="checkbox" name="checkbox" checked="checked" onchange="ckChange(this)"><i></i>金币</label>
+                                  }
+                                  else
+                                  {
+                                    <label class="checkbox state-error"><input value="1" mark2="1" mark="0" type="checkbox" name="checkbox"  onchange="ckChange(this)"><i></i>金币</label>
+                                  }
+                                 
+                                </div>
+                                <div class="col col-1.5">
+@if (Model.AccessNo.Contains(",2:"))
+{
+    <label class="checkbox state-error"><input value="2" mark2="2" mark="1" type="checkbox" name="checkbox" checked="checked" onchange="ckChange(this)"><i></i>五币</label>
+}
+else
+{
+    <label class="checkbox state-error"><input value="2" mark2="2" mark="0" type="checkbox" name="checkbox" onchange="ckChange(this)"><i></i>五币</label>
+}
+                                 
+                                </div>
+                                <div class="col col-1.5">
+@if (Model.AccessNo.Contains(",3:"))
+{
+    <label class="checkbox state-error"><input value="3" mark2="3" mark="1" type="checkbox" name="checkbox" checked="checked" onchange="ckChange(this)"><i></i>积分</label>
+}
+else
+{
+    <label class="checkbox state-error"><input value="3" mark2="3" mark="0" type="checkbox" name="checkbox"  onchange="ckChange(this)"><i></i>积分</label>
+}
+                                   
+                                </div>
+                                <div class="col col-1.5">
+@if (Model.AccessNo.Contains(",4:"))
+{
+    <label class="checkbox state-error"><input value="4" mark2="4" mark="1" type="checkbox" name="checkbox" checked="checked" onchange="ckChange(this)"><i></i>礼物</label>
+}
+else
+{
+    <label class="checkbox state-error"><input value="4" mark2="4" mark="0" type="checkbox" name="checkbox" onchange="ckChange(this)"><i></i>礼物</label>
+}
+                                   
+                                </div>
+                                <div class="col col-1.5">
+@if (Model.AccessNo.Contains(",5:"))
+{
+    <label class="checkbox state-error"><input value="5" mark2="5" mark="1" type="checkbox" name="checkbox" checked="checked" onchange="ckChange(this)"><i></i>权贵</label>
+}
+else
+{
+    <label class="checkbox state-error"><input value="5" mark2="5" mark="0" type="checkbox" name="checkbox" onchange="ckChange(this)"><i></i>权贵</label>
+}
+                                   
+                                </div>
+                                <div class="col col-1.5">
+@if (Model.AccessNo.Contains(",6:"))
+{
+    <label class="checkbox state-error"><input value="6" mark2="6" mark="1" type="checkbox" name="checkbox" checked="checked" onchange="ckChange(this)"><i></i>道具</label>
+}
+else
+{
+    <label class="checkbox state-error"><input value="6" mark2="6" mark="0" type="checkbox" name="checkbox" onchange="ckChange(this)"><i></i>道具</label>
+}
+                                   
+                                </div>
+                            </div>
+                            <div class="note note-error"> select the option.</div>
+                        </section>
+                    </fieldset>
+                    
+                    
+                    
+                    <fieldset>
+                        <div class="row">
+                            @if (Model.AccessNo.Contains(",1:"))
+                                    {
+                                    
+                                 <section class="col col-3" id="sec1">
+                                    <label>金币额度</label>
+                                    <label class="input">
+                                        <input type="text" id="inp1" name="faqtitle" class="span4" value="@dic[1]" />
+                                    </label>
+                                </section>
+                            }
+                            else
+                            {    <section class="col col-3" id="sec1" style="display:none">
+                                <label>金币额度</label>
+                                <label class="input">
+                                    <input type="text" id="inp1" name="faqtitle" class="span4" value="" />
+                                </label>
+                                </section>
+                            }
+                         
+
+
+@if (Model.AccessNo.Contains(",2:"))
+{
+    <section class="col col-3" id="sec2">
+        <label>五币额度</label>
+        <label class="input">
+            <input type="text" id="inp2" name="faqtitle" class="span4" value="@dic[2]" />
+        </label>
+    </section>
+}
+else
+{
+    <section class="col col-3" id="sec2" style="display:none">
+        <label>五币额度</label>
+        <label class="input">
+            <input type="text" id="inp2" name="faqtitle" class="span4" value="" />
+        </label>
+    </section>
+
+}
+
+@if (Model.AccessNo.Contains(",3:"))
+{
+    <section class="col col-3" id="sec3">
+        <label>积分额度</label>
+        <label class="input">
+            <input type="text" id="inp3" name="faqtitle" class="span4" value="@dic[3]" />
+        </label>
+    </section>
+}
+else
+{
+    <section class="col col-3" id="sec3"  style="display:none">
+        <label>积分额度</label>
+        <label class="input">
+            <input type="text" id="inp3" name="faqtitle" class="span4" value="" />
+        </label>
+    </section>
+}
+
+      @if (Model.AccessNo.Contains(",4:"))
+      {
+        <section class="col col-3" id="sec4">
+            <label>礼物额度</label>
+            <label class="input">
+                <input type="text" id="inp4" name="faqtitle" class="span4" value="@dic[4]" />
+            </label>
+        </section>
+      }
+      else
+      {
+        <section class="col col-3" id="sec4"  style="display:none">
+            <label>礼物额度</label>
+            <label class="input">
+                <input type="text" id="inp4" name="faqtitle" class="span4" value="" />
+            </label>
+        </section>
+      }
+
+@if (Model.AccessNo.Contains(",5:"))
+{
+    <section class="col col-3" id="sec5"  >
+        <label>权贵额度</label>
+        <label class="input">
+            <input type="text" id="inp5" name="faqtitle" class="span4" value="@dic[5]" />
+        </label>
+    </section>
+}
+else
+{
+    <section class="col col-3" id="sec5" style="display:none">
+        <label>权贵额度</label>
+        <label class="input">
+            <input type="text" id="inp5" name="faqtitle" class="span4" value="" />
+        </label>
+    </section>
+}
+
+
+                        </div>
+                </fieldset>
+
+
+                  
+
+
+
+
+                    <footer>
+
+                        <input id="btnGoBack" type="button" value="返回列表" class=" btn btn-warning" />
+                        <input id="btnKick" type="submit" value="提交" class="btn btn-danger" />
+                    </footer>
+                </form>
+
+            </div>
+            <!-- end widget content -->
+
+        </div>
+        <!-- end widget div -->
+
+    </div>
+
+</article>
+
+
+
+<script src="~/js/SmartAdmin/js/libs/jquery-1.11.3.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/select2.min.js"></script>
+@Scripts.Render("~/bundles/jqueryval")
+<script type="text/javascript">
+    function ckChange(obj) {
+      
+        var jq = $(obj);
+        var mark = jq.attr("mark");
+        var mark2 = jq.attr("mark2");
+
+       // alert("mark=" + mark + ",mark2" + mark2);
+
+
+        if (mark == "1") {//取消勾选
+          
+
+            jq.attr("mark", "0");
+            //sec5  inp5
+            var sec = eval($("#sec" + mark2 + ""));
+            var inp = eval($("#inp" + mark2 + ""));
+         
+            sec.css("display", "none");
+            inp.val("");
+
+        } else {//勾选
+            jq.attr("mark", "1");
+            var sec = eval($("#sec" + mark2 + ""));
+            var inp = eval($("#inp" + mark2 + ""));
+           
+            sec.css("display", "");
+            inp.val("");
+        }
+
+     
+    
+    }
+  
+
+    $(function () {
+    
+
+        $("#btnGoBack").click(function () {
+            location.href = "/SU/SetSysEmailLimit";
+        });
+    })
+
+</script>
+
+
+@section scripts{
+
+}

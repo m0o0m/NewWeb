@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Styles.Render("~/Content/indexcss")
+
+    <!--[if lt IE 9]><script src="/Scripts/html5.js"></script><![endif]-->
+</head>
+<body>
+
+
+    <header>
+        <section id="top" class="area">
+            <h1 class="logo"><a href="/home/index">深圳市互联工场科技有限公司</a></h1>
+            <nav>
+                @RenderSection("nav", required: true)
+            </nav>
+            <a href="/home/game" class="startgame">开始游戏</a>
+        </section>
+    </header>
+    @RenderBody()
+    <footer>
+        <nav class="area">
+            <span class="copyright">Copyright © 2011 - 2014 互联工场(IWO) 粤ICP备XX号 增值电信业务经营许可证：粤XX</span>
+            <a href="/sitemap.html">常见问题</a>   |   <a href="javascript:;" onclick="javascript:window.open(&#39;disclaimer&#39;,&#39;disclaimer&#39;,&#39;status=yes,scrollbars=no,width=350,height=400&#39;)">免责声明</a>
+        </nav>
+    </footer>
+
+
+
+    @RenderSection("scripts", required: false)
+
+
+</body>
+</html>

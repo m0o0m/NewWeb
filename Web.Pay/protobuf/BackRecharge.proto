@@ -1,0 +1,43 @@
+////////////////////////////////////////////////////////////
+////
+////			后台充值
+////
+////////////////////////////////////////////////////////////
+package ProtoCmd.BackRecharge;
+
+enum BR_Cmd
+{
+	BR_BEGIN 	= 11;
+	BR_NORMAL	= 13;
+
+	BR_TOTAL	= 20;
+}
+
+enum CenterCmd
+{
+	CS_BEGIN	= 11;
+	CS_CONNECT_ERROR = 12;
+
+	CS_NORMAL	= 13;
+
+	CS_TOTAL	 = 100;
+}
+
+message normal
+{
+	required uint32 userID = 1;	//角色ID
+	required string list = 2;
+	required uint32 rmb_   = 3;	//RMB
+	required bool   firstGif = 4;	//首充礼包标志
+	optional string	billNo	= 5;	//充值订单
+	optional uint32 rmb_actual = 6;	// RMB 实际充值
+	optional uint32 num = 7;   //数量
+	optional uint32 unit_price = 8;  //不打折单价
+	optional uint32 unit_discounted = 9; //打折的单价
+}
+
+message normalRep
+{
+	required uint32 userID = 1;
+	required bool	suc	= 2;
+}

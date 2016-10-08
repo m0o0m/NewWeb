@@ -1,0 +1,2789 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>DataTables</name>
+    </assembly>
+    <members>
+        <member name="T:DataTables.Database">
+            <summary>
+            DataTables Database connection object.
+            
+            Create a database connection which may then have queries performed upon it.
+            
+            This is a database abstraction class that can be used on multiple different
+            databases. As a result of this, it might not be suitable to perform complex
+            queries through this interface or vendor specific queries, but everything 
+            required for basic database interaction is provided through the abstracted
+            methods.
+            </summary>
+        </member>
+        <member name="M:DataTables.Database.#ctor(System.String,System.String)">
+            <summary>
+            Create a database connection
+            </summary>
+            <param name="dbType">Database type - this should be "sqlserver" or "mysql"</param>
+            <param name="str">Connection string to connect to the SQL server</param>
+        </member>
+        <member name="M:DataTables.Database.#ctor(System.String,System.Data.Common.DbConnectionStringBuilder)">
+            <summary>
+            Create a database connection
+            </summary>
+            <param name="dbType">Database type - this should be "sqlserver" or "mysql"</param>
+            <param name="builder">Connection string builder instance to connect to the SQL server</param>
+        </member>
+        <member name="M:DataTables.Database.#ctor(System.String,System.Data.Common.DbConnection)">
+            <summary>
+            Create a database connection
+            </summary>
+            <param name="dbType">Database type - this should be "sqlserver" or "mysql"</param>
+            <param name="conn">Database connection that has already been established to the SQL server</param>
+        </member>
+        <member name="M:DataTables.Database.Adapter">
+            <summary>
+            Get the database provider factory
+            </summary>
+            <returns>Provider factory name</returns>
+        </member>
+        <member name="M:DataTables.Database.Adapter(System.String)">
+            <summary>
+            Set the database provider factory
+            </summary>
+            <param name="set">Provider factory name</param>
+            <returns>Self for chaining</returns>
+        </member>
+        <member name="M:DataTables.Database.Commit">
+            <summary>
+            Commit the current transaction
+            </summary>
+            <returns>Self for chaining</returns>
+        </member>
+        <member name="M:DataTables.Database.Conn">
+            <summary>
+            Get the database connection
+            </summary>
+            <returns>Database connection</returns>
+        </member>
+        <member name="M:DataTables.Database.Delete(System.String,System.Collections.Generic.Dictionary{System.String,System.Object})">
+            <summary>
+            Perform a delete query on a table.
+            
+            This is a short cut method that creates and update query and then uses the
+            <code>query('delete')</code>, table, where and exec methods of the query.
+            </summary>
+            <param name="table">Table to operate the delete on</param>
+            <param name="where">Collection of conditions to apply to the delete to</param>
+            <returns>Result instance</returns>
+        </member>
+        <member name="M:DataTables.Database.Dispose">
+            <summary>
+            Dispose of this database instance
+            </summary>
+        </member>
+        <member name="M:DataTables.Database.Insert(System.String,System.Collections.Generic.Dictionary{System.String,System.Object})">
+            <summary>
+            Insert data into a table.
+            
+            This is a short cut method that creates an update query and then uses
+            the <code>query('insert')</code>, table, set and exec methods of the query.
+            </summary>
+            <param name="table">Table to perform the insert on</param>
+            <param name="set">Dictionary of field names and values to set</param>
+            <returns>Result instance</returns>
+        </member>
+        <member name="M:DataTables.Database.Push(System.String,System.Collections.Generic.Dictionary{System.String,System.Object},System.Collections.Generic.Dictionary{System.String,System.Object})">
+            <summary>
+            Update or Insert data. When doing an insert, the where condition is
+            added as a set field
+            </summary>
+            <param name="table">Table name to act upon</param>
+            <param name="set">Dictionary of field names and values to update / set</param>
+            <param name="where">Where condition for what to update</param>
+            <returns>Result instance</returns>
+        </member>
+        <member name="M:DataTables.Database.Query(System.String)">
+            <summary>
+            Create a query object to build a database query.
+            </summary>
+            <param name="type">
+            Database type - this can be 'mysql', 'oracle', 'sqlite' or
+            'sqlserver'
+            </param>
+            <returns>Query for the database type given</returns>
+        </member>
+        <member name="M:DataTables.Database.Query(System.String,System.String)">
+            <summary>
+            Create a query object to build a database query.
+            </summary>
+            <param name="type">
+            Database type - this can be 'mysql', 'oracle', 'sqlite' or
+            'sqlserver'
+            </param>
+            <param name="table">
+            Table to setup this query to execute against
+            </param>
+            <returns>Query for the database type given</returns>
+        </member>
+        <member name="M:DataTables.Database.Rollback">
+            <summary>
+            Rollback the database state to the start of the transaction.
+            </summary>
+            <returns>Self for chaining</returns>
+        </member>
+        <member name="M:DataTables.Database.Select(System.String,System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.Dictionary{System.String,System.Object},System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Select data from a table.
+            
+            This is a short cut method that creates an update query and then uses
+            the <code>query('select')</code>, table, get, where and exec methods
+            of the query.
+            </summary>
+            <param name="table">Table name to act upon</param>
+            <param name="field">Collection of field names to get. If null all fields are returned</param>
+            <param name="where">Where condition for what to select</param>
+            <param name="orderBy">Order by condition</param>
+            <returns>Result instance</returns>
+        </member>
+        <member name="M:DataTables.Database.Select(System.String,System.Collections.Generic.IEnumerable{System.String},System.Action{DataTables.Query},System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Select data from a table.
+            
+            This is a short cut method that creates an update query and then uses
+            the <code>query('select')</code>, table, get, where and exec methods
+            of the query.
+            </summary>
+            <param name="table">Table name to act upon</param>
+            <param name="field">Collection of field names to get. If null all fields are returned</param>
+            <param name="where">Where condition for what to select</param>
+            <param name="orderBy">Order by condition</param>
+            <returns>Result instance</returns>
+        </member>
+        <member name="M:DataTables.Database.SelectDistinct(System.String,System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.Dictionary{System.String,System.Object},System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Select distinct data from a table.
+            
+            This is a short cut method that creates an update query and then uses the
+            <code>query('select')</code>, distinct ,table, get, where and exec methods of the
+            query.
+            </summary>
+            <param name="table">Table name to act upon</param>
+            <param name="field">Collection of field names to get. If null all fields are returned</param>
+            <param name="where">Where condition for what to select</param>
+            <param name="orderBy">Order by condition</param>
+            <returns>Result instance</returns>
+        </member>
+        <member name="M:DataTables.Database.SelectDistinct(System.String,System.Collections.Generic.IEnumerable{System.String},System.Action{DataTables.Query},System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Select distinct data from a table.
+            
+            This is a short cut method that creates an update query and then uses the
+            <code>query('select')</code>, distinct ,table, get, where and exec methods of the
+            query.
+            </summary>
+            <param name="table">Table name to act upon</param>
+            <param name="field">Collection of field names to get. If null all fields are returned</param>
+            <param name="where">Where condition for what to select</param>
+            <param name="orderBy">Order by condition</param>
+            <returns>Result instance</returns>
+        </member>
+        <member name="M:DataTables.Database.Sql(System.String)">
+            <summary>
+            Execute an raw SQL query - i.e. give the method your own SQL, rather
+            than having the Database classes building it for you.
+            </summary>
+            <param name="sql">SQL to execute</param>
+            <returns>Result instance</returns>
+        </member>
+        <member name="M:DataTables.Database.Transaction">
+            <summary>
+            Start a new database transaction.
+            </summary>
+            <returns>Self for chaining</returns>
+        </member>
+        <member name="M:DataTables.Database.Update(System.String,System.Collections.Generic.Dictionary{System.String,System.Object},System.Collections.Generic.Dictionary{System.String,System.Object})">
+             <summary>
+             Update data.
+            
+             This is a short cut method that creates an update query and then uses
+             the <code>query('update')</code>, table, set, where and exec methods
+             of the query.
+             </summary>
+             <param name="table">Table name to operate on</param>
+             <param name="set">Field names and values to set</param>
+             <param name="where">Where condition for what to update</param>
+             <returns>Self for chaining</returns>
+        </member>
+        <member name="M:DataTables.DatabaseUtil.Sqlserver.Query._BuildLimit">
+            <summary>
+            Create LIMIT / OFFSET for SQL Server 2012+. Note that this will only work
+            with SQL Server 2012 or newer due to the use of the OFFSET and FETCH NEXT
+            keywords
+            </summary>
+            <returns>Limit / offset string</returns>
+        </member>
+        <member name="T:DataTables.DtRequest">
+            <summary>
+            Representation of a DataTables or Editor request. This can be any form
+            of request from the two libraries, including a standard DataTables get,
+            a server-side processing request, or an Editor create, edit or delete
+            command.
+            </summary>
+        </member>
+        <member name="M:DataTables.DtRequest.HttpData(System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{System.String,System.String}})">
+             <summary>
+             Convert HTTP request data, in the standard HTTP parameter form
+             submitted by jQuery into a generic dictionary of string / object
+             pairs so the data can easily be accessed in .NET.
+            
+             This static method is generic and not specific to the DtRequest. It
+             may be used for other data formats as well.
+             
+             Note that currently this does not support nested arrays or objects in arrays
+             </summary>
+             <param name="dataIn">Collection of HTTP parameters sent by the client-side</param>
+             <returns>Dictionary with the data and values contained. These may contain nested lists and dictionaries.</returns>
+        </member>
+        <member name="F:DataTables.DtRequest.RequestType">
+            <summary>
+            Type of request this instance contains the data for
+            </summary>
+        </member>
+        <member name="T:DataTables.DtRequest.RequestTypes">
+            <summary>
+            Request type values
+            </summary>
+        </member>
+        <member name="F:DataTables.DtRequest.RequestTypes.DataTablesGet">
+            <summary>
+            DataTables standard get for client-side processing
+            </summary>
+        </member>
+        <member name="F:DataTables.DtRequest.RequestTypes.DataTablesSsp">
+            <summary>
+            DataTables server-side processing request
+            </summary>
+        </member>
+        <member name="F:DataTables.DtRequest.RequestTypes.EditorCreate">
+            <summary>
+            Editor create request
+            </summary>
+        </member>
+        <member name="F:DataTables.DtRequest.RequestTypes.EditorEdit">
+            <summary>
+            Editor edit request
+            </summary>
+        </member>
+        <member name="F:DataTables.DtRequest.RequestTypes.EditorRemove">
+            <summary>
+            Editor remove request
+            </summary>
+        </member>
+        <member name="F:DataTables.DtRequest.RequestTypes.EditorUpload">
+            <summary>
+            Editor file upload request
+            </summary>
+        </member>
+        <member name="F:DataTables.DtRequest.Draw">
+            Server-side processing parameters *
+            <summary>
+            DataTables draw counter for server-side processing
+            </summary>
+        </member>
+        <member name="F:DataTables.DtRequest.Start">
+            <summary>
+            DataTables record start pointer for server-side processing
+            </summary>
+        </member>
+        <member name="F:DataTables.DtRequest.Length">
+            <summary>
+            DataTables page length parameter for server-side processing
+            </summary>
+        </member>
+        <member name="F:DataTables.DtRequest.Search">
+            <summary>
+            Search information for server-side processing
+            </summary>
+        </member>
+        <member name="F:DataTables.DtRequest.Order">
+            <summary>
+            Column ordering information for server-side processing
+            </summary>
+        </member>
+        <member name="F:DataTables.DtRequest.Columns">
+            <summary>
+            Column information for server-side processing
+            </summary>
+        </member>
+        <member name="F:DataTables.DtRequest.Action">
+            Editor parameters *
+            <summary>
+            Editor action request
+            </summary>
+        </member>
+        <member name="F:DataTables.DtRequest.Data">
+            <summary>
+            Dictionary of data sent by Editor (may contain nested data)
+            </summary>
+        </member>
+        <member name="F:DataTables.DtRequest.Ids">
+            <summary>
+            List of ids for Editor to operate on
+            </summary>
+        </member>
+        <member name="F:DataTables.DtRequest.UploadField">
+            <summary>
+            Upload field name
+            </summary>
+        </member>
+        <member name="M:DataTables.DtRequest.#ctor(System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{System.String,System.String}})">
+            <summary>
+            Convert an HTTP request submitted by the client-side into a
+            DtRequest object
+            </summary>
+            <param name="rawHttp">Data from the client-side</param>
+        </member>
+        <member name="T:DataTables.DtRequest.SearchT">
+            <summary>
+            Search class for server-side processing nested data
+            </summary>
+        </member>
+        <member name="F:DataTables.DtRequest.SearchT.Value">
+            <summary>
+            Search value
+            </summary>
+        </member>
+        <member name="F:DataTables.DtRequest.SearchT.Regex">
+            <summary>
+            Regex flag
+            </summary>
+        </member>
+        <member name="T:DataTables.DtRequest.OrderT">
+            <summary>
+            Order class for server-side processing nested data
+            </summary>
+        </member>
+        <member name="F:DataTables.DtRequest.OrderT.Column">
+            <summary>
+            Column index
+            </summary>
+        </member>
+        <member name="F:DataTables.DtRequest.OrderT.Dir">
+            <summary>
+            Ordering direction
+            </summary>
+        </member>
+        <member name="T:DataTables.DtRequest.ColumnT">
+            <summary>
+            Column class for server-side processing nested data
+            </summary>
+        </member>
+        <member name="F:DataTables.DtRequest.ColumnT.Data">
+            <summary>
+            Column data source property
+            </summary>
+        </member>
+        <member name="F:DataTables.DtRequest.ColumnT.Name">
+            <summary>
+            Column name
+            </summary>
+        </member>
+        <member name="F:DataTables.DtRequest.ColumnT.Searchable">
+            <summary>
+            Searchable flag
+            </summary>
+        </member>
+        <member name="F:DataTables.DtRequest.ColumnT.Orderable">
+            <summary>
+            Orderable flag
+            </summary>
+        </member>
+        <member name="F:DataTables.DtRequest.ColumnT.Search">
+            <summary>
+            Search term
+            </summary>
+        </member>
+        <member name="T:DataTables.Editor">
+             <summary>
+             DataTables Editor base class for creating editable tables.
+            
+             Editor class instances are capable of servicing all of the requests that
+             DataTables and Editor will make from the client-side - specifically:
+            
+             * Get data
+             * Create new record
+             * Edit existing record
+             * Delete existing records
+            
+             The Editor instance is configured with information regarding the
+             database table fields that you which to make editable, and other information
+             needed to read and write to the database (table name for example!).
+            
+             This documentation is very much focused on describing the API presented
+             by these DataTables Editor classes. For a more general overview of how
+             the Editor class is used, and how to install Editor on your server, please
+             refer to the Editor manual ( https://editor.datatables.net/manual ).
+             </summary>
+        </member>
+        <member name="F:DataTables.Editor.Version">
+            <summary>
+            Version string
+            </summary>
+        </member>
+        <member name="M:DataTables.Editor.#ctor(DataTables.Database,System.String,System.String)">
+            <summary>
+            Create a new Editor instance
+            </summary>
+            <param name="db">An instance of the DataTables Database class that we can use for the DB connection. Can also be set with the <code>Db()</code> method.</param>
+            <param name="table">The table name in the database to read and write information from and to. Can also be set with the <code>Table()</code> method.</param>
+            <param name="pkey">Primary key column name in the table given. Can also be set with the <code>PKey()</code> method.</param>
+        </member>
+        <member name="E:DataTables.Editor.PreCreate">
+            <summary>
+            Event which is triggered immediately prior to a row being created.
+            Note that for multi-row creation it is triggered for each row
+            indivudally.
+            </summary>
+        </member>
+        <member name="E:DataTables.Editor.PostCreate">
+            <summary>
+            Event which is triggered immediately after a row has been created.
+            Note that for multi-row creation it is triggered for each row
+            indivudally.
+            </summary>
+        </member>
+        <member name="E:DataTables.Editor.PreEdit">
+            <summary>
+            Event which is triggered immediately prior to a row being edited.
+            Note that for multi-row editing, it is triggered for each row
+            individually.
+            </summary>
+        </member>
+        <member name="E:DataTables.Editor.PostEdit">
+            <summary>
+            Event which is triggered immediately after a row being edited.
+            Note that for multi-row editing, it is triggered for each row
+            individually.
+            </summary>
+        </member>
+        <member name="E:DataTables.Editor.PreRemove">
+            <summary>
+            Event which is triggered immediately prior to a row being deleted.
+            Note that for multi-row deletion, it is triggered for each row
+            individually.
+            </summary>
+        </member>
+        <member name="E:DataTables.Editor.PostRemove">
+            <summary>
+            Event which is triggered immediately after a row being deleted.
+            Note that for multi-row deletion, it is triggered for each row
+            individually.
+            </summary>
+        </member>
+        <member name="M:DataTables.Editor.Data">
+            <summary>
+            Get the response object that has been created by this instance. This
+            is only useful after <code>process()</code> has been called.
+            </summary>
+            <returns>The response object as populated by this instance</returns>
+        </member>
+        <member name="M:DataTables.Editor.Db">
+            <summary>
+            Get the database instance used by this instance
+            </summary>
+            <returns>Database connection instance</returns>
+        </member>
+        <member name="M:DataTables.Editor.Db(DataTables.Database)">
+            <summary>
+            Set the database connection instance
+            </summary>
+            <param name="db">Connection instance to set</param>
+            <returns>Self for chaining</returns>
+        </member>
+        <member name="M:DataTables.Editor.Field">
+            <summary>
+            Get the fields that have been configured for this instance
+            </summary>
+            <returns>List of fields</returns>
+        </member>
+        <member name="M:DataTables.Editor.Field(System.String)">
+            <summary>
+            Get a field instance that has already been added
+            </summary>
+            <param name="f">Field name to select</param>
+            <returns>Field instance</returns>
+        </member>
+        <member name="M:DataTables.Editor.Field(DataTables.Field)">
+            <summary>
+            Add a new field to this instance
+            </summary>
+            <param name="f">New field to add</param>
+            <returns>Self for chaining</returns>
+        </member>
+        <member name="M:DataTables.Editor.Field(System.Collections.Generic.IEnumerable{DataTables.Field})">
+            <summary>
+            Add multiple fields too this instance
+            </summary>
+            <param name="fields">Collection of fields to add</param>
+            <returns>Self for chaining</returns>
+        </member>
+        <member name="M:DataTables.Editor.IdPrefix">
+            <summary>
+            Get the DOM prefix.
+            
+            Typically primary keys are numeric and this is not a valid ID value in an
+            HTML document - is also increases the likelihood of an ID clash if multiple
+            tables are used on a single page. As such, a prefix is assigned to the 
+            primary key value for each row, and this is used as the DOM ID, so Editor
+            can track individual rows.
+            </summary>
+            <returns>DOM prefix</returns>
+        </member>
+        <member name="M:DataTables.Editor.IdPrefix(System.String)">
+            <summary>
+            Set the DOM prefix.
+            
+            Typically primary keys are numeric and this is not a valid ID value in an
+            HTML document - is also increases the likelihood of an ID clash if multiple
+            tables are used on a single page. As such, a prefix is assigned to the 
+            primary key value for each row, and this is used as the DOM ID, so Editor
+            can track individual rows.
+            </summary>
+            <param name="prefix">Prefix to set</param>
+            <returns>Self for chaining</returns>
+        </member>
+        <member name="M:DataTables.Editor.InData">
+            <summary>
+            Get the data that is being processed by the Editor instance. This is only
+            useful once the <code>Process()</code> method has been called, and
+            is available for use in validation and formatter methods.
+            </summary>
+            <returns>Data given to <code>Process()</code></returns>
+        </member>
+        <member name="M:DataTables.Editor.LeftJoin(System.String,System.String,System.String,System.String)">
+             <summary>
+             Add a left join condition to the Editor instance, allowing it to operate
+             over multiple tables. Multiple <code>leftJoin()</code> calls can be made for a
+             single Editor instance to join multiple tables.
+            
+             A left join is the most common type of join that is used with Editor
+             so this method is provided to make its use very easy to configure. Its
+             parameters are basically the same as writing an SQL left join statement,
+             but in this case Editor will handle the create, update and remove
+             requirements of the join for you:
+            
+             * Create - On create Editor will insert the data into the primary table
+               and then into the joined tables - selecting the required data for each
+               table.
+             * Edit - On edit Editor will update the main table, and then either
+               update the existing rows in the joined table that match the join and
+               edit conditions, or insert a new row into the joined table if required.
+             * Remove - On delete Editor will remove the main row and then loop over
+               each of the joined tables and remove the joined data matching the join
+               link from the main table.
+            
+             Please note that when using join tables, Editor requires that you fully
+             qualify each field with the field's table name. SQL can result table
+             names for ambiguous field names, but for Editor to provide its full CRUD
+             options, the table name must also be given. For example the field
+             <code>first_name</code> in the table <code>users</code> would be given
+             as <code>users.first_name</code>.
+             </summary>
+             <param name="table">Table name to do a join onto</param>
+             <param name="field1">Field from the parent table to use as the join link</param>
+             <param name="op">Join condition (`=`, '&lt;`, etc)</param>
+             <param name="field2">Field from the child table to use as the join link</param>
+             <returns>Self for chaining</returns>
+        </member>
+        <member name="M:DataTables.Editor.MJoin(DataTables.MJoin)">
+            <summary>
+            Add a 1-to-many ("mjoin") join to the Editor instance. The way the
+            join operates is defined by the MJoin class
+            </summary>
+            <param name="join">MJoin link to use</param>
+            <returns></returns>
+        </member>
+        <member name="M:DataTables.Editor.Model``1">
+             <summary>
+             Set a model to use.
+            
+             In keeping with the MVC style of coding, you can define the fields
+             and their types that you wish to get from the database in a simple
+             class. Editor will automatically add fields from the model.
+            
+             Note that fields that are defined in the model can also be defined
+             as <code>Field</code> instances should you wish to add additional
+             options to a specific field such as formatters or validation.
+             </summary>
+             <typeparam name="T">Model to use</typeparam>
+             <returns>Self for chaining</returns>
+        </member>
+        <member name="M:DataTables.Editor.On(System.String,System.Delegate)">
+            <summary>
+            Add an event listener. The `Editor` class will trigger an number of
+            events that some action can be taken on.
+            </summary>
+            <param name="name">Event name</param>
+            <param name="callback">
+            Callback function to execute when the event occurs
+            </param>
+            <returns>Self for chaining</returns>
+        </member>
+        <member name="M:DataTables.Editor.Table">
+            <summary>
+            Get the database table name this Editor instance will use
+            </summary>
+            <returns>Table name</returns>
+        </member>
+        <member name="M:DataTables.Editor.Table(System.String)">
+            <summary>
+            Set the database table name this Editor instance will use
+            </summary>
+            <param name="t">Table name</param>
+            <returns>Self for chaining</returns>
+        </member>
+        <member name="M:DataTables.Editor.Table(System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Add multiple tables to the Editor instance
+            </summary>
+            <param name="tables">Collection of tables to add</param>
+            <returns>Self for chaining</returns>
+        </member>
+        <member name="M:DataTables.Editor.Transaction">
+            <summary>
+            Get the transaction state for this instance.
+            
+            When enabled (which it is by default) Editor will use an SQL transaction
+            to ensure data integrity while it is performing operations on the table.
+            This can be optionally disabled using this method, if required by your
+            database configuration.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:DataTables.Editor.Transaction(System.Boolean)">
+            <summary>
+            Set the transaction state for this instance.
+            </summary>
+            <param name="set">Value to set - true to enable transactions, false to disabled.</param>
+            <returns>Editor instance for chaining</returns>
+        </member>
+        <member name="M:DataTables.Editor.TryCatch(System.Boolean)">
+            <summary>
+            Enable (default) / disable the error catching that Editor performs when
+            processing the data from the client. When enabled any errors will be presented
+            in a format that can be presented to the end user, but it makes debugging
+            much more difficult if an error should occur inside the DataTables dll.
+            Disabling the try / catch makes it much easier to see exactly where the error
+            is occuring.
+            </summary>
+            <param name="set">Enable - true, or disable - false</param>
+            <returns>Editor instance for chaining</returns>
+        </member>
+        <member name="M:DataTables.Editor.Pkey">
+            <summary>
+            Get the primary key field that has been configured.
+            
+            The primary key must be known to Editor so it will know which rows are being
+            edited / deleted upon those actions. The default value is 'id'.
+            </summary>
+            <returns>Primary key</returns>
+        </member>
+        <member name="M:DataTables.Editor.Pkey(System.String)">
+            <summary>
+            Set the primary key field to use. Please note that at this time
+            Editor does not support composite primary keys in a table, only a
+            single field primary key is supported.
+            
+            The primary key must be known to Editor so it will know which rows are being
+            edited / deleted upon those actions. The default value is 'id'.
+            </summary>
+            <param name="id">Primary key column name</param>
+            <returns>Self for chaining</returns>
+        </member>
+        <member name="M:DataTables.Editor.Process(DataTables.DtRequest)">
+            <summary>
+            Process a request from the Editor client-side to get / set data.
+            </summary>
+            <param name="data">Data sent from the client-side</param>
+            <returns>Self for chaining</returns>
+        </member>
+        <member name="M:DataTables.Editor.Process(System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{System.String,System.String}})">
+            <summary>
+            Process a request from the Editor client-side to get / set data.
+            For use with WebAPI's 'FormDataCollection' collection
+            </summary>
+            <param name="data">Data sent from the client-side</param>
+            <returns>Self for chaining</returns>
+        </member>
+        <member name="M:DataTables.Editor.Process(System.Collections.Specialized.NameValueCollection)">
+            <summary>
+            Process a request from the Editor client-side to get / set data.
+            For use with MVC's 'Request.Form' collection
+            </summary>
+            <param name="data">Data sent from the client-side</param>
+            <returns>Self for chaining</returns>
+        </member>
+        <member name="M:DataTables.Editor.Process(System.Web.HttpRequest)">
+            <summary>
+            Process a request from the Editor client-side to get / set data.
+            For use with an HttpRequest object
+            </summary>
+            <param name="request">Data sent from the client-side</param>
+            <returns>Self for chaining</returns>
+        </member>
+        <member name="M:DataTables.Editor.Validate(DataTables.DtResponse,DataTables.DtRequest)">
+             <summary>
+             Perform validation on a data set.
+            
+             Note that validation is performed on data only when the action is
+             'create' or 'edit'. Additionally, validation is performed on the _wire
+             data_ - i.e. that which is submitted from the client, without formatting.
+             Any formatting required by <code>setFormatter</code> is performed after
+             the data from the client has been validated.
+             </summary>
+             <param name="response">DataTables response object</param>
+             <param name="request">DataTables request object</param>
+             <returns>`true` if the data is valid, `false` if not.</returns>
+        </member>
+        <member name="M:DataTables.Editor.Where(System.Action{DataTables.Query})">
+             <summary>
+             Where condition to add to the query used to get data from the database.
+             Multiple conditions can be added if required.
+             
+             Can be used in two different ways:
+             
+             * Simple case: `where( field, value, operator )`
+             * Complex: `where( fn )`
+            
+             The simple case is fairly self explanatory, a condition is applied to the
+             data that looks like `field operator value` (e.g. `name = 'Allan'`). The
+             complex case allows full control over the query conditions by providing a
+             closure function that has access to the database Query that Editor is
+             using, so you can use the `where()`, `or_where()`, `and_where()` and
+             `where_group()` methods as you require.
+            
+             Please be very careful when using this method! If an edit made by a user
+             using Editor removes the row from the where condition, the result is
+             undefined (since Editor expects the row to still be available, but the
+             condition removes it from the result set).
+             </summary>
+             <param name="fn">Delegate to execute adding where conditions to the table</param>
+             <returns>Self for chaining</returns>
+        </member>
+        <member name="M:DataTables.Editor.Where(System.String,System.Object,System.String)">
+             <summary>
+             Where condition to add to the query used to get data from the database.
+             Multiple conditions can be added if required.
+             
+             Can be used in two different ways:
+             
+             * Simple case: `where( field, value, operator )`
+             * Complex: `where( fn )`
+            
+             The simple case is fairly self explanatory, a condition is applied to the
+             data that looks like `field operator value` (e.g. `name = 'Allan'`). The
+             complex case allows full control over the query conditions by providing a
+             closure function that has access to the database Query that Editor is
+             using, so you can use the `where()`, `or_where()`, `and_where()` and
+             `where_group()` methods as you require.
+            
+             Please be very careful when using this method! If an edit made by a user
+             using Editor removes the row from the where condition, the result is
+             undefined (since Editor expects the row to still be available, but the
+             condition removes it from the result set).
+             </summary>
+             <param name="key">Database column name to perform the condition on</param>
+             <param name="value">Value to use for the condition</param>
+             <param name="op">Conditional operator</param>
+             <returns>Self for chaining</returns>
+        </member>
+        <member name="M:DataTables.Editor.Request">
+            <summary>
+            Get the request object used for this instance
+            </summary>
+            <returns>HTTP request object</returns>
+        </member>
+        <member name="T:DataTables.EditorModel">
+            <summary>
+            This  base class is used to extend models used in the 'Model()' method
+            for the Editor class.
+            
+            Currently it doesn't actually do anything, but there is a chance it
+            will in future, so this is just for future compatibility
+            </summary>
+        </member>
+        <member name="T:DataTables.EditorTypeErrorAttribute">
+            <summary>
+            Define an error message for cases where the data given cannot be
+            stored in parameter type.
+            </summary>
+        </member>
+        <member name="P:DataTables.EditorTypeErrorAttribute.Msg">
+            <summary>
+            Error message
+            </summary>
+        </member>
+        <member name="M:DataTables.EditorTypeErrorAttribute.#ctor(System.String)">
+            <summary>
+            Constructor for a field attribute defining an error message
+            </summary>
+            <param name="msg">Error message</param>
+        </member>
+        <member name="T:DataTables.EditorHttpNameAttribute">
+            <summary>
+            Define the HTTP name (used for both the JSON and incoming HTTP values
+            on form submit) for the field defined by the parameter. The parameter
+            name is used as the database column name automatically.
+            </summary>
+        </member>
+        <member name="P:DataTables.EditorHttpNameAttribute.Name">
+            <summary>
+            Field's HTTP name
+            </summary>
+        </member>
+        <member name="M:DataTables.EditorHttpNameAttribute.#ctor(System.String)">
+            <summary>
+            Constructor for a field attribute defining the HTTP name for a property
+            </summary>
+            <param name="name">HTTP name</param>
+        </member>
+        <member name="T:DataTables.EditorUtil.LeftJoin">
+            <summary>
+            Container class to hold information about join details
+            </summary>
+        </member>
+        <member name="F:DataTables.EditorUtil.LeftJoin.Table">
+            <summary>
+            Join table name
+            </summary>
+        </member>
+        <member name="F:DataTables.EditorUtil.LeftJoin.Field1">
+            <summary>
+            Table 1 field for the join
+            </summary>
+        </member>
+        <member name="F:DataTables.EditorUtil.LeftJoin.Field2">
+            <summary>
+            Table 2 field for the join
+            </summary>
+        </member>
+        <member name="F:DataTables.EditorUtil.LeftJoin.Operator">
+            <summary>
+            Join logic operator
+            </summary>
+        </member>
+        <member name="M:DataTables.EditorUtil.LeftJoin.#ctor(System.String,System.String,System.String,System.String)">
+            <summary>
+            Left join information container
+            </summary>
+            <param name="table">Join table name</param>
+            <param name="field1">Table 1 field</param>
+            <param name="op">Join logic operator</param>
+            <param name="field2">Table 2 field</param>
+        </member>
+        <member name="T:DataTables.EditorUtil.ValidationHost">
+            <summary>
+            When a field's value is validated, the validation method is given
+            information about the host environment (i.e. the host Editor and Field)
+            so it can perform database validation (for example the `Unique`
+            validation)
+            </summary>
+        </member>
+        <member name="P:DataTables.EditorUtil.ValidationHost.Action">
+            <summary>
+            Client-side requested action
+            </summary>
+        </member>
+        <member name="P:DataTables.EditorUtil.ValidationHost.Id">
+            <summary>
+            Row Id being edited (for "edit" action)
+            </summary>
+        </member>
+        <member name="P:DataTables.EditorUtil.ValidationHost.Field">
+            <summary>
+            Host field
+            </summary>
+        </member>
+        <member name="P:DataTables.EditorUtil.ValidationHost.Editor">
+            <summary>
+            Host Editor
+            </summary>
+        </member>
+        <member name="P:DataTables.EditorUtil.ValidationHost.Db">
+            <summary>
+            Database connection instance
+            </summary>
+        </member>
+        <member name="T:DataTables.PreCreateEventArgs">
+            <summary>
+            Arguments for the 'PreCreate' Editor event
+            </summary>
+        </member>
+        <member name="F:DataTables.PreCreateEventArgs.Editor">
+            <summary>
+            Editor instance that triggered the event
+            </summary>
+        </member>
+        <member name="F:DataTables.PreCreateEventArgs.Values">
+            <summary>
+            Values submitted to the server by the client
+            </summary>
+        </member>
+        <member name="T:DataTables.PostCreateEventArgs">
+            <summary>
+            Arguments for the 'PostCreate' Editor event
+            </summary>
+        </member>
+        <member name="F:DataTables.PostCreateEventArgs.Id">
+            <summary>
+            Newly created row id
+            </summary>
+        </member>
+        <member name="F:DataTables.PostCreateEventArgs.Data">
+            <summary>
+            Data for the new row, as read from the database
+            </summary>
+        </member>
+        <member name="T:DataTables.PreEditEventArgs">
+            <summary>
+            Arguments for the 'PreEdit' Editor event
+            </summary>
+        </member>
+        <member name="F:DataTables.PreEditEventArgs.Editor">
+            <summary>
+            Editor instance that triggered the event
+            </summary>
+        </member>
+        <member name="F:DataTables.PreEditEventArgs.Id">
+            <summary>
+            Id of the row to be edited
+            </summary>
+        </member>
+        <member name="F:DataTables.PreEditEventArgs.Values">
+            <summary>
+            Values submitted to the server by the client
+            </summary>
+        </member>
+        <member name="T:DataTables.PostEditEventArgs">
+            <summary>
+            Arguments for the 'PostEdit' event
+            </summary>
+        </member>
+        <member name="F:DataTables.PostEditEventArgs.Data">
+            <summary>
+            Data for the edited row, as read from the database
+            </summary>
+        </member>
+        <member name="T:DataTables.PreRemoveEventArgs">
+            <summary>
+            Arguments for the 'PreRemove' Editor event
+            </summary>
+        </member>
+        <member name="F:DataTables.PreRemoveEventArgs.Editor">
+            <summary>
+            Editor instance that triggered the event
+            </summary>
+        </member>
+        <member name="F:DataTables.PreRemoveEventArgs.Id">
+            <summary>
+            Id of the row to be removed
+            </summary>
+        </member>
+        <member name="F:DataTables.PreRemoveEventArgs.Values">
+            <summary>
+            Values submitted to the server by the client
+            </summary>
+        </member>
+        <member name="T:DataTables.PostRemoveEventArgs">
+            <summary>
+            Arguments for the 'PostRemove' Editor event
+            </summary>
+        </member>
+        <member name="T:DataTables.Field">
+             <summary>
+             Field definitions for the DataTables Editor.
+            
+             Each Database column that is used with Editor can be described with this 
+             Field method (both for Editor and Join instances). It basically tells
+             Editor what table column to use, how to format the data and if you want
+             to read and/or write this column.
+             </summary>
+        </member>
+        <member name="T:DataTables.Field.SetType">
+            <summary>
+            Set options for the <code>Set()</code> method, controlling when this
+            field's value is set on the database
+            </summary>
+        </member>
+        <member name="F:DataTables.Field.SetType.None">
+            <summary>
+            Never set this field's value
+            </summary>
+        </member>
+        <member name="F:DataTables.Field.SetType.Both">
+            <summary>
+            Set the value on both create and edit actions
+            </summary>
+        </member>
+        <member name="F:DataTables.Field.SetType.Create">
+            <summary>
+            Set the value on only the create action
+            </summary>
+        </member>
+        <member name="F:DataTables.Field.SetType.Edit">
+            <summary>
+            Set the value on only the edit action
+            </summary>
+        </member>
+        <member name="M:DataTables.Field.#ctor(System.String)">
+            <summary>
+            Create a new Field instance - common db name and http name
+            </summary>
+            <param name="dbField">Database name for the field. This is also used as the HTTP name for the field</param>
+        </member>
+        <member name="M:DataTables.Field.#ctor(System.String,System.String)">
+            <summary>
+            Create a new Field instance - different db and http names
+            </summary>
+            <param name="dbField">Database name for the field</param>
+            <param name="name">HTTP name (JSON data and form submit)</param>
+        </member>
+        <member name="M:DataTables.Field.#ctor(System.String,System.Type,System.String)">
+            <summary>
+            Create a new Field instance - common db name and http name with type specified
+            </summary>
+            <param name="dbField">Database name for the field. This is also used as the HTTP name for the field</param>
+            <param name="type">Type that the value should take</param>
+            <param name="typeError">Error message if the field's value cannot be cast to the given type</param>
+        </member>
+        <member name="M:DataTables.Field.#ctor(System.String,System.String,System.Type,System.String)">
+            <summary>
+            Create a new Field instance - different db and http names with type specified
+            </summary>
+            <param name="dbField">Database name for the field. This is also used as the HTTP name for the field</param>
+            <param name="name">HTTP name (JSON data and form submit)</param>
+            <param name="type">Type that the value should take</param>
+            <param name="typeError">Error message if the field's value cannot be cast to the given type</param>
+        </member>
+        <member name="M:DataTables.Field.DbField">
+            <summary>
+            Set the DB field name.
+            </summary>
+            <returns>Database field name</returns>
+        </member>
+        <member name="M:DataTables.Field.DbField(System.String)">
+             <summary>
+             Set the DB field name.
+             
+             Note that when used as a setter, an alias can be given for the field
+             using the SQL `as` keyword - for example: `firstName as name`. In this
+             situation the dbField is set to the field name before the `as`, and the
+             field's name (`name()`) is set to the name after the ` as `.
+            
+             As a result of this, the following constructs have identical
+             functionality:
+            
+             * `.field.DbField( 'firstName as name' );`
+             * `.field.DbField( 'firstName', 'name' );`
+             </summary>
+             <param name="field">Database field name</param>
+             <returns>Self for chaining</returns>
+        </member>
+        <member name="M:DataTables.Field.Get">
+            <summary>
+            Get the 'Get' flag for the field.
+            </summary>
+            <returns>Get flag</returns>
+        </member>
+        <member name="M:DataTables.Field.Get(System.Boolean)">
+             <summary>
+             Set the 'Get' flag of the field.
+            
+             A field can be marked as write only by setting the Get property to false
+             </summary>
+             <param name="get">Flag value to set</param>
+             <returns>Self for chaining</returns>
+        </member>
+        <member name="M:DataTables.Field.GetFormatter(System.Func{System.Object,System.Collections.Generic.Dictionary{System.String,System.Object},System.Object})">
+             <summary>
+             Get formatter for the field's data.
+            
+             When the data has been retrieved from the server, it can be passed through
+             a formatter here, which will manipulate (format) the data as required. This
+             can be useful when, for example, working with dates and a particular format
+             is required on the client-side.
+            
+             Editor has a number of formatters available with the <code>Format</code> class
+             which can be used directly with this method.
+             </summary>
+             <param name="fn">Get formatter that will transform the db value into the http value</param>
+             <returns>Self for chaining</returns>
+        </member>
+        <member name="M:DataTables.Field.GetValue">
+            <summary>
+            Get the 'Get' value for the field
+            </summary>
+            <returns>Get value</returns>
+        </member>
+        <member name="M:DataTables.Field.GetValue(System.Object)">
+            <summary>
+            Set a "Get" value. When set this value is used to send to the
+            client-side, regardless of what value is held by the database.
+             (if this field even has a database value!)
+            </summary>
+            <param name="val">Value to set for "Get"</param>
+            <returns>Self for chaining</returns>
+        </member>
+        <member name="M:DataTables.Field.GetValue(System.Func{System.Object})">
+            <summary>
+            Set a "Get" delegate. When set, the delegate given here is executed
+            when the data for the field is requested and the value returned is
+            send to the client-side, regardless of what value is held by the
+            database (if this field even has a database value!)
+            </summary>
+            <param name="val">Delegate to set for "Get"</param>
+            <returns>Self for chaining</returns>
+        </member>
+        <member name="M:DataTables.Field.Name">
+            <summary>
+            Get the HTTP / JSON name for the field.
+             
+            The name is typically the same as the `DbField` name, since it makes things
+            less confusing(!), but it is possible to set a different name for the data
+            which is used in the JSON returned to DataTables in a 'get' operation and
+            the field name used in a 'set' operation.
+            </summary>
+            <returns>Field HTTP name</returns>
+        </member>
+        <member name="M:DataTables.Field.Name(System.String)">
+            <summary>
+            Set the HTTP / JSON name for the field.
+            
+            The name is typically the same as the `DbField` name, since it makes things
+            less confusing(!), but it is possible to set a different name for the data
+            which is used in the JSON returned to DataTables in a 'get' operation and
+            the field name used in a 'set' operation.
+            </summary>
+            <param name="name">Name to set</param>
+            <returns>Self for chaining</returns>
+        </member>
+        <member name="M:DataTables.Field.Options(System.Func{System.Collections.Generic.List{System.Collections.Generic.Dictionary{System.String,System.Object}}})">
+            <summary>
+            Set a function that will retrieve a list of values that can be used
+            for the options list in radio, select and checkbox inputs from the
+            database for this field.
+            </summary>
+            <param name="fn">Delegate that will return a list of options</param>
+            <returns>Self for chaining</returns>
+        </member>
+        <member name="M:DataTables.Field.Options(System.String,System.String,System.String,System.Action{DataTables.Query},System.Func{System.Collections.Generic.Dictionary{System.String,System.Object},System.String})">
+             <summary>
+             Provide database information for where to get a list of values that
+             can be used for the options list in radio, select and checkbox
+             inputs from the database for this field.
+            
+             Note that this is for simple cases only. For more complex operations
+             use the delegate overload.
+             </summary>
+             <param name="table">Table name to read the options from</param>
+             <param name="value">Column name to read the option values from</param>
+             <param name="label">Column name to read the label values from</param>
+             <param name="condition">Function that will using the Query class passed in to apply a condtion</param>
+             <param name="format">Formatting function (called for every option)</param>
+             <returns>Self for chaining</returns>
+        </member>
+        <member name="M:DataTables.Field.Options(System.String,System.String,System.Collections.Generic.IEnumerable{System.String},System.Action{DataTables.Query},System.Func{System.Collections.Generic.Dictionary{System.String,System.Object},System.String})">
+             <summary>
+             Provide database information for where to get a list of values that
+             can be used for the options list in radio, select and checkbox
+             inputs from the database for this field.
+            
+             Note that this is for simple cases only. For more complex operations
+             use the delegate overload.
+             </summary>
+             <param name="table">Table name to read the options from</param>
+             <param name="value">Column name to read the option values from</param>
+             <param name="label">Column name to read the label values from</param>
+             <param name="condition">Function that will using the Query class passed in to apply a condtion</param>
+             <param name="format">Formatting function (called for every option)</param>
+             <returns>Self for chaining</returns>
+        </member>
+        <member name="M:DataTables.Field.Set">
+            <summary>
+            Get the "Set" flag for this field
+            </summary>
+            <returns>Set flag</returns>
+        </member>
+        <member name="M:DataTables.Field.Set(System.Boolean)">
+             <summary>
+             Set the "Set" flag for this field.
+            
+             A field can be marked as read only using this option, to be set only
+             during an create or edit action or to be set during both actions. This
+             provides the ability to have fields that are only set when a new row is
+             created (for example a "created" time stamp).
+            
+             For more control, use the `SetType` overload.
+             </summary>
+             <param name="set">Set flag</param>
+             <returns>Self for chaining</returns>
+        </member>
+        <member name="M:DataTables.Field.Set(DataTables.Field.SetType)">
+             <summary>
+             Set the "Set" flag for this field.
+            
+             A field can be marked to be set on create, edit, both or none using
+             this method, providing the ability, for example, to write to
+             `created` and `updated` datetime columns as appropriate.
+             </summary>
+             <param name="set">Set flag</param>
+             <returns>Self for chaining</returns>
+        </member>
+        <member name="M:DataTables.Field.SetFormatter(System.Func{System.Object,System.Collections.Generic.Dictionary{System.String,System.Object},System.Object})">
+             <summary>
+             Set formatter for the field's data.
+            
+             When the data has been retrieved from the server, it can be passed through
+             a formatter here, which will manipulate (format) the data as required. This
+             can be useful when, for example, working with dates and a particular format
+             is required on the client-side.
+            
+             Editor has a number of formatters available with the <code>Format</code> class
+             which can be used directly with this method.
+             </summary>
+             <param name="fn">Get formatter delegate</param>
+             <returns>Self for chaining</returns>
+        </member>
+        <member name="M:DataTables.Field.SetValue">
+            <summary>
+            Retrieve the "Set" value for the field
+            </summary>
+            <returns>"Set" value</returns>
+        </member>
+        <member name="M:DataTables.Field.SetValue(System.Object)">
+            <summary>
+            Set a "Set" value. When set this value is used to write to the
+            database regardless of what data is sent from the client-side
+            (if the parameter was even sent!).
+            </summary>
+            <param name="val">Value to set for "Set"</param>
+            <returns>Self for chaining</returns>
+        </member>
+        <member name="M:DataTables.Field.SetValue(System.Func{System.Object})">
+            <summary>
+            Set a "Set" delegate. When set, the delegate given here is executed
+            when the data for the field is to be written to the database and the
+            value returned is used, regardless of what is sent by the client-side
+            (if the parameter was even sent!).
+            </summary>
+            <param name="val">Delegate to set for "Set"</param>
+            <returns>Self for chaining</returns>
+        </member>
+        <member name="M:DataTables.Field.Type">
+            <summary>
+            Get the field type
+            </summary>
+            <returns>Type</returns>
+        </member>
+        <member name="M:DataTables.Field.Type(System.Type)">
+            <summary>
+            Set the data type for the field's values
+            </summary>
+            <param name="t">Type</param>
+            <returns>Self for chaining</returns>
+        </member>
+        <member name="M:DataTables.Field.TypeError">
+            <summary>
+            Get the type error message
+            </summary>
+            <returns>Type error message</returns>
+        </member>
+        <member name="M:DataTables.Field.TypeError(System.String)">
+            <summary>
+            If the value retrieved from the database can't be cast to the type
+            given, this is the error message that will be given.
+            </summary>
+            <param name="err">Error message</param>
+            <returns>Self for chaining</returns>
+        </member>
+        <member name="M:DataTables.Field.Upload">
+            <summary>
+            Get the Upload instance for this field
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:DataTables.Field.Upload(DataTables.Upload)">
+            <summary>
+            Set the upload instance for this field
+            </summary>
+            <param name="upload">Upload instance</param>
+            <returns>Self for chaining</returns>
+        </member>
+        <member name="M:DataTables.Field.Validator(System.Func{System.Object,System.Collections.Generic.Dictionary{System.String,System.Object},DataTables.EditorUtil.ValidationHost,System.String})">
+             <summary>
+             Set the 'validator' of the field.
+            
+             The validator can be used to check if any abstract piece of data is valid
+             or not according to the given rules of the validation function used.
+            
+             Multiple validation options can be applied to a field instance by calling
+             this method multiple times. For example, it would be possible to have a
+             'Required' validation and a 'MaxLength' validation with multiple calls.
+             
+             Editor has a number of validation available with the <code>Validation</code> class
+             which can be used directly with this method.
+             </summary>
+             <param name="fn">Validation method</param>
+             <returns>Self for chaining</returns>
+        </member>
+        <member name="M:DataTables.Field.Xss(System.Func{System.String,System.String})">
+            <summary>
+            Set a formatting method that will be used for XSS checking / removal.
+            This should be a function that takes a single argument (the value to be
+            cleaned) and returns the cleaned value.
+            
+            Editor will use the Microsfot security librarie's `Encoder.HtmlEncode` 
+            method by default for this operation, which is built into the software
+            and no additional configuration is required, but a custom function can
+            be used if you wish to use a different formatter such as HtmlSanitizer.
+            
+            If you wish to disable this option (which you would only do if you are
+            absolutely confident that your validation will pick up on any XSS inputs)
+            simply pass in 'false' or provide a closure function that returns the
+            value given to the function. This is _not_ recommended.
+            </summary>
+            <param name="fn">Xss formatting method</param>
+            <returns>Self for chaining</returns>
+        </member>
+        <member name="M:DataTables.Field.Xss(System.Boolean)">
+            <summary>
+            Option to quickly disable XSS formatting.
+            </summary>
+            <param name="flag">Enable / disable XSS</param>
+            <returns>Self for chaining</returns>
+        </member>
+        <member name="M:DataTables.Field.Apply(System.String,System.Collections.Generic.Dictionary{System.String,System.Object})">
+             <summary>
+             Check to see if a field should be used for a particular action (get or set).
+            
+             Called by the Editor / Join class instances - not expected for general
+             consumption - internal.
+             </summary>
+             <param name="action">Direction that the data is travelling  - 'get' is reading DB data, `create` and `edit` for writing to the DB</param>
+             <param name="data">Data submitted from the client-side when setting.</param>
+             <returns>true if the field should be used in the get / set.</returns>
+        </member>
+        <member name="M:DataTables.Field.OptionsExec(DataTables.Database)">
+            <summary>
+            Execute the ipOpts to get the list of options to return to the client-
+            side
+            </summary>
+            <param name="db">Database instance</param>
+            <returns>List of options</returns>
+        </member>
+        <member name="M:DataTables.Field.Val(System.String,System.Collections.Generic.Dictionary{System.String,System.Object})">
+            <summary>
+            Get the value of the field, taking into account if it is coming from the
+            DB or from a POST. If formatting has been specified for this field, it
+            will be applied here.
+            </summary>
+            <param name="direction">Direction that the data is travelling  - 'get' is reading DB data, `create` and `edit` for writing to the DB</param>
+            <param name="data">Data submitted from the client-side when setting.</param>
+            <returns>Value for the field</returns>
+        </member>
+        <member name="M:DataTables.Field.Validate(System.Collections.Generic.Dictionary{System.String,System.Object},DataTables.Editor,System.String)">
+            <summary>
+            Check the validity of the field based on the data submitted. Note that
+            this validation is performed on the wire data - i.e. that which is
+            submitted, before any setFormatter is run
+            </summary>
+            <param name="data">Data from HTTP to check</param>
+            <param name="editor">Editor instance</param>
+            <param name="id">Row id for the row being edited</param>
+            <returns>`null` if valid, or error message string if not valid</returns>
+        </member>
+        <member name="M:DataTables.Field.Write(System.Collections.Generic.Dictionary{System.String,System.Object},System.Collections.Generic.Dictionary{System.String,System.Object})">
+            <summary>
+            Write the value for this field to the output array for a read operation
+            </summary>
+            <param name="outData">Row output data (to the JSON)</param>
+            <param name="srcData">Row input data (raw, from the database)</param>
+        </member>
+        <member name="M:DataTables.Field.XssSafety(System.String)">
+            <summary>
+            Perform XSS encoding
+            </summary>
+            <param name="val">Value to be encoded</param>
+            <returns></returns>
+        </member>
+        <member name="M:DataTables.Field._Format(System.Object,System.Collections.Generic.Dictionary{System.String,System.Object},System.Func{System.Object,System.Collections.Generic.Dictionary{System.String,System.Object},System.Object})">
+            <summary>
+            Apply a formatter to data. The caller will decide what formatter to apply
+            (get or set)
+            </summary>
+            <param name="val">Value to be formatted</param>
+            <param name="data">Full row data</param>
+            <param name="formatter">Formatting function to be called</param>
+            <returns>Formatted value</returns>
+        </member>
+        <member name="M:DataTables.Field._GetAssignedValue(System.Object)">
+            <summary>
+            Get the value from `_[gs]etValue` - taking into account if it is callable
+            function or not
+            </summary>
+            <param name="val">Value to be evaluated</param>
+            <returns>Value assigned, or returned from the function</returns>
+        </member>
+        <member name="M:DataTables.Field._InData(System.String,System.Collections.Generic.Dictionary{System.String,System.Object})">
+            <summary>
+            Check is a parameter is in the submitted data set. This is functionally
+            the same as the `_readProp()` method, but in this case a binary value
+            is required to indicate if the value is present or not.
+            </summary>
+            <param name="name">Javascript dotted object name to write to</param>
+            <param name="data">Data source array to read from</param>
+            <returns>`true` if present, `false` otherwise</returns>
+        </member>
+        <member name="M:DataTables.Field._ReadProp(System.String,System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            Read a value from a data structure, using Javascript dotted object
+            notation. This is the inverse of the `_writeProp` method and provides
+            the same support, matching DataTables' ability to read nested JSON
+            data objects.
+            </summary>
+            <param name="name">Javascript dotted object name to write to</param>
+            <param name="inData">Data source array to read from</param>
+            <returns>The read value, or null if no value found.</returns>
+        </member>
+        <member name="M:DataTables.Field._WriteProp(System.Collections.Generic.Dictionary{System.String,System.Object},System.String,System.Object)">
+            <summary>
+            Write the field's value to an array structure, using Javascript dotted
+            object notation to indicate JSON data structure. For example `name.first`
+            gives the data structure: `name: { first: ... }`. This matches DataTables
+            own ability to do this on the client-side, although this doesn't
+            implement implement quite such a complex structure (no array / function
+            support).
+            </summary>
+            <param name="outData">Dic to write the data to</param>
+            <param name="name">Javascript dotted object name to write to</param>
+            <param name="value">Value to write</param>
+        </member>
+        <member name="M:DataTables.Field._WriteCast(System.Collections.Generic.Dictionary{System.String,System.Object},System.String,System.Object)">
+            <summary>
+            Convert the value to the field's type, with error handling
+            </summary>
+            <param name="outData">Dic to write the data to</param>
+            <param name="name">Javascript dotted object name to write to</param>
+            <param name="value">Value to write</param>
+        </member>
+        <member name="T:DataTables.DtResponse">
+             <summary>
+             DataTables and Editor response object. This object can be used to
+             construct and contain the data in response to a DataTables or Editor
+             request before JSON encoding it and sending to the client-side.
+            
+             Note that this object uses lowercase property names as this it output
+             directly to JSON, so the format and parameter names that DataTables and
+             Editor expect must be used.
+             </summary>
+        </member>
+        <member name="F:DataTables.DtResponse.draw">
+            Server-side processing parameters *
+            <summary>
+            Draw counter for server-side processing requests
+            </summary>
+        </member>
+        <member name="F:DataTables.DtResponse.data">
+            <summary>
+            Data to draw the table with, for both client-side and server-side processing
+            </summary>
+        </member>
+        <member name="F:DataTables.DtResponse.recordsTotal">
+            <summary>
+            Total record count for server-side processing requests
+            </summary>
+        </member>
+        <member name="F:DataTables.DtResponse.recordsFiltered">
+            <summary>
+            Record count in the filtered data set for server-side processing requests
+            </summary>
+        </member>
+        <member name="F:DataTables.DtResponse.error">
+            Editor parameters *
+            <summary>
+            General error message if there is one
+            </summary>
+        </member>
+        <member name="F:DataTables.DtResponse.fieldErrors">
+            <summary>
+            List of field errors if one or more fields are in an error state
+            when validated
+            </summary>
+        </member>
+        <member name="F:DataTables.DtResponse.id">
+            <summary>
+            Id of the newly created row for the create action
+            </summary>
+        </member>
+        <member name="F:DataTables.DtResponse.meta">
+            <summary>
+            Information that can be processes in the Ajax callback handlers can
+            be added here. It is not actively used by the libraries.
+            </summary>
+        </member>
+        <member name="F:DataTables.DtResponse.options">
+            <summary>
+            List of options for Editor `select`, `radio` and `checkbox` field types
+            </summary>
+        </member>
+        <member name="F:DataTables.DtResponse.files">
+            <summary>
+            File information for the upload input types
+            </summary>
+        </member>
+        <member name="F:DataTables.DtResponse.upload">
+            <summary>
+            Row data on update action
+            </summary>
+        </member>
+        <member name="M:DataTables.DtResponse.Merge(DataTables.DtResponse)">
+            <summary>
+            Merge a response object into this one to create a single combined
+            object. Generally parameters that are defined in the object passed
+            in as a parameter will overwrite the parameters in this object if
+            the are defined.
+            </summary>
+            <param name="b">Response object to merge in</param>
+            <returns>Self for chaining</returns>
+        </member>
+        <member name="T:DataTables.DtResponse.FieldError">
+            <summary>
+            Editor field error nested class. Describes an error message for a
+            field if it is in an error state.
+            </summary>
+        </member>
+        <member name="P:DataTables.DtResponse.FieldError.name">
+            <summary>
+            Name of the field in error state
+            </summary>
+        </member>
+        <member name="P:DataTables.DtResponse.FieldError.status">
+            <summary>
+            Error message
+            </summary>
+        </member>
+        <member name="T:DataTables.DtResponse.ResponseUpload">
+            <summary>
+            Upload response information
+            </summary>
+        </member>
+        <member name="P:DataTables.DtResponse.ResponseUpload.id">
+            <summary>
+            Id of the newly uploaded file
+            </summary>
+        </member>
+        <member name="T:DataTables.MJoin">
+            <summary>
+            The MJoin class provides a one-to-many join link for Editor. This can
+            be useful in cases were an attribute can take multiple values at the
+            same time - for example cumulative security access levels.
+            
+            Typically the MJoin class should be used with a link table, but this is
+            optional. Please note that if you don't use a link table you should be
+            aware that on edit the linked rows are deleted and then reinserted, thus
+            if any values should be retained they should also be submitted.
+            
+            Please refer to the Editor .NET documentation for further information
+            https://editor.datatables.net/manual/net
+            </summary>
+        </member>
+        <member name="M:DataTables.MJoin.#ctor(System.String)">
+            <summary>
+            Create an MJoin instance for use with the Editor class's MJoin
+            method.
+            </summary>
+            <param name="table">Table to join to.</param>
+        </member>
+        <member name="M:DataTables.MJoin.Field(DataTables.Field)">
+            <summary>
+            Add a new field to the MJoin instance
+            </summary>
+            <param name="field">New field to add</param>
+            <returns>Self for chaining</returns>
+        </member>
+        <member name="M:DataTables.MJoin.Fields">
+            <summary>
+            Get the list of fields configured for this join instance
+            </summary>
+            <returns>Join instance fields</returns>
+        </member>
+        <member name="M:DataTables.MJoin.Get">
+            <summary>
+            Get the get flag for this MJoin instance. If disabled data will not
+            be retrieved
+            </summary>
+            <returns>Enablement status</returns>
+        </member>
+        <member name="M:DataTables.MJoin.Get(System.Boolean)">
+            <summary>
+            Set the get flag for this MJoin instance. If disabled data will not
+            be retrieved when loaded by DataTables.
+            </summary>
+            <param name="flag">Value to set</param>
+            <returns>Self for chaining</returns>
+        </member>
+        <member name="M:DataTables.MJoin.Link(System.String,System.String)">
+            <summary>
+            Create a join link between two tables. The order of the fields does not
+            matter, but each field must contain the table name as well as the field name.
+            
+            This method can be called a maximum of two times for an MJoin instance:
+            
+            * First time, creates a link between the Editor host table and a join table
+            * Second time creates the links required for a link table.
+            
+            Please refer to the Editor MJoin documentation for further details:
+            https://editor.datatables.net/manual/net
+            </summary>
+            <param name="field1">Table and field name</param>
+            <param name="field2">Table and field name</param>
+            <returns>Self for chaining</returns>
+        </member>
+        <member name="M:DataTables.MJoin.Model``1">
+             <summary>
+             Set a model to use.
+            
+             In keeping with the MVC style of coding, you can define the fields
+             and their types that you wish to get from the database in a simple
+             class. Editor will automatically add fields from the model.
+            
+             Note that fields that are defined in the model can also be defined
+             as <code>Field</code> instances should you wish to add additional
+             options to a specific field such as formatters or validation.
+             </summary>
+             <typeparam name="T">Model to use</typeparam>
+             <returns>Self for chaining</returns>
+        </member>
+        <member name="M:DataTables.MJoin.Name">
+            <summary>
+            Get the JSON name for the join JSON and HTTP submit data.
+            </summary>
+            <returns>JSON name</returns>
+        </member>
+        <member name="M:DataTables.MJoin.Name(System.String)">
+            <summary>
+            Set the JSON name for the join JSON and HTTP submit data. By default this
+            is set to match the table name, but can be altered using this method.
+            </summary>
+            <param name="name">Name to use</param>
+            <returns>Self for chaining</returns>
+        </member>
+        <member name="M:DataTables.MJoin.Set">
+            <summary>
+            Get the set value for this instance. If disabled this MJoin instance
+            will not write to the database
+            </summary>
+            <returns>Enablement value</returns>
+        </member>
+        <member name="M:DataTables.MJoin.Set(System.Boolean)">
+            <summary>
+            Set the set value for this instance. If disabled this MJoin instance
+            will not write to the database on create, edit or delete.
+            </summary>
+            <param name="flag">Value to set</param>
+            <returns>Self for chaining</returns>
+        </member>
+        <member name="M:DataTables.MJoin.Table">
+            <summary>
+            Get the DB table name that this MJoin instance links the main table to
+            </summary>
+            <returns>Table name</returns>
+        </member>
+        <member name="M:DataTables.MJoin.Table(System.String)">
+            <summary>
+            Set the table name that this MJoin instance links the main table to.
+            </summary>
+            <param name="table">Table to link to</param>
+            <returns>Self for chaining</returns>
+        </member>
+        <member name="M:DataTables.MJoin.Where(System.Action{DataTables.Query})">
+             <summary>
+             Where condition to add to the query used to get data from the database.
+             Multiple conditions can be added if required.
+             
+             Can be used in two different ways:
+             
+             * Simple case: `where( field, value, operator )`
+             * Complex: `where( fn )`
+            
+             The simple case is fairly self explanatory, a condition is applied to the
+             data that looks like `field operator value` (e.g. `name = 'Allan'`). The
+             complex case allows full control over the query conditions by providing a
+             closure function that has access to the database Query that Editor is
+             using, so you can use the `where()`, `or_where()`, `and_where()` and
+             `where_group()` methods as you require.
+            
+             Please be very careful when using this method! If an edit made by a user
+             using Editor removes the row from the where condition, the result is
+             undefined (since Editor expects the row to still be available, but the
+             condition removes it from the result set).
+             </summary>
+             <param name="fn">Delegate to execute adding where conditions to the table</param>
+             <returns>Self for chaining</returns>
+        </member>
+        <member name="M:DataTables.MJoin.Where(System.String,System.Object,System.String)">
+             <summary>
+             Where condition to add to the query used to get data from the database.
+             Multiple conditions can be added if required.
+             
+             Can be used in two different ways:
+             
+             * Simple case: `where( field, value, operator )`
+             * Complex: `where( fn )`
+            
+             The simple case is fairly self explanatory, a condition is applied to the
+             data that looks like `field operator value` (e.g. `name = 'Allan'`). The
+             complex case allows full control over the query conditions by providing a
+             closure function that has access to the database Query that Editor is
+             using, so you can use the `where()`, `or_where()`, `and_where()` and
+             `where_group()` methods as you require.
+            
+             Please be very careful when using this method! If an edit made by a user
+             using Editor removes the row from the where condition, the result is
+             undefined (since Editor expects the row to still be available, but the
+             condition removes it from the result set).
+             </summary>
+             <param name="key">Database column name to perform the condition on</param>
+             <param name="value">Value to use for the condition</param>
+             <param name="op">Conditional operator</param>
+             <returns>Self for chaining</returns>
+        </member>
+        <member name="M:DataTables.MJoin.Data(DataTables.Editor,DataTables.DtResponse)">
+            <summary>
+            Data "get" request - get the joined data
+            </summary>
+            <param name="editor">Host Editor instance</param>
+            <param name="response">DataTables reponse object for where the data
+            should be written to</param>
+        </member>
+        <member name="M:DataTables.MJoin.Insert(DataTables.Editor,System.Object,System.Collections.Generic.Dictionary{System.String,System.Object})">
+            <summary>
+            Create a new row
+            </summary>
+            <param name="editor">Host Editor instance</param>
+            <param name="parentId">Parent row id</param>
+            <param name="data">HTTP submitted data</param>
+        </member>
+        <member name="M:DataTables.MJoin.Update(DataTables.Editor,System.Object,System.Collections.Generic.Dictionary{System.String,System.Object})">
+            <summary>
+            Edit a row
+            </summary>
+            <param name="editor">Host Editor instance</param>
+            <param name="parentId">Parent row id</param>
+            <param name="data">HTTP submitted data</param>
+        </member>
+        <member name="M:DataTables.MJoin.Remove(DataTables.Editor,System.Object)">
+            <summary>
+            Remove a row
+            </summary>
+            <param name="editor">Host Editor instance</param>
+            <param name="ids">Parent row id</param>
+        </member>
+        <member name="M:DataTables.MJoin.Validate(DataTables.DtResponse,DataTables.Editor,System.Collections.Generic.Dictionary{System.String,System.Object})">
+            <summary>
+            Validate the MJoin fields submitted
+            </summary>
+            <param name="response">DataTables response object to record the errors</param>
+            <param name="editor">Host Editor instance</param>
+            <param name="data">Data submitted by the client</param>
+        </member>
+        <member name="M:DataTables.MJoin._ApplyWhere(DataTables.Query)">
+            <summary>
+            Apply the where conditions to a query
+            </summary>
+            <param name="query">Query to apply the conditions to</param>
+        </member>
+        <member name="M:DataTables.MJoin._Prepare(DataTables.Editor)">
+            <summary>
+            Complete initialisation once we have an Editor instance to work with
+            </summary>
+            <param name="editor"></param>
+        </member>
+        <member name="M:DataTables.MJoin._PrepareModel">
+            <summary>
+            Create any fields required by the model which haven't already
+            been defined
+            </summary>
+        </member>
+        <member name="M:DataTables.MJoin._FindField(System.String,System.String)">
+            <summary>
+            Find a field based on a name
+            </summary>
+            <param name="name">Field name</param>
+            <param name="type">Name type (db or name)</param>
+            <returns></returns>
+        </member>
+        <member name="T:DataTables.Upload">
+            <summary>
+            Upload class for Editor. This class provides the ability to easily specify
+            file upload information, specifically how the file should be recorded on
+            the server (database and file system).
+            
+            An instance of this class is attached to a field using the 'Field.upload()'
+            method. When Editor detects a file upload for that file the information
+            provided for this instance is executed.
+            
+            The configuration is primarily driven through the 'db' and 'action' methods
+            </summary>
+        </member>
+        <member name="T:DataTables.Upload.DbType">
+            <summary>
+            Database upload options for the 'fields' option in the 'Db()' method.
+            These are used to provide easy information about the file that will be
+            stored in the database.
+            </summary>
+        </member>
+        <member name="F:DataTables.Upload.DbType.Content">
+            <summary>
+            Binary information
+            </summary>
+        </member>
+        <member name="F:DataTables.Upload.DbType.ContentType">
+            <summary>
+            Content type
+            </summary>
+        </member>
+        <member name="F:DataTables.Upload.DbType.Extn">
+            <summary>
+            File extension (note that this includes the dot)
+            </summary>
+        </member>
+        <member name="F:DataTables.Upload.DbType.FileName">
+            <summary>
+            File name (with extension)
+            </summary>
+        </member>
+        <member name="F:DataTables.Upload.DbType.FileSize">
+            <summary>
+            File size (bytes)
+            </summary>
+        </member>
+        <member name="F:DataTables.Upload.DbType.MimeType">
+            <summary>
+            MIME type (same as content type)
+            </summary>
+        </member>
+        <member name="F:DataTables.Upload.DbType.WebPath">
+            <summary>
+            HTTP path to the file this is computed from
+            Request.PhysicalApplicationPath . If you are storing the files outside
+            of your application, this option isn't particularly useful!
+            </summary>
+        </member>
+        <member name="F:DataTables.Upload.DbType.SystemPath">
+            <summary>
+            System path to the file (i.e. the absolute path on your hard disk)
+            </summary>
+        </member>
+        <member name="M:DataTables.Upload.#ctor">
+            <summary>
+            Upload constructor
+            </summary>
+        </member>
+        <member name="M:DataTables.Upload.#ctor(System.String)">
+            <summary>
+            Upload constructor with a path action
+            </summary>
+            <param name="action">Location for where to store the file. This should be
+            an absolute path on your system.</param>
+        </member>
+        <member name="M:DataTables.Upload.#ctor(System.Func{System.Web.HttpPostedFile,System.Object,System.Object})">
+            <summary>
+            Upload constructor with a function action
+            </summary>
+            <param name="action">Callback function that is executed when a file
+            is uploaded.</param>
+        </member>
+        <member name="M:DataTables.Upload.Action(System.String)">
+            <summary>
+            Set the action to take when a file is uploaded. As a string the value
+            given is the full system path to where the uploaded file is written to.
+            The value given can include three "macros" which are replaced by the
+            script dependent on the uploaded file:
+            
+            * '__EXTN__' - the file extension (with the dot)
+            * '__NAME__' - the uploaded file's name (including the extension)
+            * '__ID__' - Database primary key value if the 'Db()' method is used
+            </summary>
+            <param name="action">Full system path for where the file should be stored</param>
+            <returns>Self for chaining</returns>
+        </member>
+        <member name="M:DataTables.Upload.Action(System.Func{System.Web.HttpPostedFile,System.Object,System.Object})">
+            <summary>
+            Set the action to take when a file is uploaded. As a function the callback
+            is given the responsiblity of what to do with the uploaded file. That will
+            typically involve writing it to the file system so it can be used later.
+            </summary>
+            <param name="action">Callback</param>
+            <returns>Self for chaining</returns>
+        </member>
+        <member name="M:DataTables.Upload.AllowedExtensions(System.Collections.Generic.IEnumerable{System.String},System.String)">
+            <summary>
+            A list of valid file extensions that can be uploaded. This is for simple
+            validation that the file is of the expected type. The check is
+            case-insensitive. If no extensions are given, no validation is performed
+            on the file extension.
+            </summary>
+            <param name="extns">List of extensions to test against.</param>
+            <param name="error">Error message for if the file is not valid.</param>
+            <returns>Self for chaining</returns>
+        </member>
+        <member name="M:DataTables.Upload.Db(System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.Object})">
+            <summary>
+            Database configuration method. When used, this method will tell Editor
+            what information you want to be wirtten to a database on file upload, should
+            you wish to store relational information about your files on the database
+            (this is generally recommended).
+            </summary>
+            <param name="table">Name of the table where the file information should be stored</param>
+            <param name="pkey">Primary key column name. This is required so each row can
+            be uniquely identified.</param>
+            <param name="fields">A list of the fields to be wirtten to on upload. The
+            dictonary keys are used as the database column names and the values can be
+            defined by the 'DbType' enum of this class. The value can also be a string,
+            which will be written directly to the database, or a function which will be
+            executed and the returned value written to the database.</param>
+            <returns>Self for chanining</returns>
+        </member>
+        <member name="M:DataTables.Upload.DbClean(System.Func{System.Collections.Generic.List{System.Collections.Generic.Dictionary{System.String,System.Object}},System.Boolean})">
+            <summary>
+            Set a callback function that is used to remove files which no longer have
+            a reference in a source table.
+            </summary>
+            <param name="callback">
+            Function that will be executed on clean. It is given a List of information
+            from the database about the orphaned rows, and can return true to indicate
+            that the rows should be removed from the database. Any other return value
+            (including none) will result in the records being retained.
+            </param>
+            <returns>Self for chaining</returns>
+        </member>
+        <member name="M:DataTables.Upload.Validator(System.Func{System.Web.HttpPostedFile,System.String})">
+            <summary>
+            Add a validation method to check file uploads. Multiple validators can be
+            added by calling this method multiple times. They will be executed in
+            sequence when a file has been uploaded.
+            </summary>
+            <param name="fn">Validation function. The function takes a single parameter,
+            an HttpPostedFile, and a string is returned on error with the error message.
+            If the validation does not fail, 'null' should be returned.</param>
+            <returns></returns>
+        </member>
+        <member name="M:DataTables.Upload.Data(DataTables.Database)">
+            <summary>
+            Get database information from the table
+            </summary>
+            <param name="db">Database instance</param>
+            <returns>Database information</returns>
+        </member>
+        <member name="M:DataTables.Upload.DbCleanExec(DataTables.Editor,DataTables.Field)">
+            <summary>
+            Execute a file clean up
+            </summary>
+            <param name="editor">Calling Editor instance</param>
+            <param name="field">Host field</param>
+        </member>
+        <member name="M:DataTables.Upload.Error">
+            <summary>
+            Get the error message for the uplaod
+            </summary>
+            <returns>Error message</returns>
+        </member>
+        <member name="M:DataTables.Upload.Exec(DataTables.Editor)">
+            <summary>
+            Execute an upload
+            </summary>
+            <param name="editor">Host editor</param>
+            <returns>Id of the new file</returns>
+        </member>
+        <member name="M:DataTables.Upload.Pkey">
+            <summary>
+            Get the primary key of the files table
+            </summary>
+            <returns>Primary key column</returns>
+        </member>
+        <member name="M:DataTables.Upload.Table">
+            <summary>
+            Get the table name for the files table
+            </summary>
+            <returns>Table name</returns>
+        </member>
+        <member name="M:DataTables.Upload._actionExec(System.Object,System.Web.HttpPostedFile)">
+            <summary>
+            Execute the configured action for the upload
+            </summary>
+            <param name="id">Primary key value</param>
+            <param name="upload">Posted file</param>
+            <returns>File identifier - typically the primary key</returns>
+        </member>
+        <member name="M:DataTables.Upload._dbExec(DataTables.Editor,System.Web.HttpPostedFile)">
+            <summary>
+            Add a record to the database for a newly uploaded file
+            </summary>
+            <param name="editor">Host editor</param>
+            <param name="upload">Uploaded file</param>
+            <returns>Primary key value for the newly uploaded file</returns>
+        </member>
+        <member name="M:DataTables.Upload._path(System.String,System.String)">
+            <summary>
+            Apply macros to a user specified path
+            </summary>
+            <param name="name">File path</param>
+            <param name="id">Primary key value for the file</param>
+            <returns>Resolved path</returns>
+        </member>
+        <member name="T:DataTables.Format">
+             <summary>
+             Formatter methods for the DataTables Editor. All of the methods in this
+             class return a delegate that can be used in the <code>GetFormatter</code>
+             and <code>SetFormatter</code> methods of the <code>Field</code> class.
+            
+             Each method may define its own parameters that configure how the
+             formatter operates. For example the date / time formatters take information
+             on the formatting to be used.
+             </summary>
+        </member>
+        <member name="F:DataTables.Format.DATE_ISO_8601">
+            <summary>
+            Date format: 2012-03-09. jQuery UI equivalent format: yy-mm-dd
+            </summary>
+        </member>
+        <member name="F:DataTables.Format.DATE_ISO_822">
+            <summary>
+            Date format: Fri, 9 Mar 12. jQuery UI equivalent format: D, d M y
+            </summary>
+        </member>
+        <member name="F:DataTables.Format.DATE_ISO_850">
+            <summary>
+            Date format: Friday, 09-Mar-12.  jQuery UI equivalent format: DD, dd-M-y
+            </summary>
+        </member>
+        <member name="F:DataTables.Format.DATE_ISO_1036">
+            <summary>
+            Date format: Fri, 9 Mar 12. jQuery UI equivalent format: D, d M y
+            </summary>
+        </member>
+        <member name="F:DataTables.Format.DATE_ISO_1123">
+            <summary>
+            Date format: Fri, 9 Mar 2012. jQuery UI equivalent format: D, d M yy
+            </summary>
+        </member>
+        <member name="F:DataTables.Format.DATE_ISO_2822">
+            <summary>
+            Date format: Fri, 9 Mar 2012. jQuery UI equivalent format: D, d M yy
+            </summary>
+        </member>
+        <member name="M:DataTables.Format.DateSqlToFormat(System.String)">
+            <summary>
+            Convert from SQL date / date time format (ISO8601) to a format given by the options parameter.
+            </summary>
+            <param name="format">Value to convert from SQL date format</param>
+            <returns>Formatter delegate</returns>
+        </member>
+        <member name="M:DataTables.Format.DateFormatToSql(System.String)">
+            <summary>
+            Convert to SQL date / date time format (ISO8601) from a format given by the options parameter.
+            </summary>
+            <param name="format">Value to convert to SQL date format</param>
+            <returns>Formatter delegate</returns>
+        </member>
+        <member name="M:DataTables.Format.DateTime(System.String,System.String)">
+            <summary>
+            Convert from one date time format to another
+            </summary>
+            <param name="from">From format</param>
+            <param name="to">To format</param>
+            <returns>Formatter delegate</returns>
+        </member>
+        <member name="M:DataTables.Format.Explode(System.String)">
+            <summary>
+            Convert a string of values into an array for use with checkboxes.
+            </summary>
+            <param name="delimiter">Delimiter to split on</param>
+            <returns>Formatter delegate</returns>
+        </member>
+        <member name="M:DataTables.Format.Implode(System.String)">
+            <summary>
+            Convert an array of values from a checkbox into a string which can be
+            used to store in a text field in a database.
+            </summary>
+            <param name="delimiter">Delimiter to join on</param>
+            <returns>Formatter delegate</returns>
+        </member>
+        <member name="M:DataTables.Format.NullEmpty">
+            <summary>
+            Convert an empty string to `null`. Null values are very useful in
+            databases, but HTTP variables have no way of representing `null` as a
+            value, often leading to an empty string and null overlapping. This method
+            will check the value to operate on and return null if it is empty.
+            </summary>
+            <returns>Formatter delegate</returns>
+        </member>
+        <member name="T:DataTables.Query">
+             <summary>
+             The Query class provides methods to craft an individual query
+             against the database.
+             
+             The typical pattern for using this class is through the 'Database'.
+             Typically it would not be initialised directly.
+            
+             Note that this is a stub class that a driver will extend and complete as
+             required for individual database types. Individual drivers could add
+             additional methods, but this is discouraged to ensure that the API is the
+             same for all database types. 
+             </summary>
+        </member>
+        <member name="M:DataTables.Query.#ctor(DataTables.Database,System.String)">
+            <summary>
+            Query instance construtor. Should be called by the Database
+            class methods rather than direction initialisation.
+            </summary>
+            <param name="db">Database host</param>
+            <param name="type">Query type</param>
+        </member>
+        <member name="M:DataTables.Query.Commit(DataTables.Database)">
+            <summary>
+            Commit a transaction
+            </summary>
+            <param name="dbh">The Db instance to use</param>
+        </member>
+        <member name="M:DataTables.Query.Transaction(DataTables.Database)">
+            <summary>
+            Start a new transaction
+            </summary>
+            <param name="dbh">The Db instance to use</param>
+        </member>
+        <member name="M:DataTables.Query.Rollback(DataTables.Database)">
+            <summary>
+            Rollback the database state to the start of the transaction
+            </summary>
+            <param name="dbh">The Db instance to use</param>
+        </member>
+        <member name="M:DataTables.Query.Bind(System.String,System.Object,System.Object)">
+            <summary>
+            Bind a value for safe SQL execution
+            </summary>
+            <param name="name">Parameter name - should include the leading escape
+            character (typically a colon or @)</param>
+            <param name="value">Value to bind</param>
+            <param name="type">Data type</param>
+            <returns>Query instance for chaining</returns>
+        </member>
+        <member name="M:DataTables.Query.Distinct(System.Boolean)">
+            <summary>
+            Set a distinct flag for a `select` query. Note that this has no
+            effect on any other query type.
+            </summary>
+            <param name="dis">Distinct select (`true`) or not (`false`)</param>
+            <returns>Query instance for chaining</returns>
+        </member>
+        <member name="M:DataTables.Query.Exec(System.String)">
+            <summary>
+            Execute the setup query
+            </summary>
+            <param name="sql">SQL string to execute (only if type is 'raw')</param>
+            <returns>Query result</returns>
+        </member>
+        <member name="M:DataTables.Query.Get(System.String)">
+            <summary>
+            Add one or more get (select) field
+            </summary>
+            <param name="field">Comma seperated list of column names to get</param>
+            <returns>Query instance for chaining</returns>
+        </member>
+        <member name="M:DataTables.Query.Get(System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Add one or more get (select) field
+            </summary>
+            <param name="fields">List of comma seperated list of column names to get</param>
+            <returns>Query instance for chaining</returns>
+        </member>
+        <member name="M:DataTables.Query.Join(System.String,System.String,System.String)">
+            <summary>
+            Perform a JOIN operation
+            </summary>
+            <param name="table">Table name to do the JOIN on</param>
+            <param name="condition">JOIN condition</param>
+            <param name="type">JOIN type</param>
+            <returns>Query instance for chaining</returns>
+        </member>
+        <member name="M:DataTables.Query.Limit(System.Int32)">
+            <summary>
+            Limit the result set to a certain size
+            </summary>
+            <param name="lim">The number of records to limit the result to</param>
+            <returns>Query instance for chaining</returns>
+        </member>
+        <member name="M:DataTables.Query.Offset(System.Int32)">
+            <summary>
+            Offset the return set by a given number of records (useful for paging).
+            </summary>
+            <param name="off">The number of records to offset the result by</param>
+            <returns>Query instance for chaining</returns>
+        </member>
+        <member name="M:DataTables.Query.Order(System.String)">
+            <summary>
+            Order by
+            </summary>
+            <param name="order">Columns and direction to order by. Can be specified as individual
+            names or a string of comma separated names. The 'asc' and 'desc' for each column
+            (as in SQL) is optional.</param>
+            <returns>Query instance for chaining</returns>
+        </member>
+        <member name="M:DataTables.Query.Order(System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Order by
+            </summary>
+            <param name="orders">List of columns and direction to order by. Can be specified as
+            individual names or a string of comma separated names. The 'asc' and 'desc' for each
+            column (as in SQL) is optional.</param>
+            <returns>Query instance for chaining</returns>
+        </member>
+        <member name="M:DataTables.Query.Set(System.String,System.Object,System.Boolean)">
+            <summary>
+            Set a single field to a given value
+            </summary>
+            <param name="field">Field name to set</param>
+            <param name="val">Value to set</param>
+            <param name="bind">Bind (i.e. escape) the value, or not. Set to false
+            if you want to use a field reference or function as the value</param>
+            <returns>Query instance for chaining</returns>
+        </member>
+        <member name="M:DataTables.Query.Set(System.Collections.Generic.Dictionary{System.String,System.Object},System.Boolean)">
+            <summary>
+            Set one or more fields to their given values
+            </summary>
+            <param name="fields">Key value pairs where the key is the column name</param>
+            <param name="bind">Bind (i.e. escape) the value, or not. Set to false
+            if you want to use a field reference or function as the value</param>
+            <returns>Query instance for chaining</returns>
+        </member>
+        <member name="M:DataTables.Query.Table(System.String)">
+            <summary>
+            Set table(s) to perform the query on
+            </summary>
+            <param name="table">Comma separated list of table names</param>
+            <returns>Query instance for chaining</returns>
+        </member>
+        <member name="M:DataTables.Query.Table(System.Collections.Generic.List{System.String})">
+            <summary>
+            Set table(s) to perform the query on
+            </summary>
+            <param name="tables">Collection of table names</param>
+            <returns>Query instance for chaining</returns>
+        </member>
+        <member name="M:DataTables.Query.Where(System.Action{DataTables.Query})">
+            <summary>
+            Where query - Bound to the previous condition (if there is one) as an AND statement
+            </summary>
+            <param name="fn">Function that can be used to construct a contained set of options. The Query instance is passed in so Where, AndWhere and OrWhere can all be used</param>
+            <returns>Query instance for chaining</returns>
+        </member>
+        <member name="M:DataTables.Query.Where(System.String,System.Object,System.String,System.Boolean)">
+            <summary>
+            Where query - Bound to the previous condition (if there is one) as an AND statement
+            </summary>
+            <param name="key">Column name to perform the condition on</param>
+            <param name="value">Value to check. This can be `null` for an `IS NULL` or `IS NOT NULL` condition, depending on the value of `op` which should be `=` or `!=`</param>
+            <param name="op">Conditional operation to perform</param>
+            <param name="bind">Bind the value or not. Binding will cause the parameter to effectively be escaped, which you might not want for some cases, such as passing in an SQL function as the condition</param>
+            <returns>Query instance for chaining</returns>
+        </member>
+        <member name="M:DataTables.Query.Where(System.String,System.Collections.Generic.IEnumerable{System.Object},System.String,System.Boolean)">
+            <summary>
+            Where query - Bound to the previous condition (if there is one) as an OR statement
+            </summary>
+            <param name="key">Column name to perform the condition on</param>
+            <param name="values">Values to check. This can be `null` for an `IS NULL` or `IS NOT NULL` condition, depending on the value of `op` which should be `=` or `!=`</param>
+            <param name="op">Conditional operation to perform</param>
+            <param name="bind">Bind the value or not. Binding will cause the parameter to effectively be escaped, which you might not want for some cases, such as passing in an SQL function as the condition</param>
+            <returns>Query instance for chaining</returns>
+        </member>
+        <member name="M:DataTables.Query.Where(System.Collections.Generic.Dictionary{System.String,System.Object},System.String,System.Boolean)">
+            <summary>
+            Where query - Bound to the previous condition (if there is one) as an AND statement
+            </summary>
+            <param name="set">Dictionary of key (column name) / value pairs to use for the conditions</param>
+            <param name="op">Conditional operation to perform</param>
+            <param name="bind">Bind the value or not. Binding will cause the parameter to effectively be escaped, which you might not want for some cases, such as passing in an SQL function as the condition</param>
+            <returns>Query instance for chaining</returns>
+        </member>
+        <member name="M:DataTables.Query.AndWhere(System.Action{DataTables.Query})">
+            <summary>
+            Where query - Bound to the previous condition (if there is one) as an AND statement
+            </summary>
+            <param name="fn">Function that can be used to construct a contained set of options. The Query instance is passed in so Where, AndWhere and OrWhere can all be used</param>
+            <returns>Query instance for chaining</returns>
+        </member>
+        <member name="M:DataTables.Query.AndWhere(System.String,System.Object,System.String,System.Boolean)">
+            <summary>
+            Where query - Bound to the previous condition (if there is one) as an AND statement
+            </summary>
+            <param name="key">Column name to perform the condition on</param>
+            <param name="value">Value to check. This can be `null` for an `IS NULL` or `IS NOT NULL` condition, depending on the value of `op` which should be `=` or `!=`</param>
+            <param name="op">Conditional operation to perform</param>
+            <param name="bind">Bind the value or not. Binding will cause the parameter to effectively be escaped, which you might not want for some cases, such as passing in an SQL function as the condition</param>
+            <returns>Query instance for chaining</returns>
+        </member>
+        <member name="M:DataTables.Query.AndWhere(System.String,System.Collections.Generic.IEnumerable{System.Object},System.String,System.Boolean)">
+            <summary>
+            Where query - Bound to the previous condition (if there is one) as an AND statement
+            </summary>
+            <param name="key">Column name to perform the condition on</param>
+            <param name="values">Values to check. This can be `null` for an `IS NULL` or `IS NOT NULL` condition, depending on the value of `op` which should be `=` or `!=`</param>
+            <param name="op">Conditional operation to perform</param>
+            <param name="bind">Bind the value or not. Binding will cause the parameter to effectively be escaped, which you might not want for some cases, such as passing in an SQL function as the condition</param>
+            <returns>Query instance for chaining</returns>
+        </member>
+        <member name="M:DataTables.Query.AndWhere(System.Collections.Generic.Dictionary{System.String,System.Object},System.String,System.Boolean)">
+            <summary>
+            Where query - Bound to the previous condition (if there is one) as an AND statement
+            </summary>
+            <param name="set">Dictionary of key (column name) / value pairs to use for the conditions</param>
+            <param name="op">Conditional operation to perform</param>
+            <param name="bind">Bind the value or not. Binding will cause the parameter to effectively be escaped, which you might not want for some cases, such as passing in an SQL function as the condition</param>
+            <returns>Query instance for chaining</returns>
+        </member>
+        <member name="M:DataTables.Query.OrWhere(System.Action{DataTables.Query})">
+            <summary>
+            Where query - Bound to the previous condition (if there is one) as an OR statement
+            </summary>
+            <param name="fn">Function that can be used to construct a contained set of options. The Query instance is passed in so Where, AndWhere and OrWhere can all be used</param>
+            <returns>Query instance for chaining</returns>
+        </member>
+        <member name="M:DataTables.Query.OrWhere(System.String,System.Object,System.String,System.Boolean)">
+            <summary>
+            Where query - Bound to the previous condition (if there is one) as an OR statement
+            </summary>
+            <param name="key">Column name to perform the condition on</param>
+            <param name="value">Value to check. This can be `null` for an `IS NULL` or `IS NOT NULL` condition, depending on the value of `op` which should be `=` or `!=`</param>
+            <param name="op">Conditional operation to perform</param>
+            <param name="bind">Bind the value or not. Binding will cause the parameter to effectively be escaped, which you might not want for some cases, such as passing in an SQL function as the condition</param>
+            <returns>Query instance for chaining</returns>
+        </member>
+        <member name="M:DataTables.Query.OrWhere(System.String,System.Collections.Generic.IEnumerable{System.Object},System.String,System.Boolean)">
+            <summary>
+            Where query - Bound to the previous condition (if there is one) as an OR statement
+            </summary>
+            <param name="key">Column name to perform the condition on</param>
+            <param name="values">Values to check. This can be `null` for an `IS NULL` or `IS NOT NULL` condition, depending on the value of `op` which should be `=` or `!=`</param>
+            <param name="op">Conditional operation to perform</param>
+            <param name="bind">Bind the value or not. Binding will cause the parameter to effectively be escaped, which you might not want for some cases, such as passing in an SQL function as the condition</param>
+            <returns>Query instance for chaining</returns>
+        </member>
+        <member name="M:DataTables.Query.OrWhere(System.Collections.Generic.Dictionary{System.String,System.Object},System.String,System.Boolean)">
+            <summary>
+            Where query - Bound to the previous condition (if there is one) as an OR statement
+            </summary>
+            <param name="set">Dictionary of key (column name) / value pairs to use for the conditions</param>
+            <param name="op">Conditional operation to perform</param>
+            <param name="bind">Bind the value or not. Binding will cause the parameter to effectively be escaped, which you might not want for some cases, such as passing in an SQL function as the condition</param>
+            <returns>Query instance for chaining</returns>
+        </member>
+        <member name="M:DataTables.Query.WhereGroup(System.Boolean,System.String)">
+            <summary>
+            Provide grouping for WHERE conditions. Calling this method with `true` as the first
+            parameter will open a bracket, while `false` will close it.
+            </summary>
+            <param name="inOut">`true` to open brackets, `false` to close</param>
+            <param name="op">Conditional operator to use to join to the preceding condition.</param>
+            <returns>Self for chaining</returns>
+        </member>
+        <member name="M:DataTables.Query._BuildField(System.Boolean)">
+            <summary>
+            Create a comma separated field list
+            </summary>
+            <param name="addAlias">Indicate if the fields should have an `as` alias added automatically (true) or not</param>
+            <returns>SQL list of fields</returns>
+        </member>
+        <member name="M:DataTables.Query._BuildJoin">
+            <summary>
+            Create a JOIN satement list
+            </summary>
+            <returns>SQL list of joins</returns>
+        </member>
+        <member name="M:DataTables.Query._BuildLimit">
+            <summary>
+            Create the LIMIT / OFFSET string.
+            
+            Default is to create a MySQL and Postgres style statement. Drivers can override
+            </summary>
+            <returns>SQL limit and offset statement</returns>
+        </member>
+        <member name="M:DataTables.Query._BuildOrder">
+            <summary>
+            Create the ORDER BY statement
+            </summary>
+            <returns>SQL order statement</returns>
+        </member>
+        <member name="M:DataTables.Query._BuildSet">
+            <summary>
+            Create a set list
+            </summary>
+            <returns>SQL for update</returns>
+        </member>
+        <member name="M:DataTables.Query._BuildTable">
+            <summary>
+            Create the table list
+            </summary>
+            <returns>SQL table statement</returns>
+        </member>
+        <member name="M:DataTables.Query._BuildValue">
+            <summary>
+            Create a bind field balue list
+            </summary>
+            <returns>SQL value list for inserts</returns>
+        </member>
+        <member name="M:DataTables.Query._BuildWhere">
+            <summary>
+            Create the WHERE statement
+            </summary>
+            <returns>SQL WHERE statement</returns>
+        </member>
+        <member name="M:DataTables.Query._Delete">
+            <summary>
+            Execute a DELETE statement from the current configuration
+            </summary>
+            <returns>Query result</returns>
+        </member>
+        <member name="M:DataTables.Query._Exec">
+            <summary>
+            Execute the query. Provided by the driver
+            </summary>
+            <returns>Query result</returns>
+        </member>
+        <member name="M:DataTables.Query._Insert">
+            <summary>
+            Execute an INSERT statement from the current configuration
+            </summary>
+            <returns>Query result</returns>
+        </member>
+        <member name="M:DataTables.Query._Prepare(System.String)">
+            <summary>
+            Prepare the SQL query by populating the bound variables. Provided by the driver
+            </summary>
+            <param name="sql">SQL to run</param>
+        </member>
+        <member name="M:DataTables.Query._ProtectIdentifiers(System.String)">
+            <summary>
+            Protect field names
+            </summary>
+            <param name="identifier">Field name</param>
+            <returns>Quoted field name</returns>
+        </member>
+        <member name="M:DataTables.Query._Raw(System.String)">
+            <summary>
+            Execute a given statement
+            </summary>
+            <param name="sql">SQL to execute</param>
+            <returns>Query result</returns>
+        </member>
+        <member name="M:DataTables.Query._SafeBind(System.String)">
+            <summary>
+            The characters that can be used to bind a value are quite limited. We need
+            to abstract this out to allow slightly more complex expressions including
+            dots for easy aliasing
+            </summary>
+            <param name="name">Field name</param>
+            <returns>Modify field name</returns>
+        </member>
+        <member name="M:DataTables.Query._Select">
+            <summary>
+            Execute an SELECT statement from the current configuration
+            </summary>
+            <returns>Query result</returns>
+        </member>
+        <member name="M:DataTables.Query._Update">
+            <summary>
+            Execute a UPDATE statement from the current configuration
+            </summary>
+            <returns>Query result</returns>
+        </member>
+        <member name="M:DataTables.Query._Where(System.String,System.Object,System.String,System.String,System.Boolean)">
+            <summary>
+            Add an individual where condition to the query
+            </summary>
+            <param name="key">Wkere key</param>
+            <param name="value">Value to use</param>
+            <param name="type">Combination operator</param>
+            <param name="op">Conditional operator</param>
+            <param name="bind">Bind flag</param>
+        </member>
+        <member name="M:DataTables.Query._WhereGroup(System.Boolean,System.String)">
+            <summary>
+            Add parentheses to a where condition
+            </summary>
+            <param name="inOut">Opening (`true`) or closing bracket</param>
+            <param name="op">Operator</param>
+        </member>
+        <member name="T:DataTables.Result">
+            <summary>
+            Result object given by a <code>Query</code> performed on a database.
+            
+            The typical pattern for using this class is to receive an instance of it as a
+            result of using the <code>Database</code> and <code>Query</code> class methods
+            that return a result. This class should not be initialised independently.
+            
+            Note that this is a stub class that a driver will extend and complete as
+            required for individual database types. Individual drivers could add
+            additional methods, but this is discouraged to ensure that the API is the
+            same for all database types.
+            </summary>
+        </member>
+        <member name="M:DataTables.Result.#ctor(DataTables.Database,System.Data.DataTable,DataTables.Query)">
+            <summary>
+            Create a new result instance. Typically this should only be done by
+            a <code>Query</code> method.
+            </summary>
+            <param name="db">Database connection</param>
+            <param name="dt">Query results</param>
+        </member>
+        <member name="M:DataTables.Result.Count">
+            <summary>
+            Count the number of rows in the result set.
+            </summary>
+            <returns>Number of rows in the result set</returns>
+        </member>
+        <member name="M:DataTables.Result.Fetch">
+            <summary>
+            Get the next row in a result set
+            </summary>
+            <returns>Next row</returns>
+        </member>
+        <member name="M:DataTables.Result.FetchAll">
+            <summary>
+            Get all rows in the result set
+            </summary>
+            <returns>The data for all rows</returns>
+        </member>
+        <member name="M:DataTables.Result.InsertId">
+            <summary>
+            After an INSERT query, get the ID that was inserted.
+            </summary>
+            <returns>Insert id</returns>
+        </member>
+        <member name="M:DataTables.Result.DataTable">
+            <summary>
+            Get a DataTable of the results
+            </summary>
+            <returns>DataTable filled form the query result</returns>
+        </member>
+        <member name="T:DataTables.Validation">
+             <summary>
+             Validation methods for DataTables Editor fields. All of the methods
+             defined in this class return a delegate that can be used by
+             <code>Field</code> instance's <code>Validator</code> method.
+            
+             Each method may define its own parameters that configure how the
+             formatter operates. For example the `minLen` validator takes information
+             on the minimum length of value to accept.
+            
+             Additionally each method can optionally take a <code>ValidationOpts</code>
+             instance that controls common validation options and error messages.
+            
+             The validation delegates return `null` for validate data and a string for
+             invalid data, with the string being the error message.
+             </summary>
+        </member>
+        <member name="M:DataTables.Validation.None(DataTables.ValidationOpts)">
+            <summary>
+            No validation - all inputs are valid.
+            </summary>
+            <param name="cfg">Validation options</param>
+            <returns>Validation delegate</returns>
+        </member>
+        <member name="M:DataTables.Validation.Basic(DataTables.ValidationOpts)">
+            <summary>
+            Basic validation - this is used to perform the validation provided by the
+            validation options only. If the validation options pass (e.g. `required`,
+            `empty` and `optional`) then the validation will pass regardless of the
+            actual value.
+            </summary>
+            <param name="cfg">Validation options</param>
+            <returns>Validation delegate</returns>
+        </member>
+        <member name="M:DataTables.Validation.Required(DataTables.ValidationOpts)">
+            <summary>
+            Required field - there must be a value and it must be a non-empty value
+            </summary>
+            <param name="cfg">Validation options</param>
+            <returns>Validation delegate</returns>
+        </member>
+        <member name="M:DataTables.Validation.NotEmpty(DataTables.ValidationOpts)">
+            <summary>
+            Optional field, but if given there must be a non-empty value
+            </summary>
+            <param name="cfg">Validation options</param>
+            <returns>Validation delegate</returns>
+        </member>
+        <member name="M:DataTables.Validation.Boolean(DataTables.ValidationOpts)">
+            <summary>
+            Validate an input as a boolean value.
+            </summary>
+            <param name="cfg">Validation options</param>
+            <returns>Validation delegate</returns>
+        </member>
+        <member name="M:DataTables.Validation.Numeric(DataTables.ValidationOpts)">
+            <summary>
+            Check that any input is numeric.
+            </summary>
+            <param name="cfg">Validation options</param>
+            <returns>Validation delegate</returns>
+        </member>
+        <member name="M:DataTables.Validation.MinNum(System.Decimal,DataTables.ValidationOpts)">
+            <summary>
+            Check for a numeric input and that it is greater than a given value.
+            </summary>
+            <param name="min">Minimum value the numeric value can take</param>
+            <param name="cfg">Validation options</param>
+            <returns>Validation delegate</returns>
+        </member>
+        <member name="M:DataTables.Validation.MaxNum(System.Decimal,DataTables.ValidationOpts)">
+            <summary>
+            Check for a numeric input and that it is less than a given value.
+            </summary>
+            <param name="max">Maximum value the numeric value can take</param>
+            <param name="cfg">Validation options</param>
+            <returns>Validation delegate</returns>
+        </member>
+        <member name="M:DataTables.Validation.MinMaxNum(System.Decimal,System.Decimal,DataTables.ValidationOpts)">
+            <summary>
+            Check for a numeric input and that it is both less than and greater than given values
+            </summary>
+            <param name="min">Minimum value the numeric value can take</param>
+            <param name="max">Maximum value the numeric value can take</param>
+            <param name="cfg">Validation options</param>
+            <returns>Validation delegate</returns>
+        </member>
+        <member name="M:DataTables.Validation.Email(DataTables.ValidationOpts)">
+            <summary>
+            Validate an input as an e-mail address.
+            </summary>
+            <param name="cfg">Validation options</param>
+            <returns>Validation delegate</returns>
+        </member>
+        <member name="M:DataTables.Validation.MinLen(System.Int32,DataTables.ValidationOpts)">
+            <summary>
+            Validate a string has a minimum length.
+            </summary>
+            <param name="min">Minimum length</param>
+            <param name="cfg">Validation options</param>
+            <returns>Validation delegate</returns>
+        </member>
+        <member name="M:DataTables.Validation.MaxLen(System.Int32,DataTables.ValidationOpts)">
+            <summary>
+            Validate a string does not exceed a maximum length.
+            </summary>
+            <param name="max">Maximum length</param>
+            <param name="cfg">Validation options</param>
+            <returns>Validation delegate</returns>
+        </member>
+        <member name="M:DataTables.Validation.MinMaxLen(System.Int32,System.Int32,DataTables.ValidationOpts)">
+            <summary>
+            Require a string with a certain minimum or maximum number of characters.
+            </summary>
+            <param name="min">Minimum length</param>
+            <param name="max">Maximum length</param>
+            <param name="cfg">Validation options</param>
+            <returns>Validation delegate</returns>
+        </member>
+        <member name="M:DataTables.Validation.Ip(DataTables.ValidationOpts)">
+            <summary>
+            Validate as an IP address.
+            </summary>
+            <param name="cfg">Validation options</param>
+            <returns>Validation delegate</returns>
+        </member>
+        <member name="M:DataTables.Validation.Url(DataTables.ValidationOpts)">
+            <summary>
+            Validate as an URL address.
+            </summary>
+            <param name="cfg">Validation options</param>
+            <returns>Validation delegate</returns>
+        </member>
+        <member name="M:DataTables.Validation.Xss(DataTables.ValidationOpts)">
+            <summary>
+            Check if string could contain an XSS attack string
+            </summary>
+            <param name="cfg">Validation options</param>
+            <returns>Validation delegate</returns>
+        </member>
+        <member name="M:DataTables.Validation.NoTags(DataTables.ValidationOpts)">
+            <summary>
+            Ensure that the submitted string does not contain HTML tags
+            </summary>
+            <param name="cfg">Validation options</param>
+            <returns>Validation delegate</returns>
+        </member>
+        <member name="M:DataTables.Validation.DateFormat(System.String,DataTables.ValidationOpts)">
+            <summary>
+            Check that a valid date input is given
+            </summary>
+            <param name="format">Format that the date / time should be given in</param>
+            <param name="cfg">Validation options</param>
+            <returns>Validation delegate</returns>
+        </member>
+        <member name="M:DataTables.Validation.Unique(DataTables.ValidationOpts,System.String,System.String,DataTables.Database)">
+            <summary>
+            Check that the given value is unique in the database
+            </summary>
+            <param name="cfg">Validation options</param>
+            <param name="column">Column name to use to check as a unique value. If not given the host field's database column name is used</param>
+            <param name="table">Table to check that this value is uniquely valid on. If not given the host Editor's table name is used</param>
+            <param name="db">Database connection. If not given the host Editor's database connection is used</param>
+            <returns>Validation delegate</returns>
+        </member>
+        <member name="M:DataTables.Validation._Common(System.Object,DataTables.ValidationOpts)">
+            <summary>
+            Perform common validation using the configuration parameters
+            </summary>
+            <param name="val">Value</param>
+            <param name="opts">Validation options</param>
+            <returns>null for invalid, true if immediately valid and false if invalid</returns>
+        </member>
+        <member name="T:DataTables.ValidationOpts">
+            <summary>
+            Common validation options that can be specified for all validation methods.
+            </summary>
+        </member>
+        <member name="F:DataTables.ValidationOpts.Message">
+            <summary>
+            Error message should the validation fail
+            </summary>
+        </member>
+        <member name="F:DataTables.ValidationOpts.Empty">
+            <summary>
+            Allow a field to be empty, i.e. a zero length string -
+            `''` (`true` - default) or require it to be non-zero length (`false`).
+            </summary>
+        </member>
+        <member name="F:DataTables.ValidationOpts.Optional">
+            <summary>
+            Require the field to be submitted (`false`) or not
+            (`true` - default). When set to `true` the field does not need to be
+            included in the list of parameters sent by the client - if set to `false`
+            then it must be included. This option can be particularly useful in Editor
+            as Editor will not set a value for fields which have not been submitted -
+            giving the ability to submit just a partial list of options.
+            </summary>
+        </member>
+        <member name="M:DataTables.ValidationOpts.Select(DataTables.ValidationOpts)">
+            <summary>
+            Check to see if validation options have been given. If not, create
+            and instance with the default options and return that. This is
+            useful for checking to see if a user has passed in validation options
+            or not, since a new instance can't be a default parameter value.
+            </summary>
+            <param name="user">User set validation options or null</param>
+            <returns>Validation options to use for the validation</returns>
+        </member>
+    </members>
+</doc>

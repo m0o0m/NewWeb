@@ -1,0 +1,2323 @@
+@charset "utf-8";
+$maincolor:#bf1210;
+$aboutRedColor:#D03232;//关于我们页面次红色
+$placeholderColor:#A3A3A3;//占位符颜色
+/*
+YUI 3.18.1 (build f7e7bcb)
+Copyright 2014 Yahoo! Inc. All rights reserved.
+Licensed under the BSD License.
+http://yuilibrary.com/license/
+*/
+
+/*
+    TODO will need to remove settings on HTML since we can't namespace it.
+    TODO with the prefix, should I group by selector or property for weight savings?
+*/
+html{
+    color:#000;
+    background:#FFF;
+}
+/*
+    TODO remove settings on BODY since we can't namespace it.
+*/
+/*
+    TODO test putting a class on HEAD.
+        - Fails on FF.
+*/
+body,
+div,
+dl,
+dt,
+dd,
+ul,
+ol,
+li,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+pre,
+code,
+form,
+fieldset,
+legend,
+input,
+textarea,
+p,
+blockquote,
+th,
+td {
+    margin:0;
+    padding:0;
+}
+table {
+    border-collapse:collapse;
+    border-spacing:0;
+}
+fieldset,
+img {
+    border:0;
+}
+img{display:block;}
+/*
+    TODO think about hanlding inheritence differently, maybe letting IE6 fail a bit...
+*/
+address,
+caption,
+cite,
+code,
+dfn,
+em,
+strong,
+th,
+var {
+    font-style:normal;
+    font-weight:normal;
+}
+
+ol,
+ul {
+    list-style:none;
+}
+
+caption,
+th {
+    text-align:left;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-size:100%;
+    font-weight:normal;
+}
+q:before,
+q:after {
+    content:'';
+}
+abbr,
+acronym {
+    border:0;
+    font-variant:normal;
+}
+/* to preserve line-height and selector appearance */
+sup {
+    vertical-align:text-top;
+}
+sub {
+    vertical-align:text-bottom;
+}
+input,
+textarea,
+select,
+button {
+    font-family:inherit;
+    font-size:inherit;
+    font-weight:inherit;
+    *font-size:100%; /*to enable resizing for IE*/
+}
+/*because legend doesn't inherit in IE */
+legend {
+    color:#000;
+}
+
+
+a{
+    color: inherit;
+    *color: #666;
+    text-decoration: none;
+}
+input[type="text"],
+input[type="password"]{
+    border: 1px solid #A1A1A1;
+    box-shadow: none;
+    outline: none;
+    font:inherit;// IE8以及IE8以上均可
+    *font:14px normal;//for IE 7
+    color:#333;
+    border-radius: 1px;
+}
+input[type="text"]:focus,
+input[type="password"]:focus,
+textarea:focus{
+    border: 1px solid #DE4848;
+    outline: none;
+    box-shadow: none;
+}
+// 为了保证最大兼容的css
+// WebKit browsers
+input::-webkit-input-placeholder,textarea::-webkit-input-placeholder { color:$placeholderColor;}
+// Mozilla Firefox 4 to 18
+input:-moz-placeholder,textarea:-moz-placeholder { color:$placeholderColor;}
+// Mozilla Firefox 19+
+input::-moz-placeholder,textarea::-moz-placeholder { color:$placeholderColor;}
+// Internet Explorer 10+
+input:-ms-input-placeholder,textarea:-ms-input-placeholder { color:$placeholderColor;}
+input.placeholder,textarea.placeholder{color:$placeholderColor;}
+
+.left,.fl{float: left;}
+.right,.fr{float: right;}
+button[type="submit"]{
+    cursor: pointer;
+}
+
+body{
+    font-size: 14px;
+    font-family: 'Helvetica Neue', 'Hiragino Sans GB', 'Microsoft YaHei', 微软雅黑, 黑体, Arial, sans-serif;
+    color: #666;
+    min-width: 1050px;
+    line-height: normal;
+    background-color: #FFF;
+}
+
+.global-header{
+    overflow: hidden;
+    width: 100%;
+    background-color: #000;
+    -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.75);
+    -moz-box-shadow: 0 1px 1px rgba(0,0,0,.75);
+    box-shadow: 0 1px 1px rgba(0,0,0,.75);
+}
+.global-header .wrap{
+    width: 1050px;
+    margin:0 auto;
+    overflow: hidden;
+}
+.global-header .top{
+    width: 100%;
+    height: 26px;
+    line-height: 26px;
+    font-size: 12px;
+    color: #999;
+    border-bottom: 2px solid #0B0B0B;
+}
+.global-header .top ul{
+    float: right;
+    margin-left: 10px;
+}
+.global-header .top ul li{
+    float: left;
+    padding-left: 11px;
+    padding-right: 10px;
+    background: url(../Image/top_split.png) no-repeat 0 0;
+}
+.global-header .top ul li:first-child{
+    background-image: none;
+}
+.global-header .top ul li>span.split{
+    margin-left: 9px;
+    margin-right: 9px;
+    line-height: 26px;
+}
+.global-header .top ul li a{
+
+}
+.global-header .top ul li a:hover{
+    color: #ccc;
+}
+.global-header .top p.intro{
+    float: left;
+}
+.global-header .top p.welcome{
+    float: right;
+}
+.global-header .logo{
+    display: block;
+    float: left;
+    margin-top: 8px;
+    // width: 180px;
+    // height: 80px;
+}
+.main-nav{
+    float: right;
+    height: 47px;
+    padding-left: 10px;
+    padding-top: 23px;
+}
+.main-nav li{float:left;}
+.main-nav li a{
+    display: block;
+    width: 100px;
+    height: 40px;
+    color: #bbb;
+    font-size: 18px;
+    line-height: 40px;
+    text-align: center;
+    padding-top: 7px;
+    margin-left: 5px;
+}
+.main-nav li a:hover,.main-nav li a.join{
+    color: $maincolor;
+}
+.main-nav li.active a{
+    color:#FFF;
+    background: url(../Image/main_nav_a_bg.png) repeat-x 0 0;
+}
+
+
+// 登录banner
+.login-banner{
+    position: relative;
+    width: 100%;
+    min-width: 1050px;
+    height: 460px;
+    background: url(../Image/banner/banner_home.jpg) no-repeat center center;
+}
+.login-banner .wrap{
+    position: relative;
+    height: 460px;
+}
+.login-banner .login-panel,
+.login-banner .user-panel{
+    position: absolute;
+    top: 45px;
+    right: 0;
+}
+
+
+// 登录panel
+.login-panel,
+.user-panel{
+    width: 318px;
+    height: 339px;
+    padding-top: 12px;
+    padding-left: 15px;
+    background: url(../Image/user_panel_bg.jpg) no-repeat 0 0;
+    box-shadow:0px 0px 7px 2px rgba(0,0,0,0.6);
+    border-radius: 2px;
+}
+.login-panel .error-info{
+    color: #E43D3B;
+    height: 16px;
+    line-height: 16px;
+    margin-top: 7px;
+    margin-bottom: 4px;
+}
+.input-prepend{
+    display: block;
+    position: relative;
+    border-radius: 2px;
+    border: 1px solid #ccc;
+    background-color: #FFF;
+    width: 301px;
+    height: 44px;
+    margin-top: 35px;
+}
+// .input-prepend.active{
+//     border-color: #F76464;
+//     box-shadow:0px 0px 6px 0px rgba(0,0,0,0.3) inset;
+// }
+.input-prepend .icon{
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 32px;
+    height: 44px;
+    background-repeat:no-repeat;
+}
+.input-prepend .person-icon{background-repeat: no-repeat;}
+.input-prepend .password-icon {background-repeat: no-repeat;}
+.input-prepend input{
+    width: 245px;
+    font-size: 16px;
+    padding: 11px 15px 11px 38px;
+    border: none !important;
+    outline: none;
+    background-color: transparent;
+}
+
+
+.login-panel .addition{
+    font-size: 12px;
+    margin-bottom: 30px;
+}
+.login-panel .addition label{
+    color: #999;
+}
+.login-panel .addition label input{
+    position: relative;
+    bottom: -3px;
+    margin-right: 5px;
+}
+.login-panel .addition .reg,
+.login-panel .addition .forget{
+    float: right;
+    margin-right: 15px;
+}
+.login-panel .addition .reg{
+    color: #FFF;
+}
+.login-panel .addition .forget{
+    color: #ffa800;
+}
+.login-panel .addition .reg:hover,
+.login-panel .addition .forget:hover{
+    text-decoration: underline;
+}
+.btn-login,
+.login-game a{
+    display: block;
+    width: 303px;
+    height: 64px;
+    text-indent: -9999px;
+    border-radius: 4px;
+    font-size: 24px;
+    color: #FFF;
+    border: 1px solid #F43635;
+    cursor: pointer;
+	background-color:$maincolor;
+	background-repeat: no-repeat;
+}
+.btn-login:active,
+.btn-login:focus{
+    outline: none;
+}
+
+// 用户信息pannel
+.user-panel{
+    padding-top: 39px;
+    height: 312px;
+}
+.user-wrap{
+    overflow: hidden;
+    padding-bottom: 40px;
+}
+.user-pic{
+    border: 1px solid #5B5A5A;
+    width: 120px;
+    height: 120px;
+    margin-left: 15px;
+}
+.user-pic img{
+    width: 100%;
+    height: 100%;
+}
+.user-info{
+    width: 160px;
+    padding-left: 15px;
+}
+.user-info strong.name{
+    display: block;
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 7px;
+}
+.user-info p{
+    margin-bottom: 4px;
+}
+.login-game{
+    clear: both;
+    padding-bottom: 19px;
+}
+.user-panel .link{
+    float: right;
+    width: 303px;
+    margin-right: 15px;
+    border-top: 1px solid #262626;
+    padding-top: 5px;
+}
+.user-panel .link li{
+    display: inline-block;
+    height: 26px;
+    line-height: 26px;
+    padding-left: 8px;
+    padding-right: 9px;
+    float: right;
+    background: url(../Image/top_split.png) no-repeat top right;
+}
+.user-panel .link li:first-child{
+    background-image: none;
+}
+.user-panel .link li a{
+    color: #FFF;
+}
+.user-panel .link li a:hover{
+    text-decoration: underline;
+}
+.user-panel .link li a.pay{
+    color: #FF8D13;
+}
+
+
+
+
+
+
+
+
+// 推荐游戏
+.hotlists-game{
+    width: 1050px;
+    padding-top: 25px;
+    padding-bottom: 5px;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+
+.line-title{
+    position: relative;
+    height: 26px;
+    padding-bottom: 6px;
+    .crumb{
+        float: right;
+        height: 26px;
+        line-height: 26px;
+        li{
+            position: relative;
+            float: left;
+            display: inline-block;
+            padding-right: 15px;
+            height: 26px;
+            a{
+                display: inline-block;
+                line-height: 26px;
+
+            }
+            a:hover{
+                color: $maincolor;
+            }
+        }
+        li.home{
+            a{
+                display: block;
+                width: 26px;
+                height: 26px;
+                background: url(../Image/sprite.png) no-repeat -200px 0;
+            }
+        }
+        li:after{
+            position: absolute;
+            right: 8px;
+            top: 9px;
+            content: "";
+            display: block;
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 4px 0 4px 4px;
+            border-color: transparent transparent transparent #c6c7c9;
+        }
+        li.last:after{
+            display: none;
+        }
+    }
+}
+.line-title .line{
+    position: absolute;
+    z-index: 2;
+    bottom: 0;
+    left: 0;
+    display: block;
+    width: 100%;
+    height: 1px;
+    background-color: #8C8C8C;
+}
+.line-title{
+
+    h2{
+        display: inline-block;
+        position: relative;
+        z-index: 3;
+        width: 148px;
+        text-align: left;
+        padding-left: 32px; 
+        background-color: #FFF;
+        font-size: 20px;
+        font-weight: bold;
+        line-height: 26px;
+        color: #565656;
+    }
+    h2:after{
+        position: absolute;
+        top: 0;
+        left: 0;
+        content: "";
+        display: block;
+        width: 30px;
+        height: 26px;
+        background: url(../Image/sprite.png?v=1) no-repeat 0 -150px;
+    }
+    h2.game:after{ background-position: 0 -150px; }
+    h2.pay:after{ background-position: -50px -150px; }
+    h2.person:after{ background-position: -100px -150px; }
+    h2.kf:after{ background-position: -150px -150px; }
+    h2.hz:after{ background-position: -200px -150px; }
+    
+}
+.line-title .title h2.icon-fire{
+    color: #000;
+    // font-weight: bold;
+    padding-left: 20px;
+	background-repeat: no-repeat;
+}
+
+.hotlists-game li{
+    float: left;
+    margin-left: 22px;
+    margin-right: 22px;
+}
+
+
+// 游戏模块
+.game-panel{
+    display: block;
+    width: 218px;
+    height: 192px;
+    cursor: pointer;
+    
+}
+.game-panel img.pic{
+    width: 100%;
+    height: 130px;
+    transition:all .25s ease-out;
+}
+.game-panel .info{
+    text-align: center;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    transition:all .25s ease-out;
+}
+
+.game-panel .info>h3{
+    color: $maincolor;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 5px;
+}
+
+.game-panel .info>p.en{
+    position: relative;
+    display: inline-block;
+    *zoom:1;
+    *display:inline;
+    font-size: 12px;
+    height: 18px;
+    line-height: 18px;
+    color: #888;
+    padding-right: 15px;
+    margin: 0 auto;
+}
+
+.game-panel .info>p.en i{
+    position: absolute;
+    top: 4px;
+    right: 0;
+    display: block;
+    width: 0;
+    height: 0;
+    border-top: 4px solid transparent;
+    border-bottom: 4px solid transparent;
+    border-left: 4px solid $maincolor;
+}
+
+// 模块触及效果
+//普通游戏模块触及效果
+.game-panel-n:hover .info{
+    background-color: $maincolor;
+}
+.game-panel-n:hover img.pic{
+    opacity: 0.82;
+}
+.game-panel-n:hover .info>h3{
+    color: #FFF;
+}
+.game-panel-n:hover .info>p.en{
+    color: #FFF;
+}
+.game-panel-n:hover .info>p.en i{
+    border-left: 4px solid #FFF;
+}
+
+
+.global-footer-wrap{
+    clear: both;
+    overflow: hidden;
+    width: 100%;
+    background-color: #0d0606;
+}
+.global-footer{
+    clear: both;
+    overflow: hidden;
+    width: 1050px;
+    color: #e0e0e0;
+    font-size: 14px;
+    padding-top: 18px;
+    padding-bottom: 18px;
+    margin: 0 auto;
+    border-top: 1px solid #8C8C8C;
+}
+.footer-list{
+    float: left;
+}
+.footer-list li{
+    float: left;
+}
+.footer-list .li:first-child{
+    background-image: none;
+}
+.footer-list li span.split{
+    position: relative;
+    top: -1px;
+    margin-left: 8px;
+    margin-right: 8px;
+}
+.copyright{
+    float: right;
+}
+
+
+.wrap{
+    overflow: hidden;
+    width: 1050px;
+    margin: 0 auto;
+}
+
+//注册登录页面
+.login-tabs{
+    position: relative;
+    width: 100%;
+    height: 38px;
+    border-bottom: 1px solid #8C8C8C;
+    
+}
+.login-tabs ul{
+    position: absolute;
+    left: 0;
+    bottom: -1px;
+    overflow: hidden;
+}
+.login-tabs ul li{float:left;}
+.login-tabs ul li a{
+    display: inline-block;
+    font-size: 20px;
+    height: 36px;
+    line-height: 36px;
+    margin-right: 38px;
+    border-bottom:3px solid transparent;
+}
+.login-tabs ul li a:hover,
+.login-tabs ul li.active a{
+    border-bottom-color:$maincolor;
+}
+
+
+.control-group{
+    overflow: hidden;
+    display: block;
+    clear: both;
+    min-height: 51px;
+    padding-bottom: 13px;
+}
+.control-group .control-label{
+    float: left;
+    display: block;
+    width: 80px;
+    line-height: 34px;
+    color: #333;
+    text-align: right;
+    margin-right: 5px;
+}
+.control-group .controls{
+    float: left;
+}
+.control-group .controls input{
+    font-size: 14px;
+    padding: 6px 8px;
+}
+.control-group .controls input[type="text"],
+.control-group .controls input[type="password"]{
+    width: 270px;
+}
+.control-group .controls input.ipt-verify{
+    float: left;
+    width: 90px !important;
+    margin-right: 10px;
+}
+.control-group .controls img.verify-img{
+    margin-left: 10px;
+}
+.server-error,
+.control-group .controls .help,
+.control-group .controls .error,
+.control-group .controls .server-error{
+    color: $maincolor;
+    font-size: 12px;
+    margin-top: 2px;
+
+}
+.control-group .controls .help{
+    color: #A1A1A1;
+}
+.control-group.addition{
+    padding-left: 345px;
+    min-height: 0;
+}
+.control-group.addition label input[type="checkbox"]{
+    position: relative;
+    bottom: -2px;
+    margin-right: 4px;
+}
+.control-group.addition label a{
+    color: $maincolor;
+}
+.control-group.addition label a:hover{
+    text-decoration: underline;
+}
+.control-group button[type="submit"],
+.control-group .btn-sbt{
+    width: 195px;
+    height: 38px;
+    font-size: 18px;
+    color: #FFF;
+    background-color: $maincolor;
+    border: 1px solid $maincolor;
+    cursor: pointer;
+}
+
+
+// 表单区域
+.login-area,
+.reg-area{
+    padding-top: 15px;
+    padding-bottom: 35px;
+}
+.login-area legend,
+.reg-area legend{
+    display: block;
+    width: 100%;
+    height: 36px;
+    line-height: 36px;
+    background-color: $maincolor;
+    text-align: center;
+    color: #FFF;
+    font-size: 20px;
+    margin-bottom: 43px;
+}
+.login-area .control-label,
+.reg-area .control-label{
+    margin-left: 260px;
+}
+.login-area button[type="submit"],
+.reg-area button[type="submit"],
+.login-area .btn-sbt,
+.reg-area .btn-sbt{
+    margin-top: 10px;
+    margin-left: 380px;
+}
+
+// 通用
+.main {
+width: 1050px;
+padding-top: 25px;
+padding-bottom: 5px;
+margin: 0 auto;
+overflow: hidden;
+}
+//banner
+.main-banner{
+    width: 100%;
+    height: 350px;
+    background-repeat: no-repeat;
+    background-position: 0 0;
+}
+.service-banner{ background-image: url(../Image/banner/banner_kf.jpg); }
+.aboutus-banner{ background-image: url(../Image/banner/banner_aboutus.jpg); }
+.gamecenter-banner{ background-image: url(../Image/banner/banner_gamecenter.jpg); }
+.pay-banner{ background-image: url(../Image/banner/banner_pay.jpg); }
+
+// 客服中心
+.contact-list li{
+    float: left;
+}
+.contact-list li:first-child{
+    padding-left: 27px;
+}
+.contact-info{
+    position: relative;
+    display: block;
+    width: 318px;
+    height: 55px;
+    color: #6e6e6e;
+    padding-top: 67px;
+    background-color: #F1F1F1;
+    margin-right: 18px;
+    text-align: center;
+    border:1px solid #F1F1F1;
+}
+.contact-info:hover{
+    background-color: #FAFAFA;
+}
+.contact-info .icon{
+    position: absolute;
+    top: 18px;
+    left: 135px;
+    display: block;
+    width: 50px;
+    height: 50px;
+    background-image: url(../Image/contact_icon.png);
+    background-repeat: no-repeat;
+    background-position: 0 0;
+}
+.contact-info .icon.icon-phone{
+    background-position: 0 0;
+}
+.contact-info .icon.icon-qq{
+    background-position: -50px 0;
+}
+.contact-info .icon.icon-mail{
+    background-position: -100px 0;
+}
+.contact-info strong{
+    font-size: 22px;
+    line-height: 26px;
+    font-weight: bold;
+}
+.contact-info strong.qq{
+    display: inline-block;
+    padding-right: 86px;
+    background: url(../Image/qqonline.png) no-repeat top right;
+}
+
+.contact-list{
+    padding-top: 20px;
+    padding-bottom: 45px;
+    overflow: hidden;
+}
+
+
+// 关于我们普通标题样式
+.title-n{
+    position: relative;
+    width: 100%;
+    border-bottom: 2px solid #E4E4E4;
+}
+.title-n h2{
+    position: relative;
+    bottom: -2px;
+    color: #B1B1B1;
+    font-size: 12px;
+    line-height: 38px;
+}
+.title-n h2 strong{
+    font-size: 16px;
+    display: inline-block;
+    color: $aboutRedColor;
+    margin-right: 9px;
+    border-bottom: 2px solid $aboutRedColor;
+}
+
+.article-side{
+    float: left;
+    width: 263px;
+}
+.article-area{
+    float: left;
+    width: 779px;
+    margin-left: 65px;
+    padding-bottom: 60px;
+
+
+}
+.small-article{
+    padding-top: 20px;
+    border-bottom: 1px solid #bebebe;
+    padding-bottom: 25px;
+    .content{
+        padding-left: 15px;
+        p{
+            // text-indent: 2em;
+            color: #5c5c5c;
+            margin-bottom: 15px;
+            strong{
+                font-weight: bold;
+            }
+        }
+    }
+}
+.small-article:last-child{
+    border-bottom: none;
+}
+.article-title{
+    color: #bebebe;
+    font-size: 16px;
+    margin-bottom: 10px;
+    strong{
+        font-size: 22px;
+        color: #565656;
+        padding-left: 15px;
+        padding-right: 5px;
+    }
+}
+.article-area .article{
+    font-size: 14px;
+    line-height: 20px;
+    padding: 20px 20px 0 20px;
+}
+.contact-block{
+    border-top: 2px solid #E4E4E4;
+    padding: 30px 0 25px 50px;
+	background-color: #F8F8F8;
+	background-repeat: no-repeat;
+}
+.contact-block .tel{
+    display: block;
+    color: $aboutRedColor;
+    font-size: 16px;
+    padding-left: 35px;
+    padding-bottom: 25px;
+}
+.article-side nav{
+    padding-top: 20px;
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+    background-color: #F8F8F8;
+
+}
+.article-side nav ul li a{
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 30px;
+    line-height: 30px;
+    text-indent: 60px;
+    margin-top: 2px;
+}
+
+.article-side nav ul li.active a,
+.article-side nav ul li a:hover{
+    color: #FFF;
+    font-size: 16px;
+    background-color: $aboutRedColor;
+}
+.article-side nav ul li.active a:after,
+.article-side nav ul li a:hover:after{
+    position: absolute;
+    left: 42px;
+    top: 10px;
+    content: "";
+    display: block;
+    width: 8px;
+    height: 8px;
+    border-radius: 2px;
+    border: 1px solid #FFF;
+}
+
+// 面包屑
+.crumbs{
+    padding-top: 21px;
+    padding-bottom: 10px;
+    font-size: 16px;
+}
+.crumbs strong{
+    color: #181818;
+}
+.crumbs a,
+.crumbs p{
+    display: inline;
+    color: #7b7b7b;
+}
+.crumbs a:hover{
+    color: $maincolor;
+    text-decoration: underline;
+}
+.crumbs span{
+    margin-left: 5px;
+    margin-right: 2px;
+}
+//普通主体内容页面
+.main-wrap{
+    overflow: hidden;
+    border-top: 1px solid #8C8C8C;
+}
+
+
+// 充值页面
+//普通带侧边栏的
+.pay-nav,
+.side-nav{
+    float: left;
+    width: 174px;
+    
+}
+.pay-nav{
+    padding-top: 45px;
+    margin-top: 2px;
+}
+.pay-nav ul li,
+.side-nav ul li{
+    border-bottom: 1px solid #8C8C8C;
+    margin-bottom: 2px; 
+
+}
+.pay-nav ul li a,
+.side-nav ul li a{
+    position: relative;
+    display: block;
+    width: 170px;
+    font-size: 16px;
+    height: 56px;
+    line-height: 56px;
+    text-align: center;
+    border-radius: 2px;
+    border:2px solid transparent;
+}
+.pay-nav ul li.active a,
+.side-nav ul li.active a{
+    border:2px solid $aboutRedColor;
+}
+.st-icon{
+    background: url(../Image/sprite_1.png) no-repeat 0 0;
+}
+.side-nav .st-icon{
+    display: block;
+    width: 25px;
+    height: 25px;
+    position: absolute;
+    left: 30px;
+    top: 19px;
+}
+.side-nav .icon-person{background-position: 0 0;}
+.side-nav .active .icon-person{background-position: -50px 0;}
+.side-nav .icon-pwd{background-position: 0 -50px;}
+.side-nav .active .icon-pwd{background-position: -50px -50px;}
+
+
+
+.pay-area,
+.main-area{
+    float: left;
+    width: 840px;
+    padding-left: 10px;
+    padding-bottom: 50px;
+}
+.pay-area{
+    margin-top: 2px;
+
+
+}
+
+
+
+.pay-area h3.title{
+    width: 100%;
+    height: 30px;
+    font-size: 16px;
+    line-height: 30px;
+    text-indent: 10px;
+    background-color: #F1F1F1;
+}
+.pay-area h3.title strong{
+    color: $maincolor;
+}
+.pay-area .step{
+    padding: 20px;
+    overflow: hidden;
+}
+.pay-path{
+    overflow: hidden;
+    margin-bottom: -10px;
+}
+.pay-path li{
+    float: left;
+    display: inline-block;
+    padding-left: 65px;
+    margin-bottom: 10px;
+    background: url(../Image/pay_path_arrow.png) no-repeat 0 0;
+}
+.pay-path li p{
+    display: inline-block;
+    padding: 6px 18px;
+    font-size: 16px;
+    line-height: 18px;
+    background-color: #F1F1F1;
+}
+.pay-path li:first-child{
+    padding-left: 0;
+    background: none;
+}
+.pay-area .step .left{
+    overflow: hidden;
+    width: 290px;
+}
+.pay-area .step.diamond label{
+    display: inline-block;
+    margin-top: 10px;
+    clear: both;
+    white-space: nowrap;
+}
+.pay-area .step.diamond .other{
+    margin-top: 10px;
+}
+.pay-area .step.diamond .other input[type="text"]{
+    margin-left: 5px;
+    margin-right: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+.pay-area .step.diamond label:first-child{
+    margin-top: 0;
+}
+.pay-area .step label input[type="radio"],
+.pay-area .step label input[type="checkbox"]{
+    position:relative;
+    bottom: -2px;
+    margin-right: 5px;
+}
+
+//选择银行
+.pay-area .step.bank{
+    padding-right: 250px;
+}
+.pay-area .step.bank label{
+    position: relative;
+    display: block;
+    width: 218px;
+    height: 72px;
+    border: 1px solid #DDD;
+    margin-bottom: 12px;
+    margin-right: 90px;
+    text-indent: -9999px;
+    background: url(../Image/bank_list.png) no-repeat 0 0;
+}
+.pay-area .step.bank label:hover{
+    border: 1px solid $maincolor;
+}
+.pay-area .step.bank label input{
+    position: absolute;
+    left: 13px;
+    top: 28px;
+}
+#pay-server-error{
+    margin-left: 20px;
+    margin-bottom: 5px;
+}
+
+// 游戏中心
+.os-list,.pay-list,.about-nav-list{
+    float: left;
+    width: 195px;
+    padding-top: 50px;
+    padding-bottom: 60px;
+    li{
+        display: block;
+        position: relative;
+        a{
+            position: relative;
+            display: block;
+            width: 100%;
+            height: 80px;
+            text-indent: 50px;
+            line-height: 80px;
+            border-bottom: 1px solid #8C8C8C;
+        }
+        i{
+            display: block;
+            position: absolute;
+            top: 20px;
+            left: 0px;
+            width: 40px;
+            height: 40px;
+            background: url(../Image/os_list.png) no-repeat 0 0;
+        }
+        i.arrow{
+            display: none;
+            left: auto;
+            position: absolute;
+            right: 2px;
+            top: 36px;
+            width: 0;
+            height: 0;
+            border-top: 4px solid transparent;
+            border-bottom: 4px solid transparent;
+            border-left: 4px solid $maincolor;
+
+        }
+    }
+    li.active i.arrow{display: block;}
+    li.active a,.os-list li a:hover{color: #ff0000;}
+}
+.pay.wrap{
+    width: 100%;
+    overflow: hidden;
+}
+.pay-list{
+    padding-top: 0;
+    li{
+        a{
+            text-align: left;
+            text-indent: 42px;
+            font-size: 18px;
+            height: 62px;
+            line-height: 62px;
+            .icon{
+                display: block;
+                width: 32px;
+                height: 32px;
+                position: absolute;
+                left: 3px;
+                top: 15px;
+                background: url(../Image/pay_list_icon.png) no-repeat 0 0;
+            }
+            .icon.yxb{ background-position: 0 0; }
+            .icon.wb{ background-position: 0 -32px; }
+        }
+        i.arrow{
+            top: 27px;
+        }
+    }
+}
+.about-nav-list{
+    padding-top: 15px;
+    li{
+        a{
+            text-align: left;
+            text-indent: 10px;
+            font-size: 18px;
+            height: 72px;
+            line-height: normal;
+            p{
+                line-height: 18px;
+                padding-top: 18px;
+                font-size: 16px;
+                font-weight: bold;
+            }
+            span{
+                    display: inline-block;
+                    line-height: 16px;
+                    font-size: 12px;
+                    text-indent: 10px;
+            }
+        }
+        i.arrow{
+            top: 32px;
+        }
+    }
+}
+.pay-des{
+    // font-size: 12px;
+    line-height: 18px;
+    color: #a3a3a3;
+    padding: 20px 5px 5px 15px;
+}
+.os-list li a i.pc{background-position: 0 -240px;}
+.os-list li a i.iphone{background-position: 0 0;}
+.os-list li a i.android{background-position: 0 -80px;}
+.os-list li a i.ipad{background-position: 0 -160px;}
+.os-list li.active a i.pc,.os-list li a:hover i.pc{background-position: -50px -240px;}
+.os-list li.active a i.iphone,.os-list li a:hover i.iphone{background-position: -50px 0;}
+.os-list li.active a i.android,.os-list li a:hover i.android{background-position: -50px -80px;}
+.os-list li.active a i.ipad,.os-list li a:hover i.ipad{background-position: -50px -160px;}
+
+// 游戏列表
+.games-area{
+    float: left;
+    padding-top: 50px;
+    width: 840px;
+}
+//带边框的大的游戏模块
+.game-panel-b{
+    width: 332px;
+    height: 305px;
+}
+.game-panel-b img.pic:hover{
+    opacity: 0.82;
+}
+.game-panel-b{
+    border-radius:4px;
+    padding: 20px 12px 0 12px;
+    background-color: #F7F7F7;
+    border: 1px solid #CAD6E0;
+}
+.game-panel-b:hover{
+    // background-color: #FFF;
+}
+.games-area li{float: left;}
+.game-panel-b{
+    display: block;
+    margin-left: 60px;
+    margin-bottom: 42px;
+    >.info{
+        text-align: center;
+        padding-bottom: 15px;
+        >h3{
+            display: inline-block;
+            color: #333;
+            font-size: 16px;
+        }
+        >p.en{
+            display: inline-block;
+            position: relative;
+            display: inline-block;
+            *zoom:1;
+            *display:inline;
+            font-size: 12px;
+            height: 18px;
+            line-height: 18px;
+            color: #e51616;
+            padding-left: 3px;
+            padding-right: 15px;
+            margin: 0 auto;
+            i{
+                position: absolute;
+                top: 4px;
+                right: 0;
+                display: block;
+                width: 0;
+                height: 0;
+                border-top: 4px solid transparent;
+                border-bottom: 4px solid transparent;
+                border-left: 4px solid $maincolor;
+            }
+        }
+    }
+    >img{
+        display: block;
+        width: 100%;
+        height: 196px;
+    }
+    .online-play{
+        width: 100%;
+        height: 70px;
+        text-align: center;
+        >a{
+            position: relative;
+            display: inline-block;
+            padding-right: 35px;
+            line-height: 70px;
+
+        }
+        i.pc-icon{
+            position: absolute;
+            display: block;
+            width: 30px;
+            height: 30px;
+            right: 0px;
+            top: 21px;
+            background: url(../Image/sprite.png) no-repeat -200px -100px;
+        }
+    }
+    .down{
+        width: 100%;
+        height: 70px;
+        .code-hover{
+            position: absolute;
+            left: 0;
+            top: 0; 
+            height: 70px;
+            overflow: visible;
+            img.code-img{
+                position: absolute;
+                width: 30px;
+                height: 30px;
+                top: 20px;
+                left: 0px;
+            }
+            .code-hover-in{
+                display: none;
+                position: relative;
+                top: -135px;
+                left: -55px;
+                width: 148px;
+                height: 157px;
+                padding-top: 10px;
+                padding-left: 11px;
+                overflow: visible;
+                border-radius: 8px;
+                transition: 0.3s all ease;
+                background: url(../Image/game_bg.png) no-repeat 0 0;
+            }
+            // .code-hover-in:before{
+            //     position: absolute;
+            //     bottom: -12px;
+            //     left: 50%;
+            //     margin-left: -11px;
+            //     content: "";
+            //     width: 0;
+            //     height: 0;
+            //     border-style: solid;
+            //     border-width: 12px 11px 0 11px;
+            //     border-color: #FFF transparent transparent transparent;
+            // }
+        }
+        .code-hover:hover{
+            .code-hover-in{
+                display: block;
+            }
+        }
+        
+        a{
+            position: relative;
+            display: block;
+            width: 50%;
+            float: left;
+            line-height: 70px;
+            height: 70px;
+            text-align: center;
+            span,.item{
+                position: relative;
+                display: inline-block;
+                padding-left: 35px;
+                line-height: 70px;
+                i.ios-icon,i.android-icon{
+                    position: absolute;
+                    display: block;
+                    width: 30px;
+                    height: 30px;
+                    left: 0px;
+                    top: 19px;
+                    background: url(../Image/sprite.png) no-repeat -200px -50px;
+                }
+                i.android-icon{
+                    background: url(../Image/sprite.png) no-repeat -150px -50px;
+                }
+                img.code-img{
+                    display: block;
+                    width: 30px;
+                    height: 30px;
+                }
+            }
+        }
+        // 分割线
+        a.ios:before,a.android:before{
+            position: absolute;
+            content: "";
+            top: 17px;
+            right: 0px;
+            width: 1px;
+            height: 36px;
+            background-color: #d6d6d6;
+        }
+    }
+    
+}
+
+
+
+//重新合并后的
+.input-prepend .person-icon{background-position:-265px 0px}
+.input-prepend .password-icon{background-position:-265px -64px}
+.btn-login,.login-game a{background-position:0px -128px}
+.line-title .title h2.icon-fire{
+    background-position:-291px -212px;
+    *zoom:1;
+    *display:inline;
+}
+.contact-block{background-position:-214px -252px}
+.input-prepend .person-icon,.input-prepend .password-icon,.btn-login,
+.login-game a,.line-title .title h2.icon-fire,.contact-block{background-image: url(../Image/main_z.png)}
+
+//表单验证
+
+.Validform_checktip{
+    display: none;
+    max-width: 300px;
+    white-space:nowrap; 
+    overflow:hidden;
+    line-height: 32px;
+    margin-left: 5px;
+    *position: relative;
+    *top: -6px;
+}
+.Validform_checktip.Validform_wrong{
+    display: inline;
+    color: $maincolor;
+}
+.Validform_checktip.Validform_right{
+    color: #71B83D;
+}
+.ajax-tip.Validform_right{
+    display: inline !important;
+}
+.agree-protocol-info{
+    clear: both;
+    color: $maincolor;
+}
+.verify-group{
+    min-height: 0 !important;
+    padding-bottom: 3px;
+}
+/*后面增加的*/
+.ie-placeholder-wrap input{
+  position: relative;
+  z-index: 2;
+  background-color: transparent;;
+}
+.ie-placeholder-wrap .ie-placeholder{
+  z-index: 1;
+}
+.addition{
+  overflow: hidden;
+}
+.addition label{
+  float: left;
+}
+.login-panel .addition .reg,
+.login-panel .addition .forget {
+  float: right;
+  margin-right: 15px;
+  *margin-top: 5px; }
+
+
+//后面的表单性别
+.control-group .hor-lab{
+    position: relative;
+    display: block;
+    width: 50px;
+    margin-right: 20px;
+    float: left;
+    height: 34px;
+    line-height: 34px;
+}
+.control-group .hor-lab input{
+    position: relative;
+    bottom: -2px;
+    margin-right: 6px;
+}
+.hor-lab-group .sex-man .Validform_checktip{
+    position: absolute;
+    top: 0;
+    right: -175px;
+}
+
+// 页面注册成功
+.reg-suc-area{
+    text-align: center;
+    padding: 210px 0;
+}
+.reg-suc-area h2.info{
+    display: inline-block;
+    font-size: 40px;
+    color: #333;
+    height: 60px;
+    line-height: 60px;
+    padding-left: 75px;
+    background: url(../Image/reg_suc.png) no-repeat 0 0;
+    *zoom:1;
+    *display:inline;
+}
+.reg-suc-area a{
+    display: block;
+    margin-top: 15px;
+    
+}
+.reg-suc-area a:hover{
+    color: $maincolor;
+    text-decoration: underline;
+}
+.reg-suc-area a span{
+    color: #3879D9;
+}
+.reg-suc-area a:hover span{
+    color: $maincolor;
+}
+
+//我的账户页面
+.my-account-area .head{
+    float: left;
+    border: 1px solid #D7D7D7;
+    width: 130px;
+    height: 130px;
+}
+.my-account-area .info{
+    float: left;
+    width: 620px;
+    margin-left: 15px;
+}
+.item-6{
+    float: left;
+    width: 49%;
+    overflow: hidden;
+}
+
+
+
+
+//整行形式的组
+.small-btn{
+    display: inline-block;
+    padding: 0 14px;
+    line-height: 24px;
+    background-color: $maincolor;
+    color: #FFF;
+
+}
+.small-btn:hover{
+    background-color: #DE3939;
+}
+.strong{
+    font-weight: bold;
+}
+.hor-group{
+    overflow: hidden;
+    width: 100%;
+    min-height: 24px;
+    padding-bottom: 5px;
+}
+.hor-group .item,
+.hor-group span,
+.hor-group a{
+    line-height: 24px;
+}
+.hor-group input{
+    padding: 1px 5px;
+}
+.hor-group label,
+.hor-group .label{
+    float: left;
+    display: block;
+    width: 80px;
+    height: 24px;
+    line-height: 24px;
+    text-align: right;
+}
+.hor-group .group{
+    float: left;
+}
+
+.hor-group .data-per{
+    bottom: -4px;
+}
+.hor-group .Validform_checktip{
+    line-height: 24px;
+}
+.hor-group input[type="text"],
+.hor-group input[type="password"]{
+    width: 190px;
+}
+.button-sbt{
+    width: 90px;
+    height: 28px;
+    line-height: 28px;
+    color: #FFF;
+    padding: 0;
+    border:none;
+    cursor: pointer;
+    background-color: $maincolor;
+}
+.button-sbt:hover{
+    background-color: #D33434;
+}
+.find-pwd-area .button-sbt,
+.my-account-area .button-sbt{
+    margin-top: 10px;
+    margin-left: 80px;
+}
+.change-pwd-area .button-sbt{
+    margin-top: 10px;
+    margin-left: 120px;
+}
+
+.my-account-area,
+.change-pwd-area{
+    padding-top: 20px;
+    padding-left: 90px;
+    overflow: hidden;
+
+}
+.passwordStrength{
+    margin-top: 5px;
+    margin-bottom: 2px;
+    font-size: 12px;
+}
+.passwordStrength span{
+    display: inline-block;
+    *zoom: 1;
+    *display: inline;
+    line-height: 18px;
+    width:45px; 
+    text-align:center; 
+    background-color:#d0d0d0; 
+    border-right:1px solid #fff;
+}
+.passwordStrength .bgStrength {
+color: #fff;
+background-color: #71b83d;
+}
+
+.set-phone,
+.ipt-toggle-btn{
+    margin-left: 5px;
+    color: #1F637F;
+    text-decoration: underline;
+}
+.change-pwd-area label,
+.change-pwd-area .label{
+    width: 120px !important;
+}
+
+.pwd-info{
+    width: 630px;
+    padding: 15px 65px;
+    margin-bottom: 35px;
+    color: #999;
+    background-color: #FFFDEB;
+}
+
+
+
+
+// 资料完善
+.data-per{
+    position: relative;
+    width: 95px;
+    height: 16px;
+    background-color: #C6C7C8;
+    border-radius: 2px;
+}
+.data-per .per{
+    width: 0%;
+    height: 16px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 2;
+    background-color: #FBC12A;
+    border-radius: 2px;
+
+}
+.data-per p{
+    width: 100%;
+    font-size: 14px;
+    height: 16px;
+    line-height: 16px;
+    position: relative;
+    z-index: 3;
+    text-align: center;
+    color: #FFF;
+}
+
+// 找回密码方式
+.find-pwd-type{
+    cursor: pointer;
+    display: inline-block;
+    padding: 0 13px 0 55px;
+    height: 46px;
+    line-height: 46px;
+    font-size: 16px;
+    color: #FFF;
+    background: $maincolor url(../Image/sprite_1.png) no-repeat 0 0;
+}
+.find-pwd-type:hover{
+    background-color: #DE3E3E;
+}
+.find-pwd-type.mail{
+    background-position: -90px -43px;
+}
+.find-pwd-text{
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 30px;
+}
+.find-pwd-area,
+.forget-pwd-area{
+    min-height: 410px;
+    padding-top: 22px;
+    padding-left: 115px;
+}
+
+
+// 邮箱和手机号输入切换
+.ipt-toggle-txt.hidden,.ipt-toggle-ipt.hidden{display:none;}
+// 弹出框
+.ui-dialog{
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    z-index: 999;
+    margin-left: -200px;
+    margin-top: -100px;
+    width: 560px;
+    
+    padding-top: 55px;
+    padding-bottom: 50px;
+    background-color: #FFF;
+    border: 6px solid #E5E5E5;
+    border-radius: 2px;
+}
+.ui-dialog.active{
+    display: block;
+}
+.ui-dialog .close{
+    position: absolute;
+    right: 12px;
+    top: 8px;
+    display: block;
+    width: 18px;
+    height: 18px;
+    background: url(../Image/sprite_1.png) no-repeat -150px 0;
+}
+
+// 获取验证码按钮
+.get-phonecode{
+    position: absolute;
+    left: 210px;
+    display: inline-block;
+    height: 20px;
+    line-height: 20px !important;
+    color: #FFF;
+    padding-left: 10px;
+    padding-right: 10px;
+    background-color: $maincolor;
+    border:1px solid $maincolor;
+
+}
+.get-phonecode.disable{
+    border:1px solid #ccc;
+    color: #ccc;
+    background-color: #FFF;
+}
+.ui-dialog .hor-group label{
+    width: 120px;
+}
+.ui-dialog .hor-group .group{
+    width: 400px;
+    position: relative;
+}
+.ui-dialog .hor-group .button-sbt{
+    margin-left: 120px;
+    margin-top: 15px;
+}
+.light{color:$maincolor;}
+.mail-suc h2{
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #000;
+    text-align:center;
+}
+.mail-suc p{
+    width: 80%;
+    margin: 0 auto;
+}
+
+
+.dialog-content.hidden{
+    display: none !important;
+}
+
+.game-wrap{
+    overflow: hidden;
+    margin: 0 auto;
+    text-align: center;
+}
+.flash-game{
+    display: inline-block;
+    margin: 0 auto;
+    overflow: hidden;
+}
+.login-banner .banner-des{
+    position: absolute;
+    left: 520px;
+    top: 65px;
+    color: #FFF;
+    .b-img{
+        float: left;
+        margin-right: 10px;
+    }
+    .down{
+        position: relative;
+        height: 30px;
+        color: #ffcc76;
+        line-height: 30px;
+        padding-left: 30px;
+        margin-top: 10px;
+        margin-bottom: 7px;
+        i{
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 30px;
+            height: 30px;
+            background: url(../Image/sprite.png) no-repeat 5px 5px;
+        }
+    }
+    .online-play{
+        position: absolute;
+        top: 8px;
+        right: 5px;
+        width: 118px;
+        height: auto;
+        background-color: #FFF;
+        border-radius: 18px;
+        cursor: pointer;
+        h2{
+            color: #191b39;
+            position: relative;
+            padding-left: 20px;
+            font-size: 14px;
+            line-height: 36px;
+        }
+        h2:before{
+            position: absolute;
+            right: 15px;
+            top: 10px;
+            width: 12px;
+            height: 14px;
+            content: "";
+            background: url(../Image/sprite.png) no-repeat -50px -200px;
+        }
+        >ul{ display: none; }
+        >ul li a{
+            // display: none;
+            position: relative;
+            display: block;
+            width: 100%;
+            height: 36px;
+            i{
+                position: absolute;
+                top: 5px;
+                left: 50%;
+                margin-left: -12px;
+                display: block;
+                width: 25px;
+                height: 25px;
+                background: url(../Image/sprite.png) no-repeat 0 -200px;
+            }
+        }
+        &:hover{
+            >ul{ display: block; }
+        }
+    }
+}
+.big-intro{
+    position: relative;
+    clear: both;
+    overflow: hidden;
+    width: 1050px;
+    margin: 0 auto;
+    text-align: center;
+    padding-top: 23px;
+    padding-bottom: 20px;
+    >img{
+        display: block;
+        margin: 0 auto;
+    }
+}
+
+.login-banner .banner-des>h2{
+    margin-top: 2px;
+    font-size: 42px;
+    font-weight: 400;
+    line-height: 50px;
+}
+.login-banner .banner-des h2 span{
+    font-size: 14px;
+    line-height: 18px;
+}
+.login-banner .banner-des p.des{
+    margin-top: 7px;
+}
+
+.flash-game embed, .flash-game object {
+margin: 0 auto;
+z-index: 0;
+padding: 0;
+}
+
+.jion-us{
+    position: relative;
+    clear: both;
+    overflow: hidden;
+    width: 1050px;
+    margin: 0 auto;
+    text-align: center;
+    >h2{
+        position: relative;
+        z-index: 3;
+        display: inline-block;
+        font-size: 24px;
+        color: #000;
+        text-align: center;
+        margin-top: 15px;
+        padding-left: 15px;
+        padding-right: 15px;
+        background-color: #FFF;
+    }
+    >h3{
+        font-size: 16px;
+        color: #858585;
+        text-align: center;
+        margin-top: 4px;
+    }
+    .lx-btn{
+        display: inline-block;
+        width: 132px;
+        height: 42px;
+        // text-align: center;
+        // color: #FFF;
+        margin: 0 auto;
+        // padding-left: 25px;
+        // padding-right: 25px;
+        // background-color: #c6c6c6;
+        // border-radius: 17px;
+        margin-top: 10px;
+        text-indent: -9999px;
+        background: url(../Image/sprite.png) no-repeat -50px 0px;
+    }
+}
+.jion-us:after{
+    position: absolute;
+    z-index: 2;
+    top: 30px; 
+    left: 0;
+    width: 100%;
+    height: 1px;
+    content: "";
+    display: block;
+    background-color: #BEBEBE;
+}
+.jion-us.home-us:after{
+    display: none;
+}
+.contact-list{
+    
+    .contact-panel{
+        position: relative;
+        float: left;
+        border: 1px solid #999;
+        border-radius: 8px;
+        width: 316px;
+        padding-top: 65px;
+        height: 71px;
+        margin-left: 15px;
+        margin-right: 16px;
+        background-color: #FFF;
+        color: #626262;
+        text-align: center;
+        i.icon{
+            position: absolute;
+            top: 15px;
+            left: 50%;
+            margin-left: -20px;
+            width: 40px;
+            height: 40px;
+            background: url(../Image/sprite.png) no-repeat 0 -50px;
+        }
+        i.icon.mail{ background-position: 0 -50px; }
+        i.icon.phone{ background-position: -50px -50px; }
+        i.icon.adr{ background-position: -100px -50px; }
+        h4{
+            font-size: 14px;
+        }
+        strong{
+            font-size: 20px;
+            line-height: 1.4;
+        }
+        strong.adr{
+            display: block;
+            padding-left: 15px;
+            padding-right: 15px; 
+            font-size: 14px;
+        }
+    }
+}
+
+.label-group{
+    overflow: hidden;
+    padding-bottom: 12px;
+
+    .lab{
+        float: left;
+        width: 115px;
+        padding-right: 5px;
+        text-align: right;
+        color: #605f5f;
+        font-size: 14px;
+        line-height: 34px;
+        display: block;
+    }
+    input[type="text"]{
+        float: left;
+        padding: 8px 5px;
+        width: 250px;
+        border: 1px solid #ccc;
+    }
+    input[type="text"]:focus{
+        border-color:#E96440;
+    }
+    p.error{
+        position: relative;
+        clear: both;
+        font-size: 12px;
+        margin-left: 120px;
+        padding-left: 15px;
+        padding-top: 5px;
+        line-height: 20px;
+        color: $maincolor;
+    }
+    p.error:before{
+        position: absolute;
+        left: 0;
+        top: 9px;
+        content: "";
+        width: 12px;
+        height: 12px;
+        display: block;
+        background: url(../Image/sprite.png) no-repeat 0 -100px;
+
+    }
+    .custom-select{
+        float: left;
+        width: 263px;
+
+        ul{
+            li{
+                a{
+                    position: relative;
+                    display: block;
+                    margin-bottom: 6px;
+                    width: 258px;
+                    text-indent: 10px;
+                    font-size: 14px;
+                    height: 26px;
+                    line-height: 26px;
+                    border: 2px solid #c7c7c7;
+                    background-color: #f5f5f5;
+                }
+            }
+            li.active{
+                a{
+                    border-color: #a5c85b;
+                    background-color: #FFF;
+                }
+                a:before{
+                    position: absolute;
+                    display: block;
+                    width: 13px;
+                    height: 13px;
+                    content: "";
+                    right: 0;
+                    bottom: 0;
+                    background: url(../Image/sprite.png) no-repeat -100px -100px;
+                }
+
+            }
+        }
+        ul.pay-platform{
+            li{
+                float: left;
+                a{
+                    text-align: center;
+                    text-indent: 10px;
+                    font-size: 18px;
+                    display: inline-block;
+                    margin-right: 10px;
+                    width: auto;
+                    height: 38px;
+                    line-height: 38px;
+                    text-indent: 0;
+                    padding-left: 10px;
+                    padding-right: 10px;
+                }
+            }
+        }
+    }
+    .custom-select.pay{
+        width: 680px;
+    }
+    .btn-pay{
+        width: 110px;
+        height: 34px;
+        margin: 0;
+        padding: 0;
+        border-radius: 4px;
+        margin-left: 120px;
+        background-color: #d03232;
+        border: none;
+        color: #FFF;
+    }
+
+}
+
+.down-list{
+    li{
+        float: left;
+        a{
+            display: block;
+            margin-right: 1px;
+            width: 110px;
+            height: 40px;
+            background-color: #FFF;
+            background-color: rgba(255,255,255,0.3);
+            background-image: url(../Image/banner_down_s.png);
+            background-repeat: no-repeat;
+            background-position: 0 0;
+            // text-indent: -9999px;
+            color: #FFF;
+            padding-top: 70px;
+            text-align: center;
+            // border-radius: 6px;
+        }
+        a.ios{ background-position: 0 0; }
+        a.android{ background-position: -110px 0; }
+        a.ipad{ background-position: -220px 0; }
+        a.code{
+            position: relative;
+            background-image: none;
+            .code-in{
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                width: 80px;
+                height: 80px;
+                padding: 3px;
+                margin-top: -43px;
+                margin-left: -43px;
+                border-radius: 4px;
+                background-color: #FFF;
+                >img{
+                    width: 100%;
+                }
+            }
+            
+        }
+    }
+    li:first-child{
+        a{
+            border-top-left-radius: 8px;
+            border-bottom-left-radius: 8px;
+        }
+        
+    }
+    li:last-child{
+        a{
+            border-top-right-radius: 8px;
+            border-bottom-right-radius: 8px;
+        }
+        
+    }
+}
+
+.small-article .content{
+    overflow: hidden;
+}
+.content-qq{
+    float: left;
+    width: 350px;
+    height: 110px;
+    overflow: hidden;
+    font-size: 22px;
+    line-height: 30px;
+    color: #000;
+    img.qq{
+        display: block;
+        float: left;
+        width: 94px;
+        height: 110px;
+        margin-right: 15px;
+    }
+    >p{
+        font-size: 18px;
+        margin-top: 20px;
+        margin-bottom: 0 !important;
+    }
+    >strong{
+        font-weight: bold;
+    }
+}

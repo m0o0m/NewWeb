@@ -1,0 +1,333 @@
+﻿@using GL.Data.Model;
+@model GL.Data.Model.RoleInfo
+@{
+    ViewBag.Title = "会员管理 -- 修改";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+
+    AgentInfo Higher = (AgentInfo)ViewData["Higher"];
+
+}
+
+<!--breadcrumbs-->
+<div id="content-header">
+    <div id="breadcrumb"> <a href="#" title="" class="current"><i class="icon-home"></i> 修改会员</a></div>
+</div>
+
+<!--End-breadcrumbs-->
+<div class="container-fluid">
+    @if (!ViewBag.Top)
+    {
+        <div class="row-fluid">
+            <div class="widget-box span6">
+                <div class="widget-title">
+                    <span class="icon"><i class="icon-align-justify"></i></span>
+                    <h5>@(Higher.AgentLv)信息</h5>
+                </div>
+                <div class="widget-content nopadding">
+                    <div class="form-horizontal">
+                        <div class="control-group">
+                            <label class="control-label">用户账号 :</label>
+                            <div class="controls">
+                                <input type="text" disabled="disabled" class="span4" value="@Higher.AgentAccount" />
+
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">可用额度 :</label>
+                            <div class="controls">
+                                <input type="text" id="HigherAmountAvailable" disabled="disabled" class="span4" value="@Higher.AmountAvailable.Value.ToString("0.")" />
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">收益模式 :</label>
+                            <div class="controls">
+                                <input type="text" disabled="disabled" class="span4" value="@Higher.RevenueModel" />
+                            </div>
+                        </div>
+                        @if (Higher.RevenueModel == revenueModel.占成)
+                        {
+                            <div class="control-group">
+                                <label class="control-label">占成比例 (％):</label>
+                                <div class="controls">
+                                    <input type="text" disabled="disabled" class="span4" value="@Higher.EarningsRatio" />
+                                </div>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="control-group">
+                                <label class="control-label">抽水比例 (‰):</label>
+                                <div class="controls">
+                                    <input type="text" disabled="disabled" class="span4" value="@Higher.EarningsRatio" />
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+    <div class="row-fluid">
+        <div class="widget-box span6" id="box">
+            <div class="widget-title">
+                <span class="icon"><i class="icon-align-justify"></i></span>
+                <h5>修改会员</h5>
+            </div>
+            <div class="widget-content nopadding">
+                <form id="submitForm" action="" method="post" class="form-horizontal">
+                    <input type="hidden" name="ID" value="@Model.ID" />
+                    <input type="hidden" name="ParentAgentID" value="@ViewBag.HigherID" />
+                    <div class="control-group">
+                        <label class="control-label">用户账号 :</label>
+                        <div class="controls">
+                            @Model.Account
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">用户昵称 :</label>
+                        <div class="controls">
+                            <input type="text" id="NickName" name="NickName" class="span4" value="@Model.NickName" />
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">用户密码 :</label>
+                        <div class="controls">
+                            <input type="password" id="Password" name="Password" class="span4" value="" />
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">确认密码 :</label>
+                        <div class="controls">
+                            <input type="password" id="ConfirmPasswd" name="ConfirmPasswd" class="span4" value="" />
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label">用户手机 :</label>
+                        <div class="controls">
+                            <input type="text" name="Tel" class="span4" value="@Model.Tel" />
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">用户邮箱 :</label>
+                        <div class="controls">
+                            <input type="text" name="Email" class="span4" value="@Model.Email" />
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <input id="btnKick" type="submit" value="提交" class="btn btn-danger" />
+                        @*<input id="btnKick2" type="button" value="提交" class="btn btn-danger" onclick="return btnSubmit()" />*@
+                        <input id="btnGoBack" type="button" value="返回列表" onclick="return GoBack(@ViewBag.HigherID)" class=" btn btn-warning" />
+                    </div>
+                </form>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+
+@section scripts{
+    @{Html.RegisterMvcPagerScriptResource();}
+
+
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/select2.min.js"></script>
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+
+        // resets the menu selection upon entry to this page:
+        function resetMenu() {
+            document.gomenu.selector.selectedIndex = 2;
+        }
+        function GoBack(obj) {
+            location.href = "/Manage/Member?id=" + obj;
+        }
+
+        $(function () {
+
+
+            $.validator.setDefaults({
+                submitHandler: function (form) {
+                    //form.submit();
+                    $.ajax({
+                        url: "/api/MemberApi/",
+                        type: "OPTIONS",
+                        dataType: "JSON",
+                        data: $("#submitForm").serialize(),
+                        success: function (data) {
+                            switch (data.result) {
+                                case 0:
+                                    location.href = "/Manage/Member?id=@ViewBag.HigherID";
+                                    break;
+                                case 200:
+                                    alert("值不能为空，请稍后再试");
+                                    break;
+                                case 204:
+                                    alert("账号已存在，请重新添加");
+                                    break;
+                                case 205:
+                                    alert("添加失败，账号只能由字母和数字组成");
+                                    break;
+                                default:
+                                    alert('添加失败,请与管理员联系');
+                                    break;
+                            }
+                        }
+                    }).fail(function (xhr, textStatus, err) {
+                        alert('Error: ' + err);
+                    });
+                    return false;
+                }
+            });
+
+            // 字符验证
+
+
+            jQuery.validator.addMethod("stringCheck", function (value, element) {
+                return this.optional(element) || /^[\w]+$/.test(value);
+            }, "只能包括英文字母、数字和下划线");
+            // 字符验证
+            jQuery.validator.addMethod("stringCheckWithChinese", function (value, element) {
+                return this.optional(element) || /^[\u0391-\uFFE5\w]+$/.test(value);
+            }, "只能包括中文字、英文字母、数字和下划线");
+
+            // 中文字两个字节
+            jQuery.validator.addMethod("byteRangeLength", function (value, element, param) {
+                var length = value.length;
+                for (var i = 0; i < value.length; i++) {
+                    if (value.charCodeAt(i) > 127) {
+                        length++;
+                    }
+                }
+                return this.optional(element) || (length >= param[0] && length <= param[1]);
+            }, "请确保输入的值在3-15个字节之间(一个中文字算2个字节)");
+
+            // 身份证号码验证
+            jQuery.validator.addMethod("isIdCardNo", function (value, element) {
+                return this.optional(element) || isIdCardNo(value);
+            }, "请正确输入您的身份证号码");
+
+            // 手机号码验证
+            jQuery.validator.addMethod("isMobile", function (value, element) {
+                var length = value.length;
+                var mobile = /^(((13[0-9]{1})|(15[0-9]{1})|(17[0-9]{1})|(18[0-9]{1}))+\d{8})$/;
+                return this.optional(element) || (length == 11 && mobile.test(value));
+            }, "请正确填写您的手机号码");
+
+            // 电话号码验证
+            jQuery.validator.addMethod("isTel", function (value, element) {
+                var tel = /^\d{3,4}-?\d{7,9}$/;    //电话号码格式010-12345678
+                return this.optional(element) || (tel.test(value));
+            }, "请正确填写您的电话号码");
+
+            // 联系电话(手机/电话皆可)验证
+            jQuery.validator.addMethod("isPhone", function (value, element) {
+                var length = value.length;
+                var mobile = /^(((13[0-9]{1})|(15[0-9]{1})|(17[0-9]{1})|(18[0-9]{1}))+\d{8})$/;
+                //var tel = /^\d{3,4}-?\d{7,9}$/;
+                //return this.optional(element) || (tel.test(value) || mobile.test(value));
+                return this.optional(element) || mobile.test(value);
+
+            }, "请正确填写您的联系电话");
+
+            // 邮政编码验证
+            jQuery.validator.addMethod("isZipCode", function (value, element) {
+                var tel = /^[0-9]{6}$/;
+                return this.optional(element) || (tel.test(value));
+            }, "请正确填写您的邮政编码");
+
+
+            $('#submitForm').validate({
+                /* 设置验证规则 */
+                errorElement: "span",
+                rules: {
+                    Account: {
+                        required: true,
+                        stringCheck: true,
+                        byteRangeLength: [4, 16]
+                    },
+                    NickName: {
+                        required: true,
+                        stringCheckWithChinese: true,
+                        byteRangeLength: [4, 16]
+                    },
+                    Password: {
+                        minlength: 6
+                    },
+                    ConfirmPasswd: {
+                        minlength: 6,
+                        equalTo: "#Password"
+                    },
+                    //GUQQ: {
+                    //    required: true,
+                    //    digits: true,
+                    //    minlength: 5
+                    //},
+                    Tel: {
+                        required: true,
+                        isMobile: true
+                    },
+                    Email: {
+                        required: true,
+                        email: true
+                    },
+                },
+
+                /* 设置错误信息 */
+                messages: {
+                    Account: {
+                        required: "请填写用户账号",
+                        stringCheck: "用户账号只能包括英文字母、数字和下划线",
+                        byteRangeLength: "用户账号必须在4-16个字符之间"
+                    },
+                    NickName: {
+                        required: "请填写用户昵称",
+                        stringCheckWithChinese: "用户昵称只能包括中文字、英文字母、数字和下划线",
+                        byteRangeLength: "用户昵称必须在4-15个字符之间(一个中文字算2个字符)"
+                    },
+                    Password: {
+                        minlength: "密码不能少于6个字符"
+                    },
+                    ConfirmPasswd: {
+                        minlength: "确认密码不能少于6个字符",
+                        equalTo: "请确保输入的密码一致"
+                    },
+                    //GUQQ: {
+                    //    required: "请输入用户QQ",
+                    //    digits: "用户QQ必须由数字组成",
+                    //    minlength: "用户QQ不能少于5个数字"
+                    //},
+                    Tel: {
+                        required: "请输入用户联系电话",
+                        isMobile: "请输入一个有效的联系电话"
+                    },
+                    Email: {
+                        required: "请输入用户Email地址",
+                        email: "请输入一个有效的Email地址"
+                    },
+                },
+
+                /* 设置验证触发事件 */
+                focusInvalid: false,
+                onkeyup: false,
+
+                /* 设置错误信息提示DOM */
+                errorPlacement: function (error, element) {
+                    error.appendTo(element.parent());
+                },
+
+            });
+
+
+
+        })
+
+
+
+    </script>
+}

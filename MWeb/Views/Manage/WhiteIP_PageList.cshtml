@@ -1,0 +1,155 @@
+﻿
+@using Webdiyer.WebControls.Mvc;
+@using GL.Data.Model;
+@model PagedList<WhiteList>
+
+
+
+
+
+
+<section id="widget-grid" class="">
+    <div class="row">
+        <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-0" data-widget-editbutton="false" data-widget-colorbutton="false"
+                 data-widget-togglebutton="false"
+                 data-widget-deletebutton="false"
+                 data-widget-fullscreenbutton="false"
+                 data-widget-custombutton="false"
+                 data-widget-collapsed="false"
+                 data-widget-sortable="false">
+                <header>
+                    <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                    <h2>@ViewBag.Title</h2>
+                </header>
+                <!-- widget div-->
+                <div>
+                    <!-- widget edit box -->
+                    <div class="jarviswidget-editbox">
+                        <!-- This area used as dropdown edit box -->
+                    </div>
+                    <!-- end widget edit box -->
+                    <!-- widget content -->
+                    <div class="widget-body no-padding">
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <thead>
+
+                                    <tr>
+                                        <th>IP</th>
+                                        @*<th>创建时间</th>*@
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model.Count == 0)
+            {
+                                        <tr class="gradeX">
+                                            <td class="colspan" align="center" colspan="0">
+                                                没有找到相关记录！
+                                            </td>
+                                        </tr>
+                                    }
+                                    @foreach (WhiteList m in Model)
+            {
+                                        <tr class="gradeA">
+                                            <td>@m.IP</td>
+                                            @*<td>@m.CreateTime</td>*@
+                                            <td style="text-align:center">
+                                                @if (m.Status == true)
+                                                {
+                                                    <input id="btWhiteIP" type="button" value="解除白名单" class="btn btn-inverse btn-mini" onclick="return btWhiteIP(this)" />
+                                                }
+                                                else
+                                                {
+                                                    <input id="btSetWhiteIP" type="button" value="设为白名单" class="btn btn-inverse btn-mini" onclick="return btSetWhiteIP(this)" />
+                                                }
+
+                                            </td>
+                                        </tr>
+
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+
+
+
+
+
+
+
+
+                        <div class="widget-content">
+
+                            @Ajax.Pager(
+    Model,
+    new PagerOptions()
+    {
+        CssClass = "pager",
+        ShowMorePagerItems = true,
+        PageIndexParameterName = "page",
+        ShowDisabledPagerItems = true,
+        AlwaysShowFirstLastPageNumber = true,
+        //ShowRecordCountItems = true,
+        HorizontalAlign = "right",
+        //SeparatorHtml = "",
+
+        CurrentPagerItemTemplate = "<li class=\"disabled\"><span>{0}</span></li>",
+        DisabledPagerItemTemplate = "<li class=\"disabled\"><span>{0}</span></li>",
+        PagerItemTemplate = "<li>{0}</li>",
+        //CurrentPagerItemWrapperFormatString = "<li class=\"disabled\"><span>{0}</span></li>",
+        //NumericPagerItemWrapperFormatString = "<li>{0}</li>",
+        //PagerItemWrapperFormatString = "<li>{0}</li>",
+        //RecordCountText = string.Format("共{0}条记录, {1}页", Model.TotalItemCount, Model.TotalPageCount),
+        //RecordCountFormatString = "<li><span>{0}</span></li>",
+        //DisabledPagerItemsFormatString = "<li class=\"disabled\"><span>{0}</span></li>",
+        //PageIndexBoxType = Webdiyer.WebControls.Mvc.PageIndexBoxType.TextBox,
+        //GoButtonText = "跳转到",
+        ShowPrevNext = true,
+        FirstPageText = "第一页",
+        LastPageText = "最后一页",
+        ContainerTagName = "ul",
+        PageIndexBoxId = "pageindexcm",
+        WYWPageIndexString = @"<li><input style='width:50px;' type='text' value='' id='{0}' name = '{1}'></li>
+                                 <li><a id='goto' name='goto' style='margin-right:10px' >跳转</a><li>
+                             ",
+        GoToButtonId = "goto"
+    },
+    new MvcAjaxOptions
+    {
+        HttpMethod = "POST",
+        UpdateTargetId = "box",
+        InsertionMode = InsertionMode.Replace,
+        OnFailure = "errFunc",
+        OnSuccess = "successPageFun"
+    })
+                        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    </div>
+                    <!-- end widget content -->
+                </div>
+                <!-- end widget div -->
+            </div>
+            <!-- end widget -->
+
+        </article>
+    </div>
+</section>
+

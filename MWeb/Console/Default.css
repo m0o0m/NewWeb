@@ -1,0 +1,47 @@
+/* CSS file */
+@namespace s "library://ns.adobe.com/flex/spark";
+@namespace mx "library://ns.adobe.com/flex/mx";
+global 
+{
+	font-family: "宋体";
+}
+
+.titleLabName
+{
+	color:#000000;
+	fontFamily:"宋体";
+	fontSize:15;
+}
+
+s|Label
+{
+	fontFamily:"宋体";
+}
+
+mx|ToolTip
+{
+	fontFamily:"宋体";
+	fontSize:12;
+}
+
+.winLabName
+{
+	color:#329e1c;
+}
+
+.loseLabName
+{
+	color:#FF0000;
+}
+
+.normalLabName
+{
+	color:#000000;
+}
+
+.writeLab
+{
+	color:#FFFFFF;
+	fontFamily:"宋体";
+	fontSize:9;
+}

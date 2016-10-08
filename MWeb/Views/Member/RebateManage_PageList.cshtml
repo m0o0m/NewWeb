@@ -1,0 +1,78 @@
+﻿@using Webdiyer.WebControls.Mvc;
+@using GL.Data.Model;
+@model List<UserClub>
+
+<section id="widget-grid" class="">
+    <div class="row">
+        <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-0" data-widget-editbutton="false" data-widget-colorbutton="false"
+                 data-widget-togglebutton="false"
+                 data-widget-deletebutton="false"
+                 data-widget-fullscreenbutton="false"
+                 data-widget-custombutton="false"
+                 data-widget-collapsed="false"
+                 data-widget-sortable="false">
+                <header>
+                    <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                    <h2>@ViewBag.Title</h2>
+                </header>
+                <!-- widget div-->
+                <div>
+                    <!-- widget edit box -->
+                    <div class="jarviswidget-editbox">
+                        <!-- This area used as dropdown edit box -->
+                    </div>
+                    <!-- end widget edit box -->
+                    <!-- widget content -->
+                    <div class="widget-body no-padding">
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>分组ID</th>
+                                        <th>分组名称</th>
+                                        <th>创建时间</th>
+                                        <th>总服务费</th>
+                                        <th>总返利</th>
+                                        <th>返利比例</th>
+                                        <th>成员详细</th>
+                                        <th>设置</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model.Count == 0)
+                                    {
+                                        <tr class="gradeX">
+                                            <td class="colspan" align="center" colspan="0">
+                                                没有找到相关记录！
+                                            </td>
+                                        </tr>
+                                    }
+                                    @foreach (UserClub m in Model)
+                                    {
+                                        <tr class="gradeA">
+                                            <td>@m.ClubID</td>
+                                            <td>@m.GroupName</td>
+                                            <td>@m.ClubUpdate</td>
+                                            <td>@m.ServiceSum</td>
+                                            <td>@m.GiveSum</td>
+                                            <td>@m.RebatePer.ToString()%</td>
+                                            <td style="text-align:center"><input type="button" value="查看" class="btn btn-inverse btn-mini" onclick="return btnGetClubList(@m.ClubID, this)" /></td>
+                                            <td style="text-align:center">
+                                                <input type="button" value="添加人员" class="btn btn-danger btn-mini" onclick="return btnSetClub(@m.ClubID)" />
+                                                <input type="button" value="删除分组" class="btn btn-danger btn-mini" onclick="return btnCancelClub(@m.ClubID, this)" />
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </div>
+</section>
+
+
+

@@ -1,0 +1,81 @@
+﻿@using Webdiyer.WebControls.Mvc;
+@using GL.Data.Model;
+@model PagedList<ExpRecord>
+
+
+
+
+<table id="wdt_0" class="table table-striped table-bordered table-hover" width="100%">
+    <thead>
+        <tr>
+            <th>用户ID</th>
+            <th>昵称</th>
+            <th>当前等级</th>
+            <th>游戏类型</th>
+            <th>时间</th>
+            <th>经验点数</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.Count == 0)
+            {
+            <tr class="gradeX">
+                <td class="colspan" align="center" colspan="0">
+                    没有找到相关记录！
+                </td>
+            </tr>
+        }
+        @foreach (ExpRecord m in Model)
+            {
+            <tr class="gradeA">
+                <td>@m.UserID</td>
+                <td>@m.UserName</td>
+                <td>@m.ExpLevel</td>
+                <td>@m.Type</td>
+                <td>@m.CreateTime</td>
+                <td>@m.AddExp</td>
+                <td style="text-align:center"></td>
+            </tr>
+
+        }
+    </tbody>
+</table>
+<div class="dt-toolbar-footer">
+    <div class="col-sm-6 col-xs-12 hidden-xs">
+        <div class="dataTables_info" id="dt_basic_info" role="status" aria-live="polite">Showing <span class="txt-color-darken">@Model.StartItemIndex</span> to <span class="txt-color-darken">@Model.EndItemIndex</span> of <span class="text-primary">@Model.TotalItemCount</span> entries</div>
+    </div>
+    <div class="col-xs-12 col-sm-6">
+        <div class="dataTables_paginate paging_simple_numbers" id="dt_basic_paginate">
+            @Ajax.Pager(
+                Model,
+                new PagerOptions()
+                {
+                    CssClass = "pagination pagination-sm",
+                    ShowMorePagerItems = true,
+                    PageIndexParameterName = "page",
+                    ShowDisabledPagerItems = true,
+                    AlwaysShowFirstLastPageNumber = true,
+                    HorizontalAlign = "right",
+                    CurrentPagerItemTemplate = "<li class=\"paginate_button active\"><span>{0}</span></li>",
+                    DisabledPagerItemTemplate = "<li class=\"paginate_button disabled\"><span>{0}</span></li>",
+                    PagerItemTemplate = "<li class=\"paginate_button\">{0}</li>",
+                    FirstPageText = "第一页",
+                    LastPageText = "最后一页",
+                    ContainerTagName = "ul"
+                    //PageIndexBoxId = "pageindexcm",
+                    //WYWPageIndexString = @"<li class='paginate_button'><input style='width:10px;' type='text' value='' id='{0}' name = '{1}'></li>
+                    //<li class='paginate_button'><a id='goto' name='goto' style='margin-right:10px' >跳转</a><li>",
+                    //GoToButtonId = "goto"
+
+                },
+                new MvcAjaxOptions
+                {
+                    HttpMethod = "POST",
+                    UpdateTargetId = "box",
+                    InsertionMode = InsertionMode.Replace
+                })
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,223 @@
+﻿
+@model object
+@{
+    ViewBag.Title = "修改游戏公告";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div id="content">
+
+    <article class="col-sm-12 col-md-12 col-lg-8" >
+        <div class="jarviswidget" id="wid-id-4" data-widget-editbutton="false" data-widget-custombutton="false">
+            <header>
+                <span class="widget-icon"> <i class="fa fa-edit"></i> </span>
+                <h2>@ViewBag.Title</h2>
+            </header>
+            <div>
+                <div class="jarviswidget-editbox">
+                </div>
+                <div class="widget-body no-padding">
+                    <form id="basic_validate" name="basic_validate" class="smart-form" action="" method="post">
+                        <fieldset>
+                            <section>
+                                <label>游戏公告内容 </label>
+                                <label class="textarea">
+                                    <textarea style="" id="Content" name="Content" class="custom-scroll" rows="30">@Model</textarea>
+                                </label>
+                            </section>
+                        </fieldset>
+
+                        <footer>
+                            <input type="submit" id="btnSubmit" name="btnSubmit" value=" 确定 " class="btn btn-success">
+                            <input onclick="viewData()" type="button" id="btnView" name="btnView" value=" 预览 " class="btn btn-success">
+                        </footer>
+                    </form>
+
+                </div>
+                <!-- end widget content -->
+
+            </div>
+            <!-- end widget div -->
+
+        </div>
+
+    </article>
+
+
+
+
+
+    <div class="row" style="padding-left:15px">
+        <section id="widget-grid" class="">
+            <article class="col-xs-12 col-sm-12 col-md-12 col-lg-6" style="width:568px">
+                <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-0" data-widget-editbutton="false" data-widget-colorbutton="false"
+                     data-widget-togglebutton="false"
+                     data-widget-deletebutton="false"
+                     data-widget-fullscreenbutton="false"
+                     data-widget-custombutton="false"
+                     data-widget-collapsed="false"
+                     data-widget-sortable="false">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                        <h2>预览功能</h2>
+                    </header>
+                    <!-- widget div-->
+                    <label style="background-color:black;width:100%" id="lbl"> 
+                      
+                        
+                          
+                   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                            <!-- end widget content -->
+                        </label>
+                    <!-- end widget div -->
+                </div>
+                <!-- end widget -->
+
+            </article>
+
+        </section>
+    </div>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+@section scripts{
+
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/select2.min.js"></script>
+    <script src="/js/jquery.validate.js"></script>
+
+    <style type="text/css">
+        .loading {
+            position: absolute;
+            z-index: 10000;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            background: url(...) center center;
+        }
+
+        .aaaa tr:hover {
+            background-color: white;
+        }
+    </style>
+    <script type="text/javascript">
+
+                $(function () {
+
+                    var lock = false;
+                    $("#basic_validate").validate({
+                        onsubmit: true,
+                        rules: {
+                            Content: {
+                                required: true
+                              //  , maxlength: 100
+                            }
+                        },
+                        messages: {
+                            Content: {
+                                required: "请输入要发布的内容"
+                                //maxlength: "内容不能超过100个字符"
+                            }
+                        },
+                        errorClass: "help-inline",
+                        errorElement: "span",
+                        highlight: function (element, errorClass, validClass) {
+                            $(element).parents('.control-group').addClass('error');
+                            $(element).parents('.control-group').removeClass('success');
+                        },
+                        unhighlight: function (element, errorClass, validClass) {
+                            $(element).parents('.control-group').removeClass('error');
+                            $(element).parents('.control-group').addClass('success');
+                        },
+                        submitHandler: function (form) {  //通过之后回调
+                            locksubmit()
+                            $.ajax({
+                                url: "/System/GameAnnouncement/",
+                                type: "POST",
+                                //dataType: "JSON",
+                                //data: { "value": document.getElementById("GUName").value },
+                                data: { "Content": $("#Content").val() },
+                                success: function (data) {
+                                    unlocksubmit();
+                                    switch (data.result) {
+                                        case 210:
+                                            window.location = "/System/GameAnnouncement/"
+                                            break;
+                                        case 1:
+                                            alert("发送失败，请稍后再试");
+                                            break;
+                                    }
+                                    //$("#box").empty().append(data).show();
+                                }
+                            }).fail(function (xhr, textStatus, err) {
+                                unlocksubmit();
+                                alert('Error: ' + err);
+                            });
+                        },
+                        invalidHandler: function (form, validator) {  //不通过回调
+                            unlocksubmit();
+                            //alert("not pass");
+                            return false;
+                        }
+                    });
+
+                    function locksubmit() {
+                        if (lock) { return; }
+                        lock = true;
+                        $('#basic_validate').append($('#markbox').addClass('loading'));
+                    }
+                    function unlocksubmit() {
+                        lock = false;
+                        $('#basic_validate').find('#markbox').detach();
+                    }
+                })
+
+
+                function viewData() {
+                    var txt = $("#Content").val();
+
+                
+
+                    $.ajax({
+                        url: "/System/GameViewAnnouncement/",
+                        type: "Post",
+                        data: { "con": txt },
+                        success: function (data) {
+                            $("#lblcon").remove();
+                            $("#lbl").append(data);
+                           
+                        }
+                    });
+                }
+    </script>
+}

@@ -1,0 +1,67 @@
+﻿    <!-- Left panel : Navigation area -->
+<!-- Note: This width of the aside area can be adjusted through LESS variables -->
+<aside id="left-panel">
+
+    <!-- User info -->
+    @{ Html.RenderPartial("_CurrentUser"); }
+    <!-- end user info -->
+    <!-- NAVIGATION : This navigation is also responsive
+
+    To make this navigation dynamic please make sure to link the node
+    (the reference to the nav > ul) after page load. Or the navigation
+    will not initialize.
+    -->
+    <nav>
+        <!-- NOTE: Notice the gaps after each icon usage <i></i>..
+        Please note that these links work a bit different than
+        traditional href="" links. See documentation for details.
+        -->
+
+        <ul>
+            <li class="@Html.RouteIf("AgentInfo", "active")">
+                <a href="@Url.Action("AgentInfo", "Home")" title="账户信息"><i class="fa fa-lg fa-fw fa-home"></i> <span class="menu-item-parent">账户信息</span></a>
+            </li>
+            <li class="@Html.RouteIf("Agent", "active")">
+                <a href="#"><i class="fa fa-lg fa-fw fa-bar-chart-o"></i> <span class="menu-item-parent">渠道信息</span></a>
+                <ul>
+                    @Html.Li("AgentForUpdate", "active", "/Agent/AgentForUpdate", "修改密码")
+                    @Html.Li("AgentList", "active", "/Agent/AgentList", "渠道列表", roles: "SU,公司,股东,总代")
+                </ul>
+            </li>
+            @using (Html.LiContainer("Base", "active"))
+            {
+                <a href="#"><i class="fa fa-lg fa-fw fa-bar-chart-o"></i> <span class="menu-item-parent">基础运营数据</span></a>
+                <ul>
+                    @Html.Li("NumberOfRegisteredUsers", "active", "/Base/NumberOfRegisteredUsers", "注册用户统计", roles : "SU,公司,股东,总代,代理,CPS,CPA,策划")
+                    @Html.Li("NumberOfActiveUsers", "active", "/Base/NumberOfActiveUsers", "活跃用户统计", roles: "SU,公司,股东,总代,代理,CPS,CPA,策划")
+                    @Html.Li("UserRetentionRates", "active", "/Base/UserRetentionRates", "留存率", roles: "SU,公司,股东,总代,代理,CPS,CPA,策划")
+                    @Html.Li("OnlinePlay", "active", "/Base/OnlinePlay", "在线在玩统计", roles: "SU,公司,股东,总代,代理,策划")
+
+                    @*@Html.Li("UsersGoldDistributionRatio", "active", "/Base/UsersGoldDistributionRatio", "用户游戏币分布比", roles: "SU,公司,股东,代理")
+                    @Html.Li("UsersDiamondDistributionRatio", "active", "/Base/UsersDiamondDistributionRatio", "用户钻石分布比", roles: "SU,公司,股东,代理")
+                    @Html.Li("VIPDistributionRatio", "active", "/Base/VIPDistributionRatio", "用户VIP分布表", roles: "SU,公司,股东,代理")*@
+
+                    @*@Html.Li("BankruptcyRate", "active", "/Base/BankruptcyRate", "破产率", roles: "SU,公司,股东,总代,代理,策划")*@
+
+                    @Html.Li("QQZoneRechargeCount", "active", "/Base/QQZoneRechargeCount", "付费", roles: "SU,公司,股东,总代,代理,CPS,策划")
+                    @*@Html.Li("GameOutput2", "active", "/Base/GameOutput2", "游戏产出消耗(优化)", roles: "SU,公司,股东,代理")*@
+                </ul>
+            }
+
+            <li class="@Html.RouteIf("Member", "active")" style='@Html.NoView("总代,策划")'>
+                <a href="#"><i class="fa fa-lg fa-fw fa-bar-chart-o"></i> <span class="menu-item-parent">会员数据查询</span></a>
+                <ul>
+                    @Html.Li("MemberForSearchGameRecord", "active", "/Member/MemberForSearchGameRecord", "个人产出消耗", roles: "SU,公司,股东,代理")
+                    @Html.Li("MemberForSearchGameScore", "active", "/Member/MemberForSearchGameScore", "个人积分流水", roles: "SU,公司,股东,代理")
+                    @Html.Li("MemberForSearchGameExp", "active", "/Member/MemberForSearchGameExp", "个人经验流水", roles: "SU,公司,股东,代理")
+                </ul>
+            </li>
+
+        </ul>
+    </nav>
+    <span class="minifyme" data-action="minifyMenu">
+        <i class="fa fa-arrow-circle-left hit"></i>
+    </span>
+
+</aside>
+<!-- END NAVIGATION -->

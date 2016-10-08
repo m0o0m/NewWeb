@@ -1,0 +1,173 @@
+﻿
+@{
+    List<SelectListItem> boardSelects = ViewData["PhoneBoard"] as List<SelectListItem>;
+
+
+    //ViewData["PhoneModel"] 
+
+    List<SelectListItem> modelsSelects = ViewData["PhoneModel"] as List<SelectListItem>;
+
+}
+@model LoginRegisterDataView
+
+
+<div id="content">
+    <form id="comment-form" class="smart-form" novalidate="novalidate">
+        <div class="row">
+            <div class="widget-body">
+              
+
+                <section class="col col-12" style="width:210px;padding-top:5px">
+                    <label>渠道</label>
+                    <label class="select">
+                        @Html.GetAllAgentGroupList("Channels",Model.Channels)
+                        <i></i>
+                    </label>
+                </section>
+
+
+                <section class="col col-12" style="width:210px;padding-top:5px">
+                    <label>手机系统</label>
+                    <label class="select">
+                        @Html.DropDownListFor(m => m.Platform, new List<SelectListItem>
+                            {
+                                new SelectListItem { Text= "所有", Value = "-1" },
+                                new SelectListItem { Text= "Android", Value = "1" },
+                                new SelectListItem { Text= "IOS", Value = "2" }
+                            
+                            })<i></i>
+                    </label>
+                </section>
+            
+
+                <section class="col col-12" style="width:210px;padding-top:5px">
+                    <label>手机品牌</label>
+                    <label class="select">
+                        <select id="PhoneBoard" name="PhoneBoard" onchange="changeJX()">
+                            @foreach (SelectListItem item in boardSelects)
+                            {
+                                if (item.Value == Model.PhoneBoard)
+                                {
+                                    <option selected="selected" value="@item.Value">@item.Text</option>
+                                }
+                                else
+                                {
+                                    <option value="@item.Value">@item.Text</option>
+                                }
+
+                            }
+
+                        </select>
+                        @*@Html.DropDownListFor(m => m.PhoneBoard, boardSelects)<i></i>*@
+
+                        @*@Html.GetAllPhoneBoardList("PhoneBoard", Model.PhoneBoard)*@
+                        <i></i>
+                    </label>
+                </section>
+
+                <section class="col col-12" style="width:210px;padding-top:5px">
+                    <label>品牌机型</label>
+                    <label class="select">
+                  
+                        @*@Html.DropDownListFor(m => m.PhoneModels, new List<SelectListItem>
+                            {
+                                 new SelectListItem { Text= "所有", Value = "all_model" },
+                                //new SelectListItem { Text= "机型1", Value = "机型1" },
+                                //new SelectListItem { Text= "机型2", Value = "机型2" }
+
+                            })*@
+
+
+                        <select id="PhoneModels" name="PhoneModels" >
+                            @foreach (SelectListItem item in modelsSelects)
+                            {
+                                if (item.Value == Model.PhoneModels)
+                                {
+                                    <option selected="selected" value="@item.Value">@item.Text</option>
+                                }
+                                else
+                                {
+                                    <option value="@item.Value">@item.Text</option>
+                                }
+
+                            }
+
+                        </select><i></i>
+
+                    </label>
+                </section>
+
+                @*<section class="col col-1">
+                    <label class="label">&nbsp;</label>
+                    <input type="button" onclick="search()" class="btn btn-success btn-sm" value="确定" />
+                </section>*@
+            </div>
+        </div>
+     
+    </form>
+  
+          @Html.Partial("MobileLoginRegister_PageList", Model.Data)
+
+</div>
+
+
+<script type="text/javascript">
+    function changeJX() {
+        var pp = $("#PhoneBoard").val();
+        $.ajax({
+            url: "/System/GetModel/",
+            type: "POST",
+            data: { "id": pp },
+            success: function (data) {
+                $("#PhoneModels").empty();
+                $("#PhoneModels").append(data);
+            }
+        });
+    }
+
+    function btnDelete(id) {
+        $.ajax({
+            url: "/System/MobileLoginRegisterDelete/",
+            type: "POST",
+            data: { "id": id },
+            success: function (data) {
+                if (data == "1") {
+                    alert("删除成功!");
+                   
+                    location.reload();
+                } else {
+                    alert("删除失败，请重新尝试!");
+                }
+            }
+        });
+    }
+    //平台，渠道，品牌，登录关闭类型，注册关闭类型，手机型号
+    function btnAdd(loginType,RegisterType) {
+       
+        var device = $("#Platform").val();
+        var agent = $("#Channels").val();
+        var brand = $("#PhoneBoard").val();
+        var mobileModel = $("#PhoneModels").val();
+        if (agent <= 0) {
+            agent = -1;
+        }
+     
+
+        $.ajax({
+            url: "/System/MobileLoginRegisterAdd/",
+            type: "POST",
+            data: { "device": device, "agent": agent, "brand": brand, "loginType": loginType, "RegisterType": RegisterType, "mobileModel": mobileModel },
+            success: function (data) {
+                if (data == "1") {
+                    alert("操作成功!");
+
+                    location.reload();
+                } else {
+                    alert("操作失败，请重新尝试!");
+                }
+            }
+        });
+    }
+
+
+</script>

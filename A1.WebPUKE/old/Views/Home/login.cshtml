@@ -1,0 +1,55 @@
+﻿@{
+    ViewBag.Title = "login";
+    Layout = "~/Views/Shared/_index.cshtml";
+}
+@section Js{
+    <script src="/Scripts/yw.js"></script>
+}
+<div class="wrap">
+        <nav class="login-tabs">
+            <ul>
+                <li><a href="/reg">用户注册</a></li>
+                <li class="active"><a href="/login">用户登录</a></li>
+            </ul>   
+        </nav>
+        <section class="login-area">
+            <form id="form1">
+                <fieldset>
+                    <legend>帐号登录</legend>
+                    <div class="control-group">
+                        <label class="control-label"  for="ipt-login-id">帐号：</label>
+                        <div class="controls">
+                            <input id="ipt-login-id" type="text" name="userName">
+                            <!-- 提示信息 -->
+                            <p class="help">4-12字符可用汉字、数字和字母</p>
+                            <!-- 错误信息 -->
+                            <!-- <p class="error">不能为空</p> -->
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="ipt-login-pwd">密码：</label>
+                        <div class="controls">
+                            <input id="ipt-login-pwd" type="password" name="Password">
+                            <p class="help">4-16字符可用数字和字母</p>
+                              <p class="server-error"></p>
+                        </div>
+                    </div>
+                    <!-- <div class="control-group">
+                        <label class="control-label" for="ipt-login-pwd">验证码：</label>
+                        <div class="controls">
+                            <input id="ipt-login-verify" class="ipt-verify" type="text">
+                            <img class="verify-img" src="Image/verify_img.png" alt="验证码">
+                            <p class="server-error">服务器返回的错误信息</p>
+                        </div>
+                    </div> -->
+                    <div class="control-group">
+                        
+                        <button type="button" class="btn-sbt" id="login"> 立即登录</button>
+                    </div>
+                </fieldset>
+            </form>
+
+       
+
+        </section>        
+    </div>

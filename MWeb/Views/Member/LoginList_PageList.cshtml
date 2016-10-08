@@ -1,0 +1,185 @@
+﻿@using Webdiyer.WebControls.Mvc;
+@using GL.Data.Model;
+@model PagedList<LoginRecord>
+
+
+
+<div class="detail">
+    <div class="row-fluid">
+        <div class="widget-box" id="box">
+            <section id="widget-grid" class="">
+                <div class="row">
+                    <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-0" data-widget-editbutton="false" data-widget-colorbutton="false"
+                             data-widget-togglebutton="false"
+                             data-widget-deletebutton="false"
+                             data-widget-fullscreenbutton="false"
+                             data-widget-custombutton="false"
+                             data-widget-collapsed="false"
+                             data-widget-sortable="false">
+                            <header>
+                                <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                                <h2>@ViewBag.Title</h2>
+                            </header>
+                            <!-- widget div-->
+                            <div>
+                                <!-- widget edit box -->
+                                <div class="jarviswidget-editbox">
+                                    <!-- This area used as dropdown edit box -->
+                                </div>
+                                <!-- end widget edit box -->
+                                <!-- widget content -->
+                                <div class="widget-body no-padding">
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered">
+                                            @if (Model.Count == 0)
+            {
+                                                <tr class="gradeX">
+                                                    <td class="colspan" align="center" colspan="0">
+                                                        没有找到相关记录！
+                                                    </td>
+                                                </tr>
+                                            }
+                                            else if (Model[0].Flag == -1)
+                                            {
+                                                <thead>
+                                                    <tr>
+                                                        <th>日期</th>
+                                                        <th>IP</th>
+                                                        <th>玩家个数</th>
+                                                        <th>玩家ID</th>
+                                                    </tr>
+                                                </thead>
+                                            }
+                                            else
+                                            {
+                                                <thead>
+                                                    <tr>
+                                                        <th>用户ID</th>
+                                                        <th>用户昵称</th>
+                                                        <th>登录时间</th>
+                                                        <th>登录账号类型</th>
+                                                        <th>登录渠道</th>
+                                                        <th>登录版本</th>
+                                                        <th>手机型号</th>
+                                                        <th>IP地址</th>
+                                                        <th>所在地</th>
+                                                        <th>IMEI地址</th>
+                                                        <th>游戏币</th>
+                                                        <th>五币</th>
+                                                        <th></th>
+                                                    </tr>
+                                                </thead>
+                                            }
+
+                                            <tbody>
+                                                @foreach (LoginRecord m in Model)
+                                                {
+                                                    if (m.Flag == -1)
+                                                    {
+                                                        <tr class="gradeA">
+                                                            <td>@m.LoginTime</td>
+                                                            <td>@m.IP</td>
+                                                            <td>@m.Acc</td>
+                                                            <td style="word-wrap:break-word;word-break:break-all;">@m.UserIDS</td>
+                                                        </tr>}
+                                                    else
+                                                    {
+                                                        <tr class="gradeA">
+                                                            <td>@m.UserID</td>
+                                                            <td>@m.NickName</td>
+                                                            <td>@m.LoginTime</td>
+                                                            <td>
+                                                            @if (m.AccountType == AccountType.旧数据无登录方式) {
+                                                                
+                                                            }
+                                                            else
+                                                            {
+                                                               @m.AccountType.ToString()
+                                                            }
+                                                           
+                                                            <td>@m.AgentName</td>
+                                                            <td>@m.VersionInfo</td>
+                                                            <td>@m.PhoneInfo</td>
+                                                            <td>@m.IP</td>
+                                                            <td>@m.Area</td>
+                                                            <td>@m.Mac</td>
+                                                            <td>@m.Gold</td>
+                                                            <td>@m.Diamond</td>
+                                                            <td style="text-align:center">
+                                                                <input id="btnFreeze" type="button" value="封号" class="btn btn-primary btn-mini" onclick="return btnFreeze(@m.UserID,'@m.NickName')" />
+                                                                |<input id="btnIP" type="button" value="封IP" class="btn btn-inverse btn-mini" onclick="return btnIP(@m.UserID,'@m.IP')" />
+                                                                |<input id="btnMac" type="button" value="封IMEI" class="btn btn-inverse btn-mini" onclick="return btnMac(@m.UserID,'@m.Mac')" />
+                                                                |<input id="btnReIP" type="button" value="封注册IP" class="btn btn-inverse btn-mini" onclick="return btnReIP(@m.UserID,'@m.CreateIP')" />
+                                                            </td>
+                                                        </tr>
+                                                    }
+                                                }
+                                            </tbody>
+
+                                        </table>
+                                    </div>
+
+
+
+                                    <div class="widget-content">
+
+                                        @Ajax.Pager(
+    Model,
+    new PagerOptions()
+    {
+        CssClass = "pager",
+        ShowMorePagerItems = true,
+        PageIndexParameterName = "page",
+        ShowDisabledPagerItems = true,
+        AlwaysShowFirstLastPageNumber = true,
+        HorizontalAlign = "right",
+        CurrentPagerItemTemplate = "<li class=\"disabled\"><span>{0}</span></li>",
+        DisabledPagerItemTemplate = "<li class=\"disabled\"><span>{0}</span></li>",
+        PagerItemTemplate = "<li>{0}</li>",
+        ShowPrevNext = true,
+        FirstPageText = "第一页",
+        LastPageText = "最后一页",
+        ContainerTagName = "ul",
+        PageIndexBoxId = "pageindexcm",
+        WYWPageIndexString = @"<li><input style='width:50px;' type='text' value='' id='{0}' name = '{1}'></li>
+                                 <li><a id='goto' name='goto' style='margin-right:10px' >跳转</a><li>
+                             ",
+        GoToButtonId = "goto"
+    },
+    new MvcAjaxOptions
+    {
+        HttpMethod = "POST",
+        UpdateTargetId = "box",
+        InsertionMode = InsertionMode.Replace,
+        OnFailure = "errFunc",
+        OnSuccess = "successPageFun"
+    }).Options(o => o.AddRouteValue("target", "box"))
+                                    </div>
+
+
+
+
+                                </div>
+                                <!-- end widget content -->
+                            </div>
+                            <!-- end widget div -->
+                        </div>
+                        <!-- end widget -->
+
+                    </article>
+                </div>
+            </section>
+
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+

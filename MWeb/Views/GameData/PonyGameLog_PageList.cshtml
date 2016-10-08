@@ -1,0 +1,340 @@
+﻿
+@using Webdiyer.WebControls.Mvc;
+@using GL.Data.Model;
+@using GL.Data.BLL;
+@model PagedList<HorseGameRecord>
+
+
+
+
+
+
+<section id="widget-grid" class="">
+    <div class="row">
+        <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-0" data-widget-editbutton="false" data-widget-colorbutton="false"
+                 data-widget-togglebutton="false"
+                 data-widget-deletebutton="false"
+                 data-widget-fullscreenbutton="false"
+                 data-widget-custombutton="false"
+                 data-widget-collapsed="false"
+                 data-widget-sortable="false">
+                <header>
+                    <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                    <h2>@ViewBag.Title</h2>
+                </header>
+                <!-- widget div-->
+                <div>
+                    <!-- widget edit box -->
+                    <div class="jarviswidget-editbox">
+                        <!-- This area used as dropdown edit box -->
+                    </div>
+                    <!-- end widget edit box -->
+                    <!-- widget content -->
+                    <div class="widget-body no-padding">
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <thead>
+
+                                    <tr>
+                                        <th style="width:140px">时间</th>
+                                        <th style="width:60px">房间ID</th>
+                                        <th style="width:110px">牌局号</th>
+
+                                        <th style="width:100px">玩家信息</th>
+                                        <th>庄家资产</th>
+                                        <th style="width:40px" >赔率</th>
+                                        <th>下注详细</th>
+                                        <th style="width:70px">开奖结果</th>
+                                        <th style="width:90px">输赢游戏币</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model.Count == 0)
+            {
+                                        <tr class="gradeX">
+                                            <td class="colspan" align="center" colspan="0">
+                                                没有找到相关记录！
+                                            </td>
+                                        </tr>
+                                    }
+                                    @foreach (HorseGameRecord m in Model)
+                                    {
+
+                                        string tempStr = m.UserData.Replace("_0,0,0,(", "");
+                                        var tempStr2 = tempStr.Split(new string[] { ",(_" }, StringSplitOptions.RemoveEmptyEntries).ToList();
+                                        string wjxy = "";
+                                        string zj = "";
+                                        int k = 0;
+                                        if (tempStr2.Count == 2)
+                                        {//如果是庄家
+                                            zj = tempStr2[0];
+                                            k = -1;
+                                            wjxy = tempStr2[1];
+                                            tempStr = tempStr2[0] + "_" + tempStr2[1];
+                                        }
+                                        else
+                                        {
+                                            wjxy = tempStr2[0];
+                                            k = 0;
+                                        }
+                                        var userList = m.UserData.Split('_').ToList();
+                                        userList.RemoveAt(userList.Count - 1);
+                                        var j = userList.Count;
+                                        for (int i = 0; i < j; i++)
+                                        {
+                                            var userData1 = userList[i].Split(new string[] { ",(" }, StringSplitOptions.RemoveEmptyEntries).ToList();
+                                            var userData = userList[i].Split(',').ToList();
+                                            <tr class="gradeA">
+                                                @if (i == 0)
+                                                {
+                                                    <td rowspan="@j">@m.CreateTime</td>
+                                                    <td rowspan="@j">@m.RoomID</td>
+                                                    <td rowspan="@j">@m.RoundID</td>
+
+                                                }
+
+
+                                                <td style="word-break:keep-all">
+                                                    @{
+
+                                                        int id = 0;
+                                                        var wj = "";
+                                                        if (int.TryParse(userData[0], out id))
+                                                        {
+                                                            Role u = RoleBLL.GetModelByID(new Role { ID = Convert.ToInt64(id) });
+
+                                                            if (u != null)
+                                                            {
+                                                                wj = u.NickName + "(" + userData[0] + ")";
+                                                            }
+                                                            else
+                                                            {
+                                                                wj = userData[0];
+                                                            }
+                                                        }
+                                                        else
+                                                        {
+                                                            wj = userData[0];
+                                                        }
+                                                        if (wj == "0")
+                                                        {
+                                                            wj = "五小姐";
+                                                        }
+
+
+                                                }
+                                                    @if (tempStr2.Count == 2 && i == 0)
+                                                    {
+                                                        wj = wj + " 庄家";
+                                                    }
+                                                    else
+                                                    {
+
+                                                    }
+                                                @wj
+
+                                            </td>
+                                                <td>@userData[1]</td>   @*总资产*@
+                                                 @if (i == 0)
+                                                 {
+                                                    <td  rowspan="@j">
+                                                        1-2:12<br>
+                                                        1-3:12<br>
+                                                        1-4:12<br>
+                                                        1-5:12<br>
+                                                        1-6:12<br>
+                                                        2-3:12<br>
+                                                        2-4:12<br>
+                                                        2-5:12<br>
+                                                        2-6:12<br>
+                                                        3-4:12<br>
+                                                        3-5:12<br>
+                                                        3-6:12<br>
+                                                        4-5:12<br>
+                                                        4-6:12<br>
+                                                        5-6:12<br>
+                                                        1:5<br>
+                                                        2-5:5<br>
+                                                        3-5:5<br>
+                                                        4-5:5<br>
+                                                        5-5:5<br>
+                                                        6-5:5<br>
+                                                        单:2<br>
+                                                        双:2
+                                                        @*@{
+                                                            string[] obbstr = m.Obbs.Replace('_', '，').Trim('，').Split('，');
+                                                            int mn = 0;
+                                                            for (int t = 1; t <= obbstr.Length; t++)
+                                                            {
+                                                                mn++;
+                                                                if (t == obbstr.Length)
+                                                                {
+                                                                    <text> @obbstr[t - 1] </text>
+                                                                }
+                                                                else if (mn % 1 == 0)
+                                                                {
+                                                                    mn = 0;
+                                                                    <text> @obbstr[t - 1] </text><br><br>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <text> @obbstr[t - 1] </text>
+                                                                }
+                                                            }
+
+                                                        }*@
+                                                    </td>
+                                                            }
+                                          
+                                            <td>
+                                                @if (tempStr2.Count == 2 && i == 0)
+                                                {
+                                                    <text> </text>
+                                                }
+                                                else
+                                                {
+
+                                                    var bb = System.Text.RegularExpressions.Regex.Matches(userData1[1], @"(\d+):(\d+),", System.Text.RegularExpressions.RegexOptions.IgnoreCase);
+                                                    @*<span style="width:150px;text-align: right;">2:102，</span><span style="width:150px;text-align: right;">2:10</span><br>
+                                                        <span style="width:150px;text-align: right;">1-2:102，</span><span style="width:150px;text-align: right;">2-2:10</span>*@
+                                                int count = 0;
+                                                int count2 = 0;
+                                                int allc = bb.Count;
+                                                foreach (System.Text.RegularExpressions.Match NextMatch in bb)
+                                                {
+
+                                                    count++; count2++;
+                                                    if (count2 == allc)
+                                                    {
+                                                        <text> @HorseGameRecordMethod.TransPositionTo(NextMatch.Groups[1].Value) : @NextMatch.Groups[2].Value</text>
+        }
+        else if (count >= 9)
+        {
+            <text>@HorseGameRecordMethod.TransPositionTo(NextMatch.Groups[1].Value) : @NextMatch.Groups[2].Value </text> <br>
+            count = 0;
+        }
+        else
+        {
+            <text>@HorseGameRecordMethod.TransPositionTo(NextMatch.Groups[1].Value) : @NextMatch.Groups[2].Value ，</text>
+        }
+
+    }
+
+                                             
+
+
+}
+                                            </td>
+                                            @if (i == 0)
+                    {
+                                                <td rowspan="@j">@m.RankID</td>
+                                            }
+                                            @*@{
+                                                var bb = System.Text.RegularExpressions.Regex.Matches(userData[4], @"\w{2}", System.Text.RegularExpressions.RegexOptions.IgnoreCase);
+                                                    for (int k = 0; k < bb.Count; k++)
+                                                    {
+                                                        <i class="game game-@bb[k]"></i>
+                                                    }
+                                                    }*@
+
+
+                                            <td>
+                                                @if (userData[2].Contains("-"))
+                                                {
+                                                    @userData[2].Replace("-", "- $ ");
+                                                }
+                                                else
+                                                {
+                                                    var str = "+ $ " + userData[2];
+                                                    @str;
+                                                }
+
+
+                                            </td>
+                                        </tr>
+                                                        }
+                                                    }
+                                </tbody>
+                            </table>
+                        </div>
+
+
+
+
+
+
+
+
+                        <div class="widget-content">
+
+                            @Ajax.Pager(
+    Model,
+    new PagerOptions()
+    {
+        CssClass = "pager",
+        ShowMorePagerItems = true,
+        PageIndexParameterName = "page",
+        ShowDisabledPagerItems = true,
+        AlwaysShowFirstLastPageNumber = true,
+        //ShowRecordCountItems = true,
+        HorizontalAlign = "right",
+        //SeparatorHtml = "",
+
+        CurrentPagerItemTemplate = "<li class=\"disabled\"><span>{0}</span></li>",
+        DisabledPagerItemTemplate = "<li class=\"disabled\"><span>{0}</span></li>",
+        PagerItemTemplate = "<li>{0}</li>",
+        //CurrentPagerItemWrapperFormatString = "<li class=\"disabled\"><span>{0}</span></li>",
+        //NumericPagerItemWrapperFormatString = "<li>{0}</li>",
+        //PagerItemWrapperFormatString = "<li>{0}</li>",
+        //RecordCountText = string.Format("共{0}条记录, {1}页", Model.TotalItemCount, Model.TotalPageCount),
+        //RecordCountFormatString = "<li><span>{0}</span></li>",
+        //DisabledPagerItemsFormatString = "<li class=\"disabled\"><span>{0}</span></li>",
+        //PageIndexBoxType = Webdiyer.WebControls.Mvc.PageIndexBoxType.TextBox,
+        //GoButtonText = "跳转到",
+        ShowPrevNext = true,
+        FirstPageText = "第一页",
+        LastPageText = "最后一页",
+        ContainerTagName = "ul",
+        PageIndexBoxId = "pageindexcm",
+        WYWPageIndexString = @"<li><input style='width:50px;' type='text' value='' id='{0}' name = '{1}'></li>
+                                 <li><a id='goto' name='goto' style='margin-right:10px' >跳转</a><li>
+                             ",
+        GoToButtonId = "goto"
+    },
+    new MvcAjaxOptions
+    {
+        HttpMethod = "POST",
+        UpdateTargetId = "box",
+        InsertionMode = InsertionMode.Replace,
+        OnFailure = "errFunc",
+        OnSuccess = "successPageFun"
+    })
+                        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    </div>
+                    <!-- end widget content -->
+                </div>
+                <!-- end widget div -->
+            </div>
+            <!-- end widget -->
+
+        </article>
+    </div>
+</section>

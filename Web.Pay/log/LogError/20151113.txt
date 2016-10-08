@@ -1,0 +1,61 @@
+
+ 
+记录时间：2015-11-13 16:38:22,519  线程ID:[9]  日志级别：INFO  
+错误描述：Yeepay 
+2015/11/13 16:38:22
+生成的签名为：qVLEJE+2WRX9DJHNlD3eCeQQ4DYDCguTnA1OdgWyGsSdPUE9CLeNnwV84YmfUe36ajkEb9okmnGyFMSGwiKA42o0f7W5OSefqankYrBQU42D9iCWb3ZBAGUnrHLLuZW5Vsn3VQpUJD47waQb41ibR4LArIs3HMK4+yqzmXj0V6Y=
+网页支付明文数据json格式为：{"amount":1,"callbackurl":"http://localhost:2335/Callback/fYeePay","currency":156,"fcallbackurl":"http://localhost:2335/Callback/YeePay","identityid":"12543","identitytype":2,"merchantaccount":"YB01000000144","orderexpdate":60,"orderid":"Yeepay20151113163822422","paytypes":"1|2","productcatalog":"1","productdesc":"1","productname":"515游戏-1游戏币","sign":"qVLEJE+2WRX9DJHNlD3eCeQQ4DYDCguTnA1OdgWyGsSdPUE9CLeNnwV84YmfUe36ajkEb9okmnGyFMSGwiKA42o0f7W5OSefqankYrBQU42D9iCWb3ZBAGUnrHLLuZW5Vsn3VQpUJD47waQb41ibR4LArIs3HMK4+yqzmXj0V6Y=","terminalid":"F57DFAB3-5F20-4B28-ABB1-39AADACB8C0E","terminaltype":2,"transtime":1447403902,"userip":"127.0.0.1","userua":"Mozilla/5.0 (Windows NT 6.1; WOW64; rv:42.0) Gecko/20100101 Firefox/42.0"}
+网页支付业务数据经过AES加密后的值为：1dQsERmsZvLjzJTfkGSeTSHOiUO4SszpWkhAOqK332r3gQvvY7agVCVtV8CRgRMHRSb9PlS2EUBF709fjVSIAGUAqZyQuvgv65ZFxObOOnd4qPyHoJTzViR+W8JizmWllyKTMdXiFS2m81rdg+CIDC7T67m6QwmIryT7bA8AaoWAQ745a2mnylTFF1iPKNKlQvJp3zzpZLCKf/hjTUYOiUq0Ftf03gEwTEO/Rp5/b/pidJi8bcSoYHojCgb3NWiR7Jeu0tnyJ9BZTOmiJ7Z9Y0kchTyoqBQsdMAkibK1sE+UmlJGee/FSCDegAFeGdZyt3vSQQmU6NC1i92ro6HQyWeNBEnqsYUMutTl5Ex29ruB+o2UTi4GuK/2rL8SHRDb7yDX96SnUWH7eTDMP/AqCkHkgEGpXV++6K5DxhMS0m+r4sAOiKhuhDNpobdpo+0KyhB7ib71rQq03p0NtfYjt/0UpcRvyorZCn6NPz/8AFw5A9gfpdvKP9KC21xqNlp7cVrxI6WFlTCB4hFWdJLs4SPjwe7ONH1mYsQ/uuhLgO58dYhnCSV8UCDae6wuos5+wYUyaANsfsA9xsF9yMJKaskLnQ8bZehItK+lwO1vup8NrhRnN8IaODtcHSgdm2qgRelA+31qcIq8g3WNdybueTWmBc9YtNFmR4aF2D6pxOYPpBAfbDbSrkUiQOd82+UW/V7TzP+OC2u1ssfBmgr6v+ecBliaYsawYcD1mBEv/H+pgvaaUcdGILhL7SC+Qsq0gCHJz6toBSAmVV8KSJGDd3ZDf2SrpZsPbem0jfydMdODRZQRIIkh993xtb3hTt5FZ7/hUGEZmyg86sA5Ry/I2O5LBTdpAVyp+hASaoe81mJjNWk9iXf+Bm4HAr745udoQfLwu9Ewzs0Ibo3RSvHxYfhLGXJlzocHRVcgWPFhFDz1O2MFvoD4WNCXrEeJDLq2euDLO0B3iNvnqnBj6gtZrQ==
+merchantAesKey为：DJJB8V8L622T2480
+encryptkey为：Yz+O/0thdcNWb+cSAmzmSHdKz3owVX1LADuzFxzndb+h6r9CU/yUx6+YeGfmtZ5QNFAxJt357KutitpBdGGn5msoWpOZIzCnaMUuOm0aw5bTVl3f3al19q1jma1BeWR1hH8sFy1N/NWChNViEbriyw9ZFJmcYqKCqyIoRltQ0aU=
+网页支付链接地址为：http://mobiletest.yeepay.com/paymobile/api/pay/request?data=1dQsERmsZvLjzJTfkGSeTSHOiUO4SszpWkhAOqK332r3gQvvY7agVCVtV8CRgRMHRSb9PlS2EUBF709fjVSIAGUAqZyQuvgv65ZFxObOOnd4qPyHoJTzViR%2bW8JizmWllyKTMdXiFS2m81rdg%2bCIDC7T67m6QwmIryT7bA8AaoWAQ745a2mnylTFF1iPKNKlQvJp3zzpZLCKf%2fhjTUYOiUq0Ftf03gEwTEO%2fRp5%2fb%2fpidJi8bcSoYHojCgb3NWiR7Jeu0tnyJ9BZTOmiJ7Z9Y0kchTyoqBQsdMAkibK1sE%2bUmlJGee%2fFSCDegAFeGdZyt3vSQQmU6NC1i92ro6HQyWeNBEnqsYUMutTl5Ex29ruB%2bo2UTi4GuK%2f2rL8SHRDb7yDX96SnUWH7eTDMP%2fAqCkHkgEGpXV%2b%2b6K5DxhMS0m%2br4sAOiKhuhDNpobdpo%2b0KyhB7ib71rQq03p0NtfYjt%2f0UpcRvyorZCn6NPz%2f8AFw5A9gfpdvKP9KC21xqNlp7cVrxI6WFlTCB4hFWdJLs4SPjwe7ONH1mYsQ%2fuuhLgO58dYhnCSV8UCDae6wuos5%2bwYUyaANsfsA9xsF9yMJKaskLnQ8bZehItK%2blwO1vup8NrhRnN8IaODtcHSgdm2qgRelA%2b31qcIq8g3WNdybueTWmBc9YtNFmR4aF2D6pxOYPpBAfbDbSrkUiQOd82%2bUW%2fV7TzP%2bOC2u1ssfBmgr6v%2becBliaYsawYcD1mBEv%2fH%2bpgvaaUcdGILhL7SC%2bQsq0gCHJz6toBSAmVV8KSJGDd3ZDf2SrpZsPbem0jfydMdODRZQRIIkh993xtb3hTt5FZ7%2fhUGEZmyg86sA5Ry%2fI2O5LBTdpAVyp%2bhASaoe81mJjNWk9iXf%2bBm4HAr745udoQfLwu9Ewzs0Ibo3RSvHxYfhLGXJlzocHRVcgWPFhFDz1O2MFvoD4WNCXrEeJDLq2euDLO0B3iNvnqnBj6gtZrQ%3d%3d&encryptkey=Yz%2bO%2f0thdcNWb%2bcSAmzmSHdKz3owVX1LADuzFxzndb%2bh6r9CU%2fyUx6%2bYeGfmtZ5QNFAxJt357KutitpBdGGn5msoWpOZIzCnaMUuOm0aw5bTVl3f3al19q1jma1BeWR1hH8sFy1N%2fNWChNViEbriyw9ZFJmcYqKCqyIoRltQ0aU%3d&merchantaccount=YB01000000144
+网页支付链接地址长度为：1342
+
+
+ 
+记录时间：2015-11-13 17:33:05,992  线程ID:[7]  日志级别：INFO  
+错误描述： QQPay Url : http://localhost:2335/Callback/ResultNotifyPageForQQ
+
+ 
+记录时间：2015-11-13 17:33:06,007  线程ID:[7]  日志级别：ERROR 
+错误描述： QQPay 无通知参数 : http://localhost:2335/Callback/ResultNotifyPageForQQ
+
+ 
+记录时间：2015-11-13 17:33:42,567  线程ID:[13]  日志级别：INFO  
+错误描述： QQPay Url : http://localhost:2335/Callback/ResultNotifyPageForQQ?amt=200&appid=1104965754&billno=-APPDJSX36116-20151113-1732124081&openid=8358A11C807DA87B2E8D38AFEB00B860&payamt_coins=0&paychannel=qqpoint&paychannelsubid=1&payitem=50001*20*1&providetype=0&pubacct_payamt_coins=&rbazinga=1&token=A671006A8842254F5AEEFAF8E68BD1B225066&ts=1447407132&version=v3&zoneid=0&sig=5hiZLnL%2FrMrrpOZqI%2FqH%2BRM%2FTPo%3D
+
+ 
+记录时间：2015-11-13 17:37:52,656  线程ID:[7]  日志级别：INFO  
+错误描述： QQPay Url : http://localhost:2335/Callback/ResultNotifyPageForQQ?amt=200&appid=1104965754&billno=-APPDJSX36116-20151113-1732124081&openid=8358A11C807DA87B2E8D38AFEB00B860&payamt_coins=0&paychannel=qqpoint&paychannelsubid=1&payitem=50001*20*1&providetype=0&pubacct_payamt_coins=&rbazinga=1&token=A671006A8842254F5AEEFAF8E68BD1B225066&ts=1447407132&version=v3&zoneid=0&sig=5hiZLnL%2FrMrrpOZqI%2FqH%2BRM%2FTPo%3D
+
+ 
+记录时间：2015-11-13 17:39:47,366  线程ID:[7]  日志级别：INFO  
+错误描述： QQPay Url : http://localhost:2335/Callback/ResultNotifyPageForQQ?amt=200&appid=1104965754&billno=-APPDJSX36116-20151113-1732124081&openid=8358A11C807DA87B2E8D38AFEB00B860&payamt_coins=0&paychannel=qqpoint&paychannelsubid=1&payitem=50001*20*1&providetype=0&pubacct_payamt_coins=&rbazinga=1&token=A671006A8842254F5AEEFAF8E68BD1B225066&ts=1447407132&version=v3&zoneid=0&sig=5hiZLnL%2FrMrrpOZqI%2FqH%2BRM%2FTPo%3D
+
+ 
+记录时间：2015-11-13 17:42:19,526  线程ID:[7]  日志级别：INFO  
+错误描述： QQPay Url : http://localhost:2335/Callback/ResultNotifyPageForQQ?amt=200&appid=1104965754&billno=-APPDJSX36116-20151113-1732124081&openid=8358A11C807DA87B2E8D38AFEB00B860&payamt_coins=0&paychannel=qqpoint&paychannelsubid=1&payitem=50001*20*1&providetype=0&pubacct_payamt_coins=&rbazinga=1&token=A671006A8842254F5AEEFAF8E68BD1B225066&ts=1447407132&version=v3&zoneid=0&sig=5hiZLnL%2FrMrrpOZqI%2FqH%2BRM%2FTPo%3D
+
+ 
+记录时间：2015-11-13 17:52:14,380  线程ID:[7]  日志级别：INFO  
+错误描述： QQPay Url : http://localhost:2335/Callback/ResultNotifyPageForQQ?amt=200&appid=1104965754&billno=-APPDJSX36116-20151113-1732124081&openid=8358A11C807DA87B2E8D38AFEB00B860&payamt_coins=0&paychannel=qqpoint&paychannelsubid=1&payitem=50001*20*1&providetype=0&pubacct_payamt_coins=&rbazinga=1&token=A671006A8842254F5AEEFAF8E68BD1B225066&ts=1447407132&version=v3&zoneid=0&sig=5hiZLnL%2FrMrrpOZqI%2FqH%2BRM%2FTPo%3D
+
+ 
+记录时间：2015-11-13 17:55:55,415  线程ID:[6]  日志级别：ERROR 
+错误描述：Web.Pay.Controllers.PayController参数不正确 
+
+ 
+记录时间：2015-11-13 17:57:18,938  线程ID:[15]  日志级别：INFO  
+错误描述： QQPay Url : http://localhost:2335/Callback/ResultNotifyPageForQQ?amt=200&appid=1104965754&billno=-APPDJSX36116-20151113-1732124081&openid=8358A11C807DA87B2E8D38AFEB00B860&payamt_coins=0&paychannel=qqpoint&paychannelsubid=1&payitem=50001*20*1&providetype=0&pubacct_payamt_coins=&rbazinga=1&token=A671006A8842254F5AEEFAF8E68BD1B225066&ts=1447407132&version=v3&zoneid=0&sig=5hiZLnL%2FrMrrpOZqI%2FqH%2BRM%2FTPo%3D
+
+ 
+记录时间：2015-11-13 17:57:30,107  线程ID:[15]  日志级别：ERROR 
+错误描述： QQPay fail : http://localhost:2335/Callback/ResultNotifyPageForQQ?amt=200&appid=1104965754&billno=-APPDJSX36116-20151113-1732124081&openid=8358A11C807DA87B2E8D38AFEB00B860&payamt_coins=0&paychannel=qqpoint&paychannelsubid=1&payitem=50001*20*1&providetype=0&pubacct_payamt_coins=&rbazinga=1&token=A671006A8842254F5AEEFAF8E68BD1B225066&ts=1447407132&version=v3&zoneid=0&sig=5hiZLnL%2FrMrrpOZqI%2FqH%2BRM%2FTPo%3D
+
+ 
+记录时间：2015-11-13 17:57:33,812  线程ID:[15]  日志级别：INFO  
+错误描述： QQPay Url : http://localhost:2335/Callback/ResultNotifyPageForQQ?amt=200&appid=1104965754&billno=-APPDJSX36116-20151113-1732124081&openid=8358A11C807DA87B2E8D38AFEB00B860&payamt_coins=0&paychannel=qqpoint&paychannelsubid=1&payitem=50001*20*1&providetype=0&pubacct_payamt_coins=&rbazinga=1&token=A671006A8842254F5AEEFAF8E68BD1B225066&ts=1447407132&version=v3&zoneid=0&sig=5hiZLnL%2FrMrrpOZqI%2FqH%2BRM%2FTPo%3D
+
+ 
+记录时间：2015-11-13 17:57:38,345  线程ID:[15]  日志级别：ERROR 
+错误描述： QQPay fail : http://localhost:2335/Callback/ResultNotifyPageForQQ?amt=200&appid=1104965754&billno=-APPDJSX36116-20151113-1732124081&openid=8358A11C807DA87B2E8D38AFEB00B860&payamt_coins=0&paychannel=qqpoint&paychannelsubid=1&payitem=50001*20*1&providetype=0&pubacct_payamt_coins=&rbazinga=1&token=A671006A8842254F5AEEFAF8E68BD1B225066&ts=1447407132&version=v3&zoneid=0&sig=5hiZLnL%2FrMrrpOZqI%2FqH%2BRM%2FTPo%3D

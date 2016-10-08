@@ -1,0 +1,215 @@
+﻿@using Webdiyer.WebControls.Mvc;
+@using GL.Data.Model;
+@model PagedList<Role>
+
+
+
+
+<section id="widget-grid" class="">
+    <div class="row">
+        <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-0" data-widget-editbutton="false" data-widget-colorbutton="false"
+                 data-widget-togglebutton="false"
+                 data-widget-deletebutton="false"
+                 data-widget-fullscreenbutton="false"
+                 data-widget-custombutton="false"
+                 data-widget-collapsed="false"
+                 data-widget-sortable="false">
+                <header>
+                    <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                    <h2>会员列表</h2>
+                </header>
+                <!-- widget div-->
+                <div>
+                    <!-- widget edit box -->
+                    <div class="jarviswidget-editbox">
+                        <!-- This area used as dropdown edit box -->
+                    </div>
+                    <!-- end widget edit box -->
+                    <!-- widget content -->
+                    <div class="widget-body no-padding">
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <thead>
+                                      <tr><th colspan="5">会员总数 | 【@ViewData["AllUser"]】</th></tr>
+                                    <tr>
+                                        <th>账号信息</th>
+                                        <th>个人信息</th>
+                                        <th>财务信息</th>
+                                        <th>状态信息</th>
+                                        <th>基本操作</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model.Count == 0)
+            {
+                                        <tr class="gradeX">
+                                            <td class="colspan" align="center" colspan="0">
+                                                没有找到相关记录！
+                                            </td>
+                                        </tr>
+            }
+                                    @foreach (Role m in Model)
+            {
+                                        <tr class="gradeA">
+                                            <td>ID:@m.ID <br />帐号:@m.Account <br />昵称:@m.NickName<br />
+                                            VIP等级: 
+                                                @{
+                                                    string vipL = m.MaxNoble.ToString();
+                                                    if (m.MaxNoble == 200)
+                                                    {
+                                                        vipL = "体验vip";
+                                                    }
+                                                    @vipL
+                                                }
+                                            </td>
+                                            <td>邮箱:@m.Email<br />电话:@m.Tel<br />姓名:@m.TrueName<br />身份证号码:@m.Identity</td>
+                                            <td>代理:@m.Agent<br />游戏币:@m.Gold<br />5币:@m.Diamond<br />保险箱:@m.SafeBox<br />保险密码:@m.SafePwd</td>
+                                            <td>创建时间:@m.CreateTime.ToString("yyyy-MM-dd HH:mm:ss")<br />创建IP:@m.CreateIP<br />创建IMEI:@m.CreateMac<br />
+                                            禁言:@m.NoSpeak 
+                                            @if (m.NoSpeak ==isSwitch.关 ) {
+                                                DateTime dt = DateTime.Now;
+                                                string reachTime = "";
+                                                if (m.SpeakTime.Year - dt.Year >= 2)
+                                                {
+                                                    reachTime = "(永久)";
+                                                }
+                                                else {
+                                                    reachTime = "(截止" + m.SpeakTime.ToString() + ")";
+                                                }
+                                                @reachTime; 
+                                            }
+
+                                            <br />
+                                            封号:@m.IsFreeze
+                                            
+                                                @if (m.IsFreeze == isSwitch.关)
+                                                {
+                                                    DateTime dt = DateTime.Now;
+                                                    string reachTime = "";
+                                                    if (m.FreezeTime.Year - dt.Year >= 2)
+                                                    {
+                                                        reachTime = "(永久)";
+                                                    }
+                                                    else
+                                                    {
+                                                        reachTime = "(截止" + m.FreezeTime.ToString() + ")";
+                                                    }
+
+
+
+                                                    @reachTime;
+                                                }
+                                            
+
+                                            </td>
+                                            <td style="text-align:center">
+                                                <input id="btnOutput" type="button" value="查看产出消耗" class="btn btn-danger btn-mini" onclick="return OutputView(@m.ID);" />
+                                                @*|<input id="btnOutput" type="button" value="查看福袋产出消耗" class="btn btn-danger btn-mini" onclick="return OpenFudaiView(@m.ID);" />*@
+                                                |<input id="btnOutput" type="button" value="查看积分兑换" class="btn btn-danger btn-mini" onclick="return DuiHuanView(@m.ID);" />
+                                                <br />
+                                                |<input id="btnKick" type="button" value="编辑" class="btn btn-primary btn-mini" onclick="return UpdateUser(@m.ID)" />
+                                                |<input id="btnKick" type="button" value="奖品发放" class="btn btn-primary btn-mini" onclick="return PaymentOfPrizes(@m.ID)" />
+                                                |<input id="btnFreeze" type="button" value="封号" class="btn btn-primary btn-mini" onclick="return btnFreeze(@m.ID,'@m.Account')" />
+                                                |<input id="btnunFreeze" type="button" value="解封" class="btn btn-primary btn-mini" onclick="return btnunFreeze(@m.ID,'@m.Account')" />
+                                                <br />
+                                                |<input id="btnBan" type="button" value="玩家禁言" class="btn btn-info btn-mini" onclick="return btnBan(@m.ID,'@m.Account')" />
+                                                |<input id="btnunBan" type="button" value="解除禁言" class="btn btn-info btn-mini" onclick="return btnunBan(@m.ID,'@m.Account')" />
+                                                <br />
+                                                |<input id="btnIP" type="button" value="封IP" class="btn btn-inverse btn-mini" onclick="return btnIP(@m.ID,'@m.CreateIP')" />
+                                                |<input id="btnMac" type="button" value="封IMEI" class="btn btn-inverse btn-mini" onclick="return btnMac(@m.ID,'@m.CreateMac')" />
+                                                |<input id="btnWhiteIP" type="button" value="IP白名单" class="btn btn-inverse btn-mini" onclick="return btnWhiteIP(@m.ID,'@m.CreateIP')" />
+                                                |<input id="btnResetSafeBox" type="button" value="重置保险箱密码" class="btn btn-inverse btn-mini" onclick="return btnResetSafeBox(@m.ID,'@m.Account')" />
+                                            </td>
+                                        </tr>
+            }
+
+
+                                </tbody>
+                            </table>
+                        </div>
+
+
+
+
+
+
+
+
+                        <div class="widget-content">
+
+                            @Ajax.Pager(
+    Model,
+    new PagerOptions()
+    {
+        CssClass = "pager",
+        ShowMorePagerItems = true,
+        PageIndexParameterName = "page",
+        ShowDisabledPagerItems = true,
+        AlwaysShowFirstLastPageNumber = true,
+        //ShowRecordCountItems = true,
+        HorizontalAlign = "right",
+        //SeparatorHtml = "",
+
+        CurrentPagerItemTemplate = "<li class=\"disabled\"><span>{0}</span></li>",
+        DisabledPagerItemTemplate = "<li class=\"disabled\"><span>{0}</span></li>",
+        PagerItemTemplate = "<li>{0}</li>",
+        //CurrentPagerItemWrapperFormatString = "<li class=\"disabled\"><span>{0}</span></li>",
+        //NumericPagerItemWrapperFormatString = "<li>{0}</li>",
+        //PagerItemWrapperFormatString = "<li>{0}</li>",
+        //RecordCountText = string.Format("共{0}条记录, {1}页", Model.TotalItemCount, Model.TotalPageCount),
+        //RecordCountFormatString = "<li><span>{0}</span></li>",
+        //DisabledPagerItemsFormatString = "<li class=\"disabled\"><span>{0}</span></li>",
+        //PageIndexBoxType = Webdiyer.WebControls.Mvc.PageIndexBoxType.TextBox,
+        //GoButtonText = "跳转到",
+        ShowPrevNext = true,
+        FirstPageText = "第一页",
+        LastPageText = "最后一页",
+        ContainerTagName = "ul",
+        PageIndexBoxId = "pageindexcm",
+        WYWPageIndexString = @"<li><input style='width:50px;' type='text' value='' id='{0}' name = '{1}'></li>
+                                 <li><a id='goto' name='goto' style='margin-right:10px' >跳转</a><li>
+                             ",
+        GoToButtonId = "goto"
+    },
+    new MvcAjaxOptions
+    {
+        HttpMethod = "POST",
+        UpdateTargetId = "box",
+        InsertionMode = InsertionMode.Replace,
+        OnFailure = "errFunc",
+        OnSuccess = "successPageFun"
+    })
+                        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    </div>
+                    <!-- end widget content -->
+                </div>
+                <!-- end widget div -->
+            </div>
+            <!-- end widget -->
+
+        </article>
+    </div>
+</section>
+
+
+
+
+

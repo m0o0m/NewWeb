@@ -1,0 +1,164 @@
+﻿@using Webdiyer.WebControls.Mvc;
+@using GL.Data.Model;
+@using GL.Data.BLL;
+@model PagedList<TexasProAccording>
+
+
+
+
+
+
+
+<section id="widget-grid" class="">
+    <div class="row">
+        <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-0" data-widget-editbutton="false" data-widget-colorbutton="false"
+                 data-widget-togglebutton="false"
+                 data-widget-deletebutton="false"
+                 data-widget-fullscreenbutton="false"
+                 data-widget-custombutton="false"
+                 data-widget-collapsed="false"
+                 data-widget-sortable="false">
+                <header>
+                    <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                    <h2>@ViewBag.Title</h2>
+                </header>
+                <!-- widget div-->
+                <div>
+                    <!-- widget edit box -->
+                    <div class="jarviswidget-editbox">
+                        <!-- This area used as dropdown edit box -->
+                    </div>
+                    <!-- end widget edit box -->
+                    <!-- widget content -->
+                    <div class="widget-body no-padding">
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <thead>
+
+                                    <tr>
+                                        <th>用户ID</th>
+                                        <th>时间</th>
+                                        <th>变化前游戏币</th>
+                                      
+                                        <th>变化/坐庄结算游戏币</th>
+                                        <th>变化后游戏币</th>
+                                        <th>操作类型</th>
+                                        <th>牌局号</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model.Count == 0)
+                                   {
+                                        <tr class="gradeX">
+                                            <td class="colspan" align="center" colspan="0">
+                                                没有找到相关记录！
+                                            </td>
+                                        </tr>
+                                    }
+                                    @foreach (TexasProAccording m in Model)
+                                    {
+                                        <tr>
+                                            <td>@m.UserID</td>
+                                            <td>@m.CreateTime</td>
+                                            <td>@m.ChipNow</td>
+                                            <td>@m.ChipChange</td>
+                                            <td>@m.ChipAfter</td>
+                                        
+                                            <td>@(((TexProOper)m.Type).ToString())</td>
+                                            <td>
+                                            @{ 
+                                                DateTime eT = m.CreateTime.AddDays(1);
+                                                DateTime sTime = new DateTime(m.CreateTime.Year, m.CreateTime.Month, m.CreateTime.Day, 0, 0, 0);
+                                                DateTime eTime = new DateTime(eT.Year, eT.Month, eT.Day, 0, 0, 0);
+                                            }
+                                                @if (m.Type <= 5)
+                                                {//中发白
+                                                    <a target="_blank" href="/GameData/GameLog?Gametype=2&SearchExt=&Data=@m.RoundID&StartDate=@sTime&ExpirationDate=@eTime">@m.RoundID</a>
+                                                }
+                                                else if (m.Type <= 10)
+                                                {
+                                                    //十二生肖
+                                                    <a target="_blank" href="/GameData/GameLog?Gametype=3&SearchExt=&Data=@m.RoundID&StartDate=@sTime&ExpirationDate=@eTime">@m.RoundID</a>
+                                                }
+                                                else if (m.Type <= 15)
+                                                {
+                                                    //奔驰宝马
+                                                    <a target="_blank" href="/GameData/GameLog?Gametype=5&SearchExt=&Data=@m.RoundID&StartDate=@sTime&ExpirationDate=@eTime">@m.RoundID</a>
+                                                }
+                                                else if (m.Type <= 20)
+                                                {//百人德州
+                                                    <a target="_blank" href="/GameData/GameLog?Gametype=6&SearchExt=&Data=@m.RoundID&StartDate=@sTime&ExpirationDate=@eTime">@m.RoundID</a>
+                                                }
+
+                                         
+                                            </td>
+                                        </tr>
+                                     }
+           
+                                </tbody>
+                            </table>
+                        </div>
+
+
+
+
+
+
+
+
+                        <div class="widget-content">
+
+                            @Ajax.Pager(
+    Model,
+    new PagerOptions()
+    {
+        CssClass = "pager",
+        ShowMorePagerItems = true,
+        PageIndexParameterName = "page",
+        ShowDisabledPagerItems = true,
+        AlwaysShowFirstLastPageNumber = true,
+        //ShowRecordCountItems = true,
+        HorizontalAlign = "right",
+        //SeparatorHtml = "",
+
+        CurrentPagerItemTemplate = "<li class=\"disabled\"><span>{0}</span></li>",
+        DisabledPagerItemTemplate = "<li class=\"disabled\"><span>{0}</span></li>",
+        PagerItemTemplate = "<li>{0}</li>",
+        //CurrentPagerItemWrapperFormatString = "<li class=\"disabled\"><span>{0}</span></li>",
+        //NumericPagerItemWrapperFormatString = "<li>{0}</li>",
+        //PagerItemWrapperFormatString = "<li>{0}</li>",
+        //RecordCountText = string.Format("共{0}条记录, {1}页", Model.TotalItemCount, Model.TotalPageCount),
+        //RecordCountFormatString = "<li><span>{0}</span></li>",
+        //DisabledPagerItemsFormatString = "<li class=\"disabled\"><span>{0}</span></li>",
+        //PageIndexBoxType = Webdiyer.WebControls.Mvc.PageIndexBoxType.TextBox,
+        //GoButtonText = "跳转到",
+        ShowPrevNext = true,
+        FirstPageText = "第一页",
+        LastPageText = "最后一页",
+        ContainerTagName = "ul",
+        PageIndexBoxId = "pageindexcm",
+        WYWPageIndexString = @"<li><input style='width:50px;' type='text' value='' id='{0}' name = '{1}'></li>
+                                 <li><a id='goto' name='goto' style='margin-right:10px' >跳转</a><li>
+                             ",
+        GoToButtonId = "goto"
+    },
+    new MvcAjaxOptions
+    {
+        HttpMethod = "POST",
+        UpdateTargetId = "box",
+        InsertionMode = InsertionMode.Replace,
+        OnFailure = "errFunc",
+        OnSuccess = "successPageFun"
+    })
+                        </div>
+                    </div>
+                    <!-- end widget content -->
+                </div>
+                <!-- end widget div -->
+            </div>
+            <!-- end widget -->
+
+        </article>
+    </div>
+</section>

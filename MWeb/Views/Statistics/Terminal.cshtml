@@ -1,0 +1,118 @@
+﻿
+@{
+    ViewBag.Title = "Terminal";
+    Dictionary<string, string> dics = new Dictionary<string, string>();
+    dics.Add("IOS","150");
+    dics.Add("Android2.0", "190");
+    dics.Add("Android3.0", "390");
+    dics.Add("winphone", "630");
+
+
+    Dictionary<string, string> dics2 = new Dictionary<string, string>();
+    dics2.Add("1080*1920", "150");
+    dics2.Add("320*480", "500");
+    dics2.Add("720*1280", "390");
+    dics2.Add("540*960", "1000");
+
+    Dictionary<string, string> dics3 = new Dictionary<string, string>();
+    dics3.Add("ipad2 3G", "1510");
+    dics3.Add("iPad Mini2 wifi", "1990");
+    dics3.Add("iPad2 wifi", "1390");
+    dics3.Add("iphone 4s", "730");
+
+}
+<style type="text/css">
+    .yAxis div {
+        margin-top: 13px;
+    }
+</style>
+
+<div class="row">
+    <div class="col-sm-6 col-md-6 col-lg-6">
+        <div class="well well-sm well-light">
+            <div id="tabs" >
+                <ul>
+                    <li onclick="tabEvent(0)">
+                        <a href="#tabs-a">操作系统</a>
+                    </li>
+                    <li onclick="tabEvent(1)">
+                        <a href="#tabs-b">分辨率</a>
+                    </li>
+                    <li onclick="tabEvent(2)">
+                        <a href="#tabs-c">设备型号</a>
+                    </li>
+                    <li onclick="tabEvent(3)">
+                        <a href="#tabs-d">网络环境</a>
+                    </li>
+                </ul>
+                <div id="tabs-a" >
+                   @Html.Partial("Graph_Cylinder", new GraphCylinder
+              {
+                  Title = "操作系统版本",
+                  HasGird = true,
+                  Data = dics,
+                  Id = "Graph_Cylinder1",
+                  GirdTitle = new List<string>() { "操作系统","新增玩家(账户)" }
+              });
+                </div>
+                <div id="tabs-b" >
+
+                    @Html.Partial("Graph_Cylinder", new GraphCylinder
+               {
+                   Title = "分辨率",
+                   HasGird = true,
+                   Data = dics2,
+                   Id = "Graph_Cylinder2",
+                   GirdTitle = new List<string>() { "分辨率", "新增玩家(账户)" }
+               });
+                </div>
+                <div id="tabs-c" >
+                    @Html.Partial("Graph_Cylinder", new GraphCylinder
+               {
+                   Title = "设备型号",
+                   HasGird = true,
+                   Data = dics3,
+                   Id = "Graph_Cylinder3",
+                   GirdTitle = new List<string>() { "机型", "新增玩家(账户)" }
+               });
+                </div>
+                <div id="tabs-d">
+                    4
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+            
+            @section scripts{
+                <script type="text/javascript">
+                    var tabs =$('#tabs').tabs();
+                    Graph_Cylinder1();
+                    Graph_Cylinder2();
+                    Graph_Cylinder3();
+
+
+                 
+                    function tabEvent(index) {
+                        switch (index) {
+                            case 0:
+                                Graph_Cylinder1();
+                            case 1:
+                                Graph_Cylinder2();
+                            case 2:
+                                Graph_Cylinder3();
+                            case 3:
+                            default:
+                                break;
+                        }
+                    }
+                   
+                   
+                </script>
+            }
+
+
+
+
+
+

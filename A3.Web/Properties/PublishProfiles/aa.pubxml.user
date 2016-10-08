@@ -1,0 +1,625 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+您 Web 项目的发布/打包进程将使用此文件。您可以通过编辑此 MSBuild 文件
+来自定义该进程的行为。若要了解与此相关的详细信息，请访问 http://go.microsoft.com/fwlink/?LinkID=208121。
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <_PublishTargetUrl>F:\tt</_PublishTargetUrl>
+  </PropertyGroup>
+  <ItemGroup>
+    <File Include="bin/A3.Web.dll">
+      <publishTime>11/13/2014 11:02:59</publishTime>
+    </File>
+    <File Include="bin/Antlr3.Runtime.dll">
+      <publishTime>10/16/2014 11:48:36</publishTime>
+    </File>
+    <File Include="bin/GL.Common.dll">
+      <publishTime>11/13/2014 10:44:16</publishTime>
+    </File>
+    <File Include="bin/GL.Dapper.dll">
+      <publishTime>11/13/2014 10:44:16</publishTime>
+    </File>
+    <File Include="bin/GL.Dapper.Extensions.dll">
+      <publishTime>11/13/2014 10:44:16</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Web.Infrastructure.dll">
+      <publishTime>09/11/2014 17:14:08</publishTime>
+    </File>
+    <File Include="bin/MySql.Data.dll">
+      <publishTime>08/05/2014 11:58:14</publishTime>
+    </File>
+    <File Include="bin/Newtonsoft.Json.dll">
+      <publishTime>10/16/2014 11:48:39</publishTime>
+    </File>
+    <File Include="bin/System.Net.Http.Formatting.dll">
+      <publishTime>10/16/2014 12:03:32</publishTime>
+    </File>
+    <File Include="bin/System.Web.Helpers.dll">
+      <publishTime>10/16/2014 11:48:35</publishTime>
+    </File>
+    <File Include="bin/System.Web.Http.dll">
+      <publishTime>10/16/2014 12:03:33</publishTime>
+    </File>
+    <File Include="bin/System.Web.Http.WebHost.dll">
+      <publishTime>10/16/2014 12:03:33</publishTime>
+    </File>
+    <File Include="bin/System.Web.Mvc.dll">
+      <publishTime>10/16/2014 11:48:36</publishTime>
+    </File>
+    <File Include="bin/System.Web.Optimization.dll">
+      <publishTime>10/13/2014 15:11:29</publishTime>
+    </File>
+    <File Include="bin/System.Web.Razor.dll">
+      <publishTime>10/16/2014 11:48:35</publishTime>
+    </File>
+    <File Include="bin/System.Web.WebPages.Deployment.dll">
+      <publishTime>10/16/2014 11:48:35</publishTime>
+    </File>
+    <File Include="bin/System.Web.WebPages.dll">
+      <publishTime>10/16/2014 11:48:35</publishTime>
+    </File>
+    <File Include="bin/System.Web.WebPages.Razor.dll">
+      <publishTime>10/16/2014 11:48:35</publishTime>
+    </File>
+    <File Include="bin/WebGrease.dll">
+      <publishTime>10/16/2014 11:48:36</publishTime>
+    </File>
+    <File Include="bin/zh-Hans/System.Net.Http.Formatting.resources.dll">
+      <publishTime>10/16/2014 12:11:44</publishTime>
+    </File>
+    <File Include="bin/zh-Hans/System.Web.Helpers.resources.dll">
+      <publishTime>10/16/2014 11:48:38</publishTime>
+    </File>
+    <File Include="bin/zh-Hans/System.Web.Http.resources.dll">
+      <publishTime>10/16/2014 12:11:45</publishTime>
+    </File>
+    <File Include="bin/zh-Hans/System.Web.Http.WebHost.resources.dll">
+      <publishTime>10/16/2014 12:11:45</publishTime>
+    </File>
+    <File Include="bin/zh-Hans/System.Web.Mvc.resources.dll">
+      <publishTime>10/16/2014 11:48:38</publishTime>
+    </File>
+    <File Include="bin/zh-Hans/System.Web.Optimization.resources.dll">
+      <publishTime>10/13/2014 15:11:30</publishTime>
+    </File>
+    <File Include="bin/zh-Hans/System.Web.Razor.resources.dll">
+      <publishTime>10/16/2014 11:48:37</publishTime>
+    </File>
+    <File Include="bin/zh-Hans/System.Web.WebPages.Deployment.resources.dll">
+      <publishTime>10/16/2014 11:48:38</publishTime>
+    </File>
+    <File Include="bin/zh-Hans/System.Web.WebPages.Razor.resources.dll">
+      <publishTime>10/16/2014 11:48:38</publishTime>
+    </File>
+    <File Include="bin/zh-Hans/System.Web.WebPages.resources.dll">
+      <publishTime>10/16/2014 11:48:38</publishTime>
+    </File>
+    <File Include="Content/bootstrap.css">
+      <publishTime>10/16/2014 12:11:42</publishTime>
+    </File>
+    <File Include="Content/bootstrap.min.css">
+      <publishTime>10/16/2014 12:11:42</publishTime>
+    </File>
+    <File Include="Content/game.css">
+      <publishTime>10/16/2014 14:26:21</publishTime>
+    </File>
+    <File Include="Content/Site.css">
+      <publishTime>10/16/2014 12:11:42</publishTime>
+    </File>
+    <File Include="Content/style.css">
+      <publishTime>10/16/2014 14:25:39</publishTime>
+    </File>
+    <File Include="Content/themes/base/accordion.css">
+      <publishTime>10/16/2014 14:25:39</publishTime>
+    </File>
+    <File Include="Content/themes/base/all.css">
+      <publishTime>10/16/2014 14:25:39</publishTime>
+    </File>
+    <File Include="Content/themes/base/autocomplete.css">
+      <publishTime>10/16/2014 14:25:39</publishTime>
+    </File>
+    <File Include="Content/themes/base/base.css">
+      <publishTime>10/16/2014 14:25:39</publishTime>
+    </File>
+    <File Include="Content/themes/base/button.css">
+      <publishTime>10/16/2014 14:25:39</publishTime>
+    </File>
+    <File Include="Content/themes/base/core.css">
+      <publishTime>10/16/2014 14:25:39</publishTime>
+    </File>
+    <File Include="Content/themes/base/datepicker.css">
+      <publishTime>10/16/2014 14:25:39</publishTime>
+    </File>
+    <File Include="Content/themes/base/dialog.css">
+      <publishTime>10/16/2014 14:25:39</publishTime>
+    </File>
+    <File Include="Content/themes/base/draggable.css">
+      <publishTime>10/16/2014 14:25:39</publishTime>
+    </File>
+    <File Include="Content/themes/base/images/ui-bg_flat_0_aaaaaa_40x100.png">
+      <publishTime>10/16/2014 14:25:39</publishTime>
+    </File>
+    <File Include="Content/themes/base/images/ui-bg_flat_75_ffffff_40x100.png">
+      <publishTime>10/16/2014 14:25:39</publishTime>
+    </File>
+    <File Include="Content/themes/base/images/ui-bg_glass_55_fbf9ee_1x400.png">
+      <publishTime>10/16/2014 14:25:39</publishTime>
+    </File>
+    <File Include="Content/themes/base/images/ui-bg_glass_65_ffffff_1x400.png">
+      <publishTime>10/16/2014 14:25:39</publishTime>
+    </File>
+    <File Include="Content/themes/base/images/ui-bg_glass_75_dadada_1x400.png">
+      <publishTime>10/16/2014 14:25:39</publishTime>
+    </File>
+    <File Include="Content/themes/base/images/ui-bg_glass_75_e6e6e6_1x400.png">
+      <publishTime>10/16/2014 14:25:39</publishTime>
+    </File>
+    <File Include="Content/themes/base/images/ui-bg_glass_95_fef1ec_1x400.png">
+      <publishTime>10/16/2014 14:25:39</publishTime>
+    </File>
+    <File Include="Content/themes/base/images/ui-bg_highlight-soft_75_cccccc_1x100.png">
+      <publishTime>10/16/2014 14:25:39</publishTime>
+    </File>
+    <File Include="Content/themes/base/images/ui-icons_222222_256x240.png">
+      <publishTime>10/16/2014 14:25:39</publishTime>
+    </File>
+    <File Include="Content/themes/base/images/ui-icons_2e83ff_256x240.png">
+      <publishTime>10/16/2014 14:25:39</publishTime>
+    </File>
+    <File Include="Content/themes/base/images/ui-icons_454545_256x240.png">
+      <publishTime>10/16/2014 14:25:39</publishTime>
+    </File>
+    <File Include="Content/themes/base/images/ui-icons_888888_256x240.png">
+      <publishTime>10/16/2014 14:25:39</publishTime>
+    </File>
+    <File Include="Content/themes/base/images/ui-icons_cd0a0a_256x240.png">
+      <publishTime>10/16/2014 14:25:39</publishTime>
+    </File>
+    <File Include="Content/themes/base/menu.css">
+      <publishTime>10/16/2014 14:25:39</publishTime>
+    </File>
+    <File Include="Content/themes/base/progressbar.css">
+      <publishTime>10/16/2014 14:26:21</publishTime>
+    </File>
+    <File Include="Content/themes/base/resizable.css">
+      <publishTime>10/16/2014 14:25:39</publishTime>
+    </File>
+    <File Include="Content/themes/base/selectable.css">
+      <publishTime>10/16/2014 14:25:39</publishTime>
+    </File>
+    <File Include="Content/themes/base/selectmenu.css">
+      <publishTime>10/16/2014 14:25:39</publishTime>
+    </File>
+    <File Include="Content/themes/base/slider.css">
+      <publishTime>10/16/2014 14:25:39</publishTime>
+    </File>
+    <File Include="Content/themes/base/sortable.css">
+      <publishTime>10/16/2014 14:25:39</publishTime>
+    </File>
+    <File Include="Content/themes/base/spinner.css">
+      <publishTime>10/16/2014 14:25:39</publishTime>
+    </File>
+    <File Include="Content/themes/base/tabs.css">
+      <publishTime>10/16/2014 14:25:39</publishTime>
+    </File>
+    <File Include="Content/themes/base/theme.css">
+      <publishTime>10/16/2014 14:26:21</publishTime>
+    </File>
+    <File Include="Content/themes/base/tooltip.css">
+      <publishTime>10/16/2014 14:25:39</publishTime>
+    </File>
+    <File Include="favicon.ico">
+      <publishTime>10/16/2014 12:11:42</publishTime>
+    </File>
+    <File Include="fonts/glyphicons-halflings-regular.eot">
+      <publishTime>10/16/2014 12:11:42</publishTime>
+    </File>
+    <File Include="fonts/glyphicons-halflings-regular.svg">
+      <publishTime>10/16/2014 12:11:42</publishTime>
+    </File>
+    <File Include="fonts/glyphicons-halflings-regular.ttf">
+      <publishTime>10/16/2014 12:11:42</publishTime>
+    </File>
+    <File Include="fonts/glyphicons-halflings-regular.woff">
+      <publishTime>10/16/2014 12:11:42</publishTime>
+    </File>
+    <File Include="Global.asax">
+      <publishTime>10/16/2014 12:11:42</publishTime>
+    </File>
+    <File Include="images/android_mengban.png">
+      <publishTime>10/16/2014 14:25:39</publishTime>
+    </File>
+    <File Include="images/apple_mengban.png">
+      <publishTime>10/16/2014 14:25:39</publishTime>
+    </File>
+    <File Include="images/arrow.png">
+      <publishTime>10/16/2014 14:25:39</publishTime>
+    </File>
+    <File Include="images/arrow_hover.png">
+      <publishTime>10/16/2014 14:25:39</publishTime>
+    </File>
+    <File Include="images/bd_bg.png">
+      <publishTime>10/16/2014 14:25:39</publishTime>
+    </File>
+    <File Include="images/bg.jpg">
+      <publishTime>10/16/2014 14:25:39</publishTime>
+    </File>
+    <File Include="images/btn1.png">
+      <publishTime>10/16/2014 14:25:39</publishTime>
+    </File>
+    <File Include="images/btn_chongz.png">
+      <publishTime>10/16/2014 14:25:39</publishTime>
+    </File>
+    <File Include="images/byhrbg.jpg">
+      <publishTime>10/16/2014 14:25:39</publishTime>
+    </File>
+    <File Include="images/bynewsbg.jpg">
+      <publishTime>10/16/2014 14:25:39</publishTime>
+    </File>
+    <File Include="images/download.png">
+      <publishTime>10/16/2014 14:25:39</publishTime>
+    </File>
+    <File Include="images/down_btn_ico.jpg">
+      <publishTime>10/16/2014 14:25:39</publishTime>
+    </File>
+    <File Include="images/down_ewm.png">
+      <publishTime>10/16/2014 14:25:39</publishTime>
+    </File>
+    <File Include="images/gamepic1.jpg">
+      <publishTime>10/16/2014 14:25:39</publishTime>
+    </File>
+    <File Include="images/gamepic10.jpg">
+      <publishTime>10/16/2014 14:25:39</publishTime>
+    </File>
+    <File Include="images/gamepic11.jpg">
+      <publishTime>10/16/2014 14:25:39</publishTime>
+    </File>
+    <File Include="images/gamepic12.jpg">
+      <publishTime>10/16/2014 14:25:39</publishTime>
+    </File>
+    <File Include="images/gamepic2.jpg">
+      <publishTime>10/16/2014 14:25:39</publishTime>
+    </File>
+    <File Include="images/gamepic3.jpg">
+      <publishTime>10/16/2014 14:25:39</publishTime>
+    </File>
+    <File Include="images/gamepic4.jpg">
+      <publishTime>10/16/2014 14:25:39</publishTime>
+    </File>
+    <File Include="images/gamepic5.jpg">
+      <publishTime>10/16/2014 14:25:39</publishTime>
+    </File>
+    <File Include="images/gamepic6.jpg">
+      <publishTime>10/16/2014 14:25:39</publishTime>
+    </File>
+    <File Include="images/gamepic7.jpg">
+      <publishTime>10/16/2014 14:25:39</publishTime>
+    </File>
+    <File Include="images/gamepic8.jpg">
+      <publishTime>10/16/2014 14:25:39</publishTime>
+    </File>
+    <File Include="images/gamepic9.jpg">
+      <publishTime>10/16/2014 14:25:39</publishTime>
+    </File>
+    <File Include="images/iLord80.png">
+      <publishTime>10/16/2014 14:25:39</publishTime>
+    </File>
+    <File Include="images/indexmainbg.jpg">
+      <publishTime>10/16/2014 14:25:39</publishTime>
+    </File>
+    <File Include="images/landlords80.png">
+      <publishTime>10/16/2014 14:25:39</publishTime>
+    </File>
+    <File Include="images/location.png">
+      <publishTime>10/16/2014 14:25:39</publishTime>
+    </File>
+    <File Include="images/logo.png">
+      <publishTime>10/16/2014 14:25:39</publishTime>
+    </File>
+    <File Include="images/next.png">
+      <publishTime>10/16/2014 14:25:39</publishTime>
+    </File>
+    <File Include="images/online.png">
+      <publishTime>10/16/2014 14:25:39</publishTime>
+    </File>
+    <File Include="images/pad.png">
+      <publishTime>10/16/2014 14:25:39</publishTime>
+    </File>
+    <File Include="images/sichuan_mahjong80.png">
+      <publishTime>10/16/2014 14:25:39</publishTime>
+    </File>
+    <File Include="images/texas_poker80.png">
+      <publishTime>10/16/2014 14:25:39</publishTime>
+    </File>
+    <File Include="images/tubtn.png">
+      <publishTime>10/16/2014 14:25:39</publishTime>
+    </File>
+    <File Include="images/wenzi1.png">
+      <publishTime>10/16/2014 14:25:39</publishTime>
+    </File>
+    <File Include="images/wenzi2.png">
+      <publishTime>10/16/2014 14:25:39</publishTime>
+    </File>
+    <File Include="packages.config">
+      <publishTime>10/16/2014 12:11:45</publishTime>
+    </File>
+    <File Include="pic/20140821182230_2787.png">
+      <publishTime>10/16/2014 14:25:38</publishTime>
+    </File>
+    <File Include="pic/20140828155006_7251.jpg">
+      <publishTime>10/16/2014 14:25:38</publishTime>
+    </File>
+    <File Include="pic/android.png">
+      <publishTime>10/16/2014 14:25:38</publishTime>
+    </File>
+    <File Include="pic/android_pic1.jpg">
+      <publishTime>10/16/2014 14:25:38</publishTime>
+    </File>
+    <File Include="pic/android_pic2.jpg">
+      <publishTime>10/16/2014 14:25:38</publishTime>
+    </File>
+    <File Include="pic/android_pic3.jpg">
+      <publishTime>10/16/2014 14:25:38</publishTime>
+    </File>
+    <File Include="pic/android_pic4.jpg">
+      <publishTime>10/16/2014 14:25:38</publishTime>
+    </File>
+    <File Include="pic/apple.png">
+      <publishTime>10/16/2014 14:25:38</publishTime>
+    </File>
+    <File Include="pic/billiards116.png">
+      <publishTime>10/16/2014 14:25:38</publishTime>
+    </File>
+    <File Include="pic/chinese_chess116.png">
+      <publishTime>10/16/2014 14:25:38</publishTime>
+    </File>
+    <File Include="pic/crazy_little_cow116.png">
+      <publishTime>10/16/2014 14:25:38</publishTime>
+    </File>
+    <File Include="pic/dig_two_poker116.png">
+      <publishTime>10/16/2014 14:25:38</publishTime>
+    </File>
+    <File Include="pic/doudizhu1.jpg">
+      <publishTime>10/16/2014 14:25:38</publishTime>
+    </File>
+    <File Include="pic/doudizhu2.jpg">
+      <publishTime>10/16/2014 14:25:38</publishTime>
+    </File>
+    <File Include="pic/four_landlords116.png">
+      <publishTime>10/16/2014 14:25:38</publishTime>
+    </File>
+    <File Include="pic/gamebanner.jpg">
+      <publishTime>10/16/2014 14:25:38</publishTime>
+    </File>
+    <File Include="pic/gamepic1.jpg">
+      <publishTime>10/16/2014 14:25:38</publishTime>
+    </File>
+    <File Include="pic/gamepic10.jpg">
+      <publishTime>10/16/2014 14:25:39</publishTime>
+    </File>
+    <File Include="pic/gamepic11.jpg">
+      <publishTime>10/16/2014 14:25:39</publishTime>
+    </File>
+    <File Include="pic/gamepic12.jpg">
+      <publishTime>10/16/2014 14:25:39</publishTime>
+    </File>
+    <File Include="pic/gamepic2.jpg">
+      <publishTime>10/16/2014 14:25:39</publishTime>
+    </File>
+    <File Include="pic/gamepic3.jpg">
+      <publishTime>10/16/2014 14:25:39</publishTime>
+    </File>
+    <File Include="pic/gamepic4.jpg">
+      <publishTime>10/16/2014 14:25:39</publishTime>
+    </File>
+    <File Include="pic/gamepic5.jpg">
+      <publishTime>10/16/2014 14:25:39</publishTime>
+    </File>
+    <File Include="pic/gamepic6.jpg">
+      <publishTime>10/16/2014 14:25:39</publishTime>
+    </File>
+    <File Include="pic/gamepic7.jpg">
+      <publishTime>10/16/2014 14:25:39</publishTime>
+    </File>
+    <File Include="pic/gamepic8.jpg">
+      <publishTime>10/16/2014 14:25:39</publishTime>
+    </File>
+    <File Include="pic/gamepic9.jpg">
+      <publishTime>10/16/2014 14:25:39</publishTime>
+    </File>
+    <File Include="pic/iLord116.png">
+      <publishTime>10/16/2014 14:25:39</publishTime>
+    </File>
+    <File Include="pic/landlords116.png">
+      <publishTime>10/16/2014 14:25:39</publishTime>
+    </File>
+    <File Include="pic/lying_dice_116.png">
+      <publishTime>10/16/2014 14:25:39</publishTime>
+    </File>
+    <File Include="pic/phone_pic1.jpg">
+      <publishTime>10/16/2014 14:25:39</publishTime>
+    </File>
+    <File Include="pic/phone_pic2.jpg">
+      <publishTime>10/16/2014 14:25:39</publishTime>
+    </File>
+    <File Include="pic/phone_pic3.jpg">
+      <publishTime>10/16/2014 14:25:39</publishTime>
+    </File>
+    <File Include="pic/phone_pic4.jpg">
+      <publishTime>10/16/2014 14:25:39</publishTime>
+    </File>
+    <File Include="pic/probanner1.jpg">
+      <publishTime>10/16/2014 14:25:39</publishTime>
+    </File>
+    <File Include="pic/probanner2.jpg">
+      <publishTime>10/16/2014 14:25:39</publishTime>
+    </File>
+    <File Include="pic/probanner3.jpg">
+      <publishTime>10/16/2014 14:25:39</publishTime>
+    </File>
+    <File Include="pic/probanner4.jpg">
+      <publishTime>10/16/2014 14:25:39</publishTime>
+    </File>
+    <File Include="pic/sichuan_mahjong116.png">
+      <publishTime>10/16/2014 14:25:39</publishTime>
+    </File>
+    <File Include="pic/szechwan116.png">
+      <publishTime>10/16/2014 14:25:39</publishTime>
+    </File>
+    <File Include="pic/texas_detail1.jpg">
+      <publishTime>10/16/2014 14:25:39</publishTime>
+    </File>
+    <File Include="pic/texas_detail2.jpg">
+      <publishTime>10/16/2014 14:25:39</publishTime>
+    </File>
+    <File Include="pic/texas_detail3.jpg">
+      <publishTime>10/16/2014 14:25:39</publishTime>
+    </File>
+    <File Include="pic/texas_detail4.jpg">
+      <publishTime>10/16/2014 14:25:39</publishTime>
+    </File>
+    <File Include="pic/texas_poker116.png">
+      <publishTime>10/16/2014 14:25:39</publishTime>
+    </File>
+    <File Include="pic/two_mah_jongg116.png">
+      <publishTime>10/16/2014 14:25:39</publishTime>
+    </File>
+    <File Include="Scripts/bootstrap.js">
+      <publishTime>10/16/2014 12:11:42</publishTime>
+    </File>
+    <File Include="Scripts/bootstrap.min.js">
+      <publishTime>10/16/2014 12:11:42</publishTime>
+    </File>
+    <File Include="Scripts/gd.js">
+      <publishTime>10/16/2014 14:25:38</publishTime>
+    </File>
+    <File Include="Scripts/html5.js">
+      <publishTime>10/16/2014 14:25:38</publishTime>
+    </File>
+    <File Include="Scripts/jquery-1.10.2.js">
+      <publishTime>10/16/2014 12:11:42</publishTime>
+    </File>
+    <File Include="Scripts/jquery-1.10.2.min.js">
+      <publishTime>10/16/2014 12:11:42</publishTime>
+    </File>
+    <File Include="Scripts/jquery-1.10.2.min.map">
+      <publishTime>10/16/2014 14:26:21</publishTime>
+    </File>
+    <File Include="Scripts/jquery-2.1.1.js">
+      <publishTime>10/16/2014 14:25:38</publishTime>
+    </File>
+    <File Include="Scripts/jquery-2.1.1.min.js">
+      <publishTime>10/16/2014 14:25:38</publishTime>
+    </File>
+    <File Include="Scripts/jquery-2.1.1.min.map">
+      <publishTime>10/16/2014 14:26:21</publishTime>
+    </File>
+    <File Include="Scripts/jquery-ui-1.11.1.js">
+      <publishTime>10/16/2014 14:26:21</publishTime>
+    </File>
+    <File Include="Scripts/jquery-ui.min-1.11.1.js">
+      <publishTime>10/16/2014 14:25:38</publishTime>
+    </File>
+    <File Include="Scripts/jquery.mousewheel.min.js">
+      <publishTime>10/16/2014 14:25:38</publishTime>
+    </File>
+    <File Include="Scripts/jquery.unobtrusive-ajax.js">
+      <publishTime>10/16/2014 14:25:38</publishTime>
+    </File>
+    <File Include="Scripts/jquery.unobtrusive-ajax.min.js">
+      <publishTime>10/16/2014 14:25:38</publishTime>
+    </File>
+    <File Include="Scripts/jquery.validate.js">
+      <publishTime>10/16/2014 14:25:38</publishTime>
+    </File>
+    <File Include="Scripts/jquery.validate.min.js">
+      <publishTime>10/16/2014 14:25:38</publishTime>
+    </File>
+    <File Include="Scripts/jquery.validate.unobtrusive.js">
+      <publishTime>10/16/2014 14:25:38</publishTime>
+    </File>
+    <File Include="Scripts/jquery.validate.unobtrusive.min.js">
+      <publishTime>10/16/2014 14:25:38</publishTime>
+    </File>
+    <File Include="Scripts/jquerycode.js">
+      <publishTime>10/16/2014 14:25:38</publishTime>
+    </File>
+    <File Include="Scripts/knockout-3.2.0.debug.js">
+      <publishTime>10/16/2014 14:25:38</publishTime>
+    </File>
+    <File Include="Scripts/knockout-3.2.0.js">
+      <publishTime>10/16/2014 14:25:38</publishTime>
+    </File>
+    <File Include="Scripts/main.js">
+      <publishTime>10/16/2014 14:25:38</publishTime>
+    </File>
+    <File Include="Scripts/modernizr-2.6.2.js">
+      <publishTime>10/16/2014 12:11:43</publishTime>
+    </File>
+    <File Include="Scripts/modernizr-2.8.3.js">
+      <publishTime>10/16/2014 14:25:38</publishTime>
+    </File>
+    <File Include="Scripts/respond.js">
+      <publishTime>10/16/2014 12:11:43</publishTime>
+    </File>
+    <File Include="Scripts/respond.min.js">
+      <publishTime>10/16/2014 12:11:43</publishTime>
+    </File>
+    <File Include="Scripts/slides.min.jquery.js">
+      <publishTime>10/16/2014 14:25:38</publishTime>
+    </File>
+    <File Include="Scripts/stats.js">
+      <publishTime>10/16/2014 14:26:21</publishTime>
+    </File>
+    <File Include="Scripts/swfobject.js">
+      <publishTime>10/16/2014 14:25:38</publishTime>
+    </File>
+    <File Include="Scripts/_references.js">
+      <publishTime>10/16/2014 14:25:38</publishTime>
+    </File>
+    <File Include="Views/Home/disclaimer.cshtml">
+      <publishTime>10/16/2014 14:25:38</publishTime>
+    </File>
+    <File Include="Views/Home/download.cshtml">
+      <publishTime>10/16/2014 14:25:38</publishTime>
+    </File>
+    <File Include="Views/Home/game.cshtml">
+      <publishTime>10/16/2014 14:25:38</publishTime>
+    </File>
+    <File Include="Views/Home/Index.cshtml">
+      <publishTime>11/13/2014 10:51:20</publishTime>
+    </File>
+    <File Include="Views/Home/landlords.cshtml">
+      <publishTime>10/16/2014 14:25:38</publishTime>
+    </File>
+    <File Include="Views/Home/Lists.cshtml">
+      <publishTime>10/16/2014 14:25:38</publishTime>
+    </File>
+    <File Include="Views/Home/sub.cshtml">
+      <publishTime>10/18/2014 11:39:48</publishTime>
+    </File>
+    <File Include="Views/Home/texas_poker.cshtml">
+      <publishTime>10/16/2014 14:25:38</publishTime>
+    </File>
+    <File Include="Views/Home/XMLFile1.xml">
+      <publishTime>10/22/2014 09:46:48</publishTime>
+    </File>
+    <File Include="Views/Shared/Error.cshtml">
+      <publishTime>10/16/2014 14:25:38</publishTime>
+    </File>
+    <File Include="Views/Shared/_Layout.cshtml">
+      <publishTime>10/16/2014 14:25:38</publishTime>
+    </File>
+    <File Include="Views/Web.config">
+      <publishTime>10/16/2014 14:44:05</publishTime>
+    </File>
+    <File Include="Views/_ViewStart.cshtml">
+      <publishTime>10/16/2014 14:25:38</publishTime>
+    </File>
+    <File Include="Web.config">
+      <publishTime>10/18/2014 11:55:41</publishTime>
+    </File>
+  </ItemGroup>
+</Project>

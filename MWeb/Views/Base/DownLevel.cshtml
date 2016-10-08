@@ -1,0 +1,177 @@
+﻿@using GL.Data.Model
+@using GL.Data.View
+@model GameRecordView
+@{
+    ViewBag.Title = "下注梯度";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    string gameType = ViewData["GametypeS"].ToString();
+    string[] ia = gameType.Trim(',').Split(',');
+ 
+}
+
+
+
+
+
+<div id="content">
+    <form id="comment-form" class="smart-form" novalidate="novalidate">
+        <div class="row">
+            <div class="widget-body">
+
+
+                <section class="col col-12" style="width:210px;padding-top:5px">
+                    <label>渠道</label>
+                    <label class="select">
+                        @Html.GetAllAgentGroupList("Channels", Model.Channels)
+                        <i></i>
+                    </label>
+                </section>
+
+
+
+
+             
+
+
+                <section class="col col-1">
+                    <label class="label">用户类型</label>
+                    <label class="select">
+                        @Html.DropDownList("UserType", new List<SelectListItem>
+                {
+                    new SelectListItem { Text= "登陆用户", Value = "1" },
+                    new SelectListItem { Text= "新增用户", Value = "2" },
+                    new SelectListItem { Text= "活跃用户", Value = "3" },
+                    new SelectListItem { Text= "历史付费用户", Value = "4" },
+                    new SelectListItem { Text= "付费用户", Value = "5" },
+                    new SelectListItem { Text= "玩牌用户", Value = "6" },
+                    new SelectListItem { Text= "俱乐部用户", Value = "7" },
+                    new SelectListItem { Text= "登陆俱乐部用户", Value = "8" }
+                })<i></i>
+                    </label>
+                </section>
+
+                <section class="col col-1.2">
+                    <label class="label">起始日期</label>
+                    <label class="input">
+                        <i class="icon-append fa fa-calendar"></i>
+                        @Html.TextBoxFor(m => m.StartDate, new Dictionary<string, object>() { { "class", "form-control datepicker" }, { "data-dateformat", "yy-mm-dd 00:00:00" } })
+                    </label>
+                </section>
+                <section class="col col-1.2">
+                    <label class="label"> 截止日期</label>
+                    <label class="input">
+                        <i class="icon-append fa fa-calendar"></i>
+                        @Html.TextBoxFor(m => m.ExpirationDate, new Dictionary<string, object>() {
+                           { "class", "form-control datepicker" },
+                           { "data-dateformat", "yy-mm-dd 00:00:00" }
+                       })
+                    </label>
+                </section>
+             
+          
+            </div>
+       
+        </div>
+        <div class="row">
+            <div class="widget-body">
+
+                <section class="col col-11">
+                    <label class="label">游戏维度</label>
+                    <div class="row">
+                        <div class="col col-1.5">
+                            @if (ia.Contains("36") || ia.Length == 0)
+                            {
+                                <label class="checkbox state-error"><input value="36" mark2="2" mark="1" type="checkbox" name="Gametype" checked="checked"><i></i>中发白</label>
+                            }
+                            else
+                            {
+                                <label class="checkbox state-error"><input value="36" mark2="2" mark="1" type="checkbox" name="Gametype"><i></i>中发白</label>
+                            }
+                        </div>
+                        <div class="col col-1.5">
+                            @if (ia.Contains("118"))
+                            {
+                                <label class="checkbox state-error"><input value="118" mark2="3" mark="0" type="checkbox" name="Gametype" checked="checked"><i></i>奔驰宝马</label>
+                            }
+                            else
+                            {
+                                <label class="checkbox state-error"><input value="118" mark2="3" mark="0" type="checkbox" name="Gametype"><i></i>奔驰宝马</label>
+                            }
+                        </div>
+                        <div class="col col-1.5">
+                            @if (ia.Contains("69"))
+                            {
+                                <label class="checkbox state-error"><input value="69" mark2="4" mark="0" type="checkbox" name="Gametype" checked="checked"><i></i>十二生肖</label>
+                            }
+                            else
+                            {
+                                <label class="checkbox state-error"><input value="69" mark2="4" mark="0" type="checkbox" name="Gametype"><i></i>十二生肖</label>
+                            }
+                        </div>
+                        <div class="col col-1.5">
+                            @if (ia.Contains("161"))
+                            {
+                                <label class="checkbox state-error"><input value="161" mark2="1" mark="0" type="checkbox" name="Gametype" checked="checked"><i></i>百人德州</label>
+                            }
+                            else
+                            {
+                                <label class="checkbox state-error"><input value="161" mark2="1" mark="0" type="checkbox" name="Gametype"><i></i>百人德州</label>
+                            }
+                        </div>
+                    </div>
+                    <div class="note note-error"> select the option.</div>
+                </section>
+
+
+               
+                <section class="col col-1">
+                    <label class="label">&nbsp;</label>
+                    <input type="button" onclick="search()" class="btn btn-success btn-sm" value="查询" />
+                </section>
+
+            </div>
+        </div>
+    </form>
+
+    <div class="row-fluid">
+        <div class="widget-box" id="box">
+            @Html.Partial("DownLevel_PageList", Model.DataList)
+        </div>
+    </div>
+</div>
+
+
+
+
+
+@section scripts{
+    @{Html.RegisterMvcPagerScriptResource();}
+
+
+    @*<script src="/js/bootstrap.min.js"></script>
+        <script src="/js/select2.min.js"></script>
+        @Styles.Render("~/Style/bootstrap-datetimepicker")
+        @Scripts.Render("~/bundles/bootstrap-datetimepicker")*@
+
+
+    <script type="text/javascript">
+
+        //$(document).ready(function () {
+        //    $('select').select2({
+        //        allowClear: false,
+        //        minimumResultsForSearch: -1
+        //    });
+        //    $('.datepicker').datetimepicker({
+        //        minView: "month", //选择日期后，不会再跳转去选择时分秒
+        //        format: "yyyy-mm-dd hh:ii:ss", //选择日期后，文本框显示的日期格式
+        //        language: 'zh-CN', //汉化
+        //        autoclose: true //选择日期后自动关闭
+        //    });
+
+        //});
+
+
+
+    </script>
+
+}

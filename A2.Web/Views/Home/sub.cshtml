@@ -1,0 +1,82 @@
+﻿@{
+    ViewBag.Title = "在线提问";
+}
+
+
+
+<div id="body">
+    <section class="featured">
+        <div class="content-wrapper">
+            <hgroup class="title">
+                <h1>Welcome to ASP.NET Web API!</h1>
+            </hgroup>
+        </div>
+    </section>
+    <section class="content-wrapper main-content clear-fix">
+        <h3>AAA:</h3>
+
+
+
+
+
+
+
+        <form id ="loginform" name="loginform" action="" method="post" onsubmit="return submitlogin();">
+            <ol>
+                <li>
+                    用户id：
+                    <input id="GUUserID" name="GUUserID" type="text" value="177" />
+                </li>
+                <li>
+                    已解决：
+                    <input id="CSCState" name="CSCState" type="text" value="3" />
+                </li>
+                <li>
+
+
+                    <input id="format" name="format" type="hidden" value="json" />
+                    <input id="Button1" type="submit" value="提交" />
+
+                </li>
+
+            </ol>
+        </form>
+
+
+
+    </section>
+</div>
+
+@section scripts{
+    <script type="text/javascript">
+
+        function submitlogin() {
+
+
+                $.ajax({
+                    url: "/api/a111/177",
+                    type: "POST",
+                    dataType: "JSON",
+                    //data: { "value": document.getElementById("GUName").value },
+                    data: $('#loginform').serialize(),
+                    success: function (data) {
+                        switch (data.result) {
+                            case 0:
+                                alert("添加成功");
+                                break;
+                            case 1:
+                                alert("添加失败");
+                                break;
+                            default:
+                                alert('未知错误');
+                                break;
+                        }
+                    }
+                }).fail(function (xhr, textStatus, err) {
+                    alert('Error: ' + err);
+                });
+                return false;
+        }
+    </script>
+}
+

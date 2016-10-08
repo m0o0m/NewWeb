@@ -1,0 +1,1292 @@
+﻿@using GL.Data.Model
+@model ClubInit
+@{
+    ViewBag.Title = "Index";
+    Layout = null;
+    string nextContent = "";
+}
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <title>515</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="format-detection" content="email=no" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0" />
+   
+    <link href="~/mobile/css/global_7556B107.css" rel="stylesheet" />
+    <script src="~/mobile/js/jquery-1.11.2.min.js"></script> 
+    <script src="~/mobile/js/fastclick_01D91217.js"></script>
+    <script src="~/mobile/js/jQuery.fontFlex_01D91217.js"></script>
+   
+</head>
+<script>
+function browser(){
+	 return 'click';
+}
+</script>
+<body>
+    <section id="wrapper">
+        <div id="scroller">
+            <style>
+                body {
+                    font-size: 12px;
+                    font-family: "微软雅黑", ubuntu, helvetica, arial;
+                    overflow: hidden;
+                    background: #fff;
+                }
+
+                .nheader {
+                    position: relative;
+                    overflow: hidden;
+                    line-height: 20px;
+                    background: url("../../mobile/images/jlb/top.png") repeat-x;
+                    width: 100%;
+                    min-height: 125px;
+                }
+
+                    .nheader .tlt {
+                        color: #fff;
+                        font-size: 18px;
+                        height: 40px;
+                        line-height: 36px;
+                        margin-left: 10px;
+                        vertical-align: middle;
+                    }
+
+                    .nheader .tlt2 {
+                        line-height: 30px;
+                        font-size: 12px;
+                        height: 33px;
+                    }
+
+                    .nheader .tlt3 {
+                        line-height: 25px;
+                        font-size: 12px;
+                        height: 30px;
+                    }
+
+                    .nheader .tlt .p1 {
+                        line-height: 18px;
+                    }
+
+                .ll {
+                    float: left;
+                }
+
+                .nheader .tlt .ll {
+                    width: 70%;
+                    font-size: 11px;
+                    margin-top: 8px;
+                }
+
+                .nheader .tlt .rl {
+                    float: right;
+                    width: 25%;
+                    margin-top: 8px;
+                    margin-left: auto;
+                    margin-right: 10px;
+                    font-size: 12px;
+                    line-height: 25px;
+                }
+
+                .nheader .tlt2 .rl, .nheader .tlt3 .rl {
+                    float: right;
+                    margin-top: 8px;
+                    margin-left: auto;
+                    margin-right: 10px;
+                    font-size: 12px;
+                    line-height: 25px;
+                }
+
+                .nheader .tlt a {
+                    display: block;
+                    cursor: pointer;
+                    width: 75px;
+                    height: 24px;
+                    color: #000;
+                    text-align: center;
+                    vertical-align: middle;
+                    text-decoration: none;
+                    background: url("../../Lib/template/images/layer_tg_b0.png");
+                }
+
+                    .nheader .tlt a:hover {
+                        background: url("../../Lib/template/images/layer_tg_b1.png");
+                        color: #369;
+                    }
+
+                .nheader .tlt2 a, .nheader .tlt3 a {
+                    background: url("../../Lib/template/images/layer_tg_fx0.png");
+                    color: #fff;
+                }
+
+                    .nheader .tlt2 a:hover, .nheader .tlt3 a:hover {
+                        background: url("../../Lib/template/images/layer_tg_fx1.png");
+                        color: #fff;
+                    }
+
+                .contaiter {
+                    position: relative;
+                    overflow: hidden;
+                     background: url("../../Lib/template/images/layer_tg_buttom.png") repeat;
+                    width: 100%;
+                    height: 766px;
+                }
+
+                .clear {
+                    clear: both;
+                    float: none;
+                }
+
+                .tgheader {
+                    width: 100%;
+                    height: 77px;
+                    line-height: 77px;
+                }
+
+                .gridfl {
+                    float: left;
+                    margin-left: 3%;
+                }
+
+                .grid {
+                    width: 30%;
+                    overflow: hidden;
+                    line-height: 127px;
+                }
+
+                    .grid a {
+                        color: #fff;
+                        display: block;
+                        text-decoration: none;
+                        text-align: center;
+                        color: #fff;
+                        height: 77px;
+                        font-size: 16px;
+                        background: rgba(0,0,0,0);
+                    }
+
+                        .grid a.current {
+                            background: url("__ROOT__/Application/Home/View/qzone/template/images/layer_tg_barhover.png");
+                        }
+
+                .linege {
+                    height: 4px;
+                     background: url("../../Lib/template/images/layer_tg_line.png") repeat-x;
+                    width: 100%;
+                }
+
+                .tabctr {
+                    display: none;
+                    width: 100%;
+                    height: 100%;
+                    text-align: center;
+                }
+
+                    .tabctr ul {
+                        list-style-type: none;
+                        width: auto;
+                        height: 69px;
+                        clear: both;
+                        margin: 0 auto;
+                        padding-top: 10px;
+                        padding-bottom: 10px;
+                        padding-left: 5px;
+                        text-align: center;
+                    }
+
+                        .tabctr ul li {
+                            float: left;
+                            color: #fff;
+                        }
+
+                        .tabctr ul .mhli1 {
+                            line-height: 32px;
+                            margin-right: 2%;
+                            font-size: 16px;
+                            width: 65%;
+                            height: 69px;
+                            background: #000;
+                            border-radius: 5px;
+                            -webkit-border-radius: 5px;
+                            -moz-border-radius: 5px;
+                        }
+
+                            .tabctr ul .mhli1 p {
+                                width: 150px;
+                                float: right;
+                            }
+
+                        .tabctr ul .mhli2 {
+                            line-height: 70px;
+                            margin-left: 2%;
+                            font-size: 16px;
+                            cursor: pointer;
+                            width: 30%;
+                            height: 69px;
+                            background: rgb(174,6,5);
+                            border-radius: 5px;
+                            -webkit-border-radius: 5px;
+                            -moz-border-radius: 5px;
+                        }
+
+                #member ul {
+                    padding-top: 0px;
+                    padding-bottom: 0px;
+                    margin-top: 10px;
+                    margin-bottom: 10px;
+                    padding-right: 5px;
+                    width: auto;
+                    height: 69px;
+                }
+
+                .tabctr ul .mbli1 {
+                    color: #000;
+                    line-height: 32px;
+                    margin-right: 1%;
+                    font-size: 16px;
+                    width: 49%;
+                    height: 69px;
+                    background: rgb(196,196,196);
+                    border-radius: 5px 0px 0px 5px;
+                    -webkit-border-radius: 5px 0px 0px 5px;
+                    -moz-border-radius: 5px 0px 0px 5px;
+                }
+
+                    .tabctr ul .mbli1 p, .tabctr ul .mbli2 p {
+                        width: 185px;
+                        float: right;
+                    }
+
+                .tabctr ul .mbli2 {
+                    color: #000;
+                    line-height: 32px;
+                    margin-left: 1%;
+                    font-size: 16px;
+                    width: 49%;
+                    height: 69px;
+                    background: rgb(196,196,196);
+                    border-radius: 0px 5px 5px 0px;
+                    -webkit-border-radius: 0px 5px 5px 0px;
+                    -moz-border-radius: 0px 5px 5px 0px;
+                }
+
+                .homedata {
+                    width: 96%;
+                    height: 550px;
+                    margin: 0px 2%;
+                    background: url("../../Lib/template/images/layer_tg_data.png") repeat;
+                }
+
+                .rankc {
+                    overflow: hidden;
+                    width: 80%;
+                    margin-left: 10%;
+                    margin-right: 10%;
+                    height: 30px;
+                    border-bottom: 1px solid #CCC;
+                    background: none;
+                    line-height: 30px;
+                }
+
+                .rankc-left {
+                    float: left;
+                    padding-left: 20%;
+                    width: 16%;
+                    color: #353535;
+                }
+
+                .rankc-center {
+                    float: left;
+                    overflow: hiddenvertical-align:middle;
+                    padding-top: 4px;
+                    width: 50%;
+                    color: #ad072f;
+                }
+
+                .rankc-right {
+                    float: right;
+                    width: 30%;
+                    color: #353535;
+                    padding-right: 12%;
+                }
+
+                .homedata .centercenter {
+                    height: 30px;
+                    text-align: center;
+                    width: 260px;
+                    margin: 0 auto;
+                    padding: 10px 0;
+                }
+
+                .homedata .leftarrow {
+                    display: block;
+                    cursor: pointer;
+                    width: 30px;
+                    height: 30px;
+                    color: #000;
+                    text-align: center;
+                    vertical-align: middle;
+                    text-decoration: none;
+                     background: url("../../Lib/template/images/layer_tg_left0.png");
+                }
+
+                    .homedata .leftarrow:hover {
+                       background: url("../../Lib/template/images/layer_tg_left1.png");
+                        color: #369;
+                    }
+
+                .homedata .rightarrow {
+                    display: block;
+                    cursor: pointer;
+                    width: 30px;
+                    height: 30px;
+                    color: #000;
+                    text-align: center;
+                    vertical-align: middle;
+                    text-decoration: none;
+                    background: url("../../Lib/template/images/layer_tg_right0.png");
+                }
+
+                    .homedata .rightarrow:hover {
+                        background: url("../../Lib/template/images/layer_tg_right1.png");
+                        color: #369;
+                    }
+
+                .p2 {
+                    text-indent: 2em;
+                }
+
+                input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
+                    background-color: rgb(250, 255, 189);
+                    background-image: none;
+                    color: #ccc;
+                    !important;
+                }
+
+                .text_1 {
+                    color: #807a62;
+                    width: 326px;
+                    position: relative;
+                    height: 47px;
+                    line-height: 28px;
+                    margin-top: 20px;
+                    background: rgba(0,0,0,0);
+                    border: hidden;
+                }
+
+                .p {
+                    font-size: 16px;
+                    float: left;
+                    font-family: 微软雅黑;
+                    width: 150px;
+                    overflow: hidden;
+                }
+
+                .input > input {
+                    width: 100%;
+                    border: none;
+                    height: 40px;
+                    line-height: 40px;
+                    color: #ccc;
+                    text-align: right;
+                    font-size: 16px;
+                }
+
+                .msgNDD {
+                    min-width: 200px;
+                    min-height: 120px;
+                    text-align: center;
+                    padding: 10px;
+                    font-size: 16px;
+                    font-family: 微软雅黑;
+                }
+
+                    .msgNDD a {
+                        background: #d65645;
+                        text-decoration: none;
+                        border-radius: 5px;
+                        display: block;
+                        -webkit-border-radius: 5px;
+                        -moz-border-radius: 5px;
+                        color: #b1b1b1;
+                        width: 90%;
+                        height: 45px;
+                        line-height: 45px;
+                        color: #ffffff;
+                        font-size: 16px;
+                    }
+
+                        .msgNDD a:hover, .msgNDD a:active {
+                        }
+
+                .msgrep {
+                    min-height: 120px;
+                    padding: 10px;
+                    font-size: 16px;
+                    font-family: 微软雅黑;
+                }
+
+                    .msgrep em {
+                        color: #e85946;
+                        font-style: normal;
+                    }
+
+                .msgrepT {
+                    height: 30px;
+                    line-height: 30px;
+                    margin-left: 10px;
+                }
+
+                .msgrep a {
+                    background: #d65645;
+                    display: block;
+                    text-decoration: none;
+                    border-radius: 5px;
+                    -webkit-border-radius: 5px;
+                    -moz-border-radius: 5px;
+                    height: 45px;
+                    line-height: 45px;
+                    color: #b1b1b1;
+                    color: #ffffff;
+                    font-size: 16px;
+                }
+
+                    .msgrep a:hover, .msgrep a:active {
+                    }
+
+                    .msgrep a.x {
+                        margin-left: 0;
+                    }
+
+                .x {
+                }
+
+                .bg {
+                    background: #d65645;
+                }
+
+                .hover {
+                }
+
+                .msgNDDtext {
+                    text-align: center;
+                    margin: 40px 10px;
+                }
+
+                .userName {
+                    margin-top: 10px;
+                    color: #a3a3a3;
+                }
+                /*弹出层*/
+                #background {
+                    position: absolute;
+                    z-index: 998;
+                    top: 0px;
+                    left: 0px;
+                    background: rgb(50, 50, 50);
+                    background: rgba(0, 0, 0, 0.5);
+                    display: none;
+                }
+
+                #newMsg {
+                    position: absolute;
+                    width: 90%;
+                    z-index: 999;
+                    display: none;
+                    background: #fff;
+                    border-radius: 5px; /*display:none;*/
+                }
+
+                #msg .cnt {
+                    padding: 10px 10px 10px 10px;
+                    height: 70%;
+                }
+
+                #msg .text {
+                    margin: 8px 3px;
+                    padding: 0 5px;
+                    width: 212px;
+                    height: 30px;
+                    line-height: 30px;
+                    background: #E4E4E4;
+                    -webkit-border-radius: 5px;
+                    -moz-border-radius: 5px;
+                    border-radius: 5px;
+                    border-color: #adadad;
+                }
+
+                #msg .submit {
+                    cursor: pointer;
+                    position: relative;
+                    float: left;
+                    display: block;
+                    width: 115px;
+                    height: 39px;
+                    line-height: 39px;
+                  background: url("../../Lib/template/images/layer_tg_pop0.png");
+                    color: #fff;
+                }
+
+                    #msg .submit:hover {
+                       background: url("../../Lib/template/images/layer_tg_pop1.png");
+                    }
+
+                #msg .submitC {
+                    width: 100%;
+                    text-align: center;
+                    margin-left: 0%;
+                    margin-right: 0%;
+                    margin-bottom: 10%;
+                    margin-top: 2%;
+                }
+
+                #msg .tit a {
+                    display: block;
+                    margin: 5px 5px;
+                    cursor: pointer;
+                    width: 32px;
+                    height: 32px;
+                    float: right;
+                     background: url("../../Lib/template/images/closebtn1.png");
+                }
+
+                    #msg .tit a:hover {
+                       background: url("../../Lib/template/images/closebtn2.png");
+                        color: #369;
+                    }
+
+                #msg #phone_cnt {
+                    font-weight: bold;
+                }
+
+                #msg #addr_address {
+                    height: 60px;
+                    line-height: 20px;
+                }
+
+                #msg #err {
+                    display: none;
+                    color: red;
+                    text-align: center;
+                    font-size: 12px;
+                    height: 15px;
+                }
+
+                #msg .keyzi {
+                    color: #e8821e;
+                }
+
+                .disconfig {
+                    width: 100%;
+                    margin: 0px;
+                    position: fixed;
+                    color: #fff;
+                    background: rgba(0, 0, 0, 0.6);
+                    bottom: -2px;
+                }
+
+                #dropdown {
+                    width: 136px;
+                    margin: 0px auto;
+                    position: absolute;
+                    right: 20px;
+                    top: 130px;
+                }
+
+                    #dropdown p {
+                        width: 103px;
+                        height: 28px;
+                        line-height: 28px;
+                        padding-left: 4px;
+                        padding-right: 30px;
+                        border: hidden;
+                         background: url(../../Lib/public/images/box.png) no-repeat left top;
+                        color: #807a62;
+                        cursor: pointer;
+                    }
+
+                        #dropdown p span {
+                            padding-left: 4px;
+                            padding-right: 20px;
+                        }
+
+                    #dropdown ul {
+                        width: 134px;
+                        overflow: scroll;
+                        max-height: 72px;
+                        background: #EEE;
+                        margin-top: 2px;
+                        border: 1px solid #bbb;
+                        position: absolute;
+                        display: none;
+                        z-index: 1;
+                    }
+
+                        #dropdown ul li {
+                            height: 24px;
+                            line-height: 24px;
+                            text-indent: 10px;
+                        }
+
+                            #dropdown ul li a {
+                                display: block;
+                                height: 24px;
+                                color: #807a62;
+                                text-decoration: none;
+                            }
+
+                                #dropdown ul li a:hover {
+                                    background: #d55645;
+                                    color: #369;
+                                }
+
+                #flowdiv {
+                    position: absolute;
+                    color: #FFFFFF;
+                    background: rgb(255,0,0);
+                    padding: 10px 10px;
+                    display: none;
+                    -webkit-border-radius: 5px;
+                    -moz-border-radius: 5px;
+                    border-radius: 5px;
+                    border-color: rgb(0,0,0);
+                }
+            </style>
+            <div class="nheader" id="banner">
+                <div class="tlt">邀请好友，共赢大奖<div class="rl" id="bingyaoqing" style="font-size: 11px;margin: 5px 5px;"></div></div>
+                <div class="tlt tlt2"><div class="ll"><p class="p1"><span>1.复制邀请链接给您的好友</span></p><p class="p1"><span>@Model.Mark</span></p></div><div class="rl"><a id="copy_p" href="javascript:;" onclick="copyvia();">立即复制</a></div></div>
+                <div class="tlt tlt2"><div class="ll"><p class="p1"><span>2.将我的邀请码（dddzz）分享到社交网站</span></p></div><div class="rl"><a id="fen_p" href="javascript:;" onclick="fenxiang();">立即分享</a></div></div>
+            </div>
+            <div class="contaiter">
+                <div class="tgheader">
+                    <div class="gridfl grid" style="margin-left: 2%">
+                        <a class="Amyhome item current tab" tab="myhome" href="javascript:;"><img src="../../Lib/template/images/layer_tg_home.png"></img></a>
+                    </div>
+                    <div class="gridfl grid" style="margin-left: 3%">
+                        <a class="Amember item tab" tab="member" href="javascript:;"><img src="../../Lib/template/images/layer_tg_menber.png"></img></a>
+                    </div>
+                    <div class="gridfl grid" style="margin-right: 2%; float: right;">
+                        <a class="Arule item tab" tab="rule" href="javascript:;"><img src="../../Lib/template/images/layer_tg_rule.png"></img></a>
+                    </div>
+
+                </div>
+                <div class="linege"></div>
+
+                <div class="tabctr" style="display: block;" id="myhome">
+                    <ul>
+                        <li class="mhli1">
+                        <div class="ll" style="width: 30px; height: 100%;margin-left: 20px;">
+                            <img style="margin-top: 20px;" src="../../mobile/images/jlb/gold.png" align="middle" width="30" height="30">
+                         </div><p>
+                            <span style="font-size: 20px;" id="getwardNum">@Model.C4</span><br>
+                            <span>可领取返利</span></p></li>
+                        <li class="mhli2">领取</li>
+                    </ul>
+                    <div class="clear"></div>
+                    <div class="linege"></div>
+                    <div style="font-size: 16px; height: 32px; line-height: 30px;">俱乐部贡献</div>
+                    <div class="homedata" id="myhomeList"></div>
+                </div>
+                <div class="tabctr" style="display: none;" id="member">
+                    <ul>
+                        <li class="mbli1"><p><span style="font-size: 20px;" id="membercount">0</span><br><span>总会员数</span></p></li>
+                        <li class="mbli2"><p><span style="font-size: 20px;" id="memberhcount">0</span><br><span>上周活跃会员</span></p></li>
+                    </ul>
+                    <div class="clear"></div>
+                    <div class="linege"></div>
+                    <div style="font-size: 16px; height: 32px; line-height: 30px;">会员贡献明细</div>
+                    <div class="homedata" id="memberList" style="overflow:auto;height: " onscroll="divScroll(this)">
+
+                    </div>
+
+                </div>
+                <div class="tabctr" style="display: none;" id="rule">
+                    <div style="float: left; padding: 20px 20px; text-align: left; font-size: 14px;">
+                        <h3>规则</h3>
+                        <p>1.返利每周一零点更新。</p>
+                        <br>
+                        <p>2.俱乐部返利：</p>
+                        <p class="p2">上周贡献服务费小于5亿，返利额为20%。</p>
+                        <p class="p2">上周贡献服务费达到5亿，返利额为25%。</p>
+                        <p class="p2">上周贡献服务费达到10亿，返利额为30%。</p>
+                        <p class="p2">上周贡献服务费达到30亿，返利额为40%。</p>
+                        <p class="p2">上周贡献服务费达到50亿，返利额为50%。</p>
+                        <br>
+                        <p>3.必须通过本俱乐部链接邀请注册，才能成为本俱乐部旗下会员!</p>
+
+                    </div>
+
+                </div>
+                <input type="hidden" id="hidPage" value="1" />
+
+                <script type="text/javascript">
+                    //俱乐部贡献
+                    function GetClubGives(page) {
+                        $.ajax({
+                            url: "/Club/GetClubGives/",
+                            type: "Post",
+                            dataType: "JSON",
+                            data: { "page": page, "clubid":  @Model.UID },
+                            success: function (data) {
+                                getGift_callback(data);
+                            }
+                        });
+                    }
+
+                    function GetMemberAppend(){
+                        var page =   $("#hidPage").val();
+                        var membercount = $("#membercount").html();
+
+                        var tP = parseInt(membercount)/20;
+
+
+                        $.ajax({
+                            url: "/Club/GetMember/",
+                            type: "Post",
+                            dataType: "JSON",
+                            data: { "page": page, "clubid":  @Model.UID, "curTime": curTime },
+                            success: function (data) {
+
+                                $("#hidPage").val(parseInt(page)+1);
+                                getMenderAppend_callback(data);
+                            }
+                        });
+                    }
+
+                    //俱乐部会员
+                    function GetMember(page) {
+
+                        $.ajax({
+                            url: "/Club/GetMember/",
+                            type: "Post",
+                            dataType: "JSON",
+                            data: { "page": page, "clubid":  @Model.UID, "curTime": curTime },
+                            success: function (data) {
+                                $("#hidPage").val(parseInt(page)+1);
+                                if(data.data.length>0){
+                                    isEndAppend = false;
+                                }
+
+                                getMender_callback(data);
+                            }
+                        });
+                    }
+                    //初始化
+                    $(function () {
+                        GetClubGives(1);
+                    })
+
+
+
+                </script>
+
+
+
+
+
+                <script type="text/javascript">
+                    var hUrl = '{$pokerurl}';
+                    var curTime = 0;
+                    var bGetEd =  @Model.C5; //等于{$bGetED}
+
+
+
+                    var tempBindClub=0;
+
+
+
+
+                    function getGift_callback(ret){
+                        var data = ret.data;
+                        if(data == null || data.length == 0){
+                            $('#myhomeList').html('<p  style="font-size:16px;color:#999;font-family: 微软雅黑; position:relative;">无数据</p><div style="font-size: 16px; height: 32px; line-height: 30px;">注：俱乐部贡献可查看最近10天的数据</div>');
+                            return ;
+                        }
+
+                        $('#myhomeList').html('');
+
+                        var html = '<div class="rankc">';
+                        //.ToString("#,0.")
+                        //html += '<div class="rankc-left"><h1>本周贡献总额</h1></div>';
+                        html += '<div><h1>本周贡献总额: '+ret.WeekTotal+'</h1></div>';
+                        html += '<div class="clear"></div>';
+                        html += '</div>';
+                        html += '<div class="rankc">';
+                        var nextContent = "";
+                        if(ret.NextFanLi!=""){
+                            nextContent = ",贡献总额达到"+ret.NextTotal+"亿返利额为"+ret.NextFanLi+"%";
+                        }
+
+
+                        html += '<div><h1>当前返利额为' + ret.FanLi + '%  '+nextContent+'</h1></div>';
+
+                        html += '<div class="clear"></div>';
+                        html += '</div>';
+
+
+                        html += '<div class="rankc">';
+                        html += '<div class="rankc-left"><h1>日期</h1></div>';
+                        html += '<div class="rankc-right"><h1>贡献额度</h1></div>';
+                        html += '<div class="clear"></div>';
+                        html += '</div>';
+                        for(i in data){
+                            html += '<div class="rankc">';
+                            html += '<div class="rankc-left">' + data[i].CreateTime + '</div>';
+                            html += '<div class="rankc-right">' + data[i].GoldStr + '</div>';
+                            html += '<div class="clear"></div>';
+                            html += '</div>';
+                        }
+                        html += '<div style="font-size: 13px; height: 32px; line-height: 30px;">注：俱乐部贡献可查看最近10天的数据;</div>'
+                        $('#myhomeList').html(html);
+                    }
+                    function divScroll(obj){
+                        var viewH =$(obj).height();//可见高度
+                        var contentH =$(obj).get(0).scrollHeight;//内容高度
+                        var scrollTop =$(obj).scrollTop();//滚动高度
+
+                        if(scrollTop==(contentH -viewH)){
+
+
+                            GetMemberAppend();
+                        }
+
+
+                    }
+                    var isEndAppend = false;
+                    function getMenderAppend_callback(ret){
+                        var data = ret.data;
+                        var html = "";
+                        if (data == null || data.length == 0) {
+                            if(isEndAppend==false){
+                                html += '<div style="font-size: 13px; height: 32px; line-height: 30px;">注：会员贡献明细每10分钟更新一次数据;</div>';
+                                isEndAppend = true;
+                            }
+                        }else{
+                            for(i in data){
+                                if (data[i].NickName) {
+                                    var name =  data[i].NickName;
+                                    if(data[i].NickName==null || data[i].NickName==""){
+                                        name =  "";
+                                    }else{
+                                        if(data[i].NickName.length>4){
+                                            var tnm = data[i].NickName;
+                                            name = tnm[0]+tnm[1]+tnm[2]+tnm[3]+"...";
+                                        }else{
+                                            name =  data[i].NickName;
+                                        }
+
+                                    }
+
+                                    var viewName =name+"("+data[i].ID+")";
+
+
+
+
+                                    html += '<div class="rankc2">';
+                                    html += '<div class="rankc-myself1">' +viewName + '</div>';
+
+                                    html += '<div class="rankc-myself2">' + data[i].GoldStr + '</div>';
+                                    html += '<div class="rankc-myself3">' + data[i].BeforeLogin + '</div>';
+                                    html += '<div class="clear"></div>';
+                                    html += '</div>';
+                                }
+                            }
+
+                        }
+                        $("#memberList").append(html);
+                        //memberList
+                    }
+
+                    function getMender_callback(ret){
+                        var data = ret.data;
+                        $('#membercount').html(ret.mycount);
+                        $('#memberhcount').html(ret.actioncount);
+                        $('#memberList').html('');
+                        var html = '<div class="centercenter"><a class="leftarrow" href="javascript:onLeft();" style="float: left;"></a><p style="float: left;line-height: 30px;width: 200px;font-size: 14px;">' + ret.time + '</p><a class="rightarrow" href="javascript:onRight();" style="float: left;"></a></div>';
+
+                        if (data == null || data.length == 0) {
+                            html += '<p  style="font-size:16px;color:#999;font-family: 微软雅黑; position:relative;">无数据</p><div style="font-size: 16px; height: 32px; line-height: 30px;">注：会员贡献明细每10分钟更新一次数据</div>';
+                            $('#memberList').html(html);
+                            return ;
+                        }//rankc-left  rankc-right
+                        html += '<div class="rankc2">';
+                        html += '<div class="rankc-myself1"><h1>会员</h1></div>';
+
+                        html += '<div class="rankc-myself2"><h1>贡献额度</h1></div>';
+
+                        html += '<div class="rankc-myself3"><h1>最后登录</h1></div>';
+
+                        html += '<div class="clear"></div>';
+                        html += '</div>';
+                        for(i in data){
+                            if (data[i].NickName) {
+                                var name =  data[i].NickName;
+
+                                if(data[i].NickName==null || data[i].NickName==""){
+                                    name =  "";
+                                }else{
+                                    if(data[i].NickName.length>4){
+                                        var tnm = data[i].NickName;
+                                        name = tnm[0]+tnm[1]+tnm[2]+tnm[3]+"...";
+                                    }else{
+                                        name =  data[i].NickName;
+                                    }
+
+                                }
+                                var viewName =name+"("+data[i].ID+")";
+
+
+                                html += '<div class="rankc2">';
+                                html += '<div class="rankc-myself1">' +viewName+ '</div>';
+
+                                html += '<div class="rankc-myself2">' + data[i].GoldStr + '</div>';
+                                html += '<div class="rankc-myself3">' + data[i].BeforeLogin + '</div>';
+                                html += '<div class="clear"></div>';
+                                html += '</div>';
+                            }
+                        }
+                        //html += '<div style="font-size: 13px; height: 32px; line-height: 30px;">注：会员贡献明细每10分钟更新一次数据;</div>';
+                        //	html += '<div style="font-size: 13px; height: 32px; line-height: 30px;"></div>';
+                        $('#memberList').html(html);
+                    }
+
+
+
+                    function getGetAward_callback(ret){
+                        var msg='';
+                        if (ret.c3 == 0) {
+                            $('#getwardNum').html('0');
+                            msg = "成功领取" + ret.c2 + "游戏币";
+                            bGetEd=3;
+                            $('#mhli2').html('已领取');
+                        }
+                        else if (ret.c3 == 1) {
+                            msg="不可领取";
+                        }
+                        else if (ret.c3 == 3) {
+                            msg="已经领取";
+                        }
+                        else{
+                            msg="领取失败";
+                        }
+                        var cnt = "<p>"+msg+"</p>";
+                        cnt += '<div class="submitC" style="margin:auto auto;height:45px;width:104px;padding-top:20px;"><a class="submit" style="width:115px;" onclick="hideMsg();">确定</a></div>';
+                        cnt = typeof cnt != 'object' ? {'cnt':cnt} : cnt;
+                        cnt.width = 280;
+                        cnt.height = 150;
+                        showMsg(cnt);
+                    }
+
+                    function loading(){
+                        var cnt = "<img src='__ROOT__/Mobile/Home/View/activity/template/public/image//nyplay/loading.gif' style='width:40%; margin:10px auto;' />";
+                        cnt += "<p>正在发送请求，请稍等</p>";
+                        showMsg(cnt);
+                    }
+                    function showerr(msg){
+                        document.getElementById('err').innerHTML = msg;
+                        document.getElementById('err').style.display='block';
+                    }
+                    function hideerr(){
+                        document.getElementById('err').style.display='none';
+                    }
+                    function onLeft() {
+                        if (curTime < 9) {
+                            curTime += 1;
+                            GetMember(1);
+
+                        }
+                    }
+
+                    function onRight() {
+                        if(curTime>0) {
+                            curTime-=1;
+                            GetMember(1);
+
+                        }
+                    }
+
+                    function tab(id){
+                        $('.tabctr').css('display','none');
+                        $('#'+id).css('display','block');
+                        $('.item').removeClass('current');
+                        if (typeof($('.A'+id)) != 'undefined'){
+                            $('.A'+id).addClass('current');
+                        }
+                        if (id == 'member'){
+                            GetMember(1);
+                            $("#hidPage").val("1");
+                            //getUrl(hUrl+'/getMender/?type='+{$dwUserClubType}+'&hip={$hip}&hpost={$hpost}&clubid='+{$uid}+'&time='+curTime);
+                        }
+                        else if (id == 'myhome'){
+                            //更新index页面请求
+                            $("#hidPage").val("1");
+                            GetClubGives(1);
+                        }else{
+                            $("#hidPage").val("1");
+                        }
+                        refeshScroll();
+                        cssInit();
+                    }
+                    function cssInit(){
+                        search_up = search_up2  = false;
+                    }
+                    var search_up = search_up2  = false;
+                    $(document).ready(function(){
+                        hUrl=document.URL.split( "?" )[0];
+                        //getUrl(hUrl+'/getGift?userid='+{$uid}+'&hip={$hip}&hpost={$hpost}');
+                        $('.tab').on(browser(),function(){
+                            var t = $(this).attr('tab');
+                            tab(t);
+                        });
+                        $('.tabctr ul .mhli2').on(browser(), function () {
+
+                            if(bGetEd == 2){
+
+                                $.ajax({
+                                    url: "/Club/GetAward/",
+                                    type: "Post",
+                                    dataType: "JSON",
+                                    data: {  "clubid": @Model.UID,"hpost":@Model.Port,"hip":'@Model.Ip'},
+                                    success: function (data) {
+
+                                        getGetAward_callback(data);
+                                    }
+                                });
+                            }
+                            else if(bGetEd == 3){
+                                var cnt = "<p>亲：您已经领取了哦！</p>";
+                                cnt += '<div class="submitC" style="margin:auto auto;height:45px;width:104px;padding-top:20px;"><a class="submit" style="width:115px;" onclick="hideMsg();">确定</a></div>';
+                                cnt = typeof cnt != 'object' ? {'cnt':cnt} : cnt;
+                                cnt.width = 280;
+                                cnt.height = 150;
+                                showMsg(cnt);
+                            }
+                            else{
+                                if(parseInt('@Model.C4')==0){
+                                    var cnt = "<p>亲：您的可领取返利为O，加油哦！</p>";
+                                    cnt += '<div class="submitC" style="margin:auto auto;height:45px;width:104px;padding-top:20px;"><a class="submit" style="width:115px;" onclick="hideMsg();">确定</a></div>';
+                                    cnt = typeof cnt != 'object' ? {'cnt':cnt} : cnt;
+                                    cnt.width = 280;
+                                    cnt.height = 150;
+                                    showMsg(cnt);
+                                }
+
+                            }
+                        });
+                    });
+                </script>
+
+
+             
+            </div>
+    </section>
+  
+
+    <script type="text/javascript">
+        var myscroll;
+        $(document).ready(function(){
+            var u = navigator.userAgent, app = navigator.appVersion;
+            var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+            if (!isiOS){
+                $(function() {
+                    FastClick.attach(document.body);
+                });
+            }
+            //$("#copy_p").click(function () {
+            //    		$('#flowdiv').html("复制成功");
+            //    		var obj = $("#flowdiv");//获得相应的Div对象
+            //    		var x = ($(window).width()-$("#flowdiv").width())/2;//使用$(window).width()获得显示器的宽，并算出对应的Div离左边的距离
+            //    		var y = ($(window).height()-$("#flowdiv").height())/2;//使用$(window).height()获得显示器的高，并算出相应的Div离上边的距离
+            //    		obj.css("top",y).css("left",x);
+            //    		$('#flowdiv').fadeIn("slow").delay(800).fadeOut("slow");
+            //});
+
+            @*$("#copy_p").zclip({
+	    path: '../../Lib/template/js/zclip/js/ZeroClipboard.swf',
+	    copy: "@Model.Mark",
+		afterCopy: function(){
+			$('#flowdiv').html("复制成功");
+			var obj = $("#flowdiv");//获得相应的Div对象
+			var x = ($(window).width()-$("#flowdiv").width())/2;//使用$(window).width()获得显示器的宽，并算出对应的Div离左边的距离
+			var y = ($(window).height()-$("#flowdiv").height())/2;//使用$(window).height()获得显示器的高，并算出相应的Div离上边的距离
+			obj.css("top",y).css("left",x);
+			$('#flowdiv').fadeIn("slow").delay(800).fadeOut("slow");
+		},
+	});*@
+        });
+
+        function copyvia(){
+
+
+
+            $('#flowdiv').html("复制成功");
+            var obj = $("#flowdiv");//获得相应的Div对象
+            var x = ($(window).width()-$("#flowdiv").width())/2;//使用$(window).width()获得显示器的宽，并算出对应的Div离左边的距离
+            var y = ($(window).height()-$("#flowdiv").height())/2;//使用$(window).height()获得显示器的高，并算出相应的Div离上边的距离
+            obj.css("top",y).css("left",x);
+            $('#flowdiv').fadeIn("slow").delay(800).fadeOut("slow");
+            location.href = "mobilecall://copyvia//@Model.Mark";
+
+        }
+
+        function refeshScroll(){
+            if (typeof(myscroll) != 'undefined'){
+                myscroll.refresh();
+            }
+            if (typeof(window.parent.updateHeight) == 'Function' || typeof(window.parent.updateHeight) == 'function'){
+                window.parent.updateHeight($(document).height());
+            }
+        }
+        function getUrl(url) {
+            var head = document.getElementsByTagName("head")[0];
+            var script = document.createElement('script');
+            script.onload = script.onreadystatechange = script.onerror = function () {
+                if (script && script.readyState && /^(?!(?:loaded|complete)$)/.test(script.readyState))
+                    return false;
+                script.onload = script.onreadystatechange = script.onerror = null;
+                script.src = '';
+                script.parentNode.removeChild(script);
+                script = null;
+            };
+            script.charset = document.charset || document.characterSet || 'gb2312';
+            script.src = url + '&' + (new Date().valueOf());
+            head.appendChild(script);
+        };
+        function hideOpenwin(){
+            $("#open_win_background, #open_win").hide();
+            if (typeof(Refresh) != 'undefined' && Refresh == 1){
+                window.location.href=window.location.href;
+            }
+        }
+        function showOpenwin(html,title){
+            var T = arguments[1] ? arguments[1] : '系统';
+
+            $('#open_win_header').html(T);
+            $('#open_win_content').html(html);
+            var oBackground = document.getElementById("open_win_background");
+            var dw = $(document).width();
+            var dh = $(document).height();
+            oBackground.style.width = dw+'px';
+            //    oBackground.style.height = '100%';
+            oBackground.style.height = dh+'px';
+            $("#open_win_background, #open_win").show();
+            $("#open_win_background").click(function() {hideOpenwin()});
+            var oContent 	= document.getElementById('open_win');
+            var scrollTop 	= document.documentElement.scrollTop || document.body.scrollTop;
+            var vHeight 	= document.documentElement.clientHeight ? document.documentElement.clientHeight : document.body.clientHeight;
+            var l = (document.documentElement.clientWidth - oContent.offsetWidth) / 2;
+            var t = Math.max(((vHeight- oContent.offsetHeight) / 2) + scrollTop,0);
+            //t =  Math.max(parseInt((vHeight/2 - oContent.offsetHeight)) + scrollTop/2,0);
+            oContent.style.left = l + 'px';
+            oContent.style.top = t+ 'px';
+        }
+        function setOpenwin(jsonObj){
+            $('#open_win').css(jsonObj);
+        }
+        function setOpenwin_header(jsonObj){
+            $('#open_win_header').css(jsonObj);
+        }
+        function setOpenwin_content(jsonObj){
+            $('#open_win_content').css(jsonObj);
+        }
+        var ispop = false;
+        var curscroll= 0;
+        function afxMessageBox(opt){
+
+            opt = typeof opt != 'object' ? {} : opt;
+            opt.tit = (typeof opt.tit != 'undefined') ? opt.tit : 'info';
+            opt.width = (typeof opt.width != 'undefined') ? opt.width : '280';
+            document.getElementById('msg.cnt').innerHTML = opt.cnt;
+            document.getElementById('msg').style.display='block';
+            document.getElementById('content').style.width=opt.width+'px';
+            if(opt.height!='undefined'){
+                document.getElementById('content').style.height=opt.height+'px';
+            }
+            document.getElementById('msg.cnt').style.textAlign=opt.align;
+            document.getElementById('msg.cnt').style.color=opt.color;
+            var oBackground = document.getElementById("open_win_background");
+            var dw = $(document).width();
+            var dh = $(document).height();
+            oBackground.style.width = dw+'px';
+            oBackground.style.height = dh+'px';
+            $("#open_win_background").show();
+            $("#open_win_background").click(function() {hideMsg()});
+            var divWidth = opt.width;
+            var divHeight = document.getElementById('content').offsetHeight;
+            var dom1 = document.documentElement;
+            var dom2 = document.body;
+            var vWidth = dom1.clientWidth ? dom1.clientWidth : dom2.clientWidth;
+            var vHeight = dom1.clientHeight ? dom1.clientHeight : dom2.clientHeight;
+            document.getElementById('msg').style.width=divWidth+'px';
+            document.getElementById('msg').style.height=divHeight+'px';
+            var sHeight = dom1.scrollTop ? dom1.scrollTop : dom2.scrollTop;
+            var scrollTop 	= document.documentElement.scrollTop || document.body.scrollTop;
+            var left = parseInt((vWidth - divWidth)/2);
+            var top = parseInt((vHeight/2 - divHeight/2)+scrollTop)-100;
+            ispop=true;
+            curscroll = sHeight;
+            document.getElementById('msg').style.left = left+'px';
+            document.getElementById('msg').style.top = top+'px';
+        }
+        function hideMsg(){
+            ispop=false;
+            $("#open_win_background").hide();
+            document.getElementById('msg').style.display='none';
+            if (typeof(hideMsg_callback) == 'function'){
+                hideMsg_callback();
+            }
+        }
+        function showMsg2(ret){
+            hideOpenwin();
+            var html = '<p style="text-align:center">'+ret.msg+'</p>';
+            showOpenwin(html);
+        }
+        function showMsg(opt){
+            opt = typeof opt != 'object' ? {'cnt':opt} : opt;
+            opt.tit = '系统';
+            afxMessageBox(opt);
+        }
+    </script>
+    <script>
+        if (window.console) {
+            console.log("%c515德州扑克"," text-shadow: 0 1px 0 #ccc,0 2px 0 #c9c9c9,0 3px 0 #bbb,0 4px 0 #b9b9b9,0 5px 0 #aaa,0 6px 1px rgba(0,0,0,.1),0 0 5px rgba(0,0,0,.1),0 1px 3px rgba(0,0,0,.3),0 3px 5px rgba(0,0,0,.2),0 5px 10px rgba(0,0,0,.25),0 10px 10px rgba(0,0,0,.2),0 20px 20px rgba(0,0,0,.15);font-size:5em")
+            console.log("德州扑克是技术活，不过我喜欢ALLIN；\n515德州扑克是最好玩的德州扑克，看到这里表示你对515德州有浓厚的兴趣；\n-------------\n%c如果发现问题，希望你能及时的与技术人员反馈 反馈QQ：9080095","color:red;font-size:1em")
+        }
+    </script>
+    <!-- 弹窗 -->
+    <div id="open_win_background"></div>
+    <div id="open_win">
+        <div id="open_win_header">系统消息</div>
+        <div class="body" id="open_win_content"></div>
+    </div>
+    <div id='msg' style="background:transparent;">
+        <div id='content'>
+            <div class='tit'>
+                <span id='msg.tit'></span><a href='javascript:hideMsg();'></a>
+            </div>
+            <div class='cnt' id='msg.cnt'></div>
+            <div class='btm'></div>
+        </div>
+    </div>
+    <div id="fenxiangBox" style="background:none;position:fixed; width: 100%; height: 200px;bottom: 0px;">
+        <div class="contentbox" style="width: 100%; height: 200px;-webkit-border-radius:0px;-moz-border-radius:0px;border-radius:0px;text-align: center;">
+            <p style="line-height: 40px; font-size: 20px;">分享到</p>
+            <div style="width: 100%;height: 90px; margin-left: 40px;">
+                <div id="fenxiangwei" style="float: left; color:#999; "><img src="__ROOT__/Mobile/Home/View/activity/template/public/images/jlb/wei.png"><p>微信好友</p></div>
+                <div id="fenxiangwei2" style="float: left; color:#999; margin-left: 20px;"><img src="__ROOT__/Mobile/Home/View/activity/template/public/images/jlb/wei2.png"><p>微信朋友圈</p></div>
+            </div>
+            <div style="width: 90%;margin-left: 5%;line-height: 4px;"><img width="100%" src="__ROOT__/Mobile/Home/View/activity/template/public/images/jlb/line.png"></div>
+            <p id="fenxiangclose" style="line-height: 60px; font-size: 20px;">取消</p>
+        </div>
+
+    </div>
+    <div id="flowdiv"></div>
+</body>
+</html>

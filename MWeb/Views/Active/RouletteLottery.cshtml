@@ -1,0 +1,71 @@
+﻿
+@using GL.Data.View
+@model GameRecordView
+@{
+    ViewBag.Title = "轮盘抽奖彩池";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+
+    
+}
+
+
+
+<div id="content">
+
+    <form id="comment-form" class="smart-form" novalidate="novalidate">
+        <div class="row">
+            <div class="widget-body">
+                <fieldset>
+                        <div class="row">
+                            <section class="col col-1.2">
+                                <label class="label"><text>轮盘抽奖彩池金额</text> </label>
+                                <label class="input">
+                                    <input type="text" id="ChipPot" name="ChipPot" readonly="readonly" class="span4" value="@ViewData["pot"]" />
+                                </label>
+                            </section>
+                            <section class="col col-1">
+                                <label class="label">&nbsp;</label>
+                                <input data-edit="" type="button" value="修改" class="btn btn-danger btn-sm" />
+                            </section>
+                        </div>
+                </fieldset>
+
+
+
+
+            </div>
+        </div>
+    </form>
+
+
+
+
+
+
+</div>
+
+
+@section scripts{
+    @{Html.RegisterMvcPagerScriptResource();}
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/select2.min.js"></script>
+
+    <script type="text/javascript">
+
+
+        // resets the menu selection upon entry to this page:
+        function resetMenu() {
+            document.gomenu.selector.selectedIndex = 2;
+        }
+
+        $(function () {
+            $("input[data-edit]").click(function () {
+
+                location.href = "/Active/RouletteLotteryUpdate?pot=" + $("#ChipPot").val();
+               // window.location.href = "/GameData/PotListUpdate?gameid=15" ;
+            });
+        });
+
+    </script>
+}

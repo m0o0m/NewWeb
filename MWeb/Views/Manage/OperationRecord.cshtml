@@ -1,0 +1,28 @@
+﻿@model object
+@{
+    ViewBag.Title = "玩家操作记录 -- 列表";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!--breadcrumbs-->
+<div id="content-header">
+    <div id="breadcrumb"> <a href="#" title="" class="current"><i class="icon-home"></i> 玩家操作记录</a></div>
+</div>
+
+<!--End-breadcrumbs-->
+<div class="container-fluid">
+    <div class="row-fluid">
+
+        <div class="span6">
+
+
+            <div class="widget-box" id="box">
+                @Html.Partial("OperationRecord_PageList", Model)
+            </div>
+
+        </div>
+
+
+    </div>
+</div>
+

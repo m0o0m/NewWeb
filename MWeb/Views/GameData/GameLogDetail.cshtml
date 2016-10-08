@@ -1,0 +1,296 @@
+﻿
+@using Webdiyer.WebControls.Mvc;
+@using GL.Data.Model;
+@using GL.Data.BLL;
+
+@model TexasGameRecord
+
+@{
+     Layout =null;
+}
+
+
+
+
+<link rel="stylesheet" type="text/css" media="screen" href="~/js/SmartAdmin/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" media="screen" href="~/js/SmartAdmin/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" media="screen" href="~/js/SmartAdmin/css/smartadmin-production.css">
+<link rel="stylesheet" type="text/css" media="screen" href="~/js/SmartAdmin/css/smartadmin-skins.css">
+<link rel="stylesheet" type="text/css" media="screen" href="~/js/SmartAdmin/css/demo.css">
+<link rel="shortcut icon" href="~/js/SmartAdmin/img/favicon/favicon.ico" type="image/x-icon">
+<link rel="icon" href="~/js/SmartAdmin/img/favicon/favicon.ico" type="image/x-icon">
+<link href="~/js/SmartAdmin/css/mygame.css" rel="stylesheet" />
+
+
+<section id="widget-grid" class="">
+    <div class="row">
+        <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-0" data-widget-editbutton="false" data-widget-colorbutton="false"
+                 data-widget-togglebutton="false"
+                 data-widget-deletebutton="false"
+                 data-widget-fullscreenbutton="false"
+                 data-widget-custombutton="false"
+                 data-widget-collapsed="false"
+                 data-widget-sortable="false">
+                <header>
+                    <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                    <h2></h2>
+                </header>
+                <!-- widget div-->
+                <div>
+                    <!-- widget edit box -->
+                    <div class="jarviswidget-editbox">
+                        <!-- This area used as dropdown edit box -->
+                    </div>
+                    <!-- end widget edit box -->
+                    <!-- widget content -->
+                    <div class="widget-body no-padding">
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <thead>
+
+                                    <tr>
+                                        @*<th>时间</th>
+                                        <th>房间ID</th>
+                                        <th>牌局号</th>
+                                        <th>盲注</th>
+                                        <th>服务费</th>
+                                        <th>总资产</th>
+                                        <th>牌局携带</th>*@
+                                        <th>玩家昵称</th>
+                                        <th>底牌</th>
+                                        @*<th>公共牌</th>*@
+                                        <th>翻牌前</th>
+                                      
+                                       
+                                        @{
+                                            proto.db515.TexasGameRecord tgrfirst =
+                                               proto.db515.TexasGameRecord.ParseFrom(Model.Record);
+                                            IList<string> tabCards = tgrfirst.TableCardsList;
+                                            <th>
+                                                翻牌圈<br>
+                                                <i class="game game-@tabCards[0]"></i>
+                                                <i class="game game-@tabCards[1]"></i>
+                                                <i class="game game-@tabCards[2]"></i>
+                                            </th>
+                                            <th>转牌圈<br>
+<i class="game game-@tabCards[3]"></i></th>
+                                            <th>河牌圈<br>
+<i class="game game-@tabCards[4]"></i></th>
+                                        }
+                                        <th>比牌结果</th>
+                                       
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                  
+                                    @if (1==1)
+                                    {
+                                        TexasGameRecord m = Model;
+                                        //尝试解析
+                                        byte[] recordByte = m.Record;
+
+                                        proto.db515.TexasGameRecord tgr =
+                                            proto.db515.TexasGameRecord.ParseFrom(recordByte);
+                                        IList<proto.db515.TexasRole> texasRoles =
+                                            tgr.RolesList;
+
+
+
+                                        IList<string> cardList = tgr.TableCardsList;
+
+
+
+
+                                        List<int> giveups = new List<int>();
+                                        int maxGiveUp = -1;
+                                        if (!string.IsNullOrEmpty(m.GiveUP))
+                                        {
+                                            string[] gives = m.GiveUP.Trim('_').Split('_');
+                                            for (int ii = 0; ii < gives.Length; ii++)
+                                            {
+                                                giveups.Add(Convert.ToInt32(gives[ii]));
+                                            }
+                                            maxGiveUp = giveups.Max();
+                                        }
+
+
+
+                                        var userList = m.UserData.Split('_').ToList();
+                                        userList.RemoveAt(userList.Count - 1);
+                                        var j = userList.Count;
+                                        for (int i = 0; i < j; i++)
+                                        {
+                                            var userData = userList[i].Split(',').ToList();
+
+
+                                            <tr class="gradeA">
+                                                @if (i == 0)
+                    {
+                                                    @*<td rowspan="@j">@m.CreateTime</td>
+                                                    <td rowspan="@j">@m.RoomID</td>
+                                                    <td rowspan="@j">@m.Round</td>
+                                                    <td rowspan="@j">@m.BaseScore</td>
+                                                    <td rowspan="@j">@m.Service</td>*@
+                                                }
+                                                @*<td>@userData[0]</td>
+                                                <td>@userData[1]</td>*@
+                                                <td>
+                                                    @{
+
+                                                    int id = 0;
+                                                    var wj = "";
+                                                    if (int.TryParse(userData[2], out id))
+                                                    {
+                                                        Role u = RoleBLL.GetModelByID(new Role { ID = Convert.ToInt64(id) });
+
+                                                        if (u != null)
+                                                        {
+                                                            wj = u.NickName + "(" + userData[2] + ")";
+                                                        }
+                                                        else
+                                                        {
+                                                            wj = userData[2];
+                                                        }
+                                                    }
+                                                    else
+                                                    {
+                                                        wj = userData[2];
+                                                    }
+
+
+
+                                                }
+                                                @wj
+                                            </td>
+
+                                            <td>
+                                                @*对应列手牌*@
+                                                @{
+                                                    var aa = System.Text.RegularExpressions.Regex.Matches(userData[3], @"\w{2}", System.Text.RegularExpressions.RegexOptions.IgnoreCase);
+                                                    for (int k = 0; k < aa.Count; k++)
+                                                    {
+                                                        <i class="game game-@aa[k]"></i>
+                                                    }
+                                                }
+                                            </td>
+                                          
+                                                        @*var bb = System.Text.RegularExpressions.Regex.Matches(m.BankCard, @"\w{2}", System.Text.RegularExpressions.RegexOptions.IgnoreCase);
+                                                        for (int k = 0; k < bb.Count; k++)
+                                                        {
+                                                            <i class="game game-bb[k]"></i>
+                                                        }
+                                                 
+                                                        }*@
+                                            @{
+                                                proto.db515.TexasRole texasR =
+                                                           texasRoles.FirstOrDefault(km => km.UserID == Convert.ToInt32(userData[2]));
+                                                IList<proto.db515.TexasRound> x = texasR.RoundsList;
+                                                for (int jk = 1; jk <= 4; jk++)
+                                                {
+                                                    proto.db515.TexasRound texasRound = x.FirstOrDefault(kk => kk.RoundIndex == jk);
+
+                                                    IList<proto.db515.TexasOperate> toper = texasRound.TexasOperatesList;
+                                                    <td>
+                                                                                                                                                                        @{
+                                                                                                                    foreach (var item in toper)
+                                                                                                                    {
+
+                                                                                                                        string iIndex = "";
+                                                                                                                        if (item.OperateIndex < 10) {
+                                                                                                                            iIndex = ""+item.OperateIndex + "  . ";
+                                                                                                                        }
+                                                                                                                        else {
+                                                                                                                              iIndex = item.OperateIndex + ". ";
+                                                        }
+
+                                                                                                                        OperateRecordKind kin = (OperateRecordKind)item.OperateKind;
+                                                                                                                        long iscore = item.Score;
+                                                                @iIndex  @kin
+                                                                if (iscore > 0) { 
+                                                                      @iscore
+                                                                }
+                                                                  <br>
+                                                            }
+                                                        }
+
+                                                    </td>
+                                                            }
+
+                                            }
+
+
+                                            @*<td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>*@
+
+                                            @*<td>@userData[4] </td>*@
+                                            <td>
+                                                @{
+                                                    string res = "";
+                                                    if (texasR.CardType == 0)
+                                                    {
+
+                                                    }
+                                                    else
+                                                    {
+                                                        res = ((CardType)texasR.CardType).ToString();
+                                                    }
+                                                } @res <br> @texasR.WinScore
+                                            </td>
+                                          
+                                        </tr>
+                                                        }
+                                                    }
+                                </tbody>
+                            </table>
+                        </div>
+
+
+
+
+
+
+
+
+                  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    </div>
+                    <!-- end widget content -->
+                </div>
+                <!-- end widget div -->
+            </div>
+            <!-- end widget -->
+
+        </article>
+    </div>
+</section>
+<input type="hidden" value="" id="hidRound" />
+
+<script src="~/js/SmartAdmin/js/libs/jquery-2.0.2.min.js"></script>
+<script src="~/js/SmartAdmin/js/libs/jquery-ui-1.11.4-utf8.js"></script>
+
+
+
+
+
+
+
+

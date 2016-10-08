@@ -1,0 +1,108 @@
+﻿@using Webdiyer.WebControls.Mvc;
+@using GL.Data.Model;
+@model PagedList<AgentInfo>
+
+<div class="widget-title">
+    <span class="icon"><i class="icon-th"></i></span>
+    <h5>充值列表</h5>
+</div>
+<div class="widget-content nopadding">
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>代理帐号</th>
+                <th>代理名称</th>
+                <th>代理密码</th>
+                <th>代理QQ</th>
+                <th>代理手机</th>
+                <th>代理邮箱</th>
+                <th>注册时间</th>
+                <th>登录时间</th>
+                <th>登录IP</th>
+                <th>在线状态</th>
+                <th>基本操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.Count == 0)
+            {
+                <tr class="gradeX">
+                    <td class="colspan" align="center" colspan="0">
+                        没有找到相关记录！
+                    </td>
+                </tr>
+            }
+            @foreach (AgentInfo m in Model)
+            {
+                <tr class="gradeA">
+                    <td><a href="AgentInfo.aspx?id=@m.AgentID"> @m.AgentAccount</a></td>
+                    <td>@m.AgentName</td>
+                    <td>@m.AgentPasswd</td>
+                    <td>@m.AgentQQ</td>
+                    <td>@m.AgentTel</td>
+                    <td>@m.AgentEmail</td>
+                    <td>@m.RegisterTime</td>
+
+                    <td>@m.LoginTime</td>
+                    <td>@m.LoginIP</td>
+                    <td>@m.OnlineState</td>
+                    <td style="text-align:center">
+                        <input id="btnDel" type="button" value="删除" class="btn btn-danger btn-mini" onclick="return confirm('确定删除？')" />
+                        <input id="btnUpdate" type="button" value=" 编 辑 " class="btn btn-primary btn-mini" />
+                        <input id="btnAgentShift" type="button" value="代理转移" class=" btn btn-warning btn-mini"  />
+                </tr>
+
+            }
+
+
+
+
+        </tbody>
+    </table>
+</div>
+<div class="widget-content">
+
+    @Ajax.Pager(
+    Model,
+    new PagerOptions()
+    {
+        CssClass = "pager",
+        ShowMorePagerItems = true,
+        PageIndexParameterName = "page",
+        ShowDisabledPagerItems = true,
+        AlwaysShowFirstLastPageNumber = true,
+        //ShowRecordCountItems = true,
+        HorizontalAlign = "right",
+        //SeparatorHtml = "",
+
+        CurrentPagerItemTemplate = "<li class=\"disabled\"><span>{0}</span></li>",
+        DisabledPagerItemTemplate = "<li class=\"disabled\"><span>{0}</span></li>",
+        PagerItemTemplate = "<li>{0}</li>",
+        //CurrentPagerItemWrapperFormatString = "<li class=\"disabled\"><span>{0}</span></li>",
+        //NumericPagerItemWrapperFormatString = "<li>{0}</li>",
+        //PagerItemWrapperFormatString = "<li>{0}</li>",
+        //RecordCountText = string.Format("共{0}条记录, {1}页", Model.TotalItemCount, Model.TotalPageCount),
+        //RecordCountFormatString = "<li><span>{0}</span></li>",
+        //DisabledPagerItemsFormatString = "<li class=\"disabled\"><span>{0}</span></li>",
+        //PageIndexBoxType = Webdiyer.WebControls.Mvc.PageIndexBoxType.TextBox,
+        //GoButtonText = "跳转到",
+        ShowPrevNext = true,
+        FirstPageText = "第一页",
+        LastPageText = "最后一页",
+        ContainerTagName = "ul",
+        PageIndexBoxId = "pageindexcm",
+        WYWPageIndexString = @"<li><input style='width:50px;' type='text' value='' id='{0}' name = '{1}'></li>
+                                 <li><a id='goto' name='goto' style='margin-right:10px' >跳转</a><li>
+                             ",
+        GoToButtonId = "goto"
+    },
+    new MvcAjaxOptions
+    {
+        HttpMethod = "POST",
+        UpdateTargetId = "box",
+        InsertionMode = InsertionMode.Replace,
+        OnFailure = "errFunc",
+        OnSuccess = "successPageFun"
+    })
+</div>
+

@@ -1,0 +1,355 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <assembly>
+    <name>Microsoft.Owin.Security.Google</name>
+  </assembly>
+  <members>
+    <member name="T:Microsoft.Owin.Security.Google.GoogleApplyRedirectContext">
+      <summary>在 Google OpenID 中介軟體中當 Challenge 導致重新導向至授權端點時傳送的內容</summary>
+    </member>
+    <member name="M:Microsoft.Owin.Security.Google.GoogleApplyRedirectContext.#ctor(Microsoft.Owin.IOwinContext,Microsoft.Owin.Security.Google.GoogleAuthenticationOptions,Microsoft.Owin.Security.AuthenticationProperties,System.String)">
+      <summary>建立新的內容物件。</summary>
+      <param name="context">OWIN 要求內容</param>
+      <param name="options">Google OpenID 中介軟體選項</param>
+      <param name="properties">挑戰的驗證屬性</param>
+      <param name="redirectUri">初始重新導向 URI</param>
+    </member>
+    <member name="P:Microsoft.Owin.Security.Google.GoogleApplyRedirectContext.Properties">
+      <summary>取得挑戰的驗證屬性</summary>
+    </member>
+    <member name="P:Microsoft.Owin.Security.Google.GoogleApplyRedirectContext.RedirectUri">
+      <summary>取得用於重新導向作業的 URI。</summary>
+    </member>
+    <member name="T:Microsoft.Owin.Security.Google.GoogleAuthenticatedContext">
+      <summary>包含登入工作階段以及使用者 <see cref="T:System.Security.Claims.ClaimsIdentity" /> 的相關資訊。</summary>
+    </member>
+    <member name="M:Microsoft.Owin.Security.Google.GoogleAuthenticatedContext.#ctor(Microsoft.Owin.IOwinContext,System.Security.Claims.ClaimsIdentity,Microsoft.Owin.Security.AuthenticationProperties,System.Xml.Linq.XElement,System.Collections.Generic.IDictionary{System.String,System.String})">
+      <summary>初始化 <see cref="T:Microsoft.Owin.Security.Google.GoogleAuthenticatedContext" /></summary>
+      <param name="context">OWIN 環境</param>
+      <param name="identity">
+        <see cref="T:System.Security.Claims.ClaimsIdentity" /> 表示使用者</param>
+      <param name="properties">一般驗證屬性的屬性包</param>
+    </member>
+    <member name="P:Microsoft.Owin.Security.Google.GoogleAuthenticatedContext.AttributeExchangeProperties">
+      <summary>取得訊息屬性的鍵值字典</summary>
+    </member>
+    <member name="P:Microsoft.Owin.Security.Google.GoogleAuthenticatedContext.Identity">
+      <summary>取得或設定代表使用者的 <see cref="T:System.Security.Claims.ClaimsIdentity" /></summary>
+    </member>
+    <member name="P:Microsoft.Owin.Security.Google.GoogleAuthenticatedContext.Properties">
+      <summary>取得或設定通用驗證屬性的屬性包</summary>
+    </member>
+    <member name="P:Microsoft.Owin.Security.Google.GoogleAuthenticatedContext.ResponseMessage">
+      <summary>取得或設定從 openid 查詢字串剖析的回應訊息</summary>
+    </member>
+    <member name="T:Microsoft.Owin.Security.Google.GoogleAuthenticationMiddleware">
+      <summary>使用 Google OpenID 以驗證使用者的 OWIN 中介軟體</summary>
+    </member>
+    <member name="M:Microsoft.Owin.Security.Google.GoogleAuthenticationMiddleware.#ctor(Microsoft.Owin.OwinMiddleware,Owin.IAppBuilder,Microsoft.Owin.Security.Google.GoogleAuthenticationOptions)">
+      <summary>初始化 <see cref="T:Microsoft.Owin.Security.Google.GoogleAuthenticationMiddleware" /></summary>
+      <param name="next">OWIN 管線中要叫用的下一個中介軟體</param>
+      <param name="app">OWIN 應用程式</param>
+      <param name="options">中介軟體的組態選項</param>
+    </member>
+    <member name="M:Microsoft.Owin.Security.Google.GoogleAuthenticationMiddleware.CreateHandler">
+      <summary>提供 <see cref="T:Microsoft.Owin.Security.Infrastructure.AuthenticationHandler" /> 物件，以便處理驗證相關要求。</summary>
+      <returns>以提供給建構函式的 <see cref="T:Microsoft.Owin.Security.Google.GoogleAuthenticationOptions" /> 設定的 <see cref="T:Microsoft.Owin.Security.Infrastructure.AuthenticationHandler" />。</returns>
+    </member>
+    <member name="T:Microsoft.Owin.Security.Google.GoogleAuthenticationOptions">
+      <summary>
+        <see cref="T:Microsoft.Owin.Security.Google.GoogleAuthenticationMiddleware" /> 的組態選項</summary>
+    </member>
+    <member name="M:Microsoft.Owin.Security.Google.GoogleAuthenticationOptions.#ctor">
+      <summary>初始化新的 <see cref="T:Microsoft.Owin.Security.Google.GoogleAuthenticationOptions" /></summary>
+    </member>
+    <member name="P:Microsoft.Owin.Security.Google.GoogleAuthenticationOptions.BackchannelCertificateValidator">
+      <summary>取得或設定固定的憑證驗證程式，用以驗證屬於 Google 之後頻道通訊中所用的端點。</summary>
+      <returns>固定的憑證驗證程式。</returns>
+    </member>
+    <member name="P:Microsoft.Owin.Security.Google.GoogleAuthenticationOptions.BackchannelHttpHandler">
+      <summary>用來與 Google 通訊的 HttpMessageHandler。此屬性不能與 BackchannelCertificateValidator 同時設定，除非此值可以向下轉型為 WebRequestHandler。</summary>
+    </member>
+    <member name="P:Microsoft.Owin.Security.Google.GoogleAuthenticationOptions.BackchannelTimeout">
+      <summary>取得或設定與 Google 進行後頻道通訊的逾時值 (以毫秒為單位)。</summary>
+      <returns>後頻道逾時。</returns>
+    </member>
+    <member name="P:Microsoft.Owin.Security.Google.GoogleAuthenticationOptions.CallbackPath">
+      <summary>應用程式的基本路徑中將傳回 user-agent 的要求路徑。中介軟體將會在此要求送達時予以處理。預設值為 "/signin-google"。</summary>
+    </member>
+    <member name="P:Microsoft.Owin.Security.Google.GoogleAuthenticationOptions.Caption">
+      <summary>取得或設定使用者可以顯示在登入使用者介面上的文字。</summary>
+    </member>
+    <member name="P:Microsoft.Owin.Security.Google.GoogleAuthenticationOptions.Provider">
+      <summary>取得或設定用來處理驗證事件的 <see cref="T:Microsoft.Owin.Security.Google.IGoogleAuthenticationProvider" />。</summary>
+    </member>
+    <member name="P:Microsoft.Owin.Security.Google.GoogleAuthenticationOptions.SignInAsAuthenticationType">
+      <summary>取得或設定將負責實際簽發使用者 <see cref="T:System.Security.Claims.ClaimsIdentity" /> 的其他驗證中介軟體名稱。</summary>
+    </member>
+    <member name="P:Microsoft.Owin.Security.Google.GoogleAuthenticationOptions.StateDataFormat">
+      <summary>取得或設定類型，用以保護中介軟體所處理資料的安全。</summary>
+    </member>
+    <member name="T:Microsoft.Owin.Security.Google.GoogleAuthenticationProvider">
+      <summary>預設 <see cref="T:Microsoft.Owin.Security.Google.IGoogleAuthenticationProvider" /> 實作。</summary>
+    </member>
+    <member name="M:Microsoft.Owin.Security.Google.GoogleAuthenticationProvider.#ctor">
+      <summary>初始化 <see cref="T:Microsoft.Owin.Security.Google.GoogleAuthenticationProvider" /></summary>
+    </member>
+    <member name="M:Microsoft.Owin.Security.Google.GoogleAuthenticationProvider.ApplyRedirect(Microsoft.Owin.Security.Google.GoogleApplyRedirectContext)">
+      <summary>在 Google OpenID 中介軟體中當 Challenge 導致重新導向至授權端點時呼叫</summary>
+      <param name="context">包含挑戰的重新導向 URI 和 <see cref="T:Microsoft.Owin.Security.AuthenticationProperties" /></param>
+    </member>
+    <member name="M:Microsoft.Owin.Security.Google.GoogleAuthenticationProvider.Authenticated(Microsoft.Owin.Security.Google.GoogleAuthenticatedContext)">
+      <summary>每當 Google 成功驗證使用者時叫用</summary>
+      <returns>
+        <see cref="T:System.Threading.Tasks.Task" />，表示完成的作業。</returns>
+      <param name="context">包含登入工作階段以及使用者 <see cref="T:System.Security.Claims.ClaimsIdentity" /> 的相關資訊。</param>
+    </member>
+    <member name="P:Microsoft.Owin.Security.Google.GoogleAuthenticationProvider.OnApplyRedirect">
+      <summary>取得或設定在叫用 ApplyRedirect 方法時叫用的委派。</summary>
+    </member>
+    <member name="P:Microsoft.Owin.Security.Google.GoogleAuthenticationProvider.OnAuthenticated">
+      <summary>取得或設定在叫用 Authenticated 方法時叫用的函數。</summary>
+    </member>
+    <member name="P:Microsoft.Owin.Security.Google.GoogleAuthenticationProvider.OnReturnEndpoint">
+      <summary>取得或設定在叫用 ReturnEndpoint 方法時叫用的函數。</summary>
+    </member>
+    <member name="M:Microsoft.Owin.Security.Google.GoogleAuthenticationProvider.ReturnEndpoint(Microsoft.Owin.Security.Google.GoogleReturnEndpointContext)">
+      <summary>在 <see cref="T:System.Security.Claims.ClaimsIdentity" /> 儲存在本機 cookie 且將瀏覽器重新導向至原先要求之 URL 前叫用。</summary>
+      <returns>
+        <see cref="T:System.Threading.Tasks.Task" />，表示完成的作業。</returns>
+      <param name="context">包含登入工作階段以及使用者 <see cref="T:System.Security.Claims.ClaimsIdentity" /> 的相關資訊。</param>
+    </member>
+    <member name="T:Microsoft.Owin.Security.Google.GoogleOAuth2ApplyRedirectContext">
+      <summary>在 Google OAuth 2.0 中介軟體中當 Challenge 導致重新導向至授權端點時傳送的內容</summary>
+    </member>
+    <member name="M:Microsoft.Owin.Security.Google.GoogleOAuth2ApplyRedirectContext.#ctor(Microsoft.Owin.IOwinContext,Microsoft.Owin.Security.Google.GoogleOAuth2AuthenticationOptions,Microsoft.Owin.Security.AuthenticationProperties,System.String)">
+      <summary>建立新的內容物件。</summary>
+      <param name="context">OWIN 要求內容</param>
+      <param name="options">Google OAuth 2.0 中介軟體選項</param>
+      <param name="properties">挑戰的驗證屬性</param>
+      <param name="redirectUri">初始重新導向 URI</param>
+    </member>
+    <member name="P:Microsoft.Owin.Security.Google.GoogleOAuth2ApplyRedirectContext.Properties">
+      <summary>取得挑戰的驗證屬性</summary>
+    </member>
+    <member name="P:Microsoft.Owin.Security.Google.GoogleOAuth2ApplyRedirectContext.RedirectUri">
+      <summary>取得用於重新導向作業的 URI。</summary>
+    </member>
+    <member name="T:Microsoft.Owin.Security.Google.GoogleOAuth2AuthenticatedContext">
+      <summary>包含登入工作階段以及使用者 <see cref="T:System.Security.Claims.ClaimsIdentity" /> 的相關資訊。</summary>
+    </member>
+    <member name="M:Microsoft.Owin.Security.Google.GoogleOAuth2AuthenticatedContext.#ctor(Microsoft.Owin.IOwinContext,Newtonsoft.Json.Linq.JObject,System.String,System.String,System.String)">
+      <summary>初始化 <see cref="T:Microsoft.Owin.Security.Google.GoogleOAuth2AuthenticatedContext" /></summary>
+      <param name="context">OWIN 環境</param>
+      <param name="user">JSON 序列化 Google 使用者資訊</param>
+      <param name="accessToken">Google OAuth 2.0 存取權杖</param>
+      <param name="refreshToken">Goolge OAuth 2.0 重新整理權杖</param>
+      <param name="expires">過期前秒數</param>
+    </member>
+    <member name="P:Microsoft.Owin.Security.Google.GoogleOAuth2AuthenticatedContext.AccessToken">
+      <summary>取得 Google 存取權杖</summary>
+    </member>
+    <member name="P:Microsoft.Owin.Security.Google.GoogleOAuth2AuthenticatedContext.Email">
+      <summary>取得使用者的電子郵件</summary>
+    </member>
+    <member name="P:Microsoft.Owin.Security.Google.GoogleOAuth2AuthenticatedContext.ExpiresIn">
+      <summary>取得 Google 存取權杖過期時間</summary>
+    </member>
+    <member name="P:Microsoft.Owin.Security.Google.GoogleOAuth2AuthenticatedContext.FamilyName">
+      <summary>取得使用者的姓氏</summary>
+    </member>
+    <member name="P:Microsoft.Owin.Security.Google.GoogleOAuth2AuthenticatedContext.GivenName">
+      <summary>取得使用者的名字</summary>
+    </member>
+    <member name="P:Microsoft.Owin.Security.Google.GoogleOAuth2AuthenticatedContext.Id">
+      <summary>取得 Google 使用者 ID</summary>
+    </member>
+    <member name="P:Microsoft.Owin.Security.Google.GoogleOAuth2AuthenticatedContext.Identity">
+      <summary>取得代表使用者的 <see cref="T:System.Security.Claims.ClaimsIdentity" /></summary>
+    </member>
+    <member name="P:Microsoft.Owin.Security.Google.GoogleOAuth2AuthenticatedContext.Name">
+      <summary>取得使用者的名稱</summary>
+    </member>
+    <member name="P:Microsoft.Owin.Security.Google.GoogleOAuth2AuthenticatedContext.Profile">
+      <summary>取得使用者的設定檔連結</summary>
+    </member>
+    <member name="P:Microsoft.Owin.Security.Google.GoogleOAuth2AuthenticatedContext.Properties">
+      <summary>取得或設定通用驗證屬性的屬性包</summary>
+    </member>
+    <member name="P:Microsoft.Owin.Security.Google.GoogleOAuth2AuthenticatedContext.RefreshToken">
+      <summary>取得 Google 重新整理權杖</summary>
+    </member>
+    <member name="P:Microsoft.Owin.Security.Google.GoogleOAuth2AuthenticatedContext.User">
+      <summary>取得 JSON 序列化使用者</summary>
+    </member>
+    <member name="T:Microsoft.Owin.Security.Google.GoogleOAuth2AuthenticationMiddleware">
+      <summary>使用 Google OAuth 2.0 以驗證使用者的 OWIN 中介軟體</summary>
+    </member>
+    <member name="M:Microsoft.Owin.Security.Google.GoogleOAuth2AuthenticationMiddleware.#ctor(Microsoft.Owin.OwinMiddleware,Owin.IAppBuilder,Microsoft.Owin.Security.Google.GoogleOAuth2AuthenticationOptions)">
+      <summary>初始化 <see cref="T:Microsoft.Owin.Security.Google.GoogleOAuth2AuthenticationMiddleware" /></summary>
+      <param name="next">OWIN 管線中要叫用的下一個中介軟體</param>
+      <param name="app">OWIN 應用程式</param>
+      <param name="options">中介軟體的組態選項</param>
+    </member>
+    <member name="M:Microsoft.Owin.Security.Google.GoogleOAuth2AuthenticationMiddleware.CreateHandler">
+      <summary>提供 <see cref="T:Microsoft.Owin.Security.Infrastructure.AuthenticationHandler" /> 物件，以便處理驗證相關要求。</summary>
+      <returns>以提供給建構函式的 <see cref="T:Microsoft.Owin.Security.Google.GoogleOAuth2AuthenticationOptions" /> 設定的 <see cref="T:Microsoft.Owin.Security.Infrastructure.AuthenticationHandler" />。</returns>
+    </member>
+    <member name="T:Microsoft.Owin.Security.Google.GoogleOAuth2AuthenticationOptions">
+      <summary>
+        <see cref="T:Microsoft.Owin.Security.Google.GoogleOAuth2AuthenticationMiddleware" /> 的組態選項</summary>
+    </member>
+    <member name="M:Microsoft.Owin.Security.Google.GoogleOAuth2AuthenticationOptions.#ctor">
+      <summary>初始化新的 <see cref="T:Microsoft.Owin.Security.Google.GoogleOAuth2AuthenticationOptions" /></summary>
+    </member>
+    <member name="P:Microsoft.Owin.Security.Google.GoogleOAuth2AuthenticationOptions.AccessType">
+      <summary>access_type。設為 'offline' 以要求重新整理權杖。</summary>
+    </member>
+    <member name="P:Microsoft.Owin.Security.Google.GoogleOAuth2AuthenticationOptions.BackchannelCertificateValidator">
+      <summary>取得或設定固定的憑證驗證程式，用以驗證屬於 Google 之後頻道通訊中所用的端點。</summary>
+      <returns>固定的憑證驗證程式。</returns>
+    </member>
+    <member name="P:Microsoft.Owin.Security.Google.GoogleOAuth2AuthenticationOptions.BackchannelHttpHandler">
+      <summary>用來與 Google 通訊的 HttpMessageHandler。此屬性不能與 BackchannelCertificateValidator 同時設定，除非此值可以向下轉型為 WebRequestHandler。</summary>
+    </member>
+    <member name="P:Microsoft.Owin.Security.Google.GoogleOAuth2AuthenticationOptions.BackchannelTimeout">
+      <summary>取得或設定與 Google 進行後頻道通訊的逾時值 (以毫秒為單位)。</summary>
+      <returns>後頻道逾時 (以毫秒計)。</returns>
+    </member>
+    <member name="P:Microsoft.Owin.Security.Google.GoogleOAuth2AuthenticationOptions.CallbackPath">
+      <summary>應用程式的基本路徑中將傳回 user-agent 的要求路徑。中介軟體將會在此要求送達時予以處理。預設值為 "/signin-google"。</summary>
+    </member>
+    <member name="P:Microsoft.Owin.Security.Google.GoogleOAuth2AuthenticationOptions.Caption">
+      <summary>取得或設定使用者可以顯示在登入使用者介面上的文字。</summary>
+    </member>
+    <member name="P:Microsoft.Owin.Security.Google.GoogleOAuth2AuthenticationOptions.ClientId">
+      <summary>取得或設定 Google 指派的用戶端識別碼</summary>
+    </member>
+    <member name="P:Microsoft.Owin.Security.Google.GoogleOAuth2AuthenticationOptions.ClientSecret">
+      <summary>取得或設定 Google 指派的用戶端秘鑰</summary>
+    </member>
+    <member name="P:Microsoft.Owin.Security.Google.GoogleOAuth2AuthenticationOptions.Provider">
+      <summary>取得或設定用來處理驗證事件的 <see cref="T:Microsoft.Owin.Security.Google.IGoogleOAuth2AuthenticationProvider" />。</summary>
+    </member>
+    <member name="P:Microsoft.Owin.Security.Google.GoogleOAuth2AuthenticationOptions.Scope">
+      <summary>要求的權限清單。</summary>
+    </member>
+    <member name="P:Microsoft.Owin.Security.Google.GoogleOAuth2AuthenticationOptions.SignInAsAuthenticationType">
+      <summary>取得或設定將負責實際簽發使用者 <see cref="T:System.Security.Claims.ClaimsIdentity" /> 的其他驗證中介軟體名稱。</summary>
+    </member>
+    <member name="P:Microsoft.Owin.Security.Google.GoogleOAuth2AuthenticationOptions.StateDataFormat">
+      <summary>取得或設定類型，用以保護中介軟體所處理資料的安全。</summary>
+    </member>
+    <member name="T:Microsoft.Owin.Security.Google.GoogleOAuth2AuthenticationProvider">
+      <summary>預設 <see cref="T:Microsoft.Owin.Security.Google.IGoogleOAuth2AuthenticationProvider" /> 實作。</summary>
+    </member>
+    <member name="M:Microsoft.Owin.Security.Google.GoogleOAuth2AuthenticationProvider.#ctor">
+      <summary>初始化 <see cref="T:Microsoft.Owin.Security.Google.GoogleOAuth2AuthenticationProvider" /></summary>
+    </member>
+    <member name="M:Microsoft.Owin.Security.Google.GoogleOAuth2AuthenticationProvider.ApplyRedirect(Microsoft.Owin.Security.Google.GoogleOAuth2ApplyRedirectContext)">
+      <summary>在 Google OAuth 2.0 中介軟體中當 Challenge 導致重新導向至授權端點時呼叫</summary>
+      <param name="context">包含挑戰的重新導向 URI 和 <see cref="T:Microsoft.Owin.Security.AuthenticationProperties" /></param>
+    </member>
+    <member name="M:Microsoft.Owin.Security.Google.GoogleOAuth2AuthenticationProvider.Authenticated(Microsoft.Owin.Security.Google.GoogleOAuth2AuthenticatedContext)">
+      <summary>每當 Google 成功驗證使用者時叫用</summary>
+      <returns>
+        <see cref="T:System.Threading.Tasks.Task" />，表示完成的作業。</returns>
+      <param name="context">包含登入工作階段以及使用者 <see cref="T:System.Security.Claims.ClaimsIdentity" /> 的相關資訊。</param>
+    </member>
+    <member name="P:Microsoft.Owin.Security.Google.GoogleOAuth2AuthenticationProvider.OnApplyRedirect">
+      <summary>取得或設定在叫用 ApplyRedirect 方法時叫用的委派。</summary>
+    </member>
+    <member name="P:Microsoft.Owin.Security.Google.GoogleOAuth2AuthenticationProvider.OnAuthenticated">
+      <summary>取得或設定在叫用 Authenticated 方法時叫用的函數。</summary>
+    </member>
+    <member name="P:Microsoft.Owin.Security.Google.GoogleOAuth2AuthenticationProvider.OnReturnEndpoint">
+      <summary>取得或設定在叫用 ReturnEndpoint 方法時叫用的函數。</summary>
+    </member>
+    <member name="M:Microsoft.Owin.Security.Google.GoogleOAuth2AuthenticationProvider.ReturnEndpoint(Microsoft.Owin.Security.Google.GoogleOAuth2ReturnEndpointContext)">
+      <summary>在 <see cref="T:System.Security.Claims.ClaimsIdentity" /> 儲存在本機 cookie 且將瀏覽器重新導向至原先要求之 URL 前叫用。</summary>
+      <returns>
+        <see cref="T:System.Threading.Tasks.Task" />，表示完成的作業。</returns>
+      <param name="context">包含傳回端點的內容資訊和驗證票證。</param>
+    </member>
+    <member name="T:Microsoft.Owin.Security.Google.GoogleOAuth2ReturnEndpointContext">
+      <summary>提供中介軟體提供者的內容資訊。</summary>
+    </member>
+    <member name="M:Microsoft.Owin.Security.Google.GoogleOAuth2ReturnEndpointContext.#ctor(Microsoft.Owin.IOwinContext,Microsoft.Owin.Security.AuthenticationTicket)">
+      <summary>初始化 <see cref="T:Microsoft.Owin.Security.Google.GoogleOAuth2ReturnEndpointContext" /></summary>
+      <param name="context">OWIN 環境</param>
+      <param name="ticket">驗證票券</param>
+    </member>
+    <member name="T:Microsoft.Owin.Security.Google.GoogleReturnEndpointContext">
+      <summary>提供中介軟體提供者的內容資訊。</summary>
+    </member>
+    <member name="M:Microsoft.Owin.Security.Google.GoogleReturnEndpointContext.#ctor(Microsoft.Owin.IOwinContext,Microsoft.Owin.Security.AuthenticationTicket)">
+      <param name="context">OWIN 環境</param>
+      <param name="ticket">驗證票券</param>
+    </member>
+    <member name="T:Microsoft.Owin.Security.Google.IGoogleAuthenticationProvider">
+      <summary>指定 <see cref="T:Microsoft.Owin.Security.Google.GoogleAuthenticationMiddleware" /> 叫用的回呼方法，以便開發人員控制驗證程序。/&amp;amp;gt;</summary>
+    </member>
+    <member name="M:Microsoft.Owin.Security.Google.IGoogleAuthenticationProvider.ApplyRedirect(Microsoft.Owin.Security.Google.GoogleApplyRedirectContext)">
+      <summary>在 Google OpenID 中介軟體中當 Challenge 導致重新導向至授權端點時呼叫</summary>
+      <param name="context">包含挑戰的重新導向 URI 和 <see cref="T:Microsoft.Owin.Security.AuthenticationProperties" /></param>
+    </member>
+    <member name="M:Microsoft.Owin.Security.Google.IGoogleAuthenticationProvider.Authenticated(Microsoft.Owin.Security.Google.GoogleAuthenticatedContext)">
+      <summary>每當 Google 成功驗證使用者時叫用</summary>
+      <returns>
+        <see cref="T:System.Threading.Tasks.Task" />，表示完成的作業。</returns>
+      <param name="context">包含登入工作階段以及使用者 <see cref="T:System.Security.Claims.ClaimsIdentity" /> 的相關資訊。</param>
+    </member>
+    <member name="M:Microsoft.Owin.Security.Google.IGoogleAuthenticationProvider.ReturnEndpoint(Microsoft.Owin.Security.Google.GoogleReturnEndpointContext)">
+      <summary>在 <see cref="T:System.Security.Claims.ClaimsIdentity" /> 儲存在本機 cookie 且將瀏覽器重新導向至原先要求之 URL 前叫用。</summary>
+      <returns>
+        <see cref="T:System.Threading.Tasks.Task" />，表示完成的作業。</returns>
+      <param name="context">包含登入工作階段以及使用者 <see cref="T:System.Security.Claims.ClaimsIdentity" /> 的相關資訊。</param>
+    </member>
+    <member name="T:Microsoft.Owin.Security.Google.IGoogleOAuth2AuthenticationProvider">
+      <summary>指定 <see cref="T:Microsoft.Owin.Security.Google.GoogleOAuth2AuthenticationMiddleware" /> 叫用的回呼方法，以便開發人員控制驗證程序。/&amp;amp;gt;</summary>
+    </member>
+    <member name="M:Microsoft.Owin.Security.Google.IGoogleOAuth2AuthenticationProvider.ApplyRedirect(Microsoft.Owin.Security.Google.GoogleOAuth2ApplyRedirectContext)">
+      <summary>在 Google OAuth 2.0 中介軟體中當 Challenge 導致重新導向至授權端點時呼叫</summary>
+      <param name="context">包含挑戰的重新導向 URI 和 <see cref="T:Microsoft.Owin.Security.AuthenticationProperties" /></param>
+    </member>
+    <member name="M:Microsoft.Owin.Security.Google.IGoogleOAuth2AuthenticationProvider.Authenticated(Microsoft.Owin.Security.Google.GoogleOAuth2AuthenticatedContext)">
+      <summary>每當 Google 成功驗證使用者時叫用</summary>
+      <returns>
+        <see cref="T:System.Threading.Tasks.Task" />，表示完成的作業。</returns>
+      <param name="context">包含登入工作階段以及使用者 <see cref="T:System.Security.Claims.ClaimsIdentity" /> 的相關資訊。</param>
+    </member>
+    <member name="M:Microsoft.Owin.Security.Google.IGoogleOAuth2AuthenticationProvider.ReturnEndpoint(Microsoft.Owin.Security.Google.GoogleOAuth2ReturnEndpointContext)">
+      <summary>在 <see cref="T:System.Security.Claims.ClaimsIdentity" /> 儲存在本機 cookie 且將瀏覽器重新導向至原先要求之 URL 前叫用。</summary>
+      <returns>
+        <see cref="T:System.Threading.Tasks.Task" />，表示完成的作業。</returns>
+      <param name="context">包含傳回端點的內容資訊和驗證票證。</param>
+    </member>
+    <member name="T:Owin.GoogleAuthenticationExtensions">
+      <summary>使用 <see cref="T:Microsoft.Owin.Security.Google.GoogleAuthenticationMiddleware" /> 的擴充方法</summary>
+    </member>
+    <member name="M:Owin.GoogleAuthenticationExtensions.UseGoogleAuthentication(Owin.IAppBuilder)">
+      <summary>使用 Google OpenId 來驗證使用者</summary>
+      <returns>已更新的 <see cref="T:Owin.IAppBuilder" /></returns>
+      <param name="app">傳遞到設定方法的 <see cref="T:Owin.IAppBuilder" /></param>
+    </member>
+    <member name="M:Owin.GoogleAuthenticationExtensions.UseGoogleAuthentication(Owin.IAppBuilder,Microsoft.Owin.Security.Google.GoogleAuthenticationOptions)">
+      <summary>使用 Google OpenId 來驗證使用者</summary>
+      <returns>已更新的 <see cref="T:Owin.IAppBuilder" /></returns>
+      <param name="app">傳遞到設定方法的 <see cref="T:Owin.IAppBuilder" /></param>
+      <param name="options">中介軟體組態選項</param>
+    </member>
+    <member name="M:Owin.GoogleAuthenticationExtensions.UseGoogleAuthentication(Owin.IAppBuilder,Microsoft.Owin.Security.Google.GoogleOAuth2AuthenticationOptions)">
+      <summary>使用 Google OAuth 2.0 來驗證使用者</summary>
+      <returns>已更新的 <see cref="T:Owin.IAppBuilder" /></returns>
+      <param name="app">傳遞到設定方法的 <see cref="T:Owin.IAppBuilder" /></param>
+      <param name="options">中介軟體組態選項</param>
+    </member>
+    <member name="M:Owin.GoogleAuthenticationExtensions.UseGoogleAuthentication(Owin.IAppBuilder,System.String,System.String)">
+      <summary>使用 Google OAuth 2.0 來驗證使用者</summary>
+      <returns>已更新的 <see cref="T:Owin.IAppBuilder" /></returns>
+      <param name="app">傳遞到設定方法的 <see cref="T:Owin.IAppBuilder" /></param>
+      <param name="clientId">Google 指派的用戶端識別碼</param>
+      <param name="clientSecret">Google 指派的用戶端秘鑰</param>
+    </member>
+  </members>
+</doc>

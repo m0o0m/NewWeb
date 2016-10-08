@@ -1,0 +1,24 @@
+<!--
+ goodsType 1:游戏币 2:5币
+ goods:数量
+ -->
+<DataList>
+
+<item product_id="5b_1"  goodsType="2"   goods="60"      price="6"     attach_chip="0"   attach_5b="0"  productname="515游戏-60五币"/>
+<item product_id="5b_2"  goodsType="2"   goods="180"     price="18"    attach_chip="0"   attach_5b="0"  productname="515游戏-180五币"/>
+<item product_id="5b_3"  goodsType="2"   goods="680"     price="68"    attach_chip="0"   attach_5b="0"  productname="515游戏-680五币"/>
+<item product_id="5b_4"  goodsType="2"   goods="1280"    price="128"   attach_chip="0"   attach_5b="0"  productname="515游戏-1280五币"/>
+<item product_id="5b_5"  goodsType="2"   goods="3280"    price="328"   attach_chip="0"   attach_5b="0"  productname="515游戏-3280五币"/>
+<item product_id="5b_6"  goodsType="2"   goods="6480"    price="648"   attach_chip="0"   attach_5b="0"  productname="515游戏-6480五币"/>
+
+<item product_id="Chip_1"  goodsType="1"   goods="60000"      price="6"     attach_chip="0"   attach_5b="0"  productname="515游戏-60000游戏币"/>
+<item product_id="Chip_2"  goodsType="1"   goods="180000"     price="18"    attach_chip="0"   attach_5b="0"  productname="515游戏-180000游戏币"/>
+<item product_id="Chip_3"  goodsType="1"   goods="680000"     price="68"    attach_chip="0"   attach_5b="0"  productname="515游戏-680000游戏币"/>
+<item product_id="Chip_4"  goodsType="1"   goods="1280000"    price="128"   attach_chip="0"   attach_5b="0"  productname="515游戏-1280000游戏币"/>
+<item product_id="Chip_5"  goodsType="1"   goods="3280000"    price="328"   attach_chip="0"   attach_5b="0"  productname="515游戏-3280000游戏币"/>
+<item product_id="Chip_6"  goodsType="1"   goods="6480000"    price="648"   attach_chip="0"   attach_5b="0"  productname="515游戏-6480000游戏币"/>
+<item product_id="Chip_7"  goodsType="1"   goods="10000"      price="1"     attach_chip="0"   attach_5b="0"  productname="515游戏-10000游戏币"/>
+<item product_id="Chip_8"  goodsType="1"   goods="300000"     price="30"    attach_chip="0"   attach_5b="0"  productname="515游戏-300000游戏币"/>
+
+
+</DataList>

@@ -1,0 +1,61 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link rel="stylesheet" type="text/css" href="/CSS/main.css">
+    <script type="text/javascript" src="/Scripts/jquery.js"></script>
+    <script type="text/javascript" src="/Scripts/main.js"></script>
+    @RenderSection("Css", false)
+     <!--[if lt IE 9]>
+    <script src="Scripts/html5shiv.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+    <header class="global-header">
+        <div class="top">
+            <div class="wrap">
+                <ul>@*
+                    <li><a href="reg">帐号注册</a></li>
+                    <li><a href="login">立即登录</a></li>
+                    @{
+                        Dictionary<string, string> d = MvcApplication1.Method.getUserInfo;
+
+                        if (d.Count > 0)
+                        {
+                              @Html.Raw("<li><a href=\"#\">我的账户</a></li>")
+                        }
+                        else
+                        {
+                        @Html.Raw("<li><a href=\"login\">我的账户</a></li>")
+                        }
+                    }*@
+
+                </ul>
+                <p class="welcome">欢迎来到515棋牌中心！</p>
+            </div>
+        </div>
+        <div class="wrap">
+            <a class="logo">
+                <img src="/Image/logo.png"></a>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="index">首页</a></li>
+                    <li><a href="gamecenter">游戏中心</a></li>
+                    <li><a href="service">客服中心</a></li>
+                    <li><a href="aboutus">关于我们</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    @RenderBody()
+    <footer class="global-footer">
+        <ul class="footer-list">
+            <li><a href="#">常见问题</a><span class="split">|</span></li>
+            <li><a href="#">免责声明</a></li>
+        </ul>
+        <p class="copyright">Copyright © 2011 - 2014 五一五(515.com) <a href="http://www.miitbeian.gov.cn">粤ICP备14100538号-1</a> </p>
+    </footer>
+    @RenderSection("Js", false)
+</body>
+</html>

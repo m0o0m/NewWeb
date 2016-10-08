@@ -1,0 +1,214 @@
+﻿@using GL.Data.Model;
+@model GL.Data.Model.AgentInfo
+@{
+    ViewBag.Title = "代理管理 -- 上分";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    AgentInfo Higher = (AgentInfo)ViewData["Higher"];
+
+}
+
+@if (!ViewBag.Top)
+{
+
+    <article class="col-sm-12 col-md-12 col-lg-7">
+        <div class="jarviswidget" id="wid-id-4" data-widget-editbutton="false" data-widget-custombutton="false">
+            <header>
+                <span class="widget-icon"> <i class="fa fa-edit"></i> </span>
+                <h2>@(Higher.AgentLv)信息</h2>
+            </header>
+            <div>
+                <div class="jarviswidget-editbox">
+                </div>
+                <div class="widget-body no-padding">
+                    <form class="smart-form" action="" method="post">
+                        <fieldset>
+                            <div class="row">
+
+                                <section class="col col-2">
+                                    <label>用户账号 :</label>
+                                    <label class="input">
+                                        <input type="text" disabled="disabled" class="span4" value="@Higher.AgentAccount" />
+                                    </label>
+                                </section>
+                                <section class="col col-2">
+                                    <label>可用额度 :</label>
+                                    <label class="input">
+                                        <input type="text" id="HigherAmountAvailable" disabled="disabled" class="span4" value="@Higher.AmountAvailable.Value.ToString(" 0.")" />
+                                    </label>
+                                </section>
+                           
+                            </div>
+
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </article>
+
+}
+
+
+
+<article class="col-sm-12 col-md-12 col-lg-7">
+    <div class="jarviswidget" id="wid-id-4" data-widget-editbutton="false" data-widget-custombutton="false">
+        <header>
+            <span class="widget-icon"> <i class="fa fa-edit"></i> </span>
+            <h2>代理上分</h2>
+        </header>
+        <div>
+            <div class="jarviswidget-editbox">
+            </div>
+            <div class="widget-body no-padding">
+                <form id="submitForm" class="smart-form" action="" method="post">
+                    <input type="hidden" name="AgentID" value="@Model.AgentID" />
+                    <input type="hidden" name="LowerLevel" value="0" />
+                    <fieldset>
+                        <div class="row">
+                            <section class="col col-7">
+                                <label>用户账号 :</label>
+                                <label class="label">
+                                    @Model.AgentAccount
+                                </label>
+                            </section>
+                        </div>
+                        <div class="row">
+                            <section class="col col-7">
+                                <label>可用额度 :</label>
+                                <label class="input">
+                                    <input type="text" id="AmountAvailable2" name="AmountAvailable2" disabled="disabled" class="span4" value="@Model.AmountAvailable.Value.ToString("0.")" />
+                                </label>
+                            </section>
+                        </div>
+                        <div class="row">
+                            <section class="col col-7">
+                                <label>上分 :</label>
+                                <label class="input">
+                                    <input type="text" name="AmountAvailable" class="span4" value="0" />
+                                </label>
+                            </section>
+                        </div>
+                    </fieldset>
+
+
+
+                    <footer>
+
+                        <input id="btnGoBack" type="button" value="返回列表" onclick="return GoBack(@ViewBag.HigherID)" class=" btn btn-warning" />
+                        <input id="btnKick" type="submit" value="提交" class="btn btn-danger" />
+                    </footer>
+                </form>
+
+            </div>
+            <!-- end widget content -->
+
+        </div>
+        <!-- end widget div -->
+
+    </div>
+
+</article>
+
+
+
+
+
+
+@section scripts{
+    @{Html.RegisterMvcPagerScriptResource();}
+
+
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/select2.min.js"></script>
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+
+    // resets the menu selection upon entry to this page:
+    function resetMenu() {
+        document.gomenu.selector.selectedIndex = 2;
+    }
+    function GoBack(obj) {
+        location.href = "/Agent/Agent?id=" + obj;
+    }
+
+
+    $(function () {
+
+
+
+
+        $.validator.setDefaults({
+            submitHandler: function (form) {
+
+                //form.submit();
+                $.ajax({
+                    url: "/Agent/AgentForUpperScores/",
+                    type: "POST",
+                    dataType: "JSON",
+                    data: $("#submitForm").serialize(),
+                    success: function (data) {
+                        switch (data.result) {
+                            case 0:
+                                location.href = "/Agent/Agent?id=@ViewBag.HigherID";
+                                break;
+                            case 10202:
+                                alert("值超过许可范围，请稍后再试");
+                                break;
+                            default:
+                                alert('添加失败,请与管理员联系');
+                                break;
+                        }
+                    }
+                }).fail(function (xhr, textStatus, err) {
+                    alert('Error: ' + err);
+                });
+                return false;
+            }
+        });
+
+        jQuery.validator.addMethod("CheckAmount", function (value, element, param) {
+            return this.optional(element) || parseInt($(param).val()) >= parseInt(value);
+        }, "金额不能超过上级的可用金额");
+
+        $('#submitForm').validate({
+            /* 设置验证规则 */
+            ignore: '',
+            errorElement: "span",
+            rules: {
+                AmountAvailable: {
+                    @if(!ViewBag.Top){
+		            <text>CheckAmount: "#HigherAmountAvailable",
+                    </text>}
+                    digits: true
+                }
+            },
+
+            /* 设置错误信息 */
+            messages: {
+                AmountAvailable: {
+                    @if(!ViewBag.Top){
+		            <text>CheckAmount: "金额不能超过上级的可用金额",
+                    </text>}
+                    digits: "金额必须为整数,并且大于等于0"
+                }
+            },
+
+            /* 设置验证触发事件 */
+            focusInvalid: false,
+            onkeyup: false,
+
+            /* 设置错误信息提示DOM */
+            errorPlacement: function (error, element) {
+                error.appendTo(element.parent());
+            },
+
+        });
+
+
+
+    })
+
+
+    </script>
+}

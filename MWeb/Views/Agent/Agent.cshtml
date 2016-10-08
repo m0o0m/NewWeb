@@ -1,0 +1,159 @@
+﻿@using GL.Data.Model
+@model object
+@{
+    ViewBag.Title = "代理管理 -- 列表";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    AgentInfo Higher = (AgentInfo)ViewData["Higher"];
+    
+}
+
+<!--breadcrumbs-->
+@*<div id="content-header">
+    <div id="breadcrumb"> <a href="#" title="" class="current"><i class="icon-home"></i> @(ViewBag.AgentLv)列表</a></div>
+
+</div>*@
+
+<!--End-breadcrumbs-->
+<div class="container-fluid">
+
+    <div class="row-fluid">
+        <div class="span6">
+            <div id="search2">
+                <input id="btnAddAgent" type="button" value="添加@(ViewBag.AgentLv)" onclick="return AddAgent(@ViewBag.AgentID)" class=" btn btn-warning" />
+                @*<input id="btnAddAgent" type="button" value="设置主站" onclick="return SetTheMain('aa')" class="btn btn-warning" />*@
+                @if (@ViewBag.HigherID != null)
+                {
+                    <input id="btnGoBack" type="button" value="返回上级" onclick="return GoBack(@ViewBag.HigherID)" class=" btn btn-warning" />
+                }
+            </div>
+        </div>
+    </div>
+    <br />
+    <div class="row-fluid">
+        <div class="widget-box" id="box">
+            @Html.Partial("Agent_PageList", Model)
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    @{Html.RegisterMvcPagerScriptResource();}
+
+
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/select2.min.js"></script>
+
+    <script type="text/javascript">
+
+        // resets the menu selection upon entry to this page:
+        function resetMenu() {
+            document.gomenu.selector.selectedIndex = 2;
+        }
+
+
+
+        function errFunc(res) {
+            alert(res["responseText"]);
+        }
+        function successPageFun() {
+
+        }
+        function SetTheMain(obj) {
+            if (obj ==null) {
+                location.href = "/Agent/AgentForSetTheMain";
+            }else {
+                if (confirm("你确定要将此代理设置为主站吗？")) {
+                    //_this = $(obj).parent().parent();
+                    //var _UserID = $(_this).find("td").eq(0).html();
+
+                    $.ajax({
+                        url: "/Agent/AgentForSetTheMain/",
+                        type: "POST",
+                        dataType: "JSON",
+                        data: { "AgentID": obj },
+                        success: function (data) {
+                            switch (data.result) {
+                                case 0:
+                                    location.reload();
+                                    break;
+                                default:
+                                    alert('未知错误');
+                                    break;
+                            }
+                        }
+                    }).fail(function (xhr, textStatus, err) {
+                        alert('Error: ' + err);
+                    });
+                }
+                else {
+                    return false;
+                }
+            }
+            return false;
+        }
+
+        function AddAgent(obj) {
+            location.href = "/Agent/AgentForAdd?id=" + obj;
+        }
+        
+        function GoBack(obj) {
+            location.href = "/Agent/Agent?id=" + obj;
+        }
+
+        
+        function AddScoresUser(obj)
+        {
+            location.href = "/Agent/AgentForUpperScores?id=" + obj;
+        }
+        function SubScoresUser(obj) {
+            location.href = "/Agent/AgentForLowerScores?id=" + obj;
+        }
+        function UpdateUser(obj) {
+            //_this = $(obj).parent().parent();
+            //var _UserID = $(_this).find("td").eq(0).html();
+            location.href = "/Agent/AgentForUpdate?id=" + obj;
+        }
+
+        function ConfirmDelUser(obj) {
+            if (confirm("你确定要删除此记录吗？")) {
+                //_this = $(obj).parent().parent();
+                //var _UserID = $(_this).find("td").eq(0).html();
+
+                $.ajax({
+                    url: "/Agent/AgentForDelete/",
+                    type: "POST",
+                    dataType: "JSON",
+                    data: { "AgentID": obj },
+                    success: function (data) {
+                        switch (data.result) {
+                            case 0:
+                                location.reload();
+                                break;
+                            case 1:
+                                alert("删除失败，请稍后再试");
+                                break;
+                            case 10200:
+                                alert("账号的下级代理必须为空，请清空账号或转移账号");
+                                break;
+                            case 10201:
+                                alert("账号的下级会员必须为空，请清空账号或转移账号");
+                                break;
+                            default:
+                                alert('未知错误');
+                                break;
+                        }
+                    }
+                }).fail(function (xhr, textStatus, err) {
+                    alert('Error: ' + err);
+                });
+            }
+            else {
+                return false;
+            }
+
+            return false;
+        }
+
+    </script>
+}

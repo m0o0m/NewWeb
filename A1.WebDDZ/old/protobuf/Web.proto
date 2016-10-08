@@ -1,0 +1,85 @@
+package ProtoCmd.Web;
+
+
+
+enum eWebOption_c
+{
+	w2r_protocol_begin	= 1;
+	w2r_register 		= 2;	//注册
+	w2r_login		= 3;	//登录
+	w2r_recharge		= 4;	//充值
+	w2r_verifing		= 5;	//验证
+	w2r_modify		= 6;	//修改
+	w2r_protocol_total	= 10;
+}
+
+enum eWebOption_s
+{
+	r2w_connect_error	= 1;	//连接失败
+	r2w_protocol_begin	= 2;	
+	r2w_register		= 3;	//注册
+	r2w_login		= 4;	//登录
+	r2w_recharge		= 5;	//充值
+	r2w_verifing		= 6;	//验证
+	r2w_modify		= 7;	//修改
+	r2w_protocol_total	= 10;
+}
+
+message WebLogin_w   //登录
+{
+	optional string		accounts 	= 1;			// 登录帐号
+	optional string		password 	= 2;			// 登录密码	
+}
+
+message WebRegister_w  // 注册
+{
+	optional string  	account			= 1;	// 帐号
+	optional string		password		= 2;	// 密码	
+	optional uint32		sex			= 3;	// 1 表示男性 0 表示女性
+	
+	optional string		agentName		= 4;	// 代理商命名
+	optional uint32		agentID			= 5;	// 代理商ID
+	optional string		inviteCode		= 6;	// 注册邀请
+}
+
+message WebRegister_r		// 注册返回
+{
+	required	int32	errorCode		= 1;	// 错误代码(0表示成功)
+	optional	uint32	userID			= 2;	// 角色ID
+	optional	string	account			= 3;	// 账号
+}
+
+message WebLogin_r
+{
+	required	int32	errorCode		= 1;	// 返回码
+	optional	uint32	userID			= 2;	// 角色ID
+	optional	string	account			= 3;	// 账号
+	optional	double	gold			= 4;	// 金币
+	optional	uint32	diamond			= 5;	// 钻石
+	optional	uint32	zicard			= 6;	// 紫卡
+}
+
+message WebRecharge_w
+{
+	required string	strSerialNum	= 1;		// 流水号
+	required uint32	dwUserID	= 2;		// 角色ID号
+	required uint32 dwValue		= 3;		// 充值金额
+}
+
+message WebRecharge_r
+{
+	required string strSerialNum 	= 1;		// 流水号
+	required uint32	dwUserID	= 2;		// USERID
+	required bool 	result		= 3;		// 结果（true 成功 false 失败）	
+}
+
+message WebVerifing_w
+{
+	required string	account		= 1;		//验证账号是否存在
+}
+
+message WebVerifing_r
+{
+	required uint32	suc		= 1;		//1存在0不存在
+}
+

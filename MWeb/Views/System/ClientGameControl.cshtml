@@ -1,0 +1,150 @@
+﻿@{
+    ViewBag.Title = "客户端开关";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+
+<section id="widget-grid" class="">
+    <div class="row">
+        <article class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
+            <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-0" data-widget-editbutton="false" data-widget-colorbutton="false"
+                 data-widget-togglebutton="false"
+                 data-widget-deletebutton="false"
+                 data-widget-fullscreenbutton="false"
+                 data-widget-custombutton="false"
+                 data-widget-collapsed="false"
+                 data-widget-sortable="false">
+                <header>
+                    <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                    <h2>客户端开关</h2>
+                </header>
+                <!-- widget div-->
+                <div>
+                    <!-- widget edit box -->
+                    <div class="jarviswidget-editbox">
+                        <!-- This area used as dropdown edit box -->
+                    </div>
+                    <!-- end widget edit box -->
+                    <!-- widget content -->
+                    <div class="widget-body no-padding">
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <div class="form-group">
+                                                <div class="col-md-2 control-label">
+                                                    <div class="user-thumb"> 中发白 </div>
+                                                </div>
+                                                <div class="col-md-10">
+                                                    <input type="button" value="修改" class="btn btn-danger btn-xs" onclick="return btngo(13);" />
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="form-group">
+                                                <div class="col-md-2 control-label">
+                                                    <div class="user-thumb"> 百人德州 </div>
+                                                </div>
+                                                <div class="col-md-10">
+                                                    <input type="button" value="修改" class="btn btn-danger btn-xs" onclick="return btngo(18);" />
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>
+                                            <div class="form-group">
+                                                <div class="col-md-2 control-label">
+                                                    <div class="user-thumb"> 十二生肖 </div>
+                                                </div>
+                                                <div class="col-md-10">
+                                                    <input type="button" value="修改" class="btn btn-danger btn-xs" onclick="return btngo(14);" />
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="form-group">
+                                                <div class="col-md-2 control-label">
+                                                    <div class="user-thumb"> 奔驰宝马 </div>
+                                                </div>
+                                                <div class="col-md-10">
+                                                    <input type="button" value="修改" class="btn btn-danger btn-xs" onclick="return btngo(17);" />
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                 
+                                 
+                                
+                                    <tr>
+                                        <td>
+                                            <div class="form-group">
+                                                <div class="col-md-2 control-label">
+                                                    <div class="user-thumb"> 百人游戏入口(移动端) </div>
+                                                </div>
+                                                <div class="col-md-10">
+                                                    <input type="button" value="修改" class="btn btn-danger btn-xs" onclick="return btngo(50);" />
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="form-group">
+                                                <div class="col-md-2 control-label">
+                                                    <div class="user-thumb"> 街机游戏入口(移动端) </div>
+                                                </div>
+                                                <div class="col-md-10">
+                                                    <input type="button" value="修改" class="btn btn-danger btn-xs" onclick="return btngo(51);" />
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- end widget content -->
+                </div>
+                <!-- end widget div -->
+            </div>
+            <!-- end widget -->
+
+        </article>
+    </div>
+</section>
+
+
+
+
+
+@section scripts{
+
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/select2.min.js"></script>
+
+    <script type="text/javascript">
+        function btngo(obj) {
+            location.href = "/System/SetClientGameSwitch?type=" + obj;
+        }
+
+
+
+    // resets the menu selection upon entry to this page:
+    function resetMenu() {
+        document.gomenu.selector.selectedIndex = 2;
+    }
+
+
+
+    </script>
+}

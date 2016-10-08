@@ -1,0 +1,167 @@
+﻿@model BaseDataView
+@{
+    ViewBag.Title = "在线问题列表";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="content">
+    <form id="comment-form" class="smart-form" novalidate="novalidate">
+        <div class="row">
+            <div class="widget-body">
+                <section class="col col-1.2">
+                    <label class="label">起始日期</label>
+                    <label class="input">
+                        <i class="icon-append fa fa-calendar"></i>
+                        @Html.TextBoxFor(m => m.StartDate, new Dictionary<string, object>() { { "class", "form-control datepicker" }, { "data-dateformat", "yy-mm-dd 00:00:00" } })
+                    </label>
+                </section>
+                <section class="col col-1.2">
+                    <label class="label"> 截止日期</label>
+                    <label class="input">
+                        <i class="icon-append fa fa-calendar"></i>
+                        @Html.TextBoxFor(m => m.ExpirationDate, new Dictionary<string, object>() {
+                           { "class", "form-control datepicker" },
+                           { "data-dateformat", "yy-mm-dd 00:00:00" }
+                       })
+                    </label>
+                </section>
+                <section class="col col-1">
+                    <label class="label">&nbsp;</label>
+                    @*<button type="submit" class="btn btn-success btn-sm">查询</button>*@
+                    <input type="button" onclick="search()" class="btn btn-success btn-sm" value="查询" />
+                </section>
+
+            </div>
+        </div>
+    </form>
+
+
+    <!--End-breadcrumbs-->
+        <div class="row-fluid">
+            <div class="widget-box" id="box">
+                @Html.Partial("OnlineProblem_PageList", Model.BaseDataList)
+            </div>
+        </div>
+</div>
+    <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="myModalLabel"></h3>
+        </div>
+        <div class="modal-body">
+            <p>内容加载中...</p>
+        </div>
+        <div class="modal-footer">
+            <div class="chat-message" id="chat-messages">
+                <input type="hidden" id="myModalval" value="" />
+                <button class="btn btn-success" id="myModalSend" onclick="btnSend();">Send</button>
+                <span class="input-box">
+                    <input type="text" name="msg-box" id="msg-box" />
+                </span>
+            </div>
+        </div>
+    </div>
+
+@section scripts{
+
+    @{Html.RegisterMvcPagerScriptResource();}
+    <script src="/js/bootstrap.min.js"></script>
+
+
+    <script type="text/javascript">
+        function btnDel(obj) {
+            if (confirm('确定删除此记录？')) {
+                $.ajax({
+                    url: "/Api/CustomerServicesApi/",
+                    type: "DELETE",
+                    dataType: "JSON",
+                    data: { "CSCMainID": obj },
+                    success: function (data) {
+                        switch (data.result) {
+                            case 0:
+                                location.reload();
+                                break;
+                            case 1:
+                                alert("删除失败，请稍后再试");
+                                break;
+                            default:
+                                alert('未知错误');
+                                break;
+                        }
+                    }
+                }).fail(function (xhr, textStatus, err) {
+                    alert('Error: ' + err);
+                });
+            } else {
+                return false;
+            }
+            return false;
+        }
+
+
+        function btnView(id, _static, obj) {
+            //alert("/Services/PopupboxForReply/?i=" + new Date().getTime());
+            _this = $(obj).parent().parent();
+            var _Title = $(_this).find("td").eq(2).html();
+            $("#myModalLabel").html(_Title);
+            $("#myModalval").val(id);
+            $('#myModal').removeData("modal");
+            $('#msg-box').val("");
+
+
+            if (_static == 3) {
+                $("#chat-messages").hide();
+            } else {
+                $("#chat-messages").show();
+            }
+
+            $('#myModal').modal({
+                keyboard: false
+                , show: true
+                , remote: "/Service/OnlineProblemForReply/?CSCMainID=" + id + "&i=" + new Date().getTime()
+            });
+        }
+
+        function btnSend() {
+            if ($('#msg-box').val() == '') {
+                alert("回复内容不能为空");
+                $('#msg-box').focus();
+                return false;
+            }
+            $.ajax({
+                url: "/api/CustomerServicesApi/",
+                type: "Post",
+                dataType: "JSON",
+                data: { "CSCMainID": $("#myModalval").val(), "CSCContent": $('#msg-box').val() },
+                success: function (data) {
+                    //alert(data.result)
+                    switch (data.result) {
+                        case 0:
+
+                            $('#myModal').modal('hide');
+                            break;
+                        case 1:
+                            alert("回复失败，请稍后再试");
+                            break;
+                        default:
+                            alert('未知错误');
+                            break;
+                    }
+                }
+            }).fail(function (xhr, textStatus, err) {
+                alert('Error: ' + err);
+            });
+        }
+
+        function ConfirmDelUser() {
+            return confirm("你确认要执行此操作吗？");
+        }
+        function errFunc(res) {
+            alert(res["responseText"]);
+        }
+        function successPageFun() {
+
+        }
+
+    </script>
+}

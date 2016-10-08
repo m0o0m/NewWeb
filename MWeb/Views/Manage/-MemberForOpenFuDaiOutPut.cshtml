@@ -1,0 +1,110 @@
+﻿@using GL.Data.Model
+@using GL.Data.View
+@model GameRecordView
+@{
+    ViewBag.Title = "福袋产出消耗";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    List<OpenFuDai> ui = (List<OpenFuDai>)Model.Data;
+}
+
+
+<div id="content-header">
+    <div id="breadcrumb"> <a href="#" title="" class="current"><i class="icon-home"></i> @ViewBag.Title</a></div>
+</div>
+
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span8">
+            <form class="form-inline">
+                会员ID
+                @Html.TextBoxFor(m => m.UserID, new { @class = "span2", style = "border-radius:4px" })
+                起始日期
+                @Html.TextBoxFor(m => m.StartDate, new { @class = "datepicker span2", style = "border-radius:4px" })
+                截止日期
+                @Html.TextBoxFor(m => m.ExpirationDate, new { @class = "datepicker span2", style = "border-radius:4px" })
+                <button type="submit" class="btn btn-success">查询</button>
+            </form>
+
+
+        </div>
+    </div>
+
+    <div class="row-fluid">
+        <div class="span6">
+            <div class="widget-box">
+                <div class="widget-title">
+                    <span class="icon"> <i class="icon-arrow-right"></i> </span>
+                    <h5>福袋统计</h5>
+                </div>
+                <div class="widget-content nopadding">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>日期</th>
+                                <th>福袋总数</th>
+                                <th>福袋消耗</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (ui.Count == 0)
+                            {
+                                <tr>
+                                    <td></td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                </tr>
+                            }
+                            @foreach (var item in ui)
+                            {
+                                <tr>
+                                    <td>@item.Createtime.ToString("yyyy-MM-dd")</td>
+                                    <td>@item.Count</td>
+                                    <td>@item.NeedGold</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row-fluid">
+        <div class="widget-box" id="box">
+            @Html.Partial("MemberForOpenFuDaiOutPut_PageList", Model.DataList)
+        </div>
+    </div>
+
+
+</div>
+
+
+@section scripts{
+
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/select2.min.js"></script>
+    @Styles.Render("~/Style/bootstrap-datetimepicker")
+    @Scripts.Render("~/bundles/bootstrap-datetimepicker")
+
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $('select').select2({
+                allowClear: false,
+                minimumResultsForSearch: -1
+            });
+            $('.datepicker').datetimepicker({
+                minView: "month", //选择日期后，不会再跳转去选择时分秒
+                format: "yyyy-mm-dd hh:ii:ss", //选择日期后，文本框显示的日期格式
+                language: 'zh-CN', //汉化
+                autoclose: true //选择日期后自动关闭
+            });
+
+        });
+
+
+
+    </script>
+
+}

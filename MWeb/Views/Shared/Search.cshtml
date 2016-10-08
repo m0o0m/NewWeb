@@ -1,0 +1,65 @@
+﻿@using System.Data;
+
+@model Search
+@{
+
+    string randSearch = Model.SearchFunc+new Random().Next(1,99999);
+
+    List<KeyValue> keyValues = new List<KeyValue>();
+}
+<div class="row">
+    <div class="form-group">
+        @Html.Partial("GetControls", Model.Items)
+         
+        @foreach (MWeb.Control item in Model.Items)
+        {
+            switch (item.ControlType)
+            {
+                case ControlType.Text:
+                case ControlType.Select:
+                case ControlType.DateTime:
+                    keyValues.Add(new KeyValue()
+                    {
+                        Key = item.Name,
+                        Value = "$('#" + item.ID + "').val()"
+                    });
+                    break;
+            }
+        }
+
+        <div class="col-md-2">
+            <label>&nbsp;</label>
+            <div class="input-group">
+                <a href="javascript:;" class="btn blue" onclick="@randSearch ()">
+                    查询
+                    <i class="fa fa-search"></i>
+                </a>
+            </div>
+
+        </div>
+      
+    </div>
+
+    
+
+</div>
+
+<br>
+<script type="text/javascript">
+
+
+    function @randSearch () {
+       
+        var obj = {
+            "page": 1
+        };
+
+        @for (int i = 0; i < keyValues.Count(); i++) {
+            KeyValue item = keyValues[i];
+            string jstemp = "obj."+ item.Key+ "=" + item.Value+ ";";
+            @Html.Raw(jstemp);
+        }
+       
+        @Model.SearchFunc (obj);
+    }
+</script>

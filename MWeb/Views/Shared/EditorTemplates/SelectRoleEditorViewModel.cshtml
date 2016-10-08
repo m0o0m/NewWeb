@@ -1,0 +1,9 @@
+﻿@model SelectRoleEditorViewModel
+@Html.HiddenFor(model => model.RoleName)
+<div class="checkbox" style="text-transform : capitalize">
+    <label>
+        @Html.CheckBoxFor(model => model.Selected)
+        @Html.DisplayFor(model => model.RoleName)
+        @Html.DisplayFor(model => model.Description)
+    </label>
+</div>

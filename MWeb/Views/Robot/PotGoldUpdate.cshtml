@@ -1,0 +1,169 @@
+﻿
+@using GL.Data.View
+@model PotGold
+@{
+    ViewBag.Title = "修改彩金";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+
+
+}
+
+<article class="col-sm-12 col-md-12 col-lg-7">
+    <div class="jarviswidget" id="wid-id-4" data-widget-editbutton="false" data-widget-custombutton="false">
+        <header>
+            <span class="widget-icon"> <i class="fa fa-edit"></i> </span>
+            <h2>修改@((gameID)Model.GameType)彩金基准值</h2>
+        </header>
+        <div>
+            <div class="jarviswidget-editbox">
+            </div>
+            <div class="widget-body no-padding">
+                <form id="submitForm" class="smart-form" action="" method="post">
+                    <input id="GameID" name="GameID" type="hidden" value="@Model.GameType" />
+                    <fieldset>
+                        <div class="row">
+                            <section class="col col-5">
+                                <label>修改彩金 :</label>
+                                <label class="input">
+                                    <input type="text" id="ChipGold" name="ChipGold" class="span4" value="@Model.Gold" />
+                                </label>
+                            </section>
+
+                        </div>
+                        <div class="row">
+                            <section class="col col-5">
+                                <label>修改基准值 :</label>
+                                <label class="input">
+                                    <input type="text" id="ChipStandard" name="ChipStandard" class="span4" value="@Model.Standard" />
+                                </label>
+                            </section>
+
+                        </div>
+                    </fieldset>
+
+
+                    <footer>
+                        <input id="btnGoBack" type="button" value="返回列表" class=" btn btn-warning" />
+                        <input id="btndiff" type="button" value="确定" class="btn btn-danger" />
+                    </footer>
+                </form>
+
+            </div>
+            <!-- end widget content -->
+
+        </div>
+        <!-- end widget div -->
+
+    </div>
+
+</article>
+
+
+
+
+
+
+
+
+
+
+@section scripts{
+
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/select2.min.js"></script>
+    <style type="text/css">
+        .quick-actions1 {
+            display: block;
+            list-style: outside none none;
+            margin: 15px 0;
+            text-align: center;
+        }
+
+            .quick-actions1 li a {
+                color: #fff;
+                display: block;
+                font-size: 14px;
+                font-weight: lighter;
+            }
+
+            .quick-actions1 li a {
+                padding: 10px 30px;
+            }
+
+        .quick-actions_homepage .quick-actions1 .span3 {
+            width: 30%;
+        }
+
+        .quick-actions_homepage .quick-actions1 li {
+            position: relative;
+        }
+
+        .quick-actions1 li {
+            min-height: 70px;
+            min-width: 14%;
+        }
+
+        .quick-actions1 li {
+            float: left;
+            line-height: 18px;
+            margin: 0 10px 10px 0;
+            padding: 0 10px;
+        }
+
+            .quick-actions1 li a i[class^="icon-"], .quick-actions1 li a i[class*=" icon-"] {
+                display: block;
+                font-size: 30px;
+                margin: 0 auto 5px;
+            }
+
+        .quick-actions1 li {
+            padding: 0;
+        }
+    </style>
+
+    <script type="text/javascript">
+
+
+        // resets the menu selection upon entry to this page:
+        function resetMenu() {
+            document.gomenu.selector.selectedIndex = 2;
+        }
+
+        $(function () {
+          
+            $("#btndiff").click(function () {
+              
+
+                $.ajax({
+                    url: "/Robot/PotGoldUpdate/",
+                    type: "POST",
+                    dataType: "JSON",
+                    data: { "gametype": $("#GameID").val(), "ChipGold": $("#ChipGold").val(), "ChipStandard": $("#ChipStandard").val() },
+                    success: function (data) {
+                        switch (data.result) {  
+                            case 0:
+                                location.href = "/Robot/PotGold?gametype=" + $("#GameID").val() + "&ChipGold=" + $("#ChipGold").val() + "&ChipStandard=" + $("#ChipStandard").val();
+                                break;
+
+                            case 1:
+                                alert("彩金和标准值必须为正数");
+                                break;
+                            default:
+                                alert('修改失败,请与管理员联系');
+                                break;
+                        }
+                    }
+                }).fail(function (xhr, textStatus, err) {
+                    alert('Error: ' + err);
+                });
+                return false;
+            });
+            $("#btnGoBack").click(function () {
+                location.href = "/Robot/PotGold";
+            });
+        });
+
+
+    </script>
+}

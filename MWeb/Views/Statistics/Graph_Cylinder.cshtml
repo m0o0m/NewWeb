@@ -1,0 +1,234 @@
+﻿
+@using Webdiyer.WebControls.Mvc;
+@using GL.Data.Model;
+@model GraphCylinder
+
+@{
+    Layout = null;
+
+    Dictionary<string, string> datas = Model.Data;
+    int total = 0;
+    int i = 0;
+    string hid = "";
+    foreach (var item in datas)
+    {
+        hid = hid + "|" + item.Value + "," + i + "," + item.Key;
+        i++;
+        total += Convert.ToInt32(item.Value);
+    }
+    hid = hid.Trim('|');
+    string id = Model.Id;
+}
+
+<section  class="">
+    <div class="row">
+        <!-- NEW WIDGET START -->
+        <article class="col-xs-12 col-sm-6 col-md-6 col-lg-6" style="width:100%">
+            <div class="jarviswidget"  data-widget-editbutton="false"
+                 data-widget-colorbutton="false"
+                 data-widget-togglebutton="false"
+                 data-widget-deletebutton="false"
+                 data-widget-fullscreenbutton="false"
+                 data-widget-custombutton="false"
+                 data-widget-collapsed="false"
+                 data-widget-sortable="false">
+                <header>
+                    <span class="widget-icon"> <i class="fa fa-bar-chart-o"></i> </span>
+                    <h2>@Model.Title </h2>
+                </header>
+                <!-- widget div-->
+                <div>
+                    <!-- widget edit box -->
+                    <div class="jarviswidget-editbox">
+                        <!-- This area used as dropdown edit box -->
+                    </div>
+                    <!-- end widget edit box -->
+                    <!-- widget content -->
+                    <div class="widget-body no-padding">
+                        <div id="@id" class="chart"></div>
+                    </div>
+                    <!-- end widget content -->
+                </div>
+                <!-- end widget div -->
+            </div>
+            <!-- end widget -->
+        </article>
+        <!-- WIDGET END -->
+
+        @if (Model.HasGird)
+        {
+            <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-0" data-widget-editbutton="false" data-widget-colorbutton="false"
+                     data-widget-togglebutton="false"
+                     data-widget-deletebutton="false"
+                     data-widget-fullscreenbutton="false"
+                     data-widget-custombutton="false"
+                     data-widget-collapsed="false"
+                     data-widget-sortable="false">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                        <h2>@Model.Title</h2>
+                    </header>
+                    <!-- widget div-->
+                    <div>
+                        <!-- widget edit box -->
+                        <div class="jarviswidget-editbox">
+                            <!-- This area used as dropdown edit box -->
+                        </div>
+                        <!-- end widget edit box -->
+                        <!-- widget content -->
+                        <div class="widget-body no-padding">
+                            <div class="table-responsive">
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            @foreach (var z in Model.GirdTitle)
+                                            {
+                                                <th>@z</th>
+                                            }
+
+                                            <th>百分比</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @if (datas.Count() == 0)
+                                        {
+                                            <tr class="gradeX">
+                                                <td class="colspan" align="center" colspan="0">
+                                                    没有找到相关记录！
+                                                </td>
+                                            </tr>
+                                        }
+                                        else
+                                        {
+                                            var d = datas.Reverse();
+                                            foreach (var m in d)
+                                            {
+                                                double datadou = Convert.ToInt32(m.Value) * 100.0 / total;
+                                                string dataStr = datadou + "%";
+                                                <tr class="gradeA">
+                                                    <td>@m.Key</td>
+                                                    <td>@m.Value</td>
+                                                    <td>@dataStr</td>
+                                                </tr>
+                                            }
+                                        }
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <!-- end widget content -->
+                    </div>
+                    <!-- end widget div -->
+                </div>
+                <!-- end widget -->
+
+            </article>
+        }
+
+     
+
+
+    </div>
+</section>
+
+<input id="hid@{ @id }" type="hidden" 
+       value="@hid" />
+
+
+    <script type="text/javascript">
+        /* chart colors default */
+        var $chrt_border_color = "#efefef";
+        var $chrt_grid_color = "#DDD"
+        var $chrt_main = "#E24913";			/* red       */
+        var $chrt_second = "#6595b4";		/* blue      */
+        var $chrt_third = "#FF9F01";		/* orange    */
+        var $chrt_fourth = "#7e9d3a";		/* green     */
+        var $chrt_fifth = "#BD362F";		/* dark red  */
+        var $chrt_mono = "#000";
+
+        function @{   @id  }() {
+            if ($("#@id").length) {
+                //Display horizontal graph
+                var d1_h = [];
+                var data = $("#hid@{  @id }").val();
+
+                //  var data = "150,0,ios|50,1,andriod 2.02|50,2,xx|60,3,uu|300,4,yy";
+                var data2 = data.split('|');
+                var obj = new Array();
+                for (var i = 0; i < data2.length; i++) {
+                    var data3 = data2[i].split(',');
+                    d1_h.push([parseInt(data3[0]), parseInt(data3[1])]);
+
+                    obj[data3[1]] = data3[2];
+                }
+
+
+
+
+                //d1_h.push([150, 0]);
+                //d1_h.push([50, 1]);
+                //d1_h.push([50, 2]);
+                //d1_h.push([60, 3]);
+                //d1_h.push([300, 4]);
+
+                var ds_h = new Array();
+                ds_h.push({
+                    data: d1_h,
+                    bars: {
+                        horizontal: true,
+                        show: true,
+                        barWidth: 1,
+                        order: 2,
+                    }
+                });
+                // display graph
+                $.plot($("#@id"), ds_h, {
+                    colors: [$chrt_second, $chrt_fourth, "#666", "#BBB"],
+                    grid: {
+                        show: true,
+                        hoverable: true,
+                        clickable: true,
+                        tickColor: $chrt_border_color,
+                        borderWidth: 0,
+                        borderColor: $chrt_border_color,
+                    },
+                    yaxis: {
+                        ticks: 15,
+                        tickDecimals: 0,
+                        top: 10,
+                        color: "black",
+                        ayisLabelFontSizePixels: 112,
+                        ayisLabelPadding: 81
+                        ,
+                        tickFormatter: function (val, axis) {
+
+                            if (val == 0) {
+                                return "";
+                            } else {
+                                if (obj.length == val - 1) {
+                                    return "";
+                                }
+                                return obj[val - 1];
+                            }
+                        }
+                    },
+                    legend: true,
+                    tooltip: true,
+                    tooltipOpts: {
+                        content: "<b>%x人</b>",
+                        defaultTheme: false
+                    }
+                });
+            }
+        }
+
+
+
+
+</script>
+
+
+    
+

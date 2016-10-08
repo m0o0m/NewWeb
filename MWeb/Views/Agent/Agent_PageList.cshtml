@@ -1,0 +1,185 @@
+﻿@using Webdiyer.WebControls.Mvc;
+@using GL.Data.AWeb.Identity;
+@model PagedList<AgentUser>
+
+
+
+
+<section id="widget-grid" class="">
+    <div class="row">
+        <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-0" data-widget-editbutton="false" data-widget-colorbutton="false"
+                 data-widget-togglebutton="false"
+                 data-widget-deletebutton="false"
+                 data-widget-fullscreenbutton="false"
+                 data-widget-custombutton="false"
+                 data-widget-collapsed="false"
+                 data-widget-sortable="false">
+                <header>
+                    <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                    <h2>@(ViewBag.AgentLv)列表</h2>
+                </header>
+                <!-- widget div-->
+                <div>
+                    <!-- widget edit box -->
+                    <div class="jarviswidget-editbox">
+                        <!-- This area used as dropdown edit box -->
+                    </div>
+                    <!-- end widget edit box -->
+                    <!-- widget content -->
+                    <div class="widget-body no-padding">
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <thead>
+
+                                    <tr>
+                                        <th style="width:80px">@(ViewBag.AgentLv)id</th>
+                                        <th style="width:80px">@(ViewBag.AgentLv)帐号</th>
+                                        <th style="width:80px">@(ViewBag.AgentLv)昵称</th>
+                                        <th style="width:60px">代理等级</th>
+                                        <th style="width:60px">可用金额</th>
+                                        <th style="width:60px">已用金额</th>
+                                        <th style="width:80px">@(ViewBag.AgentLv)手机</th>
+                                        <th>@(ViewBag.AgentLv)QQ</th>
+                                        <th>@(ViewBag.AgentLv)邮箱</th>
+                                        <th style="width:118px">注册时间</th>
+                                        <th style="width:118px">登录时间</th>
+                                        <th style="width:80px">登录IP</th>
+                                        <th>基本操作</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model.Count == 0)
+                                    {
+                                        <tr class="gradeX">
+                                            <td class="colspan" align="center" colspan="0">
+                                                没有找到相关记录！
+                                            </td>
+                                        </tr>
+                                    }
+                                    @foreach (AgentUser m in Model)
+                                    {
+                                        <tr class="gradeA">
+                                            <td>
+                                                @*@if (m.Extend_isDefault){<i class="icon-home"></i>}*@
+                                            @*@if (m.AgentLv == agentLv.代理)
+                        {
+                                                <a href="/Member/Member?id=@m.AgentID">@(m.OnlineState > 0 ? "在线" : "离线")|@m.AgentID</a>
+                        }
+                        else
+                        {*@
+                                                <a href="/Agent/Agent?id=@m.Id">@(m.OnlineState > 0 ? "在线" : "离线")|@m.Id</a>
+                        @*}*@
+                                        </td>
+                                        <td>@m.UserName</td>
+                                        <td>@m.AgentName</td>
+                                        <td>@m.AgentLv</td>
+                                        <td>@m.AmountAvailable.ToString("0.")</td>
+                                        <td>@m.HavaAmount.ToString("0.")</td>
+                                        <td>@m.PhoneNumber</td>
+                                        <td>@m.AgentQQ</td>
+                                        <td>@m.Email</td>
+                                        <td>@m.RegisterTime</td>
+                                        <td>@m.LoginTime</td>
+                                        <td>@m.LoginIP</td>
+                                        <td style="text-align:center">
+                                            @*@if (m.AgentLv == agentLv.代理 && !m.Extend_isDefault)
+                                            {
+                                                <input id="btnSetMain" type="button" value="设为主站" class="btn btn-danger btn-mini" onclick="return SetTheMain(@m.AgentID)" />
+                                            }*@
+
+                                            <input id="btnDel" type="button" value="删除" class="btn btn-danger btn-mini" onclick="return ConfirmDelUser(@m.Id)" />
+                                            <input id="btnUpdate" type="button" value=" 编 辑 " class="btn btn-primary btn-mini" onclick="return UpdateUser(@m.Id)" />
+                                            <input id="btnUpdate" type="button" value=" 上 分 " class="btn btn-primary btn-mini" onclick="return AddScoresUser(@m.Id)" />
+                                            <input id="btnUpdate" type="button" value=" 下 分 " class="btn btn-primary btn-mini" onclick="return SubScoresUser(@m.Id)" />
+                                            @*<input id="btnAgentShift" type="button" value="代理转移" class=" btn btn-warning btn-mini" />*@
+                                    </tr>
+                                }
+
+
+                                </tbody>
+                            </table>
+                        </div>
+
+
+
+
+
+
+
+
+                        <div class="widget-content">
+
+                            @Ajax.Pager(
+    Model,
+    new PagerOptions()
+    {
+        CssClass = "pager",
+        ShowMorePagerItems = true,
+        PageIndexParameterName = "page",
+        ShowDisabledPagerItems = true,
+        AlwaysShowFirstLastPageNumber = true,
+        //ShowRecordCountItems = true,
+        HorizontalAlign = "right",
+        //SeparatorHtml = "",
+
+        CurrentPagerItemTemplate = "<li class=\"disabled\"><span>{0}</span></li>",
+        DisabledPagerItemTemplate = "<li class=\"disabled\"><span>{0}</span></li>",
+        PagerItemTemplate = "<li>{0}</li>",
+        //CurrentPagerItemWrapperFormatString = "<li class=\"disabled\"><span>{0}</span></li>",
+        //NumericPagerItemWrapperFormatString = "<li>{0}</li>",
+        //PagerItemWrapperFormatString = "<li>{0}</li>",
+        //RecordCountText = string.Format("共{0}条记录, {1}页", Model.TotalItemCount, Model.TotalPageCount),
+        //RecordCountFormatString = "<li><span>{0}</span></li>",
+        //DisabledPagerItemsFormatString = "<li class=\"disabled\"><span>{0}</span></li>",
+        //PageIndexBoxType = Webdiyer.WebControls.Mvc.PageIndexBoxType.TextBox,
+        //GoButtonText = "跳转到",
+        ShowPrevNext = true,
+        FirstPageText = "第一页",
+        LastPageText = "最后一页",
+        ContainerTagName = "ul",
+        PageIndexBoxId = "pageindexcm",
+        WYWPageIndexString = @"<li><input style='width:50px;' type='text' value='' id='{0}' name = '{1}'></li>
+                                 <li><a id='goto' name='goto' style='margin-right:10px' >跳转</a><li>
+                             ",
+        GoToButtonId = "goto"
+    },
+    new MvcAjaxOptions
+    {
+        HttpMethod = "POST",
+        UpdateTargetId = "box",
+        InsertionMode = InsertionMode.Replace,
+        OnFailure = "errFunc",
+        OnSuccess = "successPageFun"
+    })
+                        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    </div>
+                    <!-- end widget content -->
+                </div>
+                <!-- end widget div -->
+            </div>
+            <!-- end widget -->
+
+        </article>
+    </div>
+</section>
+
+
+

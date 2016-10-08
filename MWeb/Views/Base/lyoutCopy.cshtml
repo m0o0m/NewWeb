@@ -1,0 +1,662 @@
+﻿@using Microsoft.AspNet.Identity
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>@ViewBag.Title</title>
+
+    <link rel="stylesheet" type="text/css" media="screen" href="~/js/SmartAdmin/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="~/js/SmartAdmin/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="~/js/SmartAdmin/css/smartadmin-production.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="~/js/SmartAdmin/css/smartadmin-skins.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="~/js/SmartAdmin/css/demo.css">
+    <link rel="shortcut icon" href="~/js/SmartAdmin/img/favicon/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="~/js/SmartAdmin/img/favicon/favicon.ico" type="image/x-icon">
+    <link href="~/js/SmartAdmin/css/mygame.css" rel="stylesheet" />
+   
+</head>
+<body id="allbody">
+        <header id="header">
+        <div id="logo-group">
+            <span id="logo"> <img src="~/js/SmartAdmin/img/logo.png" alt="SmartAdmin"> </span>
+          
+        </div>
+        <div class="pull-right">
+            <div id="hide-menu" class="btn-header pull-right">
+                <span>
+                    <a href="javascript:return false;" onclick="ClearSession();">
+                        注销
+                        @*<i style="font-style: normal;font-weight: normal;">注销</i>*@
+                        @*<i style='font-size:small;'>注销</i>*@
+                    </a>
+                </span>
+            </div>
+            <div id="hide-menu" class="btn-header pull-right">
+                <span> 
+                    <a href="javascript:void(0);" title="打开关闭菜单">
+                        菜单
+                        @*<i style='font-size:small;font-weight: normal; font-family: "Open Sans",Arial,Helvetica,sans-serif;' >菜单</i>*@
+                    </a> 
+                </span>
+              
+            </div>
+          
+            </div>
+    </header>
+
+
+
+
+
+
+
+    <aside id="left-panel">
+        @using (Html.BeginForm("LogOff", "Home", FormMethod.Post, new { id = "logoutForm" }))
+        {
+            @Html.AntiForgeryToken()
+        <!-- User info -->
+            <div class="login-info">
+                <span>
+                    <a href="javascript:void(0);" id="show-shortcut">
+                        <img src="~/js/SmartAdmin/img/avatars/sunny.png" alt="me" class="online" />
+                        <span>
+                            @User.Identity.GetUserName()
+                        </span>
+                    </a>
+                
+                </span>
+            </div>
+        }
+        <!--左边的导航-->
+
+        <nav>
+            <ul id="nav">
+                <li class="submenu" id="baseLi">
+                    <a href="#"><i class="fa fa-lg fa-fw fa-bar-chart-o"></i> <span class="menu-item-parent">基础运营数据</span></a>
+                    <ul id="nav1">
+                        <li ><a href="/Base/NumberOfRegisteredUsers">注册用户统计</a></li>
+                        <li><a href="/Base/NumberOfActiveUsers">活跃用户统计</a></li>
+                        <li id="lionlineplay"><a href="/Base/OnlinePlay">在线在玩统计</a></li>
+                        <li><a href="/Base/UsersGoldDistributionRatio">用户游戏币分布比</a></li>
+                        <li><a href="/Base/UsersDiamondDistributionRatio">用户五币分布比</a></li>
+                        <li><a href="/Base/VIPDistributionRatio">用户VIP分布表</a></li>
+                        <li><a href="/Base/UserRetentionRates">留存率</a></li>
+                        @*<li><a href="/Base/GameOutput">游戏总产出消耗</a></li>*@
+                        <li><a href="/Base/GameOutput2">游戏总产出消耗</a></li>
+                        <li class="submenu">
+                            <a href="#">财务数据</a>
+                            <ul>
+                                <li><a href="/Base/QQZoneRechargeCount">充值统计</a></li>
+                                <li><a href="/Base/QQZoneFlow">充值流水</a></li>
+
+                            </ul>
+                        </li>
+
+
+                    </ul>
+                </li>
+                <li class="submenu">
+                    <a href="#"><i class="fa fa-lg fa-fw fa-bar-chart-o"></i> <span class="menu-item-parent">活动系统数据</span></a>
+                    <ul id="nav1">
+                        <li class="submenu">
+                            <a href="#">首充</a>
+                            <ul>
+                                <li> <a href="/Recharge/FirstRechargeSum">购买首冲的总充值</a> </li>
+                                <li> <a href="/Recharge/FirstChargeItem">1\6\30\68购买次数</a> </li>
+                            </ul>
+                        </li>
+                        <li class="submenu">
+                            <a href="#"><i class="fa fa-lg fa-fw fa-bar-chart-o"></i> <span class="menu-item-parent">《开心水族馆》</span></a>
+                            <ul>
+
+                                <li><a href="/Manage/FishDaybook">购买与放生流水日志</a></li>
+                                <li><a href="/Manage/FishInfo">查询用户身上的鱼</a></li>
+                                <li><a href="/Manage/FishCount">购买与放生数据查询</a></li>
+                                <li><a href="/Manage/FishCountOnUser">查询所有用户的鱼</a></li>
+
+
+                            </ul>
+                        </li>
+                        <li class="submenu">
+                            <a href="#"><i class="fa fa-lg fa-fw fa-bar-chart-o"></i> <span class="menu-item-parent">《玩就送》</span></a>
+                            <ul>
+                                <li><a href="/Base/Scoreboard">积分排行榜</a></li>
+                                <li><a href="/Manage/MemberForDuiHuan">积分兑换</a></li>
+
+                            </ul>
+                        </li>
+                        <li class="submenu">
+                            <a href="#">新手奖励</a>
+                            <ul>
+                                <li><a href="/Member/CountNoviceTask">完成新手任务用户统计</a></li>
+                                <li><a href="/Member/RechargeForNoviceTask">用户兑换新手任务奖励</a></li>
+                            </ul>
+                        </li>
+                        <li class="submenu">
+                            <a href="#">会员俱乐部</a>
+                            <ul>
+                                <li> <a href="/Member/ClubList">俱乐部信息</a> </li>
+                                <li> <a href="/Member/ClubData">俱乐部数据</a> </li>
+                            </ul>
+                        </li>
+
+
+                        <li><a href="/Recharge/TexasGameGetAward">德州玩牌领大奖</a></li>
+                        
+                        <li><a href="/Recharge/NewYearCharge">新年充值活动</a></li>
+
+
+                        @*<li><a href="/Recharge/RedeemCode">兑换码生成</a></li>*@
+                    </ul>
+                </li>
+                <li class="submenu">
+                    <a href="#"><i class="fa fa-lg fa-fw fa-bar-chart-o"></i> <span class="menu-item-parent">游戏控制台</span></a>
+                    <ul id="nav1">
+
+                        <li><a href="/Console/ProbabilityGames">概率游戏控制台</a></li>
+                        <li><a href="/Console/PotCtrlList">游戏控制日志</a></li>
+                        <li><a href="/GameData/PotList">彩池列表</a></li>
+                        <li><a href="/Console/Model">数据模版</a></li>
+                        <li class="submenu">
+                            <a  href="#" >007管理</a>
+                            <ul>
+                                <li>
+                                    <a  href="/Robot/PotGold">007游戏彩金</a>
+                                </li>
+                                <li>
+                                    <a  href="/Robot/PotTotalSum">007数据统计</a>
+                                </li>
+                                <li>
+                                    <a href="/Robot/PotRobotFlow" >007游戏流水日志</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="submenu">
+                    <a href="#"><i class="fa fa-lg fa-fw fa-bar-chart-o"></i> <span class="menu-item-parent">会员数据查询</span></a>
+                    <ul id="nav1">
+
+                        <li><a href="/GameData/LandGameLog">斗地主牌局查询</a></li>
+                        <li><a href="/GameData/TexasGameLog">德州扑克牌局查询</a></li>
+                        <li><a href="/GameData/ScaleGameLog">中发白牌局查询</a></li>
+                        <li><a href="/GameData/ZodiacGameLog">十二生肖牌局查询</a></li>
+                        <li><a href="/GameData/PonyGameLog">小马快跑牌局查询</a></li>
+                        <li><a href="/GameData/CarGameGameLog">奔驰宝马牌局查询</a></li>
+                        <li><a href="/Manage/MemberForSearchGameRecord">个人产出消耗</a></li>
+                        <li><a href="/Manage/MemberForSearchGameScore">个人积分流水</a></li>
+                        <li><a href="/Member/ExpList">个人经验流水</a></li>
+
+                    </ul>
+                </li>
+                <!--3层问题-->
+                <li class="submenu">
+                    <a href="#"><i class="fa fa-lg fa-fw fa-bar-chart-o"></i> <span class="menu-item-parent">会员管理</span></a>
+                    <ul id="nav1">
+                        <li class="submenu">
+                            @*<a mark="/Manage/MemberList" href="/Manage/MemberList"  class="partClass">会员列表</a>*@
+                            @*<a mark=""  class="partClass">会员列表</a>*@
+                            <a href="/Manage/MemberList" mark="/Manage/MemberList" class="partClass">会员列表</a>
+                            <ul id="nav2">
+
+
+                      
+
+
+                                <li class="submenu">
+                                    <a class="partClass" href="/Base/OnLineList" mark="/Base/OnLineList">在线会员列表</a>
+                                    <ul>
+
+                                        <li class="submenu"> <a class="partClass" href="/Base/OnPlayList" mark="/Base/OnPlayList">在玩列表</a> </li>
+                                    </ul>
+                                </li>
+
+                            </ul>
+                        </li>
+                        @*<li><a href="/Manage/Member">会员信息查询</a></li>*@
+                        <li><a href="/Manage/MemberManage">会员信息查询</a></li>
+                        <li><a href="/Manage/MemberNoSpeak">禁言</a> </li>
+                        <li>
+                            <a href="/Manage/MemberIsFreeze">封号</a>
+                        </li>
+                        <li>
+                            <a href="/Member/BlackList">封IP地址</a>
+                        </li>
+                        <li><a href="/Member/MacBlackList">封IMEI列表(黑名单)</a></li>
+                        <li><a href="/Manage/WhiteIP">玩德州IP白名单列表</a></li>
+                        <li><a href="/Member/RedisterIP">同IP下注册管理列表</a></li>
+                        <li class="submenu">
+                            <a class="partClass" href="/Manage/SendUserEmail" mark="/Manage/SendUserEmail">发送系统邮件</a>
+                            <ul>
+                                <li>
+                                    <a class="partClass" href="/Manage/UserEmail" mark="/Manage/UserEmail">系统邮件列表</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li><a href="/Member/LoginList">会员登录查询</a></li>
+                    </ul>
+                </li>
+
+                <li class="submenu">
+                    <a href="#"><i class="fa fa-lg fa-fw fa-bar-chart-o"></i> <span class="menu-item-parent">客服管理</span></a>
+                    <ul id="nav1">
+                        <li><a href="/Service/CustomerInfo">客服信息列表</a></li>
+                        <li><a href="/Service/CustomerForAdd">添加客服</a></li>
+                        <li><a href="/Service/OnlineProblem">在线问题列表(反馈-对话)</a></li>
+                        <li class="submenu">
+                            <a href="/Service/CommonProblems" mark="/Service/CommonProblems" class="partClass">常见问题列表</a>
+                            <ul>
+                                <li class=""><a href="/Service/CommonProblemsForAdd" mark="/Service/CommonProblemsForAdd" class="partClass">添加常见问题</a></li>
+                            </ul>
+                        </li>
+
+                    </ul>
+                </li>
+                <li class="submenu">
+                    <a href="#"><i class="fa fa-lg fa-fw fa-bar-chart-o"></i> <span class="menu-item-parent">管理员设置</span></a>
+                    <ul>
+
+                        <li><a href="/SU/Management">用户信息</a></li>
+                        <li><a href="/SU/ManagementForAdd">添加用户</a></li>
+                        @*<li><a href="/SU/ManagementForUpdate">修改管理员</a></li>*@
+                        <li><a href="/SU/Role">角色管理</a></li>
+                        <li><a href="/SU/RoleForCreate">添加角色</a></li>
+                      
+                    </ul>
+                </li>
+
+                <li class="submenu">
+                    <a href="#"><i class="fa fa-lg fa-fw fa-bar-chart-o"></i> <span class="menu-item-parent">渠道管理</span></a>
+                    <ul>
+                        <li><a href="/Agent/Agent">渠道列表</a></li>
+                        <li><a href="/Member/Member">渠道会员</a></li>
+                        <li><a href="#">代理信息</a></li>
+                        <li><a href="#">添加代理</a></li>
+                    </ul>
+                </li>
+                <li class="submenu">
+                    <a href="#"><i class="fa fa-lg fa-fw fa-bar-chart-o"></i> <span class="menu-item-parent">系统设置</span></a>
+                    <ul id="nav1">
+
+                        <li class="submenu">
+                            <a class="partClass" href="/System/SendSystemBroadcasts" mark="/System/SendSystemBroadcasts">发送游戏公告</a>
+                            <ul>
+
+                                <li><a href="/System/ServEmail" class="partClass" mark="/System/ServEmail">游戏公告列表</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="/System/LoginControl">内部登陆开关</a></li>
+                        <li><a href="/System/ServControl">服务器开关</a></li>
+                        <li><a href="/System/GameServControl">游戏系统开关</a></li>
+                        <li><a href="/System/Announcement">修改维护公告</a></li>
+
+
+
+
+                    </ul>
+                </li>
+
+
+                <!--
+
+
+
+                        <li>
+                            <a href="#"><i class="fa fa-lg fa-fw fa-bar-chart-o"></i> <span class="menu-item-parent">基础运营数据(待删除)</span></a>
+                            <ul>
+
+                                <li class="@Html.RouteIf("NumberOfBoard", "active")"><a href="/Base/NumberOfBoard">牌局统计</a></li>
+
+                <li class="@Html.RouteIf("BankruptcyRate", "active")"><a href="/Base/BankruptcyRate">破产率</a></li>
+
+
+
+                <li class="@Html.RouteIf("PotRakeback", "active")"><a href="/Base/PotRakeback">彩池反奖记录</a></li>
+
+                            </ul>
+                        </li>
+
+
+
+                        <li>
+                            <a href="#"><i class="fa fa-lg fa-fw fa-bar-chart-o"></i> <span class="menu-item-parent">系统设置(待删除)</span></a>
+                            <ul>
+
+                                <li class="@Html.RouteIf("SendServEmail", "active")"><a href="/System/SendServEmail">发送系统邮件</a></li>
+                            </ul>
+
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-lg fa-fw fa-bar-chart-o"></i> <span class="menu-item-parent">会员管理(待删除)</span></a>
+                            <ul>
+                                <li class="@Html.RouteIf("Member", "active")"><a href="/Manage/Member">会员信息</a></li>
+                <li class="@Html.RouteIf("OnlineMember", "active")"><a href="/Manage/OnlineMember">在线玩家列表</a></li>
+                <li class="@Html.RouteIf("SearchMember", "active")"><a href="/Manage/SearchMember">个人信息查询</a></li>
+
+                <li class="@Html.RouteIf("OperationRecord", "active")"><a href="/Manage/OperationRecord">玩家操作记录</a></li>
+                <li class="@Html.RouteIf("UserEmail", "active")"><a href="/Manage/UserEmail">会员邮件列表</a></li>
+
+
+            
+
+
+
+
+                            </ul>
+
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-lg fa-fw fa-bar-chart-o"></i> <span class="menu-item-parent">财务管理(待删除)</span></a>
+                            <ul>
+                                <li class="@Html.RouteIf("QQZoneRecharge", "active")"><a href="/Recharge/QQZoneRecharge">多平台充值列表</a></li>
+                            </ul>
+                        </li>
+
+
+
+                  -->
+
+            </ul>
+        </nav>
+    </aside>
+
+
+
+
+
+    <div id="main" role="main">
+
+        @RenderBody()
+
+
+
+    </div>
+
+
+
+
+
+
+
+
+
+    <script data-pace-options='{ "restartOnRequestAfter": true }' src="~/js/SmartAdmin/js/plugin/pace/pace.min.js"></script>
+
+    <script src="~/js/SmartAdmin/js/libs/jquery-2.0.2.min.js"></script>
+    <script src="~/Scripts/jquery.history.js"></script>
+
+    @*<script src="~/js/SmartAdmin/js/libs/jquery-ui-1.10.3.min.js"></script>*@
+    <script src="~/js/SmartAdmin/js/libs/jquery-ui-1.11.4-utf8.js"></script>
+    <script src="~/js/SmartAdmin/js/bootstrap/bootstrap.min.js"></script>
+    <script src="~/js/SmartAdmin/js/notification/SmartNotification.min.js"></script>
+    <script src="~/js/SmartAdmin/js/smartwidgets/jarvis.widget.min.js"></script>
+    <script src="~/js/SmartAdmin/js/plugin/easy-pie-chart/jquery.easy-pie-chart.min.js"></script>
+    <script src="~/js/SmartAdmin/js/plugin/sparkline/jquery.sparkline.min.js"></script>
+    <script src="~/js/SmartAdmin/js/plugin/jquery-validate/jquery.validate.min.js"></script>
+    <script src="~/js/SmartAdmin/js/plugin/masked-input/jquery.maskedinput.min.js"></script>
+    <script src="~/js/SmartAdmin/js/plugin/select2/select2.min.js"></script>
+    <script src="~/js/SmartAdmin/js/plugin/bootstrap-slider/bootstrap-slider.min.js"></script>
+    <script src="~/js/SmartAdmin/js/plugin/msie-fix/jquery.mb.browser.min.js"></script>
+    <script src="~/js/SmartAdmin/js/plugin/fastclick/fastclick.js"></script>
+    <script src="~/js/SmartAdmin/js/demo.js"></script>
+    <script src="~/js/SmartAdmin/js/app.js"></script>
+    <script src="~/js/SmartAdmin/js/plugin/flot/jquery.flot.cust.js"></script>
+    <script src="~/js/SmartAdmin/js/plugin/flot/jquery.flot.resize.js"></script>
+    <script src="~/js/SmartAdmin/js/plugin/flot/jquery.flot.tooltip.js"></script>
+    <script src="~/js/SmartAdmin/js/plugin/vectormap/jquery-jvectormap-1.2.2.min.js"></script>
+    <script src="~/js/SmartAdmin/js/plugin/vectormap/jquery-jvectormap-world-mill-en.js"></script>
+    <script src="~/js/SmartAdmin/js/plugin/fullcalendar/jquery.fullcalendar.min.js"></script>
+  
+    <script>
+        $(document).ready(function () {
+            // $("#allbody").removeClass("hide-menu");
+            pageSetUp();
+            setTab();
+            //if (IsPC() == false) {//是手机，并且是第一次进来
+            //    var beforeurl = document.referrer;
+            //    var url = window.location.href
+            //    if (beforeurl == null || beforeurl == "") {//如果上一页为空
+            //        $('body').toggleClass("hidden-menu");
+            //    } else {
+            //        var beforearr = beforeurl.split('.');
+            //        var arr = url.split('.');
+            //        if()
+            //    }
+
+               
+            //}
+           
+        });
+
+        function IsPC() {
+            var userAgentInfo = navigator.userAgent;
+            var Agents = ["Android", "iPhone",
+                        "SymbianOS", "Windows Phone",
+                        "iPad", "iPod"];
+            var flag = true;
+            for (var v = 0; v < Agents.length; v++) {
+                if (userAgentInfo.indexOf(Agents[v]) > 0) {
+                    flag = false;
+                    break;
+                }
+            }
+            return flag;
+        }
+
+        function ClearSession() {
+            $.ajax({
+                url: "/Home/LogOff/",
+                type: "POST",
+                dataType: "JSON",
+                data: $('#logoutForm').serialize(),
+                success: function (data) {
+                    switch (data.result) {
+                        case 0:
+                            location.replace(location.href);
+                            //location.reload();
+                            break;
+                        default:
+                            alert("未知错误");
+                            break;
+                    }
+                }
+            }).fail(function (xhr, textStatus, err) {
+                alert('Error: ' + err);
+            });
+            return false;
+        }
+    
+        function search() {
+            //把#page=去掉就正常了
+
+            //判断如果不包含#就不改浏览器地址:优化
+            var url = window.location.href;
+            var index = url.indexOf('#', 0);
+            if (index < 0) { //说明没有#号
+
+            } else {
+                History.pushState({ state: 1, rand: Math.random() }, "", "?a=1");
+            }
+            $("#comment-form").submit();
+        }
+    </script>
+    <script type="text/javascript">
+        function setTab() {
+            //http://localhost:24276/Service/CommonProblems/?page=2
+            var url = location.href.toLocaleLowerCase();
+            url = url.split('?')[0];
+            url = url.split('#')[0];
+            var c = url[url.length - 1];
+            if (c == '/') {
+                url = url.substring(0, url.length - 1);
+            }
+
+            $("#nav > li > a").each(function (e) {
+                if (url == this.href.toLocaleLowerCase()) {
+                    $(this).parent().addClass("active")
+                }
+            })
+            $("#nav > .submenu a").each(function (e) {
+                if (url == this.href.toLocaleLowerCase()) {
+                    $(this).parent().addClass("active")
+                    $(this).parent().parent().attr("style", "display: block;")
+                    $(this).parent().parent().parent().addClass('open')
+                }
+            })
+
+            $("#nav1 > li > ul > li a").each(function (e) {
+                if (url == this.href.toLocaleLowerCase()) {
+                    $(this).parent().addClass("active")
+                    $(this).parent().addClass("yy")
+                }
+            })
+            $("#nav1 > .submenu > ul > li a").each(function (e) {
+                if (url == this.href.toLocaleLowerCase()) {
+                    $(this).parent().addClass("active")
+                    $(this).parent().addClass("xx")
+                    $(this).parent().parent().attr("style", "display: block;")
+                    $(this).parent().parent().parent().addClass('open')
+
+
+                    $(this).parent().parent().parent().parent().attr("style", "display: block;")
+                    $(this).parent().parent().parent().parent().parent().addClass('open')
+                }
+            })
+
+
+            $("#nav2 > li > ul > li a").each(function (e) {
+                if (url == this.href.toLocaleLowerCase()) {
+                    $(this).parent().addClass("active")
+                    $(this).parent().addClass("aa")
+                }
+            })
+            $("#nav2 > .submenu > ul > li a").each(function (e) {
+                if (url == this.href.toLocaleLowerCase()) {
+                    $(this).parent().addClass("active")
+                    $(this).parent().addClass("bb")
+                    $(this).parent().parent().attr("style", "display: block;")
+                    $(this).parent().parent().parent().addClass('open')
+
+
+                    $(this).parent().parent().parent().parent().attr("style", "display: block;")
+                    $(this).parent().parent().parent().parent().parent().addClass('open')
+
+
+                    $(this).parent().parent().parent().parent().parent().parent().attr("style", "display: block;")
+                    $(this).parent().parent().parent().parent().parent().parent().parent().addClass('open')
+
+                }
+            })
+
+            //$("#nav3 > li a").each(function (e) {
+            //    if (url == this.href.toLocaleLowerCase()) {
+            //        $(this).parent().addClass("open");
+
+            //        $(this).find("b").each(function () {
+            //            alert($(this));
+            //        })
+
+            //        $(this).find("b").find("em").each(function (e) {
+            //            alert($(this).attr("class"));
+            //            if ($(this).attr("class") == "fa fa-collapse-o") {
+            //                $(this).attr("class", "fa fa-expand-o")
+            //            } else {
+            //                $(this).attr("class", "fa fa-collapse-o")
+            //            }
+            //        })
+            //        $(this).parent().find("ul").each(function (e) {
+            //            if ($(this).css("display") == "none") {
+            //                $(this).css("display", "block");
+            //            } else {
+            //                $(this).css("display", "none");
+            //            }
+
+            //        })
+
+            //    }
+            //})
+            //$("#nav3 > .submenu > ul > li a").each(function (e) {
+            //    if (url == this.href.toLocaleLowerCase()) {
+            //        $(this).parent().addClass("active")
+            //        $(this).parent().parent().attr("style", "display: block;")
+            //        $(this).parent().parent().parent().addClass('open')
+
+
+            //        $(this).parent().parent().parent().parent().attr("style", "display: block;")
+            //        $(this).parent().parent().parent().parent().parent().addClass('open')
+
+
+            //        $(this).parent().parent().parent().parent().parent().parent().attr("style", "display: block;")
+            //        $(this).parent().parent().parent().parent().parent().parent().parent().addClass('open')
+
+            //    }
+            //})
+
+        }
+
+        $(function () {
+            $(".partClass").click(function () {
+
+                $("li[class=active]").each(function () {
+                    $(this).attr("class", "");
+                })
+                $(this).parent().addClass("active");
+                var url = $(this).attr("mark");
+                if (url == "") {
+                    $("#main").empty();
+                    return false;
+                }
+                $.ajax({
+                    url: url,
+                    type: "POST",
+                    dataType: "html",
+                    data: { "leftMenuMark": "leftMenu" },
+                    success: function (data) {
+                        $("#main").empty();
+                        var stateObject = {};
+                        var title = "";
+                        var newUrl = url;
+                        history.pushState(stateObject, title, newUrl);
+                        $("#main").append(data);
+                        return false;
+                    }
+                }).fail(function (xhr, textStatus, err) {
+                    alert('Error: ' + err);
+                    return false;
+                });
+                return false;
+                //$(this).find("b").find("em").each(function (e) {
+
+                //    if ($(this).attr("class") == "fa fa-collapse-o") {
+                //        $(this).attr("class", "fa fa-expand-o")
+                //    } else {
+                //        $(this).attr("class", "fa fa-collapse-o")
+                //    }
+                //})
+                //$(this).parent().find("ul").each(function (e) {
+                //    alert($(this).html());
+
+                //})
+            });
+
+
+            //hidden-menu
+
+            //$("#allbody").removeClass("hidden-menu");
+
+        })
+    </script>
+    @RenderSection("scripts", required: false)
+</body>
+</html>
+
+
+
+
+
+

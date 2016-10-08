@@ -1,0 +1,116 @@
+﻿
+@using GL.Data.Model
+@model UserIpInfo
+@{
+    ViewBag.Title = "充值列表";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    ViewBag.Format = "yyyy-MM-dd";
+
+
+}
+
+
+
+
+
+<div id="content">
+    <form id="comment-form" class="smart-form" novalidate="novalidate">
+        <div class="row">
+            <div class="widget-body">
+
+            
+                <section class="col col-1">
+                    <label class="label">IP</label>
+                    <label class="input">
+                        @Html.TextBoxFor(m => m.OrderIP, new { @class = "span2", style = "border-radius:4px" })
+                    </label>
+                </section>
+              
+
+                <section class="col col-1">
+                    <label class="label"> 类型</label>
+                    <label class="select">
+                        @Html.DropDownListFor(m => m.ChargeType, new List<SelectListItem>
+                {
+                    new SelectListItem { Text= "所有", Value = "-1" },
+                     new SelectListItem { Text= "腾讯", Value = "1" },
+                      new SelectListItem { Text= "AppStore", Value = "2" },
+                       new SelectListItem { Text= "易宝", Value = "3" },
+                        new SelectListItem { Text= "微信", Value = "4" },
+                         new SelectListItem { Text= "支付宝", Value = "5" },
+                          new SelectListItem { Text= "百度", Value = "6" },
+                           new SelectListItem { Text= "XY助手", Value = "7" },
+                            new SelectListItem { Text= "联通", Value = "8" },
+                             new SelectListItem { Text= "应用宝", Value = "9" },
+                              new SelectListItem { Text= "海马玩", Value = "10" },
+                               new SelectListItem { Text= "移动", Value = "11" },
+                                new SelectListItem { Text= "卓悠", Value = "12" },
+                                 new SelectListItem { Text= "应用汇", Value = "13" },
+                                  new SelectListItem { Text= "魅族", Value = "14" }
+                                 
+
+
+                })<i></i>
+                    </label>
+                </section>
+
+                <section class="col col-1">
+                    <label class="label">&nbsp;</label>
+                    @*<button type="submit" class="btn btn-success btn-sm">查询</button>*@
+                    <input type="button" onclick="search()" class="btn btn-success btn-sm" value="查询" />
+                </section>
+
+            </div>
+        </div>
+    </form>
+
+    <div class="row-fluid">
+        <div class="widget-box" id="box">
+            @Html.Partial("CallBackIP_PageList", Model.Data)
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+@section scripts{
+    @{Html.RegisterMvcPagerScriptResource();}
+
+
+    <script type="text/javascript">
+
+
+        function SafeIP( ip,type,option) {
+            $.ajax({
+                url: "/Recharge/SetSafeIP/",
+                type: "Post",
+                dataType: "JSON",
+                data: { "ip": ip, "type": type, "option": option },
+                success: function (data) {
+                    switch (data.result) {
+                        case 0:
+                            alert("操作成功");
+                            location.reload();
+                            break;
+                       
+                        default:
+                            alert('操作失败');
+                            break;
+                    }
+                }
+            }).fail(function (xhr, textStatus, err) {
+                alert('Error: ' + err);
+            });
+        }
+
+    </script>
+}
+

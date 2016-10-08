@@ -1,0 +1,194 @@
+﻿@using GL.Data.Model
+
+@model ClubInit
+@{
+    ViewBag.Title = "LeftMenu";
+    Layout = null;
+}
+
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>515</title>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font: 14px/1.6 Tahoma,"微软雅黑","宋体";
+            margin: 0 auto;
+            color: #6d6d6d;
+            text-align: center;
+        }
+
+        BODY {
+            SCROLLBAR-FACE-COLOR: #e8e7e7;
+            SCROLLBAR-HIGHLIGHT-COLOR: #ffffff;
+            SCROLLBAR-SHADOW-COLOR: #ffffff;
+            SCROLLBAR-3DLIGHT-COLOR: #cccccc;
+            SCROLLBAR-ARROW-COLOR: #03B7EC;
+            SCROLLBAR-TRACK-COLOR: #EFEFEF;
+            SCROLLBAR-DARKSHADOW-COLOR: #b2b2b2;
+            SCROLLBAR-BASE-COLOR: #000000;
+        }
+
+        ol, ul {
+            list-style: none;
+        }
+
+        ul, li, a, h1, h2, h3, h4, h5, p, s {
+            list-style-type: none;
+            text-decoration: none;
+            font-weight: normal;
+        }
+    
+        .ctr {
+            width: 950px;
+            margin: 0px auto;
+            text-align: left;
+        }
+
+        .act_box .ctr {
+            width: 930px;
+            height: 880px;
+            border-radius: 7px;
+            box-shadow: 0 2px 2px rgba(0,0,0,0.1);
+            background: url("../../Lib/template/images/layer_leftbg.png") repeat-y #ffffff;
+        }
+
+        .act_box .lfp {
+            float: left;
+            width: 211px;
+        }
+
+            .act_box .lfp .actnav li {
+                height: 60px;
+                line-height: 60px;
+                cursor: pointer;
+                border-radius: 7px 0px 0px 0px;
+                border-bottom: 1px solid #e3e3e3;
+            }
+
+        .actnav span {
+            margin-top: -30px;
+        }
+
+        .act_box .lfp .actnav li.selected {
+            background: #ffffff;
+        }
+
+        .act_box .lfp .actnav img {
+            width: 50px;
+            height: 50px;
+            margin: 5px 5px -20px 5px;
+        }
+
+        .act_box .lfp .concat {
+            height: 200px;
+            color: #999;
+            line-height: 20px;
+            font-size: 12px;
+            padding: 10px 10px;
+            margin: 170px 10px auto 10px;
+            border-top: 1px solid #e3e3e3;
+        }
+
+        .layout-content {
+            float: left;
+            width: 719px;
+            min-height: 780px;
+            background: #fff;
+        }
+
+        .wrap-padding {
+            padding: 10px;
+            background: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="act_box" style="position: absolute;top:2px;">
+        <div class="ctr">
+            <div class="lfp">
+                <ul class="actnav">
+                    <li id="head_play14" class="" rel="./Index?uid=@Model.UID&hip=@Model.Ip&hpost=@Model.Port">
+                        <img src="../../Lib/template/images/layer_jlb.png" style="width: 48px; height: 48px;">
+                        <span>俱乐部</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="layout-content">
+                <div class="wrap-padding">
+                    <iframe id="iframepage" name="iframepage" src="" frameborder="0" width="699px" height="860px" style="overflow-x: hidden; overflow-y: auto;"></iframe>
+                </div>
+            </div>
+            <div class="c"></div>
+        </div>
+    </div>
+    <script src="~/Lib/template/js/jquery-1.11.2.min.js"></script>
+   
+    <script type="text/javascript">
+var aid = '0';
+$(document).ready(function () {
+	$('.actnav li').click(function(){
+		var url = $(this).attr('rel');
+		$('.actnav li').removeClass('selected');
+		$(this).addClass('selected');
+		$('#iframepage').attr('src',url);
+	});
+	if ($('#'+aid).length > 0){
+		$('#iframepage').attr('src',$('#'+aid).attr('rel'));
+		$('#'+aid).addClass('selected');
+	}else{
+		$('#iframepage').attr('src',$('.actnav li').eq(0).attr('rel'));
+		$('.actnav li').eq(0).addClass('selected');
+	}
+	$("#iframepage").load(function(){
+		var iframe = document.getElementById("iframepage");
+		iframe.height =  0+'px';
+		try{
+			var bHeight = iframe.contentWindow.document.body.scrollHeight;
+			var dHeight = iframe.contentWindow.document.documentElement.scrollHeight;
+			var height = Math.max(bHeight, dHeight);
+			height = Math.max(height,800);
+
+			var height1 = Math.min(height,1000);
+			iframe.height =  height;
+
+		}catch (ex){
+			iframe.height =  1300;
+			if (typeof(parent.layer) != 'undefined'){
+				var index = parent.layer.getFrameIndex(window.name);
+				parent.layer.iframeAuto(index);
+			}
+		}
+	});
+})
+
+function setTxt(value){
+
+	if (typeof(window.parent.setCopy) == 'Function' || typeof(window.parent.setCopy) == 'function'){
+
+		window.parent.setCopy(value);
+	}
+}
+
+function shareQzone(opt){
+	if (typeof(window.parent.shareStory2) == 'Function' || typeof(window.parent.shareStory2) == 'function'){
+
+		window.parent.shareStory2(opt);
+	}
+
+}
+
+function updateHeight(height){
+	var iframe = document.getElementById("iframepage");
+	iframe.height =  height;
+
+}
+    </script>
+</body>
+</html>

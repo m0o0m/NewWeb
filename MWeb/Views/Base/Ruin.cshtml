@@ -1,0 +1,113 @@
+﻿@using GL.Data.Model
+@model BaseDataView
+@{
+    ViewBag.Title = "破产统计";
+    ViewBag.Format = "yyyy-MM-dd";
+
+    List<Ruin> bdl = (List<Ruin>)Model.BaseDataList;
+
+}
+<div id="content">
+
+    <form id="comment-form" class="smart-form" novalidate="novalidate">
+        <div class="row">
+            <section class="col col-12" style="width:210px">
+                <label class="select">
+                    @Html.GetAllAgentGroupList("Channels", Model.Channels)
+                    <i></i>
+                </label>
+            </section>
+
+            <section class="col col-1.2">
+                <label class="input">
+                    <i class="icon-append fa fa-calendar"></i>
+                    @Html.TextBoxFor(m => m.StartDate, new Dictionary<string, object>() {
+                           { "class", "form-control datepicker" },
+                           { "data-dateformat", "yy-mm-dd 00:00:00" }
+                       })
+                </label>
+            </section>
+            <section class="col col-1.2">
+                <label class="input">
+                    <i class="icon-append fa fa-calendar"></i>
+                    @Html.TextBoxFor(m => m.ExpirationDate, new Dictionary<string, object>() {
+                           { "class", "form-control datepicker" },
+                           { "data-dateformat", "yy-mm-dd 00:00:00" }
+                       })
+                </label>
+            </section>
+            <section class="col col-1">
+                <button type="submit" class="btn btn-success btn-sm">查询</button>
+            </section>
+
+        </div>
+    </form>
+
+    <section id="widget-grid" class="">
+        <div class="row">
+            <article class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
+                <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-0" data-widget-editbutton="false" data-widget-colorbutton="false"
+                     data-widget-togglebutton="false"
+                     data-widget-deletebutton="false"
+                     data-widget-fullscreenbutton="false"
+                     data-widget-custombutton="false"
+                     data-widget-collapsed="false"
+                     data-widget-sortable="false">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                        <h2>破产数据统计</h2>
+                    </header>
+                    <!-- widget div-->
+                    <div>
+                        <!-- widget edit box -->
+                        <div class="jarviswidget-editbox">
+                            <!-- This area used as dropdown edit box -->
+                        </div>
+                        <!-- end widget edit box -->
+                        <!-- widget content -->
+                        <div class="widget-body no-padding" style="min-height: 70px;">
+                            <div class="table-responsive">
+                                <table class="table table-bordered">
+                                    <thead>
+                                        @*<tr><th colspan="2">活跃用户数</th></tr>*@
+                                        <tr>
+                                            <th>日期</th>
+                                            <th>破产领取总人数</th>
+                                            <th>破产领取总人次</th>
+                                            <th>破产领取总总额</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @if (bdl.Count == 0)
+                                        {
+                                            <tr>
+                                                <td class="colspan" align="center" colspan="0">
+                                                    没有找到相关记录！
+                                                </td>
+                                            </tr>
+                                        }
+                                        @for (int k = 0; k < bdl.Count(); k++)
+                                        {
+                                            Ruin item = bdl[k];
+                                            <tr>
+                                                <td>@item.CountDate.ToString(ViewBag.Format)</td>
+                                                <td>@item.RuinUsers</td>
+                                                <td>@item.RuinCount</td>
+                                                <td>@item.RuinSum</td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <!-- end widget content -->
+                    </div>
+                    <!-- end widget div -->
+                </div>
+                <!-- end widget -->
+
+            </article>
+        </div>
+    </section>
+</div>
+

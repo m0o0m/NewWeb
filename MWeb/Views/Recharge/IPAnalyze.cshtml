@@ -1,0 +1,142 @@
+﻿
+@using GL.Data.Model
+@model UserIpInfo
+@{
+    ViewBag.Title = "充值列表";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    ViewBag.Format = "yyyy-MM-dd";
+
+
+}
+
+
+
+
+
+<div id="content">
+    <form id="comment-form" class="smart-form" novalidate="novalidate">
+        <div class="row">
+            <div class="widget-body">
+
+                <section class="col col-1">
+                    <label class="label">会员ID</label>
+                    <label class="input">
+                        @Html.TextBoxFor(m => m.UserID, new { @class = "span2", style = "border-radius:4px" })
+                    </label>
+                </section>
+                <section class="col col-1">
+                    <label class="label">订单号</label>
+                    <label class="input">
+                        @Html.TextBoxFor(m => m.OrderID, new { @class = "span2", style = "border-radius:4px" })
+                    </label>
+                </section>
+                <section class="col col-1">
+                    <label class="label">IP</label>
+                    <label class="input">
+                        @Html.TextBoxFor(m => m.OrderIP, new { @class = "span2", style = "border-radius:4px" })
+                    </label>
+                </section>
+                <section class="col col-1.2">
+                    <label class="label">起始日期</label>
+                    <label class="input">
+                        <i class="icon-append fa fa-calendar"></i>
+                        @Html.TextBoxFor(m => m.StartTime, new Dictionary<string, object>() { { "class", "form-control datepicker" }, { "data-dateformat", "yy-mm-dd 00:00:00" } })
+                    </label>
+                </section>
+                <section class="col col-1.2">
+                    <label class="label"> 截止日期</label>
+                    <label class="input">
+                        <i class="icon-append fa fa-calendar"></i>
+                        @Html.TextBoxFor(m => m.EndTime, new Dictionary<string, object>() {
+                           { "class", "form-control datepicker" },
+                           { "data-dateformat", "yy-mm-dd 00:00:00" }
+                       })
+                    </label>
+                </section>
+
+                <section class="col col-1">
+                    <label class="label"> 接口</label>
+                    <label class="select">
+                        @Html.DropDownListFor(m => m.ChargeType, new List<SelectListItem>
+                {
+                    new SelectListItem { Text= "所有", Value = "-1" },
+                     new SelectListItem { Text= "腾讯", Value = "1" },
+                      new SelectListItem { Text= "AppStore", Value = "2" },
+                       new SelectListItem { Text= "易宝", Value = "3" },
+                        new SelectListItem { Text= "微信", Value = "4" },
+                         new SelectListItem { Text= "支付宝", Value = "5" },
+                          new SelectListItem { Text= "百度", Value = "6" },
+                           new SelectListItem { Text= "XY助手", Value = "7" },
+                            new SelectListItem { Text= "联通", Value = "8" },
+                             new SelectListItem { Text= "应用宝", Value = "9" },
+                              new SelectListItem { Text= "海马玩", Value = "10" },
+                               new SelectListItem { Text= "移动", Value = "11" },
+                                new SelectListItem { Text= "卓悠", Value = "12" },
+                                 new SelectListItem { Text= "应用汇", Value = "13" },
+                                  new SelectListItem { Text= "魅族", Value = "14" }
+
+
+
+                })<i></i>
+                    </label>
+                </section>
+
+                <section class="col col-1">
+                    <label class="label">&nbsp;</label>
+                    @*<button type="submit" class="btn btn-success btn-sm">查询</button>*@
+                    <input type="button" onclick="search()" class="btn btn-success btn-sm" value="查询" />
+                </section>
+
+            </div>
+        </div>
+    </form>
+
+    <div class="row-fluid">
+        <div class="widget-box" id="box">
+            @Html.Partial("IPAnalyze_PageList", Model.Data)
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+@section scripts{
+    @{Html.RegisterMvcPagerScriptResource();}
+
+
+    <script type="text/javascript">
+
+        // resets the menu selection upon entry to this page:
+        function resetMenu() {
+            document.gomenu.selector.selectedIndex = 2;
+        }
+
+
+        function ConfirmDelUser() {
+            return confirm("你确认要执行此操作吗？");
+        }
+
+        function errFunc(res) {
+            alert(res["responseText"]);
+        }
+        function successPageFun() {
+
+        }
+
+        $(document).ready(function () {
+
+
+        });
+
+
+    </script>
+}
+

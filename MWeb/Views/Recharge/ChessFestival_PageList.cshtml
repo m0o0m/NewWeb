@@ -1,0 +1,358 @@
+﻿@using Webdiyer.WebControls.Mvc;
+@using GL.Data.Model;
+@model FestivalBaseData 
+@{ 
+    List<object> objList = Model.objects;
+
+    List<Festival515> obj1 = (List<Festival515>)objList[0];
+    AllFesLogin obj2 = (AllFesLogin)objList[1];
+    FestivalVIP obj3 = (FestivalVIP)objList[2];
+}
+
+
+
+
+
+<section id="widget-grid" class="">
+    <div class="row">
+        <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="jarviswidget jarviswidget-color-blueDark" id="wi222d-id-212" data-widget-editbutton="false" data-widget-colorbutton="false"
+                 data-widget-togglebutton="false"
+                 data-widget-deletebutton="false"
+                 data-widget-fullscreenbutton="false"
+                 data-widget-custombutton="false"
+                 data-widget-collapsed="false"
+                 data-widget-sortable="false">
+                <header>
+                    <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                    <h2 id="tit">活动曝光率</h2>
+                </header>
+                <!-- widget div-->
+                <div>
+                    <!-- widget edit box -->
+                    <div class="jarviswidget-editbox">
+                        <!-- This area used as dropdown edit box -->
+                    </div>
+                    <!-- end widget edit box -->
+                    <!-- widget content -->
+                    <div class="widget-body no-padding">
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <thead>
+
+                                    <tr>
+                                        <th>日期</th>
+                                        <th>DAU</th>
+                                        <th>Icon点击人数</th>
+                                        <th>Icon点击人次</th>
+                                        <th>大厅icon点击人数</th>
+                                        <th>大厅icon点击人次</th>
+                                        <th>房间icon点击人数</th>
+                                        <th>房间icon点击人次</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (obj1.Count == 0)
+            {
+                                        <tr class="gradeX">
+                                            <td class="colspan" align="center" colspan="0">
+                                                没有找到相关记录！
+                                            </td>
+                                        </tr>
+                                    }
+                                    @foreach (Festival515 m in obj1)
+                                   {
+                                        <tr class="gradeA">
+                                            <td>@m.DateTime</td>
+                                            <td>@m.DAU</td>
+                                            <td>@m.IconPCount</td>
+                                            <td>@m.IconPNum</td>
+                                            <td>@m.DIconPCount</td>
+                                            <td>@m.DIconPNum</td>
+                                            <td>@m.FIconPCount</td>
+                                            <td>@m.FIconPNum</td>
+                                        </tr>
+
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- end widget content -->
+                </div>
+                <!-- end widget div -->
+            </div>
+            <!-- end widget -->
+
+        </article>
+    </div>
+</section>
+
+
+
+<section id="widget-grid" class="">
+    <div class="row">
+        <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="jarviswidget jarviswidget-color-blueDark" id="w21fid-id-0" data-widget-editbutton="false" data-widget-colorbutton="false"
+                 data-widget-togglebutton="false"
+                 data-widget-deletebutton="false"
+                 data-widget-fullscreenbutton="false"
+                 data-widget-custombutton="false"
+                 data-widget-collapsed="false"
+                 data-widget-sortable="false">
+                <header>
+                    <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                    <h2 id="tit">连续登录奖励领取</h2>
+                </header>
+                <!-- widget div-->
+                <div>
+                    <!-- widget edit box -->
+                    <div class="jarviswidget-editbox">
+                        <!-- This area used as dropdown edit box -->
+                    </div>
+                    <!-- end widget edit box -->
+                    <!-- widget content -->
+                    <div class="widget-body no-padding">
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                              <thead>
+                                  <tr align="center">
+                                      <th colspan="5" align="center">连续1天登录</th>
+                                  </tr>
+                                  <tr>
+                                      <th >日期</th>
+                                      <th >DAU</th>
+                                      <th >登录1天人数</th>
+                                      <th >玩牌一局人数</th>
+                                      <th >领奖人数</th>
+                                  </tr>
+                              </thead>
+                                <tbody>
+                                    @if (obj2.thirdDay == null)
+                                    {
+                                        <tr class="gradeX">
+                                            <td class="colspan" align="center" colspan="0">
+                                                没有找到相关记录！
+                                            </td>
+                                        </tr>
+                                    }
+                                    else if (obj2.thirdDay.Count() == 0)
+                                    {
+                                        <tr class="gradeX">
+                                            <td class="colspan" align="center" colspan="0">
+                                                没有找到相关记录！
+                                            </td>
+                                        </tr>
+                                    }
+                                    else
+                                    {
+
+                                        foreach (FestivalLogin m in obj2.thirdDay)
+                                        {
+                                            <tr class="gradeA">
+                                                <td>@m.LoginTime</td>
+                                                <td>@m.DAU</td>
+                                                <td>@m.UserCount</td>
+                                                <td>@m.UserPlay</td>
+                                                <td>@m.UserArawd</td>
+                                            </tr>
+                                        }
+                                    }
+                                   
+                               
+                                 
+                                </tbody>
+
+                                <thead>
+                                    <tr align="center">
+                                        <th colspan="5" align="center">连续2天登录</th>
+                                    </tr>
+                                    <tr>
+                                        <th>日期</th>
+                                        <th>DAU</th>
+                                        <th>登录2天人数</th>
+                                        <th>玩牌一局人数</th>
+                                        <th>领奖人数</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (obj2.SecDay == null)
+                                    {
+                                        <tr class="gradeX">
+                                            <td class="colspan" align="center" colspan="0">
+                                                没有找到相关记录！
+                                            </td>
+                                        </tr>
+                                    }
+                                    else if (obj2.SecDay.Count() == 0)
+                                    {
+                                        <tr class="gradeX">
+                                            <td class="colspan" align="center" colspan="0">
+                                                没有找到相关记录！
+                                            </td>
+                                        </tr>
+                                    }
+                                    else
+                                    {
+
+                                        foreach (FestivalLogin m in obj2.SecDay)
+                                        {
+                                        <tr class="gradeA">
+                                            <td>@m.LoginTime</td>
+                                            <td>@m.DAU</td>
+                                            <td>@m.UserCount</td>
+                                            <td>@m.UserPlay</td>
+                                            <td>@m.UserArawd</td>
+                                        </tr>
+                                        }
+                                    }
+
+
+                                <thead>
+                                    <tr align="center">
+                                        <th colspan="5" align="center">连续3天登录</th>
+                                    </tr>
+                                    <tr>
+                                        <th>日期</th>
+                                        <th>DAU</th>
+                                        <th>登录3天人数</th>
+                                        <th>玩牌一局人数</th>
+                                        <th>领奖人数</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (obj2.OneDay == null)
+                                    {
+                                        <tr class="gradeX">
+                                            <td class="colspan" align="center" colspan="0">
+                                                没有找到相关记录！
+                                            </td>
+                                        </tr>
+                                    }
+                                    else if (obj2.OneDay.Count() == 0)
+                                    {
+                                        <tr class="gradeX">
+                                            <td class="colspan" align="center" colspan="0">
+                                                没有找到相关记录！
+                                            </td>
+                                        </tr>
+                                    }
+                                    else
+                                    {
+
+                                        foreach (FestivalLogin m in obj2.OneDay)
+                                        {
+                                        <tr class="gradeA">
+                                            <td>@m.LoginTime</td>
+                                            <td>@m.DAU</td>
+                                            <td>@m.UserCount</td>
+                                            <td>@m.UserPlay</td>
+                                            <td>@m.UserArawd</td>
+                                        </tr>
+                                        }
+                                    }
+                                </tbody>
+
+                            </table>
+                        </div>
+                    </div>
+                    <!-- end widget content -->
+                </div>
+                <!-- end widget div -->
+            </div>
+            <!-- end widget -->
+
+        </article>
+    </div>
+</section>
+
+
+
+<section id="widget-grid" class="">
+    <div class="row">
+        <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="jarviswidget jarviswidget-color-blueDark" id="w23423id-id-0" data-widget-editbutton="false" data-widget-colorbutton="false"
+                 data-widget-togglebutton="false"
+                 data-widget-deletebutton="false"
+                 data-widget-fullscreenbutton="false"
+                 data-widget-custombutton="false"
+                 data-widget-collapsed="false"
+                 data-widget-sortable="false">
+                <header>
+                    <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                    <h2 id="tit">VIP奖励领取</h2>
+                </header>
+                <!-- widget div-->
+                <div>
+                    <!-- widget edit box -->
+                    <div class="jarviswidget-editbox">
+                        <!-- This area used as dropdown edit box -->
+                    </div>
+                    <!-- end widget edit box -->
+                    <!-- widget content -->
+                    <div class="widget-body no-padding">
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+
+                                <tbody>
+                                    @if (obj3== null)
+                                    {
+                                        <tr class="gradeX">
+                                            <td class="colspan" align="center" colspan="0">
+                                                没有找到相关记录！
+                                            </td>
+                                        </tr>
+                                    }
+                                    else {
+
+<tr class="gradeA">
+    <td>日期</td>
+    <td>DAU</td>
+    <td>vip1</td>
+    <td>@obj3.Vip1</td>
+    <td>vip2</td>
+    <td>@obj3.Vip2</td>
+</tr>
+<tr class="gradeA">
+    <td rowspan="4">@obj3.CreateTime</td>
+    <td  rowspan="4">@obj3.DAU</td>
+    <td>vip3</td>
+    <td>@obj3.Vip3</td>
+    <td>vip4</td>
+    <td>@obj3.Vip4</td>
+</tr>
+<tr class="gradeA">
+    <td>vip5</td>
+    <td>@obj3.Vip5</td>
+    <td>vip6</td>
+    <td>@obj3.Vip6</td>
+</tr>
+<tr class="gradeA">
+    <td>vip7</td>
+    <td>@obj3.Vip7</td>
+    <td>vip8</td>
+    <td>@obj3.Vip8</td>
+</tr>
+<tr class="gradeA">
+    <td>vip9</td>
+    <td>@obj3.Vip9</td>
+    <td>vip10</td>
+    <td>@obj3.Vip10</td>
+</tr>
+                                    }
+
+                                  
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- end widget content -->
+                </div>
+                <!-- end widget div -->
+            </div>
+            <!-- end widget -->
+
+        </article>
+    </div>
+</section>
+

@@ -1,0 +1,344 @@
+﻿@using GL.Data.Model;
+@using Webdiyer.WebControls.Mvc;
+@using GL.Data.Model;
+@using GL.Data.View;
+@model ValueView
+@{
+    ViewBag.Title = "会员登录查询";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+<div id="content">
+    <form id="comment-form" class="smart-form" novalidate="novalidate" method="get">
+        <div class="row">
+            <div class="widget-body">
+                <section class="col col-1">
+                    <label class="label">&nbsp;</label>
+                    <label class="select">
+                        @Html.DropDownList("type", new List<SelectListItem> {
+                    new SelectListItem{ Text = "会员ID", Value = "0", Selected = object.Equals(ViewData["seachtype"], 0) },
+                      new SelectListItem{ Text = "会员昵称", Value = "13", Selected = object.Equals(ViewData["seachtype"], 13) },
+                    new SelectListItem{ Text = "会员账号", Value = "14", Selected = object.Equals(ViewData["seachtype"], 14) },
+                    new SelectListItem{ Text = "IP", Value = "9", Selected = object.Equals(ViewData["seachtype"], 9) },
+                    new SelectListItem{ Text = "IMEI", Value = "12", Selected = object.Equals(ViewData["seachtype"], 12) },
+                    new SelectListItem{ Text = "同IP登陆玩家", Value = "15", Selected = object.Equals(ViewData["seachtype"], 15) },
+                })<i></i>
+                    </label>
+
+                </section>
+                <section class="col col-1">
+                    <label class="label">&nbsp;</label>
+                    <label class="input">
+                        @Html.TextBoxFor(m => m.Value, new { @class = "span2", style = "border-radius:4px" })
+                    </label>
+                </section>
+                <section class="col col-2">
+                    <label class="label">起始日期</label>
+                    <label class="input">
+                        <i class="icon-append fa fa-calendar"></i>
+                        @Html.TextBoxFor(m => m.StartDate, new Dictionary<string, object>() {
+                           { "class", "form-control datepicker" },
+                           { "data-dateformat", "yy-mm-dd 00:00:00" }
+                       })
+                    </label>
+                </section>
+                <section class="col col-2">
+                    <label class="label">截止日期</label>
+                    <label class="input">
+                        <i class="icon-append fa fa-calendar"></i>
+                        @Html.TextBoxFor(m => m.ExpirationDate, new Dictionary<string, object>() {
+                           { "class", "form-control datepicker" },
+                           { "data-dateformat", "yy-mm-dd 00:00:00" }
+                       })
+                    </label>
+                </section>
+                <section class="col col-0">
+                    <label class="label">&nbsp;</label>
+                    @*<button type="submit" class="btn btn-success btn-sm">查询</button>*@
+                    <input type="button" onclick="search()" class="btn btn-success btn-sm" value="查询" />
+                </section>
+
+                </div>
+            </div>
+        </form>
+
+    @Html.Partial("LoginList_PageList", Model.DataList)
+    @*@Html.Partial("LoginRepeat", Model.Data)*@
+
+    <div id="dialog" title="封号" style="display:none">
+        <form style="width:95%" id="comment-form" class="smart-form" novalidate="novalidate" method="get">
+            <input type="hidden" value="" id="hidUID" />
+            <section>
+                <label class="label"><font size="4">被封账号</font>:<span id="spanFreeze"></span></label>
+            </section>
+
+            <section>
+                <label class="label">
+                    <font size="4">
+                        封号时长:
+                    </font>
+                    @Html.DropDownList("TimeSelect", new List<SelectListItem>
+                    {
+                        new SelectListItem { Text= "永久", Value = "5256000" },//5256000
+                        new SelectListItem { Text= "30分钟", Value ="30" },
+                        new SelectListItem { Text= "1小时", Value ="60" },
+                        new SelectListItem { Text= "3小时", Value = "180" },
+                        new SelectListItem { Text= "6小时", Value = "360" },
+                        new SelectListItem { Text= "12小时", Value = "720" },
+                        new SelectListItem { Text= "1天", Value = "1440" },
+                        new SelectListItem { Text= "2天", Value = "2880" },
+                        new SelectListItem { Text= "3天", Value = "4320" },
+                        new SelectListItem { Text= "7天", Value = "10080" }
+                    }, new { @class = "time" })
+                </label>
+            </section>
+
+            <section>
+                <label class="label"><font size="4">封号原因:</font></label>
+                <div class="inline-group">
+                    <label class="radio">
+                        <input type="radio" name="result" value="2" checked="checked">
+                        <i></i>刷游戏币
+                    </label>
+                    <label class="radio">
+                        <input type="radio" name="result" value="1" id="radefault">
+                        <i></i>注册账号已超过3个
+                    </label>
+                    <label class="radio">
+                        <input type="radio" name="result" value="5" id="radefault">
+                        <i></i>发布恶意虚假信息
+                    </label>
+                    <label class="radio">
+                        <input type="radio" name="result" value="6" id="radefault">
+                        <i></i>恶意攻击官方
+                    </label>
+                </div>
+            </section>
+            <section style="padding-left:200px">
+                <div class="row">
+                    <section class="col col-lg-12">
+                        <button type="button" class="btn btn-success btn-sm" onclick="FreezeNum()">确定</button>
+                        <button type="button" class="btn btn-success btn-sm" onclick="closeFreez()">取消</button>
+                    </section>
+                </div>
+            </section>
+        </form>
+    </div>
+
+    </div>
+
+
+
+    @section scripts{
+        @{Html.RegisterMvcPagerScriptResource();}
+
+        <script type="text/javascript">
+
+
+                        $(document).ready(function () {
+
+                        });
+
+                        function closeFreez() {
+
+                            dialog.dialog("close");
+                            $("#hidUID").val("");
+
+                        }
+
+                        function FreezeNum() {
+                            var _UserID = $("#hidUID").val();//id
+                            var _min = $(".time").find("option:selected").val();//时间长短
+                            var _Reason = $("input[name=result]:checked").val();//原因
+                           // return false;
+                            $.ajax({
+                                url: "/Member/FMPut/",
+                                type: "post",
+                                dataType: "json",
+                                data: { "dwUserID": _UserID, "strAccount": "true", "Reason": _Reason, "Minu": _min },
+                                success: function (data) {
+
+                                    if (data == 2020) {
+                                        window.location.reload();
+                                        return false;
+                                    }
+
+                                    switch (data.result) {
+                                        case 0:
+                                            alert('已将玩家【' + $("#spanFreeze").html() + '】的账号封号');
+                                            closeFreez();
+                                            location.reload();
+                                            break;
+                                        case 1:
+                                            alert("封号失败，请稍后再试");
+                                            break;
+                                        case 2:
+                                            alert("服务器未启动，请稍后再试");
+                                            break;
+                                        default:
+                                            alert('未知错误');
+                                            break;
+                                    }
+                                }
+                            }).fail(function (xhr, textStatus, err) {
+                                alert('服务器繁忙，请稍候再试');
+                            });
+                        }
+
+                        function btnFreeze(id, acc) {
+                            //弹出一个选择原因的框，来选封的原因
+                            $("#spanFreeze").html(acc);//账号
+                            $("#hidUID").val(id);//账号id
+                            dialog = $("#dialog").dialog({
+                                width: 620,
+                                modal: true
+                            });
+                            return false;
+
+                            if (confirm('确定将玩家【' + acc + '】的账号封号？')) {
+                                var _UserID = id;
+                                $.ajax({
+                                    url: "/api/FM/",
+                                    type: "Put",
+                                    dataType: "JSON",
+                                    data: { "dwUserID": id, "strAccount": "true" },
+                                    success: function (data) {
+
+                                        if (data == 2020) {
+                                            window.location.reload();
+                                            return false;
+                                        }
+
+                                        switch (data.result) {
+                                            case 0:
+                                                alert('已将玩家【' + acc + '】的账号封号');
+                                                break;
+                                            case 1:
+                                                alert("封号失败，请稍后再试");
+                                                break;
+                                            case 2:
+                                                alert("服务器未启动，请稍后再试");
+                                                break;
+                                            default:
+                                                alert('未知错误');
+                                                break;
+                                        }
+                                    }
+                                }).fail(function (xhr, textStatus, err) {
+                                    alert('服务器繁忙，请稍候再试');
+                                });
+
+                            } else {
+                                return false;
+                            }
+                            return false;
+                        }
+                        function btnIP(id, acc) {
+                            if (confirm('确定将IP【' + acc + '】封禁？')) {
+                                var _UserID = acc;
+                                $.ajax({
+                                    url: "/member/banip/",
+                                    type: "Post",
+                                    dataType: "JSON",
+                                    data: { "strIP": _UserID, "strAccount": "true" },
+                                    success: function (data) {
+                                        switch (data.result) {
+                                            case 0:
+                                                alert('已将IP【' + acc + '】封禁');
+                                                location.reload();
+                                                break;
+                                            case 1:
+                                                alert("封IP失败，请稍后再试");
+                                                break;
+                                            case 2:
+                                                alert("服务器未启动，请稍后再试");
+                                                break;
+                                            default:
+                                                alert('未知错误');
+                                                break;
+                                        }
+                                    }
+                                }).fail(function (xhr, textStatus, err) {
+                                    alert('服务器繁忙，请稍候再试');
+                                });
+
+                            } else {
+                                return false;
+                            }
+                            return false;
+                        }
+                        function btnMac(id, acc) {
+                            if (confirm('确定将IMEI【' + acc + '】封禁？')) {
+                                var _UserID = acc;
+                                $.ajax({
+                                    url: "/member/banMac/",
+                                    type: "Post",
+                                    dataType: "JSON",
+                                    data: { "strIP": _UserID, "strAccount": "true" },
+                                    success: function (data) {
+
+
+                                        switch (data.result) {
+                                            case 0:
+                                                alert('已将IMEI【' + acc + '】封禁');
+                                                location.reload();
+                                                break;
+                                            case 1:
+                                                alert("封IMEI失败，请稍后再试");
+                                                break;
+                                            case 2:
+                                                alert("服务器未启动，请稍后再试");
+                                                break;
+                                            default:
+                                                alert('未知错误');
+                                                break;
+                                        }
+                                    }
+                                }).fail(function (xhr, textStatus, err) {
+                                    alert('服务器繁忙，请稍候再试');
+                                });
+
+                            } else {
+                                return false;
+                            }
+                            return false;
+                        }
+                        function btnReIP(id, acc) {
+                            if (confirm('确定将注册IP【' + acc + '】封禁？')) {
+                                var _UserID = acc;
+                                $.ajax({
+                                    url: "/member/banip/",
+                                    type: "Post",
+                                    dataType: "JSON",
+                                    data: { "strIP": _UserID, "strAccount": "true" },
+                                    success: function (data) {
+                                        switch (data.result) {
+                                            case 0:
+                                                alert('已将注册IP【' + acc + '】封禁');
+                                                location.reload();
+                                                break;
+                                            case 1:
+                                                alert("封注册IP失败，请稍后再试");
+                                                break;
+                                            case 2:
+                                                alert("服务器未启动，请稍后再试");
+                                                break;
+                                            default:
+                                                alert('未知错误');
+                                                break;
+                                        }
+                                    }
+                                }).fail(function (xhr, textStatus, err) {
+                                    alert('服务器繁忙，请稍候再试');
+                                });
+
+                            } else {
+                                return false;
+                            }
+                            return false;
+                        }
+
+    </script>
+
+    }

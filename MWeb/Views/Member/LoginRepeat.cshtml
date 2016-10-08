@@ -1,0 +1,115 @@
+﻿@using Webdiyer.WebControls.Mvc;
+@using GL.Data.Model;
+@model PagedList<LoginRepeat>
+
+
+
+    <div class="row-fluid">
+        <div class="widget-box" id="boxGroup">
+            <section id="widget-grid" class="">
+                <div class="row">
+                    <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-0" data-widget-editbutton="false" data-widget-colorbutton="false"
+                             data-widget-togglebutton="false"
+                             data-widget-deletebutton="false"
+                             data-widget-fullscreenbutton="false"
+                             data-widget-custombutton="false"
+                             data-widget-collapsed="false"
+                             data-widget-sortable="false">
+                            <header>
+                                <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                                <h2>同IP登陆玩家超过3个记录</h2>
+                            </header>
+                            <!-- widget div-->
+                            <div>
+                                <!-- widget edit box -->
+                                <div class="jarviswidget-editbox">
+                                    <!-- This area used as dropdown edit box -->
+                                </div>
+                                <!-- end widget edit box -->
+                                <!-- widget content -->
+                                <div class="widget-body no-padding">
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered">
+                                            <thead>
+
+                                                <tr>
+                                                    <th>日期</th>
+                                                    <th>IP</th>
+                                                    <th>玩家个数</th>
+                                                    <th>玩家ID</th>
+                                                    <th></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @if (Model.Count == 0)
+                                                {
+                                                    <tr class="gradeX">
+                                                        <td class="colspan" align="center" colspan="0">
+                                                            没有找到相关记录！
+                                                        </td>
+                                                    </tr>
+                                                }
+                                                @foreach (LoginRepeat m in Model)
+                                                {
+                                                    <tr class="gradeA">
+                                                        <td>@m.LoginTime</td>
+                                                        <td>@m.IP</td>
+                                                        <td>@m.Account</td>
+                                                        <td style="word-wrap:break-word;word-break:break-all;">@m.UserIDS</td>
+                                                    </tr>
+
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+
+
+                                    <div class="widget-content">
+
+                                        @Ajax.Pager(
+Model,
+new PagerOptions()
+{
+    CssClass = "pager",
+    ShowMorePagerItems = true,
+    PageIndexParameterName = "pageGroup",
+    ShowDisabledPagerItems = true,
+    AlwaysShowFirstLastPageNumber = true,
+    HorizontalAlign = "right",
+    CurrentPagerItemTemplate = "<li class=\"disabled\"><span>{0}</span></li>",
+    DisabledPagerItemTemplate = "<li class=\"disabled\"><span>{0}</span></li>",
+    PagerItemTemplate = "<li>{0}</li>",
+    ShowPrevNext = true,
+    FirstPageText = "第一页",
+    LastPageText = "最后一页",
+    ContainerTagName = "ul",
+    PageIndexBoxId = "pageindexcmGroup",
+    WYWPageIndexString = @"<li><input style='width:50px;' type='text' value='' id='{0}' name = '{1}'></li>
+<li><a id='goto2' name='goto2' style='margin-right:10px' >跳转</a><li>
+",
+    GoToButtonId = "goto2"
+},
+new MvcAjaxOptions
+{
+    HttpMethod = "POST",
+    UpdateTargetId = "boxGroup",
+    InsertionMode = InsertionMode.Replace,
+    OnFailure = "errFunc",
+    OnSuccess = "successPageFun"
+}).Options(o => o.AddRouteValue("target", "boxGroup"))
+                                    </div>
+
+                                </div>
+                                <!-- end widget content -->
+                            </div>
+                            <!-- end widget div -->
+                        </div>
+                        <!-- end widget -->
+
+                    </article>
+                </div>
+            </section>
+        </div>
+    </div>

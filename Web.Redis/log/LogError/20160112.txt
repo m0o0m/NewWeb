@@ -1,0 +1,302 @@
+
+ 
+记录时间：2016-01-12 13:49:30,540  线程ID:[1]  日志级别：ERROR 
+错误描述：TaskAction(定时读取在线人数到缓存):It was not possible to connect to the redis server(s); to create a disconnected multiplexer, disable AbortOnConnectFail. SocketFailure on PING
+
+
+ 
+记录时间：2016-01-12 13:49:40,581  线程ID:[7]  日志级别：ERROR 
+错误描述：TaskAction(定时读取在线人数到缓存):It was not possible to connect to the redis server(s); to create a disconnected multiplexer, disable AbortOnConnectFail. SocketFailure on PING
+
+
+ 
+记录时间：2016-01-12 13:49:50,558  线程ID:[8]  日志级别：ERROR 
+错误描述：TaskAction(定时读取在线人数到缓存):It was not possible to connect to the redis server(s); to create a disconnected multiplexer, disable AbortOnConnectFail. SocketFailure on PING
+
+
+ 
+记录时间：2016-01-12 13:50:00,576  线程ID:[14]  日志级别：ERROR 
+错误描述：TaskAction(定时读取在线人数到缓存):It was not possible to connect to the redis server(s); to create a disconnected multiplexer, disable AbortOnConnectFail. SocketFailure on PING
+
+
+ 
+记录时间：2016-01-12 13:50:10,572  线程ID:[15]  日志级别：ERROR 
+错误描述：TaskAction(定时读取在线人数到缓存):It was not possible to connect to the redis server(s); to create a disconnected multiplexer, disable AbortOnConnectFail. SocketFailure on PING
+
+
+ 
+记录时间：2016-01-12 13:50:16,747  线程ID:[12]  日志级别：ERROR 
+错误描述：OnLinePlay(读取在线玩家):读取的缓存转换为null
+
+ 
+记录时间：2016-01-12 13:50:16,749  线程ID:[12]  日志级别：ERROR 
+错误描述：OnLinePlay(读取在线玩家):读取的缓存转换为长度为0
+
+ 
+记录时间：2016-01-12 13:50:18,706  线程ID:[15]  日志级别：ERROR 
+错误描述：OnLinePlay(读取在线玩家):读取的缓存转换为null
+
+ 
+记录时间：2016-01-12 13:50:18,708  线程ID:[15]  日志级别：ERROR 
+错误描述：OnLinePlay(读取在线玩家):读取的缓存转换为长度为0
+
+ 
+记录时间：2016-01-12 13:50:19,539  线程ID:[12]  日志级别：ERROR 
+错误描述：OnLinePlay(读取在线玩家):读取的缓存转换为null
+
+ 
+记录时间：2016-01-12 13:50:19,540  线程ID:[12]  日志级别：ERROR 
+错误描述：OnLinePlay(读取在线玩家):读取的缓存转换为长度为0
+
+ 
+记录时间：2016-01-12 13:50:20,594  线程ID:[8]  日志级别：ERROR 
+错误描述：TaskAction(定时读取在线人数到缓存):It was not possible to connect to the redis server(s); to create a disconnected multiplexer, disable AbortOnConnectFail. SocketFailure on PING
+
+
+ 
+记录时间：2016-01-12 13:50:20,651  线程ID:[7]  日志级别：ERROR 
+错误描述：OnLinePlay(读取在线玩家):读取的缓存转换为null
+
+ 
+记录时间：2016-01-12 13:50:20,651  线程ID:[7]  日志级别：ERROR 
+错误描述：OnLinePlay(读取在线玩家):读取的缓存转换为长度为0
+
+ 
+记录时间：2016-01-12 13:50:21,669  线程ID:[7]  日志级别：ERROR 
+错误描述：OnLinePlay(读取在线玩家):读取的缓存转换为null
+
+ 
+记录时间：2016-01-12 13:50:21,671  线程ID:[7]  日志级别：ERROR 
+错误描述：OnLinePlay(读取在线玩家):读取的缓存转换为长度为0
+
+ 
+记录时间：2016-01-12 13:50:22,575  线程ID:[12]  日志级别：ERROR 
+错误描述：OnLinePlay(读取在线玩家):读取的缓存转换为null
+
+ 
+记录时间：2016-01-12 13:50:22,575  线程ID:[12]  日志级别：ERROR 
+错误描述：OnLinePlay(读取在线玩家):读取的缓存转换为长度为0
+
+ 
+记录时间：2016-01-12 13:50:23,577  线程ID:[12]  日志级别：ERROR 
+错误描述：OnLinePlay(读取在线玩家):读取的缓存转换为null
+
+ 
+记录时间：2016-01-12 13:50:23,578  线程ID:[12]  日志级别：ERROR 
+错误描述：OnLinePlay(读取在线玩家):读取的缓存转换为长度为0
+
+ 
+记录时间：2016-01-12 13:50:24,423  线程ID:[7]  日志级别：ERROR 
+错误描述：OnLinePlay(读取在线玩家):读取的缓存转换为null
+
+ 
+记录时间：2016-01-12 13:50:24,424  线程ID:[7]  日志级别：ERROR 
+错误描述：OnLinePlay(读取在线玩家):读取的缓存转换为长度为0
+
+ 
+记录时间：2016-01-12 13:50:25,313  线程ID:[12]  日志级别：ERROR 
+错误描述：OnLinePlay(读取在线玩家):读取的缓存转换为null
+
+ 
+记录时间：2016-01-12 13:50:25,314  线程ID:[12]  日志级别：ERROR 
+错误描述：OnLinePlay(读取在线玩家):读取的缓存转换为长度为0
+
+ 
+记录时间：2016-01-12 13:50:26,140  线程ID:[7]  日志级别：ERROR 
+错误描述：OnLinePlay(读取在线玩家):读取的缓存转换为null
+
+ 
+记录时间：2016-01-12 13:50:26,140  线程ID:[7]  日志级别：ERROR 
+错误描述：OnLinePlay(读取在线玩家):读取的缓存转换为长度为0
+
+ 
+记录时间：2016-01-12 13:50:26,967  线程ID:[14]  日志级别：ERROR 
+错误描述：OnLinePlay(读取在线玩家):读取的缓存转换为null
+
+ 
+记录时间：2016-01-12 13:50:26,968  线程ID:[14]  日志级别：ERROR 
+错误描述：OnLinePlay(读取在线玩家):读取的缓存转换为长度为0
+
+ 
+记录时间：2016-01-12 13:50:27,803  线程ID:[15]  日志级别：ERROR 
+错误描述：OnLinePlay(读取在线玩家):读取的缓存转换为null
+
+ 
+记录时间：2016-01-12 13:50:27,804  线程ID:[15]  日志级别：ERROR 
+错误描述：OnLinePlay(读取在线玩家):读取的缓存转换为长度为0
+
+ 
+记录时间：2016-01-12 13:50:28,585  线程ID:[15]  日志级别：ERROR 
+错误描述：OnLinePlay(读取在线玩家):读取的缓存转换为null
+
+ 
+记录时间：2016-01-12 13:50:28,586  线程ID:[15]  日志级别：ERROR 
+错误描述：OnLinePlay(读取在线玩家):读取的缓存转换为长度为0
+
+ 
+记录时间：2016-01-12 13:50:29,400  线程ID:[7]  日志级别：ERROR 
+错误描述：OnLinePlay(读取在线玩家):读取的缓存转换为null
+
+ 
+记录时间：2016-01-12 13:50:29,401  线程ID:[7]  日志级别：ERROR 
+错误描述：OnLinePlay(读取在线玩家):读取的缓存转换为长度为0
+
+ 
+记录时间：2016-01-12 13:50:30,218  线程ID:[15]  日志级别：ERROR 
+错误描述：OnLinePlay(读取在线玩家):读取的缓存转换为null
+
+ 
+记录时间：2016-01-12 13:50:30,222  线程ID:[15]  日志级别：ERROR 
+错误描述：OnLinePlay(读取在线玩家):读取的缓存转换为长度为0
+
+ 
+记录时间：2016-01-12 13:50:30,586  线程ID:[14]  日志级别：ERROR 
+错误描述：TaskAction(定时读取在线人数到缓存):It was not possible to connect to the redis server(s); to create a disconnected multiplexer, disable AbortOnConnectFail. SocketFailure on PING
+
+
+ 
+记录时间：2016-01-12 13:50:31,019  线程ID:[7]  日志级别：ERROR 
+错误描述：OnLinePlay(读取在线玩家):读取的缓存转换为null
+
+ 
+记录时间：2016-01-12 13:50:31,019  线程ID:[7]  日志级别：ERROR 
+错误描述：OnLinePlay(读取在线玩家):读取的缓存转换为长度为0
+
+ 
+记录时间：2016-01-12 13:50:31,865  线程ID:[12]  日志级别：ERROR 
+错误描述：OnLinePlay(读取在线玩家):读取的缓存转换为null
+
+ 
+记录时间：2016-01-12 13:50:31,866  线程ID:[12]  日志级别：ERROR 
+错误描述：OnLinePlay(读取在线玩家):读取的缓存转换为长度为0
+
+ 
+记录时间：2016-01-12 13:50:32,730  线程ID:[14]  日志级别：ERROR 
+错误描述：OnLinePlay(读取在线玩家):读取的缓存转换为null
+
+ 
+记录时间：2016-01-12 13:50:32,731  线程ID:[14]  日志级别：ERROR 
+错误描述：OnLinePlay(读取在线玩家):读取的缓存转换为长度为0
+
+ 
+记录时间：2016-01-12 13:50:33,643  线程ID:[7]  日志级别：ERROR 
+错误描述：OnLinePlay(读取在线玩家):读取的缓存转换为null
+
+ 
+记录时间：2016-01-12 13:50:33,645  线程ID:[7]  日志级别：ERROR 
+错误描述：OnLinePlay(读取在线玩家):读取的缓存转换为长度为0
+
+ 
+记录时间：2016-01-12 13:50:34,427  线程ID:[7]  日志级别：ERROR 
+错误描述：OnLinePlay(读取在线玩家):读取的缓存转换为null
+
+ 
+记录时间：2016-01-12 13:50:34,428  线程ID:[7]  日志级别：ERROR 
+错误描述：OnLinePlay(读取在线玩家):读取的缓存转换为长度为0
+
+ 
+记录时间：2016-01-12 13:50:35,515  线程ID:[8]  日志级别：ERROR 
+错误描述：OnLinePlay(读取在线玩家):读取的缓存转换为null
+
+ 
+记录时间：2016-01-12 13:50:35,516  线程ID:[8]  日志级别：ERROR 
+错误描述：OnLinePlay(读取在线玩家):读取的缓存转换为长度为0
+
+ 
+记录时间：2016-01-12 13:51:25,002  线程ID:[7]  日志级别：ERROR 
+错误描述：TaskAction(定时读取在线人数到缓存):It was not possible to connect to the redis server(s); to create a disconnected multiplexer, disable AbortOnConnectFail. SocketFailure on PING
+
+
+ 
+记录时间：2016-01-12 14:21:11,057  线程ID:[10]  日志级别：ERROR 
+错误描述：TaskAction(定时读取在线人数到缓存):文件“C:\temp.txt”正由另一进程使用，因此该进程无法访问此文件。
+
+
+ 
+记录时间：2016-01-12 14:21:11,064  线程ID:[14]  日志级别：ERROR 
+错误描述：TaskAction(定时读取在线人数到缓存):无法将类型为“Newtonsoft.Json.Linq.JArray”的对象强制转换为类型“StackExchange.Redis.HashEntry[]”。
+
+
+ 
+记录时间：2016-01-12 14:21:38,879  线程ID:[9]  日志级别：ERROR 
+错误描述：TaskAction(定时读取在线人数到缓存):无法将类型为“Newtonsoft.Json.Linq.JArray”的对象强制转换为类型“StackExchange.Redis.HashEntry[]”。
+
+
+ 
+记录时间：2016-01-12 14:21:41,714  线程ID:[14]  日志级别：ERROR 
+错误描述：TaskAction(定时读取在线人数到缓存):无法将类型为“Newtonsoft.Json.Linq.JArray”的对象强制转换为类型“StackExchange.Redis.HashEntry[]”。
+
+
+ 
+记录时间：2016-01-12 14:21:48,901  线程ID:[9]  日志级别：ERROR 
+错误描述：TaskAction(定时读取在线人数到缓存):无法将类型为“Newtonsoft.Json.Linq.JArray”的对象强制转换为类型“StackExchange.Redis.HashEntry[]”。
+
+
+ 
+记录时间：2016-01-12 14:22:03,811  线程ID:[7]  日志级别：ERROR 
+错误描述：TaskAction(定时读取在线人数到缓存):无法将类型为“Newtonsoft.Json.Linq.JArray”的对象强制转换为类型“StackExchange.Redis.HashEntry[]”。
+
+
+ 
+记录时间：2016-01-12 14:22:08,911  线程ID:[9]  日志级别：ERROR 
+错误描述：TaskAction(定时读取在线人数到缓存):无法将类型为“Newtonsoft.Json.Linq.JArray”的对象强制转换为类型“StackExchange.Redis.HashEntry[]”。
+
+
+ 
+记录时间：2016-01-12 14:22:18,931  线程ID:[8]  日志级别：ERROR 
+错误描述：TaskAction(定时读取在线人数到缓存):无法将类型为“Newtonsoft.Json.Linq.JArray”的对象强制转换为类型“StackExchange.Redis.HashEntry[]”。
+
+
+ 
+记录时间：2016-01-12 14:22:28,921  线程ID:[11]  日志级别：ERROR 
+错误描述：TaskAction(定时读取在线人数到缓存):无法将类型为“Newtonsoft.Json.Linq.JArray”的对象强制转换为类型“StackExchange.Redis.HashEntry[]”。
+
+
+ 
+记录时间：2016-01-12 14:22:38,921  线程ID:[9]  日志级别：ERROR 
+错误描述：TaskAction(定时读取在线人数到缓存):无法将类型为“Newtonsoft.Json.Linq.JArray”的对象强制转换为类型“StackExchange.Redis.HashEntry[]”。
+
+
+ 
+记录时间：2016-01-12 14:22:48,941  线程ID:[7]  日志级别：ERROR 
+错误描述：TaskAction(定时读取在线人数到缓存):无法将类型为“Newtonsoft.Json.Linq.JArray”的对象强制转换为类型“StackExchange.Redis.HashEntry[]”。
+
+
+ 
+记录时间：2016-01-12 14:22:58,931  线程ID:[7]  日志级别：ERROR 
+错误描述：TaskAction(定时读取在线人数到缓存):无法将类型为“Newtonsoft.Json.Linq.JArray”的对象强制转换为类型“StackExchange.Redis.HashEntry[]”。
+
+
+ 
+记录时间：2016-01-12 14:23:08,971  线程ID:[9]  日志级别：ERROR 
+错误描述：TaskAction(定时读取在线人数到缓存):无法将类型为“Newtonsoft.Json.Linq.JArray”的对象强制转换为类型“StackExchange.Redis.HashEntry[]”。
+
+
+ 
+记录时间：2016-01-12 15:33:57,175  线程ID:[1]  日志级别：ERROR 
+错误描述：TaskAction(定时读取在线人数到缓存):Table 'GServerInfo.OnLineInfo' doesn't exist
+
+
+ 
+记录时间：2016-01-12 15:37:00,901  线程ID:[5]  日志级别：ERROR 
+错误描述：TaskAction(定时读取在线人数到缓存):Table 'GServerInfo.OnLineInfo' doesn't exist
+
+
+ 
+记录时间：2016-01-12 15:51:06,304  线程ID:[60]  日志级别：ERROR 
+错误描述：OnLinePlay(读取在线玩家):读取的缓存转换为null
+
+ 
+记录时间：2016-01-12 16:29:24,422  线程ID:[1]  日志级别：ERROR 
+错误描述：TaskAction(定时读取在线人数到缓存):未将对象引用设置到对象的实例。
+
+
+ 
+记录时间：2016-01-12 16:55:44,735  线程ID:[1]  日志级别：ERROR 
+错误描述：TaskAction(定时读取在线人数到缓存):Error parsing column 0 (CreateTime=<null>)
+
+
+ 
+记录时间：2016-01-12 16:59:17,308  线程ID:[14]  日志级别：ERROR 
+错误描述：TaskAction(定时读取在线人数到缓存):You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')' at line 1
+

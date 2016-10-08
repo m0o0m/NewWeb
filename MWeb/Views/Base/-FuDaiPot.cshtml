@@ -1,0 +1,94 @@
+﻿@using GL.Data.Model
+@model List<PotRecord>
+@{
+    ViewBag.Title = "摇钱树彩池";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+
+
+}
+
+
+<div id="content-header">
+    <div id="breadcrumb"> <a href="#" title="" class="current"><i class="icon-home"></i> @ViewBag.Title</a></div>
+</div>
+
+<div class="container-fluid">
+
+    <div class="quick-actions_homepage">
+        <ul class="quick-actions1">
+            @foreach (var item in Model)
+            {
+                <li class="bg_lo span3" id="serverStatic" style=""> <a href="#" style="cursor:default; font-size:50px;margin-top:20px" onclick="return false;"> @item.ChipPot</a> </li>
+            }
+        </ul>
+    </div>
+</div>
+
+
+@section scripts{
+
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/select2.min.js"></script>
+    <style type="text/css">
+        .quick-actions1 {
+            display: block;
+            list-style: outside none none;
+            margin: 15px 0;
+            text-align: center;
+        }
+
+            .quick-actions1 li a {
+                color: #fff;
+                display: block;
+                font-size: 14px;
+                font-weight: lighter;
+            }
+
+            .quick-actions1 li a {
+                padding: 10px 30px;
+            }
+
+        .quick-actions_homepage .quick-actions1 .span3 {
+            width: 30%;
+        }
+
+        .quick-actions_homepage .quick-actions1 li {
+            position: relative;
+        }
+
+        .quick-actions1 li {
+            min-height: 70px;
+            min-width: 14%;
+        }
+
+        .quick-actions1 li {
+            float: left;
+            line-height: 18px;
+            margin: 0 10px 10px 0;
+            padding: 0 10px;
+        }
+
+            .quick-actions1 li a i[class^="icon-"], .quick-actions1 li a i[class*=" icon-"] {
+                display: block;
+                font-size: 30px;
+                margin: 0 auto 5px;
+            }
+
+        .quick-actions1 li {
+            padding: 0;
+        }
+    </style>
+
+    <script type="text/javascript">
+
+
+        // resets the menu selection upon entry to this page:
+        function resetMenu() {
+            document.gomenu.selector.selectedIndex = 2;
+        }
+
+
+
+    </script>
+}

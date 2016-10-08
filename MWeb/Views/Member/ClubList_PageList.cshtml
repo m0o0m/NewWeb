@@ -1,0 +1,110 @@
+﻿@using Webdiyer.WebControls.Mvc;
+@using GL.Data.Model;
+@model List<UserClub>
+
+
+
+<section id="widget-grid" class="">
+    <div class="row">
+        <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-0" data-widget-editbutton="false" data-widget-colorbutton="false"
+                 data-widget-togglebutton="false"
+                 data-widget-deletebutton="false"
+                 data-widget-fullscreenbutton="false"
+                 data-widget-custombutton="false"
+                 data-widget-collapsed="false"
+                 data-widget-sortable="false">
+                <header>
+                    <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                    <h2>@ViewBag.Title</h2>
+                </header>
+                <!-- widget div-->
+                <div>
+                    <!-- widget edit box -->
+                    <div class="jarviswidget-editbox">
+                        <!-- This area used as dropdown edit box -->
+                    </div>
+                    <!-- end widget edit box -->
+                    <!-- widget content -->
+                    <div class="widget-body no-padding">
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <thead>
+
+                                    <tr>
+                                        <th>俱乐部ID</th>
+                                        <th>上周总贡献</th>
+                                        <th>上周总返利</th>
+                                        <th>俱乐部成员数量</th>
+                                        <th>俱乐部模式</th>
+                                        <th>成为会员俱乐部时间</th>
+                                        <th>我上家的俱乐部ID</th>
+                                        <th>成员详细</th>
+                                        <th>设置</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model.Count == 0)
+            {
+                                        <tr class="gradeX">
+                                            <td class="colspan" align="center" colspan="0">
+                                                没有找到相关记录！
+                                            </td>
+                                        </tr>
+            }
+                                    @foreach (UserClub m in Model)
+            {
+                                        <tr class="gradeA">
+                                            <td>@m.ClubID</td>
+                                            <td>@m.Give_LastWeek</td>
+                                            <td>@m.Rebate_LastWeek</td>
+                                            <td>@m.ClubCount</td>
+                                            <td>@m.ClubType</td>
+                                            
+                                               @if (m.ClubUpdate.ToString() == "0001/1/1 0:00:00")
+                                               {
+
+                                                <td>0</td>
+
+                                               }
+                                               else {
+                                                   <td>@m.ClubUpdate</td>
+                                               }
+
+
+
+
+                                            <td>@m.HighClub</td>
+                                            <td style="text-align:center">
+                                                @if (m.ClubType == clubType.未激活俱乐部)
+                        {
+                                                    <input type="button" value="查看" class="btn btn-inverse btn-mini disabled" />
+                        }
+                        else {
+                                                    <input type="button" value="查看" class="btn btn-inverse btn-mini" onclick="return btnGetClubList(@m.ClubID, this)" />
+                        }
+                                            </td>
+                                            <td style="text-align:center">
+                                                    <input type="button" value="设为会员俱乐部" class="btn btn-danger btn-mini" onclick="return btnSetClub(@m.ClubID, this)" />
+                                                <input type="button" value="取消俱乐部" class="btn btn-danger btn-mini" onclick="return btnCancelClub(@m.ClubID, this)" />
+                                            
+                                            </td>
+                                         
+                                        </tr>
+
+            }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- end widget content -->
+                </div>
+                <!-- end widget div -->
+            </div>
+            <!-- end widget -->
+
+        </article>
+    </div>
+</section>
+
+

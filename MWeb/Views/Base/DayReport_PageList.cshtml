@@ -1,0 +1,224 @@
+﻿@using Webdiyer.WebControls.Mvc;
+@using GL.Data.Model;
+@using GL.Data.BLL;
+@model IEnumerable<DayReport>
+
+
+
+
+
+
+
+<section id="widget-grid" class="">
+    <div class="row">
+        <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-0" data-widget-editbutton="false" data-widget-colorbutton="false"
+                 data-widget-togglebutton="false"
+                 data-widget-deletebutton="false"
+                 data-widget-fullscreenbutton="false"
+                 data-widget-custombutton="false"
+                 data-widget-collapsed="false"
+                 data-widget-sortable="false">
+                <header>
+                    <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                    <h2>日报</h2>
+                </header>
+                <!-- widget div-->
+                <div>
+                    <!-- widget edit box -->
+                    <div class="jarviswidget-editbox">
+                        <!-- This area used as dropdown edit box -->
+                    </div>
+                    <!-- end widget edit box -->
+                    <!-- widget content -->
+                    <div class="widget-body no-padding">
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>日期 &nbsp;<span id="refresh" class="" data-title="refresh" rel="tooltip" data-placement="bottom" data-original-title="<i class=''></i> 报表的日期" data-html="true" data-reset-msg="Would you like to RESET all your saved widgets and clear LocalStorage?"><i class="fa fa-question "></i></span> </span>
+                                        </th>
+                                        <th>日新增&nbsp;<span id="refresh" class="" data-title="refresh" rel="tooltip" data-placement="bottom" data-original-title="<i class=''></i> 当日新注册的用户数 " data-html="true" data-reset-msg="Would you like to RESET all your saved widgets and clear LocalStorage?"><i class="fa fa-question "></i></span> </span>
+                                        </th>
+                                        <th>DAU&nbsp;<span id="refresh" class="" data-title="refresh" rel="tooltip" data-placement="bottom" data-original-title="<i class=''></i> 当日去掉日新增后的登陆用户数； " data-html="true" data-reset-msg="Would you like to RESET all your saved widgets and clear LocalStorage?"><i class="fa fa-question "></i></span> </span>
+                                        </th>
+                                        <th>日登陆总量&nbsp;<span id="refresh" class="" data-title="refresh" rel="tooltip" data-placement="bottom" data-original-title="<i class=''></i>当日所有登陆过游戏的用户 " data-html="true" data-reset-msg="Would you like to RESET all your saved widgets and clear LocalStorage?"><i class="fa fa-question "></i></span> </span>
+                                        </th>
+                                        <th>次日留存&nbsp;<span id="refresh" class="" data-title="refresh" rel="tooltip" data-placement="bottom" data-original-title="<i class=''></i> 昨日注册且今日有登陆的用户数 " data-html="true" data-reset-msg="Would you like to RESET all your saved widgets and clear LocalStorage?"><i class="fa fa-question "></i></span> </span>
+                                        </th>
+                                        <th>7日留存&nbsp;<span id="refresh" class="" data-title="refresh" rel="tooltip" data-placement="bottom" data-original-title="<i class=''></i> 7天前注册且今日有登陆的用户数 " data-html="true" data-reset-msg="Would you like to RESET all your saved widgets and clear LocalStorage?"><i class="fa fa-question "></i></span> </span>
+                                        </th>
+                                        <th>新增付费率&nbsp;<span id="refresh" class="" data-title="refresh" rel="tooltip" data-placement="bottom" data-original-title="<i class=''></i> 新增付费人数/日新增 " data-html="true" data-reset-msg="Would you like to RESET all your saved widgets and clear LocalStorage?"><i class="fa fa-question "></i></span> </span>
+                                        </th>
+                                        <th>新增付费人数&nbsp;<span id="refresh" class="" data-title="refresh" rel="tooltip" data-placement="bottom" data-original-title="<i class=''></i> 日新增中有付费的人数 " data-html="true" data-reset-msg="Would you like to RESET all your saved widgets and clear LocalStorage?"><i class="fa fa-question "></i></span> </span>
+                                        </th>
+                                        <th>新增付费Arppu&nbsp;<span id="refresh" class="" data-title="refresh" rel="tooltip" data-placement="bottom" data-original-title="<i class=''></i> 新增付费总额/新增付费人数 " data-html="true" data-reset-msg="Would you like to RESET all your saved widgets and clear LocalStorage?"><i class="fa fa-question "></i></span> </span>
+                                        </th>
+                                        <th>新增付费总额 &nbsp;<span id="refresh" class="" data-title="refresh" rel="tooltip" data-placement="bottom" data-original-title="<i class=''></i> 新增用户付费的总额 " data-html="true" data-reset-msg="Would you like to RESET all your saved widgets and clear LocalStorage?"><i class="fa fa-question "></i></span> </span>
+                                        </th>
+                                        <th>日付费率&nbsp;<span id="refresh" class="" data-title="refresh" rel="tooltip" data-placement="bottom" data-original-title="<i class=''></i> 日付费人数/日登陆总量 " data-html="true" data-reset-msg="Would you like to RESET all your saved widgets and clear LocalStorage?"><i class="fa fa-question "></i></span> </span>
+                                        </th>
+                                        <th>日付费人数&nbsp;<span id="refresh" class="" data-title="refresh" rel="tooltip" data-placement="bottom" data-original-title="<i class=''></i> 当日登陆用户中有付费的人数 " data-html="true" data-reset-msg="Would you like to RESET all your saved widgets and clear LocalStorage?"><i class="fa fa-question "></i></span> </span>
+                                        </th>
+                                        <th>日付费Arppu&nbsp;<span id="refresh" class="" data-title="refresh" rel="tooltip" data-placement="bottom" data-original-title="<i class=''></i> 日付费总额/日付费人数 " data-html="true" data-reset-msg="Would you like to RESET all your saved widgets and clear LocalStorage?"><i class="fa fa-question "></i></span> </span>
+                                        </th>
+                                        <th>日付费总额&nbsp;<span id="refresh" class="" data-title="refresh" rel="tooltip" data-placement="bottom" data-original-title="<i class=''></i> 当日登陆用户的付费总额 " data-html="true" data-reset-msg="Would you like to RESET all your saved widgets and clear LocalStorage?"><i class="fa fa-question "></i></span> </span>
+                                        </th>
+                                        <th>新增付费Arpu&nbsp;<span id="refresh" class="" data-title="refresh" rel="tooltip" data-placement="bottom" data-original-title="<i class=''></i> 新增付费总额/日新增 " data-html="true" data-reset-msg="Would you like to RESET all your saved widgets and clear LocalStorage?"><i class="fa fa-question "></i></span> </span>
+                                        </th>
+                                        <th>日登录Arpu&nbsp;<span id="refresh" class="" data-title="refresh" rel="tooltip" data-placement="bottom" data-original-title="<i class=''></i> 日付费总额/日登陆总量 " data-html="true" data-reset-msg="Would you like to RESET all your saved widgets and clear LocalStorage?"><i class="fa fa-question "></i></span> </span>
+                                        </th>
+                                        <th>玩牌率&nbsp;<span id="refresh" class="" data-title="refresh" rel="tooltip" data-placement="bottom" data-original-title="<i class=''></i> 日登陆用户中有玩牌的人数/日登陆总人数 " data-html="true" data-reset-msg="Would you like to RESET all your saved widgets and clear LocalStorage?"><i class="fa fa-question "></i></span> </span>
+                                        </th>
+                                        <th>总牌局数&nbsp;<span id="refresh" class="" data-title="refresh" rel="tooltip" data-placement="bottom" data-original-title="<i class=''></i> 日注册用户玩牌的总局数（所有游戏总和） " data-html="true" data-reset-msg="Would you like to RESET all your saved widgets and clear LocalStorage?"><i class="fa fa-question "></i></span> </span>
+                                        </th>
+                                        <th>平均在玩&nbsp;<span id="refresh" class="" data-title="refresh" rel="tooltip" data-placement="bottom" data-original-title="<i class=''></i> 取每10分钟一次在玩数据的平均数 " data-html="true" data-reset-msg="Would you like to RESET all your saved widgets and clear LocalStorage?"><i class="fa fa-question "></i></span> </span>
+                                        </th>
+                                        <th>平均在线&nbsp;<span id="refresh" class="" data-title="refresh" rel="tooltip" data-placement="bottom" data-original-title="<i class=''></i> 取每10分钟一次在线数据的平均数 " data-html="true" data-reset-msg="Would you like to RESET all your saved widgets and clear LocalStorage?"><i class="fa fa-question "></i></span> </span>
+                                        </th>
+                                        <th>日发放&nbsp;<span id="refresh" class="" data-title="refresh" rel="tooltip" data-placement="bottom" data-original-title="<i class=''></i> 系统每天发放游戏币的总量 " data-html="true" data-reset-msg="Would you like to RESET all your saved widgets and clear LocalStorage?"><i class="fa fa-question "></i></span> </span>
+                                        </th>
+                                        <th>日消耗&nbsp;<span id="refresh" class="" data-title="refresh" rel="tooltip" data-placement="bottom" data-original-title="<i class=''></i> 系统每天回收游戏币的总量 " data-html="true" data-reset-msg="Would you like to RESET all your saved widgets and clear LocalStorage?"><i class="fa fa-question "></i></span> </span>
+                                        </th>
+                                        <th>日结余&nbsp;<span id="refresh" class="" data-title="refresh" rel="tooltip" data-placement="bottom" data-original-title="<i class=''></i> 日发放-日消耗 " data-html="true" data-reset-msg="Would you like to RESET all your saved widgets and clear LocalStorage?"><i class="fa fa-question "></i></span> </span>
+                                        </th>
+                                        <th>系统存量&nbsp;<span id="refresh" class="" data-title="refresh" rel="tooltip" data-placement="bottom" data-original-title="<i class=''></i> 服务器存在的所有游戏币的总量 " data-html="true" data-reset-msg="Would you like to RESET all your saved widgets and clear LocalStorage?"><i class="fa fa-question "></i></span> </span>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model.Count() == 0)
+            {
+                                        <tr class="gradeX">
+                                            <td class="colspan" align="center" colspan="0">
+                                                没有找到相关记录！
+                                            </td>
+                                        </tr>
+                                    }
+                                    @foreach (DayReport m in Model)
+                                    {
+                                        <tr>
+                                            <td>@m.CreateTime</td>
+                                            <td>@m.DayAdd</td>
+                                            <td>@m.DAU</td>
+                                            <td>@m.DayLoginCount</td>
+                                            <td>@m.CiRiRate</td>
+                                            <td>@m.QiRiRate</td>
+                                            <td>
+                                            @{ 
+                                                string xinzengfufeiLv = "0.00%";
+                                                if (m.DayAdd >0)
+                                                {
+                                                    xinzengfufeiLv = String.Format("{0:F}", m.NewAddCount * 100 / m.DayAdd)+"%";//默认为保留两位
+                                                    ;
+                                                }
+
+                                            }
+                                            @xinzengfufeiLv</td>
+                                            <td>@m.NewAddCount</td>
+                                            <td>
+                                            
+                                                @{
+                                                    string xinzengfufeiArppu = "0";
+                                                    if (m.NewAddCount > 0)
+                                                    {
+                                                        xinzengfufeiArppu = String.Format("{0:F}", m.NewAddSum / m.NewAddCount);//默认为保留两位
+
+                                                    }
+
+                                                }
+                                            
+                                            @xinzengfufeiArppu</td>
+                                            <td>@m.NewAddSum</td>
+                                            <td>
+                                                @{
+                                                    string rifufeilv = "0%";
+                                                    if (m.DayLoginCount > 0)
+                                                    {
+                                                        rifufeilv = String.Format("{0:F}", m.DayPayCount *100/ m.DayLoginCount) + "%";//默认为保留两位
+
+                                                    }
+
+                                                }
+
+                                                @rifufeilv
+                                           </td>
+                                            <td>@m.DayPayCount</td>
+                                            <td>
+                                                @{
+                                                    double rifufeiarppu = 0;
+                                                    if (m.DayPayCount > 0)
+                                                    {
+                                                        rifufeiarppu = m.DayPaySum / m.DayPayCount;
+
+                                                    }
+
+                                                }
+
+
+
+                                            
+                                            @(rifufeiarppu)</td>@*---------*@
+                                            <td>@m.DayPaySum</td>
+                                            <td>
+                                                @{
+                                                    double xinzengfufeiArpu = 0;
+                                                    if (m.NewAddCount > 0)
+                                                    {
+                                                        xinzengfufeiArpu = m.NewAddSum / m.NewAddCount;
+
+                                                    }
+
+                                                }
+
+
+                                            @xinzengfufeiArpu
+                                            
+                                            </td>
+                                            <td>
+                                                @{
+                                                    double ridengluarpu = 0;
+                                                    if (m.DayLoginCount > 0)
+                                                    {
+                                                        ridengluarpu = m.DayPaySum / m.DayLoginCount;
+
+                                                    }
+
+                                                }
+                                            
+                                            @ridengluarpu</td>@*---------*@
+                                            <td>
+                                                @{
+                                                    string wanpailv = "0.00%";
+                                                    if (m.DayLoginCount > 0)
+                                                    {
+                                                        wanpailv = String.Format("{0:F}", m.PlayRate*100 / m.DayLoginCount) + "%";//默认为保留两位
+
+                                                    }
+
+                                                }
+                                            @wanpailv
+                                           </td>
+                                            <td>@m.TotalCount</td>
+                                            <td>@m.AvgPlay</td>
+                                            <td>@m.AvgOnLine</td>
+                                            <td>@m.DaySend</td>
+                                            <td>@m.DayUser</td>
+                                            <td>@(m.DaySend-m.DayUser)</td>
+                                            <td>@m.SystemSave</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                    <!-- end widget content -->
+                </div>
+                <!-- end widget div -->
+            </div>
+            <!-- end widget -->
+
+        </article>
+    </div>
+</section>

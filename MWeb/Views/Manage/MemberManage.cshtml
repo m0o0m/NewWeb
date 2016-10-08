@@ -1,0 +1,759 @@
+﻿@using Webdiyer.WebControls.Mvc;
+@using GL.Data.Model;
+@model Role
+@{
+    ViewBag.Title = "会员管理 -- 列表";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="content">
+    <form id="comment-form" class="smart-form" novalidate="novalidate">
+        <div class="row">
+            <section class="col col-1.2">
+                <label class="label">会员ID</label>
+                <label class="input">
+                    @Html.TextBox("Value", ViewData["Value"], new { @class = "span2", style = "border-radius:4px" })
+                </label>
+            </section>
+            <section class="col col-1">
+                <label class="label">&nbsp;</label>
+                <button type="submit" class="btn btn-success btn-sm">查询</button>
+            </section>
+
+        </div>
+    </form>
+    <div class="row">
+    
+        <section class="col col-12">
+            <label class="label">&nbsp;</label>
+            <label class="input">
+                <input type="button" class="btn btn-toolbar btn-default" value="牌局查询" onclick="javascript: window.open('/GameData/GameLog?Gametype=1&SearchExt='+$('#Value').val())" />
+              &nbsp;
+            
+                <input type="button" class="btn btn-toolbar btn-default" value="流水日志" onclick="javascript: window.open('/Manage/MemberForRecord?Gametype=0&SearchExt=' + $('#Value').val())" />
+             
+                &nbsp;
+                <input type="button"  class="btn btn-toolbar btn-default" value="充值流水" onclick="javascript: window.open('/Base/QQZoneFlow?SearchExt=' + $('#Value').val() + '&Channels=0&RaType=-1')" />    &nbsp;
+
+                <input type="button"   class="btn btn-toolbar btn-default" value="登录查询" onclick="javascript: window.open('/Member/LoginList?type=0&Value=' + $('#Value').val())" />
+                &nbsp;
+                <input type="button"  class="btn btn-toolbar btn-default"  value="账号状态" onclick="javascript: window.open('/System/FreezeLog?Search=' + $('#Value').val() + '&OperUserName=')" />
+                &nbsp;
+                <input type="button"  class="btn btn-toolbar btn-default"  value="盈亏统计" onclick="javascript: window.open('/Base/UserProfit?SearchExt=' + $('#Value').val())+'&Channels=0'" />
+                    &nbsp;
+             </label>
+        </section>
+     
+  
+   
+    </div>
+    <section id="widget-grid" class="">
+        <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-0"
+             data-widget-editbutton="false" data-widget-colorbutton="false" data-widget-togglebutton="false" data-widget-deletebutton="false"
+             data-widget-fullscreenbutton="false" data-widget-custombutton="false" data-widget-collapsed="false" data-widget-sortable="false"
+             style="">
+            @if (Model == null)
+            {
+                <header>
+                    <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                </header>
+                <table class="table table-bordered">
+                    <tr><td align="center">没有找到相关记录！</td></tr>
+                </table>
+            }
+            else
+            {
+                <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-0"
+                     data-widget-editbutton="false" data-widget-colorbutton="false" data-widget-togglebutton="false" data-widget-deletebutton="false"
+                     data-widget-fullscreenbutton="false" data-widget-custombutton="false" data-widget-collapsed="false" data-widget-sortable="false"
+                     style="">
+                    <header role="heading">
+                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                        <h2>基础信息</h2>
+                    </header>
+                    <table class="table table-bordered">
+                        <tbody>
+                            <tr>
+                                <th>角色ID</th><th>@Model.ID</th>
+                                <th>昵称</th><th>@Model.NickName</th>
+                                <th>角色等级</th><th>@Model.LevelGrade <input type="button" style="float:right;" value="修改" onclick="return UpdateGrade(2 ,@Model.ID);" /></th>
+                            </tr>
+                            <tr>
+                                <th>游戏币</th><th>@Model.Gold <input type="button" style="float:right;" value="查询" onclick="return OutputView(@Model.ID);" /></th>
+                                <th>五币</th><th>@Model.Diamond <input type="button" style="float:right;" value="查询" onclick="return UsersDiamondDistributionRatio()" /></th>
+                                <th>VIP等级</th><th>
+                              
+                                @{ 
+                                    string vipL = Model.VipGrade.ToString();
+                                    if (Model.VipGrade == 200) {
+                                        vipL = "体验vip";
+                                    }
+                                    @vipL
+                                }
+                                <input type="button" style="float:right;" value="修改" onclick="return UpdateGrade(1 ,@Model.ID);"/></th>
+                            </tr>
+                            <tr>
+                                <th>保险箱游戏币</th><th>@Model.SafeBox <input type="button" style="float:right;" value="密码重置" onclick="return btnResetSafeBox(@Model.ID,'@Model.Account')" /></th>
+                                <th>当前积分</th><th>@Model.Zicard <input type="button" style="float:right;" value="查询" onclick="return DuiHuanView(@Model.ID)" />  </th>
+                              @*<th>QQ</th><th>@Model.QQNum  /></th>*@
+                            </tr>
+                            @*<tr>
+                                <th>邮箱</th><th>@Model.Email</th>
+                                <th>电话</th><th>@Model.Tel</th>
+                                <th>身份证号码</th><th>@Model.Identity</th>
+                            </tr>
+                            <tr>
+                                <th>姓名</th><th>@Model.TrueName</th>
+                                <th>兑换劵个数</th><th>@Model.Exchange</th>
+                                <th>金钥匙个数</th><th>@Model.GoldKey</th>
+                            </tr>*@
+                    </table>
+                </div>
+                <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-0"
+                     data-widget-editbutton="false" data-widget-colorbutton="false" data-widget-togglebutton="false" data-widget-deletebutton="false"
+                     data-widget-fullscreenbutton="false" data-widget-custombutton="false" data-widget-collapsed="false" data-widget-sortable="false"
+                     style="">
+                    <header role="heading">
+                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                        <h2>账号信息</h2>
+                    </header>
+                    <table class="table table-bordered">
+                        <tbody>
+                            <tr>
+                                <th>账号</th><th>@Model.Account</th>
+                                <th>最后登录时间</th><th>@Model.LastLoginTime <input type="button" style="float:right;" value="查询" onclick="return LoginSearch(@Model.ID);" /></th>
+                                <th>最后登录IP</th><th>@Model.LastLoginIP</th>
+                            </tr>
+                            <tr>
+                                <th>注册时间</th><th>@Model.CreateTime</th>
+                                <th>注册IP</th><th>@Model.CreateIP</th>
+                                <th>注册IMEI</th><th>@Model.CreateMac</th>
+                            </tr>
+                            <tr>
+                                <th>禁言状态</th>
+                                @if (Model.NoSpeak == isSwitch.开)
+                                {
+                                    <th id="nospeak">未禁言 <input type="button" style="float:right;" value="禁言" onclick="return btnCloseTalk(@Model.ID ,'@Model.Account')" /></th>
+<th id="jiechuspeak" style="display:none"><span id="spanjinyan"></span> <input  type="button" style="float:right;" value="解除禁言" onclick="return btnUser(@Model.ID ,0 ,'Delete')" /></th>
+                                    }
+                                else
+                                {
+<th id="nospeak" style="display:none">未禁言 <input type="button" style="float:right;" value="禁言" onclick="return btnCloseTalk(@Model.ID ,'@Model.Account')" /></th>
+                                    <th  id="jiechuspeak"><span id="spanjinyan2">
+    已禁言
+    @{
+                                            DateTime dt = DateTime.Now;
+                                            string reachTime = "";
+                                            if (Model.SpeakTime.Year - dt.Year >= 2)
+                                            {
+                                                reachTime = "(永久)";
+                                            }
+                                            else
+                                            {
+                                                reachTime = "(截止" + Model.SpeakTime.ToString() + ")";
+                                            }
+        @reachTime;
+
+    }
+</span>
+                                 <input id="jiechuspeak" type="button" style="float:right;" value="解除禁言" onclick="return btnUser(@Model.ID ,0 ,'Delete')" /></th>
+                                }
+                                <th>封注册IP状态</th>
+                                @if(Model.SwitchIP == isSwitch.开)
+                                {
+                                    <th>未封禁 <input type="button" style="float:right;" value="封禁" onclick="return btnCommand('@Model.CreateIP' ,1 ,'banip')" /></th>
+                                }
+                                else
+                                {
+                                    <th>已封禁 <input type="button" style="float:right;" value="解除封禁" onclick="return btnCommand('@Model.CreateIP' ,0 ,'banip')" /></th>
+                                }
+                                <th>封注册IMEI状态</th>
+                                @if(Model.SwitchMac == isSwitch.开)
+                                {
+                                    if(Model.CreateMac != ""){
+                                        <th>未封禁 <input type="button" style="float:right;" value="封禁" onclick="return btnCommand('@Model.CreateMac'  ,1 ,'banMac')" /></th>
+                                    }else{
+                                        <th>未封禁</th>
+                                    }
+                                }
+                                else
+                                {
+                                    <th>已封禁 <input type="button" style="float:right;" value="解除封禁" onclick="return btnCommand('@Model.CreateMac'  ,0 ,'banMac')" /></th>
+                                }
+                            </tr>
+                            <tr>
+                                <th>封号状态</th>
+                                @if(Model.IsFreeze == isSwitch.开)
+                                {
+                                    <th id="noFreeze">未封号 <input type="button" style="float:right;" value="封号" onclick="return btnFreeze(@Model.ID ,'@Model.Account')" /></th>
+                                    <th id="jiechuFreeze" style="display:none"><span id="spanfenghao"></span><input type="button" style="float:right;" value="解除封号" onclick="return btnUser(@Model.ID ,0 ,'Put')" /></th>
+                                }
+                                else
+                                {
+                                    <th id="noFreeze" style="display:none">未封号 <input type="button" style="float:right;" value="封号" onclick="return btnFreeze(@Model.ID ,'@Model.Account')" /></th>
+                                <th id="jiechuFreeze">
+                                    <span id="spanfenghao">
+                                        已封号
+                                        @{
+        DateTime dt = DateTime.Now;
+        string reachTime = "";
+        if (Model.FreezeTime.Year - dt.Year >= 2)
+        {
+            reachTime = "(永久)";
+        }
+        else
+        {
+            reachTime = "(截止" + Model.FreezeTime.ToString() + ")";
+        }
+                                            @reachTime;
+                                        }
+                                    </span>
+                                    @*<input type="button" style="float:right;" value="解除封号" onclick="return btnUser(@Model.ID ,0 ,'Put')" />*@
+                              <input id="jiechuFreeze" type="button" style="float:right;" value="解除封号" onclick="return btnUser(@Model.ID ,0 ,'Put')" />
+
+</th>
+                                }
+                                <th>代理</th><th>@Model.AgentName</th>
+                                <th>俱乐部</th><th>@Model.ClubID <input type="button" style="float:right;" value="修改" onclick="return UpdateGrade(3 ,@Model.ID);" /></th>
+                            </tr>
+                            <tr>
+                                <th>版本信息</th><th>@Model.VersionInfo</th>
+                                <th>在线状态</th>
+                                @{ 
+                                    string onlineInfo = "";
+                                    if (Model.IsOnLine == IsOnLine.离线)
+                                    {
+                                        onlineInfo = "离线";
+                                    }
+                                    else {
+                                        if (Model.RoomID == 0)
+                                        {
+                                            onlineInfo = "大厅";
+                                        }
+                                        else {
+                                            onlineInfo = "在线(" + Model.RoomType.ToString() + Model.RoomID + ")";
+                                        }
+                                    }
+                                }
+                               <th>@onlineInfo </th>
+                                <th>最后登录渠道</th><th>@Model.LoginAgent</th>
+                            </tr>
+                    </table>
+                </div>
+                <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-0"
+                     data-widget-editbutton="false" data-widget-colorbutton="false" data-widget-togglebutton="false" data-widget-deletebutton="false"
+                     data-widget-fullscreenbutton="false" data-widget-custombutton="false" data-widget-collapsed="false" data-widget-sortable="false"
+                     style="">
+                    <header role="heading">
+                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                        <h2>游戏信息</h2>
+                    </header>
+                    <table class="table table-bordered">
+                        <tbody>
+                            <tr>
+                                <th>好友人数</th><th>@Model.Friend</th>
+                                <th>最高拥有游戏币</th><th>@Model.MaxGold</th>
+                                <th>昨日盈利</th><th>@Model.lastMoney <input type="button" style="float:right;" value="查询" onclick="return GotoUserProfit(@Model.ID);" /></th>
+                            </tr>
+                            <tr>
+                                <th>当前礼物数量</th><th>@Model.Gift</th>
+                                <th>过期礼物数量</th><th>@Model.GiftExpire</th>
+                                <th>道具数量</th><th>@Model.ItemCount <input type="button" style="float:right;" value="查询" onclick="return GotoUserItem(@Model.ID);" /></th>
+                            </tr>
+                            <tr>
+                                <th>德州局数(胜负)</th><th>@Model.GameInfo15.dwWin/@{var re1 = Model.GameInfo15.dwTotal - Model.GameInfo15.dwWin;}@re1</th>
+                                <th>德州胜率</th>
+                                @if (Model.GameInfo15.dwTotal == 0){
+                                    <th>0%</th>
+                                }else{
+                                    <th>@{var winRate = Model.GameInfo15.dwWin * 100 / Model.GameInfo15.dwTotal;}@winRate%</th>
+                                }                                    
+                                <th>德州一把最高赢取</th><th>@Model.GameInfo15.maxWinChip</th>
+                            </tr>
+                            <tr>
+                                <th>中发白局数(胜负)</th><th>@Model.GameInfo13.dwWin/@{var re2 = Model.GameInfo13.dwTotal - Model.GameInfo13.dwWin;}@re2</th>
+                                <th>中发白胜率</th>
+                                @if (Model.GameInfo13.dwTotal == 0){
+                                    <th>0%</th>
+                                }else{
+                                    <th>@{var winRate = Model.GameInfo13.dwWin * 100 / Model.GameInfo13.dwTotal;}@winRate%</th>
+                                }
+                                <th>中发白一把最高赢取</th><th>@Model.GameInfo13.maxWinChip</th>
+                            </tr>
+                            <tr>
+                                <th>十二生肖局数(胜负)</th><th>@Model.GameInfo14.dwWin/@{var re3 = Model.GameInfo14.dwTotal - Model.GameInfo14.dwWin;}@re3</th>
+                                <th>十二生肖胜率</th>
+                                @if (Model.GameInfo14.dwTotal == 0){
+                                    <th>0%</th>
+                                }else{
+                                    <th>@{var winRate = Model.GameInfo14.dwWin * 100 / Model.GameInfo14.dwTotal;}@winRate%</th>
+                                }
+                                <th>十二生肖一把最高赢取</th><th>@Model.GameInfo14.maxWinChip</th>
+                            </tr>
+                    </table>
+                </div>
+            }
+        </div>
+    </section>
+
+    <div id="dialog" title="封号" style="display:none">
+        <form style="width:95%" id="comment-form" class="smart-form" novalidate="novalidate" method="get">
+            <input type="hidden" value="" id="hidUID" />
+            <section>
+                <label class="label"><font size="4">被封账号</font>:<span id="spanFreeze"></span></label>
+            </section>
+           
+            <section>
+                <label class="label"> 
+                    <font size="4">
+                        封号时长:
+                    </font>
+                    @Html.DropDownListFor(m => m.TimeSelect, new List<SelectListItem>
+                    {
+                        new SelectListItem { Text= "永久", Value = "5256000" },//5256000 
+                        new SelectListItem { Text= "30分钟", Value ="30" },
+                        new SelectListItem { Text= "1小时", Value ="60" },
+                        new SelectListItem { Text= "3小时", Value = "180" },
+                        new SelectListItem { Text= "6小时", Value = "360" },
+                        new SelectListItem { Text= "12小时", Value = "720" },
+                        new SelectListItem { Text= "1天", Value = "1440" },
+                        new SelectListItem { Text= "2天", Value = "2880" },
+                        new SelectListItem { Text= "3天", Value = "4320" },
+                        new SelectListItem { Text= "7天", Value = "10080" }   
+                    }, new { @class = "time" })
+                </label>
+            </section>
+
+             <section>
+                <label class="label"><font size="4">封号原因:</font></label>
+                <div class="inline-group">
+                    <label class="radio">
+                        <input type="radio" name="result" value="2" checked="checked">
+                        <i></i>刷游戏币
+                    </label>
+                    <label class="radio">
+                        <input type="radio" name="result" value="1" id="radefault">
+                        <i></i>注册账号已超过5个
+                    </label>
+                    <label class="radio">
+                        <input type="radio" name="result" value="5" id="radefault">
+                        <i></i>发布恶意虚假信息
+                    </label>
+                    <label class="radio">
+                        <input type="radio" name="result" value="6" id="radefault">
+                        <i></i>恶意攻击官方
+                    </label>
+                </div>
+            </section>
+            <section style="padding-left:200px">
+                <div class="row">
+                    <section class="col col-lg-12">
+                        <button type="button" class="btn btn-success btn-sm" onclick="FreezeNum()">确定</button>
+                        <button type="button" class="btn btn-success btn-sm" onclick="closeFreez()">取消</button>
+                    </section>
+                </div>
+            </section>
+        </form>
+    </div>
+
+    <div id="dialog2" title="禁言" style="display:none">
+        <form style="width:95%" id="comment-form" class="smart-form" novalidate="novalidate" method="get">
+            <input type="hidden" value="" id="hidUID2" />
+            <section>
+                <label class="label"><font size="4">被禁账号</font>:<span id="spanFreeze2"></span></label>
+            </section>
+            <section>
+                <label class="label">
+                    <font size="4">
+                        被禁时长:
+                    </font>
+                    @Html.DropDownListFor(m => m.TimeSelect, new List<SelectListItem>
+                    {
+                        new SelectListItem { Text= "30分钟", Value ="30" },
+                        new SelectListItem { Text= "1小时", Value ="60" },
+                        new SelectListItem { Text= "3小时", Value = "180" },
+                        new SelectListItem { Text= "6小时", Value = "360" },
+                        new SelectListItem { Text= "12小时", Value = "720" },
+                        new SelectListItem { Text= "1天", Value = "1440" },
+                        new SelectListItem { Text= "2天", Value = "2880" },
+                        new SelectListItem { Text= "3天", Value = "4320" },
+                        new SelectListItem { Text= "7天", Value = "10080" },
+                        new SelectListItem { Text= "永久", Value = "5256000" }
+                    }, new { @class ="time2" })
+                </label>
+            </section>
+
+            <section>
+                <label class="label"><font size="4">被禁原因:</font></label>
+                <div class="inline-group">
+                    <label class="radio">
+                        <input type="radio" name="result2" value="1" checked="checked">
+                        <i></i>恶意刷屏
+                    </label>
+                    <label class="radio">
+                        <input type="radio" name="result2" value="2" id="radefault2">
+                        <i></i>发布恶意辱骂信息
+                    </label>
+                    <label class="radio">
+                        <input type="radio" name="result2" value="3" id="radefault2">
+                        <i></i>发布恶意虚假信息
+                    </label>
+                    <label class="radio">
+                        <input type="radio" name="result2" value="4" id="radefault2">
+                        <i></i>言论与国家法律法规冲突
+                    </label>
+                </div>
+            </section>
+            <section style="padding-left:200px">
+                <div class="row">
+                    <section class="col col-lg-12">
+                        <button type="button" class="btn btn-success btn-sm" onclick="btnUserOper()">确定</button>
+                        <button type="button" class="btn btn-success btn-sm" onclick="closeFreez()">取消</button>
+                    </section>
+                </div>
+            </section>
+        </form>
+    </div>
+
+</div>
+
+@section scripts{
+    @{Html.RegisterMvcPagerScriptResource();}
+
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/select2.min.js"></script>
+    <script src="/js/matrix.tables.js"></script>
+    <script type="text/javascript">
+        function btnOffLine(id){
+            if(confirm("是否将玩家"+id+"踢下线")){
+                $.ajax({
+                    url: "/Member/OffLine/",
+                    data: { "UserID": id },
+                    success: function (data) {
+                      
+                    }
+                });
+            }
+        }
+
+        function btnFreeze(id, acc) {
+            //弹出一个选择原因的框，来选封的原因
+            $("#spanFreeze").html(acc);//账号
+            $("#hidUID").val(id);//账号id
+            dialog = $("#dialog").dialog({
+                width: 620,
+                modal: true
+            });
+            return false;
+        }
+
+        function btnUser(value, flag, type) {
+          
+            var _strAccount = "false";
+            var _des = "解除封禁";
+            if (flag == 1) {  //禁言
+                _strAccount = "true";
+                _des = "封禁";
+
+            }
+            if (confirm('确定将玩家' + _des)) {
+                $.ajax({
+                    url: "/Member/FM" + type,
+                    type: "post",
+                    dataType: "json",
+                    data: { "dwUserID": value, "strAccount": _strAccount },
+                    success: function (data) {
+                        if (data == 2020) {
+                            window.location.reload();
+                            return false;
+                        }
+
+                        switch (data.result) {
+                            case 0:
+                                alert('已将玩家' + _des);
+                                if(type=="Delete"){
+                                    $("#jiechuspeak").css("display","none");
+                                    $("#nospeak").css("display","");
+                                }else if(type=="Put"){
+                                    $("#jiechuFreeze").css("display","none");
+                                    $("#noFreeze").css("display","");
+                                    
+                                    
+                                    // location.reload();
+                                }
+                                //alert("1");
+                            
+                              
+
+
+                               // location.reload();
+                                break;
+                            case 1:
+                                alert(_des + "操作失败，请稍后再试");
+                                break;
+                            case 2:
+                                alert("服务器未启动，请稍后再试");
+                                break;
+                            default:
+                                alert('未知错误');
+                                break;
+                        }
+                    }
+                });
+            } else {
+                return false;
+            }
+            return false;
+        }
+
+        function btnCloseTalk(id, acc) {
+            $("#spanFreeze2").html(acc);//账号
+            $("#hidUID2").val(id);//账号id
+            dialog = $("#dialog2").dialog({
+                width: 660,
+                modal: true
+            });
+            return false;
+        }
+
+        function closeFreez() {
+            dialog.dialog("close");
+            $("#hidUID").val("");
+            $("#hidUID2").val("");
+        }
+
+        function FreezeNum() {
+            var _UserID = $("#hidUID").val();//id
+            var _min = $(".time").find("option:selected").val();//时间长短
+            var _Reason = $("input[name=result]:checked").val();//原因
+            $.ajax({
+                url: "/Member/FMPut/",
+                type: "post",
+                dataType: "json",
+                data: { "dwUserID": _UserID, "strAccount": "true", "Reason": _Reason,"Minu":_min },
+                success: function (data) {
+
+                    if (data == 2020) {
+                        window.location.reload();
+                        return false;
+                    }
+
+                    switch (data.result) {
+                        case 0:
+                            alert('已将玩家【' + $("#spanFreeze").html() + '】的账号封号');
+                            //closeFreez();
+                            
+                            $("#spanfenghao").html(data.Times);
+                            $("#spanfenghao2").html(data.Times);
+                            $("#jiechuFreeze").css("display","");
+                            $("#noFreeze").css("display","none");
+                            $('#dialog').dialog('close'); 
+                            
+                            //location.reload();
+                            break;
+                        case 1:
+                            alert("封号失败，请稍后再试");
+                            break;
+                        case 2:
+                            alert("服务器未启动，请稍后再试");
+                            break;
+                        default:
+                            alert('未知错误');
+                            break;
+                    }
+                }
+            });
+        }
+
+        function btnUserOper() {
+            var _UserID = $("#hidUID2").val();//id
+            var _min = $(".time2").find("option:selected").val();//时间长短
+            var _Reason = $("input[name=result2]:checked").val();//原因
+            $.ajax({
+                url: "/Member/FMDelete/",
+                type: "post",
+                dataType: "json",
+                data: { "dwUserID": _UserID, "strAccount": "true", "Reason": _Reason, "Minu": _min },
+                success: function (data) {
+
+                    //if (data == 2020) {
+                    //    window.location.reload();
+                    //    return false;
+                    //}
+                
+                    switch (data.result) {
+                        case 0:
+                            alert('已将玩家' + "禁言");
+                            
+                         
+                            $("#spanjinyan").html(data.Times);
+                            $("#spanjinyan2").html(data.Times);
+                            $("#jiechuspeak").css("display","");
+                            $("#nospeak").css("display","none");
+                            //$(".ui-dialog").each(function(){
+                            //    $(this).css("display","none");
+                            //})
+                            //$(".ui-widget-overlay").each(function(){
+                            //    $(this).remove();
+                            //})
+                            $('#dialog2').dialog('close'); 
+
+
+                           // location.reload();
+                            break;
+                        case 1:
+                            alert("禁言" + "操作失败，请稍后再试");
+                            break;
+                        case 2:
+                            alert("服务器未启动，请稍后再试");
+                            break;
+                        default:
+                            alert('未知错误');
+                            break;
+                    }
+                }
+            });
+            return false;
+        }
+
+
+        function btnCommand(value ,flag ,url) {
+            var _strAccount = "false";
+            var _des = "解除封禁";
+            if(flag == 1){
+                _strAccount = "true";
+                _des = "封禁";
+            }
+            if (confirm('确定将【' + value + '】' + _des)) {
+                $.ajax({
+                    url: "/member/" + url,
+                    type: "Post",
+                    dataType: "JSON",
+                    data: { "strIP": value, "strAccount": _strAccount },
+                    success: function (data) {
+                        switch (data.result) {
+                            case 0:
+                                alert('已将【' + value + '】' + _des);
+                             
+                               
+                                
+                                 location.reload();
+                                break;
+                            case 1:
+                                alert(_des + "失败，请稍后再试");
+                                break;
+                            case 2:
+                                alert("服务器未启动，请稍后再试");
+                                break;
+                            default:
+                                alert('未知错误');
+                                break;
+                        }
+                    }
+                });
+            } else {
+                return false;
+            }
+            return false;
+        }
+
+        function LoginSearch(obj) {
+            location.href = "/Member/LoginList?type=0&Value=" + obj;
+        }
+
+        function DuiHuanView(obj) {
+            location.href = "/Manage/MemberForDuiHuan?SearchExt=" + obj;
+        }
+
+        function OutputView(obj) {
+            location.href = "/Manage/MemberForSearchGameRecord?SearchExt=" + obj;
+        }
+
+        function UsersDiamondDistributionRatio() {
+            location.href = "/Base/UsersDiamondDistributionRatio";
+        }
+
+        function UpdateGrade(type ,id){
+            location.href = "/Manage/MemberUpdate?Type=" + type + "&ID=" + id;
+        }
+
+        function GetDateStr(AddDayCount) {
+            var dd = new Date();
+            dd.setDate(dd.getDate()+AddDayCount);//获取AddDayCount天后的日期
+            var y = dd.getFullYear();
+            var m = dd.getMonth()+1;//获取当前月份的日期
+            var d = dd.getDate();
+            return y+"-"+m+"-"+d;
+        } 
+
+        function GotoUserProfit(id){
+            var myDate = new Date();
+            //location.href = "/Base/UserProfit?SearchExt=" + id + "&StartDate=" + GetDateStr(0) + "&ExpirationDate=" + GetDateStr(1);
+            window.open("/Base/UserProfit?SearchExt=" + id + "&StartDate=" + GetDateStr(-1) + "&ExpirationDate=" + GetDateStr(0));
+        }
+
+        function GotoUserItem(id){
+            window.open("/Manage/MemberForRecord?hidDataCount=&Gametype=3&SearchExt=" + id + "&ItemID=0");
+        }
+
+        function btnResetSafeBox(id, acc) {
+            if (confirm('确定将【' + acc + '】的保险箱重置？')) {
+                var _UserID = id;
+                $.ajax({
+                    url: "/member/btnResetSafeBox/",
+                    type: "Post",
+                    dataType: "JSON",
+                    data: { "dwUserID": _UserID },
+                    success: function (data) {
+                        switch (data.result) {
+                            case 0:
+                                alert('已将【' + acc + '】的保险箱重置');
+                                location.reload();
+                                break;
+                            case 1:
+                                alert("保险箱重置失败，请稍后再试");
+                                break;
+                            case 2:
+                                alert("服务器未启动，请稍后再试");
+                                break;
+                            default:
+                                alert('未知错误');
+                                break;
+                        }
+                    }
+                });
+
+            } else {
+                return false;
+            }
+            return false;
+        }
+
+        function UpdateVipLevel(obj){
+            $.ajax({
+                url: "/member/SetVipLevel",
+                type: "Post",
+                dataType: "JSON",
+                data: { "UserID": obj, "vip": 2 },
+                success: function (data) {
+                    switch (data.result) {
+                        case 0:
+                            alert('已将【' + value + '】' + _des);
+                            location.reload();
+                            break;
+                        case 1:
+                            alert(_des + "失败，请稍后再试");
+                            break;
+                        case 2:
+                            alert("服务器未启动，请稍后再试");
+                            break;
+                        default:
+                            alert('未知错误');
+                            break;
+                    }
+                }
+            });
+        }
+
+    </script>    
+}

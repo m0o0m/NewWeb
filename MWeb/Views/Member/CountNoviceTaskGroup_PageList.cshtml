@@ -1,0 +1,153 @@
+﻿
+@using Webdiyer.WebControls.Mvc;
+@using GL.Data.Model;
+@model  PagedList<BaseDataInfo>
+    @{ 
+        PagedList<BaseDataInfo> bdl = (PagedList<BaseDataInfo>)ViewData["taskGroup"];
+        ViewBag.Title = "完成新手任务的用户统计";
+        ViewBag.Format = "yyyy-MM-dd";
+    }
+
+
+
+<div class="row-fluid NoviceTaskList">
+    <div class="widget-box" id="boxgroup">
+
+
+
+        <section id="widget-grid" class="">
+            <div class="row">
+                <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-0" data-widget-editbutton="false" data-widget-colorbutton="false"
+                         data-widget-togglebutton="false"
+                         data-widget-deletebutton="false"
+                         data-widget-fullscreenbutton="false"
+                         data-widget-custombutton="false"
+                         data-widget-collapsed="false"
+                         data-widget-sortable="false">
+                        <header>
+                            <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                            <h2>@ViewBag.Title</h2>
+                        </header>
+                        <!-- widget div-->
+                        <div>
+                            <!-- widget edit box -->
+                            <div class="jarviswidget-editbox">
+                                <!-- This area used as dropdown edit box -->
+                            </div>
+                            <!-- end widget edit box -->
+                            <!-- widget content -->
+                            <div class="widget-body no-padding">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered">
+                                        <thead>
+
+                                            <tr>
+                                                <th>日期</th>
+                                                <th>日完成新手任务用户数</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @if (bdl.Count == 0)
+            {
+                                                <tr class="gradeX">
+                                                    <td class="colspan" align="center" colspan="0">
+                                                        没有找到相关记录！
+                                                    </td>
+                                                </tr>
+                                            }
+                                            @foreach (var item in bdl)
+            {
+                                                <tr class="gradeA">
+                                                    <td>@item.date.ToString(ViewBag.Format)</td>
+                                                    <td>@item.count</td>
+                                                </tr>
+
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+
+
+
+
+
+
+
+
+                                <div class="widget-content">
+
+                                    @Ajax.Pager(
+    bdl,
+    new PagerOptions()
+    {
+        CssClass = "pager",
+        ShowMorePagerItems = true,
+        PageIndexParameterName = "pageGroup",
+        ShowDisabledPagerItems = true,
+        AlwaysShowFirstLastPageNumber = true,
+        //ShowRecordCountItems = true,
+        HorizontalAlign = "right",
+        //SeparatorHtml = "",
+
+        CurrentPagerItemTemplate = "<li class=\"disabled\"><span>{0}</span></li>",
+        DisabledPagerItemTemplate = "<li class=\"disabled\"><span>{0}</span></li>",
+        PagerItemTemplate = "<li>{0}</li>",
+        //CurrentPagerItemWrapperFormatString = "<li class=\"disabled\"><span>{0}</span></li>",
+        //NumericPagerItemWrapperFormatString = "<li>{0}</li>",
+        //PagerItemWrapperFormatString = "<li>{0}</li>",
+        //RecordCountText = string.Format("共{0}条记录, {1}页", Model.TotalItemCount, Model.TotalPageCount),
+        //RecordCountFormatString = "<li><span>{0}</span></li>",
+        //DisabledPagerItemsFormatString = "<li class=\"disabled\"><span>{0}</span></li>",
+        //PageIndexBoxType = Webdiyer.WebControls.Mvc.PageIndexBoxType.TextBox,
+        //GoButtonText = "跳转到",
+        ShowPrevNext = true,
+        FirstPageText = "第一页",
+        LastPageText = "最后一页",
+        ContainerTagName = "ul",
+        PageIndexBoxId = "pageindexcmGroup",
+        WYWPageIndexString = @"<li><input style='width:50px;' type='text' value='' id='{0}' name = '{1}'></li>
+                                 <li><a id='goto' name='goto' style='margin-right:10px' >跳转</a><li>
+                             ",
+        GoToButtonId = "goto"
+    },
+    new MvcAjaxOptions
+    {
+        HttpMethod = "POST",
+        UpdateTargetId = "boxgroup",
+        InsertionMode = InsertionMode.Replace,
+        OnFailure = "errFunc",
+        OnSuccess = "successPageFun"
+    }).Options(o => o.AddRouteValue("target", "boxgroup"))
+                                </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                            </div>
+                            <!-- end widget content -->
+                        </div>
+                        <!-- end widget div -->
+                    </div>
+                    <!-- end widget -->
+
+                </article>
+            </div>
+        </section>
+
+    </div>
+</div>
+

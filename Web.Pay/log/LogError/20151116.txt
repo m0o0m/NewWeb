@@ -1,0 +1,60 @@
+
+ 
+记录时间：2015-11-16 10:52:59,926  线程ID:[1647]  日志级别：ERROR 
+错误描述：Yeepay 参数不正确 
+
+ 
+记录时间：2015-11-16 10:53:05,400  线程ID:[1649]  日志级别：INFO  
+错误描述： QQPay Url : http://localhost:2335/callback/ResultNotifyPageForQQ?amt=200&appid=1104965754&billno=-APPDJSX36116-20151116-1051330410&ibazinga=1&openid=A1BAE5D590ACCAC6DCD61063A9387637&payamt_coins=0&paychannel=qqpoint&paychannelsubid=1&payitem=5b_1*20*1&providetype=0&pubacct_payamt_coins=&token=937C039B789A252EC1DB169C8922C10220553&ts=1447642293&version=v3&zoneid=0&sig=9XO9q8M0DiiRzzcsP0juejZe7l0%3D
+
+ 
+记录时间：2015-11-16 10:53:05,551  线程ID:[1649]  日志级别：ERROR 
+错误描述： QQPay OpenID用户不存在http://localhost:2335/callback/ResultNotifyPageForQQ?amt=200&appid=1104965754&billno=-APPDJSX36116-20151116-1051330410&ibazinga=1&openid=A1BAE5D590ACCAC6DCD61063A9387637&payamt_coins=0&paychannel=qqpoint&paychannelsubid=1&payitem=5b_1*20*1&providetype=0&pubacct_payamt_coins=&token=937C039B789A252EC1DB169C8922C10220553&ts=1447642293&version=v3&zoneid=0&sig=9XO9q8M0DiiRzzcsP0juejZe7l0%3D
+
+ 
+记录时间：2015-11-16 10:55:47,301  线程ID:[13]  日志级别：INFO  
+错误描述： QQPay Url : http://localhost:2335/callback/ResultNotifyPageForQQ?amt=200&appid=1104965754&billno=-APPDJSX36116-20151116-1051330410&ibazinga=1&openid=A1BAE5D590ACCAC6DCD61063A9387637&payamt_coins=0&paychannel=qqpoint&paychannelsubid=1&payitem=5b_1*20*1&providetype=0&pubacct_payamt_coins=&token=937C039B789A252EC1DB169C8922C10220553&ts=1447642293&version=v3&zoneid=0&sig=9XO9q8M0DiiRzzcsP0juejZe7l0%3D
+
+ 
+记录时间：2015-11-16 10:56:02,694  线程ID:[13]  日志级别：ERROR 
+错误描述： QQPay 服务器发货失败http://localhost:2335/callback/ResultNotifyPageForQQ?amt=200&appid=1104965754&billno=-APPDJSX36116-20151116-1051330410&ibazinga=1&openid=A1BAE5D590ACCAC6DCD61063A9387637&payamt_coins=0&paychannel=qqpoint&paychannelsubid=1&payitem=5b_1*20*1&providetype=0&pubacct_payamt_coins=&token=937C039B789A252EC1DB169C8922C10220553&ts=1447642293&version=v3&zoneid=0&sig=9XO9q8M0DiiRzzcsP0juejZe7l0%3D
+System.Data.DataException: Error parsing column 8 (Gold=9747970472 - Int64) ---> System.OverflowException: 算术运算导致溢出。
+   在 Deserializec281d85e-ca25-400a-9333-cd9465cb5029(IDataReader )
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 GL.Dapper.SqlMapper.ThrowDataException(Exception ex, Int32 index, IDataReader reader, Object value) 位置 E:\yun\WorkGroup\GameBackstage\Web\GL.Dapper\SqlMapper.cs:行号 3985
+   在 Deserializec281d85e-ca25-400a-9333-cd9465cb5029(IDataReader )
+   在 GL.Dapper.SqlMapper.<QueryImpl>d__60`1.MoveNext() 位置 E:\yun\WorkGroup\GameBackstage\Web\GL.Dapper\SqlMapper.cs:行号 1565
+   在 System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   在 System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   在 GL.Dapper.SqlMapper.Query[T](IDbConnection cnn, String sql, Object param, IDbTransaction transaction, Boolean buffered, Nullable`1 commandTimeout, Nullable`1 commandType) 位置 E:\yun\WorkGroup\GameBackstage\Web\GL.Dapper\SqlMapper.cs:行号 1436
+   在 GL.Data.DAL.RoleDAL.GetModelByOpenID(Role model) 位置 E:\yun\WorkGroup\GameBackstage\Web\GL.Pay.Data\DAL\RoleDAL.cs:行号 33
+   在 GL.Data.BLL.RoleBLL.GetModelByOpenID(Role role) 位置 E:\yun\WorkGroup\GameBackstage\Web\GL.Pay.Data\BLL\RoleBLL.cs:行号 24
+   在 Web.Pay.Controllers.CallbackController.ResultNotifyPageForQQ(Dictionary`2 queryvalues) 位置 E:\yun\WorkGroup\GameBackstage\Web\Web.Pay\Controllers\CallbackController.cs:行号 563
+
+ 
+记录时间：2015-11-16 10:59:06,844  线程ID:[5]  日志级别：INFO  
+错误描述： QQPay Url : http://localhost:2335/callback/ResultNotifyPageForQQ?amt=200&appid=1104965754&billno=-APPDJSX36116-20151116-1051330410&ibazinga=1&openid=A1BAE5D590ACCAC6DCD61063A9387637&payamt_coins=0&paychannel=qqpoint&paychannelsubid=1&payitem=5b_1*20*1&providetype=0&pubacct_payamt_coins=&token=937C039B789A252EC1DB169C8922C10220553&ts=1447642293&version=v3&zoneid=0&sig=9XO9q8M0DiiRzzcsP0juejZe7l0%3D
+
+ 
+记录时间：2015-11-16 11:07:39,676  线程ID:[6]  日志级别：INFO  
+错误描述： QQPay Url : http://localhost:2335/callback/ResultNotifyPageForQQ?amt=200&appid=1104965754&billno=-APPDJSX36116-20151116-1106536425&openid=A1BAE5D590ACCAC6DCD61063A9387637&payamt_coins=0&paychannel=qqpoint&paychannelsubid=1&payitem=5b_1*20*1&providetype=0&pubacct_payamt_coins=&token=470F74E6D23691740E0E68C06ED7C3A020553&ts=1447643213&version=v3&ybazinga=1&zoneid=0&sig=EY9KkIqfLbTScjUVnQ9ca%2B3i0wE%3D
+
+ 
+记录时间：2015-11-16 11:07:39,676  线程ID:[7]  日志级别：INFO  
+错误描述： QQPay Url : http://localhost:2335/callback/ResultNotifyPageForQQ?amt=200&appid=1104965754&billno=-APPDJSX36116-20151116-1106536425&openid=A1BAE5D590ACCAC6DCD61063A9387637&payamt_coins=0&paychannel=qqpoint&paychannelsubid=1&payitem=5b_1*20*1&providetype=0&pubacct_payamt_coins=&token=470F74E6D23691740E0E68C06ED7C3A020553&ts=1447643213&version=v3&ybazinga=1&zoneid=0&sig=EY9KkIqfLbTScjUVnQ9ca%2B3i0wE%3D
+
+ 
+记录时间：2015-11-16 11:08:36,282  线程ID:[6]  日志级别：ERROR 
+错误描述： QQPay 服务器发货失败http://localhost:2335/callback/ResultNotifyPageForQQ?amt=200&appid=1104965754&billno=-APPDJSX36116-20151116-1106536425&openid=A1BAE5D590ACCAC6DCD61063A9387637&payamt_coins=0&paychannel=qqpoint&paychannelsubid=1&payitem=5b_1*20*1&providetype=0&pubacct_payamt_coins=&token=470F74E6D23691740E0E68C06ED7C3A020553&ts=1447643213&version=v3&ybazinga=1&zoneid=0&sig=EY9KkIqfLbTScjUVnQ9ca%2B3i0wE%3D
+
+ 
+记录时间：2015-11-16 11:08:39,556  线程ID:[7]  日志级别：ERROR 
+错误描述： QQPay 服务器发货失败http://localhost:2335/callback/ResultNotifyPageForQQ?amt=200&appid=1104965754&billno=-APPDJSX36116-20151116-1106536425&openid=A1BAE5D590ACCAC6DCD61063A9387637&payamt_coins=0&paychannel=qqpoint&paychannelsubid=1&payitem=5b_1*20*1&providetype=0&pubacct_payamt_coins=&token=470F74E6D23691740E0E68C06ED7C3A020553&ts=1447643213&version=v3&ybazinga=1&zoneid=0&sig=EY9KkIqfLbTScjUVnQ9ca%2B3i0wE%3D
+
+ 
+记录时间：2015-11-16 11:08:53,409  线程ID:[13]  日志级别：INFO  
+错误描述： QQPay Url : http://localhost:2335/callback/ResultNotifyPageForQQ?amt=200&appid=1104965754&billno=-APPDJSX36116-20151116-1106536425&openid=A1BAE5D590ACCAC6DCD61063A9387637&payamt_coins=0&paychannel=qqpoint&paychannelsubid=1&payitem=5b_1*20*1&providetype=0&pubacct_payamt_coins=&token=470F74E6D23691740E0E68C06ED7C3A020553&ts=1447643213&version=v3&ybazinga=1&zoneid=0&sig=EY9KkIqfLbTScjUVnQ9ca%2B3i0wE%3D
+
+ 
+记录时间：2015-11-16 11:09:19,930  线程ID:[13]  日志级别：ERROR 
+错误描述： QQPay 服务器发货失败http://localhost:2335/callback/ResultNotifyPageForQQ?amt=200&appid=1104965754&billno=-APPDJSX36116-20151116-1106536425&openid=A1BAE5D590ACCAC6DCD61063A9387637&payamt_coins=0&paychannel=qqpoint&paychannelsubid=1&payitem=5b_1*20*1&providetype=0&pubacct_payamt_coins=&token=470F74E6D23691740E0E68C06ED7C3A020553&ts=1447643213&version=v3&ybazinga=1&zoneid=0&sig=EY9KkIqfLbTScjUVnQ9ca%2B3i0wE%3D

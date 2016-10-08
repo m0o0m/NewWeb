@@ -1,0 +1,81 @@
+﻿@{
+    ViewBag.Title = "changepwd";
+    Layout = "~/Views/Shared/_index.cshtml";
+}
+
+@section Js{
+    
+<script type="text/javascript">
+
+    $(function () {
+
+        $("#form-changepwd").Validform({
+            tiptype: 3,
+            usePlugin: {
+                passwordstrength: {
+                    minLen: 6,
+                    maxLen: 18
+                }
+            }
+        });
+    });
+
+</script>
+}
+<div class="wrap">
+        <!-- 位置 -->
+        <section class="crumbs">
+            <strong>您现在的位置:</strong>
+            <a href="/" title="">首页</a><span>&gt;</span>
+            <a href="#" title="">会员中心</a><span>&gt;</span>
+            <p>修改密码</p>
+        </section>
+        <!-- 主体包裹 -->
+        <div class="main-wrap">
+            <!-- 侧栏 -->
+            <nav class="side-nav">
+                <ul>
+                    <li ><a href="/account"><i class="st-icon icon-person"></i>我的账户</a></li>
+                    <li class="active"><a href="/changepwd"><i class="st-icon icon-pwd"></i>修改密码</a></li>
+                </ul>
+            </nav>
+            <!-- 主体内容 -->
+            <section class="main-area main-area-account">
+                <div class="change-pwd-area">
+                    <p class="pwd-info">建议使用字母加数字组合、混合大小写、特殊字符（如@@）等提高密码强度。</p>
+                    <form id="form-changepwd" action="changepwd_submit" method="get">
+                    
+                    <div class="hor-group">
+                        <label>当前密码：</label>
+                        <div class="group">
+                            <input type="password" name="" value="" datatype="*" nullmsg="请填写信息！">
+                            <span class="Validform_checktip Validform_wrong">这是错误信息</span>
+                        </div>
+                    </div>
+                    <div class="hor-group">
+                        <label>新密码：</label>
+                        <div class="group">
+                            <input type="password" value="" name="password" class="inputxt Validform_error" plugin="passwordStrength" datatype="*6-18" errormsg="密码至少6个字符,最多18个字符！" nullmsg="请填写信息！">
+                            <!-- <input type="password" name="" value="" placeholder=""> -->
+                            <span class="Validform_checktip Validform_wrong">这是错误信息</span>
+                            <div class="passwordStrength">密码强度： <span>弱</span><span>中</span><span class="last">强</span></div>
+                        </div>
+                    </div>
+                    <div class="hor-group">
+                        <label>确认新密码：</label>
+                        <div class="group">
+                            <input id="ipt-reg-pwd-re" type="password" datatype="*" recheck="userpassword" errormsg="您两次输入的账号密码不一致！">
+                            <span class="Validform_checktip Validform_wrong">这是错误信息</span>
+                        </div>
+                    </div>
+                    <div class="hor-group">
+                            <button class="button-sbt" type="button">保存</button>
+                        </div>
+
+
+                    </form>
+                        
+                </div>
+            </section>
+        </div>
+    </div>

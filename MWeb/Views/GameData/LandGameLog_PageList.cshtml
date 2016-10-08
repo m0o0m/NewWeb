@@ -1,0 +1,205 @@
+﻿@using Webdiyer.WebControls.Mvc;
+@using GL.Data.Model;
+@model PagedList<LandGameRecord>
+
+
+
+
+
+
+
+
+<section id="widget-grid" class="">
+    <div class="row">
+        <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-0" data-widget-editbutton="false" data-widget-colorbutton="false"
+                 data-widget-togglebutton="false"
+                 data-widget-deletebutton="false"
+                 data-widget-fullscreenbutton="false"
+                 data-widget-custombutton="false"
+                 data-widget-collapsed="false"
+                 data-widget-sortable="false">
+                <header>
+                    <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                    <h2>@ViewBag.Title</h2>
+                </header>
+                <!-- widget div-->
+                <div>
+                    <!-- widget edit box -->
+                    <div class="jarviswidget-editbox">
+                        <!-- This area used as dropdown edit box -->
+                    </div>
+                    <!-- end widget edit box -->
+                    <!-- widget content -->
+                    <div class="widget-body no-padding">
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <thead>
+
+                                    <tr>
+                                        <th>时间</th>
+                                        <th>房间ID</th>
+                                        <th>牌局号</th>
+                                        <th>低分</th>
+                                        <th>服务费</th>
+                                        <th>倍数</th>
+                                        <th>底牌</th>
+                                        <th>总资产</th>
+                                        <th>牌局携带</th>
+                                        <th>参与玩家</th>
+                                        <th>身份</th>
+                                        <th>牌型</th>
+                                        <th>输赢游戏币</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model.Count == 0)
+            {
+                                        <tr class="gradeX">
+                                            <td class="colspan" align="center" colspan="0">
+                                                没有找到相关记录！
+                                            </td>
+                                        </tr>
+            }
+                                    @foreach (LandGameRecord m in Model)
+            {
+                var userList = m.UserData.Split('_').ToList();
+                userList.RemoveAt(userList.Count-1);
+                var j = userList.Count;
+                for (int i = 0; i < j; i++)
+                {
+                    var userData = userList[i].Split(',').ToList();
+                                        <tr class="gradeA">
+                                            @if (i == 0)
+                    {
+                                                <td rowspan="@j">@m.CreateTime</td>
+                                                <td rowspan="@j">@m.RoomID</td>
+                                                <td rowspan="@j">@m.Round</td>
+                                                <td rowspan="@j">@m.BaseScore</td>
+                                                <td rowspan="@j">@m.Service</td>
+                                                <td rowspan="@j">@m.Rate</td>
+                                                <td rowspan="@j">
+                                                    @{
+                        var aa = m.BankCard.Split(',');
+                        for (int k = 0; k < aa.Length; k++)
+                        {
+                                                        <i class="game game-@aa[k]"></i>
+                        }
+                                                    }
+                                                </td>
+                    }
+
+                                            <td>@userData[0]</td>
+                                            <td>@userData[1]</td>
+                                            <td>@userData[2]</td>
+                                            <td>@userData[3]</td>
+                                            <td>
+                                                @{
+                    var bb = System.Text.RegularExpressions.Regex.Matches(userData[4], @"\w{2}", System.Text.RegularExpressions.RegexOptions.IgnoreCase);
+                        for (int k = 0; k < bb.Count; k++)
+                        {
+                                                    <i class="game game-@bb[k]"></i>
+                        }
+                                                }
+
+                                            </td>
+                                            <td>@userData[5]</td>
+                                        </tr>
+                }
+            }
+                                </tbody>
+                            </table>
+                        </div>
+
+
+
+
+
+
+
+
+                        <div class="widget-content">
+
+                            @Ajax.Pager(
+    Model,
+    new PagerOptions()
+    {
+        CssClass = "pager",
+        ShowMorePagerItems = true,
+        PageIndexParameterName = "page",
+        ShowDisabledPagerItems = true,
+        AlwaysShowFirstLastPageNumber = true,
+        //ShowRecordCountItems = true,
+        HorizontalAlign = "right",
+        //SeparatorHtml = "",
+
+        CurrentPagerItemTemplate = "<li class=\"disabled\"><span>{0}</span></li>",
+        DisabledPagerItemTemplate = "<li class=\"disabled\"><span>{0}</span></li>",
+        PagerItemTemplate = "<li>{0}</li>",
+        //CurrentPagerItemWrapperFormatString = "<li class=\"disabled\"><span>{0}</span></li>",
+        //NumericPagerItemWrapperFormatString = "<li>{0}</li>",
+        //PagerItemWrapperFormatString = "<li>{0}</li>",
+        //RecordCountText = string.Format("共{0}条记录, {1}页", Model.TotalItemCount, Model.TotalPageCount),
+        //RecordCountFormatString = "<li><span>{0}</span></li>",
+        //DisabledPagerItemsFormatString = "<li class=\"disabled\"><span>{0}</span></li>",
+        //PageIndexBoxType = Webdiyer.WebControls.Mvc.PageIndexBoxType.TextBox,
+        //GoButtonText = "跳转到",
+        ShowPrevNext = true,
+        FirstPageText = "第一页",
+        LastPageText = "最后一页",
+        ContainerTagName = "ul",
+        PageIndexBoxId = "pageindexcm",
+        WYWPageIndexString = @"<li><input style='width:50px;' type='text' value='' id='{0}' name = '{1}'></li>
+                                 <li><a id='goto' name='goto' style='margin-right:10px' >跳转</a><li>
+                             ",
+        GoToButtonId = "goto"
+    },
+    new MvcAjaxOptions
+    {
+        HttpMethod = "POST",
+        UpdateTargetId = "box",
+        InsertionMode = InsertionMode.Replace,
+        OnFailure = "errFunc",
+        OnSuccess = "successPageFun"
+    })
+                        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    </div>
+                    <!-- end widget content -->
+                </div>
+                <!-- end widget div -->
+            </div>
+            <!-- end widget -->
+
+        </article>
+    </div>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+

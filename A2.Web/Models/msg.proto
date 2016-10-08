@@ -1,0 +1,53 @@
+package ProtoCmd.Service;
+
+// 枚举定义通讯协议号
+enum ServiceCmd
+{
+	SC_BEGIN = 1;
+	SC_TEST	 = 2;
+	SC_TOTAL = 200;
+}
+
+// 结构定义通讯协议内容
+message MyTest
+{
+	required uint32 t = 1;
+}
+
+message CMsg
+
+{
+
+    required string msghead = 1;
+
+    required string msgbody = 2;
+
+}
+
+
+
+message CMsgHead
+
+{
+
+    required int32 msglen = 1;
+
+    required int32 msgtype = 2;
+
+}
+
+
+
+message CMsgReg
+
+{
+
+    optional int32 t = 1;
+
+
+}
+
+
+
+
+

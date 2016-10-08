@@ -1,0 +1,154 @@
+﻿@using GL.Data.Model
+@model BaseDataView
+@{
+    ViewBag.Title = "用户留存率";
+
+
+    ViewBag.Format = "yyyy-MM-dd";
+    switch (Model.Groupby)
+    {
+        case groupby.按日:
+            break;
+        case groupby.按月:
+            ViewBag.Format = "yyyy-MM";
+            break;
+    }
+    List<BaseDataInfoForRetentionRates> bdl = (List<BaseDataInfoForRetentionRates>)Model.BaseDataList;
+
+    int hid = (int)ViewData["cCount"];
+}
+
+
+<div id="content">
+    <!-- Widget ID (each widget will need unique ID)-->
+
+    <section id="widget-grid" class="">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
+
+                <div class="well">
+                    <form id="comment-form" class="form-inline" novalidate="novalidate" >
+
+
+                        <fieldset>
+                          
+
+                            @if (hid == 1)
+                            {
+                                @Html.DropDownList("Channels", null, new { @class = "form-control input-sm", @style = "display:none" })
+                            }
+                            else
+                            {
+                                @Html.DropDownList("Channels", null, new { @class = "form-control input-sm" })
+                            }
+
+
+
+                            <div class="form-group">
+                                <div class="input-group">
+                                    @*<input type="text" id="StartDate" name="StartDate" placeholder="Select a date" class="form-control datepicker" data-dateformat="yy-mm-dd">*@
+                                    @Html.TextBoxFor(m => m.StartDate, new Dictionary<string, object>() { { "class", "form-control datepicker input-sm" }, { "data-dateformat", "yy-mm-dd 00:00:00" } })
+                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    @*<input type="text" id="ExpirationDate" name="ExpirationDate"  class="form-control datepicker" data-dateformat="yy-mm-dd">*@
+                                    @Html.TextBoxFor(m => m.ExpirationDate, new Dictionary<string, object>() {
+                                    { "class", "form-control datepicker input-sm" },
+                                    { "data-dateformat", "yy-mm-dd 00:00:00" }
+                                })
+                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-success btn-sm">查询</button>
+
+                        </fieldset>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+        <div class="row">
+            <article class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
+                <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-0" data-widget-editbutton="false" data-widget-colorbutton="false"
+                     data-widget-togglebutton="false"
+                     data-widget-deletebutton="false"
+                     data-widget-fullscreenbutton="false"
+                     data-widget-custombutton="false"
+                     data-widget-collapsed="false"
+                     data-widget-sortable="false">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                        <h2>用户留存率</h2>
+                    </header>
+                    <!-- widget div-->
+                    <div>
+                        <!-- widget edit box -->
+                        <div class="jarviswidget-editbox">
+                            <!-- This area used as dropdown edit box -->
+                        </div>
+                        <!-- end widget edit box -->
+                        <!-- widget content -->
+                        <div class="widget-body no-padding" style="min-height: 70px;">
+                            <div class="table-responsive">
+                                <table class="table table-bordered">
+                                    <thead>
+                                      
+                                        <tr>
+                                            <th>注册日期</th>
+                                            <th>新增用户数</th>
+                                            <th>1日留存</th>
+                                            <th>2日留存</th>
+                                            <th>3日留存</th>
+                                            <th>5日留存</th>
+                                            <th>7日留存</th>
+                                            <th>10日留存</th>
+                                            <th>15日留存</th>
+                                            <th>30日留存</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @if (bdl.Count == 0)
+                                        {
+                                            <tr>
+                                                <td class="colspan" align="center" colspan="0">
+                                                    没有找到相关记录！
+                                                </td>
+                                            </tr>
+                                        }
+                                        @foreach (var item in bdl)
+                                        {
+                                            <tr>
+                                                <td>@item.date.ToString(ViewBag.Format)</td>
+                                                <td>@item.newuser</td>
+                                                <td>@item.oneday.ToString("0.00%")</td>
+                                                <td>@item.twoday.ToString("0.00%")</td>
+                                                <td>@item.threeday.ToString("0.00%")</td>
+                                                <td>@item.fiveday.ToString("0.00%")</td>
+                                                <td>@item.sevenday.ToString("0.00%")</td>
+                                                <td>@item.tenday.ToString("0.00%")</td>
+                                                <td>@item.fifteenday.ToString("0.00%")</td>
+                                                <td>@item.thirtyday.ToString("0.00%")</td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <!-- end widget content -->
+                    </div>
+                    <!-- end widget div -->
+                </div>
+                <!-- end widget -->
+
+            </article>
+        </div>
+    </section>
+
+
+
+
+
+
+</div>

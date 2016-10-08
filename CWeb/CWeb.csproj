@@ -1,0 +1,1573 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{23D76FD9-3C3A-4B09-8587-8E68166D3934}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CWeb</RootNamespace>
+    <AssemblyName>CWeb</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Owin">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.2.2.1\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.1\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Owin">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin">
+      <HintPath>..\packages\Microsoft.Owin.3.0.1\lib\net45\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb">
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.3.0.1\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security">
+      <HintPath>..\packages\Microsoft.Owin.Security.3.0.1\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Facebook">
+      <HintPath>..\packages\Microsoft.Owin.Security.Facebook.3.0.1\lib\net45\Microsoft.Owin.Security.Facebook.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Cookies">
+      <HintPath>..\packages\Microsoft.Owin.Security.Cookies.3.0.1\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.OAuth">
+      <HintPath>..\packages\Microsoft.Owin.Security.OAuth.3.0.1\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Google">
+      <HintPath>..\packages\Microsoft.Owin.Security.Google.3.0.1\lib\net45\Microsoft.Owin.Security.Google.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Twitter">
+      <HintPath>..\packages\Microsoft.Owin.Security.Twitter.3.0.1\lib\net45\Microsoft.Owin.Security.Twitter.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.MicrosoftAccount">
+      <HintPath>..\packages\Microsoft.Owin.Security.MicrosoftAccount.3.0.1\lib\net45\Microsoft.Owin.Security.MicrosoftAccount.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Helpers\HtmlHelperExtensions.cs" />
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\CustomerFilter.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Attribute\QueryStringAttribute.cs" />
+    <Compile Include="Attribute\QueryValuesAttribute.cs" />
+    <Compile Include="Attribute\XmlResult.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\MLogin.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Startup.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="favicon.ico" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Global.asax" />
+    <Content Include="Content\Site.css" />
+    <Content Include="img\logo.png" />
+    <Content Include="js\ad\681422.png" />
+    <Content Include="js\ad\681423.png" />
+    <Content Include="js\ad\681424.png" />
+    <Content Include="js\ad\681425.png" />
+    <Content Include="js\ad\api.htm" />
+    <Content Include="js\ad\base.css" />
+    <Content Include="js\ad\e.gif" />
+    <Content Include="js\ad\e_002.gif" />
+    <Content Include="js\ad\idangerous.css" />
+    <Content Include="js\ad\idangerous.js" />
+    <Content Include="js\ad\landing-v5.js" />
+    <Content Include="js\ad\main2.js" />
+    <Content Include="js\ad\moxz-v0.js" />
+    <Content Include="js\ad\swiper.css" />
+    <Content Include="js\ad\swiper.js" />
+    <Content Include="js\ad\zepto.js" />
+    <Content Include="js\app.js" />
+    <Content Include="js\awesomechart.js" />
+    <Content Include="js\bootstrap-colorpicker.js" />
+    <Content Include="js\bootstrap-datepicker.js" />
+    <Content Include="js\bootstrap-wysihtml5.js" />
+    <Content Include="js\bootstrap.min.js" />
+    <Content Include="js\ClearSession1.js" />
+    <Content Include="js\date_jquery.js" />
+    <Content Include="js\demo.js" />
+    <Content Include="js\excanvas.min.js" />
+    <Content Include="js\fullcalendar.min.js" />
+    <Content Include="js\jquery-1.7.2.min.js" />
+    <Content Include="js\jquery.dataTables.min.js" />
+    <Content Include="js\jquery.datePicker-min.js" />
+    <Content Include="js\jquery.flot.min.js" />
+    <Content Include="js\jquery.flot.pie.min.js" />
+    <Content Include="js\jquery.flot.resize.min.js" />
+    <Content Include="js\jquery.gritter.min.js" />
+    <Content Include="js\jquery.min.js" />
+    <Content Include="js\jquery.peity.min.js" />
+    <Content Include="js\jquery.toggle.buttons.html" />
+    <Content Include="js\jquery.ui.custom.js" />
+    <Content Include="js\jquery.uniform.js" />
+    <Content Include="js\jquery.validate.js" />
+    <Content Include="js\jquery.wizard.js" />
+    <Content Include="js\JqueryValidate\jquery.validate.js" />
+    <Content Include="js\JqueryValidate\jquery.validate.min.js" />
+    <Content Include="js\manhuaDate.1.0.js" />
+    <Content Include="js\maruti.html" />
+    <Content Include="js\masked.js" />
+    <Content Include="js\matrix.calendar.js" />
+    <Content Include="js\matrix.charts.js" />
+    <Content Include="js\matrix.chat.js" />
+    <Content Include="js\matrix.dashboard.js" />
+    <Content Include="js\matrix.form_common.js" />
+    <Content Include="js\matrix.form_validation.js" />
+    <Content Include="js\matrix.interface.js" />
+    <Content Include="js\matrix.js" />
+    <Content Include="js\matrix.login.js" />
+    <Content Include="js\matrix.popover.js" />
+    <Content Include="js\matrix.tables.js" />
+    <Content Include="js\matrix.wizard.js" />
+    <Content Include="js\plugin\bootstrap-progressbar\bootstrap-progressbar.js" />
+    <Content Include="js\plugin\bootstrap-slider\bootstrap-slider.js" />
+    <Content Include="js\plugin\bootstrap-slider\bootstrap-slider.min.js" />
+    <Content Include="js\plugin\bootstrap-tags\bootstrap-tagsinput-angular.js" />
+    <Content Include="js\plugin\bootstrap-tags\bootstrap-tagsinput.js" />
+    <Content Include="js\plugin\bootstrap-tags\bootstrap-tagsinput.min.js" />
+    <Content Include="js\plugin\bootstrap-timepicker\bootstrap-timepicker.js" />
+    <Content Include="js\plugin\bootstrap-timepicker\bootstrap-timepicker.min.js" />
+    <Content Include="js\plugin\bootstrap-wizard\jquery.bootstrap.wizard.js" />
+    <Content Include="js\plugin\bootstrap-wizard\jquery.bootstrap.wizard.min.js" />
+    <Content Include="js\plugin\bootstraptree\bootstrap-tree.js" />
+    <Content Include="js\plugin\ckeditor\adapters\jquery.js" />
+    <Content Include="js\plugin\ckeditor\build-config.js" />
+    <Content Include="js\plugin\ckeditor\ckeditor-.js" />
+    <Content Include="js\plugin\ckeditor\ckeditor.js" />
+    <Content Include="js\plugin\ckeditor\config.js" />
+    <Content Include="js\plugin\ckeditor\contents.css" />
+    <Content Include="js\plugin\ckeditor\lang\af.js" />
+    <Content Include="js\plugin\ckeditor\lang\ar.js" />
+    <Content Include="js\plugin\ckeditor\lang\bg.js" />
+    <Content Include="js\plugin\ckeditor\lang\bn.js" />
+    <Content Include="js\plugin\ckeditor\lang\bs.js" />
+    <Content Include="js\plugin\ckeditor\lang\ca.js" />
+    <Content Include="js\plugin\ckeditor\lang\cs.js" />
+    <Content Include="js\plugin\ckeditor\lang\cy.js" />
+    <Content Include="js\plugin\ckeditor\lang\da.js" />
+    <Content Include="js\plugin\ckeditor\lang\de.js" />
+    <Content Include="js\plugin\ckeditor\lang\el.js" />
+    <Content Include="js\plugin\ckeditor\lang\en-au.js" />
+    <Content Include="js\plugin\ckeditor\lang\en-ca.js" />
+    <Content Include="js\plugin\ckeditor\lang\en-gb.js" />
+    <Content Include="js\plugin\ckeditor\lang\en.js" />
+    <Content Include="js\plugin\ckeditor\lang\eo.js" />
+    <Content Include="js\plugin\ckeditor\lang\es.js" />
+    <Content Include="js\plugin\ckeditor\lang\et.js" />
+    <Content Include="js\plugin\ckeditor\lang\eu.js" />
+    <Content Include="js\plugin\ckeditor\lang\fa.js" />
+    <Content Include="js\plugin\ckeditor\lang\fi.js" />
+    <Content Include="js\plugin\ckeditor\lang\fo.js" />
+    <Content Include="js\plugin\ckeditor\lang\fr-ca.js" />
+    <Content Include="js\plugin\ckeditor\lang\fr.js" />
+    <Content Include="js\plugin\ckeditor\lang\gl.js" />
+    <Content Include="js\plugin\ckeditor\lang\gu.js" />
+    <Content Include="js\plugin\ckeditor\lang\he.js" />
+    <Content Include="js\plugin\ckeditor\lang\hi.js" />
+    <Content Include="js\plugin\ckeditor\lang\hr.js" />
+    <Content Include="js\plugin\ckeditor\lang\hu.js" />
+    <Content Include="js\plugin\ckeditor\lang\id.js" />
+    <Content Include="js\plugin\ckeditor\lang\is.js" />
+    <Content Include="js\plugin\ckeditor\lang\it.js" />
+    <Content Include="js\plugin\ckeditor\lang\ja.js" />
+    <Content Include="js\plugin\ckeditor\lang\ka.js" />
+    <Content Include="js\plugin\ckeditor\lang\km.js" />
+    <Content Include="js\plugin\ckeditor\lang\ko.js" />
+    <Content Include="js\plugin\ckeditor\lang\ku.js" />
+    <Content Include="js\plugin\ckeditor\lang\lt.js" />
+    <Content Include="js\plugin\ckeditor\lang\lv.js" />
+    <Content Include="js\plugin\ckeditor\lang\mk.js" />
+    <Content Include="js\plugin\ckeditor\lang\mn.js" />
+    <Content Include="js\plugin\ckeditor\lang\ms.js" />
+    <Content Include="js\plugin\ckeditor\lang\nb.js" />
+    <Content Include="js\plugin\ckeditor\lang\nl.js" />
+    <Content Include="js\plugin\ckeditor\lang\no.js" />
+    <Content Include="js\plugin\ckeditor\lang\pl.js" />
+    <Content Include="js\plugin\ckeditor\lang\pt-br.js" />
+    <Content Include="js\plugin\ckeditor\lang\pt.js" />
+    <Content Include="js\plugin\ckeditor\lang\ro.js" />
+    <Content Include="js\plugin\ckeditor\lang\ru.js" />
+    <Content Include="js\plugin\ckeditor\lang\si.js" />
+    <Content Include="js\plugin\ckeditor\lang\sk.js" />
+    <Content Include="js\plugin\ckeditor\lang\sl.js" />
+    <Content Include="js\plugin\ckeditor\lang\sq.js" />
+    <Content Include="js\plugin\ckeditor\lang\sr-latn.js" />
+    <Content Include="js\plugin\ckeditor\lang\sr.js" />
+    <Content Include="js\plugin\ckeditor\lang\sv.js" />
+    <Content Include="js\plugin\ckeditor\lang\th.js" />
+    <Content Include="js\plugin\ckeditor\lang\tr.js" />
+    <Content Include="js\plugin\ckeditor\lang\ug.js" />
+    <Content Include="js\plugin\ckeditor\lang\uk.js" />
+    <Content Include="js\plugin\ckeditor\lang\vi.js" />
+    <Content Include="js\plugin\ckeditor\lang\zh-cn.js" />
+    <Content Include="js\plugin\ckeditor\lang\zh.js" />
+    <Content Include="js\plugin\ckeditor\plugins\a11yhelp\dialogs\a11yhelp.js" />
+    <Content Include="js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\ar.js" />
+    <Content Include="js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\bg.js" />
+    <Content Include="js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\ca.js" />
+    <Content Include="js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\cs.js" />
+    <Content Include="js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\cy.js" />
+    <Content Include="js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\da.js" />
+    <Content Include="js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\de.js" />
+    <Content Include="js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\el.js" />
+    <Content Include="js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\en.js" />
+    <Content Include="js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\eo.js" />
+    <Content Include="js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\es.js" />
+    <Content Include="js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\et.js" />
+    <Content Include="js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\fa.js" />
+    <Content Include="js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\fi.js" />
+    <Content Include="js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\fr-ca.js" />
+    <Content Include="js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\fr.js" />
+    <Content Include="js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\gl.js" />
+    <Content Include="js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\gu.js" />
+    <Content Include="js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\he.js" />
+    <Content Include="js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\hi.js" />
+    <Content Include="js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\hr.js" />
+    <Content Include="js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\hu.js" />
+    <Content Include="js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\id.js" />
+    <Content Include="js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\it.js" />
+    <Content Include="js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\ja.js" />
+    <Content Include="js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\km.js" />
+    <Content Include="js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\ko.js" />
+    <Content Include="js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\ku.js" />
+    <Content Include="js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\lt.js" />
+    <Content Include="js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\lv.js" />
+    <Content Include="js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\mk.js" />
+    <Content Include="js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\mn.js" />
+    <Content Include="js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\nb.js" />
+    <Content Include="js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\nl.js" />
+    <Content Include="js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\no.js" />
+    <Content Include="js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\pl.js" />
+    <Content Include="js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\pt-br.js" />
+    <Content Include="js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\pt.js" />
+    <Content Include="js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\ro.js" />
+    <Content Include="js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\ru.js" />
+    <Content Include="js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\si.js" />
+    <Content Include="js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\sk.js" />
+    <Content Include="js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\sl.js" />
+    <Content Include="js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\sq.js" />
+    <Content Include="js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\sr-latn.js" />
+    <Content Include="js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\sr.js" />
+    <Content Include="js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\sv.js" />
+    <Content Include="js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\th.js" />
+    <Content Include="js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\tr.js" />
+    <Content Include="js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\ug.js" />
+    <Content Include="js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\uk.js" />
+    <Content Include="js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\vi.js" />
+    <Content Include="js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\zh-cn.js" />
+    <Content Include="js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\_translationstatus.txt" />
+    <Content Include="js\plugin\ckeditor\plugins\about\dialogs\about.js" />
+    <Content Include="js\plugin\ckeditor\plugins\about\dialogs\hidpi\logo_ckeditor.png" />
+    <Content Include="js\plugin\ckeditor\plugins\about\dialogs\logo_ckeditor.png" />
+    <Content Include="js\plugin\ckeditor\plugins\clipboard\dialogs\paste.js" />
+    <Content Include="js\plugin\ckeditor\plugins\colordialog\dialogs\colordialog.js" />
+    <Content Include="js\plugin\ckeditor\plugins\dialog\dialogDefinition.js" />
+    <Content Include="js\plugin\ckeditor\plugins\div\dialogs\div.js" />
+    <Content Include="js\plugin\ckeditor\plugins\fakeobjects\images\spacer.gif" />
+    <Content Include="js\plugin\ckeditor\plugins\find\dialogs\find.js" />
+    <Content Include="js\plugin\ckeditor\plugins\flash\dialogs\flash.js" />
+    <Content Include="js\plugin\ckeditor\plugins\flash\images\placeholder.png" />
+    <Content Include="js\plugin\ckeditor\plugins\forms\dialogs\button.js" />
+    <Content Include="js\plugin\ckeditor\plugins\forms\dialogs\checkbox.js" />
+    <Content Include="js\plugin\ckeditor\plugins\forms\dialogs\form.js" />
+    <Content Include="js\plugin\ckeditor\plugins\forms\dialogs\hiddenfield.js" />
+    <Content Include="js\plugin\ckeditor\plugins\forms\dialogs\radio.js" />
+    <Content Include="js\plugin\ckeditor\plugins\forms\dialogs\select.js" />
+    <Content Include="js\plugin\ckeditor\plugins\forms\dialogs\textarea.js" />
+    <Content Include="js\plugin\ckeditor\plugins\forms\dialogs\textfield.js" />
+    <Content Include="js\plugin\ckeditor\plugins\forms\images\hiddenfield.gif" />
+    <Content Include="js\plugin\ckeditor\plugins\icons.png" />
+    <Content Include="js\plugin\ckeditor\plugins\icons_hidpi.png" />
+    <Content Include="js\plugin\ckeditor\plugins\iframe\dialogs\iframe.js" />
+    <Content Include="js\plugin\ckeditor\plugins\iframe\images\placeholder.png" />
+    <Content Include="js\plugin\ckeditor\plugins\image\dialogs\image.js" />
+    <Content Include="js\plugin\ckeditor\plugins\image\images\noimage.png" />
+    <Content Include="js\plugin\ckeditor\plugins\link\dialogs\anchor.js" />
+    <Content Include="js\plugin\ckeditor\plugins\link\dialogs\link.js" />
+    <Content Include="js\plugin\ckeditor\plugins\link\images\anchor.png" />
+    <Content Include="js\plugin\ckeditor\plugins\link\images\hidpi\anchor.png" />
+    <Content Include="js\plugin\ckeditor\plugins\liststyle\dialogs\liststyle.js" />
+    <Content Include="js\plugin\ckeditor\plugins\magicline\images\hidpi\icon.png" />
+    <Content Include="js\plugin\ckeditor\plugins\magicline\images\icon.png" />
+    <Content Include="js\plugin\ckeditor\plugins\pagebreak\images\pagebreak.gif" />
+    <Content Include="js\plugin\ckeditor\plugins\pastefromword\filter\default.js" />
+    <Content Include="js\plugin\ckeditor\plugins\preview\preview.html" />
+    <Content Include="js\plugin\ckeditor\plugins\scayt\dialogs\options.js" />
+    <Content Include="js\plugin\ckeditor\plugins\scayt\dialogs\toolbar.css" />
+    <Content Include="js\plugin\ckeditor\plugins\showblocks\images\block_address.png" />
+    <Content Include="js\plugin\ckeditor\plugins\showblocks\images\block_blockquote.png" />
+    <Content Include="js\plugin\ckeditor\plugins\showblocks\images\block_div.png" />
+    <Content Include="js\plugin\ckeditor\plugins\showblocks\images\block_h1.png" />
+    <Content Include="js\plugin\ckeditor\plugins\showblocks\images\block_h2.png" />
+    <Content Include="js\plugin\ckeditor\plugins\showblocks\images\block_h3.png" />
+    <Content Include="js\plugin\ckeditor\plugins\showblocks\images\block_h4.png" />
+    <Content Include="js\plugin\ckeditor\plugins\showblocks\images\block_h5.png" />
+    <Content Include="js\plugin\ckeditor\plugins\showblocks\images\block_h6.png" />
+    <Content Include="js\plugin\ckeditor\plugins\showblocks\images\block_p.png" />
+    <Content Include="js\plugin\ckeditor\plugins\showblocks\images\block_pre.png" />
+    <Content Include="js\plugin\ckeditor\plugins\smiley\dialogs\smiley.js" />
+    <Content Include="js\plugin\ckeditor\plugins\smiley\images\angel_smile.gif" />
+    <Content Include="js\plugin\ckeditor\plugins\smiley\images\angry_smile.gif" />
+    <Content Include="js\plugin\ckeditor\plugins\smiley\images\broken_heart.gif" />
+    <Content Include="js\plugin\ckeditor\plugins\smiley\images\confused_smile.gif" />
+    <Content Include="js\plugin\ckeditor\plugins\smiley\images\cry_smile.gif" />
+    <Content Include="js\plugin\ckeditor\plugins\smiley\images\devil_smile.gif" />
+    <Content Include="js\plugin\ckeditor\plugins\smiley\images\embaressed_smile.gif" />
+    <Content Include="js\plugin\ckeditor\plugins\smiley\images\embarrassed_smile.gif" />
+    <Content Include="js\plugin\ckeditor\plugins\smiley\images\envelope.gif" />
+    <Content Include="js\plugin\ckeditor\plugins\smiley\images\heart.gif" />
+    <Content Include="js\plugin\ckeditor\plugins\smiley\images\kiss.gif" />
+    <Content Include="js\plugin\ckeditor\plugins\smiley\images\lightbulb.gif" />
+    <Content Include="js\plugin\ckeditor\plugins\smiley\images\omg_smile.gif" />
+    <Content Include="js\plugin\ckeditor\plugins\smiley\images\regular_smile.gif" />
+    <Content Include="js\plugin\ckeditor\plugins\smiley\images\sad_smile.gif" />
+    <Content Include="js\plugin\ckeditor\plugins\smiley\images\shades_smile.gif" />
+    <Content Include="js\plugin\ckeditor\plugins\smiley\images\teeth_smile.gif" />
+    <Content Include="js\plugin\ckeditor\plugins\smiley\images\thumbs_down.gif" />
+    <Content Include="js\plugin\ckeditor\plugins\smiley\images\thumbs_up.gif" />
+    <Content Include="js\plugin\ckeditor\plugins\smiley\images\tongue_smile.gif" />
+    <Content Include="js\plugin\ckeditor\plugins\smiley\images\tounge_smile.gif" />
+    <Content Include="js\plugin\ckeditor\plugins\smiley\images\whatchutalkingabout_smile.gif" />
+    <Content Include="js\plugin\ckeditor\plugins\smiley\images\wink_smile.gif" />
+    <Content Include="js\plugin\ckeditor\plugins\specialchar\dialogs\lang\ar.js" />
+    <Content Include="js\plugin\ckeditor\plugins\specialchar\dialogs\lang\bg.js" />
+    <Content Include="js\plugin\ckeditor\plugins\specialchar\dialogs\lang\ca.js" />
+    <Content Include="js\plugin\ckeditor\plugins\specialchar\dialogs\lang\cs.js" />
+    <Content Include="js\plugin\ckeditor\plugins\specialchar\dialogs\lang\cy.js" />
+    <Content Include="js\plugin\ckeditor\plugins\specialchar\dialogs\lang\de.js" />
+    <Content Include="js\plugin\ckeditor\plugins\specialchar\dialogs\lang\el.js" />
+    <Content Include="js\plugin\ckeditor\plugins\specialchar\dialogs\lang\en.js" />
+    <Content Include="js\plugin\ckeditor\plugins\specialchar\dialogs\lang\eo.js" />
+    <Content Include="js\plugin\ckeditor\plugins\specialchar\dialogs\lang\es.js" />
+    <Content Include="js\plugin\ckeditor\plugins\specialchar\dialogs\lang\et.js" />
+    <Content Include="js\plugin\ckeditor\plugins\specialchar\dialogs\lang\fa.js" />
+    <Content Include="js\plugin\ckeditor\plugins\specialchar\dialogs\lang\fi.js" />
+    <Content Include="js\plugin\ckeditor\plugins\specialchar\dialogs\lang\fr-ca.js" />
+    <Content Include="js\plugin\ckeditor\plugins\specialchar\dialogs\lang\fr.js" />
+    <Content Include="js\plugin\ckeditor\plugins\specialchar\dialogs\lang\gl.js" />
+    <Content Include="js\plugin\ckeditor\plugins\specialchar\dialogs\lang\he.js" />
+    <Content Include="js\plugin\ckeditor\plugins\specialchar\dialogs\lang\hr.js" />
+    <Content Include="js\plugin\ckeditor\plugins\specialchar\dialogs\lang\hu.js" />
+    <Content Include="js\plugin\ckeditor\plugins\specialchar\dialogs\lang\id.js" />
+    <Content Include="js\plugin\ckeditor\plugins\specialchar\dialogs\lang\it.js" />
+    <Content Include="js\plugin\ckeditor\plugins\specialchar\dialogs\lang\ja.js" />
+    <Content Include="js\plugin\ckeditor\plugins\specialchar\dialogs\lang\ku.js" />
+    <Content Include="js\plugin\ckeditor\plugins\specialchar\dialogs\lang\lv.js" />
+    <Content Include="js\plugin\ckeditor\plugins\specialchar\dialogs\lang\nb.js" />
+    <Content Include="js\plugin\ckeditor\plugins\specialchar\dialogs\lang\nl.js" />
+    <Content Include="js\plugin\ckeditor\plugins\specialchar\dialogs\lang\no.js" />
+    <Content Include="js\plugin\ckeditor\plugins\specialchar\dialogs\lang\pl.js" />
+    <Content Include="js\plugin\ckeditor\plugins\specialchar\dialogs\lang\pt-br.js" />
+    <Content Include="js\plugin\ckeditor\plugins\specialchar\dialogs\lang\pt.js" />
+    <Content Include="js\plugin\ckeditor\plugins\specialchar\dialogs\lang\ru.js" />
+    <Content Include="js\plugin\ckeditor\plugins\specialchar\dialogs\lang\si.js" />
+    <Content Include="js\plugin\ckeditor\plugins\specialchar\dialogs\lang\sk.js" />
+    <Content Include="js\plugin\ckeditor\plugins\specialchar\dialogs\lang\sl.js" />
+    <Content Include="js\plugin\ckeditor\plugins\specialchar\dialogs\lang\sq.js" />
+    <Content Include="js\plugin\ckeditor\plugins\specialchar\dialogs\lang\sv.js" />
+    <Content Include="js\plugin\ckeditor\plugins\specialchar\dialogs\lang\th.js" />
+    <Content Include="js\plugin\ckeditor\plugins\specialchar\dialogs\lang\tr.js" />
+    <Content Include="js\plugin\ckeditor\plugins\specialchar\dialogs\lang\ug.js" />
+    <Content Include="js\plugin\ckeditor\plugins\specialchar\dialogs\lang\uk.js" />
+    <Content Include="js\plugin\ckeditor\plugins\specialchar\dialogs\lang\vi.js" />
+    <Content Include="js\plugin\ckeditor\plugins\specialchar\dialogs\lang\zh-cn.js" />
+    <Content Include="js\plugin\ckeditor\plugins\specialchar\dialogs\lang\_translationstatus.txt" />
+    <Content Include="js\plugin\ckeditor\plugins\specialchar\dialogs\specialchar.js" />
+    <Content Include="js\plugin\ckeditor\plugins\tabletools\dialogs\tableCell.js" />
+    <Content Include="js\plugin\ckeditor\plugins\table\dialogs\table.js" />
+    <Content Include="js\plugin\ckeditor\plugins\templates\dialogs\templates.css" />
+    <Content Include="js\plugin\ckeditor\plugins\templates\dialogs\templates.js" />
+    <Content Include="js\plugin\ckeditor\plugins\templates\templates\default.js" />
+    <Content Include="js\plugin\ckeditor\plugins\templates\templates\images\template1.gif" />
+    <Content Include="js\plugin\ckeditor\plugins\templates\templates\images\template2.gif" />
+    <Content Include="js\plugin\ckeditor\plugins\templates\templates\images\template3.gif" />
+    <Content Include="js\plugin\ckeditor\plugins\wsc\dialogs\ciframe.html" />
+    <Content Include="js\plugin\ckeditor\plugins\wsc\dialogs\tmp.html" />
+    <Content Include="js\plugin\ckeditor\plugins\wsc\dialogs\tmpFrameset.html" />
+    <Content Include="js\plugin\ckeditor\plugins\wsc\dialogs\wsc.css" />
+    <Content Include="js\plugin\ckeditor\plugins\wsc\dialogs\wsc.js" />
+    <Content Include="js\plugin\ckeditor\plugins\wsc\dialogs\wsc_ie.js" />
+    <Content Include="js\plugin\ckeditor\samples\ajax.html" />
+    <Content Include="js\plugin\ckeditor\samples\api.html" />
+    <Content Include="js\plugin\ckeditor\samples\appendto.html" />
+    <Content Include="js\plugin\ckeditor\samples\assets\inlineall\logo.png" />
+    <Content Include="js\plugin\ckeditor\samples\assets\outputxhtml\outputxhtml.css" />
+    <Content Include="js\plugin\ckeditor\samples\assets\sample.css" />
+    <Content Include="js\plugin\ckeditor\samples\assets\sample.jpg" />
+    <Content Include="js\plugin\ckeditor\samples\assets\uilanguages\languages.js" />
+    <Content Include="js\plugin\ckeditor\samples\datafiltering.html" />
+    <Content Include="js\plugin\ckeditor\samples\divreplace.html" />
+    <Content Include="js\plugin\ckeditor\samples\index.html" />
+    <Content Include="js\plugin\ckeditor\samples\inlineall.html" />
+    <Content Include="js\plugin\ckeditor\samples\inlinebycode.html" />
+    <Content Include="js\plugin\ckeditor\samples\inlinetextarea.html" />
+    <Content Include="js\plugin\ckeditor\samples\jquery.html" />
+    <Content Include="js\plugin\ckeditor\samples\plugins\dialog\assets\my_dialog.js" />
+    <Content Include="js\plugin\ckeditor\samples\plugins\dialog\dialog.html" />
+    <Content Include="js\plugin\ckeditor\samples\plugins\enterkey\enterkey.html" />
+    <Content Include="js\plugin\ckeditor\samples\plugins\htmlwriter\assets\outputforflash\outputforflash.swf" />
+    <Content Include="js\plugin\ckeditor\samples\plugins\htmlwriter\assets\outputforflash\swfobject.js" />
+    <Content Include="js\plugin\ckeditor\samples\plugins\htmlwriter\outputforflash.html" />
+    <Content Include="js\plugin\ckeditor\samples\plugins\htmlwriter\outputhtml.html" />
+    <Content Include="js\plugin\ckeditor\samples\plugins\magicline\magicline.html" />
+    <Content Include="js\plugin\ckeditor\samples\plugins\toolbar\toolbar.html" />
+    <Content Include="js\plugin\ckeditor\samples\plugins\wysiwygarea\fullpage.html" />
+    <Content Include="js\plugin\ckeditor\samples\readonly.html" />
+    <Content Include="js\plugin\ckeditor\samples\replacebyclass.html" />
+    <Content Include="js\plugin\ckeditor\samples\replacebycode.html" />
+    <Content Include="js\plugin\ckeditor\samples\sample.css" />
+    <Content Include="js\plugin\ckeditor\samples\sample.js" />
+    <Content Include="js\plugin\ckeditor\samples\tabindex.html" />
+    <Content Include="js\plugin\ckeditor\samples\uicolor.html" />
+    <Content Include="js\plugin\ckeditor\samples\uilanguages.html" />
+    <Content Include="js\plugin\ckeditor\samples\xhtmlstyle.html" />
+    <Content Include="js\plugin\ckeditor\skins\moono\dialog.css" />
+    <Content Include="js\plugin\ckeditor\skins\moono\dialog_ie.css" />
+    <Content Include="js\plugin\ckeditor\skins\moono\dialog_ie7.css" />
+    <Content Include="js\plugin\ckeditor\skins\moono\dialog_ie8.css" />
+    <Content Include="js\plugin\ckeditor\skins\moono\dialog_iequirks.css" />
+    <Content Include="js\plugin\ckeditor\skins\moono\dialog_opera.css" />
+    <Content Include="js\plugin\ckeditor\skins\moono\editor.css" />
+    <Content Include="js\plugin\ckeditor\skins\moono\editor_gecko.css" />
+    <Content Include="js\plugin\ckeditor\skins\moono\editor_ie.css" />
+    <Content Include="js\plugin\ckeditor\skins\moono\editor_ie7.css" />
+    <Content Include="js\plugin\ckeditor\skins\moono\editor_ie8.css" />
+    <Content Include="js\plugin\ckeditor\skins\moono\editor_iequirks.css" />
+    <Content Include="js\plugin\ckeditor\skins\moono\icons.png" />
+    <Content Include="js\plugin\ckeditor\skins\moono\icons_hidpi.png" />
+    <Content Include="js\plugin\ckeditor\skins\moono\images\arrow.png" />
+    <Content Include="js\plugin\ckeditor\skins\moono\images\close.png" />
+    <Content Include="js\plugin\ckeditor\skins\moono\images\hidpi\close.png" />
+    <Content Include="js\plugin\ckeditor\skins\moono\images\hidpi\lock-open.png" />
+    <Content Include="js\plugin\ckeditor\skins\moono\images\hidpi\lock.png" />
+    <Content Include="js\plugin\ckeditor\skins\moono\images\hidpi\refresh.png" />
+    <Content Include="js\plugin\ckeditor\skins\moono\images\lock-open.png" />
+    <Content Include="js\plugin\ckeditor\skins\moono\images\lock.png" />
+    <Content Include="js\plugin\ckeditor\skins\moono\images\refresh.png" />
+    <Content Include="js\plugin\ckeditor\styles.js" />
+    <Content Include="js\plugin\colorpicker\bootstrap-colorpicker.js" />
+    <Content Include="js\plugin\colorpicker\bootstrap-colorpicker.min.js" />
+    <Content Include="js\plugin\datatables\ColReorder.min.js" />
+    <Content Include="js\plugin\datatables\ColVis.min.js" />
+    <Content Include="js\plugin\datatables\DT_bootstrap.js" />
+    <Content Include="js\plugin\datatables\FixedColumns.min.js" />
+    <Content Include="js\plugin\datatables\jquery.dataTables-cust.js" />
+    <Content Include="js\plugin\datatables\jquery.dataTables-cust.min.js" />
+    <Content Include="js\plugin\datatables\media\css\TableTools.css" />
+    <Content Include="js\plugin\datatables\media\css\TableTools_JUI.css" />
+    <Content Include="js\plugin\datatables\media\images\background.png" />
+    <Content Include="js\plugin\datatables\media\images\collection.png" />
+    <Content Include="js\plugin\datatables\media\images\collection_hover.png" />
+    <Content Include="js\plugin\datatables\media\images\copy.png" />
+    <Content Include="js\plugin\datatables\media\images\copy_hover.png" />
+    <Content Include="js\plugin\datatables\media\images\csv.png" />
+    <Content Include="js\plugin\datatables\media\images\csv_hover.png" />
+    <Content Include="js\plugin\datatables\media\images\pdf.png" />
+    <Content Include="js\plugin\datatables\media\images\pdf_hover.png" />
+    <Content Include="js\plugin\datatables\media\images\print.png" />
+    <Content Include="js\plugin\datatables\media\images\print_hover.png" />
+    <Content Include="js\plugin\datatables\media\images\xls.png" />
+    <Content Include="js\plugin\datatables\media\images\xls_hover.png" />
+    <Content Include="js\plugin\datatables\media\js\TableTools.js" />
+    <Content Include="js\plugin\datatables\media\js\TableTools.min.js" />
+    <Content Include="js\plugin\datatables\media\js\ZeroClipboard.js" />
+    <Content Include="js\plugin\datatables\media\swf\copy_csv_xls.swf" />
+    <Content Include="js\plugin\datatables\media\swf\copy_csv_xls_pdf.swf" />
+    <Content Include="js\plugin\datatables\ZeroClipboard.js" />
+    <Content Include="js\plugin\delete-table-row\delete-table-row.js" />
+    <Content Include="js\plugin\dropzone\dropzone-amd-module.js" />
+    <Content Include="js\plugin\dropzone\dropzone-amd-module.min.js" />
+    <Content Include="js\plugin\dropzone\dropzone.js" />
+    <Content Include="js\plugin\dropzone\dropzone.min.js" />
+    <Content Include="js\plugin\easy-pie-chart\examples\excanvas.js" />
+    <Content Include="js\plugin\easy-pie-chart\examples\index.html" />
+    <Content Include="js\plugin\easy-pie-chart\examples\style.css" />
+    <Content Include="js\plugin\easy-pie-chart\jquery.easy-pie-chart.js" />
+    <Content Include="js\plugin\easy-pie-chart\jquery.easy-pie-chart.min.js" />
+    <Content Include="js\plugin\fastclick\fastclick.js" />
+    <Content Include="js\plugin\flot\jquery.flot.cust.js" />
+    <Content Include="js\plugin\flot\jquery.flot.fillbetween.js" />
+    <Content Include="js\plugin\flot\jquery.flot.fillbetween.min.js" />
+    <Content Include="js\plugin\flot\jquery.flot.orderBar.js" />
+    <Content Include="js\plugin\flot\jquery.flot.orderBar.min.js" />
+    <Content Include="js\plugin\flot\jquery.flot.pie.js" />
+    <Content Include="js\plugin\flot\jquery.flot.pie.min.js" />
+    <Content Include="js\plugin\flot\jquery.flot.resize.js" />
+    <Content Include="js\plugin\flot\jquery.flot.resize.min.js" />
+    <Content Include="js\plugin\flot\jquery.flot.tooltip.js" />
+    <Content Include="js\plugin\flot\jquery.flot.tooltip.min.js" />
+    <Content Include="js\plugin\fuelux\wizard\wizard.js" />
+    <Content Include="js\plugin\fullcalendar\jquery.fullcalendar.js" />
+    <Content Include="js\plugin\fullcalendar\jquery.fullcalendar.min.js" />
+    <Content Include="js\plugin\ie-placeholder\jquery.placeholder.min.js" />
+    <Content Include="js\plugin\ion-slider\ion.rangeSlider.js" />
+    <Content Include="js\plugin\ion-slider\ion.rangeSlider.min.js" />
+    <Content Include="js\plugin\jquery-form\jquery-form.min.js" />
+    <Content Include="js\plugin\jquery-nestable\jquery.nestable.js" />
+    <Content Include="js\plugin\jquery-touch\jquery.ui.touch-punch.js" />
+    <Content Include="js\plugin\jquery-touch\jquery.ui.touch-punch.min.js" />
+    <Content Include="js\plugin\jquery-validate\jquery.validate.min.js" />
+    <Content Include="js\plugin\js-migrate\jquery-migrate-1.2.1.js" />
+    <Content Include="js\plugin\js-migrate\jquery-migrate-1.2.1.min.js" />
+    <Content Include="js\plugin\knob\jquery.knob.js" />
+    <Content Include="js\plugin\knob\jquery.knob.min.js" />
+    <Content Include="js\plugin\lazyload\lazyload.js" />
+    <Content Include="js\plugin\lazyload\lazyload.min.js" />
+    <Content Include="js\plugin\markdown\bootstrap-markdown.js" />
+    <Content Include="js\plugin\markdown\bootstrap-markdown.min.js" />
+    <Content Include="js\plugin\markdown\markdown.js" />
+    <Content Include="js\plugin\markdown\markdown.min.js" />
+    <Content Include="js\plugin\markdown\to-markdown.js" />
+    <Content Include="js\plugin\markdown\to-markdown.min.js" />
+    <Content Include="js\plugin\masked-input\jquery.maskedinput.js" />
+    <Content Include="js\plugin\masked-input\jquery.maskedinput.min.js" />
+    <Content Include="js\plugin\maxlength\bootstrap-maxlength.js" />
+    <Content Include="js\plugin\maxlength\bootstrap-maxlength.min.js" />
+    <Content Include="js\plugin\morris\morris-chart-settings.js" />
+    <Content Include="js\plugin\morris\morris.js" />
+    <Content Include="js\plugin\morris\morris.min.js" />
+    <Content Include="js\plugin\morris\raphael.2.1.0.min.js" />
+    <Content Include="js\plugin\msie-fix\jquery.mb.browser.js" />
+    <Content Include="js\plugin\msie-fix\jquery.mb.browser.min.js" />
+    <Content Include="js\plugin\multiselect\bootstrap-multiselect.js" />
+    <Content Include="js\plugin\multiselect\bootstrap-multiselect.min.js" />
+    <Content Include="js\plugin\noUiSlider\jquery.nouislider.css" />
+    <Content Include="js\plugin\noUiSlider\jquery.nouislider.js" />
+    <Content Include="js\plugin\noUiSlider\jquery.nouislider.min.js" />
+    <Content Include="js\plugin\pace\pace.min.js" />
+    <Content Include="js\plugin\select2\readme.txt" />
+    <Content Include="js\plugin\select2\select2-customized.js" />
+    <Content Include="js\plugin\select2\select2.js" />
+    <Content Include="js\plugin\select2\select2.min.js" />
+    <Content Include="js\plugin\selectToUISlider\selectToUISlider.jQuery.js" />
+    <Content Include="js\plugin\selectToUISlider\selectToUISlider.jQuery.min.js" />
+    <Content Include="js\plugin\slickgrid\controls\slick.allcontrols.min.js" />
+    <Content Include="js\plugin\slickgrid\controls\slick.columnpicker.css" />
+    <Content Include="js\plugin\slickgrid\controls\slick.columnpicker.js" />
+    <Content Include="js\plugin\slickgrid\controls\slick.pager.css" />
+    <Content Include="js\plugin\slickgrid\controls\slick.pager.js" />
+    <Content Include="js\plugin\slickgrid\lib\jquery.event.drag-2.2.js" />
+    <Content Include="js\plugin\slickgrid\lib\jquery.event.drop-2.2.js" />
+    <Content Include="js\plugin\slickgrid\plugins\slick.allplugins.min.js" />
+    <Content Include="js\plugin\slickgrid\plugins\slick.autotooltips.js" />
+    <Content Include="js\plugin\slickgrid\plugins\slick.cellcopymanager.js" />
+    <Content Include="js\plugin\slickgrid\plugins\slick.cellrangedecorator.js" />
+    <Content Include="js\plugin\slickgrid\plugins\slick.cellrangeselector.js" />
+    <Content Include="js\plugin\slickgrid\plugins\slick.cellselectionmodel.js" />
+    <Content Include="js\plugin\slickgrid\plugins\slick.checkboxselectcolumn.js" />
+    <Content Include="js\plugin\slickgrid\plugins\slick.headerbuttons.css" />
+    <Content Include="js\plugin\slickgrid\plugins\slick.headerbuttons.js" />
+    <Content Include="js\plugin\slickgrid\plugins\slick.headermenu.css" />
+    <Content Include="js\plugin\slickgrid\plugins\slick.headermenu.js" />
+    <Content Include="js\plugin\slickgrid\plugins\slick.rowmovemanager.js" />
+    <Content Include="js\plugin\slickgrid\plugins\slick.rowselectionmodel.js" />
+    <Content Include="js\plugin\slickgrid\slick.core.js" />
+    <Content Include="js\plugin\slickgrid\slick.dataview.js" />
+    <Content Include="js\plugin\slickgrid\slick.editors.js" />
+    <Content Include="js\plugin\slickgrid\slick.formatters.js" />
+    <Content Include="js\plugin\slickgrid\slick.grid.js" />
+    <Content Include="js\plugin\slickgrid\slick.groupitemmetadataprovider.js" />
+    <Content Include="js\plugin\slickgrid\slick.remotemodel.js" />
+    <Content Include="js\plugin\smartclick\smartclick.js" />
+    <Content Include="js\plugin\sparkline\jquery.sparkline.js" />
+    <Content Include="js\plugin\sparkline\jquery.sparkline.min.js" />
+    <Content Include="js\plugin\summernote\summernote.js" />
+    <Content Include="js\plugin\superbox\superbox.js" />
+    <Content Include="js\plugin\superbox\superbox.min.js" />
+    <Content Include="js\plugin\throttle-denounce\jquery.ba-throttle-debounce.min.js" />
+    <Content Include="js\plugin\typeahead\typeahead.js" />
+    <Content Include="js\plugin\typeahead\typeahead.min.js" />
+    <Content Include="js\plugin\typeahead\typeaheadjs.js" />
+    <Content Include="js\plugin\typeahead\typeaheadjs.min.js" />
+    <Content Include="js\plugin\vectormap\jquery-jvectormap-1.1.1.css" />
+    <Content Include="js\plugin\vectormap\jquery-jvectormap-1.1.1.min.js" />
+    <Content Include="js\plugin\vectormap\jquery-jvectormap-1.2.2.css" />
+    <Content Include="js\plugin\vectormap\jquery-jvectormap-1.2.2.min.js" />
+    <Content Include="js\plugin\vectormap\jquery-jvectormap-world-mill-en.js" />
+    <Content Include="js\plugin\x-editable\jquery.mockjax.min.js" />
+    <Content Include="js\plugin\x-editable\moment.min.js" />
+    <Content Include="js\plugin\x-editable\x-editable.js" />
+    <Content Include="js\plugin\x-editable\x-editable.min.js" />
+    <Content Include="js\select2.js" />
+    <Content Include="js\select2.min.js" />
+    <Content Include="js\select2_locale_zh-CN.js" />
+    <Content Include="js\SmartAdmin\css\bootstrap.css" />
+    <Content Include="js\SmartAdmin\css\bootstrap.min.css" />
+    <Content Include="js\SmartAdmin\css\demo.css" />
+    <Content Include="js\SmartAdmin\css\font-awesome.min.css" />
+    <Content Include="js\SmartAdmin\css\invoice.css" />
+    <Content Include="js\SmartAdmin\css\lockscreen.css" />
+    <Content Include="js\SmartAdmin\css\mygame.css" />
+    <Content Include="js\SmartAdmin\css\smartadmin-production.css" />
+    <Content Include="js\SmartAdmin\css\smartadmin-production_unminified.css" />
+    <Content Include="js\SmartAdmin\css\smartadmin-rtl.css" />
+    <Content Include="js\SmartAdmin\css\smartadmin-skins.css" />
+    <Content Include="js\SmartAdmin\css\your_style.css" />
+    <Content Include="js\SmartAdmin\fonts\fontawesome-webfont.svg" />
+    <Content Include="js\SmartAdmin\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="js\SmartAdmin\img\ajax-loader.gif" />
+    <Content Include="js\SmartAdmin\img\alpha.png" />
+    <Content Include="js\SmartAdmin\img\avatars\1.png" />
+    <Content Include="js\SmartAdmin\img\avatars\2.png" />
+    <Content Include="js\SmartAdmin\img\avatars\3.png" />
+    <Content Include="js\SmartAdmin\img\avatars\4.png" />
+    <Content Include="js\SmartAdmin\img\avatars\5.png" />
+    <Content Include="js\SmartAdmin\img\avatars\copyright.txt" />
+    <Content Include="js\SmartAdmin\img\avatars\female.png" />
+    <Content Include="js\SmartAdmin\img\avatars\male.png" />
+    <Content Include="js\SmartAdmin\img\avatars\sunny-big.png" />
+    <Content Include="js\SmartAdmin\img\avatars\sunny.png" />
+    <Content Include="js\SmartAdmin\img\clear.png" />
+    <Content Include="js\SmartAdmin\img\demo\64x64.png" />
+    <Content Include="js\SmartAdmin\img\demo\basic.png" />
+    <Content Include="js\SmartAdmin\img\demo\copyright.txt" />
+    <Content Include="js\SmartAdmin\img\demo\demo-smartbig-alert.png" />
+    <Content Include="js\SmartAdmin\img\demo\demo-smartmedium-alert.png" />
+    <Content Include="js\SmartAdmin\img\demo\demo-smartsmall-alert.png" />
+    <Content Include="js\SmartAdmin\img\demo\hero.png" />
+    <Content Include="js\SmartAdmin\img\demo\image-placeholder-64x64.png" />
+    <Content Include="js\SmartAdmin\img\demo\iphoneview.png" />
+    <Content Include="js\SmartAdmin\img\demo\m1.jpg" />
+    <Content Include="js\SmartAdmin\img\demo\m2.jpg" />
+    <Content Include="js\SmartAdmin\img\demo\m3.jpg" />
+    <Content Include="js\SmartAdmin\img\demo\newsletter.png" />
+    <Content Include="js\SmartAdmin\img\demo\responseimg.png" />
+    <Content Include="js\SmartAdmin\img\demo\s1.jpg" />
+    <Content Include="js\SmartAdmin\img\demo\s2.jpg" />
+    <Content Include="js\SmartAdmin\img\demo\s3.jpg" />
+    <Content Include="js\SmartAdmin\img\demo\sa-demo.png" />
+    <Content Include="js\SmartAdmin\img\demo\sample.jpg" />
+    <Content Include="js\SmartAdmin\img\demo\sidebar.png" />
+    <Content Include="js\SmartAdmin\img\demo\sidebarhero.png" />
+    <Content Include="js\SmartAdmin\img\demo\site-1.jpg" />
+    <Content Include="js\SmartAdmin\img\demo\site-2.jpg" />
+    <Content Include="js\SmartAdmin\img\demo\widget-colorpicker.png" />
+    <Content Include="js\SmartAdmin\img\dropzone\spritemap%402x.png" />
+    <Content Include="js\SmartAdmin\img\dropzone\spritemap.png" />
+    <Content Include="js\SmartAdmin\img\favicon\1favicon.ico" />
+    <Content Include="js\SmartAdmin\img\favicon\favicon.ico" />
+    <Content Include="js\SmartAdmin\img\favicon\favicon.png" />
+    <Content Include="js\SmartAdmin\img\flags\de.png" />
+    <Content Include="js\SmartAdmin\img\flags\es.png" />
+    <Content Include="js\SmartAdmin\img\flags\us.png" />
+    <Content Include="js\SmartAdmin\img\game.png" />
+    <Content Include="js\SmartAdmin\img\gradient\login.png" />
+    <Content Include="js\SmartAdmin\img\hue.png" />
+    <Content Include="js\SmartAdmin\img\invoice\americanexpress.png" />
+    <Content Include="js\SmartAdmin\img\invoice\license.txt" />
+    <Content Include="js\SmartAdmin\img\invoice\mastercard.png" />
+    <Content Include="js\SmartAdmin\img\invoice\paypal.png" />
+    <Content Include="js\SmartAdmin\img\invoice\visa.png" />
+    <Content Include="js\SmartAdmin\img\jqueryui\ui-bg_flat_0_999999_40x100.png" />
+    <Content Include="js\SmartAdmin\img\jqueryui\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="js\SmartAdmin\img\jqueryui\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="js\SmartAdmin\img\jqueryui\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="js\SmartAdmin\img\jqueryui\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="js\SmartAdmin\img\jqueryui\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="js\SmartAdmin\img\jqueryui\ui-bg_glass_75_ffffff_1x400.png" />
+    <Content Include="js\SmartAdmin\img\jqueryui\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="js\SmartAdmin\img\jqueryui\ui-bg_inset-soft_95_fef1ec_1x100.png" />
+    <Content Include="js\SmartAdmin\img\jqueryui\ui-icons_222222_256x240.png" />
+    <Content Include="js\SmartAdmin\img\jqueryui\ui-icons_2e83ff_256x240.png" />
+    <Content Include="js\SmartAdmin\img\jqueryui\ui-icons_428bca_256x240.png" />
+    <Content Include="js\SmartAdmin\img\jqueryui\ui-icons_454545_256x240.png" />
+    <Content Include="js\SmartAdmin\img\jqueryui\ui-icons_555555_256x240.png" />
+    <Content Include="js\SmartAdmin\img\jqueryui\ui-icons_888888_256x240.png" />
+    <Content Include="js\SmartAdmin\img\jqueryui\ui-icons_999999_256x240.png" />
+    <Content Include="js\SmartAdmin\img\jqueryui\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="js\SmartAdmin\img\jqueryui\ui-icons_f0ad4e_256x240.png" />
+    <Content Include="js\SmartAdmin\img\jqueryui\ui-icons_f6cf3b_256x240.png" />
+    <Content Include="js\SmartAdmin\img\jqueryui\ui-icons_ffffff_256x240.png" />
+    <Content Include="js\SmartAdmin\img\loading.gif" />
+    <Content Include="js\SmartAdmin\img\logo-blacknwhite.png" />
+    <Content Include="js\SmartAdmin\img\logo-blue.png" />
+    <Content Include="js\SmartAdmin\img\logo-o.png" />
+    <Content Include="js\SmartAdmin\img\logo-pale.png" />
+    <Content Include="js\SmartAdmin\img\logo-white.png" />
+    <Content Include="js\SmartAdmin\img\logo.png" />
+    <Content Include="js\SmartAdmin\img\mappin-default.png" />
+    <Content Include="js\SmartAdmin\img\mybg.png" />
+    <Content Include="js\SmartAdmin\img\pattern\divider.jpg" />
+    <Content Include="js\SmartAdmin\img\pattern\graphy-xs.png" />
+    <Content Include="js\SmartAdmin\img\pattern\graphy.png" />
+    <Content Include="js\SmartAdmin\img\pattern\license-info.txt" />
+    <Content Include="js\SmartAdmin\img\pattern\lightpaperfibers.png" />
+    <Content Include="js\SmartAdmin\img\pattern\movable.png" />
+    <Content Include="js\SmartAdmin\img\pattern\nistri-xs.png" />
+    <Content Include="js\SmartAdmin\img\pattern\nistri.png" />
+    <Content Include="js\SmartAdmin\img\pattern\overlay-pattern.png" />
+    <Content Include="js\SmartAdmin\img\pattern\paper-xs.png" />
+    <Content Include="js\SmartAdmin\img\pattern\paper.png" />
+    <Content Include="js\SmartAdmin\img\pattern\pattern.png" />
+    <Content Include="js\SmartAdmin\img\pattern\sneaker_mesh_fabric-xs.png" />
+    <Content Include="js\SmartAdmin\img\pattern\sneaker_mesh_fabric.png" />
+    <Content Include="js\SmartAdmin\img\pattern\tileable_wood_texture-xs.png" />
+    <Content Include="js\SmartAdmin\img\pattern\tileable_wood_texture.png" />
+    <Content Include="js\SmartAdmin\img\ribbon.png" />
+    <Content Include="js\SmartAdmin\img\saturation.png" />
+    <Content Include="js\SmartAdmin\img\select2-spinner.gif" />
+    <Content Include="js\SmartAdmin\img\sort_asc.png" />
+    <Content Include="js\SmartAdmin\img\sort_asc_disabled.png" />
+    <Content Include="js\SmartAdmin\img\sort_both.png" />
+    <Content Include="js\SmartAdmin\img\sort_desc.png" />
+    <Content Include="js\SmartAdmin\img\sort_desc_disabled.png" />
+    <Content Include="js\SmartAdmin\img\splash\ipad-landscape.png" />
+    <Content Include="js\SmartAdmin\img\splash\ipad-portrait.png" />
+    <Content Include="js\SmartAdmin\img\splash\iphone.png" />
+    <Content Include="js\SmartAdmin\img\splash\sptouch-icon-iphone.png" />
+    <Content Include="js\SmartAdmin\img\splash\touch-icon-ipad-retina.png" />
+    <Content Include="js\SmartAdmin\img\splash\touch-icon-ipad.png" />
+    <Content Include="js\SmartAdmin\img\splash\touch-icon-iphone-retina.png" />
+    <Content Include="js\SmartAdmin\img\superbox\superbox-full-1.jpg" />
+    <Content Include="js\SmartAdmin\img\superbox\superbox-full-10.jpg" />
+    <Content Include="js\SmartAdmin\img\superbox\superbox-full-11.jpg" />
+    <Content Include="js\SmartAdmin\img\superbox\superbox-full-12.jpg" />
+    <Content Include="js\SmartAdmin\img\superbox\superbox-full-13.jpg" />
+    <Content Include="js\SmartAdmin\img\superbox\superbox-full-14.jpg" />
+    <Content Include="js\SmartAdmin\img\superbox\superbox-full-15.jpg" />
+    <Content Include="js\SmartAdmin\img\superbox\superbox-full-16.jpg" />
+    <Content Include="js\SmartAdmin\img\superbox\superbox-full-17.jpg" />
+    <Content Include="js\SmartAdmin\img\superbox\superbox-full-18.jpg" />
+    <Content Include="js\SmartAdmin\img\superbox\superbox-full-19.jpg" />
+    <Content Include="js\SmartAdmin\img\superbox\superbox-full-2.jpg" />
+    <Content Include="js\SmartAdmin\img\superbox\superbox-full-20.jpg" />
+    <Content Include="js\SmartAdmin\img\superbox\superbox-full-21.jpg" />
+    <Content Include="js\SmartAdmin\img\superbox\superbox-full-22.jpg" />
+    <Content Include="js\SmartAdmin\img\superbox\superbox-full-23.jpg" />
+    <Content Include="js\SmartAdmin\img\superbox\superbox-full-24.jpg" />
+    <Content Include="js\SmartAdmin\img\superbox\superbox-full-3.jpg" />
+    <Content Include="js\SmartAdmin\img\superbox\superbox-full-4.jpg" />
+    <Content Include="js\SmartAdmin\img\superbox\superbox-full-5.jpg" />
+    <Content Include="js\SmartAdmin\img\superbox\superbox-full-6.jpg" />
+    <Content Include="js\SmartAdmin\img\superbox\superbox-full-7.jpg" />
+    <Content Include="js\SmartAdmin\img\superbox\superbox-full-8.jpg" />
+    <Content Include="js\SmartAdmin\img\superbox\superbox-full-9.jpg" />
+    <Content Include="js\SmartAdmin\img\superbox\superbox-thumb-1.jpg" />
+    <Content Include="js\SmartAdmin\img\superbox\superbox-thumb-10.jpg" />
+    <Content Include="js\SmartAdmin\img\superbox\superbox-thumb-11.jpg" />
+    <Content Include="js\SmartAdmin\img\superbox\superbox-thumb-12.jpg" />
+    <Content Include="js\SmartAdmin\img\superbox\superbox-thumb-13.jpg" />
+    <Content Include="js\SmartAdmin\img\superbox\superbox-thumb-14.jpg" />
+    <Content Include="js\SmartAdmin\img\superbox\superbox-thumb-15.jpg" />
+    <Content Include="js\SmartAdmin\img\superbox\superbox-thumb-16.jpg" />
+    <Content Include="js\SmartAdmin\img\superbox\superbox-thumb-17.jpg" />
+    <Content Include="js\SmartAdmin\img\superbox\superbox-thumb-18.jpg" />
+    <Content Include="js\SmartAdmin\img\superbox\superbox-thumb-19.jpg" />
+    <Content Include="js\SmartAdmin\img\superbox\superbox-thumb-2.jpg" />
+    <Content Include="js\SmartAdmin\img\superbox\superbox-thumb-20.jpg" />
+    <Content Include="js\SmartAdmin\img\superbox\superbox-thumb-21.jpg" />
+    <Content Include="js\SmartAdmin\img\superbox\superbox-thumb-22.jpg" />
+    <Content Include="js\SmartAdmin\img\superbox\superbox-thumb-23.jpg" />
+    <Content Include="js\SmartAdmin\img\superbox\superbox-thumb-24.jpg" />
+    <Content Include="js\SmartAdmin\img\superbox\superbox-thumb-3.jpg" />
+    <Content Include="js\SmartAdmin\img\superbox\superbox-thumb-4.jpg" />
+    <Content Include="js\SmartAdmin\img\superbox\superbox-thumb-5.jpg" />
+    <Content Include="js\SmartAdmin\img\superbox\superbox-thumb-6.jpg" />
+    <Content Include="js\SmartAdmin\img\superbox\superbox-thumb-7.jpg" />
+    <Content Include="js\SmartAdmin\img\superbox\superbox-thumb-8.jpg" />
+    <Content Include="js\SmartAdmin\img\superbox\superbox-thumb-9.jpg" />
+    <Content Include="js\SmartAdmin\js\app.js" />
+    <Content Include="js\SmartAdmin\js\bootstrap\bootstrap.js" />
+    <Content Include="js\SmartAdmin\js\bootstrap\bootstrap.min.js" />
+    <Content Include="js\SmartAdmin\js\demo.js" />
+    <Content Include="js\SmartAdmin\js\libs\jquery-1.11.3.js" />
+    <Content Include="js\SmartAdmin\js\libs\jquery-2.0.2.min.js" />
+    <Content Include="js\SmartAdmin\js\libs\jquery-ui-1.10.3.min.js" />
+    <Content Include="js\SmartAdmin\js\libs\jquery-ui-1.11.4-utf8.js" />
+    <Content Include="js\SmartAdmin\js\notification\SmartNotification.js" />
+    <Content Include="js\SmartAdmin\js\notification\SmartNotification.min.js" />
+    <Content Include="js\SmartAdmin\js\plugin\bootstrap-progressbar\bootstrap-progressbar.js" />
+    <Content Include="js\SmartAdmin\js\plugin\bootstrap-slider\bootstrap-slider.js" />
+    <Content Include="js\SmartAdmin\js\plugin\bootstrap-slider\bootstrap-slider.min.js" />
+    <Content Include="js\SmartAdmin\js\plugin\bootstrap-tags\bootstrap-tagsinput-angular.js" />
+    <Content Include="js\SmartAdmin\js\plugin\bootstrap-tags\bootstrap-tagsinput.js" />
+    <Content Include="js\SmartAdmin\js\plugin\bootstrap-tags\bootstrap-tagsinput.min.js" />
+    <Content Include="js\SmartAdmin\js\plugin\bootstrap-timepicker\bootstrap-timepicker.js" />
+    <Content Include="js\SmartAdmin\js\plugin\bootstrap-timepicker\bootstrap-timepicker.min.js" />
+    <Content Include="js\SmartAdmin\js\plugin\bootstrap-wizard\jquery.bootstrap.wizard.js" />
+    <Content Include="js\SmartAdmin\js\plugin\bootstrap-wizard\jquery.bootstrap.wizard.min.js" />
+    <Content Include="js\SmartAdmin\js\plugin\bootstraptree\bootstrap-tree.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\adapters\jquery.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\build-config.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\ckeditor-.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\ckeditor.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\config.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\contents.css" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\lang\af.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\lang\ar.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\lang\bg.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\lang\bn.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\lang\bs.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\lang\ca.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\lang\cs.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\lang\cy.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\lang\da.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\lang\de.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\lang\el.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\lang\en-au.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\lang\en-ca.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\lang\en-gb.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\lang\en.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\lang\eo.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\lang\es.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\lang\et.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\lang\eu.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\lang\fa.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\lang\fi.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\lang\fo.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\lang\fr-ca.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\lang\fr.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\lang\gl.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\lang\gu.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\lang\he.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\lang\hi.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\lang\hr.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\lang\hu.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\lang\id.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\lang\is.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\lang\it.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\lang\ja.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\lang\ka.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\lang\km.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\lang\ko.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\lang\ku.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\lang\lt.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\lang\lv.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\lang\mk.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\lang\mn.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\lang\ms.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\lang\nb.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\lang\nl.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\lang\no.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\lang\pl.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\lang\pt-br.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\lang\pt.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\lang\ro.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\lang\ru.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\lang\si.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\lang\sk.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\lang\sl.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\lang\sq.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\lang\sr-latn.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\lang\sr.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\lang\sv.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\lang\th.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\lang\tr.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\lang\ug.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\lang\uk.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\lang\vi.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\lang\zh-cn.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\lang\zh.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\a11yhelp\dialogs\a11yhelp.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\ar.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\bg.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\ca.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\cs.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\cy.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\da.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\de.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\el.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\en.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\eo.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\es.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\et.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\fa.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\fi.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\fr-ca.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\fr.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\gl.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\gu.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\he.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\hi.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\hr.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\hu.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\id.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\it.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\ja.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\km.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\ko.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\ku.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\lt.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\lv.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\mk.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\mn.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\nb.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\nl.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\no.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\pl.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\pt-br.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\pt.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\ro.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\ru.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\si.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\sk.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\sl.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\sq.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\sr-latn.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\sr.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\sv.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\th.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\tr.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\ug.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\uk.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\vi.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\zh-cn.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\_translationstatus.txt" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\about\dialogs\about.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\about\dialogs\hidpi\logo_ckeditor.png" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\about\dialogs\logo_ckeditor.png" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\clipboard\dialogs\paste.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\colordialog\dialogs\colordialog.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\dialog\dialogDefinition.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\div\dialogs\div.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\fakeobjects\images\spacer.gif" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\find\dialogs\find.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\flash\dialogs\flash.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\flash\images\placeholder.png" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\forms\dialogs\button.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\forms\dialogs\checkbox.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\forms\dialogs\form.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\forms\dialogs\hiddenfield.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\forms\dialogs\radio.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\forms\dialogs\select.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\forms\dialogs\textarea.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\forms\dialogs\textfield.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\forms\images\hiddenfield.gif" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\icons.png" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\icons_hidpi.png" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\iframe\dialogs\iframe.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\iframe\images\placeholder.png" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\image\dialogs\image.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\image\images\noimage.png" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\link\dialogs\anchor.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\link\dialogs\link.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\link\images\anchor.png" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\link\images\hidpi\anchor.png" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\liststyle\dialogs\liststyle.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\magicline\images\hidpi\icon.png" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\magicline\images\icon.png" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\pagebreak\images\pagebreak.gif" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\pastefromword\filter\default.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\preview\preview.html" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\scayt\dialogs\options.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\scayt\dialogs\toolbar.css" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\showblocks\images\block_address.png" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\showblocks\images\block_blockquote.png" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\showblocks\images\block_div.png" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\showblocks\images\block_h1.png" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\showblocks\images\block_h2.png" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\showblocks\images\block_h3.png" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\showblocks\images\block_h4.png" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\showblocks\images\block_h5.png" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\showblocks\images\block_h6.png" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\showblocks\images\block_p.png" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\showblocks\images\block_pre.png" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\smiley\dialogs\smiley.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\smiley\images\angel_smile.gif" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\smiley\images\angry_smile.gif" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\smiley\images\broken_heart.gif" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\smiley\images\confused_smile.gif" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\smiley\images\cry_smile.gif" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\smiley\images\devil_smile.gif" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\smiley\images\embaressed_smile.gif" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\smiley\images\embarrassed_smile.gif" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\smiley\images\envelope.gif" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\smiley\images\heart.gif" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\smiley\images\kiss.gif" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\smiley\images\lightbulb.gif" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\smiley\images\omg_smile.gif" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\smiley\images\regular_smile.gif" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\smiley\images\sad_smile.gif" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\smiley\images\shades_smile.gif" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\smiley\images\teeth_smile.gif" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\smiley\images\thumbs_down.gif" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\smiley\images\thumbs_up.gif" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\smiley\images\tongue_smile.gif" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\smiley\images\tounge_smile.gif" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\smiley\images\whatchutalkingabout_smile.gif" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\smiley\images\wink_smile.gif" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\specialchar\dialogs\lang\ar.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\specialchar\dialogs\lang\bg.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\specialchar\dialogs\lang\ca.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\specialchar\dialogs\lang\cs.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\specialchar\dialogs\lang\cy.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\specialchar\dialogs\lang\de.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\specialchar\dialogs\lang\el.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\specialchar\dialogs\lang\en.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\specialchar\dialogs\lang\eo.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\specialchar\dialogs\lang\es.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\specialchar\dialogs\lang\et.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\specialchar\dialogs\lang\fa.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\specialchar\dialogs\lang\fi.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\specialchar\dialogs\lang\fr-ca.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\specialchar\dialogs\lang\fr.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\specialchar\dialogs\lang\gl.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\specialchar\dialogs\lang\he.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\specialchar\dialogs\lang\hr.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\specialchar\dialogs\lang\hu.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\specialchar\dialogs\lang\id.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\specialchar\dialogs\lang\it.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\specialchar\dialogs\lang\ja.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\specialchar\dialogs\lang\ku.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\specialchar\dialogs\lang\lv.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\specialchar\dialogs\lang\nb.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\specialchar\dialogs\lang\nl.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\specialchar\dialogs\lang\no.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\specialchar\dialogs\lang\pl.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\specialchar\dialogs\lang\pt-br.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\specialchar\dialogs\lang\pt.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\specialchar\dialogs\lang\ru.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\specialchar\dialogs\lang\si.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\specialchar\dialogs\lang\sk.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\specialchar\dialogs\lang\sl.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\specialchar\dialogs\lang\sq.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\specialchar\dialogs\lang\sv.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\specialchar\dialogs\lang\th.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\specialchar\dialogs\lang\tr.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\specialchar\dialogs\lang\ug.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\specialchar\dialogs\lang\uk.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\specialchar\dialogs\lang\vi.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\specialchar\dialogs\lang\zh-cn.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\specialchar\dialogs\lang\_translationstatus.txt" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\specialchar\dialogs\specialchar.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\tabletools\dialogs\tableCell.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\table\dialogs\table.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\templates\dialogs\templates.css" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\templates\dialogs\templates.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\templates\templates\default.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\templates\templates\images\template1.gif" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\templates\templates\images\template2.gif" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\templates\templates\images\template3.gif" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\wsc\dialogs\ciframe.html" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\wsc\dialogs\tmp.html" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\wsc\dialogs\tmpFrameset.html" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\wsc\dialogs\wsc.css" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\wsc\dialogs\wsc.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\wsc\dialogs\wsc_ie.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\samples\ajax.html" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\samples\api.html" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\samples\appendto.html" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\samples\assets\inlineall\logo.png" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\samples\assets\outputxhtml\outputxhtml.css" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\samples\assets\sample.css" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\samples\assets\sample.jpg" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\samples\assets\uilanguages\languages.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\samples\datafiltering.html" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\samples\divreplace.html" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\samples\index.html" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\samples\inlineall.html" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\samples\inlinebycode.html" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\samples\inlinetextarea.html" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\samples\jquery.html" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\samples\plugins\dialog\assets\my_dialog.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\samples\plugins\dialog\dialog.html" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\samples\plugins\enterkey\enterkey.html" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\samples\plugins\htmlwriter\assets\outputforflash\outputforflash.swf" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\samples\plugins\htmlwriter\assets\outputforflash\swfobject.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\samples\plugins\htmlwriter\outputforflash.html" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\samples\plugins\htmlwriter\outputhtml.html" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\samples\plugins\magicline\magicline.html" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\samples\plugins\toolbar\toolbar.html" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\samples\plugins\wysiwygarea\fullpage.html" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\samples\readonly.html" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\samples\replacebyclass.html" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\samples\replacebycode.html" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\samples\sample.css" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\samples\sample.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\samples\tabindex.html" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\samples\uicolor.html" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\samples\uilanguages.html" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\samples\xhtmlstyle.html" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\skins\moono\dialog.css" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\skins\moono\dialog_ie.css" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\skins\moono\dialog_ie7.css" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\skins\moono\dialog_ie8.css" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\skins\moono\dialog_iequirks.css" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\skins\moono\dialog_opera.css" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\skins\moono\editor.css" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\skins\moono\editor_gecko.css" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\skins\moono\editor_ie.css" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\skins\moono\editor_ie7.css" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\skins\moono\editor_ie8.css" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\skins\moono\editor_iequirks.css" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\skins\moono\icons.png" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\skins\moono\icons_hidpi.png" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\skins\moono\images\arrow.png" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\skins\moono\images\close.png" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\skins\moono\images\hidpi\close.png" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\skins\moono\images\hidpi\lock-open.png" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\skins\moono\images\hidpi\lock.png" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\skins\moono\images\hidpi\refresh.png" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\skins\moono\images\lock-open.png" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\skins\moono\images\lock.png" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\skins\moono\images\refresh.png" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\styles.js" />
+    <Content Include="js\SmartAdmin\js\plugin\colorpicker\bootstrap-colorpicker.js" />
+    <Content Include="js\SmartAdmin\js\plugin\colorpicker\bootstrap-colorpicker.min.js" />
+    <Content Include="js\SmartAdmin\js\plugin\datatables\ColReorder.min.js" />
+    <Content Include="js\SmartAdmin\js\plugin\datatables\ColVis.min.js" />
+    <Content Include="js\SmartAdmin\js\plugin\datatables\DT_bootstrap.js" />
+    <Content Include="js\SmartAdmin\js\plugin\datatables\FixedColumns.min.js" />
+    <Content Include="js\SmartAdmin\js\plugin\datatables\jquery.dataTables-cust.js" />
+    <Content Include="js\SmartAdmin\js\plugin\datatables\jquery.dataTables-cust.min.js" />
+    <Content Include="js\SmartAdmin\js\plugin\datatables\media\css\TableTools.css" />
+    <Content Include="js\SmartAdmin\js\plugin\datatables\media\css\TableTools_JUI.css" />
+    <Content Include="js\SmartAdmin\js\plugin\datatables\media\images\background.png" />
+    <Content Include="js\SmartAdmin\js\plugin\datatables\media\images\collection.png" />
+    <Content Include="js\SmartAdmin\js\plugin\datatables\media\images\collection_hover.png" />
+    <Content Include="js\SmartAdmin\js\plugin\datatables\media\images\copy.png" />
+    <Content Include="js\SmartAdmin\js\plugin\datatables\media\images\copy_hover.png" />
+    <Content Include="js\SmartAdmin\js\plugin\datatables\media\images\csv.png" />
+    <Content Include="js\SmartAdmin\js\plugin\datatables\media\images\csv_hover.png" />
+    <Content Include="js\SmartAdmin\js\plugin\datatables\media\images\pdf.png" />
+    <Content Include="js\SmartAdmin\js\plugin\datatables\media\images\pdf_hover.png" />
+    <Content Include="js\SmartAdmin\js\plugin\datatables\media\images\print.png" />
+    <Content Include="js\SmartAdmin\js\plugin\datatables\media\images\print_hover.png" />
+    <Content Include="js\SmartAdmin\js\plugin\datatables\media\images\xls.png" />
+    <Content Include="js\SmartAdmin\js\plugin\datatables\media\images\xls_hover.png" />
+    <Content Include="js\SmartAdmin\js\plugin\datatables\media\js\TableTools.js" />
+    <Content Include="js\SmartAdmin\js\plugin\datatables\media\js\TableTools.min.js" />
+    <Content Include="js\SmartAdmin\js\plugin\datatables\media\js\ZeroClipboard.js" />
+    <Content Include="js\SmartAdmin\js\plugin\datatables\media\swf\copy_csv_xls.swf" />
+    <Content Include="js\SmartAdmin\js\plugin\datatables\media\swf\copy_csv_xls_pdf.swf" />
+    <Content Include="js\SmartAdmin\js\plugin\datatables\ZeroClipboard.js" />
+    <Content Include="js\SmartAdmin\js\plugin\delete-table-row\delete-table-row.js" />
+    <Content Include="js\SmartAdmin\js\plugin\dropzone\dropzone-amd-module.js" />
+    <Content Include="js\SmartAdmin\js\plugin\dropzone\dropzone-amd-module.min.js" />
+    <Content Include="js\SmartAdmin\js\plugin\dropzone\dropzone.js" />
+    <Content Include="js\SmartAdmin\js\plugin\dropzone\dropzone.min.js" />
+    <Content Include="js\SmartAdmin\js\plugin\easy-pie-chart\examples\excanvas.js" />
+    <Content Include="js\SmartAdmin\js\plugin\easy-pie-chart\examples\index.html" />
+    <Content Include="js\SmartAdmin\js\plugin\easy-pie-chart\examples\style.css" />
+    <Content Include="js\SmartAdmin\js\plugin\easy-pie-chart\jquery.easy-pie-chart.js" />
+    <Content Include="js\SmartAdmin\js\plugin\easy-pie-chart\jquery.easy-pie-chart.min.js" />
+    <Content Include="js\SmartAdmin\js\plugin\fastclick\fastclick.js" />
+    <Content Include="js\SmartAdmin\js\plugin\flot\jquery.flot.cust.js" />
+    <Content Include="js\SmartAdmin\js\plugin\flot\jquery.flot.fillbetween.js" />
+    <Content Include="js\SmartAdmin\js\plugin\flot\jquery.flot.fillbetween.min.js" />
+    <Content Include="js\SmartAdmin\js\plugin\flot\jquery.flot.orderBar.js" />
+    <Content Include="js\SmartAdmin\js\plugin\flot\jquery.flot.orderBar.min.js" />
+    <Content Include="js\SmartAdmin\js\plugin\flot\jquery.flot.pie.js" />
+    <Content Include="js\SmartAdmin\js\plugin\flot\jquery.flot.pie.min.js" />
+    <Content Include="js\SmartAdmin\js\plugin\flot\jquery.flot.resize.js" />
+    <Content Include="js\SmartAdmin\js\plugin\flot\jquery.flot.resize.min.js" />
+    <Content Include="js\SmartAdmin\js\plugin\flot\jquery.flot.tooltip.js" />
+    <Content Include="js\SmartAdmin\js\plugin\flot\jquery.flot.tooltip.min.js" />
+    <Content Include="js\SmartAdmin\js\plugin\fuelux\wizard\wizard.js" />
+    <Content Include="js\SmartAdmin\js\plugin\fullcalendar\jquery.fullcalendar.js" />
+    <Content Include="js\SmartAdmin\js\plugin\fullcalendar\jquery.fullcalendar.min.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ie-placeholder\jquery.placeholder.min.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ion-slider\ion.rangeSlider.js" />
+    <Content Include="js\SmartAdmin\js\plugin\ion-slider\ion.rangeSlider.min.js" />
+    <Content Include="js\SmartAdmin\js\plugin\jquery-form\jquery-form.min.js" />
+    <Content Include="js\SmartAdmin\js\plugin\jquery-nestable\jquery.nestable.js" />
+    <Content Include="js\SmartAdmin\js\plugin\jquery-touch\jquery.ui.touch-punch.js" />
+    <Content Include="js\SmartAdmin\js\plugin\jquery-touch\jquery.ui.touch-punch.min.js" />
+    <Content Include="js\SmartAdmin\js\plugin\jquery-validate\jquery.validate.min.js" />
+    <Content Include="js\SmartAdmin\js\plugin\js-migrate\jquery-migrate-1.2.1.js" />
+    <Content Include="js\SmartAdmin\js\plugin\js-migrate\jquery-migrate-1.2.1.min.js" />
+    <Content Include="js\SmartAdmin\js\plugin\knob\jquery.knob.js" />
+    <Content Include="js\SmartAdmin\js\plugin\knob\jquery.knob.min.js" />
+    <Content Include="js\SmartAdmin\js\plugin\lazyload\lazyload.js" />
+    <Content Include="js\SmartAdmin\js\plugin\lazyload\lazyload.min.js" />
+    <Content Include="js\SmartAdmin\js\plugin\markdown\bootstrap-markdown.js" />
+    <Content Include="js\SmartAdmin\js\plugin\markdown\bootstrap-markdown.min.js" />
+    <Content Include="js\SmartAdmin\js\plugin\markdown\markdown.js" />
+    <Content Include="js\SmartAdmin\js\plugin\markdown\markdown.min.js" />
+    <Content Include="js\SmartAdmin\js\plugin\markdown\to-markdown.js" />
+    <Content Include="js\SmartAdmin\js\plugin\markdown\to-markdown.min.js" />
+    <Content Include="js\SmartAdmin\js\plugin\masked-input\jquery.maskedinput.js" />
+    <Content Include="js\SmartAdmin\js\plugin\masked-input\jquery.maskedinput.min.js" />
+    <Content Include="js\SmartAdmin\js\plugin\maxlength\bootstrap-maxlength.js" />
+    <Content Include="js\SmartAdmin\js\plugin\maxlength\bootstrap-maxlength.min.js" />
+    <Content Include="js\SmartAdmin\js\plugin\morris\morris-chart-settings.js" />
+    <Content Include="js\SmartAdmin\js\plugin\morris\morris.js" />
+    <Content Include="js\SmartAdmin\js\plugin\morris\morris.min.js" />
+    <Content Include="js\SmartAdmin\js\plugin\morris\raphael.2.1.0.min.js" />
+    <Content Include="js\SmartAdmin\js\plugin\msie-fix\jquery.mb.browser.js" />
+    <Content Include="js\SmartAdmin\js\plugin\msie-fix\jquery.mb.browser.min.js" />
+    <Content Include="js\SmartAdmin\js\plugin\multiselect\bootstrap-multiselect.js" />
+    <Content Include="js\SmartAdmin\js\plugin\multiselect\bootstrap-multiselect.min.js" />
+    <Content Include="js\SmartAdmin\js\plugin\noUiSlider\jquery.nouislider.css" />
+    <Content Include="js\SmartAdmin\js\plugin\noUiSlider\jquery.nouislider.js" />
+    <Content Include="js\SmartAdmin\js\plugin\noUiSlider\jquery.nouislider.min.js" />
+    <Content Include="js\SmartAdmin\js\plugin\pace\pace.min.js" />
+    <Content Include="js\SmartAdmin\js\plugin\select2\readme.txt" />
+    <Content Include="js\SmartAdmin\js\plugin\select2\select2-customized.js" />
+    <Content Include="js\SmartAdmin\js\plugin\select2\select2.js" />
+    <Content Include="js\SmartAdmin\js\plugin\select2\select2.min.js" />
+    <Content Include="js\SmartAdmin\js\plugin\selectToUISlider\selectToUISlider.jQuery.js" />
+    <Content Include="js\SmartAdmin\js\plugin\selectToUISlider\selectToUISlider.jQuery.min.js" />
+    <Content Include="js\SmartAdmin\js\plugin\slickgrid\controls\slick.allcontrols.min.js" />
+    <Content Include="js\SmartAdmin\js\plugin\slickgrid\controls\slick.columnpicker.css" />
+    <Content Include="js\SmartAdmin\js\plugin\slickgrid\controls\slick.columnpicker.js" />
+    <Content Include="js\SmartAdmin\js\plugin\slickgrid\controls\slick.pager.css" />
+    <Content Include="js\SmartAdmin\js\plugin\slickgrid\controls\slick.pager.js" />
+    <Content Include="js\SmartAdmin\js\plugin\slickgrid\lib\jquery.event.drag-2.2.js" />
+    <Content Include="js\SmartAdmin\js\plugin\slickgrid\lib\jquery.event.drop-2.2.js" />
+    <Content Include="js\SmartAdmin\js\plugin\slickgrid\plugins\slick.allplugins.min.js" />
+    <Content Include="js\SmartAdmin\js\plugin\slickgrid\plugins\slick.autotooltips.js" />
+    <Content Include="js\SmartAdmin\js\plugin\slickgrid\plugins\slick.cellcopymanager.js" />
+    <Content Include="js\SmartAdmin\js\plugin\slickgrid\plugins\slick.cellrangedecorator.js" />
+    <Content Include="js\SmartAdmin\js\plugin\slickgrid\plugins\slick.cellrangeselector.js" />
+    <Content Include="js\SmartAdmin\js\plugin\slickgrid\plugins\slick.cellselectionmodel.js" />
+    <Content Include="js\SmartAdmin\js\plugin\slickgrid\plugins\slick.checkboxselectcolumn.js" />
+    <Content Include="js\SmartAdmin\js\plugin\slickgrid\plugins\slick.headerbuttons.css" />
+    <Content Include="js\SmartAdmin\js\plugin\slickgrid\plugins\slick.headerbuttons.js" />
+    <Content Include="js\SmartAdmin\js\plugin\slickgrid\plugins\slick.headermenu.css" />
+    <Content Include="js\SmartAdmin\js\plugin\slickgrid\plugins\slick.headermenu.js" />
+    <Content Include="js\SmartAdmin\js\plugin\slickgrid\plugins\slick.rowmovemanager.js" />
+    <Content Include="js\SmartAdmin\js\plugin\slickgrid\plugins\slick.rowselectionmodel.js" />
+    <Content Include="js\SmartAdmin\js\plugin\slickgrid\slick.core.js" />
+    <Content Include="js\SmartAdmin\js\plugin\slickgrid\slick.dataview.js" />
+    <Content Include="js\SmartAdmin\js\plugin\slickgrid\slick.editors.js" />
+    <Content Include="js\SmartAdmin\js\plugin\slickgrid\slick.formatters.js" />
+    <Content Include="js\SmartAdmin\js\plugin\slickgrid\slick.grid.js" />
+    <Content Include="js\SmartAdmin\js\plugin\slickgrid\slick.groupitemmetadataprovider.js" />
+    <Content Include="js\SmartAdmin\js\plugin\slickgrid\slick.remotemodel.js" />
+    <Content Include="js\SmartAdmin\js\plugin\smartclick\smartclick.js" />
+    <Content Include="js\SmartAdmin\js\plugin\sparkline\jquery.sparkline.js" />
+    <Content Include="js\SmartAdmin\js\plugin\sparkline\jquery.sparkline.min.js" />
+    <Content Include="js\SmartAdmin\js\plugin\summernote\summernote.js" />
+    <Content Include="js\SmartAdmin\js\plugin\superbox\superbox.js" />
+    <Content Include="js\SmartAdmin\js\plugin\superbox\superbox.min.js" />
+    <Content Include="js\SmartAdmin\js\plugin\throttle-denounce\jquery.ba-throttle-debounce.min.js" />
+    <Content Include="js\SmartAdmin\js\plugin\typeahead\typeahead.js" />
+    <Content Include="js\SmartAdmin\js\plugin\typeahead\typeahead.min.js" />
+    <Content Include="js\SmartAdmin\js\plugin\typeahead\typeaheadjs.js" />
+    <Content Include="js\SmartAdmin\js\plugin\typeahead\typeaheadjs.min.js" />
+    <Content Include="js\SmartAdmin\js\plugin\vectormap\jquery-jvectormap-1.1.1.css" />
+    <Content Include="js\SmartAdmin\js\plugin\vectormap\jquery-jvectormap-1.1.1.min.js" />
+    <Content Include="js\SmartAdmin\js\plugin\vectormap\jquery-jvectormap-1.2.2.css" />
+    <Content Include="js\SmartAdmin\js\plugin\vectormap\jquery-jvectormap-1.2.2.min.js" />
+    <Content Include="js\SmartAdmin\js\plugin\vectormap\jquery-jvectormap-world-mill-en.js" />
+    <Content Include="js\SmartAdmin\js\plugin\x-editable\jquery.mockjax.min.js" />
+    <Content Include="js\SmartAdmin\js\plugin\x-editable\moment.min.js" />
+    <Content Include="js\SmartAdmin\js\plugin\x-editable\x-editable.js" />
+    <Content Include="js\SmartAdmin\js\plugin\x-editable\x-editable.min.js" />
+    <Content Include="js\SmartAdmin\js\smartwidgets\jarvis.widget.js" />
+    <Content Include="js\SmartAdmin\js\smartwidgets\jarvis.widget.min.js" />
+    <Content Include="js\smartwidgets\jarvis.widget.js" />
+    <Content Include="js\smartwidgets\jarvis.widget.min.js" />
+    <Content Include="js\stats.js" />
+    <Content Include="js\tipswindown.js" />
+    <Content Include="js\wysihtml5-0.3.0.js" />
+    <Content Include="js\zDialog.js" />
+    <Content Include="js\zDrag.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="js\plugin\bootstrap-tags\bootstrap-tagsinput.min.js.map" />
+    <Content Include="js\plugin\ckeditor\CHANGES.md" />
+    <Content Include="js\plugin\ckeditor\LICENSE.md" />
+    <Content Include="js\plugin\ckeditor\plugins\scayt\LICENSE.md" />
+    <Content Include="js\plugin\ckeditor\plugins\scayt\README.md" />
+    <Content Include="js\plugin\ckeditor\plugins\wsc\LICENSE.md" />
+    <Content Include="js\plugin\ckeditor\plugins\wsc\README.md" />
+    <Content Include="js\plugin\ckeditor\README.md" />
+    <Content Include="js\plugin\ckeditor\samples\assets\posteddata.php" />
+    <Content Include="js\plugin\ckeditor\samples\plugins\htmlwriter\assets\outputforflash\outputforflash.fla" />
+    <Content Include="js\plugin\ckeditor\samples\sample_posteddata.php" />
+    <Content Include="js\plugin\ckeditor\skins\moono\readme.md" />
+    <Content Include="js\plugin\datatables\media\as3\lib\AlivePDF.swc" />
+    <Content Include="js\plugin\datatables\media\as3\ZeroClipboard.as" />
+    <Content Include="js\plugin\datatables\media\as3\ZeroClipboardPdf.as" />
+    <Content Include="js\plugin\datatables\media\images\psd\collection.psd" />
+    <Content Include="js\plugin\datatables\media\images\psd\copy document.psd" />
+    <Content Include="js\plugin\datatables\media\images\psd\file_types.psd" />
+    <Content Include="js\plugin\datatables\media\images\psd\printer.psd" />
+    <Content Include="js\plugin\datatables\media\js\TableTools.min.js.gz" />
+    <Content Include="js\plugin\slickgrid\slick.editors.js--" />
+    <Content Include="js\SmartAdmin\css\bootstrap.css.map" />
+    <Content Include="js\SmartAdmin\fonts\fontawesome-webfont.eot" />
+    <Content Include="js\SmartAdmin\fonts\fontawesome-webfont.ttf" />
+    <Content Include="js\SmartAdmin\fonts\fontawesome-webfont.woff" />
+    <Content Include="js\SmartAdmin\fonts\FontAwesome.otf" />
+    <Content Include="js\SmartAdmin\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="js\SmartAdmin\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="js\SmartAdmin\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="js\SmartAdmin\img\avatars\index.php" />
+    <Content Include="js\SmartAdmin\img\demo\index.php" />
+    <Content Include="js\SmartAdmin\img\dropzone\index.php" />
+    <Content Include="js\SmartAdmin\img\favicon\index.php" />
+    <Content Include="js\SmartAdmin\img\flags\flags.zip" />
+    <Content Include="js\SmartAdmin\img\flags\index.php" />
+    <Content Include="js\SmartAdmin\img\gradient\index.php" />
+    <Content Include="js\SmartAdmin\img\invoice\index.php" />
+    <Content Include="js\SmartAdmin\img\jqueryui\index.php" />
+    <Content Include="js\SmartAdmin\img\pattern\index.php" />
+    <Content Include="js\SmartAdmin\img\superbox\index.php" />
+    <Content Include="js\SmartAdmin\js\plugin\bootstrap-tags\bootstrap-tagsinput.min.js.map" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\CHANGES.md" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\LICENSE.md" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\scayt\LICENSE.md" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\scayt\README.md" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\wsc\LICENSE.md" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\plugins\wsc\README.md" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\README.md" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\samples\assets\posteddata.php" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\samples\plugins\htmlwriter\assets\outputforflash\outputforflash.fla" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\samples\sample_posteddata.php" />
+    <Content Include="js\SmartAdmin\js\plugin\ckeditor\skins\moono\readme.md" />
+    <Content Include="js\SmartAdmin\js\plugin\datatables\media\as3\lib\AlivePDF.swc" />
+    <Content Include="js\SmartAdmin\js\plugin\datatables\media\as3\ZeroClipboard.as" />
+    <Content Include="js\SmartAdmin\js\plugin\datatables\media\as3\ZeroClipboardPdf.as" />
+    <Content Include="js\SmartAdmin\js\plugin\datatables\media\images\psd\collection.psd" />
+    <Content Include="js\SmartAdmin\js\plugin\datatables\media\images\psd\copy document.psd" />
+    <Content Include="js\SmartAdmin\js\plugin\datatables\media\images\psd\file_types.psd" />
+    <Content Include="js\SmartAdmin\js\plugin\datatables\media\images\psd\printer.psd" />
+    <Content Include="js\SmartAdmin\js\plugin\datatables\media\js\TableTools.min.js.gz" />
+    <Content Include="js\SmartAdmin\js\plugin\slickgrid\slick.editors.js--" />
+    <None Include="Properties\PublishProfiles\my.pubxml" />
+    <None Include="Properties\PublishProfiles\newc515.pubxml" />
+    <None Include="Properties\PublishProfiles\web.pubxml" />
+    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\jquery-1.10.2.js" />
+    <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.history.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\respond.js" />
+    <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\spin.js" />
+    <Content Include="Scripts\spin.min.js" />
+    <Content Include="Scripts\_references.js" />
+    <Content Include="Web.config" />
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Shared\Lockout.cshtml" />
+    <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Home\Login.cshtml" />
+    <Content Include="Views\Base\ClubList.cshtml" />
+    <Content Include="Views\Base\ClubList_PageList.cshtml" />
+    <Content Include="Views\Base\ClubListDetail.cshtml" />
+    <Content Include="Views\Base\Test.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="js\bootstrap\" />
+    <Folder Include="js\iealertmaster\Documentation\assets\blueprint-css\plugins\buttons\icons\" />
+    <Folder Include="js\iealertmaster\Documentation\assets\blueprint-css\plugins\fancy-type\" />
+    <Folder Include="js\iealertmaster\Documentation\assets\blueprint-css\plugins\link-icons\icons\" />
+    <Folder Include="js\iealertmaster\Documentation\assets\blueprint-css\plugins\rtl\" />
+    <Folder Include="js\iealertmaster\Documentation\assets\blueprint-css\src\" />
+    <Folder Include="js\iealertmaster\Documentation\assets\css\" />
+    <Folder Include="js\iealertmaster\Documentation\assets\images\" />
+    <Folder Include="js\iealertmaster\Documentation\assets\js\" />
+    <Folder Include="js\iealertmaster\theplugin\iealert\" />
+    <Folder Include="js\libs\" />
+    <Folder Include="js\notification\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="packages.config" />
+    <None Include="Project_Readme.html" />
+    <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\GL.Comm\GL.Common.csproj">
+      <Project>{b1253b40-d947-4ed0-b656-c8b8be0b6333}</Project>
+      <Name>GL.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GL.Dapper.Extensions\GL.Dapper.Extensions.csproj">
+      <Project>{fc11014d-2006-420a-a185-0a1fa59de72d}</Project>
+      <Name>GL.Dapper.Extensions</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GL.Dapper\GL.Dapper.csproj">
+      <Project>{6384424e-c4c0-42c8-9b65-6122a5273c2c}</Project>
+      <Name>GL.Dapper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GL.Data\GL.Data.csproj">
+      <Project>{20168359-aa63-42e9-b1a1-5e4ff4b3e63d}</Project>
+      <Name>GL.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MvcPager\MvcPager.csproj">
+      <Project>{4ba9f10c-67b7-4cd6-87b1-0519adbca2a1}</Project>
+      <Name>MvcPager</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>6255</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:23034/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>此项目引用这台计算机上缺少的 NuGet 程序包。使用 NuGet 程序包还原可下载这些程序包。有关详细信息，请参阅 http://go.microsoft.com/fwlink/?LinkID=322105。缺少的文件是 {0}。</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

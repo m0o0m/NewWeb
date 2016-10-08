@@ -1,0 +1,106 @@
+﻿@using GL.Data.Model
+@model BaseDataView
+@{
+    ViewBag.Title = "RechargeRaType";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    ViewBag.Format = "yyyy-MM-dd";
+
+    switch (Model.Groupby)
+    {
+        case groupby.按日:
+            break;
+        case groupby.按月:
+            ViewBag.Format = "yyyy-MM";
+            break;
+    }
+
+    string typeString;
+    switch ((raType)Convert.ToInt32(ViewData["tab"]))
+    {
+        case raType.腾讯:
+            typeString = "腾讯平台"; break;
+        case raType.易宝:
+            typeString = "易宝支付"; break;
+        case raType.AppStore:
+            typeString = "IOS"; break;
+        case raType.微信:
+            typeString = "微信支付"; break;
+        case raType.支付宝:
+            typeString = "支付宝"; break;
+        default:
+            typeString = ""; break;
+
+    }
+
+}
+
+
+
+
+<div id="content">
+    <div class="alert alert-block alert-success">
+        <a class="close" data-dismiss="alert" href="#">×</a>
+        <h4 class="alert-heading"><i class="fa  fa-shopping-cart" ></i> @typeString</h4>
+       
+    </div>
+
+    <form id="comment-form" class="smart-form" novalidate="novalidate">
+        <input type="hidden" value="@ViewData["tab"]" id="tab" name="tab" />
+        <input type="hidden" value="@Guid.NewGuid()" id="rank" name="rank" />
+        <div class="row">
+            <div class="widget-body">
+
+                <section class="col col-1">
+                    <label class="label">会员ID</label>
+                    <label class="input">
+                        @Html.TextBoxFor(m => m.UserID, new { @class = "span2", style = "border-radius:4px" })
+                    </label>
+                </section>
+
+                <section class="col col-1.2">
+                    <label class="label">起始日期</label>
+                    <label class="input">
+                        <i class="icon-append fa fa-calendar"></i>
+                        @Html.TextBoxFor(m => m.StartDate, new Dictionary<string, object>() { { "class", "form-control datepicker" }, { "data-dateformat", "yy-mm-dd 00:00:00" } })
+                    </label>
+                </section>
+                <section class="col col-1.2">
+                    <label class="label"> 截止日期</label>
+                    <label class="input">
+                        <i class="icon-append fa fa-calendar"></i>
+                        @Html.TextBoxFor(m => m.ExpirationDate, new Dictionary<string, object>() {
+                           { "class", "form-control datepicker" },
+                           { "data-dateformat", "yy-mm-dd 00:00:00" }
+                       })
+                    </label>
+                </section>
+
+                @*<section class="col col-1">
+                    <label class="label"> 类型</label>
+                    <label class="select">
+                        @Html.DropDownListFor(m => m.Channels, new List<SelectListItem>
+                {
+                    new SelectListItem { Text= "所有", Value = "0" },
+                    new SelectListItem { Text= "首充礼包", Value = "1" }
+                })<i></i>
+                    </label>
+                </section>*@
+
+                <section class="col col-1">
+                    <label class="label">&nbsp;</label>
+                    @*<button type="submit" class="btn btn-success btn-sm">查询</button>*@
+                    <input type="button" onclick="search()" class="btn btn-success btn-sm" value="查询" />
+                </section>
+
+            </div>
+        </div>
+    </form>
+
+    <div class="row-fluid">
+        <div class="widget-box" id="box">
+            @Html.Partial("RechargeRaType_PageList", Model.BaseDataList)
+        </div>
+    </div>
+</div>
+

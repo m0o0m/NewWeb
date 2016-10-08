@@ -1,0 +1,173 @@
+﻿@using GL.Data.Model
+@model BaseDataView
+@{
+    ViewBag.Title = "充值统计";
+
+    ViewBag.Format = "yyyy-MM-dd";
+
+    switch (Model.Groupby)
+    {
+        case groupby.按日:
+            break;
+        case groupby.按月:
+            ViewBag.Format = "yyyy-MM";
+            break;
+    }
+
+
+    List<QQZoneRechargeCount> bdl = (List<QQZoneRechargeCount>)Model.BaseDataList;
+
+    int hid = (int)ViewData["cCount"];
+
+}
+
+<div id="content">
+
+    <!-- Widget ID (each widget will need unique ID)-->
+
+
+
+
+    <form id="comment-form" class="smart-form" novalidate="novalidate">
+        <div class="row">
+            @*<section class="col col-1" style="width:150px">
+                <label class="select">
+                    @Html.DropDownList("Channels", null, new { @class = "form-control input-sm" })<i></i><i></i>
+                </label>
+            </section>*@
+
+
+
+            @*@Html.DropDownList("Channels", null, new { @class = "form-control input-sm" })*@
+
+
+            @if (hid == 1)
+            {
+                <section class="col col-12" style="width:210px;display:none">
+                    <label class="select">
+
+                        @Html.DropDownList("Channels", null, new { @class = "form-control input-sm", @style = "display:none" })
+
+
+                        <i></i>
+                    </label>
+                </section>
+            }
+            else
+            {
+                <section class="col col-12" style="width:210px">
+                    <label class="select">
+
+                        @Html.DropDownList("Channels", null, new { @class = "form-control input-sm" })
+
+                        <i></i>
+                    </label>
+                </section>
+            }
+
+
+
+
+
+
+
+
+            <section class="col col-1.2">
+                <label class="input">
+                    <i class="icon-append fa fa-calendar"></i>
+                    @Html.TextBoxFor(m => m.StartDate, new Dictionary<string, object>() {
+                           { "class", "form-control datepicker" },
+                           { "data-dateformat", "yy-mm-dd 00:00:00" }
+                       })
+                </label>
+            </section>
+
+
+
+            <section class="col col-1.2">
+                <label class="input">
+                    <i class="icon-append fa fa-calendar"></i>
+                    @Html.TextBoxFor(m => m.ExpirationDate, new Dictionary<string, object>() {
+                           { "class", "form-control datepicker" },
+                           { "data-dateformat", "yy-mm-dd 00:00:00" }
+                       })
+                </label>
+            </section>
+            <section class="col col-1">
+                <label class="select">
+                    @Html.DropDownList("groupby") <i></i>
+                </label>
+            </section>
+
+
+            <section class="col col-1">
+                @*<button type="submit" class="btn btn-success btn-sm">查询</button>*@
+                <input type="button" onclick="search()" class="btn btn-success btn-sm" value="查询" />
+            </section>
+
+        </div>
+
+    </form>
+
+
+
+
+
+    @Html.Partial("QQZoneRechargeCountGroup_PageList", ViewData["dataGroup"])
+
+
+
+    @*@Html.Partial("QQZoneRechargeCount_PageList", ViewData["data"])*@
+
+
+
+
+
+
+</div>
+<script type="text/javascript">
+
+    function search() {
+        //把#page=去掉就正常了
+
+        //判断如果不包含#就不改浏览器地址:优化
+        var url = window.location.href;
+        var index = url.indexOf('#', 0);
+        if (index < 0) { //说明没有#号
+
+        } else {
+            History.pushState({ state: 1, rand: Math.random() }, "", "?a=1");
+        }
+        $("#comment-form").submit();
+    }
+
+    function btnView(obj,type) {
+        _this = $(obj).parent().parent();
+        if ($(obj).html() == 0) { return false;}
+        //alert(_this.find("td").eq(0).html());
+
+        //return false;
+        var _Date = _this.find("td").eq(0).html();
+        var chanel = $("#Channels option:selected").val();
+
+        $.ajax({
+            url: "/base/QQZoneRechargeDetail/",
+            type: "get",
+            dataType: "html",
+            data: { "StartDate": _Date, "Channels": chanel, "type": type, "AllCount": $(obj).html() },
+            success: function (data) {
+                $(".detail").remove();
+                $("#content").append(data);
+            }
+        }).fail(function (xhr, textStatus, err) {
+            alert('Error: ' + err);
+
+        });
+        return false;
+    }
+</script>
+
+@section scripts{
+    @{Html.RegisterMvcPagerScriptResource();}
+
+}

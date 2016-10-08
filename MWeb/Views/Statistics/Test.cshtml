@@ -1,0 +1,153 @@
+﻿
+@{
+    ViewBag.Title = "Test";
+}
+
+
+<section id="widget-grid" class="">
+
+
+   
+    <div class="row">
+
+      
+        <!-- NEW WIDGET START -->
+        <article class="col-xs-12 col-sm-4 col-md-5 col-lg-5">
+
+            <!-- Widget ID (each widget will need unique ID)-->
+            <div class="jarviswidget" id="wid-id-6" data-widget-editbutton="false">
+                <header>
+                    <span class="widget-icon"> <i class="fa fa-bar-chart-o"></i> </span>
+                    <h2>Pie Chart</h2>
+                </header>
+                <div>
+
+                    <!-- widget edit box -->
+                    <div class="jarviswidget-editbox">
+                        <!-- This area used as dropdown edit box -->
+
+                    </div>
+                    <!-- end widget edit box -->
+                    <!-- widget content -->
+                    <div class="widget-body no-padding">
+
+                        <div id="pie-chart" class="chart"></div>
+
+                    </div>
+                    <!-- end widget content -->
+
+                </div>
+                <!-- end widget div -->
+
+            </div>
+            <!-- end widget -->
+
+        </article>
+        <!-- WIDGET END -->
+
+    </div>
+
+  
+
+</section>
+<!-- end widget grid -->
+@section scripts{
+    <script type="text/javascript">
+
+	// DO NOT REMOVE : GLOBAL FUNCTIONS!
+
+	// PAGE RELATED SCRIPTS
+
+	/*
+	 * LOAD ALL FLOT DEPENDENCIES
+	 */
+
+	
+
+	/* chart colors default */
+	var $chrt_border_color = "#efefef";
+	var $chrt_grid_color = "#DDD"
+	var $chrt_main = "#E24913";			/* red       */
+	var $chrt_second = "#6595b4";		/* blue      */
+	var $chrt_third = "#FF9F01";		/* orange    */
+	var $chrt_fourth = "#7e9d3a";		/* green     */
+	var $chrt_fifth = "#BD362F";		/* dark red  */
+	var $chrt_mono = "#000";
+
+	function generateAllFlotCharts() {
+
+
+		if ($('#pie-chart').length) {
+
+				var data_pie = [];
+				var series = Math.floor(Math.random() * 10) + 1;
+				for (var i = 0; i < series; i++) {
+					data_pie[i] = {
+						label : "Series" + (i + 1),
+						data : Math.floor(Math.random() * 100) + 1
+					}
+				}
+
+				$.plot($("#pie-chart"), data_pie, {
+					series : {
+						pie : {
+							show : true,
+							innerRadius : 0.5,
+							radius: 1,
+							label : {
+								show : false,
+								radius : 2 / 3,
+								formatter : function(label, series) {
+									return '<div style="font-size:11px;text-align:center;padding:4px;color:red;">' + label + '<br/>' + Math.round(series.percent) + '%</div>';
+								},
+								threshold : 0.1
+							},
+							offset: {
+				            top: 0,
+				            left: 'auto'
+							},
+							stroke: {
+							    color: '#FFF',
+							    width: 1
+							},
+						}
+					},
+					legend : {
+						show : true,
+						noColumns : 1, // number of colums in legend table
+						labelFormatter : null, // fn: string -> string
+						labelBoxBorderColor : "#000", // border color for the little label boxes
+						container : null, // container (as jQuery object) to put legend in, null means default on top of graph
+						position : "ne", // position of default legend container within plot
+						margin : [5, 10], // distance from grid edge to default legend container within plot
+						backgroundColor : "#efefef", // null means auto-detect
+						backgroundOpacity : 1 // set to 0 to avoid background
+					},
+					grid : {
+						hoverable : true,
+						clickable : true
+					},
+					combine: {
+					    threshold: -1,﻿ // percentage at which to combine little slices into one larger slice
+					    color: null,﻿ // color to give the new slice (auto-generated if null)
+					    label: 'Other'﻿ // label to give the new slice
+					},
+					highlight: {
+					    //color: '#FFF',﻿ ﻿ // will add this functionality once parseColor is available
+					    opacity: 0.5
+					}
+				});
+
+		}
+
+	
+
+	}
+	generateAllFlotCharts();
+	
+
+</script>
+    }
+
+
+

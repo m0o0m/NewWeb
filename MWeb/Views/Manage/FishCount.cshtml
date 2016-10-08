@@ -1,0 +1,179 @@
+﻿@using GL.Data.Model
+@using GL.Data.View
+@model GameRecordView
+@{
+    ViewBag.Title = "购买与放生数据查询";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+
+    List<FishCount> bdl = (List<FishCount>)Model.DataList;
+
+
+}
+
+
+
+
+
+<div id="content">
+    <form id="comment-form" class="smart-form" novalidate="novalidate">
+        <div class="row">
+            <div class="widget-body">
+
+                <section class="col col-1.2">
+                    <label class="label">会员ID/账户/昵称</label>
+                    <label class="input">
+                        @Html.TextBoxFor(m => m.SearchExt, new { @class = "span2", style = "border-radius:4px;width:120px" })
+                    </label>
+                </section>
+
+                <section class="col col-1.2">
+                    <label class="label">起始日期</label>
+                    <label class="input">
+                        <i class="icon-append fa fa-calendar"></i>
+                        @Html.TextBoxFor(m => m.StartDate, new Dictionary<string, object>() { { "class", "form-control datepicker" }, { "data-dateformat", "yy-mm-dd 00:00:00" } })
+                    </label>
+                </section>
+                <section class="col col-1.2">
+                    <label class="label"> 截止日期</label>
+                    <label class="input">
+                        <i class="icon-append fa fa-calendar"></i>
+                        @Html.TextBoxFor(m => m.ExpirationDate, new Dictionary<string, object>() {
+                           { "class", "form-control datepicker" },
+                           { "data-dateformat", "yy-mm-dd 00:00:00" }
+                       })
+                    </label>
+                </section>
+                <section class="col col-1">
+                    <label class="label">&nbsp;</label>
+                    <button type="submit" class="btn btn-success btn-sm">查询</button>
+                </section>
+
+            </div>
+        </div>
+    </form>
+
+    <div>
+
+        <section id="widget-grid" class="">
+            <div class="row">
+                <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-0" data-widget-editbutton="false" data-widget-colorbutton="false"
+                         data-widget-togglebutton="false"
+                         data-widget-deletebutton="false"
+                         data-widget-fullscreenbutton="false"
+                         data-widget-custombutton="false"
+                         data-widget-collapsed="false"
+                         data-widget-sortable="false">
+                        <header>
+                            <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                            <h2>@ViewBag.Title</h2>
+                        </header>
+                        <!-- widget div-->
+                        <div>
+                            <!-- widget edit box -->
+                            <div class="jarviswidget-editbox">
+                                <!-- This area used as dropdown edit box -->
+                            </div>
+                            <!-- end widget edit box -->
+                            <!-- widget content -->
+                            <div class="widget-body no-padding">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered">
+                                        <thead>
+
+                                            <tr>
+                                                <th class="span6">时间</th>
+                                                <th colspan="2" class="span6">购买</th>
+                                                <th colspan="2" class="span6">放生</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr class="gradeA">
+                                                <td rowspan="5" style="border-right:1px solid #ddd; text-align:center; vertical-align:middle"> @Model.StartDate - @Model.ExpirationDate  </td>
+                                                <td style="border-left:0px">银龙鱼（ID：1）</td>
+                                                <td>@bdl.Select(x => (x.Type == ntype.购买 && x.FishID == 1) ? x.Num : 0).Sum()</td>
+                                                <td>银龙鱼（ID：1）</td>
+                                                <td>@bdl.Select(x => (x.Type == ntype.放生 && x.FishID == 1) ? x.Num : 0).Sum()</td>
+                                            </tr>
+                                            <tr class="gradeA">
+                                                <td>金龙鱼（ID：2）</td>
+                                                <td>@bdl.Select(x => (x.Type == ntype.购买 && x.FishID == 2) ? x.Num : 0).Sum()</td>
+                                                <td>金龙鱼（ID：2）</td>
+                                                <td>@bdl.Select(x => (x.Type == ntype.放生 && x.FishID == 2) ? x.Num : 0).Sum()</td>
+                                            </tr>
+                                            <tr class="gradeA">
+                                                <td>海豚（ID：3）</td>
+                                                <td>@bdl.Select(x => (x.Type == ntype.购买 && x.FishID == 3) ? x.Num : 0).Sum()</td>
+                                                <td>海豚（ID：3）</td>
+                                                <td>@bdl.Select(x => (x.Type == ntype.放生 && x.FishID == 3) ? x.Num : 0).Sum()</td>
+                                            </tr>
+
+                                            <tr class="gradeA">
+                                                <td>鲨鱼（ID：4）</td>
+                                                <td>@bdl.Select(x => (x.Type == ntype.购买 && x.FishID == 4) ? x.Num : 0).Sum()</td>
+                                                <td>鲨鱼（ID：4）</td>
+                                                <td>@bdl.Select(x => (x.Type == ntype.放生 && x.FishID == 4) ? x.Num : 0).Sum()</td>
+                                            </tr>
+
+                                            <tr class="gradeA">
+                                                <td>小虾米（ID：5）</td>
+                                                <td>@bdl.Select(x => (x.Type == ntype.购买 && x.FishID == 5) ? x.Num : 0).Sum()</td>
+                                                <td>小虾米（ID：5）</td>
+                                                <td>@bdl.Select(x => (x.Type == ntype.放生 && x.FishID == 5) ? x.Num : 0).Sum()</td>
+                                            </tr>
+
+
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                            </div>
+                            <!-- end widget content -->
+                        </div>
+                        <!-- end widget div -->
+                    </div>
+                    <!-- end widget -->
+
+                </article>
+            </div>
+        </section>
+
+
+    </div>
+</div>
+
+
+
+
+
+
+@section scripts{
+
+    @*<script src="/js/bootstrap.min.js"></script>
+    <script src="/js/select2.min.js"></script>
+    @Styles.Render("~/Style/bootstrap-datetimepicker")
+    @Scripts.Render("~/bundles/bootstrap-datetimepicker")*@
+
+
+    <script type="text/javascript">
+
+        //$(document).ready(function () {
+        //    $('select').select2({
+        //        allowClear: false,
+        //        minimumResultsForSearch: -1
+        //    });
+        //    $('.datepicker').datetimepicker({
+        //        minView: "month", //选择日期后，不会再跳转去选择时分秒
+        //        format: "yyyy-mm-dd hh:ii:ss", //选择日期后，文本框显示的日期格式
+        //        language: 'zh-CN', //汉化
+        //        autoclose: true //选择日期后自动关闭
+        //    });
+
+        //});
+
+
+
+    </script>
+
+}

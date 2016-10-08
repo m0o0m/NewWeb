@@ -1,0 +1,115 @@
+﻿@model GL.Data.Model.ManagerInfo
+@{
+    ViewBag.Title = "管理员管理 -- 添加";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!--breadcrumbs-->
+<div id="content-header">
+    <div id="breadcrumb"> <a href="#" title="" class="current"><i class="icon-home"></i> 添加管理员</a></div>
+</div>
+
+<!--End-breadcrumbs-->
+<div class="container-fluid">
+    <div class="row-fluid">
+
+        <div class="widget-box span4" id="box">
+            <div class="widget-title">
+                <span class="icon"><i class="icon-align-justify"></i></span>
+                <h5></h5>
+            </div>
+            <div class="widget-content nopadding">
+                <div class="form-horizontal">
+                    @*<input type="hidden" name="dwAgentID" value="@Model.dwAgentID" />*@
+                    <div class="control-group">
+                        <label class="control-label">管理员帐号 :</label>
+                        <div class="controls">
+                            <input type="text" name="AdminAccount" class="span11" value="@Model.AdminAccount" />
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">管理员密码 :</label>
+                        <div class="controls">
+                            <input type="password" name="AdminPasswd" class="span11" value="@Model.AdminPasswd" />
+                        </div>
+                    </div>
+                    <div class="form-actions">
+
+                        <input id="btnKick" type="button" value="提交" class="btn btn-danger" onclick="return btnSubmit(this)" />
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+
+@section scripts{
+    @{Html.RegisterMvcPagerScriptResource();}
+
+
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/select2.min.js"></script>
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+
+        // resets the menu selection upon entry to this page:
+        function resetMenu() {
+            document.gomenu.selector.selectedIndex = 2;
+        }
+
+
+
+        function btnSubmit(obj) {
+            _this = $(obj).parent().parent();
+
+            var _AdminAccount = _this.find("input[name=AdminAccount]").val();
+            var _AdminPasswd = _this.find("input[name=AdminPasswd]").val();
+
+
+            if (_AdminAccount.length == 0) {
+                alert("账号不能为空");
+                return false;
+            }
+            if (_AdminPasswd.length == 0) {
+                alert("密码不能为空");
+                return false;
+            }
+
+            $.ajax({
+                url: "/api/ManageApi/",
+                type: "PUT",
+                dataType: "JSON",
+                data: { "AdminAccount": _AdminAccount, "AdminPasswd": _AdminPasswd },
+                success: function (data) {
+                    switch (data.result) {
+                        case 0:
+                            location.href = "/Manage/Management";
+                            break;
+                        case 200:
+                            alert("值不能为空，请稍后再试");
+                            break;
+                        case 204:
+                            alert("账号已存在，请重新添加");
+                            break;
+                        case 205:
+                            alert("添加失败，账号只能由字母和数字组成");
+                            break;
+                        default:
+                            alert('未知错误');
+                            break;
+                    }
+                }
+            }).fail(function (xhr, textStatus, err) {
+                alert('Error: ' + err);
+            });
+
+            return false;
+
+        }
+
+    </script>
+}

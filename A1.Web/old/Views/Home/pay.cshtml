@@ -1,0 +1,64 @@
+﻿@{
+    ViewBag.Title = "pay";
+    Layout = "~/Views/Shared/_index.cshtml";
+}
+
+    <!-- 充值 -->
+    <div class="wrap">
+        <nav class="pay-nav">
+            <ul>
+                <li class="active"><a href="#">网上银行</a></li>
+                <li><a href="#">支付宝</a></li>
+            </ul>
+        </nav>
+        <section class="pay-area">
+            <h3 class="title">银行卡充值流程:</h3>
+            <div class="step">
+                <ul class="pay-path">
+                    <li><p>选择充值<br/>钻石数量</p></li>
+                    <li><p>选择支付<br/>银行</p></li>
+                    <li><p>进入网上<br/>银行支付</p></li>
+                    <li><p>充值钻石<br/>成功</p></li>
+                    <li><p>在商城中将钻石<br/>兑换成游戏币</p></li>
+                </ul>
+            </div>
+            <h3 class="title">第一步:选择购买<strong>钻石</strong>数量</h3>
+            <form action="pay_submit" method="get">
+                <div class="step diamond">
+                    <div class="left">
+                        <label><input type="radio" name="diamond" value="3">充值3元，可获得30钻石</label>
+                        <label><input type="radio" name="diamond" value="50">充值50元，可获得500钻石</label>
+                        <label><input type="radio" name="diamond" value="200">充值200元，可获得2000钻石</label>
+                        <label><input type="radio" name="diamond" value="1000">充值1000元，可获得10000钻石</label>
+                    </div>
+                    <div class="left">
+                        <label><input type="radio" name="diamond" value="20">充值20元，可获得200钻石</label>
+                        <label><input type="radio" name="diamond" value="100">充值100元，可获得1000钻石</label>
+                        <label><input type="radio" name="diamond" value="500">充值500元，可获得5000钻石</label>
+                        <label><input type="radio" name="diamond" value="5000">充值5000元，可获得50000钻石</label>
+                    </div>
+                </div>
+                <h3 class="title">第二步:选择银行，点击进入支付平台</h3>
+                <div class="step bank">
+                    <label><input type="radio" name="bank" value="">工商银行</label>
+                    <label><input type="radio" name="bank" value="">农业银行</label>
+                    <label><input type="radio" name="bank" value="">中国银行</label>
+                    <label><input type="radio" name="bank" value="">建设银行</label>
+                    <label><input type="radio" name="bank" value="">交通银行</label>
+                    <label><input type="radio" name="bank" value="">招商银行</label>
+                    <label><input type="radio" name="bank" value="">民生银行</label>
+                    <label><input type="radio" name="bank" value="">浦发银行</label>
+                    <label><input type="radio" name="bank" value="">兴业银行</label>
+                    <label><input type="radio" name="bank" value="">中信银行</label>
+                    <label><input type="radio" name="bank" value="">光大银行</label>
+                    <label><input type="radio" name="bank" value="">深圳发展银行</label>
+                    <label><input type="radio" name="bank" value="">北京银行</label>
+
+                </div>
+                <button type="submit">提交</button>
+            </form>
+            
+            
+        </section>
+    </div>
+

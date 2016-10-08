@@ -1,0 +1,98 @@
+﻿@using GL.Data.Model;
+@model IEnumerable<CustomerServCenter>
+@{
+    Layout = null;
+    CustomerServCenter res = (CustomerServCenter)ViewData["res"];
+}
+    <!-- new widget -->
+    <div class="jarviswidget jarviswidget-color-blueDark no-margin" id="wid-id-1" data-widget-editbutton="false" data-widget-fullscreenbutton="false">
+        <!-- widget options:
+        usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+
+        data-widget-colorbutton="false"
+        data-widget-editbutton="false"
+        data-widget-togglebutton="false"
+        data-widget-deletebutton="false"
+        data-widget-fullscreenbutton="false"
+        data-widget-custombutton="false"
+        data-widget-collapsed="true"
+        data-widget-sortable="false"
+
+        -->
+        <header>
+            <div class="jarviswidget-ctrls" role="menu">
+                <a href="javascript:void(0);" class="button-icon jarviswidget-delete-btn" rel="tooltip" title="" data-placement="bottom" data-dismiss="modal" aria-label="Close"><i class="fa fa-times"></i></a>
+            </div>
+            <span class="widget-icon"> <i class="fa fa-comments txt-color-white"></i> </span>
+            <h2> @res.CSCTitle </h2>
+        </header>
+        <!-- widget div-->
+        <div>
+            <div class="widget-body widget-hide-overflow no-padding">
+                <!-- content goes here -->
+                <!-- CHAT BODY -->
+                <div id="chat-body" class="chat-body no-padding profile-message">
+                    <ul>
+                @foreach (var m in Model)
+                {
+                    if (m.GUType == 0)
+                    {
+                        <li class="message">
+                            <img src="~/content/img/avatars/male.png" class="online" alt="">
+                            <div class="message-text">
+                                <time>
+                                    2014-01-13 @m.CSCTime.ToString("yyyy-MM-dd HH:mm:ss")
+                                </time> <a href="javascript:void(0);" class="username">@m.GUName</a> @m.CSCContent
+                            </div>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="message message-reply">
+                            <img src="~/content/img/avatars/male.png" class="online" alt="">
+                            <div class="message-text">
+                                <time>
+                                    2014-01-13 @m.CSCTime.ToString("yyyy-MM-dd HH:mm:ss")
+                                </time> <a href="javascript:void(0);" class="username">@m.GUName</a> @m.CSCContent
+                            </div>
+                        </li>
+                    }
+                }
+
+                        <li class="message">
+
+                            @if (res.CSCState != cscState.已解决)
+                            {
+
+                                <form method="post" id="submitForm" name="submitForm" class="padding-bottom-10" onsubmit="return false;">
+                                    <input type="hidden" id="modalVal" name="CSCMainID" value="@res.CSCMainID" />
+                                    <div class="chat-footer">
+                                        <div class="textarea-div">
+                                            <div class="typearea">
+                                                <textarea placeholder="Write a reply..." id="textarea-expand" name="CSCContent" class="custom-scroll"></textarea>
+                                            </div>
+                                        </div>
+                                        <span class="textarea-controls">
+                                            <button class="btn btn-sm btn-primary pull-right" onclick="return btnSend();">
+                                                回复
+                                            </button>
+                                        </span>
+                                    </div>
+                                </form>
+                            }
+
+
+
+                        </li>
+
+
+                    </ul>
+                </div>
+
+                        <!-- end content -->
+</div>
+        </div>
+        <!-- end widget div -->
+    </div>
+    <!-- end widget -->
+

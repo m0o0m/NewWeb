@@ -1,0 +1,128 @@
+﻿@using GL.Data.Model
+@using GL.Data.View
+@model GameRecordView
+@{
+    ViewBag.Title = "牌局分布";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+
+
+
+
+<div id="content">
+    <form id="comment-form" class="smart-form" novalidate="novalidate">
+        <div class="row">
+            <div class="widget-body">
+
+
+                <section class="col col-12" style="width:210px;padding-top:5px">
+                    <label>渠道</label>
+                    <label class="select">
+                        @Html.GetAllAgentGroupList("Channels", Model.Channels)
+                        <i></i>
+                    </label>
+                </section>
+
+
+                <section class="col col-1">
+                    <label class="label">游戏类型</label>
+                    <label class="select">
+                        @Html.DropDownList("Gametype", new List<SelectListItem>
+                {
+                    new SelectListItem { Text= "中发白", Value = "13" },
+                    new SelectListItem { Text= "十二生肖", Value = "14" },
+                    new SelectListItem { Text= "德州扑克", Value = "15" },
+                    //new SelectListItem { Text= "小马快跑", Value = "16" },
+                    new SelectListItem { Text= "奔驰宝马", Value = "17" },
+                    new SelectListItem { Text= "德州百人场", Value = "18" }
+                })<i></i>
+                    </label>
+                </section>
+
+                <section class="col col-1">
+                    <label class="label">用户类型</label>
+                    <label class="select">
+                        @Html.DropDownList("UserType", new List<SelectListItem>
+                {
+                    new SelectListItem { Text= "登陆用户", Value = "1" },
+                    new SelectListItem { Text= "新增用户", Value = "2" },
+                    new SelectListItem { Text= "活跃用户", Value = "3" },
+                    new SelectListItem { Text= "历史付费用户", Value = "4" },
+                    new SelectListItem { Text= "付费用户", Value = "5" },
+                    new SelectListItem { Text= "玩牌用户", Value = "6" },
+                    new SelectListItem { Text= "俱乐部用户", Value = "7" },
+                    new SelectListItem { Text= "登陆俱乐部用户", Value = "8" }
+                })<i></i>
+                    </label>
+                </section>
+
+                <section class="col col-1.2">
+                    <label class="label">起始日期</label>
+                    <label class="input">
+                        <i class="icon-append fa fa-calendar"></i>
+                        @Html.TextBoxFor(m => m.StartDate, new Dictionary<string, object>() { { "class", "form-control datepicker" }, { "data-dateformat", "yy-mm-dd 00:00:00" } })
+                    </label>
+                </section>
+                <section class="col col-1.2">
+                    <label class="label"> 截止日期</label>
+                    <label class="input">
+                        <i class="icon-append fa fa-calendar"></i>
+                        @Html.TextBoxFor(m => m.ExpirationDate, new Dictionary<string, object>() {
+                           { "class", "form-control datepicker" },
+                           { "data-dateformat", "yy-mm-dd 00:00:00" }
+                       })
+                    </label>
+                </section>
+                <section class="col col-1">
+                    <label class="label">&nbsp;</label>
+                    <input type="button" onclick="search()" class="btn btn-success btn-sm" value="查询" />
+                </section>
+
+            </div>
+        </div>
+    </form>
+
+    <div class="row-fluid">
+        <div class="widget-box" id="box">
+            @Html.Partial("BoardDist_PageList", Model.DataList)
+        </div>
+    </div>
+</div>
+
+
+
+
+
+@section scripts{
+    @{Html.RegisterMvcPagerScriptResource();}
+
+
+    @*<script src="/js/bootstrap.min.js"></script>
+        <script src="/js/select2.min.js"></script>
+        @Styles.Render("~/Style/bootstrap-datetimepicker")
+        @Scripts.Render("~/bundles/bootstrap-datetimepicker")*@
+
+
+    <script type="text/javascript">
+
+        //$(document).ready(function () {
+        //    $('select').select2({
+        //        allowClear: false,
+        //        minimumResultsForSearch: -1
+        //    });
+        //    $('.datepicker').datetimepicker({
+        //        minView: "month", //选择日期后，不会再跳转去选择时分秒
+        //        format: "yyyy-mm-dd hh:ii:ss", //选择日期后，文本框显示的日期格式
+        //        language: 'zh-CN', //汉化
+        //        autoclose: true //选择日期后自动关闭
+        //    });
+
+        //});
+
+
+
+    </script>
+
+}

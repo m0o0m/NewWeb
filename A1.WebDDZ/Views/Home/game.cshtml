@@ -1,0 +1,187 @@
+﻿@{
+    ViewBag.Title = "玩一玩";
+    Layout = null;
+}
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>515</title>
+    <link rel="stylesheet" type="text/css" href="/Content/style.css?v=20140913" />
+    <link rel="stylesheet" type="text/css" href="/Content/game.css?v=20140913" />
+    @Scripts.Render("~/bundles/jquery")
+
+
+    <script type="text/javascript" src="~/Scripts/jquery.mousewheel.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/swfobject.js"></script>
+    <script src="~/Scripts/main.js"></script>
+    <script type="text/javascript">
+var DeBao = {
+	baseUrl: "http://www.debao.com",
+	jsUrl: "http://cache.debao.com/js",
+	imgUrl: "http://cache.debao.com/style/images",
+	cssUrl: "http://cache.debao.com/style",
+	swfUrl: "http://www.debao.com/flashnew",
+	isThirdPlat: 0,
+	platform: "DEBAO"
+};
+
+var flashvars = {
+	'tab': 'GOLD',
+	'subtab': 'SITANDGO_1',
+	'userId': '403713',
+	'version': '2.8.561',
+	'res_version': '2.529',
+	'gold_hands': '383',
+	'gold_amount':'18.35',
+	'silver_hands': '0',
+	'ticketCount': '1',
+	'achieveCount': '5',
+	'registerTime': '2014-05-12 15:36:39',
+	'serverTime': '2014-09-13 13:59:42',
+	'platform': 'DEBAO',
+	'prize500': '0',
+	'baseUrl': DeBao.baseUrl,
+	'swfUrl': DeBao.swfUrl
+};
+var flashvars_replay = {
+	'version': '',
+	'res_version': '',
+	'baseUrl': DeBao.baseUrl,
+	'swfUrl': DeBao.swfUrl + '/replay'
+}
+var flashparams = {
+	quality: "high",
+	menu: "false",
+	scale: "noScale",
+	allowFullscreen: "true",
+	allowScriptAccess: "always",
+	bgcolor: "",
+	wmode: "opaque"
+};
+var r = $.browser.msie ? "&t=" + Math.random() : "";
+swfobject.embedSWF(
+	DeBao.swfUrl + "/index.swf?v=2.8.561" + r,
+	"poker", "950", "653", "10.3.0",
+	DeBao.swfUrl + "/expressInstall.swf",
+	flashvars, flashparams, {id:"totem"}
+);
+var my_uid = 403713;
+    </script>
+</head>
+<body>
+
+    <header>
+        <section id="gametop" class="area">
+            <nav>
+                <a class="current" href="/home/index">首　页</a>
+                <div id="head_down">
+                    <a href="/home/download" class="head_down_btn">客户端下载</a>
+                </div>
+                <div class="head_down">
+                    @*<h3 class="head_down1_h3 down_btn_bg">PC客户端</h3>
+                    <a href="http://soft.debao.com/PokerClient/Install/desktop_debaotexaspoker.exe" class="head_pc_down down_btn_bg">PC客户端下载</a>*@
+                    <h3 class="head_down2_h3 down_btn_bg">手机客户端</h3>
+                    <div class="head_ewm">
+                        <div class="head_ios_ewm">
+                            <span class="head_ios_ewm1">IOS</span>
+                            <span class="head_ios_ewm2 down_ewm_bg"></span>
+                        </div>
+                        <div class="head_android_ewm">
+                            <span class="head_android_ewm1">Android</span>
+                            <span class="head_android_ewm2 down_ewm_bg"></span>
+                        </div>
+                    </div>
+                    <div class="head_down_xian"></div>
+                </div>
+
+                <script type="text/javascript">
+                    $("#head_down").mouseover(function () {
+                        $(".head_down").show();
+                    });
+                    $("#head_down").mouseout(function () {
+                        $(".head_down").hide();
+                    });
+                </script>
+            </nav>
+            @*<div class="e_ienter">
+                <a href="index.php?act=ajax&mod=save_to_desktop" target="_blank" onmouseout="javascript:$('.e_ienterTips').hide();void(0);" onmouseover="javascript:$('.e_ienterTips').show();void(0);">保存游戏</a>
+                <div class="e_ienterTips" style="display:none">点击这里保存到桌面</div>
+            </div>*@
+
+        </section>
+    </header>
+
+
+
+
+    <section class="cneter">
+        <div id="bd" class="clearfixNew" style="position:relative;">
+            <!-- 头部广告区 -->
+            <div id="ad2">
+                <div id='pic_window' style='position:absolute'>
+                    <a href="http://www.debao.com/allnews/n_gg/20140828_544.shtml" target="_black">
+                        <img src="/pic/20140828155006_7251.jpg">
+                    </a>
+                    <a href="http://www.debao.com/?act=webgamenew" target="_black">
+                        <img src="/pic/20140821182230_2787.png">
+                    </a>
+
+                </div>
+                <div class='pic_dot'>
+                    <a href='#'><p class="pic_dot_num">1</p></a>
+                    <a href='#'><p class="pic_dot_num">2</p></a>
+                </div>
+                <span title="关闭" onclick="$(this).parent().hide(); DeBao.bd_height = $('#bd').height();stop_ad2();"></span>
+            </div>
+        </div>
+
+            <!-- flash游戏 -->
+            <div class="play" id="flash_con" style="display:block;position:relative;">
+                <div class="flashObj" id="flash_box">
+                    <div id="poker" style="padding-top:4px;margin:auto;">
+                        <p>
+                            <a href="http://www.adobe.com/go/getflashplayer" target="_blank"><img src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="下载  Adobe Flash player" /></a><br>
+                            <div id="update_adb" style="display:block;">
+                                <span style="color:#CCCCCC;font-size:12px;">您需要更新flash插件才能正常游戏 请先 <a href="http://www.adobe.com/go/getflashplayer" target="_blank" style="text-decoration:underline;color:#FFFFFF;">更新版本</a></span><br>
+                                <span style="color:#CCCCCC;font-size:12px;">更新完成后 请点击 <a href="index.php?act=webgamenew" style="text-decoration:underline;color:#FFFFFF;">刷新</a> 进入游戏</span>
+                            </div>
+                            <div id="download_adb" style="display:none;">
+                                <span style="color:#CCCCCC;font-size:12px;">您需要下载一个flash插件才能正常游戏 <a href="http://www.adobe.com/go/getflashplayer" target="_blank" style="text-decoration:underline;color:#FFFFFF;">下载安装</a></span><br>
+                                <span style="color:#CCCCCC;font-size:12px;">更新完成后 请点击 <a href="index.php?act=webgamenew" style="text-decoration:underline;color:#FFFFFF;">刷新</a> 进入游戏</span>
+                            </div>
+                        </p>
+                    </div>
+                    <div id='flashInputBox' style='position:absolute;top:0;left:0;display:none'>
+                        <input type='text' style='border:0;float:left;font-family:Verdana;font-size:21px' />
+                        <div style='clear:both;'></div>
+                    </div>
+                    <div id='flashTextBox' style='position:absolute;top:0;left:0;display:none'>
+                        <textarea style='border:0;float:left;font-family:Verdana;font-size:21px;resize:none;overflow:hidden'></textarea>
+                        <div style='clear:both;'></div>
+                    </div>
+                </div>
+            </div>
+
+
+        @*<div class="shrink" style="top: 32px;">
+            <a class="ashrink" href="javascript:void(0)"></a>
+            <div class="shrink_tips" style="display:none">点此隐藏顶部栏</div>
+        </div>*@
+
+
+    </section>
+
+
+
+    <footer>
+        <nav class="area">
+            <span class="copyright">Copyright © 2011 - 2014 互联工场(IWO) 粤ICP备XX号 增值电信业务经营许可证：粤XX</span>
+            <a href="/sitemap.html">常见问题</a>   |   <a href="javascript:;" onclick="javascript:window.open(&#39;disclaimer&#39;,&#39;disclaimer&#39;,&#39;status=yes,scrollbars=no,width=350,height=400&#39;)">免责声明</a>
+        </nav>
+    </footer>
+
+    <script type="text/javascript" src="~/Scripts/stats.js"></script></body>
+</html>

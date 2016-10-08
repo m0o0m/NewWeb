@@ -1,0 +1,229 @@
+﻿@using GL.Data.Model
+@model BaseDataView
+@{
+    ViewBag.Title = "在线在玩";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Format = "yyyy-MM-dd HH";
+    switch (Model.Groupby)
+    {
+        case groupby.按日:
+            break;
+        case groupby.按月:
+            ViewBag.Format = "yyyy-MM-dd";
+            break;
+    }
+
+    List<BaseDataInfoForOnlinePlay> bdl = (List<BaseDataInfoForOnlinePlay>)Model.BaseDataList;
+  
+    
+}
+
+<div id="content-header">
+    <div id="breadcrumb"> <a href="#" title="" class="current"><i class="icon-home"></i> 在线在玩</a></div>
+</div>
+
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span8">
+            <form class="form-inline">
+                查询日期
+                @Html.TextBoxFor(m => m.StartDate, new { @class = "datepicker span2", style = "border-radius:4px" })
+
+                <button type="submit" class="btn btn-success">查询</button>
+            </form>
+
+
+        </div>
+    </div>
+    <div class="row-fluid">
+        <div class="span12">
+            <div class="widget-box">
+                <div class="widget-title">
+                    <span class="icon"> <i class="icon-signal"></i> </span>
+                    <h5>Bar chart</h5>
+                </div>
+                <div class="widget-content">
+                    <div class="chart"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row-fluid">
+        <div class="span4">
+            <div class="widget-box">
+                <div class="widget-title">
+                    <span class="icon"> <i class="icon-file"></i> </span>
+                    <h5>在线在玩</h5>
+                </div>
+                <div class="widget-content nopadding">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>日期</th>
+                                <th>日在线</th>
+                                <th>日在玩</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (bdl.Count == 0)
+                            {
+                                <tr>
+                                    <td class="colspan" align="center" colspan="0">
+                                        没有找到相关记录！
+                                    </td>
+                                </tr>
+                            }
+                            @foreach (var item in bdl)
+                            {
+                                <tr>
+                                    <td>@item.date.ToString(ViewBag.Format)</td>
+                                    <td>@item.online</td>
+                                    <td>@item.playing</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/select2.min.js"></script>
+    @Styles.Render("~/Style/bootstrap-datetimepicker")
+    @Scripts.Render("~/bundles/bootstrap-datetimepicker")
+    <script src="/js/jquery.flot.min.js"></script>
+    <script src="/js/jquery.flot.pie.min.js"></script> 
+    <script src="/js/jquery.flot.resize.min.js"></script>
+
+
+
+    <script type="text/javascript">
+
+    $(document).ready(function () {
+        $('select').select2({
+            allowClear: false,
+            minimumResultsForSearch: -1
+        });
+        $('.datepicker').datetimepicker({
+            minView: "month", //选择日期后，不会再跳转去选择时分秒
+            format: "yyyy-mm-dd hh:ii:ss", //选择日期后，文本框显示的日期格式
+            language: 'zh-CN', //汉化
+            autoclose: true //选择日期后自动关闭
+        });
+
+    });
+
+    $(document).ready(function () {
+
+
+        //// === Prepare the chart data ===/
+        //var sin = [], cos = [];
+        //for (var i = 0; i < 14; i += 0.5) {
+        //    sin.push([i, Math.sin(i)]);
+        //    cos.push([i, Math.cos(i)]);
+        //}
+        // === Prepare the chart data ===/
+        var sin = [], cos = [], time = [];
+
+        @{
+            int max = 0;
+            int max1 = 0;
+            int max2 = 0;
+
+
+            for (int i = 0; i < bdl.Count; i++)
+			{
+			    <text>sin.push([@bdl[i].date.Hour, @bdl[i].online])</text>
+                <text>cos.push([@bdl[i].date.Hour, @bdl[i].playing])</text>
+                <text>time.push([@i, @bdl[i].date.Hour])</text>
+
+
+            max1 = max1 > bdl[i].online ? max1 : bdl[i].online;
+            max2 = max2 > bdl[i].playing ? max2 : bdl[i].online;
+
+
+            }
+
+            max = max1 > max2 ? max1 : max2;
+
+        }
+
+
+
+        //for (var i = 0; i < 14; i += 0.5) {
+        //    sin.push([i, Math.sin(i)]);
+        //    cos.push([i, Math.cos(i)]);
+        //}
+
+        // === Make chart === //
+        var plot = $.plot($(".chart"),
+               [{ data: sin, label: "在线", color: "#ee7951" }, { data: cos, label: "在玩", color: "#4fb9f0" }], {
+                   series: {
+                       lines: { show: true },
+                       points: { show: true }
+                   },
+                   grid: { hoverable: true, clickable: true },
+                   yaxis: { min: 0, max: @max },
+                   xaxis: { 
+
+                       ticks: [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23], 
+                       tickFormatter: function(axis) {
+                           return axis.toString()+":00";
+                       },
+                       
+                       reserveSpace:true
+                   }
+
+    });
+
+        // === Point hover in chart === //
+        var previousPoint = null;
+        $(".chart").bind("plothover", function (event, pos, item) {
+
+            if (item) {
+                if (previousPoint != item.dataIndex) {
+                    previousPoint = item.dataIndex;
+
+                    $('#tooltip').fadeOut(200, function () {
+                        $(this).remove();
+                    });
+                    var x = item.datapoint[0].toFixed(0),
+                        y = item.datapoint[1].toFixed(0);
+
+                    maruti.flot_tooltip(item.pageX, item.pageY, item.series.label + "人数: " + y);
+                }
+
+            } else {
+                $('#tooltip').fadeOut(200, function () {
+                    $(this).remove();
+                });
+                previousPoint = null;
+            }
+        });
+
+
+
+
+    });
+
+
+    maruti = {
+        // === Tooltip for flot charts === //
+        flot_tooltip: function (x, y, contents) {
+
+            $('<div id="tooltip">' + contents + '</div>').css({
+                top: y + 5,
+                left: x + 5
+            }).appendTo("body").fadeIn(200);
+        }
+    }
+
+
+</script>
+
+}

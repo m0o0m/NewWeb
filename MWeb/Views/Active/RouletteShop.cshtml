@@ -1,0 +1,75 @@
+﻿
+@using GL.Data.Model
+@model BaseDataView
+@{
+
+    ViewBag.Title = "轮盘抽奖数据";
+    ViewBag.Format = "yyyy-MM-dd";
+}
+<div id="content">
+    <form id="comment-form" class="smart-form" novalidate="novalidate">
+        <div class="row">
+            <section class="col col-1.2">
+                <label class="label">会员ID</label>
+                <label class="input">
+                    @Html.TextBoxFor(m => m.UserID, new { @class = "span2", style = "border-radius:4px;width:120px" })
+                </label>
+            </section>
+            <section class="col col-1.2">
+                <label class="label">起始日期</label>
+                <label class="input">
+                    <i class="icon-append fa fa-calendar"></i>
+                    @Html.TextBoxFor(m => m.StartDate, new Dictionary<string, object>() { { "class", "form-control datepicker" }, { "data-dateformat", "yy-mm-dd 00:00:00" } })
+                </label>
+            </section>
+            <section class="col col-1.2">
+                <label class="label"> 截止日期</label>
+                <label class="input">
+                    <i class="icon-append fa fa-calendar"></i>
+                    @Html.TextBoxFor(m => m.ExpirationDate, new Dictionary<string, object>() {
+                           { "class", "form-control datepicker" },
+                           { "data-dateformat", "yy-mm-dd 00:00:00" }
+                       })
+                </label>
+            </section>
+            <section class="col col-1">
+                <button type="submit" class="btn btn-success btn-sm">查询</button>
+            </section>
+        </div>
+    </form>
+    @Html.Partial("RouletteShop_PageList", ViewData["dataGroup"])
+</div>
+
+<script type="text/javascript">
+    function btnExchange(id) {
+        if (confirm('确定物品已经发放？')) {
+            var _id = id;
+            $.ajax({
+                url: "/Active/RouletteShopGet",
+                type: "Post",
+                dataType: "JSON",
+                data: { "ID": _id },
+                success: function (data) {
+                    switch (data.result) {
+                        case 0:
+                            alert('物品发放成功');
+                            location.reload();
+                            break;
+                        case 1:
+                            alert("操作失败，请稍后再试");
+                            break;
+                        default:
+                            alert('未知错误');
+                            break;
+                    }
+                }
+            }).fail(function (xhr, textStatus, err) {
+                alert('Error: ' + err);
+            });
+
+        } else {
+            return false;
+        }
+        return false;
+    }
+</script>

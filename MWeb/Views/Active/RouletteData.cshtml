@@ -1,0 +1,65 @@
+﻿@using GL.Data.Model
+@model BaseDataView
+@{ 
+    
+    ViewBag.Title = "轮盘抽奖数据";
+    ViewBag.Format = "yyyy-MM-dd";
+}
+<div id="content">
+    <form id="comment-form" class="smart-form" novalidate="novalidate">
+        <div class="row">
+            <section class="col col-12">
+                <label class="select" style="width:210px">
+                    @Html.GetAllAgentGroupList("Channels", Model.Channels)
+                    <i></i>
+                </label>
+            </section>
+            <section class="col col-1.2">
+                <label class="input">
+                    <i class="icon-append fa fa-calendar"></i>
+                    @Html.TextBoxFor(m => m.StartDate, new Dictionary<string, object>() {
+                           { "class", "form-control datepicker" },
+                           { "data-dateformat", "yy-mm-dd 00:00:00" }
+                       })
+                </label>
+            </section>
+            <section class="col col-1.2">
+                <label class="input">
+                    <i class="icon-append fa fa-calendar"></i>
+                    @Html.TextBoxFor(m => m.ExpirationDate, new Dictionary<string, object>() {
+                           { "class", "form-control datepicker" },
+                           { "data-dateformat", "yy-mm-dd 00:00:00" }
+                       })
+                </label>
+            </section>
+            <section class="col col-1">
+                <button type="submit" class="btn btn-success btn-sm">查询</button>
+            </section>
+        </div>
+    </form>
+    @Html.Partial("RouletteData_PageList", ViewData["dataGroup"])
+</div>
+
+<script type="text/javascript">
+    function btnView(obj) {
+        _this = $(obj).parent().parent();
+        if ($(obj).html() == 0) { return false; }
+        var _Date = _this.find("th").eq(0).html();
+        
+        var chanel = $("#Channels option:selected").val();
+        $.ajax({
+            url: "/Active/RouletteDataDetail/",
+            type: "get",
+            dataType: "html",
+            data: { "StartDate": _Date, "Channels": chanel },
+            success: function (data) {
+                $(".detail").remove();
+                $("#content").append(data);
+            }
+        }).fail(function (xhr, textStatus, err) {
+            alert('Error: ' + err);
+
+        });
+        return false;
+    }
+</script>

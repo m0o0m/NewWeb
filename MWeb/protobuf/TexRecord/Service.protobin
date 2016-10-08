@@ -1,0 +1,33 @@
+
+ð
+Service.protoproto.db515"J
+TexasOperate
+operate_index (
+operate_kind (
+score ("T
+
+TexasRound
+round_index (1
+texas_operates (2.proto.db515.TexasOperate"€
+	TexasRole
+UserID (
+handle_cards (	'
+rounds (2.proto.db515.TexasRound
+	card_type (
+	win_score ("M
+TexasGameRecord%
+roles (2.proto.db515.TexasRole
+table_cards (	"Ý
+BG_TexasGameRecord
+
+CreateTime (	
+RoomID (
+Round (
+	BaseScore (	
+Service (
+BankCard (	
+UserData (	
+UserID (	
+GiveUp	 (	,
+Record
+ (2.proto.db515.TexasGameRecord

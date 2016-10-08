@@ -1,0 +1,108 @@
+﻿@using GL.Data.View
+@model PagedList<ModelBaseData>
+@{
+    ViewBag.Title = "数据模版";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div></div>
+
+<div id="content">
+    <form id="comment-form" class="smart-form" novalidate="novalidate" method="get">
+        <div class="row">
+
+            <section class="col col-1.2">
+                <label class="label">模版名称</label>
+                <label class="input">
+                    @Html.TextBox("Value", ViewData["Value"], new { @class = "span2", style = "border-radius:4px" })
+                </label>
+            </section>
+
+            <section class="col col-0">
+                <label class="label">&nbsp;</label>
+                <button type="submit" class="btn btn-success btn-sm">查询</button>
+            </section>
+
+            <section class="col col-0">
+                <label class="label">&nbsp;</label>
+                <input id="btnEdit" type="button" value="新建" class="btn btn-success btn-sm" onclick="return addModel()" />
+            </section>
+
+        </div>
+    </form>
+
+    <section id="widget-grid" class="">
+        <div class="row">
+            <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12 sortable-grid ui-sortable">
+                <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-0" data-widget-editbutton="false" data-widget-colorbutton="false" 
+                     data-widget-togglebutton="false" data-widget-deletebutton="false" data-widget-fullscreenbutton="false" 
+                     data-widget-custombutton="false" data-widget-collapsed="false" data-widget-sortable="false" style="">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                        <h2>数据模版</h2>
+                    </header>
+                    <div>
+                        <div class="jarviswidget-editbox">
+                        </div>
+                        <div class="widget-body no-padding" style="min-height: 70px;">
+                            <div class="table-responsive">
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>名称</th>
+                                            <th>详细语句</th>
+                                            <th>参数</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @if (Model.Count == 0)
+                                        {
+                                            <tr class="gradeX">
+                                                <td class="colspan" align="center" colspan="0">
+                                                    没有找到相关记录！
+                                                </td>
+                                            </tr>
+                                        }
+                                        @foreach (ModelBaseData m in Model)
+                                        {
+                                            <tr>
+                                                <td>@m.ID</td>
+                                                <td>@m.ModelName</td>
+                                                <td>@m.Model</td>
+                                                <td>@m.Para</td>
+                                                <td>
+                                                    <input id="btnView" type="button" value="查询数据" class="btn btn-danger btn-mini" onclick="return btnView(@m.ID)" />
+                                                    <input id="btnEdit" type="button" value="修改模版" class="btn btn-danger btn-mini" onclick="return btnEdit(@m.ID)" />
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+</div>
+
+
+<script type="text/javascript">
+
+    function addModel() {
+        location.href = "/Console/DataModelEdit";
+    }
+
+    function btnView(id) {
+        location.href = "/Console/DataModelView?isFirst=1&id=" + id ;
+    }
+
+    function btnEdit(id) {
+        location.href = "/Console/DataModelEdit?id=" + id ;
+    }
+</script>
+@section scripts{}
+

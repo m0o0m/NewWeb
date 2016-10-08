@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<config>
+	<debugMode>true</debugMode>
+ 	<port>8101</port>
+ 	<!--<serverIp>202.59.250.137 ,192.168.1.18  115.159.214.148</serverIp>-->
+  <!--115.159.214.148空间测试服 115.159.214.148  --> 
+  <serverIp>192.168.1.18  </serverIp> 
+	<version>1.0</version>
+	<clientVer>1.004</clientVer>
+	<agent>208</agent>
+</config>

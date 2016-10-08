@@ -1,0 +1,310 @@
+﻿
+@using System.Data;
+
+
+@model Table
+@{
+    string search = Model.ID + "_search";
+
+    string hid = Model.ID + "_searchHid";
+
+    string hidcolumn = Model.ID + "_column";
+
+     string hidbutton = Model.ID + "_button";
+
+    List<string> columns = new List<string>();
+    List<string> buttons = new List<string>();
+
+      int jj =0;
+}
+
+<div class="row" style="@Model.Style">
+    <div class="col-md-12">
+        <div class="portlet box green">
+
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-cogs"></i>@Model.TableName
+                </div>
+                <div class="tools">
+                    <a href="javascript:;" class="collapse"> </a>
+                    <a href="javascript:;" class="reload"> </a>
+                    <a href="javascript:;" class="remove"> </a>
+                </div>
+            </div>
+            <div class="portlet-body flip-scroll">
+                 <!--表格上面的按钮集合显示-->
+                 @if (Model.Events != null && Model.Events.Count() > 0)
+                 {
+                    <div class="table-toolbar">
+                        <div class="row">
+                            <div class="col-md-12">
+                                @foreach (var item in Model.Events)
+                                {
+                                    <div class="btn-group">
+                                        <button id="yy" class="btn green" onclick="@item.Invoke">
+                                            @item.Value
+                                            <i class="@item.Icon"></i>
+
+                                            @*<i class="fa fa-remove"></i>*@
+                                        </button>
+                                    </div>
+                                }
+
+
+                            </div>
+
+                        </div>
+                    </div>
+                 }
+                
+                <table class="table table-bordered table-striped table-condensed flip-content">
+                    <thead class="flip-content">
+                        <tr>
+                            <!--组装表格 表头列-->
+                            @foreach (TableHeader item in Model.TableHeaders)
+                            {
+                                <th style="@item.Style" width="@item.Width"> @item.HeaderName </th>
+                                columns.Add(item.HeaderName);
+                            }
+                            @if (Model.EventsLine != null && Model.EventsLine.Count() > 0) {
+                                 <th >操作</th>
+                            }
+                        </tr>
+                    </thead>
+                    <tbody id="@Model.ID">
+   
+                        @*@foreach (dynamic item in Model.TableData)
+                        {
+                            Type t = item.GetType();
+                            string priid = "";
+                            <tr>
+                                @foreach (TableHeader header in Model.TableHeaders) {
+                                    string hName = header.ConName;
+                                    object xx = t.GetProperty(hName).GetValue(item);
+                                    if (string.IsNullOrEmpty(priid)) {
+                                        priid = xx.ToString();
+                                    }
+
+
+                                    <td>@xx</td>
+                                }
+                                @if (Model.EventsLine != null && Model.EventsLine.Count() > 0)
+                                {
+                                  
+                                    <td>
+                                        
+                                        @foreach (Event config in Model.EventsLine)
+                                        {
+                                              
+                                              <button onclick="@config.Invoke ('@priid')" class="btn btn-sm green btn-outline filter-submit margin-bottom">
+                                                  <i class="@config.Icon"></i> @config.Value
+                                              </button>
+                                            if (jj == 0) {
+                                               buttons.Add("<button onclick="+config.Invoke+"('{0}')  class='btn btn-sm green btn-outline filter-submit margin-bottom'><i class='"+config.Icon+"'></i> "+config.Value+"</button>");
+                                            }
+
+                                        }
+                                    </td>
+                                    jj++;
+                                }
+                            </tr>
+
+                        }*@
+
+                      
+                    </tbody>
+                </table>
+                <div class="paging-toolbar">
+                    <ul id='grid_paging'></ul>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+<div>
+    <input type="hidden" id="@hidcolumn" value="" />
+    <input type="hidden" id="@hidbutton" value="" />
+</div>
+
+
+
+<script src="~/Scripts/bootstrap-paginator.min.js"></script>
+<script src="~/Lib/json2/json2.js"></script>
+
+
+
+
+<script type="text/javascript">
+
+
+    $(function () {
+
+        init(@Model.Page, @Model.CountPerPage,@Model.TotalPage);
+        @{
+            int temp = 0;
+            foreach(string columnName in columns) {
+                if (temp++ == 0)
+                {
+                       string jq = "$('#"+ hidcolumn + "').val($('#"+ hidcolumn + "').val()+'"+ columnName +"');";
+                       @Html.Raw(jq);
+                }
+                else {
+                       string jq = "$('#"+ hidcolumn + "').val($('#"+ hidcolumn + "').val()+',"+ columnName +"');";
+                       @Html.Raw(jq);
+                }
+
+            }
+
+            int temp2 = 0;
+            foreach(string buttonHtml in buttons) {
+                if (temp2++ == 0)
+                {
+                       string jq = "$('#"+ hidbutton + "').val($('#"+ hidbutton + "').val()+\""+ buttonHtml +"\");";
+                       
+                       @Html.Raw(jq);
+                }
+                else {
+                       string jq = "$('#"+ hidbutton + "').val($('#"+ hidbutton + "').val()+\","+ buttonHtml +"\");";
+                       @Html.Raw(jq);
+                }
+            }
+
+        }
+
+
+
+    });
+
+    function init(currentPage,numberOfPages,totalPages){
+        var options = {
+            bootstrapMajorVersion: 3,
+            currentPage: currentPage,
+            numberOfPages:numberOfPages,
+            totalPages: totalPages,
+            itemTexts: function (type, page, current) {
+                switch (type) {
+                    case "first":
+                        return "第一页";
+                    case "prev":
+                        return "上一页";
+                    case "next":
+                        return "下一页";
+                    case "last":
+                        return "最后一页";
+                    case "page":
+                        return page;
+                }
+            },
+            onPageChanged: function (event, oldPage, newPage) {
+                //alert("oldPage=" + oldPage + ",newPage=" + newPage);
+                var obj = {
+                    "page":newPage
+                };
+
+
+                var hidvalue = $("#@hid").val();
+
+
+                if(hidvalue!=""){
+                    var hid1 = hidvalue.split(',');
+                    for(var i=0;i<hid1.length;i++){
+                        var h1 = hid1[i];
+                        var hid2 = h1.split('=');
+                        var key = hid2[0];
+                        var value = hid2 [1];
+                        var s = "obj."+key+"='"+value+"'";
+                        eval(s);
+                    }
+                }
+
+
+
+
+
+                @search (obj,"");
+
+
+            }
+
+        }
+        $('#grid_paging').bootstrapPaginator(options);
+    }
+
+
+    function  @search (obj,type){
+        // alert("searchData");
+
+        $.ajax({
+            url: "@Model.Url",
+            type: "post",
+            dataType: "json",
+            data: obj,
+            success: function (data) {
+              
+                var dtstr = "";
+                var hidcolumn = $("#@hidcolumn").val();
+                var hidButton = $("#@hidbutton").val();
+             
+                var cloumns = hidcolumn.split(',');
+                var buttons = hidButton.split(',');
+               
+                //alert(  Contains(cloumns,"RoleID"));
+                //alert(  Contains(cloumns,"aa"));
+                for(var i=0;i< data.Data.length;i++){
+                    var itemi = data.Data[i];
+                    //var json_to_string = JSON.stringify(itemi);
+                    //json_to_string = json_to_string.replace('{','').replace('}','');
+                    //var cols = json_to_string.split(',');
+                    //for(var j=0;j<cols.length;j++){
+                    //    var colsitem = cols[j].split(':');
+                    //     colsitem[0].replace('"','').replace('"','')
+                    //     colsitem[1].replace('"','').replace('"','')
+                    //}
+
+                    //for(var j=0;j<itemi.length;j++){
+                    //    //alert(itemi[j]);
+                    //}
+
+                    dtstr+="<tr>";
+                    for(var z=0;z<cloumns.length;z++){
+                        dtstr+="<td>"+   eval("itemi."+cloumns[z])    +"</td>";
+                    }
+                    
+                    if(buttons.length>0){
+                        dtstr+="<td>";
+                        for(var z=0;z<buttons.length;z++){
+                            var pri = eval("itemi."+cloumns[0]);
+                           
+                            var rep =  buttons[z].replace('{0}',pri);
+                           
+
+                            dtstr+= rep ;
+
+                          
+                        }
+                        dtstr+="</td>";
+                    }
+                 
+                    dtstr+="</tr>";
+
+                 
+                    //  dtstr+="<td>"+ itemi.RoleID+"</td><td>"+ data.Data[i].RoleName+"</td></tr>";
+
+                }
+              
+                $("#tbody").empty();
+                $("#tbody").append(dtstr);
+                if(type=="initPage"){
+                    init(data.Page, data.CountPerPage,data.TotalPage);
+                }
+
+
+            }
+        }).fail(function (xhr, textStatus, err) {
+            alert('Error: ' + err);
+        });
+    }
+</script>

@@ -1,0 +1,714 @@
+﻿<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="keywords" content="棋牌游戏,515,手游">
+    <meta name="description" content="515游戏">
+    <title>首页-515游戏</title>
+    <link rel="stylesheet" type="text/css" href="CSS/main.css">
+    <link rel="shortcut icon" href="~/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="~/favicon.ico" type="image/x-icon">
+    <script type="text/javascript" src="Scripts/jquery.js"></script>
+    <script type="text/javascript" src="Scripts/main.js"></script>
+    <!--[if lt IE 9]>
+    <script src="Scripts/html5shiv.min.js"></script>
+    <![endif]-->
+    <style type="text/css">
+ 
+img {
+    display: block;
+}
+.global-header {
+  overflow: hidden;
+  width: 100%;
+  background-color: #000;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.75);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.75); }
+
+.global-header .wrap {
+  width: 1050px;
+  margin: 0 auto;
+  overflow: hidden; }
+
+.global-header .top {
+  width: 100%;
+  height: 26px;
+  line-height: 26px;
+  font-size: 12px;
+  color: #999;
+  border-bottom: 2px solid #0B0B0B; }
+
+.global-header .top ul {
+  float: right;
+  margin-left: 10px; }
+
+.global-header .top ul li {
+  float: left;
+  padding-left: 11px;
+  padding-right: 10px;
+  background: url(../Image/top_split.png) no-repeat 0 0; }
+
+.global-header .top ul li:first-child {
+  background-image: none; }
+
+.global-header .top ul li > span.split {
+  margin-left: 9px;
+  margin-right: 9px;
+  line-height: 26px; }
+
+.global-header .top ul li a:hover {
+  color: #ccc; }
+
+.global-header .top p.intro {
+  float: left; }
+
+.global-header .top p.welcome {
+  float: right; }
+
+.login-banner {
+  position: relative;
+  width: 100%;
+  min-width: 1050px;
+  height: 460px;
+  background: url(../Image/banner/web_bg.png) no-repeat center center; }
+
+.login-banner .wrap {
+  position: relative;
+  height: 460px; }
+
+.login-banner .login-panel,
+.login-banner .user-panel {
+  position: absolute;
+  top: 45px;
+  right: 0; }
+.big-intro {
+  position: relative;
+  clear: both;
+  overflow: hidden;
+  width: 1050px;
+  margin: 0 auto;
+  text-align: center;
+  padding-top: 40px;
+  padding-bottom: 20px; }
+  .big-intro > img {
+    display: block;
+    margin: 0 auto; }
+  .jion-us {
+  position: relative;
+  clear: both;
+  overflow: hidden;
+  width: 1050px;
+  margin: 0 auto;
+  text-align: center; }
+  .jion-us > h2 {
+    position: relative;
+    z-index: 3;
+    display: inline-block;
+    font-size: 24px;
+    color: #000;
+    text-align: center;
+    margin-top: 15px;
+    padding-left: 15px;
+    padding-right: 15px;
+    background-color: #FFF; }
+  .jion-us > h3 {
+    font-size: 16px;
+    color: #858585;
+    text-align: center;
+    margin-top: 4px; }
+  .jion-us .lx-btn {
+    display: inline-block;
+    width: 132px;
+    height: 42px;
+    margin: 0 auto;
+    margin-top: 10px;
+    text-indent: -9999px;
+    background: url(../Image/sprite.png) no-repeat -50px 0px; }
+
+.jion-us:after {
+  position: absolute;
+  z-index: 2;
+  top: 30px;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  content: "";
+  display: block;
+  background-color: #BEBEBE; }
+
+.jion-us.home-us:after {
+  display: none; }
+
+.contact-list li {
+  float: left; }
+
+.contact-list li:first-child {
+  padding-left: 27px; }
+.global-footer-wrap {
+  clear: both;
+  overflow: hidden;
+  width: 100%;
+  background-color: #0d0606; }
+
+.global-footer {
+  clear: both;
+  overflow: hidden;
+  width: 1150px;
+  color: #e0e0e0;
+  font-size: 14px;
+  padding-top: 18px;
+  padding-bottom: 18px;
+  margin: 0 auto;
+  border-top: 1px solid #8C8C8C; }
+.footer-list {
+  float: left; }
+
+.footer-list li {
+  float: left; }
+
+.footer-list .li:first-child {
+  background-image: none; }
+
+.footer-list li span.split {
+  position: relative;
+  top: -1px;
+  margin-left: 8px;
+  margin-right: 8px; }
+
+.copyright {
+  float: right; }
+
+
+        /*.global-header .logo {
+    display: block;
+    float: left;
+  margin-top: 8px;
+}*/
+h1, h2, h3, h4, h5, h6 {
+    font-size: 100%;
+    font-weight: normal;
+} .login-banner .wrap {
+    height: 460px;
+    position: relative;
+}
+.login-banner .wrap {
+    height: 460px;
+    position: relative;
+}  .wrap {
+    margin: 0 auto;
+    overflow: hidden;
+    width: 1050px;
+}
+.login-banner .banner-des {
+    color: #fff;
+    left: 420px;
+    position: absolute;
+    top: 65px;
+}.login-banner .banner-des .b-img {
+    float: left;
+    margin-right: 10px;
+}
+.login-banner .banner-des > h2 {
+    font-size: 42px;
+    font-weight: 400;
+    line-height: 50px;
+    margin-top: 2px;
+}.login-banner .banner-des .online-play h2::before {
+    background: rgba(0, 0, 0, 0) url("../Image/sprite.png") no-repeat scroll -50px -200px;
+    content: "";
+    height: 14px;
+    position: absolute;
+    right: 15px;
+    top: 10px;
+    width: 12px;
+}
+.login-banner .banner-des .online-play h2 {
+    color: #191b39;
+    font-size: 14px;
+    line-height: 36px;
+    padding-left: 20px;
+    position: relative;
+}.login-banner .banner-des .online-play > ul {
+    display: none;
+}
+ol, ul {
+    list-style: outside none none;
+}.login-banner .banner-des .online-play > ul li a {
+    display: block;
+    height: 36px;
+    position: relative;
+    width: 100%;
+}
+a {
+    color: inherit;
+    text-decoration: none;
+}.online-play > ul li a i {
+    background: rgba(0, 0, 0, 0) url("../Image/drop.png") no-repeat scroll 0 0;
+    display: block;
+    height: 25px;
+    left: 50%;
+    margin-left: -12px;
+    position: absolute;
+    top: 5px;
+    width: 25px;
+}
+.login-banner .banner-des p.des {
+    margin-top: 7px;
+}.login-banner .banner-des .down i {
+    background: rgba(0, 0, 0, 0) ;
+    height: 30px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 30px;
+}.login-banner .banner-des .down {
+    color: #ffcc76;
+    height: 30px;
+    line-height: 30px;
+    margin-bottom: 7px;
+    margin-top: 10px;
+    padding-left: 30px;
+    position: relative;
+}
+.down-list li {
+    float: left;
+}.down-list li:first-child a {
+    border-bottom-left-radius: 8px;
+    border-top-left-radius: 8px;
+}
+.down-list li a.ios {
+    background-position: -4px 0;
+}
+.down-list li a {
+    background-color: rgba(255, 255, 255, 0.3);
+    background-image: url("../Image/banner_down_s2.png");
+    background-position: 0 0;
+    background-repeat: no-repeat;
+    color: #fff;
+    display: block;
+    height: 40px;
+    margin-right: 1px;
+    padding-top: 70px;
+    text-align: center;
+    width: 110px;
+}
+a {
+    color: inherit;
+    text-decoration: none;
+}
+a {
+    color: inherit;
+    text-decoration: none;
+}.down-list li:last-child a {
+    border-bottom-right-radius: 8px;
+    border-top-right-radius: 8px;
+}
+.down-list li a.android {
+    background-position: -132px 0;
+}
+.contact-list {
+    overflow: hidden;
+    padding-bottom: 45px;
+    padding-top: 30px;
+}
+.contact-list .contact-panel {
+    background-color: #fff;
+    border: 1px solid #999;
+    border-radius: 8px;
+    color: #626262;
+    float: left;
+    height: 71px;
+    margin-left: 15px;
+    margin-right: 16px;
+    padding-top: 100px;
+    position: relative;
+    text-align: center;
+    width: 316px;
+}.contact-list .contact-panel i.icon.mail {
+    background-position: 0 -50px;
+}
+.contact-list .contact-panel i.icon {
+    background: rgba(0, 0, 0, 0) url("../Image/sprite.png") no-repeat scroll 0 -50px;
+    height: 40px;
+    left: 50%;
+    margin-left: -20px;
+    position: absolute;
+    top: 15px;
+    width: 40px;
+}
+.contact-list .contact-panel h4 {
+    font-size: 14px;
+}.contact-list .contact-panel i.icon.phone {
+    background-position: -50px -50px;
+}
+.contact-list .contact-panel i.icon {
+    background: rgba(0, 0, 0, 0) url("../Image/sprite.png") no-repeat scroll 0 -50px;
+    height: 40px;
+    left: 50%;
+    margin-left: -20px;
+    position: absolute;
+    top: 15px;
+    width: 40px;
+}.contact-list .contact-panel i.icon.adr {
+    background-position: -100px -50px;
+}
+.contact-list .contact-panel i.icon {
+    background: rgba(0, 0, 0, 0) url("../Image/sprite.png") no-repeat scroll 0 -50px;
+    height: 40px;
+    left: 50%;
+    margin-left: -20px;
+    position: absolute;
+    top: 15px;
+    width: 40px;
+}
+
+.global-header .logo {
+    display: block;
+    float: left;
+  margin-top: 8px;
+}
+    </style>
+
+
+    <style type="text/css">
+        .suspend {
+            width: 40px;
+            height: 136px;
+            position: fixed;
+            top: 200px;
+            right: 0;
+            overflow: hidden;
+            z-index: 9999;
+        }
+
+        .suspend dl {
+            width: 107px;
+            height: 136px;
+            border-radius: 25px 0 0 25px;
+            padding-left: 40px;
+            box-shadow: 0 0 5px #e4e8ec;
+        }
+
+        .suspend dl dt {
+            width: 40px;
+            height: 136px;
+            background: url(/Image/suspend.png);
+            position: absolute;
+            top: 0;
+            left: 0;
+            cursor: pointer;
+        }
+
+        .suspend dl dd.suspendQQ {
+            width: 107px;
+            height: 136px;
+            background: #ffffff;
+        }
+
+        .suspend dl dd.suspendQQ a {
+            width: 107px;
+            height: 136px;
+            display: block;
+            background: url(/Image/qq0.png) no-repeat 26px 30px;
+            overflow: hidden;
+        }
+
+        * html .suspend {
+            position: absolute;
+            left: expression(eval(document.documentElement.scrollRight));
+            top: expression(eval(document.documentElement.scrollTop+200));
+        }
+    </style>
+ 
+    <style  type="text/css">
+         #bottomNav {
+          
+        }
+
+        img {
+            padding:0 0 0 0;
+            margin:0 0 0 0;
+        
+        }
+    
+    </style>
+    <script type="text/javascript">
+        function download() {
+             
+            try {
+                if (/MicroMessenger/i.test(navigator.userAgent)) {
+                    var oBackground = document.getElementById("open_win_background");
+                    var dw = $(document).width();
+                    var dh = $(document).height();
+                    oBackground.style.width = dw + 'px';
+                    oBackground.style.height = dh + 'px';
+                    $("#open_win_background, #open_win").show();
+                    $("#open_win_background").click(function () { hideOpenwin() });
+                }
+                if (/iPhone|iPod|iPad/i.test(navigator.userAgent)) {
+                   // window.location.href = "http://itunes.apple.com/app/id1054312856";
+                } else {
+                    location.href = "http://qipai.515.com/download/515qipai.apk";
+                }
+
+
+                HidPic();
+
+            } catch (e) { }
+
+            
+
+
+
+        }
+        function HidPic() {
+            $("#divHid").css("height", "0px");
+            $("#bottomNav").css("display", "none");
+        }
+    </script>
+</head>
+<body>
+  
+
+   
+ 
+   
+
+
+    <header class="global-header">
+        <!--<div class="top" style=" margin: 0;padding: 0;">
+            <div class="wrap">-->
+                <!--<p class="intro">五一五游戏！最专业的棋牌游戏平台！</p>-->
+                <!--<ul>-->
+                    <!-- <li><a href="#">设为首页</a></li>
+                    <li><a href="#">保存游戏</a></li>
+                    <li><a href="#">加入收藏</a></li>
+                    <li><a href="#">注册</a></li>
+                    <li><a href="#">意见反馈</a></li> -->
+                <!--</ul>-->
+            <!--</div>
+        </div>-->
+        <div class="wrap">
+            <h1 class="logo"><a href="#"><img src="Image/logo.jpg" alt="515扑克在线"></a></h1>
+            <nav class="main-nav" style=" float: left;height: 47px;padding-left: 320px;  padding-top: 23px;">
+                <ul>
+                    <!--<li class="active"><a href="index.html">首页</a></li>-->
+                    <!--<li><a href="gamecenter.html">游戏中心</a></li>
+                    <li><a href="pay.html">充值中心</a></li>
+                    <li><a href="service.html">客服中心</a></li>
+                    <li><a href="cooperation.html">加盟我们</a></li>-->
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <section class="login-banner">
+        <div class="wrap">
+            <section class="banner-des">
+                <img style="height:70px;width:70px" class="b-img" src="Image/home_banner_small_icon.png" alt="扑克">
+                <h2 style="width:300px">515棋牌</h2>
+                <span><!--TEXAS HOLD’EM POKER-->&nbsp;</span>
+                <div class="online-play">
+                    <!--<h2>在线游戏</h2>
+                    <ul>
+                        <li>
+                            <a target="_blank" title="在线游戏" href="http://my.qzone.qq.com/app/1103881749.html" class="link"><i class="qzone-icon"></i></a>
+                        </li>
+                    </ul>-->
+                </div>
+                 <p class="des"><br/></p>
+                <!--<p class="down" style="padding-left:0px">电脑客户端版: <a style="color:white" href="http://doudizhu.515.com/">点击下载</a></p>-->
+                <p class="down" style="padding-left:0px">手机安卓版下载:</p>
+                <ul class="down-list">
+                    <!--<li>
+                        <a class="ios" href="#"></a>
+                    </li>-->
+                    <!--<li>
+                        <a class="android" href="#"></a>
+                    </li>-->
+
+                    <img style="width:40%;height:40%" src="Image/banner_down_s2.png" />
+                </ul>
+            </section>
+        </div>
+    </section>
+    <!-- 大图展示 -->
+    <!--<div class="big-intro">
+        <img src="Image/home_big_banner.jpg" width="1017" height="329" alt="游戏展示">
+    </div>-->
+    <!-- 推荐游戏 -->
+    <!-- <section class="hotlists-game">
+        <ul class="hotlists-game">
+            <li>
+                <a class="game-panel game-panel-n" href="#">
+                    <img class="pic" src="Image/games/poker_big.jpg" alt="德州扑克">
+                    <div class="info">
+                        <h3>德州扑克</h3>
+                        <p class="en">TEXAS HOLD’EM POKER<i></i></p>
+                    </div>
+                </a>
+            </li>
+            <li>
+                <a class="game-panel game-panel-n" href="#">
+                    <img class="pic" src="Image/games/landlords_big.jpg" alt="斗地主">
+                    <div class="info">
+                        <h3>斗地主</h3>
+                        <p class="en">LANDLORDS<i></i></p>
+                    </div>
+                </a>
+            </li>
+            <li>
+                <a class="game-panel game-panel-n" href="#">
+                    <img class="pic" src="Image/games/scale_big.jpg" alt="scale">
+                    <div class="info">
+                        <h3>中发白</h3>
+                        <p class="en">SCALE<i></i></p>
+                    </div>
+                </a>
+            </li>
+            <li>
+                <a class="game-panel game-panel-n" href="#">
+                    <img class="pic" src="Image/games/fruit_big.jpg" alt="scale">
+                    <div class="info">
+                        <h3>水果机</h3>
+                        <p class="en">FRUIT MACHINE<i></i></p>
+                    </div>
+                </a>
+            </li>
+        </ul>
+    </section> -->
+    <div class="jion-us">
+        <h2>加入我们&nbsp;就是现在</h2>
+        <h3>CONTACT&nbsp;US</h3>
+        <a href="javascript:;" class="lx-btn">联系方式</a>
+        <div class="contact-list">
+            <div class="contact-panel">
+                <i class="icon mail"></i>
+                <h4 style="margin:0;padding:0">邮箱地址：</h4>
+                <strong>WEBMASTER@515.COM</strong>
+            </div>
+            <div class="contact-panel">
+                <i class="icon phone"></i>
+                <h4 style="margin:0;padding:0">全国免费热线：</h4>
+                <strong>4000-825-515</strong>
+            </div>
+            <div class="contact-panel">
+                <i class="icon adr"></i>
+                <h4 style="margin:0;padding:0">公司地址：</h4>
+                <strong class="adr">深圳市南山区深南大道北侧艺园路西佳嘉豪商务大厦6D</strong>
+            </div>
+        </div>
+    </div>
+
+    <div class="jion-us">
+        <h3>
+            健康游戏公告：抵制不良游戏 拒绝盗版游戏 注意自我保护 谨防受骗上当 适度游戏益脑 沉迷游戏伤身 合理安排时间 享受健康生活
+        </h3> 
+    </div>
+  
+  
+    <div class="global-footer-wrap">
+        <footer class="global-footer">
+            <ul class="footer-list" style="float:left;margin-left:450px;">
+               <a target="_blank" href="http://qipai.515.com/jianhu1.html">家长监护工程 </a> &nbsp | &nbsp;
+			     <a target="_blank" href="http://qipai.515.com/jiufen.html">纠纷解决</a>
+            </ul>
+			<br>
+            <p style="float:left" >
+			
+			
+                   <div style="float:left;margin-left:170px;margin-top:10px">
+                       Copyright © 2011 - 2016 深圳市五一五游戏网络有限公司  &nbsp | &nbsp;
+                       <a target="_blank" href="http://www.miitbeian.gov.cn">粤ICP备14100538号-1</a>  &nbsp | &nbsp;
+					     <a target="_blank" href="http://qipai.515.com/xukezheng.html">粤网文(2015)1116-048号</a>
+
+						
+                   </div>
+                
+
+                    <div style="width:20px;height:20px;float:left;margin-left:20px;margin-bottom:0px">
+
+                        <script id='ebsgovicon' src='http://szcert.ebs.org.cn/govicon.js?id=8e74cc07-6822-459d-ae65-c1c763f53339&width=100&height=137&;type=1' type='text/javascript' charset='utf-8'></script>
+
+                    </div>
+
+
+                    <img style="width:40px;height:40px;margin-left:20px;float:left;" src="Image/dztb2.png" />
+               
+            </p>
+       
+
+      
+          
+        </footer>
+    </div>
+   
+    <div id="divHid" style="height:0px">
+      
+    </div>
+    <!--<div class="suspend">
+        <dl>
+            <dt class="IE6PNG"></dt>
+            <dd class="suspendQQ"><a target="_blank" href="http://b.qq.com/webc.htm?new=0&sid=4000825515&o=www.515.com&q=7"></a></dd>
+        </dl>
+    </div>-->
+
+
+    <!-- 登陆 -->
+
+
+    <!--<div id="bottomNav" style="display:none;z-index: 99990;position: fixed;bottom: 0;left: 0;width: 100%;height:210px;background-color:greenyellow;">
+        <div style="width:100%">
+            <img src="mobile/images/xfgg01.gif" style="float:left;height:70px;width:3.8%" onclick="HidPic()" />
+            <img src="mobile/images/xfgg02.gif" style="height:70px;width:96.2%" />
+        </div>
+        <div style="width:100%">
+            <img src="mobile/images/xfgg03.gif" style="float:left;height:70px;width:79%" />
+            <img src="mobile/images/xfgg04.jpg" onclick="download()" style="height:70px;width:21%" />
+        </div>
+        <div style="width:100%">
+            <img src="mobile/images/xfgg05.jpg" style="height:70px;width:100%" />
+        </div>
+    </div>-->
+
+
+ 
+    
+      <script type="text/javascript">
+$(function(){
+	$(".suspend").mouseover(function() {
+        $(this).stop();
+        $(this).animate({width: 147}, 400);
+    });
+    $(".suspend").mouseout(function() {
+        $(this).stop();
+        $(this).animate({width: 40}, 400);
+    });
+
+
+    
+
+    if (/Android|android|iPhone|iPod|iPad/i.test(navigator.userAgent)) {
+        $("#divHid").css("height", "250px");
+        $("#bottomNav").css("display","");
+    }
+
+
+
+
+    //if (/iPhone|iPod|iPad/i.test(navigator.userAgent)) {
+    //    window.location.href = "http://itunes.apple.com/app/id1054312856";
+    //} else if (/Android|android/.test(navigator.userAgent)) {
+    //    location.href = "http://www.515.com/download/poker515.apk";
+    //}
+
+
+  
+
+
+});
+    </script>
+</body>
+</html>
+

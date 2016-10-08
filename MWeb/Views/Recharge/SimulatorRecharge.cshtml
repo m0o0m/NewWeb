@@ -1,0 +1,124 @@
+﻿
+
+
+@using GL.Data.Model
+@model SimulatorRecharge
+@{
+    ViewBag.Title = "充值列表";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    ViewBag.Format = "yyyy-MM-dd";
+
+
+}
+
+
+
+
+
+<div id="content">
+    <form id="comment-form" class="smart-form" novalidate="novalidate">
+        <div class="row">
+            <div class="widget-body">
+               <input type="hidden" id="ispostback" name="ispostback" value="1" />
+                <section class="col col-1">
+                    <label class="label">会员ID</label>
+                    <label class="input">
+                        @Html.TextBoxFor(m => m.UserID, new { @class = "span2", style = "border-radius:4px" })
+                    </label>
+                </section>
+                <section class="col col-1">
+                    <label class="label"> 充值类型</label>
+                    <label class="select">
+                        @Html.DropDownListFor(m => m.Type, new List<SelectListItem>
+                {
+                    new SelectListItem { Text= "游戏币", Value = "1" },
+                     new SelectListItem { Text= "五币", Value = "2" },
+                      new SelectListItem { Text= "首冲", Value = "3" }
+                })<i></i>
+                    </label>
+                </section>
+                <section class="col col-1">
+                    <label class="label">金额(元)</label>
+                    <label class="input">
+                        @Html.TextBoxFor(m => m.Money, new { @class = "span2", style = "border-radius:4px" })
+                    </label>
+                </section>
+                <section class="col col-1">
+                    <label class="label">折扣(折)</label>
+                    <label class="input">
+                        @Html.TextBoxFor(m => m.Discounted, new { @class = "span2", style = "border-radius:4px" })
+                    </label>
+                </section>
+                <section class="col col-1">
+                    <label class="label">&nbsp;</label>
+                    <input type="button" onclick="searchCZ()" class="btn btn-success btn-sm" value="模拟充值" />
+                </section>
+
+            </div>
+        </div>
+    </form>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+@section scripts{
+    @{Html.RegisterMvcPagerScriptResource();}
+
+
+    <script type="text/javascript">
+        function searchCZ() {
+            var UserID = $("#UserID").val();
+            var Type = $("#Type option:selected").val();
+            var Money = $("#Money").val();
+            var Discounted = $("#Discounted").val();
+            if (parseInt(Money) != Money || parseInt(Money)<=0) {
+                alert("金额必须为正整数!");
+                return false;
+            }
+
+            if (isNaN(Discounted) || Discounted < 0 || Discounted>=10) {
+                alert("折扣必须为0-10的数字!");
+                return false;
+            } 
+
+            $.ajax({
+              //  url: "/Recharge/SimulatorRechargeMoney/",
+                url:"/SimulatorRecharge/QQ",
+                type: "Post",
+                data: { "UserID": UserID, "Type": Type, "Money": Money, "Discounted": Discounted },
+                success: function (data) {
+                    switch (data) {
+                        case "1":
+                            alert("操作成功");
+                           
+                            break;
+                        case "2":
+                            alert("操作成功,特殊情况(请联系开发人员)");
+
+                            break;
+                        case "3":
+                            alert("无法连接服务器");
+
+                            break;
+                        default:
+                            alert(data);
+                            break;
+                    }
+                }
+            });
+
+           
+        }
+
+    </script>
+}
+

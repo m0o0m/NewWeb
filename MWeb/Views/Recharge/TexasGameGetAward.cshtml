@@ -1,0 +1,139 @@
+﻿
+@using GL.Data.Model
+@model BaseDataView
+@{
+    ViewBag.Title = "德州玩牌领大奖";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    ViewBag.Format = "yyyy-MM-dd";
+
+
+    List<TexasGameGetAward> bdl = (List<TexasGameGetAward>)Model.BaseDataList;
+}
+
+
+
+
+<div id="content">
+
+    <!-- Widget ID (each widget will need unique ID)-->
+
+
+
+
+    <form id="comment-form" class="smart-form" novalidate="novalidate">
+        <div class="row">
+            <div class="widget-body">
+
+
+                <section class="col col-1.2">
+                    <label class="label">起始日期</label>
+                    <label class="input">
+                        <i class="icon-append fa fa-calendar"></i>
+                        @Html.TextBoxFor(m => m.StartDate, new Dictionary<string, object>() { { "class", "form-control datepicker" }, { "data-dateformat", "yy-mm-dd:00:00:00" } })
+                    </label>
+                </section>
+                <section class="col col-1.2">
+                    <label class="label"> 截止日期</label>
+                    <label class="input">
+                        <i class="icon-append fa fa-calendar"></i>
+                        @Html.TextBoxFor(m => m.ExpirationDate, new Dictionary<string, object>() {
+                           { "class", "form-control datepicker" },
+                           { "data-dateformat", "yy-mm-dd:00:00:00" }
+                       })
+                    </label>
+                </section>
+
+
+                <section class="col col-1">
+                    <label class="label">&nbsp;</label>
+                    <button type="submit" class="btn btn-success btn-sm">查询</button>
+                </section>
+
+            </div>
+        </div>
+    </form>
+
+
+
+
+    <section id="widget-grid" class="">
+        <div class="row">
+            <article class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
+                <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-0" data-widget-editbutton="false" data-widget-colorbutton="false"
+                     data-widget-togglebutton="false"
+                     data-widget-deletebutton="false"
+                     data-widget-fullscreenbutton="false"
+                     data-widget-custombutton="false"
+                     data-widget-collapsed="false"
+                     data-widget-sortable="false">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                        <h2>@ViewBag.Title</h2>
+                    </header>
+                    <!-- widget div-->
+                    <div>
+                        <!-- widget edit box -->
+                        <div class="jarviswidget-editbox">
+                            <!-- This area used as dropdown edit box -->
+                        </div>
+                        <!-- end widget edit box -->
+                        <!-- widget content -->
+                        <div class="widget-body no-padding" style="min-height: 70px;">
+                            <div class="table-responsive">
+                                <table class="table table-bordered">
+                                    <thead>
+
+                                        <tr>
+                                            <th>时间</th>
+                                            <th>18</th>
+                                            <th>58</th>
+                                            <th>118</th>
+                                            <th>238</th>
+                                            <th>388</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @if (bdl.Count == 0)
+                                        {
+                                            <tr>
+                                                <td class="colspan" align="center" colspan="0">
+                                                    没有找到相关记录！
+                                                </td>
+                                            </tr>
+                                        }
+                                        else
+                                        {
+                                            for (int i = 1; i <= bdl.Count(); i++)
+                                            {
+                                                TexasGameGetAward tga = bdl[i - 1];
+                                                <tr>
+                                                    <td>@tga.CreateTime.ToString(ViewBag.Format)</td>
+                                                    <td>@tga.Position_18 人</td>
+                                                    <td>@tga.Position_58 人</td>
+                                                    <td>@tga.Position_118 人</td>
+                                                    <td>@tga.Position_238 人</td>
+                                                    <td>@tga.Position_388 人</td>
+                                                </tr>
+                                            }
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <!-- end widget content -->
+                    </div>
+                    <!-- end widget div -->
+                </div>
+                <!-- end widget -->
+
+            </article>
+        </div>
+    </section>
+
+
+
+
+
+
+</div>

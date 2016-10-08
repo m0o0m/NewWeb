@@ -1,0 +1,150 @@
+﻿@using GL.Data.Model
+@model BaseDataInfoForUsersGoldDistributionRatio
+@{
+    ViewBag.Title = "用户游戏币分布比";
+}
+
+<div id="content">
+    <!-- Widget ID (each widget will need unique ID)-->
+    <section id="widget-grid" class="">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
+
+                <div class="well">
+                    <form id="comment-form" class="form-inline" novalidate="novalidate" >
+                        <fieldset>
+                            @Html.DropDownList("Channels", null, new { @class = "form-control input-sm" })
+                            <button type="submit" class="btn btn-success btn-sm">查询</button>
+                        </fieldset>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+        <div class="row">
+            <article class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
+                <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-0" data-widget-editbutton="false" data-widget-colorbutton="false"
+                     data-widget-togglebutton="false"
+                     data-widget-deletebutton="false"
+                     data-widget-fullscreenbutton="false"
+                     data-widget-custombutton="false"
+                     data-widget-collapsed="false"
+                     data-widget-sortable="false">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                        <h2>用户游戏币分布比</h2>
+                    </header>
+                    <!-- widget div-->
+                    <div>
+                        <!-- widget edit box -->
+                        <div class="jarviswidget-editbox">
+                            <!-- This area used as dropdown edit box -->
+                        </div>
+                        <!-- end widget edit box -->
+                        <!-- widget content -->
+                        <div class="widget-body no-padding" style="min-height: 70px;">
+                            <div class="table-responsive">
+                                <table class="table table-bordered">
+                                    <thead>
+                                      
+                                        <tr>
+                                            <th>游戏币区间</th>
+                                            <th>人数</th>
+                                            <th>占比</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td> 0</td>
+                                            <td>@Model.a1</td>
+                                            <td>@string.Format("{0:0.00%}", Model.a1 * 1.0 / Model.a0)</td>
+                                        </tr>
+                                        <tr>
+                                            <td>1—99</td>
+                                            <td>@Model.a2</td>
+                                            <td>@string.Format("{0:0.00%}", Model.a2 * 1.0 / Model.a0)</td>
+                                        </tr>
+                                        <tr>
+                                            <td>100-1,000</td>
+                                            <td>@Model.a3</td>
+                                            <td>@string.Format("{0:0.00%}", Model.a3 * 1.0 / Model.a0)</td>
+                                        </tr>
+                                        <tr>
+                                            <td>1,001-5,000</td>
+                                            <td>@Model.a4</td>
+                                            <td>@string.Format("{0:0.00%}", Model.a4 * 1.0 / Model.a0)</td>
+                                        </tr>
+                                        <tr>
+                                            <td>5,001-20,000</td>
+                                            <td>@Model.a5</td>
+                                            <td>@string.Format("{0:0.00%}", Model.a5 * 1.0 / Model.a0)</td>
+                                        </tr>
+                                        <tr>
+                                            <td>20,001-50,000</td>
+                                            <td>@Model.a6</td>
+                                            <td>@string.Format("{0:0.00%}", Model.a6 * 1.0 / Model.a0)</td>
+                                        </tr>
+                                        <tr>
+                                            <td>50,001-100,000</td>
+                                            <td>@Model.a7</td>
+                                            <td>@string.Format("{0:0.00%}", Model.a7 * 1.0 / Model.a0)</td>
+                                        </tr>
+                                        <tr>
+                                            <td>100,001-300,000</td>
+                                            <td>@Model.a8</td>
+                                            <td>@string.Format("{0:0.00%}", Model.a8 * 1.0 / Model.a0)</td>
+                                        </tr>
+                                        <tr>
+                                            <td>300,001-1,000,000</td>
+                                            <td>@Model.a9</td>
+                                            <td>@string.Format("{0:0.00%}", Model.a9 * 1.0 / Model.a0)</td>
+                                        </tr>
+                                        <tr>
+                                            <td>1,000,001-5,000,000</td>
+                                            <td>@Model.a10</td>
+                                            <td>@string.Format("{0:0.00%}", Model.a10 * 1.0 / Model.a0)</td>
+                                        </tr>
+                                        <tr>
+                                            <td>5,000,001-20,000,000</td>
+                                            <td>@Model.a11</td>
+                                            <td>@string.Format("{0:0.00%}", Model.a11 * 1.0 / Model.a0)</td>
+                                        </tr>
+                                        <tr>
+                                            <td>20,000,001-100,000,000</td>
+                                            <td>@Model.a12</td>
+                                            <td>@string.Format("{0:0.00%}", Model.a12 * 1.0 / Model.a0)</td>
+                                        </tr>
+                                        <tr>
+                                            <td>100,000,001-1,000,000,000</td>
+                                            <td>@Model.a13</td>
+                                            <td>@string.Format("{0:0.00%}", Model.a13 * 1.0 / Model.a0)</td>
+                                        </tr>
+                                        <tr>
+                                            <td>1,000,000,001-50,000,000,000</td>
+                                            <td>@Model.a14</td>
+                                            <td>@string.Format("{0:0.00%}", Model.a14 * 1.0 / Model.a0)</td>
+                                        </tr>
+                                        <tr>
+                                            <td>50,000,000,001以上</td>
+                                            <td>@Model.a15</td>
+                                            <td>@string.Format("{0:0.00%}", Model.a15 * 1.0 / Model.a0)</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <!-- end widget content -->
+                    </div>
+                    <!-- end widget div -->
+                </div>
+                <!-- end widget -->
+
+            </article>
+        </div>
+    </section>
+
+
+
+
+
+</div>

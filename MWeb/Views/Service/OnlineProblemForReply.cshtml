@@ -1,0 +1,36 @@
+﻿@using GL.Data.Model;
+@model IEnumerable<CustomerServCenter>
+@{
+    Layout = null;
+}
+
+<div class="widget-box">
+    <div class="widget-content nopadding">
+        <ul class="recent-posts">
+            @foreach (var m in Model)
+            {
+                <li>
+                    <div class="user-thumb">
+                        @if (m.GUType == 0)
+                        {
+                            <img width="40" height="40" alt="User" src="~/img/demo/Q.png">
+                        }
+                        else
+                        {
+                            <img width="40" height="40" alt="User" src="~/img/demo/A.png">
+                        }
+                    </div>
+                    <div class="article-post">
+                        <span class="user-info">
+                            By: @m.GUName / Date: @*<span class="date badge badge-important">*@
+
+                            @m.CSCTime
+                            @*</span>*@
+                        </span>
+                        <p><a href="#"> @m.CSCContent</a> </p>
+                    </div>
+                </li>
+            }
+        </ul>
+    </div>
+</div>

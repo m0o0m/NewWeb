@@ -1,0 +1,296 @@
+﻿@using GL.Data.View
+@model PopUpInfo
+@{
+    ViewBag.Title = "修改弹窗配置";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+
+
+}
+
+<article class="col-sm-12 col-md-12 col-lg-7">
+    <div class="jarviswidget" id="wid-id-4" data-widget-editbutton="false" data-widget-custombutton="false">
+        <header>
+            <span class="widget-icon"> <i class="fa fa-edit"></i> </span>
+            <h2></h2>
+        </header>
+        <div>
+            <div class="jarviswidget-editbox">
+            </div>
+            <div class="widget-body no-padding">
+                <form id="submitForm" class="smart-form" action="" method="post">
+                     <input type="hidden" value="@Model.id" name="id" id="id" />
+                    <fieldset>
+                        <div class="row">
+                            <section class="col col-12" style="width:210px;padding-top:5px">
+                                <label>弹窗位置</label>
+                                <label class="select">
+                                    @Html.DropDownListFor(m => m.Position, new List<SelectListItem>
+                            {
+                                new SelectListItem { Text= "首登首弹", Value = "0" },
+                                new SelectListItem { Text= "首登后弹", Value = "1" },
+                                new SelectListItem { Text= "返回首弹", Value = "2" },
+                                new SelectListItem { Text= "进房首弹", Value = "3" }
+                            })<i></i>
+                                </label>
+                            </section>
+
+                        </div>
+                        <div class="row">
+
+                            <section class="col col-12" style="width:210px;padding-top:5px">
+                                <label>落地页</label>
+                                <label class="select">
+                                    @Html.DropDownListFor(m => m.JumpPage, new List<SelectListItem>
+                            {
+                                new SelectListItem { Text= "感恩", Value = "0" },
+                            })<i></i>
+                                </label>
+                            </section>
+
+                        </div>
+
+
+                        <div class="row">
+                            <section class="col col-12" style="width:210px;padding-top:5px">
+                                <label>是否开启</label>
+                                <label class="select">
+                                    @Html.DropDownListFor(m => m.IsOpen, new List<SelectListItem>
+                            {
+                                new SelectListItem { Text= "开", Value = "1" },
+                                new SelectListItem { Text= "关", Value = "0" },
+                            })<i></i>
+                                </label>
+                            </section>
+
+                        </div>
+                      
+
+                        <div class="row">
+                            <section class="col col-1.2">
+                                <label class="label">开始时间</label>
+                                <label class="input">
+                                    <i class="icon-append fa fa-calendar"></i>
+                                    @Html.TextBoxFor(m => m.StartTime, new Dictionary<string, object>() { { "class", "form-control datepicker" }, { "data-dateformat", "yy-mm-dd 00:00:00" } })
+                                </label>
+                            </section>
+                            <section class="col col-1.2">
+                                <label class="label"> 截止日期</label>
+                                <label class="input">
+                                    <i class="icon-append fa fa-calendar"></i>
+                                    @Html.TextBoxFor(m => m.EndTime, new Dictionary<string, object>() {
+                           { "class", "form-control datepicker" },
+                           { "data-dateformat", "yy-mm-dd 00:00:00" }
+                       })
+                                </label>
+                            </section>
+
+
+                        </div>
+                        <div class="row">
+                            <section class="col col-11">
+                                <label class="label">平台</label>
+                                <div class="row">
+                                    @{
+                                        string Platforms = Model.Platform;
+                                        string[] ps = Platforms.Split('|');
+                                        if (ps.Contains("0"))
+                                        {
+                                            <div class="col col-1.5">
+                                                <label class="checkbox state-error"><input value="0" mark2="2" mark="1" type="checkbox" name="Platform" checked="checked"><i></i>Web</label>
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="col col-1.5">
+                                                <label class="checkbox state-error"><input value="0" mark2="2" mark="1" type="checkbox" name="Platform" ><i></i>Web</label>
+                                            </div>
+                                        }
+
+                                        if (ps.Contains("1"))
+                                        {
+                                            <div class="col col-1.5">
+
+                                                <label class="checkbox state-error"><input value="1" mark2="3" mark="0" type="checkbox" name="Platform" checked="checked"><i></i>Android</label>
+
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="col col-1.5">
+
+                                                <label class="checkbox state-error"><input value="1" mark2="3" mark="0" type="checkbox" name="Platform"><i></i>Android</label>
+
+                                            </div>
+                                        }
+
+
+                                        if (ps.Contains("2"))
+                                        {
+                                            <div class="col col-1.5">
+
+                                                <label class="checkbox state-error"><input value="2" mark2="4" mark="0" type="checkbox" name="Platform" checked="checked"><i></i>IOS</label>
+
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="col col-1.5">
+
+                                                <label class="checkbox state-error"><input value="2" mark2="4" mark="0" type="checkbox" name="Platform" ><i></i>IOS</label>
+
+                                            </div>
+                                        }
+
+                                    }
+                                 
+                                 
+                                
+
+                                </div>
+                                <div class="note note-error"> select the option.</div>
+                            </section>
+                        </div>
+                    </fieldset>
+
+
+                    <footer>
+                        <input id="btnGoBack" type="button" value="返回列表" class=" btn btn-warning" />
+                   
+                        <input id="btnUpdate" type="button" value="修改" class="btn btn-danger" />
+                    </footer>
+                </form>
+
+            </div>
+            <!-- end widget content -->
+
+        </div>
+        <!-- end widget div -->
+
+    </div>
+
+</article>
+
+
+
+
+
+
+
+
+
+
+@section scripts{
+
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/select2.min.js"></script>
+    <style type="text/css">
+        .quick-actions1 {
+            display: block;
+            list-style: outside none none;
+            margin: 15px 0;
+            text-align: center;
+        }
+
+            .quick-actions1 li a {
+                color: #fff;
+                display: block;
+                font-size: 14px;
+                font-weight: lighter;
+            }
+
+            .quick-actions1 li a {
+                padding: 10px 30px;
+            }
+
+        .quick-actions_homepage .quick-actions1 .span3 {
+            width: 30%;
+        }
+
+        .quick-actions_homepage .quick-actions1 li {
+            position: relative;
+        }
+
+        .quick-actions1 li {
+            min-height: 70px;
+            min-width: 14%;
+        }
+
+        .quick-actions1 li {
+            float: left;
+            line-height: 18px;
+            margin: 0 10px 10px 0;
+            padding: 0 10px;
+        }
+
+            .quick-actions1 li a i[class^="icon-"], .quick-actions1 li a i[class*=" icon-"] {
+                display: block;
+                font-size: 30px;
+                margin: 0 auto 5px;
+            }
+
+        .quick-actions1 li {
+            padding: 0;
+        }
+    </style>
+
+    <script type="text/javascript">
+
+
+        // resets the menu selection upon entry to this page:
+        function resetMenu() {
+            document.gomenu.selector.selectedIndex = 2;
+        }
+
+        $(function () {
+            $("#btnUpdate").click(function () {
+
+                var Position = $("#Position").val();
+                var JumpPage = $("#JumpPage").val();
+                var StartTime = $("#StartTime").val();
+                var EndTime = $("#EndTime").val();
+                var IsOpen = $("#IsOpen").val();
+                var id = $("#id").val();
+                //  var Platform = $("input[name=Platform]:checked").val();
+                var Platform = "";
+                $("input[name=Platform]").each(function () {
+                    //var chk = $(this).find("[checked]");
+                    if(this.checked){
+                        Platform += ($(this).val()+",");
+                    }
+                });  
+            
+
+               // alert(Position + "," + JumpPage + "," + StartTime + "," + EndTime + "," + Platform);
+
+                $.ajax({
+                    url: "/System/PopUpUpdate/",
+                    type: "POST",
+                   
+                    data: {
+                        "Position": Position, "JumpPage": JumpPage, "StartTime": StartTime, "EndTime": EndTime,
+                        "Platform": Platform, "btnUpdate": "update", "IsOpen": IsOpen,"id":id
+                    },
+                    success: function (data) {
+                     
+                        if (data == "1") {
+                            alert("操作成功!");
+                            location.href = "/System/PopUpControl";
+                        } else if (data == "-1") {
+                            alert("已存在此位置弹框，无法修改！")
+                        } else {
+                            alert("操作失败!")
+                        }
+                    }
+                })
+                return false;
+            });
+          
+            $("#btnGoBack").click(function () {
+                location.href = "/System/PopUpControl";
+            });
+        });
+
+
+    </script>
+}

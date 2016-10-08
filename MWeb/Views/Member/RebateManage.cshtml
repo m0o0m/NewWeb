@@ -1,0 +1,134 @@
+﻿@using GL.Data.Model
+@using GL.Data.View
+@model GameRecordView
+@{
+    ViewBag.Title = "会员返利";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+<div id="content">
+    <form id="comment-form" class="smart-form" novalidate="novalidate">
+        <div class="row">
+            <div class="widget-body">
+
+                <section class="col col-1">
+                    <label class="label">分组ID</label>
+                    <label class="input">
+                        @Html.TextBoxFor(m => m.UserID, new { @class = "span2", style = "border-radius:4px" })
+                    </label>
+                </section>
+
+                @*<section class="col col-1.2">
+                        <label class="label">起始日期</label>
+                        <label class="input">
+                            <i class="icon-append fa fa-calendar"></i>
+                            @Html.TextBoxFor(m => m.StartDate, new Dictionary<string, object>() { { "class", "form-control datepicker" }, { "data-dateformat", "yy-mm-dd 00:00:00" } })
+                        </label>
+                    </section>*@
+
+                <section class="col col">
+                    <label class="label">&nbsp;</label>
+                    <input type="button" onclick="search()" class="btn btn-success btn-sm" value="查询" />
+                </section>
+
+                <section class="col col-1">
+                    <label class="label">&nbsp;</label>
+                    <input type="button" onclick="AddGroup()" class="btn btn-success btn-sm" value="添加分组" />
+                </section>
+            </div>
+        </div>
+    </form>
+
+    <div class="row-fluid">
+        <div class="widget-box" id="box">
+            @Html.Partial("RebateManage_PageList", Model.DataList)
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    @{Html.RegisterMvcPagerScriptResource();}
+
+    <script type="text/javascript">
+        function btnSetClub(ID) {
+            location.href = "/Member/RebateAddInfo?type=2&UserID=" + ID;
+        }
+
+        function AddGroup() {
+            location.href = "/Member/RebateAddInfo?type=1";
+        }
+
+        function btnGetClubList(ID, obj) {
+            _this = $(obj).parent().parent();
+            var _Date = _this.find("td").eq(0).html();
+
+            $.ajax({
+                url: "/Member/RebateDetail/",
+                type: "POST",
+                dataType: "html",
+                //data: { "UserID": ID , "StartDate": $("#StartDate").val() },
+                data: { "UserID": ID},
+                success: function (data) {
+                    $(".UserClubDetail").remove();
+                    $("#content").append(data);
+                    if (_this.find("td").eq(3).html() != "0") {
+                        loadDataTableScripts();
+                    }
+                }
+            }).fail(function (xhr, textStatus, err) {
+                alert('Error: ' + err);
+            });
+            return false;
+        }
+
+        function btnCancelClub(ID, obj) {
+            _this = $(obj).parent().parent();
+            if (confirm('是否取消返利分组？')) {
+                //var _Value = $(_this).find("td").eq(0).html();
+                $.ajax({
+                    url: "/Member/CancleGroup/",
+                    type: "Post",
+                    dataType: "JSON",
+                    data: { "UserID": ID, "type": 1 },
+                    success: function (data) {
+                        switch (data.result) {
+                            case 0:
+                                alert('取消返利分组成功!');
+                                location.href = "/Member/RebateManage";
+                                break;
+                            case 1:
+                                alert("取消返利分组成功失败，请稍后再试");
+                                break;
+                            default:
+                                alert('未知错误');
+                                break;
+                        }
+                    }
+                }).fail(function (xhr, textStatus, err) {
+                    alert('Error: ' + err);
+                });
+
+            } else {
+                return false;
+            }
+            return false;
+        }
+
+        function flitUser() {
+            var _userid = $(".UserID").val();
+            var _grade = document.getElementsByClassName("gradeDetail");
+            for (var i = 0; i < _grade.length ; i++) {
+                var _node = _grade[i];
+                //alert($(_node.firstElementChild).html());
+                if (_userid == "") {
+                    _node.style.display = '';
+                } else if ($(_node.getElementsByClassName("selUserID")).html() != _userid) {
+                    _node.style.display = 'none';
+                } else {
+                    _node.style.display = '';
+                }
+            }
+        }
+    </script>
+}

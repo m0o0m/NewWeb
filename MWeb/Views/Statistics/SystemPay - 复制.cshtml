@@ -1,0 +1,500 @@
+﻿@using GL.Data.Model
+@model BaseDataView
+@{
+    Layout = "~/Views/Shared/_LayoutJR.cshtml";
+   
+}
+
+
+
+
+
+
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css" />
+@*<link href="~/Lib/Metronic/assets/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />*@
+<link href="~/Lib/Metronic/assets/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css" />
+<link href="~/Lib/Metronic/assets/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<link href="~/Lib/Metronic/assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css" rel="stylesheet" type="text/css" />
+<link href="~/Lib/Metronic/assets/global/css/components.min.css" rel="stylesheet" id="style_components" type="text/css" />
+<link href="~/Lib/Metronic/assets/global/css/plugins.min.css" rel="stylesheet" type="text/css" />
+<link href="~/Lib/Metronic/assets/layouts/layout/css/custom.min.css" rel="stylesheet" type="text/css" />
+
+
+
+
+
+<script src="~/Lib/Metronic/assets/global/plugins/jquery.min.js" type="text/javascript"></script>
+<script src="~/Lib/Metronic/assets/global/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+
+@*<script src="~/Lib/Metronic/assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js" type="text/javascript"></script>*@
+<script src="~/Lib/Metronic/ext/bootstrap-datepicker-cn.js"></script>
+<script src="~/Lib/Metronic/assets/global/scripts/app.min.js" type="text/javascript"></script>
+
+<script src="~/Lib/Metronic/assets/pages/scripts/components-date-time-pickers.min.js" type="text/javascript"></script>
+
+
+
+<script src="~/Lib/Metronic/assets/global/plugins/echarts/echarts.js"></script>
+<script src="~/Lib/Metronic/assets/global/plugins/echarts/chart/bar.js"></script>
+<script src="~/Lib/Metronic/assets/global/plugins/echarts/chart/chord.js"></script>
+<script src="~/Lib/Metronic/assets/global/plugins/echarts/chart/eventRiver.js"></script>
+<script src="~/Lib/Metronic/assets/global/plugins/echarts/chart/force.js"></script>
+<script src="~/Lib/Metronic/assets/global/plugins/echarts/chart/funnel.js"></script>
+<script src="~/Lib/Metronic/assets/global/plugins/echarts/chart/gauge.js"></script>
+<script src="~/Lib/Metronic/assets/global/plugins/echarts/chart/heatmap.js"></script>
+<script src="~/Lib/Metronic/assets/global/plugins/echarts/chart/k.js"></script>
+<script src="~/Lib/Metronic/assets/global/plugins/echarts/chart/line.js"></script>
+<script src="~/Lib/Metronic/assets/global/plugins/echarts/chart/map.js"></script>
+<script src="~/Lib/Metronic/assets/global/plugins/echarts/chart/pie.js"></script>
+<script src="~/Lib/Metronic/assets/global/plugins/echarts/chart/radar.js"></script>
+<script src="~/Lib/Metronic/assets/global/plugins/echarts/chart/scatter.js"></script>
+<script src="~/Lib/Metronic/assets/global/plugins/echarts/chart/tree.js"></script>
+<script src="~/Lib/Metronic/assets/global/plugins/echarts/chart/treemap.js"></script>
+<script src="~/Lib/Metronic/assets/global/plugins/echarts/chart/venn.js"></script>
+<script src="~/Lib/Metronic/assets/global/plugins/echarts/chart/wordCloud.js"></script>
+
+<div class="row">
+
+    <div class="form-group">
+
+        <div class="col-md-2">
+            <label>开始时间</label>
+            <div class="input-group  date date-picker" data-date-format="yyyy-mm-dd" data-date-start-date="+0d">
+                <input id="StartDate" value="@Model.StartDate" type="text" class="form-control date-picker"  data-date-format="yyyy-mm-dd" readonly>
+                <span class="input-group-btn">
+                    <button class="btn default date-set" type="button">
+                        <i class="fa fa-calendar"></i>
+                    </button>
+                </span>
+            </div>
+            <!-- /input-group -->
+        </div>
+        <div class="col-md-2">
+            <label>结束时间</label>
+            <div class="input-group  date date-picker" data-date-format="yyyy-mm-dd" data-date-start-date="+0d">
+                <input id="ExpirationDate"  value="@Model.ExpirationDate" type="text" class="form-control date-picker" data-date-format="yyyy-mm-dd" readonly>
+                <span class="input-group-btn">
+                    <button class="btn default date-set" type="button">
+                        <i class="fa fa-calendar"></i>
+                    </button>
+                </span>
+            </div>
+            <!-- /input-group -->
+        </div>
+        <div class="col-md-2">
+            <label>&nbsp;</label>
+            <div class="input-group">
+                <a href="javascript:;" class="btn blue" onclick="searchAjax()">
+                    查询
+                    <i class="fa fa-search"></i>
+                </a>
+            </div>
+               
+            </div>
+        
+        </div>
+
+</div>
+<br>
+
+    <div class="portlet-body">
+        <div id="echarts_bar" style="height:800px;"></div>
+    </div>
+
+  
+   
+   
+    <script type="text/javascript">
+        var myChart;
+
+        jQuery(document).ready(function () {
+            // ECHARTS
+            require.config({
+                paths: {
+                    echarts: '../assets/global/plugins/echarts/'
+                }
+            });
+            // DEMOS
+            require(
+                [
+                    'echarts',
+                    'echarts/chart/bar',
+                    'echarts/chart/chord',
+                    'echarts/chart/eventRiver',
+                    'echarts/chart/force',
+                    'echarts/chart/funnel',
+                    'echarts/chart/gauge',
+                    'echarts/chart/heatmap',
+                    'echarts/chart/k',
+                    'echarts/chart/line',
+                    'echarts/chart/map',
+                    'echarts/chart/pie',
+                    'echarts/chart/radar',
+                    'echarts/chart/scatter',
+                    'echarts/chart/tree',
+                    'echarts/chart/treemap',
+                    'echarts/chart/venn',
+                    'echarts/chart/wordCloud'
+                ],
+                function (ec) {
+
+                    //--- BAR ---
+                    myChart = ec.init(document.getElementById('echarts_bar'));
+                    var option = {
+                        tooltip: {
+                            trigger: 'axis'
+                        },
+                        title : {   text: '单位(万)'} ,
+                        legend: {
+
+                            data: []
+                        },
+                        toolbox: {
+                            show: true,
+                            feature: {
+                                mark: {
+                                    show: true
+                                },
+                                dataView: {
+                                    show: true,
+                                    readOnly: false
+                                },
+                                magicType: {
+                                    show: true,
+                                    type: ['line', 'bar']
+                                },
+                                restore: {
+                                    show: true
+                                },
+                                saveAsImage: {
+                                    show: true
+                                }
+                            }
+                        },
+                        calculable: true,
+                        xAxis: [{
+                            type: 'category',
+                            data: []
+                        }],
+                        yAxis: [{
+                            type: 'value',
+                            splitArea: {
+                                show: false
+                            },
+                            axisLabel: { formatter: '{value} ms' }
+                        }],
+                        series: []
+                    };
+                    myChart.setOption(option);
+                }
+            );
+
+
+
+
+
+        });
+
+        function searchAjax() {
+            var stime = $("#StartDate").val();
+            var etime = $("#ExpirationDate").val();
+            initData(stime, etime);
+        }
+
+        function initData(stime, etime) {
+
+            $.ajax({
+                url: "/Statistics/SystemPay/",
+                type: "post",
+                dataType: "json",
+                data: { "StartDate": stime, "ExpirationDate": etime },
+                success: function (data) {
+                    if (data.ret == 0) {//成功
+                        switch (data.datatype) {
+                            case "list":
+                                LoadListData(data.data);
+                                initTable();
+                                break;
+                            case "json":
+                               // LoadJsonData(data.data);
+                              //  initTable();
+                                break;
+                        }
+                    }
+                }
+            });
+
+          
+        }
+
+        function LoadListData(data) {
+        
+            var xAxisData1=new Array();　 
+            var legendData1 = new Array();
+            var data1 = [];
+            for (var i = 0; i < data.length; i++) {
+                var x = data[i].CountDate;
+                xAxisData1.push(x);
+              
+            }
+            legendData1.push('系统金币总量');
+            legendData1.push('金币涨跌量');
+            legendData1.push('金币涨跌比');
+          
+          
+            var arr = new Array();
+            for (var i = 0; i < data.length; i++) {
+                var SystemChip = data[i].SystemChip;
+                var ChipChange = data[i].ChipChange;
+                var ChipRate = data[i].ChipRate;
+            
+                if (SystemChip == null) {
+                    SystemChip = 0;
+                }
+                if (ChipChange == null) {
+                    ChipChange = 0;
+                }
+                if (ChipRate == null) {
+                    ChipRate = 0;
+                }
+                SystemChip = SystemChip / 10000;
+                ChipChange = ChipChange / 10000;
+                ChipRate = ChipRate / 10000;
+               
+                if (i == 0) {
+                 
+                    arr[0] = SystemChip;
+                    arr[1] = ChipChange;
+                    arr[2] = ChipRate;
+                } else {
+                   
+                    arr[0] = arr[0] + "," + SystemChip;
+                    arr[1] = arr[1] + "," + ChipChange;
+                    arr[2] = arr[2] + "," + ChipRate;
+                }
+              
+                
+
+            }
+         
+
+            for (var n = 0; n < arr.length; n++) {
+                var obj = {};
+                if (n == 0) {
+                    obj.name = "系统金币总量";
+                }else if(n==1){
+                    obj.name = "金币涨跌量";
+                } else if (n == 2) {
+                    obj.name = "金币涨跌比";
+                }
+              
+
+                if (arr[n] == "null") {
+                 
+                    arrT.push(0);
+                } else {
+                   
+
+                    var d = arr[n].toString().split(',');
+
+                 
+                    var arrT = new Array();
+                    for (j = 0; j < d.length; j++) {
+                        if (d[j] == "null") {
+                            arrT.push(0);
+                        } else {
+
+                            arrT.push(d[j]);
+                        }
+
+                    }
+                }
+              
+                obj.data = arrT;
+                obj.type = "bar";
+                data1.push(obj);
+            }
+            //var xAxisData = ['14月22', '14月23', '14月24', '14月25', '14月26', '14月27'];
+            //var legendData = ['系统金币总量', '金币涨跌量', '金币涨跌比'];
+            //var data = [{
+            //    name: '系统金币总量',
+            //    type: 'bar',
+            //    data: [2.0, 4.9, 7.0, 123.2, 1, 2]
+            //}, {
+            //    name: '金币涨跌量',
+            //    type: 'bar',
+            //    data: [2.6, 5.9, 9.0, 126.4, 6, 7]
+            //}, {
+            //    name: '金币涨跌比',
+            //    type: 'bar',
+            //    data: [20, 30, 40, 50, 160, 60]
+            //}];
+
+       
+
+            var xAxisData = xAxisData1;
+            var legendData = legendData1;
+            var data = data1;
+            //option.xAxis[0]['data'] = xAxisData;
+
+            //myChart.setOption(option);
+            //myChart.setSeries(seriesData);
+
+            //var option = myChart.getOption();
+
+           
+            //option.series[0].data = data;
+            //myChart.setOption(option);
+
+
+            //option.legend = legendData;
+           // option.xAxis[0].data = xAxisData;
+           // myChart.setSeries(data);
+
+            var option = {
+                tooltip: {
+                    trigger: 'axis'
+                },
+                title: { text: '单位(万)' },
+                legend: {
+
+                    data: legendData
+                },
+                toolbox: {
+                    show: true,
+                    feature: {
+                        mark: {
+                            show: false
+                        },
+                        dataView: {
+                            show: false,
+                            readOnly: false
+                        },
+                        magicType: {
+                            show: true,
+                            //type: ['line', 'bar', 'stack', 'tiled']
+                            type: ['line', 'bar']
+                        },
+                        restore: {
+                            show: false
+                        },
+                        saveAsImage: {
+                            show: true
+                        },
+                        //myTool : {
+                        //    show : true,
+                        //    title : '自定义扩展方法',
+                        //   // icon : 'image://../asset/ico/favicon.png',
+                        //    onclick: function () {
+
+                        //    }
+                        //},
+                        dataView: {
+                            show: true,
+                            title: '数据视图',
+                            readOnly: true,
+                            lang: ['数据视图', '关闭', '刷新'],
+                            optionToContent: function (opt) {
+                                var table = '<div class="portlet box purple">'
+       + ' <div class="portlet-title">'
+         + '      <div class="caption">'
+               + '    <i class="fa fa-cogs"></i>表格显示'
+           + '    </div>'
+            + '   <div class="tools">'
+                + '   <a href="javascript:;" class="collapse"> </a>'
+               + '    <a href="#portlet-config" data-toggle="modal" class="config"> </a>'
+                 + '  <a href="javascript:;" class="reload"> </a>'
+                + '   <a href="javascript:;" class="remove"> </a>'
+             + '  </div>'
+         + '  </div>'
+               + '  <div class="portlet-body">'
+        + '  <div class="table-scrollable">';
+                                var axisData = opt.xAxis[0].data;
+                                var series = opt.series;
+
+                                table += '<table class="table table-striped table-bordered table-hover"><thead><tr>'
+                                             + '<th>时间</th>'
+                                             + '<th>' + series[0].name + '</th>'
+                                             + '<th>' + series[1].name + '</th>'
+                                             + '</tr> </thead><tbody>';
+                                for (var i = 0, l = axisData.length; i < l; i++) {
+                                    table += '<tr>'
+                                             + '<td>' + axisData[i] + '</td>'
+                                             + '<td>' + series[0].data[i] + '</td>'
+                                             + '<td>' + series[1].data[i] + '</td>'
+                                             + '</tr>';
+                                }
+                                table += '</tbody></table>';
+                                table += '</div></div> </div>';
+                                return table;
+                            }
+                        }
+                    }
+                },
+                calculable: true,
+                xAxis: [{
+                    type: 'category',
+                    data: xAxisData
+                }],
+                yAxis: [{
+                    type: 'value',
+                    splitArea: {
+                        show: false
+                    },
+                    axisLabel: { formatter: '{value}万' }
+                }],
+                series: data
+            };
+
+            myChart.clear();
+            myChart.setOption(option);
+
+           
+        }
+
+     
+
+
+        function initTable() {
+            $("#mytable").remove();
+            var opt = myChart.getOption();
+            var table = '<div id="mytable" class="portlet box purple" style="margin-bottom:50px">'
++ ' <div class="portlet-title">'
++ '      <div class="caption">'
++ '    <i class="fa fa-cogs"></i>表格显示'
++ '    </div>'
++ '   <div class="tools">'
++ '   <a href="javascript:;" class="collapse"> </a>'
++ '    <a href="#portlet-config" data-toggle="modal" class="config"> </a>'
++ '  <a href="javascript:;" class="reload"> </a>'
++ '   <a href="javascript:;" class="remove"> </a>'
++ '  </div>'
++ '  </div>'
++ '  <div class="portlet-body">'
++ '  <div class="table-scrollable">';
+
+            var axisData = opt.xAxis[0].data;
+            var series = opt.series;
+          
+            table += '<table class="table table-striped table-bordered table-hover"><thead><tr>'
+                         + '<th></th>';
+            for (var i = 0; i < series.length; i++) {
+                table += '<th>' + series[i].name + '</th>'
+            }
+
+            table +=  '</tr> </thead><tbody>';
+            for (var i = 0, l = axisData.length; i < l; i++) {
+                table += '<tr>';
+                table += '<td>' + axisData[i] + '</td>';
+                for (var j = 0; j < series.length; j++) {
+                    table += '<td>' + series[j].data[i]*10000 + '</td>'
+                }
+                       
+                table += '</tr>';
+            }
+            table += '</tbody></table>';
+            table += '</div></div> </div>';
+
+            $("#main").append(table);
+        }
+    </script>

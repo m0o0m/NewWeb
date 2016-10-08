@@ -1,0 +1,194 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	height: auto;
+	width: 100%;
+	overflow:scroll;
+	-webkit-text-size-adjust: none;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+}
+
+.html-body-overflow
+{
+ overflow-x:hidden;
+ overflow-y:hidden;
+}
+
+body,button,input,select,textarea {
+	font: 12px Verdana, Helvetica, Helvetica-Bold, "微软雅黑";
+}
+
+h1,h2,h3,h4,h5,h6 {
+	font-size: 100%;
+}
+
+a,a:visited {
+	color: #2861d7;
+	text-decoration: none;
+}
+
+address,cite,dfn,em,var {
+	font-style: normal;
+}
+
+small {
+	font-size: 12px;
+}
+
+ul,ol {
+	list-style: none;
+}
+
+.top {
+	background: url(bg_top.png) repeat-x 0 0;
+	background-size: auto 40px;
+}
+
+.top a {
+	float: left;
+	background: url(fback_btn.png) no-repeat 0 0;
+	position: absolute;
+	background-size: 43px auto;
+	width: 43px;
+	height: 30px;
+	display: block;
+	color: #FFF;
+	margin-left: 2%;
+	margin-top: 6px;
+}
+
+.top h2 {
+	height: 40px;
+	font-size: 16px;
+	font-weight: bold;
+	line-height: 40px;
+	text-align: center;
+	color: #FFF;
+}
+
+.copyright {
+	font-size: 12px;
+	color: #ac5d18;
+	line-height: 16px;
+}
+
+/** 弹窗 **/
+#open_win_background {
+	position: absolute;
+	z-index: 998;
+	top: 0px;
+	left: 0px;
+	background: rgb(50, 50, 50);
+	background: rgba(0, 0, 0, 0.5);
+	display: none;
+}
+
+#open_win {
+	position: absolute;
+	width: 90%;
+	z-index: 999;
+	min-height: 50px;
+	background: #fff;
+	border-radius: 5px;
+	display: none;
+}
+
+#open_win_header {
+	height: 35px;
+	line-height: 35px;
+	text-align: center;
+	font-size: 14px;
+	color: #ff9000;
+	font-weight: 700;
+	border-bottom: 1px solid #ff9000;
+}
+
+#open_win_content {
+	background: #fff;
+	color: #000;
+	padding: 10px;
+	text-align: left;
+	min-height: 40px
+}
+
+#addr_fb2{
+	float: left;
+}
+
+#msg *, #msg2 *, #fenxiangBox * {
+	padding: 0px;
+	margin: 0px;
+	font-size: 14px;
+}
+
+#msg, #msg2, #fenxiangBox {
+	background:rgba(0,0,0,0.5) none repeat scroll 0 0;
+	position: absolute;
+	display: none;
+	z-index: 9999;
+}
+
+#content, .contentbox{
+	-webkit-border-radius:5px;-moz-border-radius:5px;border-radius:5px;
+	background: #fff;
+	position: absolute;
+}
+
+#content2{
+	-webkit-border-radius:5px;-moz-border-radius:5px;border-radius:5px;
+	background: #fff;
+	position: absolute;
+	overflow: auto;
+	height: 250px;
+}
+
+#msg .tit, #msg2 .tit2 {
+	position: relative;
+	font-size: 14px;
+	font-weight: bold;
+	height: 37px;
+	line-height: 37px;
+	padding-left: 10px;
+	color: #000;
+	background-size: 100% 100%;
+}
+
+#msg .cnt, #msg2 .cnt2 {
+	line-height: 27px;
+	color: #000;
+	text-align: center;
+	padding: 8px 10px;
+	min-height: 60px;
+}
+
+#msg .btm, #msg2 .btm2 {
+	height: 23px;
+	background: url(../image/msg.btm.png);
+	background-size: 100% 100%;
+}
+
+#msg .submit, #msg2 .submit2 {
+	text-decoration: none;
+	display: block;
+	color: #ffffff;
+	height: 30px;
+	border: none;
+}
+
+#msg #close, #msg2 #close2 {
+	background: url(../images/closebtn2.png) no-repeat 0 0;
+	position: absolute;
+	width: 30px;
+	height: 30px;
+	top: 0px;
+	right: 0px;
+	display: block;
+}
+
+.em2{
+	color: #ff9e02;
+}

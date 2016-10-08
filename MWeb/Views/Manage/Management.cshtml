@@ -1,0 +1,82 @@
+﻿@model object
+@{
+    ViewBag.Title = "管理员管理 -- 列表";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!--breadcrumbs-->
+<div id="content-header">
+    <div id="breadcrumb"> <a href="#" title="" class="current"><i class="icon-home"></i> 管理员列表</a></div>
+</div>
+
+<!--End-breadcrumbs-->
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="widget-box span8" id="box">
+            @Html.Partial("Management_PageList", Model)
+        </div>
+    </div>
+</div>
+
+
+@section scripts{
+    @{Html.RegisterMvcPagerScriptResource();}
+
+
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/select2.min.js"></script>
+    <script type="text/javascript">
+
+        // resets the menu selection upon entry to this page:
+        function resetMenu() {
+            document.gomenu.selector.selectedIndex = 2;
+        }
+        function UpdateUser(obj) {
+            _this = $(obj).parent().parent();
+            var _UserID = $(_this).find("td").eq(0).html();
+            location.href = "/Manage/ManagementForUpdate?id=" + _UserID;
+        }
+
+        function ConfirmDelUser(obj) {
+            if (confirm("你确定要删除此记录吗？")) {
+                _this = $(obj).parent().parent();
+                var _UserID = $(_this).find("td").eq(0).html();
+
+                $.ajax({
+                    url: "/api/ManageApi/",
+                    type: "DELETE",
+                    dataType: "JSON",
+                    data: { "AdminID": _UserID },
+                    success: function (data) {
+                        switch (data.result) {
+                            case 0:
+                                location.reload();
+                                break;
+                            case 1:
+                                alert("删除失败，请稍后再试");
+                                break;
+                            default:
+                                alert('未知错误');
+                                break;
+                        }
+                    }
+                }).fail(function (xhr, textStatus, err) {
+                    alert('Error: ' + err);
+                });
+            }
+            else {
+                return false;
+            }
+
+            return false;
+        }
+
+        function errFunc(res) {
+            alert(res["responseText"]);
+        }
+        function successPageFun() {
+
+        }
+
+    </script>
+}

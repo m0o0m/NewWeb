@@ -1,0 +1,349 @@
+﻿@using GL.Data.Model
+@model object
+@{
+    ViewBag.Title = "会员管理 -- 列表";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    AgentInfo Higher = (AgentInfo)ViewData["Higher"];
+}
+
+
+
+
+
+
+<!--End-breadcrumbs-->
+<div class="container-fluid">
+
+    @if (ViewBag.Top)
+    {
+        <div class="row-fluid">
+            <div class="widget-box">
+
+
+
+
+
+
+                <section id="widget-grid" class="">
+                    <div class="row">
+                        <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-0" data-widget-editbutton="false" data-widget-colorbutton="false"
+                                 data-widget-togglebutton="false"
+                                 data-widget-deletebutton="false"
+                                 data-widget-fullscreenbutton="false"
+                                 data-widget-custombutton="false"
+                                 data-widget-collapsed="false"
+                                 data-widget-sortable="false">
+                                <header>
+                                    <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                                    <h2>代理列表</h2>
+                                </header>
+                                <!-- widget div-->
+                                <div>
+                                    <!-- widget edit box -->
+                                    <div class="jarviswidget-editbox">
+                                        <!-- This area used as dropdown edit box -->
+                                    </div>
+                                    <!-- end widget edit box -->
+                                    <!-- widget content -->
+                                    <div class="widget-body no-padding">
+                                        <div class="table-responsive">
+                                            <table class="table table-bordered">
+                                                <thead>
+
+                                                    <tr>
+                                                        <th >代理id</th>
+                                                        <th >代理帐号</th>
+                                                        <th >代理昵称</th>
+                                                        <th >代理等级</th>
+                                                        <th >可用金额</th>
+                                                        <th>已用金额</th>
+                                                        <th >代理手机</th>
+                                                        <th>代理QQ</th>
+                                                        <th>代理邮箱</th>
+                                                        <th >注册时间</th>
+                                                        <th >登录时间</th>
+                                                        <th >登录IP</th>
+                                                        <th>基本操作</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr class="gradeA">
+                                                        <td>
+                                                            @if (Higher.Extend_isDefault)
+                                    {<i class="icon-home"></i>}
+                                                            @(Higher.OnlineState > 0 ? "在线" : "离线")|@Higher.AgentID
+                                                        </td>
+                                                        <td>@Higher.AgentAccount</td>
+                                                        <td>@Higher.AgentName</td>
+                                                        <td>@Higher.AgentLv</td>
+                                                        <td>@Higher.AmountAvailable.Value.ToString("0.")</td>
+                                                        <td>@Higher.HavaAmount.Value.ToString("0.")</td>
+                                                        <td>@Higher.AgentTel</td>
+                                                        <td>@Higher.AgentQQ</td>
+                                                        <td>@Higher.AgentEmail</td>
+                                                        <td>@Higher.RegisterTime</td>
+                                                        <td>@Higher.LoginTime</td>
+                                                        <td>@Higher.LoginIP</td>
+                                                        <td style="text-align:center">
+                                                            @if (Higher.AgentLv == agentLv.代理 && !Higher.Extend_isDefault)
+                                {
+                                                                <input id="btnSetMain" type="button" value="设为主站" class="btn btn-danger btn-mini" onclick="return SetTheMain(@Higher.AgentID)" />
+                                }
+                                                            <input id="btnDel" type="button" value="删除" class="btn btn-danger btn-mini" onclick="return ConfirmDelUserForAgent(@Higher.AgentID)" />
+                                                            <input id="btnUpdate" type="button" value=" 编 辑 " class="btn btn-primary btn-mini" onclick="return UpdateUserForAgent(@Higher.AgentID)" />
+                                                            <input id="btnUpdate" type="button" value=" 上 分 " class="btn btn-primary btn-mini" onclick="return AddScoresUserForAgent(@Higher.AgentID)" />
+                                                            <input id="btnUpdate" type="button" value=" 下 分 " class="btn btn-primary btn-mini" onclick="return SubScoresUserForAgent(@Higher.AgentID)" />
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                    </div>
+                                    <!-- end widget content -->
+                                </div>
+                                <!-- end widget div -->
+                            </div>
+                            <!-- end widget -->
+
+                        </article>
+                    </div>
+                </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        </div>
+    </div>
+    }
+    <div class="row-fluid">
+        <div class="span6">
+            <div id="search2">
+                @*<input id="btnAddAgent" type="button" value="添加@(ViewBag.AgentLv)" onclick="return AddAgent(@ViewBag.AgentID)" class=" btn btn-warning" />*@
+                <input id="btnAddMember" type="button" value="添加会员" onclick="return AddMember(@ViewBag.AgentID)" class=" btn btn-success" />
+                <input id="btnGoBack" type="button" value="返回代理" onclick="return GoBack(@ViewBag.HigherID)" class=" btn btn-success" />
+            </div>
+        </div>
+    </div>
+    </br>
+    <div class="row-fluid">
+
+        <div class="widget-box" id="box">
+            @Html.Partial("Member_PageList", Model)
+        </div>
+    </div>
+</div>
+
+
+@section scripts{
+    @{Html.RegisterMvcPagerScriptResource();}
+
+
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/select2.min.js"></script>
+
+    <script src="/js/matrix.tables.js"></script>
+
+    <script type="text/javascript">
+
+        // resets the menu selection upon entry to this page:
+        function resetMenu() {
+            document.gomenu.selector.selectedIndex = 2;
+        }
+
+        function SetTheMain(obj) {
+            if (obj == null) {
+                location.href = "/Agent/AgentForSetTheMain";
+            } else {
+                if (confirm("你确定要将此代理设置为主站吗？")) {
+                    //_this = $(obj).parent().parent();
+                    //var _UserID = $(_this).find("td").eq(0).html();
+
+                    $.ajax({
+                        url: "/Agent/AgentForSetTheMain/",
+                        type: "POST",
+                        dataType: "JSON",
+                        data: { "AgentID": obj },
+                        success: function (data) {
+                            switch (data.result) {
+                                case 0:
+                                    location.reload();
+                                    break;
+                                default:
+                                    alert('未知错误');
+                                    break;
+                            }
+                        }
+                    }).fail(function (xhr, textStatus, err) {
+                        alert('Error: ' + err);
+                    });
+                }
+                else {
+                    return false;
+                }
+            }
+            return false;
+        }
+
+        function errFunc(res) {
+            alert(res["responseText"]);
+        }
+        function successPageFun() {
+
+        }
+        function ViewRecord(obj) {
+            location.href = "/Manage/GameRecord?id=" + obj;
+        }
+
+        function AddAgent(obj) {
+            location.href = "/Agent/AgentForAdd?id=" + obj;
+        }
+        function AddMember(obj) {
+            location.href = "/Member/MemberForAdd?id=" + obj;
+        }
+
+        function GoBack(obj) {
+            location.href = "/Agent/Agent?id=" + obj;
+        }
+        function AddScoresUser(obj) {
+            location.href = "/Member/MemberForUpperScores?id=" + obj;
+        }
+        function SubScoresUser(obj) {
+            location.href = "/Member/MemberForLowerScores?id=" + obj;
+        }
+        function UpdateUser(obj) {
+            //_this = $(obj).parent().parent();
+            //var _UserID = $(_this).find("td").eq(0).html();
+            location.href = "/Member/MemberForUpdate?id=" + obj;
+        }
+
+
+        function ConfirmDelUser(id, obj) {
+            if (confirm("你确定要删除此记录吗？")) {
+                //_this = $(obj).parent().parent();
+                //var _UserID = $(_this).find("td").eq(0).html();
+
+                $.ajax({
+                    url: "/Member/MemberApi/",
+                    type: "DELETE",
+                    dataType: "JSON",
+                    data: { "ID": id },
+                    success: function (data) {
+                        switch (data.result) {
+                            case 0:
+                                location.reload();
+                                break;
+                            case 1:
+                                alert("删除失败，请稍后再试");
+                                break;
+                            default:
+                                alert('未知错误');
+                                break;
+                        }
+                    }
+                }).fail(function (xhr, textStatus, err) {
+                    alert('Error: ' + err);
+                });
+            }
+            else {
+                return false;
+            }
+
+            return false;
+        }
+
+
+
+
+
+        function AddScoresUserForAgent(obj) {
+            location.href = "/Agent/AgentForUpperScores?id=" + obj;
+        }
+        function SubScoresUserForAgent(obj) {
+            location.href = "/Agent/AgentForLowerScores?id=" + obj;
+        }
+        function UpdateUserForAgent(obj) {
+            //_this = $(obj).parent().parent();
+            //var _UserID = $(_this).find("td").eq(0).html();
+            location.href = "/Agent/AgentForUpdate?id=" + obj;
+        }
+
+        function ConfirmDelUserForAgent(obj) {
+            if (confirm("你确定要删除此记录吗？")) {
+                //_this = $(obj).parent().parent();
+                //var _UserID = $(_this).find("td").eq(0).html();
+
+                $.ajax({
+                    url: "/Agent/AgentForDelete/",
+                    type: "POST",
+                    dataType: "JSON",
+                    data: { "AgentID": obj },
+                    success: function (data) {
+                        switch (data.result) {
+                            case 0:
+                                location.reload();
+                                break;
+                            case 1:
+                                alert("删除失败，请稍后再试");
+                                break;
+                            case 10200:
+                                alert("账号的下级代理必须为空，请清空账号或转移账号");
+                                break;
+                            case 10201:
+                                alert("账号的下级会员必须为空，请清空账号或转移账号");
+                                break;
+                            default:
+                                alert('未知错误');
+                                break;
+                        }
+                    }
+                }).fail(function (xhr, textStatus, err) {
+                    alert('Error: ' + err);
+                });
+            }
+            else {
+                return false;
+            }
+
+            return false;
+        }
+
+
+
+    </script>
+}

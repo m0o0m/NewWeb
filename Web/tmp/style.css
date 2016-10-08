@@ -1,0 +1,27 @@
+/* CSS Document */
+*{margin:0;padding:0;}
+body{font:12px Arial, Helvetica, 宋体;}
+li{list-style:none;}
+
+.wrap{width:1000px;border:1px solid #f1f1f1;padding-top:20px;position:relative;margin:25px;}
+.wrap .title{position:absolute;top:-10px;left:30px;background:#fff;}
+.wrap .content{width:1000px;height:600px;overflow-y:scroll;overflow-x:scroll;}
+.wrap .btns{padding-top:6px;}
+.wrap .btns button{margin:6px 10px;}
+.wrap .btns .one{padding-left:200px;}
+.wrap .btns .two{padding-top:6px;padding-left:588px;border-top:1px solid #f1f1f1;}
+
+.panel{width:390px;overflow:hidden;border-radius:5px 5px 0 0;background:#bbd3ed;border:1px solid #72bad0;}
+.panel .title{font:13px/28px 微软雅黑;background-image:-webkit-linear-gradient(#99b3d4,#b3d3e8);background-image:-moz-linear-gradient(#99b3d4,#b3d3e8);padding-left:12px;}
+.panel .main{width:374px;margin:auto;padding:8px 0;background:#f0f0f0;}
+.panel .main .tr{width:93%;border:1px solid #a0a0a0;margin:10px auto;}
+.panel .main .tr .sm{background:#f0f0f0;position:relative;top:-8px;left:15px;}
+.panel .main .tr input,.panel .main .tr select{border:1px solid #9f9f9f;}
+.panel .main .tr ul{padding:5px 0px 5px 60px;}
+.panel .main .tr ul li{padding:5px 0;}
+.panel .main .tr ul li span.th{display:inline-block;text-align:left;width:80px;}
+.panel .range{display:inline-block;}
+.panel .main .tr ul li .range input{border:none;}
+.panel .btn{padding:10px;text-align:center;}
+.panel .btn button{margin:0 45px;padding:0 10px;}
+

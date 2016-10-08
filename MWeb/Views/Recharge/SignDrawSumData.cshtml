@@ -1,0 +1,125 @@
+﻿
+
+
+@using GL.Data.Model
+@model BaseDataView
+@{
+    SignDraw bdl = (SignDraw)Model.BaseDataList;
+
+}
+
+
+<div id="content">
+    <form id="comment-form" class="smart-form" novalidate="novalidate" method="get">
+        <div class="row">
+            <div class="widget-body">
+                <section class="col col-12" style="width:210px">
+                    <label class="label">&nbsp;</label>
+                    <label class="select">
+
+
+                    
+
+                        @Html.GetAllAgentGroupList("Channels", Model.Channels)
+
+
+
+                        <i></i>
+                    </label>
+                </section>
+
+                <section class="col col-2">
+                    <label class="label">起始日期</label>
+                    <label class="input">
+                        <i class="icon-append fa fa-calendar"></i>
+                        @Html.TextBoxFor(m => m.StartDate, new Dictionary<string, object>() {
+                           { "class", "form-control datepicker" },
+                           { "data-dateformat", "yy-mm-dd 00:00:00" }
+                       })
+                    </label>
+                </section>
+                <section class="col col-2">
+                    <label class="label">截止日期</label>
+                    <label class="input">
+                        <i class="icon-append fa fa-calendar"></i>
+                        @Html.TextBoxFor(m => m.ExpirationDate, new Dictionary<string, object>() {
+                           { "class", "form-control datepicker" },
+                           { "data-dateformat", "yy-mm-dd 00:00:00" }
+                       })
+                    </label>
+                </section>
+                <section class="col col-0">
+                    <label class="label">&nbsp;</label>
+
+                    <input type="button" onclick="search()" class="btn btn-success btn-sm" value="查询" />
+                </section>
+
+            </div>
+        </div>
+    </form>
+
+    <!-- Widget ID (each widget will need unique ID)-->
+    <section id="widget-grid" class="">
+        <div class="row">
+            <article class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
+                <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-0" data-widget-editbutton="false" data-widget-colorbutton="false"
+                     data-widget-togglebutton="false"
+                     data-widget-deletebutton="false"
+                     data-widget-fullscreenbutton="false"
+                     data-widget-custombutton="false"
+                     data-widget-collapsed="false"
+                     data-widget-sortable="false">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                        <h2>登录签到抽奖数据统计</h2>
+                    </header>
+                    <!-- widget div-->
+                    <div>
+                        <!-- widget edit box -->
+                        <div class="jarviswidget-editbox">
+                            <!-- This area used as dropdown edit box -->
+                        </div>
+                        <!-- end widget edit box -->
+                        <!-- widget content -->
+                        <div class="widget-body no-padding" style="min-height: 70px;">
+                            <div class="table-responsive">
+                                <table class="table table-bordered">
+                                    <thead>
+                                     
+                                        <tr>
+                                            <th>编号</th>
+                                            <th>项目</th>
+                                            <th>数值</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                        <tr><td> 1 </td><td>每日登录抽奖总人数</td><td>@bdl.SignDrawManPerDay</td></tr>
+                                        <tr><td> 2 </td><td>花色不同牌型总人数</td><td>@bdl.DiffColorMan</td></tr>
+                                        <tr><td> 3 </td><td>三个梅花牌型总人数</td><td>@bdl.Club</td></tr>
+                                        <tr><td> 4 </td><td>三个方块牌型总人数</td><td>@bdl.Block</td></tr>
+                                        <tr><td> 5 </td><td>三个红桃牌型总人数</td><td>@bdl.Hearts</td></tr>
+                                        <tr><td> 6 </td><td>三个黑桃牌型总人数</td><td>@bdl.Spade</td></tr>
+                                        <tr><td> 7 </td><td>领取连续登录3天奖励总人数</td><td>@bdl.Three</td></tr>
+                                        <tr><td> 8 </td><td>领取连续登录5天奖励总人数</td><td>@bdl.Five</td></tr>
+                                        <tr><td> 9 </td><td>领取连续登录7天奖励总人数</td><td>@bdl.Seven</td></tr>
+                                        <tr><td> 10 </td><td>每日产出登录抽奖总游戏币</td><td>@bdl.LoginCoinPerDay</td></tr>
+                                        <tr><td> 11 </td><td>每日产出连续登录总游戏币</td><td>@bdl.ConLoginCoinPerDay</td></tr>
+                                                                 
+</tbody>
+</table>
+</div>
+</div>
+<!-- end widget content -->
+</div>
+<!-- end widget div -->
+</div>
+<!-- end widget -->
+
+</article>
+</div>
+</section>
+
+
+
+</div>

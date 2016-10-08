@@ -1,0 +1,150 @@
+﻿@model GL.Data.MWeb.Identity.ApplicationUser
+@{
+    ViewBag.Title = "管理员管理 -- 添加";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="content">
+
+    <article class="col-sm-12 col-md-12 col-lg-6">
+        <div class="jarviswidget" id="wid-id-4" data-widget-editbutton="false" data-widget-custombutton="false">
+            <header>
+                <span class="widget-icon"> <i class="fa fa-edit"></i> </span>
+                <h2>添加管理员</h2>
+            </header>
+            <div>
+                <div class="jarviswidget-editbox">
+                </div>
+                <div class="widget-body no-padding">
+                    <form id="subfrom" class="smart-form" action="/">
+                        @Html.AntiForgeryToken()
+                        <header>
+                            添加管理员
+                        </header>
+
+                        <fieldset>
+                            <section>
+                                <label>管理员帐号 :</label>
+                                <label class="input">
+                                    <i class="icon-append fa fa-user"></i>
+                                    <input type="text" name="UserName" class="span11" value="@Model.UserName" />
+                                    <b class="tooltip tooltip-bottom-right">Needed to enter the UserName</b>
+                                </label>
+                            </section>
+
+
+
+                            <section>
+                                <label>管理员密码 :</label>
+                                <label class="input">
+                                    <i class="icon-append fa fa-lock"></i>
+                                    <input type="password" name="PasswordHash" class="span11" value="@Model.PasswordHash" />
+                                    <b class="tooltip tooltip-bottom-right">Needed to verify your password</b>
+                                </label>
+                            </section>
+
+                            <section>
+                                <label>管理员昵称 :</label>
+                                <label class="input">
+                                    <i class="icon-append fa fa-lock"></i>
+                                    <input type="text" name="NickName" class="span11" value="@Model.NickName" />
+                                    <b class="tooltip tooltip-bottom-right">Needed to verify your password</b>
+                                </label>
+                            </section>
+                        </fieldset>
+
+                     
+                        <footer>
+                            <button type="submit" class="btn btn-primary" id="btnKick" onclick="return btnSubmit(this)">
+                                提交
+                            </button>
+                        </footer>
+                    </form>
+
+                </div>
+                <!-- end widget content -->
+
+            </div>
+            <!-- end widget div -->
+
+        </div>
+      
+    </article>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+@section scripts{
+    @{Html.RegisterMvcPagerScriptResource();}
+
+
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/select2.min.js"></script>
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+
+        // resets the menu selection upon entry to this page:
+        function resetMenu() {
+            document.gomenu.selector.selectedIndex = 2;
+        }
+
+
+
+        function btnSubmit(obj) {
+            _this = $(obj).parent().parent();
+
+            var _AdminAccount = _this.find("input[name=UserName]").val();
+            var _AdminPasswd = _this.find("input[name=PasswordHash]").val();
+
+
+            if (_AdminAccount.length == 0) {
+                alert("账号不能为空");
+                return false;
+            }
+            if (_AdminPasswd.length == 0) {
+                alert("密码不能为空");
+                return false;
+            }
+
+            $.ajax({
+                url: "/SU/ManagementForAdd/",
+                type: "POST",
+                dataType: "JSON",
+                data: $('#subfrom').serialize(),
+                success: function (data) {
+                    switch (data.result) {
+                        case 0:
+                            location.href = "/SU/Management";
+                            break;
+                        case 200:
+                            alert("值不能为空，请稍后再试");
+                            break;
+                        case 204:
+                            alert("账号已存在，请重新添加");
+                            break;
+                        case 205:
+                            alert("添加失败，账号只能由字母和数字组成");
+                            break;
+                        default:
+                            alert(data.msg);
+                            break;
+                    }
+                }
+            }).fail(function (xhr, textStatus, err) {
+                alert('Error: ' + err);
+            });
+
+            return false;
+
+        }
+
+    </script>
+}

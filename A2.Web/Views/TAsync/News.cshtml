@@ -1,0 +1,22 @@
+﻿
+@model IEnumerable<A2.Web.Models.NewsItem>
+
+@{
+    ViewBag.Title = "News";
+}
+
+用时 @ViewBag.TimeCost
+
+@foreach (var item in Model)
+{
+
+    <h2>@item.Title</h2>
+
+    <p>@item.PostDate</p>
+
+    <p><a href="@item.SourceURL" target="_blank">@item.SourceURL</a></p>
+
+    <p>@MvcHtmlString.Create(item.Content)</p>
+
+    <p />
+}

@@ -1,0 +1,412 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+您 Web 项目的发布/打包进程将使用此文件。您可以通过编辑此 MSBuild 文件
+来自定义该进程的行为。若要了解与此相关的详细信息，请访问 http://go.microsoft.com/fwlink/?LinkID=208121。
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <_PublishTargetUrl>F:\web\tt</_PublishTargetUrl>
+  </PropertyGroup>
+  <ItemGroup>
+    <File Include="aboutus.html">
+      <publishTime>03/15/2016 11:47:51</publishTime>
+    </File>
+    <File Include="bin/A1.Web.dll">
+      <publishTime>03/28/2016 17:29:44</publishTime>
+    </File>
+    <File Include="bin/Microsoft.AspNet.Identity.Core.dll">
+      <publishTime>12/04/2015 09:41:34</publishTime>
+    </File>
+    <File Include="bin/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll">
+      <publishTime>12/04/2015 09:42:01</publishTime>
+    </File>
+    <File Include="bin/roslyn/csc.exe">
+      <publishTime>12/04/2015 09:42:33</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.Build.Tasks.CodeAnalysis.dll">
+      <publishTime>12/04/2015 09:42:33</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.CodeAnalysis.CSharp.dll">
+      <publishTime>12/04/2015 09:42:33</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.CodeAnalysis.dll">
+      <publishTime>12/04/2015 09:42:33</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.CodeAnalysis.VisualBasic.dll">
+      <publishTime>12/04/2015 09:42:33</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.CSharp.Core.targets">
+      <publishTime>12/04/2015 09:42:33</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.VisualBasic.Core.targets">
+      <publishTime>12/04/2015 09:42:33</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Collections.Immutable.dll">
+      <publishTime>12/04/2015 09:42:33</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Reflection.Metadata.dll">
+      <publishTime>12/04/2015 09:42:33</publishTime>
+    </File>
+    <File Include="bin/roslyn/vbc.exe">
+      <publishTime>12/04/2015 09:42:33</publishTime>
+    </File>
+    <File Include="bin/roslyn/VBCSCompiler.exe">
+      <publishTime>12/04/2015 09:42:33</publishTime>
+    </File>
+    <File Include="bin/roslyn/VBCSCompiler.exe.config">
+      <publishTime>12/04/2015 09:42:33</publishTime>
+    </File>
+    <File Include="bin/zh-Hans/Microsoft.AspNet.Identity.Core.resources.dll">
+      <publishTime>12/04/2015 09:41:34</publishTime>
+    </File>
+    <File Include="cooperation.html">
+      <publishTime>03/24/2016 15:07:29</publishTime>
+    </File>
+    <File Include="css/main.css">
+      <publishTime>02/23/2016 14:42:20</publishTime>
+    </File>
+    <File Include="css/main.css.map">
+      <publishTime>12/04/2015 09:44:22</publishTime>
+    </File>
+    <File Include="css/main.scss">
+      <publishTime>12/22/2015 13:54:43</publishTime>
+    </File>
+    <File Include="css/normalize.css">
+      <publishTime>12/04/2015 09:44:22</publishTime>
+    </File>
+    <File Include="disclaimer.html">
+      <publishTime>01/26/2016 17:32:07</publishTime>
+    </File>
+    <File Include="download/Poker515.apk">
+      <publishTime>03/23/2016 09:58:54</publishTime>
+    </File>
+    <File Include="favicon.ico">
+      <publishTime>01/26/2016 17:32:07</publishTime>
+    </File>
+    <File Include="gameandroid.html">
+      <publishTime>03/15/2016 11:48:16</publishTime>
+    </File>
+    <File Include="gamecenter.html">
+      <publishTime>03/24/2016 15:06:54</publishTime>
+    </File>
+    <File Include="gameipad.html">
+      <publishTime>03/15/2016 11:48:46</publishTime>
+    </File>
+    <File Include="gameiphone.html">
+      <publishTime>03/15/2016 11:49:01</publishTime>
+    </File>
+    <File Include="HtmlPage1.html">
+      <publishTime>03/09/2016 20:48:33</publishTime>
+    </File>
+    <File Include="Image/09-18-18-21-14858.png.thumb.png">
+      <publishTime>01/23/2013 15:58:50</publishTime>
+    </File>
+    <File Include="Image/account_user_head.jpg">
+      <publishTime>12/04/2015 09:44:16</publishTime>
+    </File>
+    <File Include="Image/android.PNG">
+      <publishTime>12/12/2015 09:18:47</publishTime>
+    </File>
+    <File Include="Image/bank_list.png">
+      <publishTime>12/04/2015 09:44:16</publishTime>
+    </File>
+    <File Include="Image/banner/banner_about.jpg">
+      <publishTime>12/04/2015 09:44:16</publishTime>
+    </File>
+    <File Include="Image/banner/banner_aboutus.jpg">
+      <publishTime>12/04/2015 09:44:16</publishTime>
+    </File>
+    <File Include="Image/banner/banner_gamecenter.jpg">
+      <publishTime>12/04/2015 09:44:16</publishTime>
+    </File>
+    <File Include="Image/banner/banner_home.jpg">
+      <publishTime>01/11/2016 09:55:57</publishTime>
+    </File>
+    <File Include="Image/banner/banner_kf.jpg">
+      <publishTime>12/04/2015 09:44:17</publishTime>
+    </File>
+    <File Include="Image/banner/banner_pay.jpg">
+      <publishTime>12/04/2015 09:44:17</publishTime>
+    </File>
+    <File Include="Image/banner/sprite.png">
+      <publishTime>12/04/2015 09:44:17</publishTime>
+    </File>
+    <File Include="Image/banner_down_s.png">
+      <publishTime>12/30/2015 15:05:25</publishTime>
+    </File>
+    <File Include="Image/base.css">
+      <publishTime>01/23/2013 16:06:50</publishTime>
+    </File>
+    <File Include="Image/bottombg.png">
+      <publishTime>01/23/2013 15:58:50</publishTime>
+    </File>
+    <File Include="Image/code/android.PNG">
+      <publishTime>12/12/2015 09:18:47</publishTime>
+    </File>
+    <File Include="Image/code/iphone.png">
+      <publishTime>12/12/2015 09:18:47</publishTime>
+    </File>
+    <File Include="Image/code/iphone_poker.jpg">
+      <publishTime>12/04/2015 09:44:17</publishTime>
+    </File>
+    <File Include="Image/company.jpg">
+      <publishTime>01/23/2013 15:58:50</publishTime>
+    </File>
+    <File Include="Image/contact_icon.png">
+      <publishTime>12/04/2015 09:44:17</publishTime>
+    </File>
+    <File Include="Image/c_qq.jpg">
+      <publishTime>12/04/2015 09:44:17</publishTime>
+    </File>
+    <File Include="Image/c_qqun.jpg">
+      <publishTime>12/04/2015 09:44:17</publishTime>
+    </File>
+    <File Include="Image/ditu.jpg">
+      <publishTime>12/04/2015 09:44:17</publishTime>
+    </File>
+    <File Include="Image/drop.png">
+      <publishTime>12/22/2015 13:44:37</publishTime>
+    </File>
+    <File Include="Image/dztb2.png">
+      <publishTime>03/24/2016 14:11:54</publishTime>
+    </File>
+    <File Include="Image/footer_line.jpg">
+      <publishTime>12/04/2015 09:44:17</publishTime>
+    </File>
+    <File Include="Image/games/developing.jpg">
+      <publishTime>12/04/2015 09:44:17</publishTime>
+    </File>
+    <File Include="Image/games/fruit_big.jpg">
+      <publishTime>12/04/2015 09:44:17</publishTime>
+    </File>
+    <File Include="Image/games/landlords.jpg">
+      <publishTime>12/04/2015 09:44:17</publishTime>
+    </File>
+    <File Include="Image/games/landlords_big.jpg">
+      <publishTime>12/04/2015 09:44:17</publishTime>
+    </File>
+    <File Include="Image/games/poker.jpg">
+      <publishTime>12/04/2015 09:44:17</publishTime>
+    </File>
+    <File Include="Image/games/poker_big.jpg">
+      <publishTime>01/11/2016 09:55:58</publishTime>
+    </File>
+    <File Include="Image/games/scale_big.jpg">
+      <publishTime>12/04/2015 09:44:17</publishTime>
+    </File>
+    <File Include="Image/game_bg.png">
+      <publishTime>12/04/2015 09:44:17</publishTime>
+    </File>
+    <File Include="Image/hezuopingtai_1.jpg">
+      <publishTime>12/04/2015 09:44:17</publishTime>
+    </File>
+    <File Include="Image/hezuopingtai_2.jpg">
+      <publishTime>12/04/2015 09:44:18</publishTime>
+    </File>
+    <File Include="Image/hezuopingtai_3.jpg">
+      <publishTime>12/04/2015 09:44:18</publishTime>
+    </File>
+    <File Include="Image/hezuopingtai_4.jpg">
+      <publishTime>12/30/2015 15:05:25</publishTime>
+    </File>
+    <File Include="Image/hezuopingtai_5.jpg">
+      <publishTime>12/30/2015 15:05:25</publishTime>
+    </File>
+    <File Include="Image/home_banner_small_icon.png">
+      <publishTime>01/11/2016 09:55:58</publishTime>
+    </File>
+    <File Include="Image/home_big_banner.jpg">
+      <publishTime>01/11/2016 09:55:58</publishTime>
+    </File>
+    <File Include="Image/home_code.png">
+      <publishTime>12/04/2015 09:44:18</publishTime>
+    </File>
+    <File Include="Image/img.gif">
+      <publishTime>01/23/2013 15:58:50</publishTime>
+    </File>
+    <File Include="Image/iphone.png">
+      <publishTime>12/12/2015 09:18:47</publishTime>
+    </File>
+    <File Include="Image/logo.png">
+      <publishTime>12/04/2015 09:44:18</publishTime>
+    </File>
+    <File Include="Image/main_nav_a_bg.png">
+      <publishTime>12/04/2015 09:44:18</publishTime>
+    </File>
+    <File Include="Image/main_z.png">
+      <publishTime>12/04/2015 09:44:18</publishTime>
+    </File>
+    <File Include="Image/os_list.png">
+      <publishTime>12/04/2015 09:44:18</publishTime>
+    </File>
+    <File Include="Image/pay_list_icon.png">
+      <publishTime>12/04/2015 09:44:18</publishTime>
+    </File>
+    <File Include="Image/pay_path_arrow.png">
+      <publishTime>12/04/2015 09:44:18</publishTime>
+    </File>
+    <File Include="Image/poker_big.jpg">
+      <publishTime>01/11/2016 09:55:58</publishTime>
+    </File>
+    <File Include="Image/qq0.png">
+      <publishTime>12/04/2015 09:44:18</publishTime>
+    </File>
+    <File Include="Image/qqonline.png">
+      <publishTime>12/04/2015 09:44:18</publishTime>
+    </File>
+    <File Include="Image/reg_suc.png">
+      <publishTime>12/04/2015 09:44:18</publishTime>
+    </File>
+    <File Include="Image/sprite.png">
+      <publishTime>12/04/2015 09:44:18</publishTime>
+    </File>
+    <File Include="Image/sprite_1.png">
+      <publishTime>12/04/2015 09:44:18</publishTime>
+    </File>
+    <File Include="Image/suspend.png">
+      <publishTime>12/04/2015 09:44:18</publishTime>
+    </File>
+    <File Include="Image/top_split.png">
+      <publishTime>12/04/2015 09:44:18</publishTime>
+    </File>
+    <File Include="Image/user_panel_bg.jpg">
+      <publishTime>12/04/2015 09:44:18</publishTime>
+    </File>
+    <File Include="Image/user_pic.jpg">
+      <publishTime>12/04/2015 09:44:18</publishTime>
+    </File>
+    <File Include="Image/verify_img.png">
+      <publishTime>12/04/2015 09:44:18</publishTime>
+    </File>
+    <File Include="index.html">
+      <publishTime>03/24/2016 15:05:58</publishTime>
+    </File>
+    <File Include="mobile/images/515.png">
+      <publishTime>12/04/2015 09:44:27</publishTime>
+    </File>
+    <File Include="mobile/images/btn.png">
+      <publishTime>12/04/2015 09:44:27</publishTime>
+    </File>
+    <File Include="mobile/images/buttombg.PNG">
+      <publishTime>12/04/2015 09:44:27</publishTime>
+    </File>
+    <File Include="mobile/images/ddz.PNG">
+      <publishTime>12/04/2015 09:44:27</publishTime>
+    </File>
+    <File Include="mobile/images/dzbk.png">
+      <publishTime>01/26/2016 17:48:31</publishTime>
+    </File>
+    <File Include="mobile/images/dzbk1.png">
+      <publishTime>01/26/2016 17:48:31</publishTime>
+    </File>
+    <File Include="mobile/images/dzpk.png">
+      <publishTime>01/26/2016 17:48:31</publishTime>
+    </File>
+    <File Include="mobile/images/dzpk1.png">
+      <publishTime>01/26/2016 17:48:31</publishTime>
+    </File>
+    <File Include="mobile/images/gg.jpg">
+      <publishTime>01/26/2016 17:48:32</publishTime>
+    </File>
+    <File Include="mobile/images/images.zip">
+      <publishTime>01/27/2016 08:09:10</publishTime>
+    </File>
+    <File Include="mobile/images/kf.PNG">
+      <publishTime>12/04/2015 09:44:27</publishTime>
+    </File>
+    <File Include="mobile/images/LOGO.png">
+      <publishTime>12/04/2015 09:44:27</publishTime>
+    </File>
+    <File Include="mobile/images/middleBg.PNG">
+      <publishTime>12/04/2015 09:44:27</publishTime>
+    </File>
+    <File Include="mobile/images/tips.PNG">
+      <publishTime>12/04/2015 09:44:27</publishTime>
+    </File>
+    <File Include="mobile/images/xf.jpg">
+      <publishTime>02/22/2016 14:47:13</publishTime>
+    </File>
+    <File Include="mobile/images/xfgg01.gif">
+      <publishTime>02/23/2016 17:24:00</publishTime>
+    </File>
+    <File Include="mobile/images/xfgg02.gif">
+      <publishTime>02/23/2016 17:24:01</publishTime>
+    </File>
+    <File Include="mobile/images/xfgg03.gif">
+      <publishTime>02/23/2016 17:24:01</publishTime>
+    </File>
+    <File Include="mobile/images/xfgg04.jpg">
+      <publishTime>02/23/2016 17:24:01</publishTime>
+    </File>
+    <File Include="mobile/images/xfgg05.jpg">
+      <publishTime>02/23/2016 17:24:01</publishTime>
+    </File>
+    <File Include="mobile/index.html">
+      <publishTime>12/12/2015 09:18:47</publishTime>
+    </File>
+    <File Include="mobile/js/jquery-1.11.2.min.js">
+      <publishTime>12/04/2015 09:44:27</publishTime>
+    </File>
+    <File Include="packages.config">
+      <publishTime>12/04/2015 09:44:28</publishTime>
+    </File>
+    <File Include="pay.html">
+      <publishTime>03/24/2016 15:07:08</publishTime>
+    </File>
+    <File Include="pay5.html">
+      <publishTime>03/15/2016 11:49:28</publishTime>
+    </File>
+    <File Include="Scripts/html5shiv.min.js">
+      <publishTime>12/04/2015 09:44:20</publishTime>
+    </File>
+    <File Include="Scripts/jquery.js">
+      <publishTime>12/04/2015 09:44:20</publishTime>
+    </File>
+    <File Include="Scripts/main.coffee">
+      <publishTime>12/04/2015 09:44:20</publishTime>
+    </File>
+    <File Include="Scripts/main.js">
+      <publishTime>12/04/2015 09:44:20</publishTime>
+    </File>
+    <File Include="Scripts/passwordStrength-min.js">
+      <publishTime>12/04/2015 09:44:20</publishTime>
+    </File>
+    <File Include="Scripts/Validform_v5.3.2_min.js">
+      <publishTime>12/04/2015 09:44:20</publishTime>
+    </File>
+    <File Include="service.html">
+      <publishTime>03/24/2016 15:07:18</publishTime>
+    </File>
+    <File Include="tg/image/2wm.jpg">
+      <publishTime>08/11/2015 16:19:54</publishTime>
+    </File>
+    <File Include="tg/image/btn_android.png">
+      <publishTime>06/13/2015 15:46:18</publishTime>
+    </File>
+    <File Include="tg/image/btn_ios.png">
+      <publishTime>06/13/2015 15:46:18</publishTime>
+    </File>
+    <File Include="tg/image/btn_toweb.png">
+      <publishTime>06/13/2015 15:46:20</publishTime>
+    </File>
+    <File Include="tg/image/img_515.jpg">
+      <publishTime>01/06/2016 18:51:31</publishTime>
+    </File>
+    <File Include="tg/image/line.png">
+      <publishTime>06/13/2015 15:46:18</publishTime>
+    </File>
+    <File Include="tg/image/wechat_appstore_popup.png">
+      <publishTime>06/13/2015 16:47:08</publishTime>
+    </File>
+    <File Include="tg/image/wechat_appstore_popup2.png">
+      <publishTime>06/13/2015 16:47:08</publishTime>
+    </File>
+    <File Include="tg/index.php">
+      <publishTime>02/25/2016 14:05:54</publishTime>
+    </File>
+    <File Include="Web.config">
+      <publishTime>03/28/2016 17:29:44</publishTime>
+    </File>
+  </ItemGroup>
+</Project>

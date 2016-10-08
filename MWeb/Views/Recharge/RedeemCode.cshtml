@@ -1,0 +1,170 @@
+﻿@using GL.Data.Model
+
+@model BaseDataView
+@{
+    ViewBag.Title = "兑换码列表";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+
+}
+
+
+
+
+<div id="content">
+    <form id="comment-form" class="smart-form" novalidate="novalidate" method="post">
+        <div class="row">
+
+            <div class="widget-body">
+
+                <section class="col col-1.1">
+                    <label class="label">兑换码</label>
+                    <label class="input">
+                        @Html.TextBoxFor(m => m.SearchExt, new { @class = "span2", style = "border-radius:4px" })
+                    </label>
+                </section>
+
+
+
+
+
+                <section class="col col-1">
+                    <label class="label">&nbsp;</label>
+                    @*<button type="submit" class="btn btn-success btn-sm">查询</button>*@
+                    <input type="button" onclick="search()" class="btn btn-success btn-sm" value="查询" />
+                </section>
+
+            </div>
+
+
+
+
+
+
+
+
+
+        </div>
+    </form>
+
+
+    <div class="row-fluid">
+        <div class="widget-box" id="box">
+            @Html.Partial("RedeemCode_PageList", Model.BaseDataList)
+
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+@section scripts{
+    @{Html.RegisterMvcPagerScriptResource();}
+
+
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/select2.min.js"></script>
+    @Styles.Render("~/Style/bootstrap-datetimepicker")
+    @Scripts.Render("~/bundles/bootstrap-datetimepicker")
+
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $('select').select2({
+                allowClear: false,
+                minimumResultsForSearch: -1
+            });
+            $('.datepicker').datetimepicker({
+                minView: "month", //选择日期后，不会再跳转去选择时分秒
+                format: "yyyy-mm-dd hh:ii:ss", //选择日期后，文本框显示的日期格式
+                language: 'zh-CN', //汉化
+                autoclose: true //选择日期后自动关闭
+            });
+
+        });
+
+        function btWhiteIP(obj) {
+            _this = $(obj).parent().parent();
+            if (confirm('确定将【' + $(_this).find("td").eq(0).html() + '】解除白名单？')) {
+                var _Value = $(_this).find("td").eq(0).html();
+                $.ajax({
+                    url: "/Member/Whiteip/",
+                    type: "Post",
+                    dataType: "JSON",
+                    data: { "strIP": _Value, "Ext": "false" },
+                    success: function (data) {
+                        switch (data.result) {
+                            case 3:
+                                alert('【' + $(_this).find("td").eq(0).html() + '】解除白名单成功!');
+                                location.reload();
+                                break;
+                            case 4:
+                                alert("解除白名单失败，请稍后再试");
+                                break;
+                            case 5:
+                                alert("服务器通信出错!");
+                                break;
+                            default:
+                                alert('未知错误');
+                                break;
+                        }
+                    }
+                }).fail(function (xhr, textStatus, err) {
+                    alert('Error: ' + err);
+                });
+
+            } else {
+                return false;
+            }
+            return false;
+        }
+
+
+        function btSetWhiteIP(obj) {
+            _this = $(obj).parent().parent();
+            var acc = $(_this).find("td").eq(0).html();
+            if (confirm('确定将IP【' + acc + '】加入白名单？')) {
+                var _UserID = acc;
+                $.ajax({
+                    url: "/member/whiteip/",
+                    type: "Post",
+                    dataType: "JSON",
+                    data: { "strIP": _UserID, "Ext": "true" },
+                    success: function (data) {
+                        switch (data.result) {
+                            case 1:
+                                alert('已将IP【' + acc + '】加入白名单!');
+                                location.reload();
+                                break;
+                            case 2:
+                                alert("添加失败!");
+                                break;
+                            case 5:
+                                alert("和服务器通信失败!");
+                                break;
+                            case 6:
+                                alert("此IP已加入白名单，不能重复添加!");
+                                break;
+                            default:
+                                alert('未知错误');
+                                break;
+                        }
+                    }
+                }).fail(function (xhr, textStatus, err) {
+                    alert('Error: ' + err);
+                });
+
+            } else {
+                return false;
+            }
+            return false;
+        }
+
+    </script>
+
+}

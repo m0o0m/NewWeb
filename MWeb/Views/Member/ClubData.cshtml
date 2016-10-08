@@ -1,0 +1,168 @@
+﻿@using GL.Data.Model
+@using GL.Data.View
+@model GameRecordView
+@{
+    ViewBag.Title = "俱乐部数据";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+
+
+
+<div id="content">
+    @*<form id="comment-form" class="smart-form" novalidate="novalidate">
+        <div class="row">
+            <div class="widget-body">
+
+                <section class="col col-1">
+                    <label class="label">俱乐部ID</label>
+                    <label class="input">
+                        @Html.TextBoxFor(m => m.UserID, new { @class = "span2", style = "border-radius:4px" })
+                    </label>
+                </section>
+
+                <section class="col col-1.2">
+                    <label class="label">起始日期</label>
+                    <label class="input">
+                        <i class="icon-append fa fa-calendar"></i>
+                        @Html.TextBoxFor(m => m.StartDate, new Dictionary<string, object>() { { "class", "form-control datepicker" }, { "data-dateformat", "yy-mm-dd 00:00:00" } })
+                    </label>
+                </section>
+
+                <section class="col col-1">
+                    <label class="label">&nbsp;</label>
+                    <button type="submit" class="btn btn-success btn-sm">查询</button>
+                </section>
+
+            </div>
+        </div>
+    </form>*@
+
+    <div class="row-fluid">
+        <div class="widget-box" id="box">
+            @Html.Partial("ClubData_PageList", Model.DataList)
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+@section scripts{
+    @{Html.RegisterMvcPagerScriptResource();}
+
+
+    @*<script src="/js/bootstrap.min.js"></script>
+        <script src="/js/select2.min.js"></script>
+        @Styles.Render("~/Style/bootstrap-datetimepicker")
+        @Scripts.Render("~/bundles/bootstrap-datetimepicker")*@
+
+<script type="text/javascript">
+    function btnView(obj) {
+        _this = $(obj).parent().parent();
+
+        //alert(_this.find("td").eq(0).html());
+
+        //return false;
+        var _Date = _this.find("td").eq(0).html();
+        $.ajax({
+            url: "/Member/ClubDataDetail/",
+            type: "POST",
+            dataType: "html",
+           // data: { "StartDate": _Date },
+            success: function (data) {
+                $(".ClubDataDetail").remove();
+                $("#content").append(data);
+
+            }
+        }).fail(function (xhr, textStatus, err) {
+            alert('Error: ' + err);
+        });
+        return false;
+    }
+
+</script>
+
+
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            //$('select').select2({
+            //    allowClear: false,
+            //    minimumResultsForSearch: -1
+            //});
+
+            //var endDate = new Date();
+            //var startDate = new Date(endDate.getFullYear(), endDate.getMonth(), endDate.getDate()-14);
+            //$('.datepicker').datetimepicker({
+            //    minView: "month", //选择日期后，不会再跳转去选择时分秒
+            //    format: "yyyy-mm-dd hh:ii:ss", //选择日期后，文本框显示的日期格式
+            //    language: 'zh-CN', //汉化
+            //    autoclose: true, //选择日期后自动关闭
+            //    startDate: startDate.toLocaleString(),
+            //    endDate: endDate.toLocaleString()
+            //});
+
+        });
+        function btnGetClubList(ID, obj) {
+            _this = $(obj).parent().parent();
+
+            var _Date = _this.find("td").eq(0).html();
+            $.ajax({
+                url: "/Member/ClubListDetail/",
+                type: "POST",
+                dataType: "html",
+                data: { "UserID": ID, "StartDate": $("#StartDate").val() },
+                success: function (data) {
+                    $(".UserClubDetail").remove();
+                    $("#content").append(data);
+                }
+            }).fail(function (xhr, textStatus, err) {
+                alert('Error: ' + err);
+            });
+            return false;
+        }
+        function btnSetClub(ID, obj) {
+            _this = $(obj).parent().parent();
+            if (confirm('确定将此ID设为会员模式的俱乐部吗？')) {
+                //var _Value = $(_this).find("td").eq(0).html();
+                $.ajax({
+                    url: "/Member/SetClub/",
+                    type: "Post",
+                    dataType: "JSON",
+                    data: { "UserID": ID, "flag": 1 },
+                    success: function (data) {
+                        switch (data.result) {
+                            case 0:
+                                alert('已将此ID设为会员模式的俱乐部');
+                                location.reload();
+                                break;
+                            case 1:
+                                alert("设置失败，请稍后再试");
+                                break;
+                            case 2:
+                                alert("服务器未启动，请稍后再试");
+                                break;
+                            default:
+                                alert('未知错误');
+                                break;
+                        }
+                    }
+                }).fail(function (xhr, textStatus, err) {
+                    alert('Error: ' + err);
+                });
+
+            } else {
+                return false;
+            }
+            return false;
+        }
+
+
+    </script>
+
+}

@@ -1,0 +1,109 @@
+﻿@using GL.Data.Model
+@using GL.Data.View
+@model GameRecordView
+@{
+    ViewBag.Title = "个人产出消耗";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    UserInfo ui = (UserInfo)Model.Data;
+
+    string totalCount = "";
+    if (ViewData["totalData"] != null) {
+        totalCount = ViewData["totalData"].ToString();
+    }
+   
+
+}
+
+<div id="content">
+    <form id="comment-form" class="smart-form" novalidate="novalidate">
+        <input type="hidden" value="@totalCount" name="hidDataCount" />
+
+        <div class="row">
+            <div class="widget-body">
+
+                <section class="col col-1.2">
+                    <label class="label">会员ID</label>
+                    <label class="input">
+                        @Html.TextBoxFor(m => m.SearchExt, new { @class = "span2", style = "border-radius:4px;width:120px" })
+                    </label>
+                </section>
+
+                <section class="col col-1.2">
+                    <label class="label">起始日期</label>
+                    <label class="input">
+                        <i class="icon-append fa fa-calendar"></i>
+                        @Html.TextBoxFor(m => m.StartDate, new Dictionary<string, object>() { { "class", "form-control datepicker" }, { "data-dateformat", "yy-mm-dd 00:00:00" } })
+                    </label>
+                </section>
+                <section class="col col-1.2">
+                    <label class="label"> 截止日期</label>
+                    <label class="input">
+                        <i class="icon-append fa fa-calendar"></i>
+                        @Html.TextBoxFor(m => m.ExpirationDate, new Dictionary<string, object>() {
+                           { "class", "form-control datepicker" },
+                           { "data-dateformat", "yy-mm-dd 00:00:00" }
+                       })
+                    </label>
+                </section>
+                <section class="col col-1">
+                    <label class="label">&nbsp;</label>
+                    @*<button type="submit" class="btn btn-success btn-sm">查询</button>*@
+                    <input type="button" onclick="search()" class="btn btn-success btn-sm" value="查询" />
+                </section>
+
+            </div>
+        </div>
+    </form>
+
+ 
+
+
+  
+            @Html.Partial("MemberForSearchGameRecord_PageList", Model.DataList)
+ 
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    
+
+    @section scripts{
+@{Html.RegisterMvcPagerScriptResource();}
+        <script src="/js/bootstrap.min.js"></script>
+        <script src="/js/select2.min.js"></script>
+        @Styles.Render("~/Style/bootstrap-datetimepicker")
+        @Scripts.Render("~/bundles/bootstrap-datetimepicker")
+
+
+        <script type="text/javascript">
+
+            $(document).ready(function () {
+                //$('select').select2({
+                //    allowClear: false,
+                //    minimumResultsForSearch: -1
+                //});
+                //$('.datepicker').datetimepicker({
+                //    minView: "month", //选择日期后，不会再跳转去选择时分秒
+                //    format: "yyyy-mm-dd hh:ii:ss", //选择日期后，文本框显示的日期格式
+                //    language: 'zh-CN', //汉化
+                //    autoclose: true //选择日期后自动关闭
+                //});
+
+            });
+
+
+
+
+        </script>
+
+    }

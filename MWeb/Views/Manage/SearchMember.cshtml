@@ -1,0 +1,305 @@
+﻿@model GL.Data.Model.GUIModel
+@{
+    ViewBag.Title = "查询玩家个人信息";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div id="content">
+    <form id="comment-form" class="smart-form" novalidate="novalidate" method="post">
+        <div class="row">
+
+            <section class="col col-2 " style="padding-left:28px">
+               
+                <label class="input">
+                    <input type="text" id="searchinput" placeholder="查找会员信息..." value="@Model.szAccount" />
+                </label>
+            </section>
+
+
+
+
+            <section class="col col-1">
+                @*<button id="btnSearch" type="submit" class="btn btn-success btn-sm"  title="Search">查询</button>*@
+                <input type="button" onclick="search()" class="btn btn-success btn-sm" value="查询" />
+            </section>
+
+        </div>
+    </form>
+
+    <div id="box" >
+
+        @switch (@Model.isSearch)
+                    {
+                        case 0:
+            @Html.Partial("SearchMember_Page", Model)
+                            break;
+                        case 1:
+            @Html.Partial("SearchMember_NoSearch", Model)
+                            break;
+                        case 2:
+                            break;
+                        default:
+            @Html.Partial("ServerDoesNotStart", Model)
+                            break;
+                    }
+
+
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+    @section scripts{
+
+        <script src="/js/bootstrap.min.js"></script>
+        <script src="/js/select2.min.js"></script>
+
+
+        <script type="text/javascript">
+
+
+            function btnKick(obj) {
+                _this = $(obj).parent().parent();
+                if (confirm('确定将玩家【' + _this.find("input[name=szAccount]").val() + '】踢下线？')) {
+                    var _UserID = _this.find("input[name=dwUserID]").val();
+                    $.ajax({
+                        url: "/api/FM/",
+                        type: "POST",
+                        dataType: "JSON",
+                        data: { "dwUserID": _UserID },
+                        success: function (data) {
+                            switch (data.result) {
+                                case 0:
+                                    alert('已将玩家【' + _this.find("input[name=szAccount]").val() + '】踢下线');
+                                    location.reload();
+                                    break;
+                                case 1:
+                                    alert("踢除失败，请稍后再试");
+                                    break;
+                                case 2:
+                                    alert("服务器未启动，请稍后再试");
+                                    break;
+                                default:
+                                    alert('未知错误');
+                                    break;
+                            }
+                        }
+                    }).fail(function (xhr, textStatus, err) {
+                        alert('服务器繁忙，请稍候再试');
+                    });
+                } else {
+                    return false;
+                }
+                return false;
+            }
+            function btnFreeze(obj) {
+                _this = $(obj).parent().parent();
+                if (confirm('确定将玩家【' + _this.find("input[name=szAccount]").val() + '】的账号封号？')) {
+                    var _UserID = _this.find("input[name=dwUserID]").val();
+                    $.ajax({
+                        url: "/api/FM/",
+                        type: "Put",
+                        dataType: "JSON",
+                        data: { "dwUserID": _UserID, "strAccount": "true" },
+                        success: function (data) {
+                            switch (data.result) {
+                                case 0:
+                                    alert('已将玩家【' + _this.find("input[name=szAccount]").val() + '】的账号封号');
+                                    break;
+                                case 1:
+                                    alert("封号失败，请稍后再试");
+                                    break;
+                                case 2:
+                                    alert("服务器未启动，请稍后再试");
+                                    break;
+                                default:
+                                    alert('未知错误');
+                                    break;
+                            }
+                        }
+                    }).fail(function (xhr, textStatus, err) {
+                        alert('服务器繁忙，请稍候再试');
+                    });
+
+                } else {
+                    return false;
+                }
+                return false;
+            }
+            function btnunFreeze(obj) {
+                _this = $(obj).parent().parent();
+                if (confirm('确定将玩家【' + _this.find("input[name=szAccount]").val() + '】的账号解封？')) {
+                    var _UserID = _this.find("input[name=dwUserID]").val();
+                    $.ajax({
+                        url: "/api/FM/",
+                        type: "PUT",
+                        dataType: "JSON",
+                        data: { "dwUserID": _UserID, "strAccount": "false" },
+                        success: function (data) {
+                            switch (data.result) {
+                                case 0:
+                                    alert('已将玩家【' + _this.find("input[name=szAccount]").val() + '】的账号解封');
+                                    break;
+                                case 1:
+                                    alert("解封失败，请稍后再试");
+                                    break;
+                                case 2:
+                                    alert("服务器未启动，请稍后再试");
+                                    break;
+                                default:
+                                    alert('未知错误');
+                                    break;
+                            }
+                        }
+                    }).fail(function (xhr, textStatus, err) {
+                        alert('服务器繁忙，请稍候再试');
+                    });
+
+                } else {
+                    return false;
+                }
+                return false;
+            }
+            function btnBan(obj) {
+                _this = $(obj).parent().parent();
+                if (confirm('确定将玩家【' + _this.find("input[name=szAccount]").val() + '】禁言？')) {
+                    var _UserID = _this.find("input[name=dwUserID]").val();
+                    $.ajax({
+                        url: "/api/FM/",
+                        type: "Delete",
+                        dataType: "JSON",
+                        data: { "dwUserID": _UserID, "strAccount": "true" },
+                        success: function (data) {
+                            switch (data.result) {
+                                case 0:
+                                    alert('已将玩家【' + _this.find("input[name=szAccount]").val() + '】禁言');
+                                    break;
+                                case 1:
+                                    alert("禁言失败，请稍后再试");
+                                    break;
+                                case 2:
+                                    alert("服务器未启动，请稍后再试");
+                                    break;
+                                default:
+                                    alert('未知错误');
+                                    break;
+                            }
+                        }
+                    }).fail(function (xhr, textStatus, err) {
+                        alert('服务器繁忙，请稍候再试');
+                    });
+
+                } else {
+                    return false;
+                }
+                return false;
+            }
+
+            function btnunBan(obj) {
+                _this = $(obj).parent().parent();
+                if (confirm('确定将玩家【' + _this.find("input[name=szAccount]").val() + '】解除禁言？')) {
+                    var _UserID = _this.find("input[name=dwUserID]").val();
+                    $.ajax({
+                        url: "/api/FM/",
+                        type: "Delete",
+                        dataType: "JSON",
+                        data: { "dwUserID": _UserID, "strAccount": "false" },
+                        success: function (data) {
+                            switch (data.result) {
+                                case 0:
+                                    alert('已将玩家【' + _this.find("input[name=szAccount]").val() + '】解除禁言');
+                                    break;
+                                case 1:
+                                    alert("解除禁言失败，请稍后再试");
+                                    break;
+                                case 2:
+                                    alert("服务器未启动，请稍后再试");
+                                    break;
+                                default:
+                                    alert('未知错误');
+                                    break;
+                            }
+                        }
+                    }).fail(function (xhr, textStatus, err) {
+                        alert('服务器繁忙，请稍候再试');
+                    });
+
+                } else {
+                    return false;
+                }
+                return false;
+            }
+
+            function btnRecord(obj) {
+                _this = $(obj).parent().parent();
+                var _UserID = _this.find("input[name=dwUserID]").val();
+                window.location = "/Manage/OperationRecord/?dwUserID=" + _UserID
+                return false;
+            }
+
+
+
+            $(function () {
+
+                @switch (@Model.isSearch)
+        {
+            case 0:
+                <text>$("#box").show();</text>
+                break;
+            case 1:
+                <text>$("#box").show();</text>
+                break;
+            case 2:
+                <text>$("#box").hide();</text>
+                break;
+            default:
+                <text>$("#box").show();</text>
+                break;
+        }
+
+                $("#btnSearch").click(function () {
+                    $.ajax({
+                        url: "/Manage/SearchMember/",
+                        type: "POST",
+                        //dataType: "JSON",
+                        //data: { "value": document.getElementById("GUName").value },
+                        data: { "value": $("#searchinput").val() },
+                        success: function (data) {
+                            //alert(data);
+
+                            $("#box").empty().append(data).show();
+                        }
+                    }).fail(function (xhr, textStatus, err) {
+                        alert('Error: ' + err);
+                    });
+                    return false;
+                });
+
+
+            })
+
+
+
+
+
+
+            // resets the menu selection upon entry to this page:
+            function resetMenu() {
+                document.gomenu.selector.selectedIndex = 2;
+            }
+
+
+
+        </script>
+    }

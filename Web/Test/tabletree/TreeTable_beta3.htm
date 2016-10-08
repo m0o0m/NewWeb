@@ -1,0 +1,497 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+ <HEAD>
+	  <TITLE> New Document </TITLE>
+	  <META http-equiv=Content-Type content="text/html; charset=utf-8">
+	  <LINK href="/css/common.css" type=text/css rel=stylesheet>
+	  <LINK href="/css/treeTable.css" type=text/css rel=stylesheet>
+	  <SCRIPT src="/js/jquery-1.2.6.js" type=text/javascript></SCRIPT>
+	  <SCRIPT src="/js/jquery.contextmenu.r2.js" type=text/javascript></SCRIPT>
+      <SCRIPT src="/js/jquery.blockUI.js" type=text/javascript></SCRIPT>
+
+		<script language="javascript">
+
+		 jQuery(document).ready(function(){
+			 initMenuPanel();             //初始化右键菜单
+			 initTRBGColor();             //初始化TR背景色變化
+			 jQuery('#yes').click(function() { //确定按钮执行
+				 if(!validate()) return;  //验证输入DIV窗体的值是否全部完成输入
+				 jQuery.blockUI({ message: "<p>请稍等...</p>" }); 
+				 jQuery.ajax({ 
+					 url: 'wait.html', 
+					 cache: false, 
+					 type: "POST", 
+					 data: "{User:'开发中', pwd:'password'}", //data:jQuery("input,select").serialize(),
+					 error: function(){
+						jQuery.unblockUI(); 
+						alert(currentFlag == "add"?"新增失败":"更新失败");
+					 },
+					 success: function(xml){
+						if(currentFlag == "add"){
+							newCreateNode();            //如果是新增则插入新行
+						}else if(currentFlag == "addMast"){
+							createNewMastNode();        //如果是新增则插入新行
+						}else{
+							updateTrNodeTextValue();    //如果是更新则更新行
+						}
+					 },
+					 complete: function() { 
+						jQuery.unblockUI(); 
+						clear();                        //输入DIV窗体的值清空
+					 } 
+				 }); 
+             }); 
+			 
+			 jQuery('#yesDelete').click(function() {          //删除按钮执行
+				 jQuery.blockUI({ message: "<p>请稍等...</p>" }); 
+				 jQuery.ajax({ 
+					 url: 'wait.html', 
+					 cache: false, 
+					 type: "POST", 
+					 data: "{User:'开发中', pwd:'password'}", //data:jQuery("input,select").serialize(),
+					 error: function(){
+						jQuery.unblockUI(); 
+						alert("删除失败");
+					 },
+					 success: function(xml){
+						deleteSelectTrNode();        //执行删除动作
+					 },
+					 complete: function() { 
+						jQuery.unblockUI(); 
+					 } 
+				 }); 
+             }); 
+
+			jQuery('#no').click(function() { 
+				jQuery.unblockUI(); 
+				clear();                         //输入DIV窗体的值清空
+				return false; 
+			}); 
+
+			jQuery('#noDelete').click(function() { 
+				jQuery.unblockUI(); 
+				return false; 
+			}); 
+
+		});
+
+		//初始化右键菜单,给id为tableDiv下的所有class为list下的所有tr增加右键菜单
+		function initMenuPanel(){
+			//jQuery("div#tableDiv .list tr").contextMenu('MenuPanel', {
+			jQuery("div#tableDiv .list tr.bg1").contextMenu('MenuPanel', {
+				bindings: {
+					'new': function(event) {          //右键新增
+					    selectedTRobjID = event.id;   //将当前选择tr的id给一个全局属性
+						hidDivMessage();              //预先隐藏div表单的提示信息
+						currentFlag = "add";          //设置全局属性表示此时点选的是新增
+						jQuery.blockUI({ message: jQuery('#tableInputDiv'), css: { width: '275px' } }); //显示DIV表单
+						//newCreateNode();
+					 },
+					 'newMast': function(event) {          //右键新增
+						hidDivMessage();                   //预先隐藏div表单的提示信息
+						currentFlag = "addMast";           //设置全局属性表示此时点选的是新增
+						jQuery.blockUI({ message: jQuery('#tableInputDiv'), css: { width: '275px' } }); //显示DIV表单
+						//newCreateNode();
+					 },
+					'update': function(event) {           //右键更新
+						selectedTRobjID = event.id;       //将当前选择tr的id给一个全局属性
+						hidDivMessage();                  //预先隐藏div表单的提示信息
+						currentFlag = "update"            //设置全局属性表示此时点选的是更新
+						setTrNodeTextValueToInput(); //获取当前选择tr中的值，所有列的值要显示到DIV的文本框中
+						jQuery.blockUI({ message: jQuery('#tableInputDiv'), css: { width: '275px' } }); //显示DIV表单
+					 },
+					'delete': function(event) {
+					    selectedTRobjID = event.id;
+						jQuery.blockUI({ message: jQuery('#tableDeleteDiv'), css: { width: '275px' } }); //显示DIV表单
+						//deleteSelectTrNode();
+					 }
+				}
+			 });
+
+			 jQuery("div#tableDiv .list tr.top").contextMenu('MenuPanel', {
+				bindings: {
+					 'newMast': function(event) {          //右键新增
+						hidDivMessage();                   //预先隐藏div表单的提示信息
+						currentFlag = "addMast";           //设置全局属性表示此时点选的是新增
+						jQuery.blockUI({ message: jQuery('#tableInputDiv'), css: { width: '275px' } }); //显示DIV表单
+					 }
+				}
+			 });
+		}
+
+		var selectedTRobjID = "";//存放当前选择tr的id，属于全局变量，更新增加修改都会有用到
+		var currentFlag = "add"; //add and update and addMast ,add 表示新增，update 表示修改,addMast 表示新增一级节点
+
+		//删除選擇的tr节点和子tr节点
+		function deleteSelectTrNode(){
+			var selTrObj = document.getElementById(selectedTRobjID);             //当前选择的tr对象
+			var table    = selTrObj.parentNode.parentNode;                       //当前表格对象
+			var parentID = selTrObj.id.substring(0,selTrObj.id.lastIndexOf("_"));//取得父节点的ID,父节点ID规则为:如果子节点TR_0_0 or TR_0_1，那么父节点ID=TR_0
+			var selTrChildNodes = jQuery("tr[pid ^= " + selTrObj.id + "]");      //获取所有当前选择TR的子TR(节点)
+			//移除所选择tr的所有子节点
+			jQuery.each(selTrChildNodes, function(i, n){  
+				table.childNodes[0].removeChild(n);
+			}); 
+			//移除所选择tr自己本身
+			table.childNodes[0].removeChild(selTrObj);
+			//删除完成后需要验证是否有父节点，就是说是否有上一级菜单
+			selTrChildNodes = jQuery("tr[pid ^= " + parentID + "]");
+			var parentObj = document.getElementById(parentID);
+			//如果所选则的tr的父节点再也没有子节点，那么就移除选择tr父节点的图标(应该是展开状态的图标)
+			if(selTrChildNodes.length==0&&parentObj!=null){
+				parentObj.childNodes[0].removeChild(parentObj.childNodes[0].childNodes[0]);
+			}
+		}
+
+		//將更改后更新的值設置到當前選擇的tr節點中
+		function updateTrNodeTextValue(){
+			var selTrObj      = document.getElementById(selectedTRobjID);   
+			var selTrChildANodes = jQuery("tr[id=" + selTrObj.id + "] a");                 //当前选择的tr超連接对象
+			selTrChildANodes[0].innerText = jQuery.trim(jQuery("#txtOrgName").attr("value"));   //第一列值
+			var rowsItemCells = selTrObj.parentNode.rows.item(selTrObj.rowIndex).cells;
+			rowsItemCells.item(1).innerText = jQuery.trim(jQuery("#txtName").attr("value"));    //第二列值
+			rowsItemCells.item(2).innerText = jQuery.trim(jQuery("#txtSortName").attr("value"));//第三列值
+			rowsItemCells.item(3).innerText = jQuery.trim(jQuery("#txtTel").attr("value"));     //第四列值
+			rowsItemCells.item(4).innerText = jQuery.trim(jQuery("#txtFax").attr("value"))      //第五列值
+		}
+
+		//將選擇tr的節點的值設置到div彈出選單的input中
+		function setTrNodeTextValueToInput(){
+			var selTrObj      = document.getElementById(selectedTRobjID);                  //当前选择的tr对象
+			var rowsItemCells = selTrObj.parentNode.rows.item(selTrObj.rowIndex).cells;
+			jQuery("#txtOrgName").attr("value",jQuery.trim(rowsItemCells.item(0).innerText));   //第一列值
+			jQuery("#txtName").attr("value",jQuery.trim(rowsItemCells.item(1).innerText));      //第二列值
+			jQuery("#txtSortName").attr("value",jQuery.trim(rowsItemCells.item(2).innerText));  //第三列值
+			jQuery("#txtTel").attr("value",jQuery.trim(rowsItemCells.item(3).innerText));       //第四列值
+			jQuery("#txtFax").attr("value",jQuery.trim(rowsItemCells.item(4).innerText));       //第五列值
+            jQuery("#hidID").attr("value",'');                                                  //存放主键值
+		}
+
+
+		//创建新一级节点createNewMastNode
+		function createNewMastNode(){
+			var selTrNodes = jQuery("div#tableDiv .list tr[pid = '']");                    //查詢是否有一級(主)節點
+			var newTRID = "";
+			if(selTrNodes.length==0){
+				newTRID = "TR_0";                                                          //如果沒有任何節點則第一個主節點為TR_0
+			}else{
+				var lastTRID = selTrNodes[selTrNodes.length-1].id;
+				var nowPreID = lastTRID.substring(lastTRID.lastIndexOf("_")+1,lastTRID.length);   //取得前置符号:如子节点为TR_0 =>TR_
+				var nowFixID = lastTRID.substring(0,lastTRID.lastIndexOf("_")+1);                 //取得后置符号:如子节点为TR_0 =>0
+				newTRID      = nowFixID+(parseFloat(nowPreID)+1);                                 //设置最后子节点名称为　TR_1
+				if(newTRID=='NaN') newTRID = "TR_0";                                              //如果錯誤則主節點為TR_0
+			}
+
+			var table  = document.getElementById("tabDetail");                                    //当前表格对象
+			var newRow = createNewRow(null,newTRID);                                              //创建将要插入的新tr
+			var oldRow = table.insertRow(table.rows.length);                                      //在表格指定位置插入新行
+			oldRow.parentNode.replaceChild(newRow,oldRow);                                        //将我们搭建的行来替换刚刚创建的行
+			initMenuPanel();                                                                      //初始化右键选单，就是给新行增加右键菜单功能
+			initTRBGColor();                                                                      //給新增的tr增加鼠標移動變色功能
+		}
+
+		//创建新的子节点
+		function newCreateNode(){
+			var selTrObj      = document.getElementById(selectedTRobjID);  //根据全局属性selectedTRobjID取得当前选择的tr对象
+			var selTrObjIndex = selTrObj.rowIndex;                         //获取当前选择tr所在行
+			var selTrChildNodes = jQuery("tr[pid ^= " + selTrObj.id + "]");//得到目前选择节点(tr)有多少子节点(tr)
+			var lastIndex = selTrChildNodes.length;                        //得到目前子节点数量
+			var tableInsertRow = selTrObjIndex+lastIndex+1;                //将要插入新tr的地方= 当前选择节点index+所有对应子节点之后+1
+			var table    = document.getElementById("tabDetail");           //当前表格对象
+			var newRow = createNewRow(selTrObj,"");                        //创建将要插入的新tr
+			var oldRow = table.insertRow(tableInsertRow);                  //在表格指定位置插入新行
+			oldRow.parentNode.replaceChild(newRow,oldRow);                 //将我们搭建的行来替换刚刚创建的行
+			showSelectTR(selTrObj);                                        //更新父节点的一些状态
+			initMenuPanel();                                               //初始化右键选单，就是给新行增加右键菜单功能
+			initTRBGColor();                                               //給新增的tr增加鼠標移動變色功能
+		}
+		
+		//设置最后一个子节点名称，如果不存在子节点则新建一个子节点
+		function queryLastChildNode(id){
+			var selTrChildNodes = jQuery("tr[pid=" + id + "]");
+			if(selTrChildNodes.length==0){
+				return id+"_0"
+			}else{
+				var nowChildID = selTrChildNodes[selTrChildNodes.length-1].id                             //取得最后一个子节点ID
+				var nowChildPreID = nowChildID.substring(nowChildID.lastIndexOf("_")+1,nowChildID.length);//取得前置符号:如子节点为TR_0_0 =>TR_0_
+				var nowChildFixID = nowChildID.substring(0,nowChildID.lastIndexOf("_")+1);                //取得后置符号:如子节点为TR_0_0 =>0
+				var lastChildID= nowChildFixID+(parseFloat(nowChildPreID)+1);                             //设置最后子节点名称为　TR_0_１
+				return lastChildID;
+			}
+		}
+
+		//创建一个新的tr对象,mastid如果不为空表示增加主节点
+		function createNewRow(selTrObj,mastid){
+			var id = ""                               
+			var textIndex = 0
+			var newTrObj;
+			if(mastid==""){
+				id = queryLastChildNode(selTrObj.id)                                   //初始化当前选择对象需要增加子节点的ID值
+			    textIndex = selTrObj.textIndex==0?20:parseFloat(selTrObj.textIndex)+20;//设置树列的移位，如果0则表示移位20,每次缩进以20pt为单位
+			    newTrObj  = document.createElement("<TR class='bg1' id='"+id+"' pid='"+selTrObj.id+"' textIndex="+textIndex+">");//创建新行
+			}else{
+				id        = mastid                                   //设置主节点id
+			    textIndex = 0;                                       //设置树列的移位，主节点移位0
+			    newTrObj  = document.createElement("<TR class='bg1' id='"+id+"' pid='' textIndex="+textIndex+">");//创建新行
+			}
+
+			var href1 =document.createElement("<A href='#'>");                         //创建新行的的超连接
+			href1.appendChild(document.createTextNode(jQuery("#txtOrgName").attr("value")));//设置超连接显示名称
+            href1.id = "A_"+id.substring(id.indexOf("_")+1,id.length);                 //设置超连接的ID,此ID等于当前新建TR的ID如:TR_0_1>>A_0_1
+			//创建TD节点
+			var tdOjb1 = document.createElement("<TD style='TEXT-INDENT: "+textIndex+"pt; TEXT-ALIGN: left'>");
+			var tdOjb2 = document.createElement("td");
+			var tdOjb3 = document.createElement("td");
+			var tdOjb4 = document.createElement("td");
+		    var tdOjb5 = document.createElement("td");
+			tdOjb1.appendChild(href1);                                                   //给第一列的增加A元素
+			tdOjb2.appendChild(document.createTextNode(jQuery("#txtSortName").attr("value")));//给第二列值
+			tdOjb3.appendChild(document.createTextNode(jQuery("#txtName").attr("value")));    //给第三列值
+			tdOjb4.appendChild(document.createTextNode(jQuery("#txtTel").attr("value")));     //给第四列值
+			tdOjb5.appendChild(document.createTextNode(jQuery("#txtFax").attr("value")));     //给第五列值
+
+			newTrObj.appendChild(tdOjb1);//将1列添加入行
+			newTrObj.appendChild(tdOjb2);//将2列添加入行
+			newTrObj.appendChild(tdOjb3);//将3列添加入行
+			newTrObj.appendChild(tdOjb4);//将4列添加入行
+			newTrObj.appendChild(tdOjb5);//将5列添加入行
+
+			return newTrObj;
+
+		}
+		
+		//新行创建完毕后将其父节点，也就是刚刚选择的节点展开，如果其父节点并不是一个节点(没有展开图标)则需要将其设置为一个节点
+		function showSelectTR(selTrObj){
+			var IMG = (selTrObj.childNodes[0].firstChild);    //当前行的第一个子元素是否IMG类型,如果是表示其有子节点
+			if(IMG.id!=undefined&&IMG.id.indexOf("IMG")!=-1){ //如果存在id为img打头的表示有IMG也就是说点选的tr有子节点，那么我们就展开它
+				var imgSrc = IMG.src.toLowerCase();
+				if(imgSrc.indexOf("nolines_minus.gif") == -1){//如果有图片且不是展开状态，也就是说此节点还没有展开，那么我们就展开它
+					showHiddenNode(IMG,selTrObj.id);          //展开所有对应的子节点
+				}
+			}else{
+				//如果不存在id为img打头的表示点选的节点就是最后的子节点，那么我们需要改变它的样式为有图片的上层节点并设置为展开状态
+			    var img1=document.createElement(
+				         "<IMG style='CURSOR: hand' align=absMiddle border=0 onclick=\"javascript:showHiddenNode(this, '"+selTrObj.id+"')\" >");
+			        img1.src = "images/dtree/nolines_plus.gif";
+					img1.id  = "IMG_"+selTrObj.id.substring(selTrObj.id.indexOf("_")+1,selTrObj.id.length);
+				selTrObj.childNodes[0].insertBefore(img1,selTrObj.childNodes[0].childNodes[0]);//将超链接前面增加图片
+				if(img1.src.indexOf("nolines_minus.gif") == -1){
+					showHiddenNode(img1,selTrObj.id);                                          //展开所有对应的子节点
+				}
+			}
+
+		}
+
+		//显示或隐藏树形Table的子节点数据
+		function showHiddenNode(imgObj,trId){
+			var imgSrc = imgObj.src.toLowerCase();
+			if(imgSrc.indexOf("nolines_minus.gif") != -1){ //如果是展開的圖標則隱藏其子菜單
+				imgObj.src = "images/dtree/nolines_plus.gif";
+				jQuery("tr[id^=" + trId + "_]").css("display", "none");
+			}else{ //显示
+				imgObj.src = "images/dtree/nolines_minus.gif";
+				//显示第一层的子节点
+				var trs = jQuery("tr[pid=" + trId + "]");
+				trs.css("display", "");
+				//显示更深层的子节点
+				for(var i=0;i<trs.length;i++){
+					showHiddenSub(trs[i].id);
+				}
+				
+			}
+		}
+
+		//递归检查下一级节点是否需要显示
+		function showHiddenSub(trId){
+			var imgObj = document.getElementById("IMG_" + trId.replace("TR_",""));
+			if(imgObj == null) return;
+			
+			var imgSrc = imgObj.src.toLowerCase();
+			if(imgSrc.indexOf("nolines_minus.gif") != -1){//下级节点是展开的，则需要显示出来
+				var trs = jQuery("tr[pid=" + trId + "]");
+				trs.css("display", "");
+				for(var i=0;i<trs.length;i++){
+					showHiddenSub(trs[i].id);
+				}
+			}
+		}
+
+		//隐藏DIV窗体提示信息
+		function hidDivMessage(){
+			jQuery("#txtOrgNameTip").hide();
+			jQuery("#txtSortNameTip").hide();
+			jQuery("#txtNameTip").hide();
+			jQuery("#txtTelTip").hide();
+			jQuery("#txtFaxTip").hide();
+		}
+
+		//验证窗体字段是否都有输入值
+		function validate(){
+			if(jQuery("#txtOrgName").attr("value")==''){jQuery("#txtOrgNameTip").show() ;return false;}
+			if(jQuery("#txtSortName").attr("value")==''){jQuery("#txtSortNameTip").show() ;return false;}
+			if(jQuery("#txtName").attr("value")==''){jQuery("#txtNameTip").show() ;return false;}
+			if(jQuery("#txtTel").attr("value")==''){jQuery("#txtTelTip").show() ;return false;}
+			if(jQuery("#txtFax").attr("value")==''){jQuery("#txtFaxTip").show() ;return false;}
+			return true;
+		}
+
+		//清空DIV窗体字段的值
+		function clear(){
+			jQuery("#txtOrgName").attr("value",''); //
+			jQuery("#txtName").attr("value",'');    //
+			jQuery("#txtSortName").attr("value",'');//
+			jQuery("#txtTel").attr("value",'');     //
+			jQuery("#txtFax").attr("value",'');     //
+            jQuery("#hidID").attr("value",'');      //
+		}
+
+		function initTRBGColor(){
+			var trs = jQuery("#tabDetail tr.bg1 ");
+			jQuery.each(trs, function(i, tr){  
+				jQuery(tr).mouseover(function(){
+					$(this).css({ "background-color": "yellow" });
+				});
+				jQuery(tr).mouseout(function(){
+					$(this).css({ "background-color": "white" });
+				})
+			}); 
+		}
+
+		</script>
+ </HEAD>
+ <BODY>
+
+<!-- <div class="contextMenu" id="MenuPanel"  style="display: none;" >
+    <ul>
+	  <li id="newMast"><img src="images/contextmenu/new.bmp"   />新建主节点</li>
+      <li id="new">    <img src="images/contextmenu/new.bmp"   />新建子节点</li>
+      <li id="update"> <img src="images/contextmenu/update.bmp"/>更新节点</li>
+      <li id="delete"> <img src="images/contextmenu/delete.bmp"/>删除节点</li>
+    </ul>
+ </div>-->
+
+<div id="tableDiv">
+  <TABLE id="tabDetail" class=list cellSpacing=0 cellPadding=2 width="100%" border=0>
+        <TBODY>
+        <TR class=top height=25>
+          <TD noWrap>组织名称</TD>
+          <TD width=70>简称</TD>
+          <TD width=70>联系人</TD>
+          <TD width=100>联系电话</TD>
+          <TD width=100>传真</TD></TR>
+
+        <TR class=bg1 id=TR_0 pid="" textIndex=0 >
+			  <TD style="TEXT-INDENT: 0pt; TEXT-ALIGN: left">
+				  <IMG id=IMG_0 style="CURSOR: hand" onclick="javascript:showHiddenNode(this, 'TR_0')" 
+				  src="images/dtree/nolines_minus.gif" align=absMiddle border=0>
+				  <A id="A_0" href="#">南京移动</A>
+			  </TD>
+			  <TD>移动不动</TD>
+			  <TD>不动明王</TD>
+			  <TD>10086</TD>
+			  <TD>fax1086</TD>
+		</TR>
+
+        <TR class=bg1 id=TR_0_0 pid="TR_0" textIndex=20 >
+              <TD style="TEXT-INDENT: 20pt; TEXT-ALIGN: left">
+				<IMG id=IMG_0_0 style="CURSOR: hand" onclick="javascript:showHiddenNode(this, 'TR_0_0')" 
+				src="images/dtree/nolines_plus.gif" align=absMiddle border=0> 
+				<A id="A_0_0" href="#">城区分公司</A>
+			  </TD>
+			  <TD>城区</TD>
+			  <TD>王朝阳</TD>
+			  <TD>13333333</TD>
+			  <TD>fox</TD>
+		</TR>
+
+        <TR class=bg1 id=TR_0_0_0 style="DISPLAY: none" pid="TR_0_0" textIndex=40>
+			  <TD style="TEXT-INDENT: 40pt; TEXT-ALIGN: left">
+				   <A id="A_0_0_0" href="#">动感地带品牌店</A>
+			  </TD>
+			  <TD>动不动店</TD>
+			  <TD>动感超人</TD>
+			  <TD>119</TD>
+			  <TD>fox119</TD>
+		</TR>
+
+        <TR class=bg1 id=TR_0_0_1 style="DISPLAY: none" pid="TR_0_0" textIndex=40>
+			  <TD style="TEXT-INDENT: 40pt; TEXT-ALIGN: left">
+				    <A id="A_0_0_1" href="#">先锋服务厅</A>
+			  </TD>
+			  <TD>先锋</TD>
+			  <TD>先锋王</TD>
+			  <TD>10086</TD>
+			  <TD>10086</TD>
+		</TR>
+
+        
+        <TR class=bg1 id=TR_0_1 pid="TR_0" textIndex=20>
+			  <TD style="TEXT-INDENT: 20pt; TEXT-ALIGN: left">
+				  <IMG id=IMG_0_1 style="CURSOR: hand" onclick="javascript:showHiddenNode(this, 'TR_0_1')" 
+				  src="images/dtree/nolines_plus.gif" align=absMiddle border=0> 
+				  <A id="A_0_1" href="#">英侖分公司</A>
+			  </TD>
+			  <TD>英德</TD>
+			  <TD>英德王</TD>
+			  <TD>10086</TD>
+			  <TD>10086</TD>
+		</TR>
+        <TR class=bg1 id=TR_0_1_0 style="DISPLAY: none" pid="TR_0_1" textIndex=40>
+			  <TD style="TEXT-INDENT: 40pt; TEXT-ALIGN: left">
+				  <A id="A_0_1_0" href="#">桥头服务厅</A>
+			  </TD>
+			  <TD>桥头</TD>
+			  <TD>桥头王</TD>
+			  <TD>10086</TD>
+			  <TD>10086</TD>
+		</TR>
+
+	 </TBODY>
+
+  </TABLE>
+</div>
+
+<!--<div id="tableInputDiv" style="display:none; cursor: default"> 
+      <table class=list cellSpacing=0 cellPadding=2>
+			<tr>
+				<td>组织名称</td>
+				<td><input type="text" name="txtOrgName" id="txtOrgName"><div id="txtOrgNameTip">必须输入</div></td>
+			</tr>
+			<tr>
+				<td>简称</td>
+				<td><input type="text" name="txtSortName" id="txtSortName"><div id="txtSortNameTip">必须输入</div></td>
+			</tr>
+			<tr>
+				<td>联系人</td>
+				<td><input type="text" name="txtName" id="txtName"><div id="txtNameTip">必须输入</div></td>
+			</tr>
+			<tr>
+				<td>联系电话</td>
+				<td><input type="text" name="txtTel" id="txtTel"><div id="txtTelTip">必须输入</div></td>
+			</tr>
+			<tr>
+				<td>传真</td>
+				<td><input type="text" name="txtFax" id="txtFax"><div id="txtFaxTip">必须输入</div></td>
+			</tr>
+			<tr>
+				<td colspan="2"><input type="button" id="yes" value="确定" /> 
+				<input type="button" id="no" value="取消" /> </td>
+			</tr>
+	  </table>
+	  <input type="hidden" name="hidID" id="hidID">
+</div> 
+
+<div id="tableDeleteDiv" style="display:none; cursor: default"> 
+      <table class=list cellSpacing=0 cellPadding=2>
+			<tr>
+				<td colspan="2">你确定删除此节点吗</td>
+			</tr>
+			<tr>
+				<td colspan="2"><input type="button" id="yesDelete" value="确定" /> 
+				<input type="button" id="noDelete" value="取消" /> </td>
+			</tr>
+	  </table>
+</div> -->
+
+ </BODY>
+</HTML>

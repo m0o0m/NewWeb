@@ -1,0 +1,171 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+
+
+    @*<link rel="stylesheet" href="/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/css/bootstrap-responsive.min.css" />*@
+
+    @Styles.Render("~/Style/bootstrap")
+    @Styles.Render("~/Style/css")
+
+
+
+    <link href="/css/AspNetPager.css" rel="stylesheet" />
+
+</head>
+<body>
+
+    <div id="header">
+        <h1><a href="#">Matrix Admin</a></h1>
+    </div>
+    <!--top-Header-menu-->
+    <div id="user-nav" class="navbar navbar-inverse">
+        <ul class="nav">
+            <li class="dropdown" id="profile-messages">
+                <a title="" href="#">
+                    <i class="icon icon-user"></i>
+                    <span class="text">Welcome User</span>
+                </a>
+
+            </li>
+            @*<li class="">
+                <a title="" href="#">
+                    <i class="icon icon-cog"></i>
+                    <span class="text">设置</span>
+                </a>
+            </li>*@
+            <li class="">
+                <a title="" href="/home/LogOut" onclick="ClearSession();">
+                    <i class="icon icon-share-alt"></i>
+                    <span class="text">注销</span>
+                </a>
+            </li>
+
+
+            @*<li class="dropdown" id="menu-messages">
+                <a href="#" data-toggle="dropdown" data-target="#menu-messages" class="dropdown-toggle"><i class="icon icon-envelope"></i> <span class="text">Messages</span> <span class="label label-important">5</span> <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li><a class="sAdd" title="" href="#"><i class="icon-plus"></i> new message</a></li>
+                    <li class="divider"></li>
+                    <li><a class="sInbox" title="" href="#"><i class="icon-envelope"></i> inbox</a></li>
+                    <li class="divider"></li>
+                    <li><a class="sOutbox" title="" href="#"><i class="icon-arrow-up"></i> outbox</a></li>
+                    <li class="divider"></li>
+                    <li><a class="sTrash" title="" href="#"><i class="icon-trash"></i> trash</a></li>
+                </ul>
+            </li>*@
+        </ul>
+    </div>
+    <!--close-top-Header-menu-->
+    <!--start-top-serch-->
+    @*<div id="search">
+        <input type="text" placeholder="Search here..." />
+        <button type="submit" class="tip-bottom" title="Search"><i class="icon-search icon-white"></i></button>
+    </div>*@
+    <!--close-top-serch-->
+    <!--sidebar-menu-->
+
+
+    <div id="sidebar">
+        @*<a href="#" class="visible-phone"><i class="icon icon-home"></i>首页</a>*@
+        <ul id="nav">
+            <li class="submenu">
+                <a href="#"><i class="icon  icon-user-md"></i> <span>基础运营数据</span></a>
+                <ul>
+                    <li><a href="/Base/OnlinePlay">在线在玩统计</a></li>
+                    <li><a href="/Base/DailyOutput">每日消耗查询</a></li>
+                    
+                </ul>
+            </li>
+
+            <li class="submenu">
+                <a href="#"><i class="icon  icon-user-md"></i> <span>管理员</span></a>
+                <ul>
+                    <li><a href="/Manage/Management">管理员信息</a></li>
+                    <li><a href="/Manage/ManagementForAdd">添加管理员</a></li>
+                    <li><a href="/Manage/ManagementForUpdate">修改管理员</a></li>
+                </ul>
+            </li>
+
+
+
+
+
+        </ul>
+    </div>
+    <!--sidebar-menu-->
+    <!--main-container-part-->
+
+    <div id="content">
+
+        @RenderBody()
+
+
+
+    </div>
+
+
+    <!--end-main-container-part-->
+    <!--Footer-part-->
+    <div class="row-fluid">
+        <div id="footer" class="span12"> 2013 &copy; Matrix Admin. Brought to you by <a href="http://themedesigner.in/">Themedesigner.in</a> </div>
+    </div>
+    <!--end-Footer-part-->
+
+
+    @Scripts.Render("~/bundles/jquery")
+
+    @*
+    <link href="/css/matrix-style.css" rel="stylesheet" />*@
+
+    @*<script src="/js/jquery.uniform.js"></script>
+    <script src="/js/select2.min.js"></script>
+    <script src="/js/jquery.dataTables.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/matrix.tables.js"></script>
+    <script src="/js/jquery.ui.custom.js"></script>*@
+
+    <script src="/js/matrix.js"></script>
+    <script type="text/javascript">
+        function setTab() {
+            var url = location.href.toLocaleLowerCase();
+            url = url.split('?')[0];
+            url = url.split('#')[0];
+
+
+            $("#nav > li > a").each(function (e) {
+                if (url == this.href.toLocaleLowerCase()) {
+                    $(this).parent().addClass("active")
+                }
+            })
+            $("#nav > .submenu a").each(function (e) {
+                if (url == this.href.toLocaleLowerCase()) {
+                    $(this).parent().addClass("active")
+                    $(this).parent().parent().attr("style", "display: block;")
+                    $(this).parent().parent().parent().addClass('open')
+                }
+            })
+        }
+        $(document).ready(function () {
+
+            setTab();
+
+        })
+    
+    
+    </script>
+
+    @RenderSection("scripts", required: false)
+</body>
+</html>
+
+
+
+
+
+

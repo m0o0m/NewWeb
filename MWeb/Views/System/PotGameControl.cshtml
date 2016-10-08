@@ -1,0 +1,308 @@
+﻿@using GL.Data.View;
+@model SCModel
+@{
+    ViewBag.Title = "德州金银宝盆控制";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+
+<article class="col-sm-12 col-md-12 col-lg-6">
+    <div class="jarviswidget" id="wid-id-9" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-custombutton="false" data-widget-sortable="false">
+        <header>
+            <span class="widget-icon"> <i class="fa fa-hand-o-up"></i> </span>
+            <h2>服务控制 </h2>
+
+        </header>
+        <div>
+
+            <!-- widget edit box -->
+            <div class="jarviswidget-editbox">
+                <!-- This area used as dropdown edit box -->
+
+            </div>
+            <!-- end widget edit box -->
+            <!-- widget content -->
+            <div>
+                <form class="smart-form" action="" method="post">
+                    <!-- widget div-->
+                    <div>
+
+                        <!-- widget edit box -->
+                        <div class="jarviswidget-editbox">
+                            <!-- This area used as dropdown edit box -->
+
+                        </div>
+                        <!-- end widget edit box -->
+                        <!-- widget content -->
+                        <div class="widget-body">
+
+                            <div class="well">
+                                @if (Model.ServerIsNotResponding)
+                                {
+                                    <li id="serverStatic" class="btn btn-danger btn-lg btn-block">
+                                        <a href="javascript:void(0);" class="btn btn-danger btn-lg btn-block" onclick="return false;">
+                                        
+                                            服务器未运行
+                                        </a>
+                                    </li>
+                                }
+                                else
+                                {
+                                    if (Model.Static)
+                                    {
+                                        <li id="serverStatic" class="btn btn-primary btn-lg btn-block">
+                                            <a href="javascript:void(0);" class="btn btn-primary btn-lg btn-block" onclick="return false;">
+                                             
+                                                德州金银宝盆已开启
+                                            </a>
+                                        </li>
+
+                                    }
+                                    else
+                                    {
+                                        <li id="serverStatic" class="btn btn-danger btn-lg btn-block">
+                                            <a href="javascript:void(0);" class="btn btn-danger btn-lg btn-block" onclick="return false;">
+                                             
+                                                德州金银宝盆已关闭
+                                            </a>
+                                        </li>
+                                    }
+
+                                }
+
+                            </div>
+
+                            <hr class="simple">
+
+                            <div class="well"  id="divoper">
+                                @if (!Model.ServerIsNotResponding)
+                                {
+                                    if (Model.Static)
+                                    {
+
+                                        <li style="display:none" class="btn btn-primary btn-lg btn-block">
+                                            <a href="javascript:void(0);" class="btn btn-primary btn-lg btn-block" onclick="return btnOpen(this);">
+                                                <i class="glyphicon glyphicon-play"></i>
+                                                开启
+                                            </a>
+                                        </li>
+
+                                        <li class="btn btn-danger btn-lg btn-block">
+                                            <a href="javascript:void(0);" class="btn btn-danger btn-lg btn-block" onclick="return btnClose(this);">
+                                                <i class="glyphicon glyphicon-off"></i>
+                                                关闭
+                                            </a>
+                                        </li>
+
+
+                                    }
+                                    else
+                                    {
+                                        <li class="btn btn-primary btn-lg btn-block">
+                                            <a href="javascript:void(0);" class="btn btn-primary btn-lg btn-block" onclick="return btnOpen(this);">
+                                                <i class="glyphicon glyphicon-play"></i>
+                                                开启
+                                            </a>
+                                        </li>
+
+                                        <li style="display:none" class="btn btn-danger btn-lg btn-block">
+                                            <a href="javascript:void(0);" class="btn btn-danger btn-lg btn-block" onclick="return btnClose(this);">
+                                                <i class="glyphicon glyphicon-off"></i>
+                                                关闭
+                                            </a>
+                                        </li>
+
+
+                                    }
+                                }
+
+
+                            </div>
+
+
+                        </div>
+                        <!-- end widget content -->
+                        <footer>
+
+                            <a href="javascript:void(0);" class="btn btn-default btn-lg " onclick="return btnGoback();">
+                                <i class="glyphicon glyphicon-arrow-left"></i>
+                                返回
+                            </a>
+                        </footer>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- end widget div -->
+
+    </div>
+</article>
+
+
+
+
+
+
+
+
+@section scripts{
+
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/select2.min.js"></script>
+    <style type="text/css">
+        .quick-actions1 {
+            display: block;
+            list-style: outside none none;
+            margin: 15px 0;
+            text-align: center;
+        }
+
+            .quick-actions1 li a {
+                color: #fff;
+                display: block;
+                font-size: 14px;
+                font-weight: lighter;
+            }
+
+            .quick-actions1 li a {
+                padding: 10px 30px;
+            }
+
+        .quick-actions_homepage .quick-actions1 .span3 {
+            width: 30%;
+        }
+
+        .quick-actions_homepage .quick-actions1 li {
+            position: relative;
+        }
+
+        .quick-actions1 li {
+            min-height: 70px;
+            min-width: 14%;
+        }
+
+        .quick-actions1 li {
+            float: left;
+            line-height: 18px;
+            margin: 0 10px 10px 0;
+            padding: 0 10px;
+        }
+
+            .quick-actions1 li a i[class^="icon-"], .quick-actions1 li a i[class*=" icon-"] {
+                display: block;
+                font-size: 30px;
+                margin: 0 auto 5px;
+            }
+
+        .quick-actions1 li {
+            padding: 0;
+        }
+    </style>
+
+    <script type="text/javascript">
+        function btnGoback() {
+            location.href = "/System/GameServControl";
+            return false;
+        }
+        function btnOpen(obj) {
+            _this = $(obj).parent().parent();
+                $.ajax({
+                    url: "/System/PotGameControl/",
+                    type: "POST",
+                    dataType: "JSON",
+                    data: { "Static": true },
+                    success: function (data) {
+                        switch (data.result) {
+                            case 0:
+                                //alert("服务器已开启");
+                                //_this.children(".bg_lg").hide();
+                                //_this.children(".bg_lo").show();
+                                //$("#serverStatic").removeClass("bg_lo").addClass("bg_lg");
+                                //$("#serverStatic > a").empty().append(" <i class='icon-play'></i> 德州金银宝盆已开启");
+                                //location.reload();
+
+
+                                $("#serverStatic").removeClass("btn-danger").addClass("btn-primary");
+                                $("#serverStatic > a").removeClass("btn-danger").addClass("btn-primary");
+                                $("#serverStatic > a").empty().append("德州金银宝盆已开启");
+                                //location.reload();
+                                $("#divoper li").each(function () {
+                                    var dis = $(this).css('display');
+                                    if (dis == "none") { $(this).css('display', '') }
+                                    else { $(this).css('display', 'none') }
+                                });
+                                break;
+                            case 1:
+                                alert("开启失败，请稍后再试");
+                                break;
+                            case 2:
+                                alert("服务器未启动，请稍后再试");
+                                break;
+                            default:
+                                alert('未知错误');
+                                break;
+                        }
+                    }
+                }).fail(function (xhr, textStatus, err) {
+                    alert('Error: ' + err);
+                });
+            return false;
+        }
+        function btnClose(obj) {
+
+            _this = $(obj).parent().parent();
+
+            $.ajax({
+                url: "/System/PotGameControl/",
+                type: "POST",
+                dataType: "JSON",
+                data: { "Static": false },
+                success: function (data) {
+                    switch (data.result) {
+                        case 0:
+                            //alert("服务器已关闭");
+                            //_this.children(".bg_lg").show();
+                            //_this.children(".bg_lo").hide();
+                            //$("#serverStatic").removeClass("bg_lg").addClass("bg_lo");
+                            //$("#serverStatic > a").empty().append(" <i class='icon-stop'></i> 德州金银宝盆已关闭");
+
+
+                            $("#serverStatic").removeClass("btn-primary").addClass("btn-danger");
+                            $("#serverStatic > a").removeClass("btn-primary").addClass("btn-danger");
+                            $("#serverStatic > a").empty().append(" 德州金银宝盆已关闭");
+
+                            $("#divoper li").each(function () {
+                                var dis = $(this).css('display');
+                                if (dis == "none") { $(this).css('display', '') }
+                                else { $(this).css('display', 'none') }
+                            });
+
+                            break;
+                        case 1:
+                            alert("关闭失败，请稍后再试");
+                            break;
+                        case 2:
+                            alert("服务器未启动，请稍后再试");
+                            break;
+                        default:
+                            alert('未知错误');
+                            break;
+                    }
+                }
+            }).fail(function (xhr, textStatus, err) {
+                alert('Error: ' + err);
+            });
+            return false;
+        }
+
+    // resets the menu selection upon entry to this page:
+    function resetMenu() {
+        document.gomenu.selector.selectedIndex = 2;
+    }
+
+
+
+    </script>
+}

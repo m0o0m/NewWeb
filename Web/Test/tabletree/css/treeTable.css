@@ -1,0 +1,33 @@
+.list {
+	BORDER-RIGHT: #cccccc 1px solid; BORDER-TOP: #9eb850 2px solid; WIDTH: 100%; BACKGROUND-COLOR: #fcfcfc
+}
+.list TD {
+	FONT-SIZE: 12px; BORDER-LEFT: #cccccc 1px solid; BORDER-BOTTOM: #cccccc 1px solid; TEXT-ALIGN: center
+}
+.list TR.top {
+	WHITE-SPACE: nowrap; BACKGROUND-COLOR: #edf5fe; TEXT-ALIGN: center
+}
+.list TR.top TD {
+	TEXT-ALIGN: center
+}
+.list TR.fstr {
+	BACKGROUND-COLOR: #f4f4f4
+}
+.bg1 {
+	BACKGROUND-COLOR: #ffffff
+}
+.bg2 {
+	BACKGROUND-COLOR: #eeeeee
+}
+DIV.context_menu {
+	Z-INDEX: 1; POSITION: absolute; BACKGROUND-COLOR: #eeeeee
+}
+.context_menu_over {
+	CURSOR: hand; BACKGROUND-COLOR: #aaaaff
+}
+.context_menu_out {
+	CURSOR: hand; BACKGROUND-COLOR: #eeeeee
+}
+.mnu {
+	CURSOR: hand; BACKGROUND-COLOR: #eeeeee
+}

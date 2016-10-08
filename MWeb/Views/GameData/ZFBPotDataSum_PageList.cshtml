@@ -1,0 +1,198 @@
+﻿@using Webdiyer.WebControls.Mvc;
+@using GL.Data.Model;
+@using GL.Data.BLL;
+@model PagedList<ScalePot>
+
+
+
+
+
+
+
+<section id="widget-grid" class="">
+    <div class="row">
+        <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-0" data-widget-editbutton="false" data-widget-colorbutton="false"
+                 data-widget-togglebutton="false"
+                 data-widget-deletebutton="false"
+                 data-widget-fullscreenbutton="false"
+                 data-widget-custombutton="false"
+                 data-widget-collapsed="false"
+                 data-widget-sortable="false">
+                <header>
+                    <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                    <h2>@ViewBag.Title</h2>
+                </header>
+                <!-- widget div-->
+                <div>
+                    <!-- widget edit box -->
+                    <div class="jarviswidget-editbox">
+                        <!-- This area used as dropdown edit box -->
+                    </div>
+                    <!-- end widget edit box -->
+                    <!-- widget content -->
+                    <div class="widget-body no-padding">
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <thead>
+
+                                    <tr>
+                                        <th>中奖时间</th>
+                                        <th>牌局号</th>
+                                        <th>中奖总金额</th>
+                                        @*<th>3</th>
+                                            <th>4</th>*@
+                                        <th>中奖位置</th>
+                                        <th>获奖玩家ID</th>
+                                        <th>获奖玩家昵称</th>
+                                        <th>中奖金额</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model.Count == 0)
+            {
+                                        <tr class="gradeX">
+                                            <td class="colspan" align="center" colspan="0">
+                                                没有找到相关记录！
+                                            </td>
+                                        </tr>
+                                    }
+                                    @foreach (ScalePot m in Model)
+                                    {
+                                        string[] item1 = m.UserData.Trim('|').Split('|');
+                                        <tr>
+                                            <td rowspan="@item1.Length">@m.CreateTime</td>
+                                            <td rowspan="@item1.Length">@m.BoardNo</td>
+                                            <td rowspan="@item1.Length">
+                                                @{
+                                                decimal total = 0;
+                                                for (var k = 0; k < item1.Length; k++)
+                                                {
+                                                    string[] itemk = item1[k].Split('_');
+                                                    total += Convert.ToInt64(itemk[3]);
+                                                }
+                                                @total
+                                            }
+                                        </td>
+                                        @*<td>@m.ChipBefor</td>
+                                            <td>@m.ChipAfter</td>*@
+                                        @{
+                                            string[] item2 = item1[0].Split('_');
+                                            //
+                                            <td>@(((AwardPosit)Convert.ToInt32(item2[0])).ToString())</td>
+                                                <td>@item2[1]</td>
+                                                <td>
+                                                    @{
+                                                    Role u = RoleBLL.GetModelByID(new Role { ID = Convert.ToInt64(item2[1]) });
+
+
+                                                } @u.NickName
+                                            </td>
+                                                <td>@item2[3]</td>
+                                        }
+
+                                    </tr>
+                                                    for (var i = 1; i < item1.Length; i++)
+                                                    {
+                                                        <tr>
+                                                            @{
+                                                                string[] item3 = item1[i].Split('_');
+                                                                <td>@(((AwardPosit)Convert.ToInt32(item3[0])).ToString())</td>
+                                                                <td>@item3[1]</td>
+                                                                <td>
+                                                                    @{
+                                                                    Role u2 = RoleBLL.GetModelByID(new Role { ID = Convert.ToInt64(item3[1]) });
+
+
+                                                                } @u2.NickName
+                                                            </td>
+                                                            <td>@item3[3]</td>
+                                                            }
+
+                                                        </tr>
+                                                                        }
+
+                                                                    }
+                                </tbody>
+                            </table>
+                        </div>
+
+
+
+
+
+
+
+
+                        <div class="widget-content">
+
+                            @Ajax.Pager(
+    Model,
+    new PagerOptions()
+    {
+        CssClass = "pager",
+        ShowMorePagerItems = true,
+        PageIndexParameterName = "page",
+        ShowDisabledPagerItems = true,
+        AlwaysShowFirstLastPageNumber = true,
+        //ShowRecordCountItems = true,
+        HorizontalAlign = "right",
+        //SeparatorHtml = "",
+
+        CurrentPagerItemTemplate = "<li class=\"disabled\"><span>{0}</span></li>",
+        DisabledPagerItemTemplate = "<li class=\"disabled\"><span>{0}</span></li>",
+        PagerItemTemplate = "<li>{0}</li>",
+        //CurrentPagerItemWrapperFormatString = "<li class=\"disabled\"><span>{0}</span></li>",
+        //NumericPagerItemWrapperFormatString = "<li>{0}</li>",
+        //PagerItemWrapperFormatString = "<li>{0}</li>",
+        //RecordCountText = string.Format("共{0}条记录, {1}页", Model.TotalItemCount, Model.TotalPageCount),
+        //RecordCountFormatString = "<li><span>{0}</span></li>",
+        //DisabledPagerItemsFormatString = "<li class=\"disabled\"><span>{0}</span></li>",
+        //PageIndexBoxType = Webdiyer.WebControls.Mvc.PageIndexBoxType.TextBox,
+        //GoButtonText = "跳转到",
+        ShowPrevNext = true,
+        FirstPageText = "第一页",
+        LastPageText = "最后一页",
+        ContainerTagName = "ul",
+        PageIndexBoxId = "pageindexcm",
+        WYWPageIndexString = @"<li><input style='width:50px;' type='text' value='' id='{0}' name = '{1}'></li>
+                                 <li><a id='goto' name='goto' style='margin-right:10px' >跳转</a><li>
+                             ",
+        GoToButtonId = "goto"
+    },
+    new MvcAjaxOptions
+    {
+        HttpMethod = "POST",
+        UpdateTargetId = "box",
+        InsertionMode = InsertionMode.Replace,
+        OnFailure = "errFunc",
+        OnSuccess = "successPageFun"
+    })
+                        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    </div>
+                    <!-- end widget content -->
+                </div>
+                <!-- end widget div -->
+            </div>
+            <!-- end widget -->
+
+        </article>
+    </div>
+</section>

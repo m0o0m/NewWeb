@@ -1,0 +1,293 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.1\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.1\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{F2841C9D-2ABE-46BF-8ACE-8D81273388C9}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>A1.Web</RootNamespace>
+    <AssemblyName>A1.Web</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Image\09-18-18-21-14858.png.thumb.png" />
+    <Content Include="Image\android.PNG" />
+    <Content Include="Image\banner\web_bg.png" />
+    <Content Include="Image\banner\斗地主logo_512.png" />
+    <Content Include="Image\base.css" />
+    <Content Include="Image\bottombg.png" />
+    <Content Include="Image\code\android.PNG" />
+    <Content Include="Image\code\iphone.png" />
+    <Content Include="Image\company.jpg" />
+    <Content Include="Image\drop.png" />
+    <Content Include="Image\banner_down_s2.png" />
+    <Content Include="Image\dztb2.png" />
+    <Content Include="Image\hezuopingtai_4.jpg" />
+    <Content Include="Image\hezuopingtai_5.jpg" />
+    <Content Include="Image\img.gif" />
+    <Content Include="Image\iphone.png" />
+    <Content Include="Image\jianhu\b1.gif" />
+    <Content Include="Image\jianhu\b2.gif" />
+    <Content Include="Image\jianhu\b32.gif" />
+    <Content Include="Image\jianhu\btn01.jpg" />
+    <Content Include="Image\jianhu\img01.jpg" />
+    <Content Include="Image\jianhu\img03.gif" />
+    <Content Include="Image\jianhu\menu012.jpg" />
+    <Content Include="Image\jianhu\menu01_on.jpg" />
+    <Content Include="Image\jianhu\menu02.jpg" />
+    <Content Include="Image\jianhu\menu022_on.jpg" />
+    <Content Include="Image\jianhu\parent.css" />
+    <Content Include="Image\jianhu\parent2.css" />
+    <Content Include="Image\jianhu\ph01.jpg" />
+    <Content Include="Image\jianhu\t1.gif" />
+    <Content Include="Image\jianhu\t2.gif" />
+    <Content Include="Image\jianhu\img02.png" />
+    <Content Include="Image\jianhu\t32.gif" />
+    <Content Include="Image\qq0.png" />
+    <Content Include="Image\suspend.png" />
+    <Content Include="Image\home_banner_small_icon.png" />
+    <Content Include="jianhu2.html" />
+    <Content Include="mobile\images\dzbk.png" />
+    <Content Include="mobile\images\dzbk1.png" />
+    <Content Include="mobile\images\dzpk.png" />
+    <Content Include="mobile\images\dzpk1.png" />
+    <Content Include="mobile\images\xf.jpg" />
+    <Content Include="mobile\images\xfgg01.gif" />
+    <Content Include="mobile\images\xfgg02.gif" />
+    <Content Include="mobile\images\xfgg03.gif" />
+    <Content Include="mobile\images\xfgg04.jpg" />
+    <Content Include="mobile\images\xfgg05.jpg" />
+    <Content Include="mobile\images\gg.png" />
+    <Content Include="mobile\images\ddz.jpg" />
+    <Content Include="mobile\斗地主banner.jpg" />
+    <Content Include="packages.config" />
+    <Content Include="css\main.css.map" />
+    <Content Include="css\main.scss" />
+    <Content Include="Scripts\main.coffee" />
+    <Content Include="favicon.ico" />
+    <Content Include="mobile\images\images.zip" />
+    <Content Include="download\doudizhu.apk" />
+    <Content Include="download\515_jzsq.zip" />
+    <Content Include="xx.html" />
+    <Content Include="yy.html" />
+    <None Include="Properties\PublishProfiles\tt.pubxml" />
+    <Content Include="jianhu1.html" />
+    <Content Include="tg\image\2wm.jpg" />
+    <Content Include="tg\image\btn_android.png" />
+    <Content Include="tg\image\btn_ios.png" />
+    <Content Include="tg\image\btn_toweb.png" />
+    <Content Include="tg\image\img_515.jpg" />
+    <Content Include="tg\image\line.png" />
+    <Content Include="tg\image\wechat_appstore_popup.png" />
+    <Content Include="tg\image\wechat_appstore_popup2.png" />
+    <Content Include="tg\index.php" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="aboutus.html" />
+    <Content Include="cooperation.html" />
+    <Content Include="css\main.css" />
+    <Content Include="css\normalize.css" />
+    <Content Include="disclaimer.html" />
+    <Content Include="gameandroid.html" />
+    <Content Include="gamecenter.html" />
+    <Content Include="gameipad.html" />
+    <Content Include="gameiphone.html" />
+    <Content Include="Image\account_user_head.jpg" />
+    <Content Include="Image\bank_list.png" />
+    <Content Include="Image\banner\banner_about.jpg" />
+    <Content Include="Image\banner\banner_aboutus.jpg" />
+    <Content Include="Image\banner\banner_gamecenter.jpg" />
+    <Content Include="Image\banner\banner_home.jpg" />
+    <Content Include="Image\banner\banner_kf.jpg" />
+    <Content Include="Image\banner\banner_pay.jpg" />
+    <Content Include="Image\banner\sprite.png" />
+    <Content Include="Image\banner_down_s.png" />
+    <Content Include="Image\code\iphone_poker.jpg" />
+    <Content Include="Image\contact_icon.png" />
+    <Content Include="Image\c_qq.jpg" />
+    <Content Include="Image\c_qqun.jpg" />
+    <Content Include="Image\ditu.jpg" />
+    <Content Include="Image\footer_line.jpg" />
+    <Content Include="Image\games\developing.jpg" />
+    <Content Include="Image\games\fruit_big.jpg" />
+    <Content Include="Image\games\landlords.jpg" />
+    <Content Include="Image\games\landlords_big.jpg" />
+    <Content Include="Image\games\poker.jpg" />
+    <Content Include="Image\games\poker_big.jpg" />
+    <Content Include="Image\games\scale_big.jpg" />
+    <Content Include="Image\game_bg.png" />
+    <Content Include="Image\hezuopingtai_1.jpg" />
+    <Content Include="Image\hezuopingtai_2.jpg" />
+    <Content Include="Image\hezuopingtai_3.jpg" />
+    <Content Include="Image\home_banner_small_icon2.png" />
+    <Content Include="Image\home_big_banner.jpg" />
+    <Content Include="Image\home_code.png" />
+    <Content Include="Image\logo.png" />
+    <Content Include="Image\main_nav_a_bg.png" />
+    <Content Include="Image\main_z.png" />
+    <Content Include="Image\os_list.png" />
+    <Content Include="Image\pay_list_icon.png" />
+    <Content Include="Image\pay_path_arrow.png" />
+    <Content Include="Image\poker_big.jpg" />
+    <Content Include="Image\qqonline.png" />
+    <Content Include="Image\reg_suc.png" />
+    <Content Include="Image\sprite.png" />
+    <Content Include="Image\sprite_1.png" />
+    <Content Include="Image\top_split.png" />
+    <Content Include="Image\user_panel_bg.jpg" />
+    <Content Include="Image\user_pic.jpg" />
+    <Content Include="Image\verify_img.png" />
+    <Content Include="index.html" />
+    <Content Include="mobile\images\515.png" />
+    <Content Include="mobile\images\btn.png" />
+    <Content Include="mobile\images\buttombg.PNG" />
+    <Content Include="mobile\images\ddz.PNG" />
+    <Content Include="mobile\images\gg.jpg" />
+    <Content Include="mobile\images\kf.PNG" />
+    <Content Include="mobile\images\LOGO.png" />
+    <Content Include="mobile\images\middleBg.PNG" />
+    <Content Include="mobile\images\tips.PNG" />
+    <Content Include="mobile\index.html" />
+    <Content Include="mobile\js\jquery-1.11.2.min.js" />
+    <Content Include="pay.html" />
+    <Content Include="pay5.html" />
+    <Content Include="Scripts\html5shiv.min.js" />
+    <Content Include="Scripts\jquery.js" />
+    <Content Include="Scripts\main.js" />
+    <Content Include="Scripts\passwordStrength-min.js" />
+    <Content Include="Scripts\Validform_v5.3.2_min.js" />
+    <Content Include="service.html" />
+    <Content Include="Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == '17|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Test|AnyCPU'">
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>6888</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:6889/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>此项目引用这台计算机上缺少的 NuGet 程序包。使用 NuGet 程序包还原可下载这些程序包。有关详细信息，请参阅 http://go.microsoft.com/fwlink/?LinkID=322105。缺少的文件是 {0}。</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.1\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.1\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+  </Target>
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

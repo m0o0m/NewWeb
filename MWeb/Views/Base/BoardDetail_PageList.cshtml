@@ -1,0 +1,219 @@
+﻿@using Webdiyer.WebControls.Mvc;
+@using GL.Data.Model;
+@using GL.Data.BLL;
+@using GL.Data.View;
+@model GameRecordView
+@{ 
+    List<BoardDetail_Left> lefts = (List<BoardDetail_Left>)Model.Data;
+
+    List<BoardDetail_Right> rights = (List<BoardDetail_Right>)Model.DataList;
+
+}
+
+
+
+<section id="widget-grid" class="">
+    <div class="row">
+        <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-0" data-widget-editbutton="false" data-widget-colorbutton="false"
+                 data-widget-togglebutton="false"
+                 data-widget-deletebutton="false"
+                 data-widget-fullscreenbutton="false"
+                 data-widget-custombutton="false"
+                 data-widget-collapsed="false"
+                 data-widget-sortable="false">
+                <header>
+                    <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                    <h2>牌局细节</h2>
+                </header>
+                <!-- widget div-->
+                <div>
+                    <!-- widget edit box -->
+                    <div class="jarviswidget-editbox">
+                        <!-- This area used as dropdown edit box -->
+                    </div>
+                    <!-- end widget edit box -->
+                    <!-- widget content -->
+                    <div class="widget-body no-padding">
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th rowspan="2" >日期</th>
+                                        <th rowspan="2">总牌局数
+                                            &nbsp;<span id="refresh" class="" data-title="refresh" rel="tooltip" data-placement="bottom" data-original-title="<i class=''></i>全服所有游戏的总牌局数（默认显示） " data-html="true" data-reset-msg="Would you like to RESET all your saved widgets and clear LocalStorage?"><i class="fa fa-question "></i></span> </span>
+                                        </th>
+                                        <th rowspan="2" >总人数
+                                            &nbsp;<span id="refresh" class="" data-title="refresh" rel="tooltip" data-placement="bottom" data-original-title="<i class=''></i>全服所有游戏的总玩牌人数（默认显示） " data-html="true" data-reset-msg="Would you like to RESET all your saved widgets and clear LocalStorage?"><i class="fa fa-question "></i></span> </span>
+                                        </th>
+                                        <th rowspan="2">总回收
+                                            &nbsp;<span id="refresh" class="" data-title="refresh" rel="tooltip" data-placement="bottom" data-original-title="<i class=''></i>全服总游戏币回收（默认显示） " data-html="true" data-reset-msg="Would you like to RESET all your saved widgets and clear LocalStorage?"><i class="fa fa-question "></i></span> </span>
+                                        </th>
+                                        <th colspan="88" name="hid0" style="display:none">@(((gameID)(Convert.ToInt32(ViewData["GametypeS"]))).ToString())</th>
+                                    </tr>
+                                    <tr>
+                                        <th name="hid1" style="display:none">牌局总数
+                                            &nbsp;<span id="refresh" class="" data-title="refresh" rel="tooltip" data-placement="bottom" data-original-title="<i class=''></i>玩牌总牌局 " data-html="true" data-reset-msg="Would you like to RESET all your saved widgets and clear LocalStorage?"><i class="fa fa-question "></i></span> </span>
+                                        </th>
+                                        <th name="hid2" style="display:none">玩牌人数
+                                            &nbsp;<span id="refresh" class="" data-title="refresh" rel="tooltip" data-placement="bottom" data-original-title="<i class=''></i>所选择的游戏的底注的玩牌人数 " data-html="true" data-reset-msg="Would you like to RESET all your saved widgets and clear LocalStorage?"><i class="fa fa-question "></i></span> </span>
+                                        </th>
+                                        <th name="hid3" style="display:none">玩牌率
+                                            &nbsp;<span id="refresh" class="" data-title="refresh" rel="tooltip" data-placement="bottom" data-original-title="<i class=''></i>玩牌人数/总玩牌人数（全服，不区分游戏） " data-html="true" data-reset-msg="Would you like to RESET all your saved widgets and clear LocalStorage?"><i class="fa fa-question "></i></span> </span>
+                                        </th>
+                                        <th name="hid4" style="display:none">牌局比例
+                                            &nbsp;<span id="refresh" class="" data-title="refresh" rel="tooltip" data-placement="bottom" data-original-title="<i class=''></i>玩牌总牌局/总牌局数（全服，不区分游戏） " data-html="true" data-reset-msg="Would you like to RESET all your saved widgets and clear LocalStorage?"><i class="fa fa-question "></i></span> </span>
+                                        </th>
+                                        <th name="hid5" style="display:none">人均牌局数
+                                            &nbsp;<span id="refresh" class="" data-title="refresh" rel="tooltip" data-placement="bottom" data-original-title="<i class=''></i>玩牌人数/总局数 " data-html="true" data-reset-msg="Would you like to RESET all your saved widgets and clear LocalStorage?"><i class="fa fa-question "></i></span> </span>
+                                        </th>
+                                        <th name="hid6" style="display:none">人均牌局时长(秒)
+                                            &nbsp;<span id="refresh" class="" data-title="refresh" rel="tooltip" data-placement="bottom" data-original-title="<i class=''></i>牌局总时长/玩牌人数 " data-html="true" data-reset-msg="Would you like to RESET all your saved widgets and clear LocalStorage?"><i class="fa fa-question "></i></span> </span>
+                                        </th>
+                                        <th name="hid7" style="display:none">牌局平均时长(秒)
+                                            &nbsp;<span id="refresh" class="" data-title="refresh" rel="tooltip" data-placement="bottom" data-original-title="<i class=''></i>牌局总时长/牌局数 " data-html="true" data-reset-msg="Would you like to RESET all your saved widgets and clear LocalStorage?"><i class="fa fa-question "></i></span> </span>
+                                        </th>
+                                        <th name="hid8" style="display:none">牌局平均流通
+                                            &nbsp;<span id="refresh" class="" data-title="refresh" rel="tooltip" data-placement="bottom" data-original-title="<i class=''></i>总下注筹码/总牌局 " data-html="true" data-reset-msg="Would you like to RESET all your saved widgets and clear LocalStorage?"><i class="fa fa-question "></i></span> </span>
+                                        </th>
+                                        <th name="hid9" style="display:none">回收
+                                            &nbsp;<span id="refresh" class="" data-title="refresh" rel="tooltip" data-placement="bottom" data-original-title="<i class=''></i>回收的台费（抽成） " data-html="true" data-reset-msg="Would you like to RESET all your saved widgets and clear LocalStorage?"><i class="fa fa-question "></i></span> </span>
+                                        </th>             
+                                    </tr>
+
+                                </thead>
+                                <tbody id="trBody">
+                                    @if(lefts.Count == 0)
+            {
+                                        <tr class="gradeX">
+                                            <td class="colspan" align="center" colspan="0">
+                                                没有找到相关记录！
+                                            </td>
+                                        </tr>
+                                    }
+                                    else
+                                    {
+                                       
+                                              foreach (BoardDetail_Left left in lefts)
+                                              {
+                                                  BoardDetail_Right rigthitem = rights.Single(m => m.CreateTime == left.CreateTime);
+                                                    <tr>
+                                                        <td>@left.CreateTime</td>
+                                                        <td>@left.TotalBoard</td>
+                                                        <td>@left.TotalCount</td>
+                                                        <td>@left.TotalRecive</td>
+                                                        <td name="hid1" style="display:none">@rigthitem.BoardNum</td>
+                                                        <td name="hid2" style="display:none">@rigthitem.BoardCount</td>
+                                                        <td name="hid3" style="display:none">
+
+
+                                                            @{
+                                                                string wanpailv = "0.00%";
+                                                                if (left.TotalCount > 0)
+                                                                {
+                                                                    wanpailv = String.Format("{0:F}", rigthitem.BoardCount * 100 / left.TotalCount) + "%";//默认为保留两位
+
+                                                                }
+
+                                                            }
+                                                            @wanpailv
+
+
+
+
+                                                        </td>
+                                                        <td name="hid4" style="display:none">
+                                                            @{
+                                                                string paijubilv = "0.00%";
+                                                                if (left.TotalBoard > 0)
+                                                                {
+                                                                    paijubilv = String.Format("{0:F}", rigthitem.BoardNum * 100 / left.TotalBoard) + "%";//默认为保留两位
+
+                                                                }
+
+                                                            }
+                                                            @paijubilv
+
+                                                        </td>
+                                                        <td name="hid5" style="display:none">
+                                                            @{
+                                                                string renjunpaijushu = "0.00";
+                                                                if (left.TotalBoard > 0)
+                                                                {
+                                                                    renjunpaijushu = String.Format("{0:F}", rigthitem.BoardCount / left.TotalBoard);//默认为保留两位
+
+                                                                }
+
+                                                            }
+                                                            @renjunpaijushu
+
+                                                        </td>
+                                                        <td name="hid6" style="display:none">
+                                                            @{
+                                                                string renjunshichang = "0";
+                                                                if (rigthitem.BoardCount > 0)
+                                                                {
+                                                                    renjunshichang = String.Format("{0:F}", rigthitem.BoardTime / rigthitem.BoardCount);//默认为保留两位
+
+                                                                }
+
+                                                            }
+                                                            @renjunshichang
+                                                        </td>
+                                                        <td name="hid7" style="display:none">
+                                                            @{
+                                                                string paijupingjunshichang = "0";
+                                                                if (rigthitem.BoardNum > 0)
+                                                                {
+                                                                    paijupingjunshichang = String.Format("{0:F}", rigthitem.BoardTime / rigthitem.BoardNum);//默认为保留两位
+
+                                                                }
+
+                                                            }
+                                                            @paijupingjunshichang
+                                                        </td>
+                                                        <td name="hid8" style="display:none">0</td>
+                                                        <td name="hid9" style="display:none">@rigthitem.CallBack</td>
+                                                    </tr>
+                                              }
+
+
+                                    }
+
+                                </tbody>
+                            </table>
+                        </div>
+
+
+
+
+
+
+
+
+                  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    </div>
+                    <!-- end widget content -->
+                </div>
+                <!-- end widget div -->
+            </div>
+            <!-- end widget -->
+
+        </article>
+    </div>
+</section>

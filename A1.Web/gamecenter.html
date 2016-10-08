@@ -1,0 +1,201 @@
+﻿<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="keywords" content="棋牌游戏,515,手游">
+    <meta name="description" content="515游戏">
+    <title>游戏中心-515游戏</title>
+    <link rel="stylesheet" type="text/css" href="CSS/main.css">
+    <link rel="shortcut icon" href="~/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="~/favicon.ico" type="image/x-icon">
+    <script src="http://code.jquery.com/jquery-1.9.0.js"></script>
+    <script type="text/javascript" src="Scripts/main.js"></script>
+    <!--[if lt IE 9]>
+    <script src="Scripts/html5shiv.min.js"></script>
+    <![endif]-->
+    <script type="text/javascript">
+        $.getScript('http://int.dpool.sina.com.cn/iplookup/iplookup.php?format=js', function (_result) {
+
+
+            if (remote_ip_info.ret == '1') {
+                if (remote_ip_info.province == "北京") //广东
+                {
+                    //alert(remote_ip_info.province);
+                    window.location.href = "http://qipai.515.com/"
+                }
+                //alert('国家：' + remote_ip_info.country + '<BR>省：' + remote_ip_info.province + '<BR>市：' + remote_ip_info.city + '<BR>区：' + remote_ip_info.district + '<BR>ISP：' + remote_ip_info.isp + '<BR>类型：' + remote_ip_info.type + '<BR>其他：' + remote_ip_info.desc);
+                //window.location.href = "http://www.baidu.com";
+            } else {
+                alert('没有找到匹配的IP地址信息！');
+            }
+        });
+
+
+    </script>
+
+</head>
+<body>
+    <header class="global-header">
+        <div class="top">
+            <div class="wrap">
+                <p class="intro">五一五游戏！最专业的棋牌游戏平台！</p>
+                <ul>
+                    <!-- <li><a href="#">设为首页</a></li>
+                    <li><a href="#">保存游戏</a></li>
+                    <li><a href="#">加入收藏</a></li>
+                    <li><a href="#">注册</a></li>
+                    <li><a href="#">意见反馈</a></li> -->
+                </ul>
+            </div>
+        </div>
+        <div class="wrap">
+            <h1 class="logo"><a href="/"><img src="Image/logo.png" alt="515扑克在线"></a></h1>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="index.html">首页</a></li>
+                    <li class="active"><a href="gamecenter.html">游戏中心</a></li>
+                    <li><a href="pay.html">充值中心</a></li>
+                    <li><a href="service.html">客服中心</a></li>
+                    <li><a href="cooperation.html">加盟我们</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <section class="main-banner gamecenter-banner"></section>
+    <section class="main">
+        <!-- 面包屑导航 -->
+        <div class="line-title">
+            <h2 class="game">游戏中心</h2>
+            <span class="line"></span>
+            <ul class="crumb">
+                <li class="home"><a href="/"></a></li>
+                <li class="last"><a href="#">五一五游戏</a></li>
+            </ul>
+        </div>
+        <!-- 平台列表 -->
+        <ul class="os-list">
+            <li class="active"><a href="gamecenter.html">PC<i class="pc"></i></a><i class="arrow"></i></li>
+            <li><a href="gameiphone.html">iPhone<i class="iphone"></i></a><i class="arrow"></i></li>
+            <li><a href="gameipad.html">iPad<i class="ipad"></i></a><i class="arrow"></i></li>
+            <li><a href="gameandroid.html">Android<i class="android"></i></a><i class="arrow"></i></li>
+        </ul>
+         <!-- 游戏列表区域 -->
+        <div class="games-area">
+            <ul>
+                <li>
+                    <div class="game-panel-b" href="#">
+                        <div class="info">
+                            <h3>德州扑克</h3>
+                            <p class="en">TEXAS HOLD’EM POKER<i></i></p>
+                        </div>
+                        <img class="pic" src="Image/games/poker_big.jpg" alt="德州扑克">
+                        <div class="online-play"> 
+                            <a target="_blank" href="http://my.qzone.qq.com/app/1103881749.html" title="在线游戏">在线游戏:<i class="pc-icon"></i></a>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="game-panel-b" href="#">
+                        <div class="info">
+                            <h3>斗地主</h3>
+                            <p class="en">LANDLORDS<i></i></p>
+                        </div>
+                        <!-- 332x196 -->
+                        <img class="pic" src="Image/games/landlords_big.jpg" alt="斗地主">
+                        <div class="online-play">
+                            <a target="_blank" href="http://my.qzone.qq.com/app/1103881749.html" title="在线游戏">在线游戏:<i class="pc-icon"></i></a>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="game-panel-b" href="#">
+                        <div class="info">
+                            <h3>中发白</h3>
+                            <p class="en">SCALE<i></i></p>
+                        </div>
+                        <!-- 332x196 -->
+                        <img class="pic" src="Image/games/scale_big.jpg" alt="中发白">
+                        <div class="online-play">
+                            <a target="_blank" href="http://my.qzone.qq.com/app/1103881749.html" title="在线游戏">在线游戏:<i class="pc-icon"></i></a>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="game-panel-b" href="#">
+                        <div class="info">
+                            <h3>水果机</h3>
+                            <p class="en">FRUIT MACHINE<i></i></p>
+                        </div>
+                        <!-- 332x196 -->
+                        <img class="pic" src="Image/games/fruit_big.jpg" alt="水果机">
+                        <div class="online-play">
+                            <a target="_blank" href="http://my.qzone.qq.com/app/1103881749.html" title="在线游戏">在线游戏:<i class="pc-icon"></i></a>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </section>
+    <div class="jion-us">
+        <h2>加入我们&nbsp;就是现在</h2>
+        <h3>CONTACT&nbsp;US</h3>
+        <a href="javascript:;" class="lx-btn">联系方式</a>
+        <div class="contact-list">
+            <div class="contact-panel">
+                <i class="icon mail"></i>
+                <h4>邮箱地址：</h4>
+                <strong>WEBMASTER@515.COM</strong>
+            </div>
+            <div class="contact-panel">
+                <i class="icon phone"></i>
+                <h4>全国免费热线：</h4>
+                <strong>4000-825-515</strong>
+            </div>
+            <div class="contact-panel">
+                <i class="icon adr"></i>
+                <h4>公司地址：</h4>
+                <strong class="adr">深圳市南山区深南大道北侧艺园路西佳嘉豪商务大厦6D</strong>
+            </div>
+        </div>
+    </div>
+    <div class="global-footer-wrap">
+        <footer class="global-footer">
+            <ul class="footer-list" style="float:left;margin-left:350px;">
+                <a href="javascript:;" onclick="javascript:window.open('disclaimer.html','disclaimer','status=yes,scrollbars=no,width=350,height=400')">免责声明</a> &nbsp; | &nbsp;
+                <a href="aboutus.html">关于五一五</a> &nbsp; | &nbsp;
+
+                <a target="_blank" href="http://www.515.com/jianhu1.html">家长监护工程 </a> &nbsp; | &nbsp;
+                <a target="_blank" href="http://www.515.com/jiufen.html">纠纷解决</a>
+            </ul>
+            <br>
+            <p style="float:left">
+
+
+                <div style="float:left;margin-left:170px;margin-top:10px">
+                    Copyright © 2011 - 2016 深圳市五一五游戏网络有限公司  &nbsp | &nbsp;
+                    <a target="_blank" href="http://www.miitbeian.gov.cn">粤ICP备14100538号-1</a>  &nbsp | &nbsp;
+                    <a target="_blank" href="http://www.515.com/xukezheng.html">粤网文(2015)1116-048号</a>
+
+
+                </div>
+
+
+                <div style="width:20px;height:20px;float:left;margin-left:20px;margin-bottom:0px">
+
+                    <script id='ebsgovicon' src='http://szcert.ebs.org.cn/govicon.js?id=8e74cc07-6822-459d-ae65-c1c763f53339&width=100&height=137&;type=1' type='text/javascript' charset='utf-8'></script>
+
+                </div>
+
+
+                <img style="width:40px;height:40px;margin-left:20px;float:left;" src="Image/dztb2.png" />
+
+            </p>
+
+
+
+
+        </footer>
+    </div>
+</body>
+</html>

@@ -1,0 +1,276 @@
+﻿
+
+@using GL.Data.Model
+@model BaseDataView
+@{
+    List<NewYearRechargeSum> bdl = (List<NewYearRechargeSum>)ViewData["NewYear"];
+
+    //List<RechargeRank> bdlRank = (List<RechargeRank>)ViewData["RechargeRank"];
+
+}
+
+
+<div id="content">
+    <form id="comment-form" class="smart-form" novalidate="novalidate" method="get">
+        <div class="row">
+            <div class="widget-body">
+                <section class="col col-2">
+                    <label class="label">起始日期</label>
+                    <label class="input">
+                        <i class="icon-append fa fa-calendar"></i>
+                        @Html.TextBoxFor(m => m.StartDate, new Dictionary<string, object>() {
+                           { "class", "form-control datepicker" },
+                           { "data-dateformat", "yy-mm-dd 00:00:00" }
+                       })
+                    </label>
+                </section>
+                <section class="col col-2">
+                    <label class="label">截止日期</label>
+                    <label class="input">
+                        <i class="icon-append fa fa-calendar"></i>
+                        @Html.TextBoxFor(m => m.ExpirationDate, new Dictionary<string, object>() {
+                           { "class", "form-control datepicker" },
+                           { "data-dateformat", "yy-mm-dd 00:00:00" }
+                       })
+                    </label>
+                </section>
+                <section class="col col-0">
+                    <label class="label">&nbsp;</label>
+                  
+                    <input type="button" onclick="search()" class="btn btn-success btn-sm" value="查询" />
+                </section>
+
+            </div>
+        </div>
+    </form>
+
+    <!-- Widget ID (each widget will need unique ID)-->
+    <section id="widget-grid" class="">
+        <div class="row">
+            <article class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
+                <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-0" data-widget-editbutton="false" data-widget-colorbutton="false"
+                     data-widget-togglebutton="false"
+                     data-widget-deletebutton="false"
+                     data-widget-fullscreenbutton="false"
+                     data-widget-custombutton="false"
+                     data-widget-collapsed="false"
+                     data-widget-sortable="false">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                        <h2>新年充值活动</h2>
+                    </header>
+                    <!-- widget div-->
+                    <div>
+                        <!-- widget edit box -->
+                        <div class="jarviswidget-editbox">
+                            <!-- This area used as dropdown edit box -->
+                        </div>
+                        <!-- end widget edit box -->
+                        <!-- widget content -->
+                        <div class="widget-body no-padding" style="min-height: 70px;">
+                            <div class="table-responsive">
+                                <table class="table table-bordered">
+                                    <thead>
+                                        @*<tr>
+                                            <th colspan="2">活动时间： @Model.StartDate - @Model.ExpirationDate</th>
+                                        </tr>*@
+                                        <tr>
+                                            <th>累计充值Q币</th>
+                                            <th>礼包领取人数</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                        <tr>
+                                            <td> 10 </td>
+                                            <td>
+                                                @{
+                                                    NewYearRechargeSum tg10 = bdl.FirstOrDefault(m => m.Postion == 0);
+
+                                                }
+                                                @(tg10 == null ? 0 : tg10.Count) 人
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td> 30 </td>
+                                            <td>@{
+                                                NewYearRechargeSum tg30 = bdl.FirstOrDefault(m => m.Postion == 1);
+
+                                            }
+                                            @(tg30 == null ? 0 : tg30.Count) 人</td>
+                                        </tr>
+                                        <tr>
+                                            <td> 100 </td>
+                                            <td>@{
+                                                NewYearRechargeSum tg100 = bdl.FirstOrDefault(m => m.Postion == 2);
+
+                                            }
+                                            @(tg100 == null ? 0 : tg100.Count) 人</td>
+                                        </tr>
+                                        <tr>
+                                            <td> 200 </td>
+                                            <td>@{
+                                                NewYearRechargeSum tg200 = bdl.FirstOrDefault(m => m.Postion == 3);
+
+                                            }
+                                            @(tg200 == null ? 0 : tg200.Count) 人</td>
+                                        </tr>
+                                        <tr>
+                                            <td> 500 </td>
+                                            <td>@{
+                                                NewYearRechargeSum tg500 = bdl.FirstOrDefault(m => m.Postion == 4);
+
+                                            }
+                                            @(tg500 == null ? 0 : tg500.Count) 人</td>
+                                        </tr>
+                                        <tr>
+                                            <td> 1000 </td>
+                                            <td>@{
+                                                NewYearRechargeSum tg1000 = bdl.FirstOrDefault(m => m.Postion == 5);
+
+                                            }
+                                            @(tg1000 == null ? 0 : tg1000.Count) 人</td>
+                                        </tr>
+                                        <tr>
+                                            <td> 2000 </td>
+                                            <td>@{
+                                                NewYearRechargeSum tg2000 = bdl.FirstOrDefault(m => m.Postion == 6);
+
+                                            }
+                                            @(tg2000 == null ? 0 : tg2000.Count) 人</td>
+                                        </tr>
+                                        <tr>
+                                            <td> 5000 </td>
+                                            <td>@{
+                                                NewYearRechargeSum tg5000 = bdl.FirstOrDefault(m => m.Postion == 7);
+
+                                            }
+                                            @(tg5000 == null ? 0 : tg5000.Count) 人</td>
+                                        </tr>
+                                        <tr>
+                                            <td> 10000 </td>
+                                            <td>@{
+                                                NewYearRechargeSum tg10000 = bdl.FirstOrDefault(m => m.Postion == 8);
+
+                                            }
+                                            @(tg10000 == null ? 0 : tg10000.Count) 人</td>
+                                        </tr>
+                                        <tr>
+                                            <td> 20000 </td>
+                                            <td>@{
+                                                NewYearRechargeSum tg20000 = bdl.FirstOrDefault(m => m.Postion == 9);
+
+                                            }
+                                            @(tg20000 == null ? 0 : tg20000.Count) 人</td>
+                                        </tr>
+                                        <tr>
+                                            <td> 50000 </td>
+                                            <td>@{
+                                                NewYearRechargeSum tg50000 = bdl.FirstOrDefault(m => m.Postion == 10);
+
+                                            }
+                                            @(tg50000 == null ? 0 : tg50000.Count) 人</td>
+                                        </tr>
+                                        <tr>
+                                            <td> 100000 </td>
+                                            <td>@{
+                                                NewYearRechargeSum tg100000 = bdl.FirstOrDefault(m => m.Postion == 11);
+
+                                            }
+                                            @(tg100000 == null ? 0 : tg100000.Count) 人</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <!-- end widget content -->
+                    </div>
+                    <!-- end widget div -->
+                </div>
+                <!-- end widget -->
+
+            </article>
+        </div>
+    </section>
+
+
+    
+    @*<section id="widget-grid" class="">
+        <div class="row">
+            <article class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
+                <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-0" data-widget-editbutton="false" data-widget-colorbutton="false"
+                     data-widget-togglebutton="false"
+                     data-widget-deletebutton="false"
+                     data-widget-fullscreenbutton="false"
+                     data-widget-custombutton="false"
+                     data-widget-collapsed="false"
+                     data-widget-sortable="false">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                        <h2>充值排名前10</h2>
+                    </header>
+                    <!-- widget div-->
+                    <div>
+                        <!-- widget edit box -->
+                        <div class="jarviswidget-editbox">
+                            <!-- This area used as dropdown edit box -->
+                        </div>
+                        <!-- end widget edit box -->
+                        <!-- widget content -->
+                        <div class="widget-body no-padding" style="min-height: 70px;">
+                            <div class="table-responsive">
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>名次</th>
+                                            <th>ID</th>
+                                            <th>昵称</th>
+                                            <th>充值总额</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @if (bdlRank.Count == 0)
+                                        {
+                                            <tr>
+                                                <td class="colspan" align="center" colspan="0">
+                                                    没有找到相关记录！
+                                                </td>
+                                            </tr>
+                                        }
+                                       else{
+                                           for (int i = 1; i <= bdlRank.Count(); i++)
+                                           {
+                                               RechargeRank rr = bdlRank[i - 1];
+                                            <tr>
+                                                <td> @i </td>
+                                                <td>@rr.UserID</td>
+                                                <td>@rr.NickName</td>
+                                                <td>@rr.Money</td>
+                                            </tr>
+                                           }
+
+                                        }
+                                     
+                                     
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <!-- end widget content -->
+                    </div>
+                    <!-- end widget div -->
+                </div>
+                <!-- end widget -->
+
+            </article>
+        </div>
+    </section>*@
+
+    
+
+
+
+
+
+</div>

@@ -1,0 +1,204 @@
+﻿@model GL.Data.MWeb.Identity.ApplicationUser
+@{
+    ViewBag.Title = "会员返利配置";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    int opr = Convert.ToInt32(ViewData["type"]);
+    int groupid = Convert.ToInt32(ViewData["groupid"]);
+}
+
+<div id="content">
+@if (opr == 1){
+    <article class="col-sm-12 col-md-12 col-lg-6">
+        <div class="jarviswidget" id="wid-id-4" data-widget-editbutton="false" data-widget-custombutton="false">
+            <header>
+                <span class="widget-icon"> <i class="fa fa-edit"></i> </span>
+                <h2>添加返利分组</h2>
+            </header>
+            <div>
+                <div class="jarviswidget-editbox">
+                </div>
+                <div class="widget-body no-padding">
+                    <form id="subfrom" class="smart-form" action="/">
+                        @*@Html.AntiForgeryToken()
+                            <header>
+                                添加俱乐部配置--用户
+                            </header>*@
+                        <fieldset>
+                            <section>
+                                <label>分组名称 :</label>
+                                <label class="input">
+                                    @*<i class="icon-append fa fa-user"></i>*@
+                                    <input type="text" name="GroupName" class="span11" value="" />
+                                    <b class="tooltip tooltip-bottom-right">请输入分组名称(唯一)</b>
+                                </label>
+                            </section>
+                            <section>
+                                <label>分组描述 :</label>
+                                <label class="input">
+                                    @*<i class="icon-append fa fa-lock"></i>*@
+                                    <input type="text" name="GroupDesc" class="textarea" value="" />
+                                    <b class="tooltip tooltip-bottom-right">请输入分组描述</b>
+                                </label>
+                            </section>
+                            <section>
+                                <label>返利百分比 :</label>
+                                <label class="input">
+                                    <i class="icon-append fa fa-lock"></i>
+                                    <input type="text" name="Per" class="span11" value="" />
+                                    <b class="tooltip tooltip-bottom-right">请输入返利百分比(1~100)</b>
+                                </label>
+                            </section>
+                        </fieldset>
+
+                        <footer>
+                            <button type="submit" class="btn btn-primary" id="btnKick" onclick="return btnSubmit(this)">
+                                提交
+                            </button>
+                            <input id="btnGoBack" type="button" value="返回列表" class="btn btn-warning" />
+                        </footer>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </article>
+    }
+@if (opr == 2)
+{
+    <article class="col-sm-12 col-md-12 col-lg-6">
+        <div class="jarviswidget" id="wid-id-4" data-widget-editbutton="false" data-widget-custombutton="false">
+            <header>
+                <span class="widget-icon"> <i class="fa fa-edit"></i> </span>
+                <h2>返利分组添加玩家</h2>
+            </header>
+            <div>
+                <div class="jarviswidget-editbox">
+                </div>
+                <div class="widget-body no-padding">
+                    <form id="subfrom" class="smart-form" action="/">
+                        @*@Html.AntiForgeryToken()
+                            <header>
+                                添加俱乐部配置--用户
+                            </header>*@
+                        <fieldset>
+                            <section>
+                                <label>玩家ID :</label>
+                                <label class="input">
+                                    @*<i class="icon-append fa fa-user"></i>*@
+                                    <input type="text" name="UserIDs" class="span11" value="" />
+                                    <b class="tooltip tooltip-bottom-right">请输入玩家ID多个用逗号分好</b>
+                                </label>
+                            </section>
+                        </fieldset>
+
+                        <footer>
+                            <button type="submit" class="btn btn-primary" id="btnKick" onclick="return btnSubmitAdd(@groupid ,this)">
+                                提交
+                            </button>
+                            <input id="btnGoBack" type="button" value="返回列表" class="btn btn-warning" />
+                        </footer>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </article>
+}
+</div>
+
+@section scripts{
+    @{Html.RegisterMvcPagerScriptResource();}
+
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/select2.min.js"></script>
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+
+        $(function () {
+            $("#btnGoBack").click(function () {
+                location.href = "/Member/RebateManage";
+            });
+        })
+        
+        function btnSubmitAdd(id,obj) {
+            _this = $(obj).parent().parent();
+
+            var _GroupName = _this.find("input[name=UserIDs]").val();
+ 
+            if (_GroupName.length == 0) {
+                alert("玩家ID不能为空");
+                return false;
+            }
+
+            $.ajax({
+                url: "/Member/RebateAddInfo/",
+                type: "POST",
+                dataType: "JSON",
+                data: {"UserIDs":_GroupName ,"UserID":id},
+                success: function (data) {
+                    switch (data.result) {
+                        case 0:
+                            alert("添加失败，影响行数为0");
+                            break;
+                        default:
+                            alert("添加成功，绑定成功" + data.result + "个玩家");
+                            location.href = "/Member/RebateManage";
+                            break;
+                    }
+                }
+            }).fail(function (xhr, textStatus, err) {
+                alert('Error: ' + err);
+            });
+
+            return false;
+
+        }
+
+        function btnSubmit(obj) {
+            _this = $(obj).parent().parent();
+
+            var _GroupName = _this.find("input[name=GroupName]").val();
+            var _per = _this.find("input[name=Per]").val();
+
+            if (_GroupName.length == 0) {
+                alert("组名称不能为空");
+                return false;
+            }
+            if (parseInt(_per) == _per) {
+                if (_per <= 0 || _per > 100) {
+                    alert("返利百分比输入错误");
+                    return false;
+                }
+            } else {
+                alert("返利百分比输入错误");
+                return false;
+            }
+
+            $.ajax({
+                url: "/Member/RebateAddInfo/",
+                type: "POST",
+                dataType: "JSON",
+                data: $('#subfrom').serialize(),
+                success: function (data) {
+                    switch (data.result) {
+                        case 1:
+                            alert("添加成功");
+                            location.href = "/Member/RebateManage";
+                            break;
+                        default:
+                            alert(data.msg);
+                            break;
+                    }
+                }
+            }).fail(function (xhr, textStatus, err) {
+                alert('Error: ' + err);
+            });
+
+            return false;
+
+        }
+
+    </script>
+}
+
+

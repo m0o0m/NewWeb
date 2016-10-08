@@ -1,0 +1,118 @@
+﻿
+@{
+    ViewBag.Title = "AppTreasure";
+}
+
+
+
+<div id="content">
+    <form id="comment-form" class="smart-form" novalidate="novalidate">
+        <div class="row">
+            <div class="widget-body">
+                <input type="hidden" id="ispostback" name="ispostback" value="1" />
+                <section class="col col-1">
+                    <label class="label">会员ID</label>
+                    <label class="input">
+                        <input id="userid" type="text" value="" class="span2" style = "border-radius:4px" />
+                    </label>
+                </section>
+              
+              
+                <section class="col col-1">
+                    <label class="label">&nbsp;</label>
+                    <input type="button" onclick="searchCZ()" class="btn btn-success btn-sm" value="查询余额" />
+                </section>
+
+            </div>
+        </div>
+        <div class="row" id="divR" style="display:none">
+            <div class="widget-body">
+                <section class="col col-1">
+                    <label class="label">应用宝余额(元)</label>
+                    <label style="margin-top:10px;margin-left:20px" id="lbl">
+                        0
+                    </label>
+                </section>
+                <section class="col col-1">
+                    <label class="label"> 商品</label>
+                    <label class="select" style="width:120px">
+                        <select id="ProductID" name="ProductID">
+                            <option  mark="1" value="firstCharge_1" money="1">1元首冲大礼包</option>
+                            <option mark="1" value="firstCharge_2" money="6">6元首冲大礼包</option>
+                            <option mark="1" value="Chip_8" money="6">60000游戏币</option>
+                            <option mark="1" value="Chip_9" money="18">180000游戏币</option>
+                            <option mark="1" value="Chip_3" money="30">300000游戏币</option>
+                            <option mark="1" value="Chip_10" money="68">680000游戏币</option>
+                            <option mark="1" value="Chip_11" money="128">1280000游戏币</option>
+                            <option mark="1" value="Chip_12" money="328">3280000游戏币</option>
+                            <option mark="1" value="Chip_13" money="648">6480000游戏币</option>
+
+                            <option style="" mark="2" value="5b_7" money="6">60五币</option>
+                            <option style="" mark="2" value="5b_8" money="18">180五币</option>
+                            <option style="" mark="2" value="5b_3" money="30">300五币</option>
+                            <option style="" mark="2" value="5b_9" money="68">680五币</option>
+                            <option style="" mark="2" value="5b_10" money="128">1280五币</option>
+                            <option style="" mark="2" value="5b_11" money="328">3280五币</option>
+                            <option style="" mark="2" value="5b_12" money="648">6480五币</option>
+
+
+                        </select><i></i>
+                    </label>
+                </section>
+                <section class="col col-2" style="margin-left:30px">
+                    <label class="label">&nbsp;</label>
+                    <input type="button" onclick="rechargeMoney()" class="btn btn-success btn-sm" value="充值" />
+                </section>
+            </div>
+        </div>
+    </form>
+
+</div>
+
+<script type="text/javascript">
+    function searchCZ() {
+
+        $("#divR").css("display", "none");
+        $("#lbl").html("0");
+
+        $.ajax({
+            url: "/SimulatorRecharge/GetAppTreasureYE/",
+            type: "get",
+            dataType: "html",
+            data: { "UserID": $("#userid").val() },
+            success: function (data) {
+
+             
+
+                var d = parseInt(data) / 10;
+                $("#lbl").html(d);
+                $("#divR").css("display", "");
+            }
+        });
+    }
+
+    function rechargeMoney() {
+        var p1 = $("#userid").val();
+        var p2 = $("#ProductID option:selected").val();
+     
+        $.ajax({
+            url: "/SimulatorRecharge/AppTreasureRechar/",
+            type: "get",
+            dataType: "html",
+            data: { "UserID": p1, "ProductID": p2},
+            success: function (data) {
+                if (data == "2") {
+                    alert("充值成功!");
+                } else if (data == "-2") {
+                    alert("充值失败,玩家平台参数超时，请玩家重新登录游戏!");
+                } else if(data=="1") {
+                    alert("已进入补单表，玩家重新登录后，可收到充值!");
+                } else if (data == "0" || data == "-1") {
+                    alert("通讯异常，请重新操作!");
+                } else {
+                    alert("未知错误,请截图给开发人员"+data);
+                }
+            }
+        });
+    }
+</script>

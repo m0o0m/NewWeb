@@ -1,0 +1,112 @@
+﻿@using GL.Data.View
+@using GL.Data.Model
+@model GameRecordView
+@{
+    Layout = null;
+
+    IEnumerable<UserClubDetail> bdl = (IEnumerable<UserClubDetail>)Model.DataList;
+
+
+}
+
+
+
+
+<section id="widget-grid" class="UserClubDetail">
+    <div class="row">
+        <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-0" data-widget-editbutton="false" data-widget-colorbutton="false"
+                 data-widget-togglebutton="false"
+                 data-widget-deletebutton="false"
+                 data-widget-fullscreenbutton="false"
+                 data-widget-custombutton="false"
+                 data-widget-collapsed="false"
+                 data-widget-sortable="false">
+                <header>
+                    <span class="widget-icon"> <i class="fa fa-table"></i></span>
+                        <h2>成员详细</h2>
+                        <div class="header-search pull-right" style="margin-top:-9px">
+                            <input placeholder="下家ID" id="UserID" class="UserID" name="UserID" type="text">
+                            <button type="submit" onclick="flitUser()" id="flitUser">
+                                <i class="fa fa-search"></i>
+                            </button>
+                        </div>
+                </header>
+                <!-- widget div-->
+                <div>
+                    <!-- widget edit box -->
+                    <div class="jarviswidget-editbox">
+                        <!-- This area used as dropdown edit box -->
+                    </div>
+                    <!-- end widget edit box -->
+                    <!-- widget content -->
+                    <div class="widget-body no-padding">
+                        <div class="table-responsive">
+                            <table  id="dt_basic"  class="table table-bordered ">
+                                <thead>
+
+                                    <tr>
+                                        <th>成员ID</th>
+                                        <th>成员昵称</th>
+                                        <th>加入时间</th>
+                                        <th>昨日贡献额度</th>
+                                        <th>上周贡献额度</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (bdl.Count() == 0)
+                                    {
+                                        <tr class="gradeX">
+                                            <td class="colspan" align="center" colspan="0">
+                                                没有找到相关记录！
+                                            </td>
+                                        </tr>
+                                    }
+                                    @foreach (UserClubDetail m in bdl)
+                                    {
+                                        <tr class="gradeDetail">
+                                            <td class="selUserID">@m.UserID</td>
+                                            <td>@m.UserName</td>
+                                            <td>@m.CreateTime</td>
+                                            <td>@m.Gold_Yesterday</td>
+                                            <td>@m.Gold_LastWeek</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- end widget content -->
+                </div>
+                <!-- end widget div -->
+            </div>
+            <!-- end widget -->
+        </article>
+    </div>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

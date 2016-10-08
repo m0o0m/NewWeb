@@ -1,0 +1,110 @@
+﻿@{
+    ViewBag.Title = "reg";
+    Layout = "~/Views/Shared/_index.cshtml";
+}
+@section Js{
+       <script type="text/javascript" src="/Scripts/Validform_v5.3.2_min.js"></script>
+       <script type="text/javascript">
+           $(function () {
+               $("#form-reg").Validform({
+                   tiptype: 3,
+                   beforeCheck: function (curform) {
+                       $('.agree-protocol-info').text('');
+                   },
+                   beforeSubmit: function (curform) {
+                       if (!$('#agree-protocol:checked').length) {
+                           $('.agree-protocol-info').text('请阅读并选择同意 《515玩家网络使用协议》');
+                           return false;
+                       }
+                   }
+               });
+
+
+
+           });
+</script>
+
+  
+}
+
+
+<div class="wrap">
+        <nav class="login-tabs">
+            <ul>
+                <li class="active"><a href="/reg">用户注册</a></li>
+                <li><a href="/login">用户登录</a></li>
+            </ul>   
+        </nav>
+        <section class="reg-area">
+        @using(Html.BeginForm("reg","Home",FormMethod.Post,new {id="form-reg"})){
+        
+                <fieldset>
+                    <legend>帐号注册</legend>
+                    <div class="control-group">
+                        <label class="control-label" for="ipt-reg-id">帐号：</label>
+                        <div class="controls">
+                              <input class="require" id="ipt-reg-id" name="ipt-reg-id" ajaxurl="valid.php" type="text" maxlength="12" datatype="*4-16" errormsg="请使用4-12字符可用汉字、数字和字母！">
+                          
+                            <span class="Validform_checktip"></span>
+                            <!-- 提示信息 -->
+                            <p class="help">4-12字符可用汉字、数字和字母</p>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="ipt-reg-pwd">密码：</label>
+                        <div class="controls">
+                            <input class="require" name="userpassword" id="ipt-reg-pwd"  name="ipt-reg-pwd" type="password" datatype="*4-16" errormsg="密码长度4-16位" >
+                            <span class="Validform_checktip"></span>
+                            <p class="help">4-16字符可用数字和字母</p>
+
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="ipt-reg-pwd-re">确认密码：</label>
+                        <div class="controls">
+                            <input class="require" id="ipt-reg-pwd-re" type="password" datatype="*" recheck="userpassword" errormsg="您两次输入的账号密码不一致！">
+                            <span class="Validform_checktip"></span>
+                            <p class="help"></p>
+                        </div>
+                    </div>
+                    <div class="control-group hor-lab-group">
+                        <label class="control-label" for="ipt-reg-pwd-re">性别：</label>
+                        <div class="controls">
+                            <label class="hor-lab sex-man"><input type="radio" id="radio1" name="sex" checked="true" value="1" datatype="*" nullmsg="请选择性别！" errormsg="请选择性别！">男</label>
+                            <label class="hor-lab"><input type="radio" id="radio2" value="0" name="sex">女</label>
+                            <span class="Validform_checktip"></span>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="ipt-reg-invite">邀请码：</label>
+                        <div class="controls">
+                            <input id="ipt-reg-invite" name="ipt-reg-invite" type="text">
+                        </div>
+                    </div>
+                    <div class="control-group verify-group">
+                        <label class="control-label" for="ipt-login-pwd">验证码：</label>
+                        <div class="controls">
+                            <input id="ipt-login-verify" name="ipt-login-verify" class="ipt-verify require" type="text" data-info="验证码">
+                                          <img id="oauth"  onclick="this.src='/createcode?i='+Math.random();" style="float:left; height:32px; width:100px; margin-right:5px; " title="点击刷新" alt="验证码" src="/createcode" />
+                        </div>
+                    </div>
+                    <div class="control-group addition">
+                        <label>
+                            <input class="require" id="agree-protocol" type="checkbox" name="" value="">
+                            阅读并同意 <a href="javascript:;">《515玩家网络使用协议》</a>
+                        </label>
+                        <p class="agree-protocol-info"></p>
+                    @*    <p class="server-error">服务器返回的错误信息</p>*@
+                    </div>
+                    <div class="control-group">
+                        <button id="btn-reg" type="submit">立即注册</button>
+                    </div>
+                </fieldset>
+          
+         
+       
+        }
+        </section>        
+    </div>
+
+@Html.Raw(@ViewData["message"])

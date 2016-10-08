@@ -1,0 +1,228 @@
+﻿@using Webdiyer.WebControls.Mvc;
+@using GL.Data.Model;
+@using GL.Data.BLL;
+@model PagedList<ScalePot>
+
+
+
+
+
+
+
+<section id="widget-grid" class="">
+    <div class="row">
+        <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-0" data-widget-editbutton="false" data-widget-colorbutton="false"
+                 data-widget-togglebutton="false"
+                 data-widget-deletebutton="false"
+                 data-widget-fullscreenbutton="false"
+                 data-widget-custombutton="false"
+                 data-widget-collapsed="false"
+                 data-widget-sortable="false">
+                <header>
+                    <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                    <h2>@ViewBag.Title</h2>
+                </header>
+                <!-- widget div-->
+                <div>
+                    <!-- widget edit box -->
+                    <div class="jarviswidget-editbox">
+                        <!-- This area used as dropdown edit box -->
+                    </div>
+                    <!-- end widget edit box -->
+                    <!-- widget content -->
+                    <div class="widget-body no-padding">
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <thead>
+
+                                    <tr>
+                                        <th>中奖时间</th>
+                                        <th>牌局号</th>
+                                        @*<th>中奖总金额</th>*@
+
+                                        <th>派奖前彩池金额</th>
+                                        <th>派奖后彩池金额</th>
+                                        <th>中奖位置</th>
+
+                                        <th>获奖玩家ID</th>
+                                        <th>获奖玩家昵称</th>
+                                        <th>中奖金额</th>
+                                        <th>该门中奖总和</th>
+                                        <th>下注金额</th>
+                                        <th>该门下注总和</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model.Count == 0)
+            {
+                                        <tr class="gradeX">
+                                            <td class="colspan" align="center" colspan="0">
+                                                没有找到相关记录！
+                                            </td>
+                                        </tr>
+                                    }
+                                    @foreach (ScalePot m in Model)
+                                    {
+                                        string[] item1 = m.UserData.Trim('|').Split('|');
+                                        //把item1简化一下
+                                        Dictionary<string, List<string>> dics = new Dictionary<string, List<string>>();
+                                        for (int p = 0; p < item1.Length; p++)
+                                        {
+                                            string[] itemp = item1[p].Split('_');
+                                            if (dics.Keys.Contains(itemp[0]))
+                                            {
+
+                                                List<string> list = dics[itemp[0]];
+                                                list.Add(item1[p]);
+                                                dics[itemp[0]] = list;
+                                            }
+                                            else
+                                            {
+                                                dics.Add(itemp[0], new List<string> { item1[p] });
+                                            }
+                                        }
+                                        int firstLine = 0;
+                                        int firstItem = 0;
+                                        string preKey = "";
+                                        string curKey = "";
+                                        foreach (var item in dics)
+                                        {
+                                            firstItem++;
+                                            string key = item.Key;
+                                            if (firstLine == 0)
+                                            { preKey = key; curKey = key; }
+                                            else { preKey = curKey; curKey = key; }
+
+
+                                            List<string> values = item.Value;
+
+                                            for (int y = 0; y < values.Count(); y++)
+                                            {
+                                                string[] item0 = values[0].Split('_');
+                                                string[] itemy = values[y].Split('_');
+                                                if (firstLine == 0 && firstItem == 1)
+                                                {
+                                                    firstLine++;
+                                                    <tr>
+                                                        <td rowspan="@item1.Length">@m.CreateTime</td>
+                                                        <td rowspan="@item1.Length">@m.BoardNo</td>
+                                                        @*<td rowspan="@item1.Length"> @values.Sum(kk => Convert.ToDecimal(kk.Split('_')[2])) </td>*@
+                                                        <td rowspan="@item1.Length">@m.ChipBefor</td>
+                                                        <td rowspan="@item1.Length">@m.ChipAfter</td>
+                                                        <td rowspan="@values.Count()">@(((TexProPosit)Convert.ToInt32(item0[0])).ToString())</td>
+
+                                                        <td>@item0[1]</td>
+                                                        <td>
+                                                            @{
+                                                                Role u0 = new Role();
+                                                                string _nickname = "<lable style='color:red'>玩家不存在</label>";
+                                                                u0 = RoleBLL.GetModelByID(new Role { ID = Convert.ToInt64(item0[1]) });
+                                                                if (u0 != null) { _nickname = u0.NickName; }
+                                                            } @Html.Raw(_nickname)
+                                                        </td>
+                                                        <td>@item0[3]</td>
+                                                        <td rowspan="@values.Count()"> @values.Sum(kk => Convert.ToDecimal(kk.Split('_')[3])) </td>
+                                                        <td>@item0[2]</td>
+                                                        <td rowspan="@values.Count()"> @values.Sum(kk => Convert.ToDecimal(kk.Split('_')[2])) </td>
+                                                    </tr>
+                                                                }
+                                                                else if (preKey == curKey)
+                                                                {
+                                                                    <tr>
+                                                                        <td>@itemy[1]</td>
+                                                                        <td>
+                                                                            @{
+                                                                                Role uy = RoleBLL.GetModelByID(new Role { ID = Convert.ToInt64(itemy[1]) });
+                                                                            } @uy.NickName
+                                                                        </td>
+                                                                        <td>@itemy[3]</td>
+                                                                        <td>@itemy[2]</td>
+                                                                    </tr>    }
+                                                                                else
+                                                                                {
+                                                                                    preKey = curKey;
+                                                                                    <tr>
+                                                                                        <td rowspan="@values.Count()">@(((TexProPosit)Convert.ToInt32(itemy[0])).ToString())</td>
+
+                                                                                        <td>@itemy[1]</td>
+                                                                                        <td>
+                                                                                            @{
+                                                                                                Role uy = RoleBLL.GetModelByID(new Role { ID = Convert.ToInt64(itemy[1]) });
+                                                                                            } @uy.NickName
+                                                                                        </td>
+                                                                                        <td>@itemy[3]</td>
+                                                                                        <td rowspan="@values.Count()"> @values.Sum(kk => Convert.ToDecimal(kk.Split('_')[3])) </td>
+                                                                                        <td>@itemy[2]</td>
+                                                                                        <td rowspan="@values.Count()"> @values.Sum(kk => Convert.ToDecimal(kk.Split('_')[2])) </td>
+                                                                                    </tr>    }
+                                                                                                        }
+                                                                                                    }
+                                                                                                }
+                                </tbody>
+                            </table>
+                        </div>
+
+
+
+
+
+
+
+
+                        <div class="widget-content">
+
+                            @Ajax.Pager(
+    Model,
+    new PagerOptions()
+    {
+        CssClass = "pager",
+        ShowMorePagerItems = true,
+        PageIndexParameterName = "page",
+        ShowDisabledPagerItems = true,
+        AlwaysShowFirstLastPageNumber = true,
+        //ShowRecordCountItems = true,
+        HorizontalAlign = "right",
+        //SeparatorHtml = "",
+
+        CurrentPagerItemTemplate = "<li class=\"disabled\"><span>{0}</span></li>",
+        DisabledPagerItemTemplate = "<li class=\"disabled\"><span>{0}</span></li>",
+        PagerItemTemplate = "<li>{0}</li>",
+        //CurrentPagerItemWrapperFormatString = "<li class=\"disabled\"><span>{0}</span></li>",
+        //NumericPagerItemWrapperFormatString = "<li>{0}</li>",
+        //PagerItemWrapperFormatString = "<li>{0}</li>",
+        //RecordCountText = string.Format("共{0}条记录, {1}页", Model.TotalItemCount, Model.TotalPageCount),
+        //RecordCountFormatString = "<li><span>{0}</span></li>",
+        //DisabledPagerItemsFormatString = "<li class=\"disabled\"><span>{0}</span></li>",
+        //PageIndexBoxType = Webdiyer.WebControls.Mvc.PageIndexBoxType.TextBox,
+        //GoButtonText = "跳转到",
+        ShowPrevNext = true,
+        FirstPageText = "第一页",
+        LastPageText = "最后一页",
+        ContainerTagName = "ul",
+        PageIndexBoxId = "pageindexcm",
+        WYWPageIndexString = @"<li><input style='width:50px;' type='text' value='' id='{0}' name = '{1}'></li>
+                                 <li><a id='goto' name='goto' style='margin-right:10px' >跳转</a><li>
+                             ",
+        GoToButtonId = "goto"
+    },
+    new MvcAjaxOptions
+    {
+        HttpMethod = "POST",
+        UpdateTargetId = "box",
+        InsertionMode = InsertionMode.Replace,
+        OnFailure = "errFunc",
+        OnSuccess = "successPageFun"
+    })
+                        </div>
+                    </div>
+                    <!-- end widget content -->
+                </div>
+                <!-- end widget div -->
+            </div>
+            <!-- end widget -->
+
+        </article>
+    </div>
+</section>

@@ -1,0 +1,139 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - 我的 ASP.NET 应用程序</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+
+
+
+    <link rel="stylesheet" type="text/css" media="screen" href="~/js/SmartAdmin/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="~/js/SmartAdmin/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="~/js/SmartAdmin/css/smartadmin-production.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="~/js/SmartAdmin/css/smartadmin-skins.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="~/js/SmartAdmin/css/demo.css">
+    <link rel="shortcut icon" href="~/js/SmartAdmin/img/favicon/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="~/js/SmartAdmin/img/favicon/favicon.ico" type="image/x-icon">
+    <link href="~/js/SmartAdmin/css/mygame.css" rel="stylesheet" />
+
+    <script data-pace-options='{ "restartOnRequestAfter": true }' src="~/js/SmartAdmin/js/plugin/pace/pace.min.js"></script>
+
+    <script src="~/js/SmartAdmin/js/libs/jquery-2.0.2.min.js"></script>
+    <script src="~/Scripts/jquery.history.js"></script>
+
+    @*<script src="~/js/SmartAdmin/js/libs/jquery-ui-1.10.3.min.js"></script>*@
+    <script src="~/js/SmartAdmin/js/libs/jquery-ui-1.11.4-utf8.js"></script>
+    <script src="~/js/SmartAdmin/js/bootstrap/bootstrap.min.js"></script>
+    <script src="~/js/SmartAdmin/js/notification/SmartNotification.min.js"></script>
+    <script src="~/js/SmartAdmin/js/smartwidgets/jarvis.widget.min.js"></script>
+    <script src="~/js/SmartAdmin/js/plugin/easy-pie-chart/jquery.easy-pie-chart.min.js"></script>
+    <script src="~/js/SmartAdmin/js/plugin/sparkline/jquery.sparkline.min.js"></script>
+    @*<script src="~/js/SmartAdmin/js/plugin/jquery-validate/jquery.validate.min.js"></script>*@
+    <script src="~/js/JqueryValidate/jquery.validate.min.js"></script>
+    <script src="~/js/SmartAdmin/js/plugin/masked-input/jquery.maskedinput.min.js"></script>
+    <script src="~/js/SmartAdmin/js/plugin/select2/select2.min.js"></script>
+    <script src="~/js/SmartAdmin/js/plugin/bootstrap-slider/bootstrap-slider.min.js"></script>
+    <script src="~/js/SmartAdmin/js/plugin/msie-fix/jquery.mb.browser.min.js"></script>
+    <script src="~/js/SmartAdmin/js/plugin/fastclick/fastclick.js"></script>
+    <script src="~/js/SmartAdmin/js/demo.js"></script>
+    <script src="~/js/SmartAdmin/js/app.js"></script>
+    <script src="~/js/SmartAdmin/js/plugin/flot/jquery.flot.cust.js"></script>
+    <script src="~/js/SmartAdmin/js/plugin/flot/jquery.flot.resize.js"></script>
+    <script src="~/js/SmartAdmin/js/plugin/flot/jquery.flot.tooltip.js"></script>
+    <script src="~/js/SmartAdmin/js/plugin/vectormap/jquery-jvectormap-1.2.2.min.js"></script>
+    <script src="~/js/SmartAdmin/js/plugin/vectormap/jquery-jvectormap-world-mill-en.js"></script>
+    <script src="~/js/SmartAdmin/js/plugin/fullcalendar/jquery.fullcalendar.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            // $("#allbody").removeClass("hide-menu");
+            pageSetUp();
+
+            //if (IsPC() == false) {//是手机，并且是第一次进来
+            //    var beforeurl = document.referrer;
+            //    var url = window.location.href
+            //    if (beforeurl == null || beforeurl == "") {//如果上一页为空
+            //        $('body').toggleClass("hidden-menu");
+            //    } else {
+            //        var beforearr = beforeurl.split('.');
+            //        var arr = url.split('.');
+            //        if()
+            //    }
+
+
+            //}
+
+        });
+    </script>
+    <style type="text/css">
+        html,body{
+    margin:0px;
+    height:100%;
+}
+#center{
+width:200px;
+height:100%;
+background-color:#666666;
+border:1px solid red;
+}
+    </style>
+</head>
+<body style="height:1300px">
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+             
+                @Html.Label(   "查看我发展的俱乐部", new { @class = "navbar-brand" })
+               
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    @*<li>@Html.ActionLink("主页", "Index", "Home")</li>
+                    <li>@Html.ActionLink("关于", "About", "Home")</li>
+                    <li>@Html.ActionLink("联系方式", "Contact", "Home")</li>*@
+                </ul>
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </div>
+    <div class="container body-content" style="margin-top:70px;height:100%">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy;  @*- 我的 ASP.NET 应用程序*@</p>
+        </footer>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            // $("#allbody").removeClass("hide-menu");
+            pageSetUp();
+
+            //if (IsPC() == false) {//是手机，并且是第一次进来
+            //    var beforeurl = document.referrer;
+            //    var url = window.location.href
+            //    if (beforeurl == null || beforeurl == "") {//如果上一页为空
+            //        $('body').toggleClass("hidden-menu");
+            //    } else {
+            //        var beforearr = beforeurl.split('.');
+            //        var arr = url.split('.');
+            //        if()
+            //    }
+
+
+            //}
+
+        });
+    </script>
+    @RenderSection("scripts", required: false)
+
+</body>
+</html>

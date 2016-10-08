@@ -1,0 +1,726 @@
+﻿@model GL.Data.Model.UserEmail
+@{
+    ViewBag.Title = "发送系统邮件";
+    Layout = "~/Views/Shared/_LayoutNoJQ.cshtml";
+
+
+    Dictionary<int, double> dic = (Dictionary<int, double>)ViewData["dic"];
+    double firstValue = (double)ViewData["dicFirst"];
+    if (Request.IsAjaxRequest())
+    {
+        Layout = null;
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_LayoutNoJQ.cshtml";
+    }
+
+}
+<link rel="stylesheet" type="text/css" media="screen" href="~/js/SmartAdmin/css/bootstrap.min.css">
+
+<link rel="stylesheet" type="text/css" media="screen" href="~/js/SmartAdmin/css/smartadmin-production.css">
+<script src="~/js/SmartAdmin/js/libs/jquery-2.0.2.min.js"></script>
+
+<script src="~/js/SmartAdmin/js/plugin/bootstrap-tags/bootstrap-tagsinput.min.js"></script>
+
+
+<style type="text/css">
+    .help-inline {
+        color: red;
+    }
+</style>
+@*<input onclick="add()" type="button" value="add" />
+<input onclick="get()" type="button" value="get" />*@
+<script type="text/javascript">
+    function add() {
+        var c = $('#divMem div input');
+        alert(c.length);
+
+        //$('#UEUserID').tagsinput('add', 'a1');
+        //$('#UEUserID').tagsinput('add', 'n2');
+        //$('#UEUserID').tagsinput('add', 'ddn2');
+        //$('#UEUserID').tagsinput('add', 'n2asdasd');
+    }
+
+    function get() {
+        alert($("#UEUserID").val());
+    }
+
+    $(function () {
+        var inp = $('#divMem div input');
+        inp.bind('keyup', function (e) {
+          
+            if(e.keyCode==188|| e.keyCode==32){  //,
+                var ids = $(this).val();
+             
+                $.ajax({
+                    url: "/Manage/GetMailUsers/",
+                    type: "post",
+                    dataType: "json",
+                    data: {"ids":ids},
+                    success: function (data) {
+                     
+                        var d = data.data;
+                        for(var i=0;i<d.length;i++){
+                            $('#UEUserID').tagsinput('add',d[i]);
+                        }
+                    }
+                });
+                $(this).val("");
+            }
+
+        });
+        inp.bind('blur', function (e) {
+            var ids = $(this).val();
+           
+            $.ajax({
+                url: "/Manage/GetMailUsers/",
+                type: "post",
+                dataType: "json",
+                data: {"ids":ids},
+                success: function (data) {
+                     
+                    var d = data.data;
+                    for(var i=0;i<d.length;i++){
+                        $('#UEUserID').tagsinput('add',d[i]);
+                    }
+                }
+            });
+            $(this).val("");
+        });
+     
+        inp.bind('paste', function (e) {
+            var pastedText = undefined;
+            if (window.clipboardData && window.clipboardData.getData) { // IE
+                pastedText = window.clipboardData.getData('Text');
+            } else {
+                pastedText = e.originalEvent.clipboardData.getData('Text');//e.clipboardData.getData('text/plain');
+            }
+      
+         
+            var inp = $('#divMem div input');
+            var v = inp.val();
+            var res = v+""+pastedText;
+            var len = res.length;
+            inp.attr("size",len);
+        });
+    })
+
+    
+</script>
+
+
+<article class="col-sm-12 col-md-12 col-lg-7">
+    <div class="jarviswidget" id="wid-id-4" data-widget-editbutton="false" data-widget-custombutton="false">
+        <header>
+            <span class="widget-icon"> <i class="fa fa-edit"></i> </span>
+            <h2>发送系统邮件</h2>
+        </header>
+        <div>
+            <div class="jarviswidget-editbox">
+            </div>
+            <div class="widget-body no-padding">
+                <form id="submitForm" class="smart-form" action="" method="post" name="basic_validate" id="basic_validate">
+                    <fieldset>
+                        <section>
+                            <label class="checkbox">
+                                <input type="checkbox" id="inputGaoJi">
+                                <i></i>高级设置
+                            </label>
+                        </section>
+
+                        <section style="display:none;padding-left:50px" id="secGlobal">
+                            <label class="checkbox">
+                                <input type="checkbox" id="isGlobal">
+                                <i></i>全服邮件
+                            </label>
+                        </section>
+                        <br />
+                        <section>
+                            <label>奖励类型 </label>
+                            <label class="select">
+                                <select id="awardType" name="awardType">
+                                    <option value="0">其他方式</option>
+                                    <option value="151">后台赠送</option>
+                                    <option value="152">加群奖励</option>
+                                </select>
+                            </label>
+                        </section>
+
+
+
+
+                        @*<section id="userIDSec">
+                                <label>会员ID </label>
+                                <label class="input">
+                                    <input id="UEUserID" name="UEUserID" type="text" class="form-control tagsinput" value="" /> 请输入会员ID以','隔开，最多10个ID
+
+                                 </label>
+
+                            </section>*@
+
+
+                        <div class="form-group" id="divMem">
+                            <label>会员ID </label>
+                            <input  name="UEUserID" id="UEUserID" class="form-control tagsinput" value="" data-role="tagsinput">
+                        </div>
+                        请输入会员ID以逗号或者空格隔开，最多10个ID，可识别会员是否存在<br /><br />
+                        
+                        <section>
+                            <label>邮件标题 </label>
+                            <label class="input">
+                                <input  id="UETitle" name="UETitle" type="text" class="span10" />
+                            </label>
+                        </section>
+
+
+
+                        <section>
+                            <label>邮件内容 </label>
+                            <label class="textarea">
+                                <textarea id="UEContent" name="UEContent" rows="10" class="span10"></textarea>
+                            </label>
+                        </section>
+                        <section>
+                            <label>备注 </label>
+                            <label class="input">
+                                <input id="UENote" name="UENote" type="text" class="span10" />
+                            </label>
+                        </section>
+
+
+                        <section>
+                            <label class="checkbox">
+                                <input type="checkbox" id="isUploadFile">
+                                <i></i>添加附件
+                            </label>
+
+
+                        </section>
+
+
+                        <div id="UploadFileBox" style="display:none">
+                            <section>
+                                <label>附件 </label>
+                                <label class="select">
+                                    <select id="UEItemType" name="UEItemType">
+                                        @if (dic.ContainsKey(1))
+                                        {
+                                            <option value="1">金币</option>
+                                        }
+                                        @if (dic.ContainsKey(2))
+                                        {
+                                            <option value="2">五币</option>
+                                        }
+                                        @if (dic.ContainsKey(3))
+                                        {
+                                            <option value="3">积分</option>
+                                        }
+                                        @if (dic.ContainsKey(4))
+                                        {
+                                            <option value="4">礼物</option>
+                                        }
+                                        @if (dic.ContainsKey(5))
+                                        {
+                                            <option value="5">权贵</option>
+                                        }
+                                        @if (dic.ContainsKey(6))
+                                        {
+                                            <option value="6">道具</option>
+                                        }
+
+                                    </select><i></i>
+                                </label>
+                            </section>
+
+
+
+                            <div id="MoneyBox">
+                                <section>
+                                    <label>数量 </label>
+                                    <label class="input">
+                                        <input id="Money" name="Money" type="text" class="span10" />
+                                    </label>
+                                </section>
+                            </div>
+
+                            <div id="GiftBox" style="display:none">
+                                <section class="col col-5">
+                                    <label>礼物 </label>
+                                    <label class="select">
+                                        <select id="Gift" name="Gift">
+                                            <option value="101">红酒</option>
+                                            <option value="102">XO</option>
+                                            <option value="103">伏特加</option>
+                                            <option value="104">绅士帽</option>
+                                            <option value="105">雪茄</option>
+                                            <option value="106">玫瑰</option>
+                                            <option value="107">貔貅</option>
+                                            <option value="108">弥勒佛</option>
+                                            <option value="109">美羊羊</option>
+                                            <option value="110">奥迪</option>
+                                            <option value="111">法拉利</option>
+                                            <option value="112">哈雷摩托</option>
+                                            <option value="113">劳斯莱斯</option>
+                                            <option value="114">戒指</option>
+                                            <option value="115">钻石</option>
+                                        </select>
+                                    </label>
+                                </section>
+                            </div>
+
+
+                            <div id="ToolsBox" class="control-group" style="display:none">
+                                <section class="col col-5">
+                                    <label>道具 </label>
+                                    <label class="select">
+                                        <select id="Gift" name="Gift`   `">
+                                            <option value="400">绿宝石</option>
+                                            <option value="401">蓝宝石</option>
+                                            <option value="410">VIP体验卡</option>
+                                        </select>
+                                    </label>
+                                </section>
+                            </div>
+
+
+                            <div id="GradeBox" class="control-group" style="display:none">
+                                <section class="col col-5">
+                                    <label>权贵 </label>
+                                    <label class="input">
+                                        <input id="Grade" name="Grade" type="text" class="span10" />
+                                    </label>
+                                </section>
+                            </div>
+
+                            <input id="UEItemValue" name="UEItemValue" type="hidden" value="0" class="span10" />
+
+                            <div id="NumberBox" class="control-group" style="display:none">
+                                <section class="col col-5">
+                                    <label>数量 </label>
+                                    <label class="input">
+                                        <input id="UEItemNum" name="UEItemNum" type="text" class="span10" />
+                                    </label>
+                                </section>
+                            </div>
+                        </div>
+
+
+
+                    </fieldset>
+
+
+                    <footer>
+                        <input type="submit" id="btnSubmit" name="btnSubmit" value="发送" class="btn btn-success">
+                    </footer>
+                </form>
+
+            </div>
+            <!-- end widget content -->
+
+        </div>
+        <!-- end widget div -->
+
+    </div>
+
+</article>
+
+<input type="hidden" id="maxValue" value=@firstValue />
+
+
+
+<div id="markbox"></div>
+
+
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/select2.min.js"></script>
+<script src="/js/jquery.validate.js"></script>
+
+<style type="text/css">
+    .loading {
+        position: absolute;
+        z-index: 10000;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        background: url(...) center center;
+    }
+    .bootstrap-tagsinput input{
+        padding-top:7px;
+    }
+</style>
+<script type="text/javascript">
+
+    $(function () {
+
+        $("#MoneyBox").show();
+        $("#GiftBox").hide();
+        $("#GradeBox").hide();
+        $("#NumberBox").hide();
+        $("#UEItemNum").val('1');
+        $("#isUploadFile").prop('checked', false);
+        $("#inputGaoJi").prop('checked', false);
+        $("#isGlobal").prop('checked', false);
+        $("#inputGaoJi").change(function(){
+            if(this.checked){
+                $("#secGlobal").show("fast");
+            }else{
+                $("#secGlobal").hide("fast");
+                $("#isGlobal").prop('checked', false);
+            }
+        })
+
+
+        $("#isUploadFile").change(function () {
+
+            if (this.checked) {
+                $("#UploadFileBox").show("fast");
+            } else {
+                $("#UploadFileBox").hide("fast");
+            }
+
+        })
+
+        $("#UEItemType").change(function ()
+        {
+
+            switch(this.value)
+            {
+                case '1':
+
+                    $("#maxValue").val( @{double d = dic.ContainsKey(1) == true ? dic[1] : double.MinValue; @d}  );
+                    $("#Money").rules("remove", "max") //移除 min max
+                    $("#Money").rules("add", {
+                        max: parseFloat( @d ),
+                        messages:
+                        {
+                            max: "不能超过最大额度" +  @d ,
+                        }
+                    });
+
+
+                    $("#MoneyBox").show();
+                    $("#GiftBox").hide();
+                    $("#GradeBox").hide();
+                    $("#NumberBox").hide();
+                    $("#UEItemNum").val('1');
+                    $("#UEItemValue").val('0');
+                    $("#ToolsBox").hide();
+                    break;
+                case '2':
+                    $("#maxValue").val(@{double d2 = dic.ContainsKey(2) == true ? dic[2] : double.MinValue; @d2});
+
+
+                    $("#Money").rules("remove", "max") //移除 min max
+                    $("#Money").rules("add", {
+                        max :  parseFloat(@d2),
+                        messages : {
+                            max : "不能超过最大额度"+@d2,
+                        }
+                    });
+
+
+
+
+                    $("#MoneyBox").show();
+                    $("#GiftBox").hide();
+                    $("#GradeBox").hide();
+                    $("#NumberBox").hide();
+                    $("#UEItemNum").val('1');
+                    $("#UEItemValue").val('0');
+                    $("#ToolsBox").hide();
+                    break;
+                case '3':
+                    $("#maxValue").val(@{double d3 = dic.ContainsKey(3) == true ? dic[3] : double.MinValue; @d3});
+
+                    $("#Money").rules("remove", "max") //移除 min max
+                    $("#Money").rules("add", {
+                        max :  parseFloat(@d3),
+                        messages : {
+                            max : "不能超过最大额度"+@d3,
+                        }
+                    });
+
+
+
+                    $("#MoneyBox").show();
+                    $("#GiftBox").hide();
+                    $("#GradeBox").hide();
+                    $("#NumberBox").hide();
+                    $("#UEItemNum").val('1');
+                    $("#UEItemValue").val('0');
+                    $("#ToolsBox").hide();
+
+                    break;
+                case '4':
+                    $("#maxValue").val(@{double d4 = dic.ContainsKey(4) == true ? dic[4] : double.MinValue; @d4});
+
+                    $("#UEItemNum").rules("remove", "max") //移除 min max
+                    $("#UEItemNum").rules("add", {
+                        max :  parseFloat(@d4),
+                        messages : {
+                            max : "不能超过最大额度"+@d4,
+                        }
+                    });
+
+
+
+
+                    $("#MoneyBox").hide();
+                    $("#GiftBox").show();
+                    $("#GradeBox").hide();
+                    $("#NumberBox").show();
+                    $("#UEItemNum").val('');
+                    $("#UEItemValue").val('0');
+                    $("#ToolsBox").hide();
+                    break;
+                case '5':
+                    $("#maxValue").val(@{double d5 = dic.ContainsKey(5) == true ? dic[5] : double.MinValue; @d5});
+
+                    $("#UEItemNum").rules("remove", "max") //移除 min max
+                    $("#UEItemNum").rules("add", {
+                        max :  parseFloat(@d5),
+                        messages : {
+                            max : "不能超过最大额度"+@d5,
+                        }
+                    });
+
+                    $("#MoneyBox").hide();
+                    $("#GiftBox").hide();
+                    $("#GradeBox").show();
+                    $("#NumberBox").show();
+                    $("#UEItemNum").val('');
+                    $("#UEItemValue").val('0');
+                    $("#ToolsBox").hide();
+
+
+                    break;
+                case '6':
+                    $("#MoneyBox").hide();
+                    $("#GiftBox").hide();
+                    $("#GradeBox").hide();
+                    $("#NumberBox").hide();
+                    $("#UEItemNum").val('1');
+                    $("#UEItemValue").val('400');
+                    $("#ToolsBox").show();
+
+                    break;
+                default:
+                    break;
+            }
+            $("#Money").val('');
+            $("#Gift").val('');
+            $("#Grade").val('');
+
+        })
+
+        $("#Money,#Gift,#Grade").change(function () {
+            //alert(this.value)
+            $("#UEItemValue").val(this.value)
+        })
+
+
+        var lock = false;
+        $("#submitForm").validate({
+            onsubmit: true,
+            rules: {
+                UETitle: {
+                    required: true
+                    , maxlength: 120
+                },
+                UEContent: {
+                    required: true
+                    , maxlength: 60
+                },
+                Money: {
+                    max: parseFloat($("#maxValue").val())
+                },
+                UEItemNum: {
+                    max: parseFloat($("#maxValue").val())
+                },
+                UENote: {
+                    maxlength: 128
+                }
+            },
+            messages: {
+                UETitle: {
+                    required: "请输入要发送的标题",
+                    maxlength: "内容不能超过65个字符"
+                },
+                UEContent: {
+                    required: "请输入要发送的内容",
+                    maxlength: "标题不能超过30个字符"
+                },
+                Money: {
+                    max: "不能超过最大额度" + $("#maxValue").val()
+                },
+                UEItemNum: {
+                    max: "不能超过最大额度" + $("#maxValue").val()
+                },
+                UENote:{
+                    maxlength: "内容不能超过128个字符"
+                }
+            },
+            errorClass: "help-inline",
+            errorElement: "span",
+            highlight: function (element, errorClass, validClass) {
+                $(element).parents('.control-group').addClass('error');
+                $(element).parents('.control-group').removeClass('success');
+            },
+            unhighlight: function (element, errorClass, validClass) {
+                $(element).parents('.control-group').removeClass('error');
+                $(element).parents('.control-group').addClass('success');
+            },
+            submitHandler: function (form) {
+
+                if(confirm("是否发送该邮件")){
+                    locksubmit();
+                    //解析用户id
+                    var spans = $("#divMem div > span");
+                    var postIds = "";
+                    spans.each(function(){
+                        var tex =  $(this).text();
+                        var texs = tex.split('(');
+                      
+                        var id = texs[0];
+                        postIds+= (id+",");
+                    })
+                 
+                    $.ajax({
+                        url: "/Manage/SendUserEmail/",
+                        type: "POST",
+                        //dataType: "JSON",
+                        //data: { "value": document.getElementById("GUName").value },
+                        data: {"awardType":$("#awardType").val(), "UEUserID": postIds,"UENote":$("#UENote").val() ,"UETitle": $("#UETitle").val(), "UEContent": $("#UEContent").val(), "UEItemType": $("#UEItemType").val(), "UEItemValue": $("#UEItemValue").val(), "UEItemNum": $("#UEItemNum").val(), "isUploadFile": $("#isUploadFile").prop("checked"),"isGlobal": $("#isGlobal").prop("checked")},
+                        success: function (data) {
+                            unlocksubmit();
+
+
+
+
+                            switch (data.result)
+                            {
+
+                                case 210:
+                                    clearData();
+                                    alert("发送成功");
+                                    //window.location = "/Manage/UserEmail/"
+                                    break;
+                                case -304:
+                                    alert("额度超过限额");
+                                    break;
+                                case -298:
+                                    alert("全局邮件额度超过限额");
+                                    break;
+                                case -303:
+                                    alert("无权限");
+                                    break;
+                                default:
+                                    alert("发送失败，请稍后再试");
+                                    break;
+                            }
+                            //$("#box").empty().append(data).show();
+                        }
+                    }).fail(function (xhr, textStatus, err) {
+                        unlocksubmit();
+                        alert('Error: ' + err);
+                    });
+                }
+
+
+            },
+            invalidHandler: function (form, validator) {  //不通过回调
+                unlocksubmit();
+                //alert("not pass");
+                return false;
+            }
+        });
+
+        function clearData(){
+            $("#UEUserID").val("");
+            $("#UEContent").val("");
+            $("#Money").val("");
+            //礼物  不选中
+            $("#Gift").val("");
+
+            switch ($("#UEItemType").val()) {
+                case '1':
+                case '2':
+                case '3':
+                    $("#UEItemValue").val("0");
+                    $("#UEItemNum").val('1');
+                    break;
+                case '4':
+                    $("#UEItemValue").val("0");
+                    $("#UEItemNum").val('');
+                    break;
+                case '5':
+                    $("#UEItemValue").val("0");
+                    $("#UEItemNum").val('');
+
+                    break;
+                case '6':
+
+                    $("#UEItemNum").val('1');
+                    $("#UEItemValue").val(@ViewData["daoju"]);
+                    break;
+                default:
+                    $("#UEItemValue").val("0");
+
+                    break;
+            }
+
+            // $("#ToolsBox section label select").val("");
+            $("#Money").val("");
+            $("#Grade").val("");
+            $("#divMem div > span").remove();
+        }
+
+
+        function locksubmit() {
+            //if (lock) { return; }
+            //lock = true;
+            //$('#basic_validate').append($('#markbox').addClass('loading'));
+
+            $("#btnSubmit").css("display","none");
+        }
+        function unlocksubmit() {
+            //lock = false;
+            //$('#markbox').attr("class", "");
+
+            $("#btnSubmit").css("display","");
+        }
+22
+
+        $("#isGlobal").change(function(){
+            if (this.checked) {
+                $("#userIDSec").hide("fast");
+            } else {
+                $("#userIDSec").show("fast");
+            }
+        })
+
+
+    })
+
+
+
+    function show(){
+        var ids = $("#UEUserID").val();
+
+        if(ids==""){return;}
+        $.ajax({
+            url: "/Manage/GetMailUsers/",
+            type: "post",
+            data: {"ids":ids},
+            success: function (data) {
+
+
+                $("#UEUserID").val(data);
+
+            }
+        });
+
+    }
+</script>

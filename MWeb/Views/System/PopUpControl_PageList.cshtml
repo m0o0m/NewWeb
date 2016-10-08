@@ -1,0 +1,132 @@
+﻿
+@model List<PopUpInfo>
+
+
+
+<div class="detail">
+    <div class="row-fluid">
+        <div class="widget-box" id="box">
+            <section id="widget-grid" class="">
+                <div class="row">
+                    <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-0" data-widget-editbutton="false" data-widget-colorbutton="false"
+                             data-widget-togglebutton="false"
+                             data-widget-deletebutton="false"
+                             data-widget-fullscreenbutton="false"
+                             data-widget-custombutton="false"
+                             data-widget-collapsed="false"
+                             data-widget-sortable="false">
+                            <header>
+                                <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                                <h2>123</h2>
+                            </header>
+                            <!-- widget div-->
+                            <div>
+                                <!-- widget edit box -->
+                                <div class="jarviswidget-editbox">
+                                    <!-- This area used as dropdown edit box -->
+                                </div>
+                                <!-- end widget edit box -->
+                                <!-- widget content -->
+                                <div class="widget-body no-padding">
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered">
+
+                                            <thead>
+                                                <tr>
+                                                   
+                                                    <th>弹窗位置</th>
+                                                    <th>落地页</th>
+                                                    <th>平台</th>
+                                                    <th>开始时间</th>
+                                                    <th>截止日期</th>
+                                                    <th>是否开启</th>
+                                                    <th>操作</th>
+                                                </tr>
+                                            </thead>
+
+                                            <tbody>
+                                                @foreach (var item in Model)
+                                                {
+                                                    <tr>
+                                                       
+                                                        <td>@(((PopPosition)item.Position).ToString())</td>
+                                                        <td>@(((JumpPage)item.JumpPage).ToString())</td>
+
+                                                        @{ 
+                                                            string Platforms = item.Platform;
+                                                            string[] ps = Platforms.Split('|');
+                                                            string viewPlat = "";
+                                                            if (ps.Contains("0")) {
+                                                                viewPlat += "Web(弹出),";
+                                                            }
+                                                            else {
+                                                                viewPlat += "Web(不弹出),";
+                                                            }
+                                                            if (ps.Contains("1"))
+                                                            {
+                                                                viewPlat += "Android(弹出),";
+                                                            }
+                                                            else {
+                                                                viewPlat += "Android(不弹出),";
+                                                            }
+                                                            if (ps.Contains("2"))
+                                                            {
+                                                                viewPlat += "IOS(弹出)";
+                                                            }
+                                                            else
+                                                            {
+                                                                viewPlat += "IOS(不弹出)";
+                                                            }
+                                                        }
+
+
+                                                        <td>@viewPlat</td>
+                                                        <td>@item.StartTime</td>
+                                                        <td>@item.EndTime</td>
+                                                       
+                                                        @if (item.IsOpen >= 1)
+                                                        {
+                                                            <td>
+                                                                开启
+                                                            </td>
+                                                        }
+                                                        else
+                                                        {
+                                                            <td>
+                                                                关闭
+                                                            </td>
+                                                        }
+
+                                                        <td>
+                                                            <section class="col col-1">
+                                                               
+                                                                <input type="button" onclick="deleteData(@item.id)" class="btn btn-success btn-sm" value="删除" />
+                                                                <input type="button" onclick="updateData(@item.id)" class="btn btn-success btn-sm" value="修改" />
+                                                            </section>
+
+                                                        </td>
+                                                    </tr>
+                                                }
+                                          
+
+                                            </tbody>
+
+                                        </table>
+                                    </div>
+
+                                </div>
+                                <!-- end widget content -->
+                            </div>
+                            <!-- end widget div -->
+                        </div>
+                        <!-- end widget -->
+
+                    </article>
+                </div>
+            </section>
+
+        </div>
+    </div>
+</div>
+

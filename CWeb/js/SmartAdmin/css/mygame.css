@@ -1,0 +1,75 @@
+
+.game-white,[class^="game-"], [class*=" game-"] {display:inline-block;width:20px;height:28px;margin-top:1px;*margin-right:.3em;line-height:14px;vertical-align:text-top; background-image:url("../img/game.png");background-position:28px 20px;background-repeat:no-repeat}
+.majiang-white,[class^="majiang-"], [class*=" majiang-"] {display:inline-block;width:25px;height:37px;margin-top:1px;*margin-right:.3em;line-height:14px;vertical-align:text-top; background-image:url("../img/game.png");background-position:25px 37px;background-repeat:no-repeat}
+.game-01{ background-position:0px 0px }
+.game-02{ background-position:-20px 0px }
+.game-03{ background-position:-40px 0px }
+.game-04{ background-position:-60px 0px }
+.game-05{ background-position:-80px 0px }
+.game-06{ background-position:-100px 0px }
+.game-07{ background-position:-120px 0px }
+.game-08{ background-position:-140px 0px }
+.game-09{ background-position:-160px 0px }
+.game-0a{ background-position:-180px 0px }
+.game-0b{ background-position:-200px 0px }
+.game-0c{ background-position:-220px 0px }
+.game-0d{ background-position:-240px 0px }
+
+.game-11{ background-position:0px -28px }
+.game-12{ background-position:-20px -28px }
+.game-13{ background-position:-40px -28px }
+.game-14{ background-position:-60px -28px }
+.game-15{ background-position:-80px -28px }
+.game-16{ background-position:-100px -28px }
+.game-17{ background-position:-120px -28px }
+.game-18{ background-position:-140px -28px }
+.game-19{ background-position:-160px -28px }
+.game-1a{ background-position:-180px -28px }
+.game-1b{ background-position:-200px -28px }
+.game-1c{ background-position:-220px -28px }
+.game-1d{ background-position:-240px -28px }
+
+.game-21{ background-position:0px -56px }
+.game-22{ background-position:-20px -56px }
+.game-23{ background-position:-40px -56px }
+.game-24{ background-position:-60px -56px }
+.game-25{ background-position:-80px -56px }
+.game-26{ background-position:-100px -56px }
+.game-27{ background-position:-120px -56px }
+.game-28{ background-position:-140px -56px }
+.game-29{ background-position:-160px -56px }
+.game-2a{ background-position:-180px -56px }
+.game-2b{ background-position:-200px -56px }
+.game-2c{ background-position:-220px -56px }
+.game-2d{ background-position:-240px -56px }
+
+.game-31{ background-position:0px -84px }
+.game-32{ background-position:-20px -84px }
+.game-33{ background-position:-40px -84px }
+.game-34{ background-position:-60px -84px }
+.game-35{ background-position:-80px -84px }
+.game-36{ background-position:-100px -84px }
+.game-37{ background-position:-120px -84px }
+.game-38{ background-position:-140px -84px }
+.game-39{ background-position:-160px -84px }
+.game-3a{ background-position:-180px -84px }
+.game-3b{ background-position:-200px -84px }
+.game-3c{ background-position:-220px -84px }
+.game-3d{ background-position:-240px -84px }
+
+.game-4e{ background-position:-0px -112px }
+.game-4f{ background-position:-20px -112px }
+
+
+.majiang-01{ background-position:0px -140px }
+.majiang-02{ background-position:-25px -140px }
+.majiang-03{ background-position:-50px -140px }
+.majiang-04{ background-position:-75px -140px }
+.majiang-05{ background-position:-100px -140px }
+.majiang-06{ background-position:-125px -140px }
+.majiang-07{ background-position:-150px -140px }
+.majiang-08{ background-position:-175px -140px }
+.majiang-09{ background-position:-200px -140px }
+.majiang-0a{ background-position:-225px -140px }
+.majiang-0b{ background-position:-250px -140px }
+.majiang-0c{ background-position:-275px -140px }

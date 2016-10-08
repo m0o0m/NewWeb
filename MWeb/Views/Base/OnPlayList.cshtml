@@ -1,0 +1,76 @@
+﻿@using GL.Data.Model
+@using GL.Data.View
+@model GameRecordView
+@{
+    ViewBag.Title = "在玩列表";
+    if (Request.IsAjaxRequest())
+    {
+        Layout = null;
+
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+
+    ViewBag.Format = "yyyy-MM-dd";
+
+}
+
+
+
+
+<div id="content">
+   
+    <form id="comment-form" class="smart-form" novalidate="novalidate">
+
+        <div class="row">
+            <div class="widget-body">
+                <section class="col col-1.2">
+                    <label class="label">会员ID</label>
+                    <label class="input">
+                        @Html.TextBoxFor(m => m.SearchExt, new { @class = "span2", style = "border-radius:4px;width:120px" })
+                    </label>
+                </section>
+
+                <section class="col col-12" style="width:210px">
+                    <label class="label">游戏类型</label>
+                    <label class="select">
+                        @Html.DropDownListFor(m => m.Gametype, new List<SelectListItem>
+                {
+                         new SelectListItem { Text= "所有游戏", Value ="-1" },
+                    new SelectListItem { Text= "斗地主", Value ="12" },
+                    new SelectListItem { Text= "中发白", Value = "13" },
+                     new SelectListItem { Text= "十二生肖", Value = "14" },
+                    new SelectListItem { Text= "德州扑克", Value = "15" },
+                     new SelectListItem { Text= "小马快跑", Value = "16" },
+                      new SelectListItem { Text= "奔驰宝马", Value = "17" }
+                   
+
+                })<i></i>
+                    </label>
+                </section>
+
+
+                <section class="col col-1">
+                    <label class="label">&nbsp;</label>
+                    @*<button type="submit" class="btn btn-success btn-sm">查询</button>*@
+                    <input type="button" onclick="search()" class="btn btn-success btn-sm" value="查询" />
+                </section>
+
+            </div>
+        </div>
+    </form>
+
+    <div class="row-fluid">
+        <div class="widget-box" id="box">
+            @Html.Partial("OnPlayList_PageList", Model.Data)
+        </div>
+    </div>
+</div>
+
+@section scripts{
+
+    @{Html.RegisterMvcPagerScriptResource();}
+
+}

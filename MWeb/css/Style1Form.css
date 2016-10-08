@@ -1,0 +1,65 @@
+﻿*{
+margin:0;
+padding:0;
+}
+body{
+font-size:63%;
+color:#000;
+}
+/*input*/
+.input_on{
+padding:2px 8px 0pt 3px;
+height:18px;
+border:1px solid #999;
+background-color:#FFFFCC;
+}
+.input_off{
+padding:2px 8px 0pt 3px;
+height:18px;
+border:1px solid #CCC;
+background-color:#FFF;
+}
+.input_move{
+padding:2px 8px 0pt 3px;
+height:18px;
+border:1px solid #999;
+background-color:#FFFFCC;
+}
+.input_out{
+/*height:16px;默认高度*/
+padding:2px 8px 0pt 3px;
+height:18px;
+border:1px solid #CCC;
+background-color:#FFF;
+}
+/*form*/
+ul.input_test{
+margin:20px auto 0 auto;
+width:500px;
+list-style-type:none;
+}
+ul.input_test li{
+width:500px;
+height:22px;
+margin-bottom:10px;
+}
+.input_test label{
+float:left;
+padding-right:10px;
+width:100px;
+line-height:22px;
+text-align:right;
+font-size:1.4em;
+}
+.input_test p{
+float:left;
+_margin-top:-1px;
+}
+.input_test span{
+float:left;
+padding-left:10px;
+line-height:22px;
+text-align:left;
+font-size:1.2em;
+color:#999;
+}

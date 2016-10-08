@@ -1,0 +1,365 @@
+﻿@using GL.Data.Model
+@model  List<RLFlow>
+@{
+    Layout = null;
+
+    LoginRegisterDataView lrd = ViewData["LoginRegisterDataView"] as LoginRegisterDataView;
+
+
+}
+
+<form id="comment-form" class="smart-form" novalidate="novalidate">
+    <div class="row">
+        <div class="widget-body">
+            <section class="col col-15">
+                <label class="label"></label>
+              
+                <div class="row">
+                    <div class="col col-7" style="height:40px">
+                      
+
+                        @*<label style="color:black">QQ注册&nbsp;&nbsp;</label>*@
+
+                        <input type="button" class="btn btn-success btn-sm" value="关闭(QQ注册)" onclick="btnAdd(-100,0)" />
+
+                        @*<section class="col col-5">
+                            <label class="label">&nbsp;</label>
+                            <input style="background-color:white;color:black" type="button" class="btn btn-success btn-sm" value="QQ 注册" />
+                        </section>
+                        <section class="col col-5">
+                            <label class="label">&nbsp;</label>
+                            <input type="button" class="btn btn-success btn-sm" value="关闭" onclick="btnAdd(-100,0)" />
+                        </section>*@
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col col-7" style="height:40px">
+                        @*<label style="color:black">微信注册&nbsp;&nbsp;</label>*@
+
+                        <input type="button" class="btn btn-success btn-sm" value="关闭(微信注册)" onclick="btnAdd(-100, 1)" />
+
+                    </div>
+
+                     
+
+                        @*<div class="col col-7" style="height:40px">
+                <section class="col col-5">
+                    <label class="label">&nbsp;</label>
+                    <input style="background-color:white;color:black" type="button" class="btn btn-success btn-sm" value="微信注册" />
+                </section>
+                <section class="col col-5">
+                    <label class="label">&nbsp;</label>
+                    <input type="button" class="btn btn-success btn-sm" value="关闭" onclick="btnAdd(-100,1)" />
+                </section>
+            </div>*@
+                    </div>
+                <div class="row">
+                    <div class="col col-7" style="height:40px">
+                        @*<label style="color:black">游客注册&nbsp;&nbsp;</label>*@
+
+                        <input type="button" class="btn btn-success btn-sm" value="关闭(游客注册)" onclick="btnAdd(-100, 2)" />
+
+                    </div>
+
+
+                    @*<div class="col col-7" style="height:40px">
+                        <section class="col col-5">
+                            <label class="label">&nbsp;</label>
+                            <input style="background-color:white;color:black" type="button" class="btn btn-success btn-sm" value="游客注册" />
+                        </section>
+                        <section class="col col-5">
+                            <label class="label">&nbsp;</label>
+                            <input type="button" class="btn btn-success btn-sm" value="关闭" onclick="btnAdd(-100,2)" />
+                        </section>
+                    </div>*@
+                </div>
+                <div class="row">
+                    <div class="col col-7" style="height:40px">
+                        @*<label style="color:black">ID 注册&nbsp;&nbsp;</label>*@
+
+                        <input type="button" class="btn btn-success btn-sm" value="关闭(ID注册)" onclick="btnAdd(-100, 3)" />
+
+                    </div>
+
+                    @*<div class="col col-7" style="height:40px">
+                        <section class="col col-5">
+                            <label class="label">&nbsp;</label>
+                            <input style="background-color:white;color:black" type="button" class="btn btn-success btn-sm" value="ID 注册" />
+                        </section>
+                        <section class="col col-5">
+                            <label class="label">&nbsp;</label>
+                            <input type="button" class="btn btn-success btn-sm" value="关闭" onclick="btnAdd(-100,3)" />
+                        </section>
+                    </div>*@
+                </div>
+                <div class="row">
+
+                    <div class="col col-7" style="height:40px">
+                        @*<label style="color:black">515 注册&nbsp;&nbsp;</label>*@
+
+                        <input type="button" class="btn btn-success btn-sm" value="关闭(515注册)" onclick="btnAdd(-100, 4)" />
+
+                    </div>
+
+                    @*<div class="col col-7" style="height:40px">
+                        <section class="col col-5">
+                            <label class="label">&nbsp;</label>
+                            <input style="background-color:white;color:black" type="button" class="btn btn-success btn-sm" value="515 注册" />
+                        </section>
+                        <section class="col col-5">
+                            <label class="label">&nbsp;</label>
+                            <input type="button" class="btn btn-success btn-sm" value="关闭" onclick="btnAdd(-100,4)" />
+                        </section>
+                    </div>*@
+                </div>
+                <div class="row">
+                    <div class="col col-7" style="height:40px">
+                        @*<label style="color:black">第三方注册&nbsp;&nbsp;</label>*@
+
+                        <input type="button" class="btn btn-success btn-sm" value="关闭(第三方注册)" onclick="btnAdd(-100, 5)" />
+
+                    </div>
+
+                    @*<div class="col col-7" style="height:40px">
+                        <section class="col col-5">
+                            <label class="label">&nbsp;</label>
+                            <input style="background-color:white;color:black" type="button" class="btn btn-success btn-sm" value="第三方注册" />
+                        </section>
+                        <section class="col col-5">
+                            <label class="label">&nbsp;</label>
+                            <input type="button" class="btn btn-success btn-sm" value="关闭" onclick="btnAdd(-100,5)" />
+                        </section>
+                    </div>*@
+                </div>
+            </section>
+
+            <section class="col col-15">
+                <label class="label"></label>
+              
+                <div class="row">
+                    <div class="col col-7" style="height:40px">
+                        @*<label style="color:black">QQ 登录&nbsp;&nbsp;</label>*@
+
+                        <input type="button" class="btn btn-success btn-sm" value="关闭(QQ登录)" onclick="btnAdd(0, -100)" />
+
+                    </div>
+
+
+                    @*<div class="col col-7" style="height:40px">
+                        <section class="col col-5">
+                            <label class="label">&nbsp;</label>
+                            <input style="background-color:white;color:black" type="button" class="btn btn-success btn-sm" value="QQ 登录" />
+                        </section>
+                        <section class="col col-5">
+                            <label class="label">&nbsp;</label>
+                            <input type="button" class="btn btn-success btn-sm" value="关闭" onclick="btnAdd(0,-100)" />
+                        </section>
+                    </div>*@
+                </div>
+                <div class="row">
+                    <div class="col col-7" style="height:40px">
+                        @*<label style="color:black">微信登录&nbsp;&nbsp;</label>*@
+
+                        <input type="button" class="btn btn-success btn-sm" value="关闭(微信登录)" onclick="btnAdd(1, -100)" />
+
+                    </div>
+
+                    @*<div class="col col-7" style="height:40px">
+                        <section class="col col-5">
+                            <label class="label">&nbsp;</label>
+                            <input style="background-color:white;color:black" type="button" class="btn btn-success btn-sm" value="微信登录" />
+                        </section>
+                        <section class="col col-5">
+                            <label class="label">&nbsp;</label>
+                            <input type="button" class="btn btn-success btn-sm" value="关闭" onclick="btnAdd(1,-100)" />
+                        </section>
+                    </div>*@
+                </div>
+                <div class="row">
+                    <div class="col col-7" style="height:40px">
+                        @*<label style="color:black">游客登录&nbsp;&nbsp;</label>*@
+
+                        <input type="button" class="btn btn-success btn-sm" value="关闭(游客登录)" onclick="btnAdd(2, -100)" />
+
+                    </div>
+
+                    @*<div class="col col-7" style="height:40px">
+                        <section class="col col-5">
+                            <label class="label">&nbsp;</label>
+                            <input style="background-color:white;color:black" type="button" class="btn btn-success btn-sm" value="游客登录" />
+                        </section>
+                        <section class="col col-5">
+                            <label class="label">&nbsp;</label>
+                            <input type="button" class="btn btn-success btn-sm" value="关闭" onclick="btnAdd(2,-100)" />
+                        </section>
+                    </div>*@
+                </div>
+                <div class="row">
+                    <div class="col col-7" style="height:40px">
+                        @*<label style="color:black">ID登录&nbsp;&nbsp;</label>*@
+
+                        <input type="button" class="btn btn-success btn-sm" value="关闭(ID登录)" onclick="btnAdd(3, -100)" />
+
+                    </div>
+                    @*<div class="col col-7" style="height:40px">
+                        <section class="col col-5">
+                            <label class="label">&nbsp;</label>
+                            <input style="background-color:white;color:black" type="button" class="btn btn-success btn-sm" value="ID 登录" />
+                        </section>
+                        <section class="col col-5">
+                            <label class="label">&nbsp;</label>
+                            <input type="button" class="btn btn-success btn-sm" value="关闭" onclick="btnAdd(3,-100)" />
+                        </section>
+                    </div>*@
+                </div>
+                <div class="row">
+
+                    <div class="col col-7" style="height:40px">
+                        @*<label style="color:black">515登录&nbsp;&nbsp;</label>*@
+
+                        <input type="button" class="btn btn-success btn-sm" value="关闭(515登录)" onclick="btnAdd(4, -100)" />
+
+                    </div>
+
+                    @*<div class="col col-7" style="height:40px">
+                        <section class="col col-5">
+                            <label class="label">&nbsp;</label>
+                            <input style="background-color:white;color:black" type="button" class="btn btn-success btn-sm" value="515 登录" />
+                        </section>
+                        <section class="col col-5">
+                            <label class="label">&nbsp;</label>
+                            <input type="button" class="btn btn-success btn-sm" value="关闭" onclick="btnAdd(4,-100)" />
+                        </section>
+                    </div>*@
+                </div>
+                <div class="row">
+
+                    <div class="col col-7" style="height:40px">
+                        @*<label style="color:black">第三方登录&nbsp;&nbsp;</label>*@
+
+                        <input type="button" class="btn btn-success btn-sm" value="关闭(第三方登录)" onclick="btnAdd(5, -100)" />
+
+                    </div>
+
+                    @*<div class="col col-7" style="height:40px">
+                        <section class="col col-5">
+                            <label class="label">&nbsp;</label>
+                            <input style="background-color:white;color:black" type="button" class="btn btn-success btn-sm" value="第三方登录" />
+                        </section>
+                        <section class="col col-5">
+                            <label class="label">&nbsp;</label>
+                            <input type="button" class="btn btn-success btn-sm" value="关闭" onclick="btnAdd(5,-100)" />
+                        </section>
+                    </div>*@
+                </div>
+            </section>
+
+        </div>
+    </div>
+</form>
+
+
+
+
+
+<br />
+
+
+
+<section id="widget-grid" class="detail">
+    <div class="row" id="box">
+        <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-0" data-widget-editbutton="false" data-widget-colorbutton="false"
+                 data-widget-togglebutton="false"
+                 data-widget-deletebutton="false"
+                 data-widget-fullscreenbutton="false"
+                 data-widget-custombutton="false"
+                 data-widget-collapsed="false"
+                 data-widget-sortable="false">
+                <header>
+                    <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                    <h2>关闭状态详情</h2>
+                </header>
+                <!-- widget div-->
+                <div>
+                    <!-- widget edit box -->
+                    <div class="jarviswidget-editbox">
+                        <!-- This area used as dropdown edit box -->
+                    </div>
+                    <!-- end widget edit box -->
+                    <!-- widget content -->
+                    <div class="widget-body no-padding">
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <thead>
+
+                                    <tr>
+                                        <th>渠道</th>
+                                        <th>手机系统</th>
+                                        <th>手机品牌</th>
+                                        <th>手机机型</th>
+                                        <th>关闭入口</th>
+                                         <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    @if (Model.Count == 0)
+                                    {
+                                        <tr>
+                                            <td class="colspan" align="center" colspan="0">
+                                                没有找到相关记录！
+                                            </td>
+                                        </tr>
+                                    }
+                                    @foreach (RLFlow r in Model)
+                                    {
+                                        <tr>
+                                            <td>@r.AgentName</td>
+                                            <td> @r.PlatformName</td>
+                                           
+                                            @if (r.PhoneBoardName == "all_brand")
+                                            {
+                                                <td>  所有品牌  </td>
+                                            }
+                                            else
+                                            {
+                                                <td>  @r.PhoneBoardName  </td>
+                                            }
+
+                                            @if (r.PhoneModelsName == "all_model")
+                                            {
+                                                <td>  所有机型  </td>
+                                            }
+                                            else
+                                            {
+                                                <td>  @r.PhoneModelsName  </td>
+                                            }
+
+                                            
+                                         
+                                            <td>@r.OperType</td>
+                                            <td style="text-align:center">
+        <input id="btnDelete" type="button" value="删除" class="btn btn-inverse btn-mini" onclick="return btnDelete(@r.ID)" />
+                                            </td>
+                                        </tr>
+                                    }
+
+
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- end widget content -->
+                </div>
+                <!-- end widget div -->
+            </div>
+            <!-- end widget -->
+
+        </article>
+    </div>
+</section>
+
+
+

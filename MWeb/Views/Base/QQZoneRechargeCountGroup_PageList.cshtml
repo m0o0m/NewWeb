@@ -1,0 +1,158 @@
+﻿
+
+@using Webdiyer.WebControls.Mvc;
+@using GL.Data.Model;
+@model PagedList<QQZoneRechargeCount>
+@{
+
+    ViewBag.Format = "yyyy-MM-dd";
+
+}
+
+<div class="row-fluid">
+    <div class="widget-box" id="boxGroup">
+        <section id="widget-grid" class="">
+            <div class="row">
+                <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-0" data-widget-editbutton="false" data-widget-colorbutton="false"
+                         data-widget-togglebutton="false"
+                         data-widget-deletebutton="false"
+                         data-widget-fullscreenbutton="false"
+                         data-widget-custombutton="false"
+                         data-widget-collapsed="false"
+                         data-widget-sortable="false">
+                        <header>
+                            <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                            <h2>充值统计</h2>
+                        </header>
+                        <!-- widget div-->
+                        <div>
+                            <!-- widget edit box -->
+                            <div class="jarviswidget-editbox">
+                                <!-- This area used as dropdown edit box -->
+                            </div>
+                            <!-- end widget edit box -->
+                            <!-- widget content -->
+                            <div class="widget-body no-padding" style="min-height: 70px;">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            @*<input id="btnView" type="button" value="注册详情" class="btn btn-danger btn-mini" onclick="return btnView(this)" />
+                                            <input id="btnViewUser" type="button" value="用户详情" class="btn btn-danger btn-mini" onclick="return btnViewUser(this)" />*@
+                                            <tr>
+                                                <th>日期</th>
+                                                <th>活跃用户</th>
+                                                <th>新增用户</th>
+                                                <th>充值总额</th>
+                                                <th>充值总人数</th>
+                                                <th>付费ARPU值</th>
+                                                <th>活跃ARPU值</th>
+                                                <th>新增ARPU值</th>
+                                                <th>新增用户充值率</th>
+                                                <th>次日留存率</th>
+                                                <th>3日留存率</th>
+                                                <th>7日留存率</th>
+                                                <th>15日留存率</th>
+                                                <th>30日留存率</th>
+                                                <th>当日注册且充值玩家</th>
+                                                <th>首次充值人数</th>
+                                                <th style="display:none">再次付费人数</th>                                                
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @if (Model.Count == 0)
+                                            {
+                                                <tr>
+                                                    <td class="colspan" align="center" colspan="0">
+                                                        没有找到相关记录！
+                                                    </td>
+                                                </tr>
+                                            }
+                                            @foreach (QQZoneRechargeCount item in Model)
+                                            {
+                                                <tr>
+                                                    <td>@item.date.ToString(ViewBag.Format)</td>
+                                                    <td>@item.activeUser.ToString("0")</td>
+                                                    <td>@item.registerUser.ToString("0")</td> 
+                                                    <td>@((item.rechargeCount / 100).ToString("0.00"))</td> 
+                                                    <td><a href="javascript:void" onclick="btnView(this, 4)">@(item.rechargeNum.ToString("0"))</td> @*总充值人数*@
+                                                    <td>@((item.ARPU / 100).ToString("0.00"))</td>
+                                                    <td>@((item.ARPUActive / 100).ToString("0.00"))</td>
+                                                    <td>@((item.ARPUNew / 100).ToString("0.00"))</td>
+                                                    <td>@item.rechargeRate.ToString("0%")</td>
+                                                    <td>@(item.OneDay.ToString("0.00%"))</td>
+                                                    <td>@(item.ThreeDay.ToString("0.00%"))</td>
+                                                    <td>@(item.SevenDay.ToString("0.00%"))</td>
+                                                    <td>@(item.FifteenDay.ToString("0.00%"))</td>
+                                                    <td>@(item.ThirtDay.ToString("0.00%"))</td>
+                                                    <td><a href="javascript:void" onclick="btnView(this, 3)">@item.newRecharge.ToString("0")</a></td>  @*当日注册，充值*@
+                                                    <td><a href="javascript:void" onclick="btnView(this, 1)">@item.rechargeUser.ToString("0")</a> </td>   @*首次充值人数*@                                               
+                                                    <td style="display:none"><a href="javascript:void" onclick="btnView(this, 2)">@item.nextRecharge.ToString("0")</a></td>  @*再次付费人数*@
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            
+                            
+
+                                <div class="widget-content">
+
+                                    @Ajax.Pager(
+    Model,
+    new PagerOptions()
+    {
+        CssClass = "pager",
+        ShowMorePagerItems = true,
+        PageIndexParameterName = "pageGroup",
+        ShowDisabledPagerItems = true,
+        AlwaysShowFirstLastPageNumber = true,
+        //ShowRecordCountItems = true,
+        HorizontalAlign = "right",
+        //SeparatorHtml = "",
+
+        CurrentPagerItemTemplate = "<li class=\"disabled\"><span>{0}</span></li>",
+        DisabledPagerItemTemplate = "<li class=\"disabled\"><span>{0}</span></li>",
+        PagerItemTemplate = "<li>{0}</li>",
+        //CurrentPagerItemWrapperFormatString = "<li class=\"disabled\"><span>{0}</span></li>",
+        //NumericPagerItemWrapperFormatString = "<li>{0}</li>",
+        //PagerItemWrapperFormatString = "<li>{0}</li>",
+        //RecordCountText = string.Format("共{0}条记录, {1}页", Model.TotalItemCount, Model.TotalPageCount),
+        //RecordCountFormatString = "<li><span>{0}</span></li>",
+        //DisabledPagerItemsFormatString = "<li class=\"disabled\"><span>{0}</span></li>",
+        //PageIndexBoxType = Webdiyer.WebControls.Mvc.PageIndexBoxType.TextBox,
+        //GoButtonText = "跳转到",
+        ShowPrevNext = true,
+        FirstPageText = "第一页",
+        LastPageText = "最后一页",
+        ContainerTagName = "ul",
+        PageIndexBoxId = "pageindexcmGroup",
+        WYWPageIndexString = @"<li><input style='width:50px;' type='text' value='' id='{0}' name = '{1}'></li>
+                                 <li><a id='goto2' name='goto2' style='margin-right:10px' >跳转</a><li>
+                             ",
+        GoToButtonId = "goto2"
+    },
+    new MvcAjaxOptions
+    {
+        HttpMethod = "POST",
+        UpdateTargetId = "boxGroup",
+        InsertionMode = InsertionMode.Replace,
+        OnFailure = "errFunc",
+        OnSuccess = "successPageFun"
+    }).Options(o => o.AddRouteValue("target", "boxGroup"))
+                                </div>
+
+                            
+                            </div>
+                            <!-- end widget content -->
+                        </div>
+                        <!-- end widget div -->
+                    </div>
+                    <!-- end widget -->
+
+                </article>
+            </div>
+        </section>
+
+    </div>
+</div>

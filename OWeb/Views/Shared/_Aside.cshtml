@@ -1,0 +1,43 @@
+﻿    <!-- Left panel : Navigation area -->
+<!-- Note: This width of the aside area can be adjusted through LESS variables -->
+<aside id="left-panel">
+
+    <!-- User info -->
+    @{ Html.RenderPartial("_CurrentUser"); }
+    <!-- end user info -->
+    <!-- NAVIGATION : This navigation is also responsive
+
+    To make this navigation dynamic please make sure to link the node
+    (the reference to the nav > ul) after page load. Or the navigation
+    will not initialize.
+    -->
+    <nav>
+        <!-- NOTE: Notice the gaps after each icon usage <i></i>..
+        Please note that these links work a bit different than
+        traditional href="" links. See documentation for details.
+        -->
+
+        <ul>
+            <li class="@Html.RouteIf("CustomerService", "active")">
+                <a href="@Url.Action("CustomerService", "Home")" title="客服个人信息"><i class="fa fa-lg fa-fw fa-home"></i> <span class="menu-item-parent">客服个人信息</span></a>
+            </li>
+            <li class="@Html.RouteIf("Services", "active")">
+                <a href="#"><i class="fa fa-lg fa-fw fa-bar-chart-o"></i> <span class="menu-item-parent">工具</span></a>
+                <ul>
+                    <li class="@Html.RouteIf("OnlineProblem", "active")">
+                        <a href="@Url.Action("OnlineProblem", "Services")">在线问题列表</a>
+                    </li>
+                    <li class="@Html.RouteIf("FAQ", "active")">
+                        <a href="@Url.Action("FAQ", "Services")">常见问题</a>
+                    </li>
+                </ul>
+            </li>
+
+        </ul>
+    </nav>
+    <span class="minifyme" data-action="minifyMenu">
+        <i class="fa fa-arrow-circle-left hit"></i>
+    </span>
+
+</aside>
+<!-- END NAVIGATION -->

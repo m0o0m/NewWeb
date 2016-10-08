@@ -1,0 +1,147 @@
+﻿@using GL.Data.View
+@model ModelBaseData
+@{
+    ViewBag.Title = Model.ModelName;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    List<object> bdl = (List<object>)Model.DataList;
+}
+
+<article class="col-sm-12 col-md-12 col-lg-7">
+    <div class="jarviswidget" id="wid-id-4" data-widget-editbutton="false" data-widget-custombutton="false">
+        <header>
+            <span class="widget-icon"> <i class="fa fa-edit"></i> </span>
+            <h2>修正模版</h2>
+        </header>
+        <div>
+            <div class="jarviswidget-editbox">
+            </div>
+            <div class="widget-body no-padding" >
+                <div>
+                    <form id="submitForm" class="smart-form" action="" method="post" name="basic_validate" id="basic_validate">
+                        <fieldset id="SQL">
+                            <section>
+                                <label>模版ID </label>
+                                <label class="input">
+                                    <input id="ID" name="ID" type="text" class="span10" readonly="readonly" value="@Model.ID" />
+                                </label>
+                            </section>
+                            <section>
+                                <label>模版名称 </label>
+                                <label class="input">
+                                    <input id="ModelName" name="ModelName" type="text" class="span10" value="@Model.ModelName" />
+                                </label>
+                            </section>
+                            <section>
+                                <label>SQL脚本 </label>
+                                <label class="textarea">
+                                    <textarea id="Model" name="Model" rows="10" class="span10">@Model.Model</textarea>
+                                </label>
+                                <label style="color:red">&nbsp;参数请使用大括号保存（如：{userid}）</label>
+                            </section>
+                        </fieldset>
+                        <footer id="save" style="display:none">
+                            <section>
+                                <input type="submit" value="保存"  class="btn btn-success">
+                                <input type="button" value="返回" onclick="return reLoad()" class="btn btn-warning">
+                            </section>
+                        </footer>
+                    </form>
+                </div>
+                <div id="checkSQL" class="dropdown" style="background-color:rgba(248,248,248,.9)">
+                    <section>
+                        <input type="button" value="下一步" onclick="return getPara()" style="margin:10px 20px 10px 20px" class="btn btn-info">
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+</article>
+
+<script src="~/js/SmartAdmin/js/libs/jquery-2.0.2.min.js"></script>
+<script type="text/javascript">
+
+    $(function () {
+        $("#submitForm").validate({
+            submitHandler: function (form) {
+                $.ajax({
+                    url: "/Console/DataModelEdit/",
+                    type: "POST",
+                    data: $("#submitForm").serialize(),
+                    success: function (data) {
+                        switch (data.result) {
+                            case 0:
+                                alert("操作成功");
+                                location.href = "/Console/Model?Value=";
+                                break;
+                            case 2:
+                                alert("操作失败，影响行数为0");
+                                location.reload();
+                                break;
+                            case 2:
+                                alert("操作失败，影响行数为预期之外的值");
+                                location.reload();
+                                break;
+                            default:
+                                alert("添加模版失败");
+                                break;
+                        }
+                    }
+                });
+            }
+        });
+    })
+
+    function reLoad() {
+        location.reload();
+    }
+
+    function getPara() {
+        var _sql = $(document.getElementById("Model")).val();
+        var _sqlUpper = _sql.toUpperCase();
+        if (_sql == "") {
+            alert("请输入SQL语句");
+            location.reload();
+        } else if (_sqlUpper.indexOf("DROP ") > 0 || _sqlUpper.indexOf("TRUNCATE ") > 0 || _sqlUpper.indexOf("DELETE ") > 0) {
+            alert("输入SQL语句存在危险操作");
+            location.reload();
+        } else {
+            //隐藏按钮
+            var _nextstep = $(document.getElementById("checkSQL"));
+            _nextstep.hide();
+            //解析参数
+            var _para = new Array();
+            while (_sql.indexOf("{") >= 0) {
+                _para.push(_sql.substring(_sql.indexOf("{") + 1, _sql.indexOf("}")));
+                _sql = _sql.substr(_sql.indexOf("}") + 1);
+            }
+            if (_para.length > 0) {
+                //数组去重
+                _para.sort();
+                var _dispara = [_para[0]];
+                for (var i = 1 ; i < _para.length; i++) {
+                    if (_para[i] !== _dispara[_dispara.length - 1]) {
+                        _dispara.push(_para[i]);
+                    }
+                }
+                //添加参数说明
+                for (var j = 0; j < _dispara.length; j++) {
+                    var _field = document.getElementById("SQL");
+                    var _section = document.createElement("section");
+                    var _lable = document.createElement("label");
+                    _lable.innerHTML = _dispara[j];
+                    _lable.id = _dispara[j];
+                    _section.appendChild(_lable);
+                    _field.appendChild(_section);
+                    $("<label class=\"input\"><input id=\"para\" style=\"padding:5px 10px 5px 10px;\" name=" + _dispara[j] + " placeholder=\"参数名称\"></label>" +
+                       "<div class=\"inline-group\">" +
+                           "<label class=\"radio\"><input value =\"1\" type=\"radio\" name=" + _dispara[j] + " checked=\"checked\"><i></i>DateTime</label>" +
+                           "<label class=\"radio\"><input value =\"2\" type=\"radio\" name=" + _dispara[j] + "><i></i>Text</label>" +
+                       "</div>").appendTo($(document.getElementById(_dispara[j])));
+                }
+            }
+        }
+        //保存数据
+        document.getElementById("save").style.display = "block";
+    }
+
+</script>

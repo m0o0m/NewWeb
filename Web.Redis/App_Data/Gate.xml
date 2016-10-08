@@ -1,0 +1,20 @@
+<!--
+ ID:网关ID
+ GIP:网关Ip
+ GPort:网关端口
+ ZIP:中心服Ip
+ ZPort:中心服端口
+ Description:描述
+ Type:网关类型  0 测试 1 外网测试 2 正式
+ -->
+<DataList>
+  <GateInfo ID="1" GIP="192.168.1.17" GPort="5622" ZIP="192.168.1.17" ZPort="5003" HIP="192.168.1.17" HPort="6100" Limit="3" Description="网关1" Type="0"/>
+  <GateInfo ID="2" GIP="192.168.1.17" GPort="5632" ZIP="192.168.1.17" ZPort="5013" HIP="192.168.1.17" HPort="6110" Limit="500" Description="网关2" Type="0"/>
+
+ 
+  <GateInfo ID="1" GIP="182.254.148.116" GPort="5622" ZIP="182.254.148.116" ZPort="5003" HIP="182.254.148.116" HPort="6100" Limit="1000" Description="网关1" Type="1"/>
+  <GateInfo ID="2" GIP="182.254.148.116" GPort="5632" ZIP="182.254.148.116" ZPort="5013" HIP="182.254.148.116" HPort="6110" Limit="1000" Description="网关2" Type="1"/>
+
+
+  <GateInfo ID="1" GIP="115.159.3.167" GPort="5622" ZIP="115.159.3.167" ZPort="5003" HIP="115.159.3.167" HPort="6100" Limit="1000" Description="网关1" Type="2"/>
+</DataList>

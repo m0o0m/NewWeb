@@ -1,0 +1,102 @@
+﻿@using GL.Data.Model
+@using GL.Data.View
+@model BaseDataView
+@{
+    ViewBag.Title = "周报";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+
+
+
+
+<div id="content">
+    <form id="comment-form" class="smart-form" novalidate="novalidate">
+        <div class="row">
+            <div class="widget-body">
+
+
+                <section class="col col-12" style="width:210px;padding-top:5px">
+                    <label>渠道</label>
+                    <label class="select">
+                        @Html.GetAllAgentGroupList("Channels", Model.Channels)
+                        <i></i>
+                    </label>
+                </section>
+
+
+                @*<section class="col col-1">
+                        <label class="label">版本</label>
+                        <label class="select">
+                            @Html.DropDownList("Gametype", new List<SelectListItem>
+                    {
+                        new SelectListItem { Text= "11", Value = "13" },
+                        new SelectListItem { Text= "12", Value = "14" },
+                        new SelectListItem { Text= "13", Value = "15" },
+                        new SelectListItem { Text= "14", Value = "17" },
+                        new SelectListItem { Text= "15", Value = "18" }
+                    })<i></i>
+                        </label>
+                    </section>*@
+
+
+                <section class="col col-1.2">
+                    <label class="label">&nbsp;</label>
+                    <label class="input">
+                        <i class="icon-append fa fa-calendar"></i>
+                        @Html.TextBoxFor(m => m.StartDate, new Dictionary<string, object>() { { "class", "form-control datepicker" }, { "data-dateformat", "yy-mm-dd 00:00:00" } })
+                    </label>
+                </section>
+            
+                <section class="col col-1">
+                    <label class="label">&nbsp;</label>
+                    <input type="button" onclick="search()" class="btn btn-success btn-sm" value="查询" />
+                </section>
+
+            </div>
+        </div>
+    </form>
+
+    <div class="row-fluid">
+        <div class="widget-box" id="box">
+            @Html.Partial("WeekReport_PageList", Model.BaseDataList)
+        </div>
+    </div>
+</div>
+
+
+
+
+
+@section scripts{
+    @{Html.RegisterMvcPagerScriptResource();}
+
+
+    @*<script src="/js/bootstrap.min.js"></script>
+        <script src="/js/select2.min.js"></script>
+        @Styles.Render("~/Style/bootstrap-datetimepicker")
+        @Scripts.Render("~/bundles/bootstrap-datetimepicker")*@
+
+
+    <script type="text/javascript">
+
+        //$(document).ready(function () {
+        //    $('select').select2({
+        //        allowClear: false,
+        //        minimumResultsForSearch: -1
+        //    });
+        //    $('.datepicker').datetimepicker({
+        //        minView: "month", //选择日期后，不会再跳转去选择时分秒
+        //        format: "yyyy-mm-dd hh:ii:ss", //选择日期后，文本框显示的日期格式
+        //        language: 'zh-CN', //汉化
+        //        autoclose: true //选择日期后自动关闭
+        //    });
+
+        //});
+
+
+
+    </script>
+
+}

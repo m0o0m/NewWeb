@@ -1,0 +1,189 @@
+﻿@using GL.Data.Model
+@model BaseDataView
+@{
+    ViewBag.Title = "游戏产出消耗";
+    ViewBag.Format = "yyyy-MM-dd";
+    switch (Model.Groupby)
+    {
+        case groupby.按日:
+            break;
+        case groupby.按月:
+            ViewBag.Format = "yyyy-MM";
+            break;
+    }
+
+
+    List<GameOutput> bdl = (List<GameOutput>)Model.BaseDataList;
+}
+
+<div id="content">
+
+    <!-- Widget ID (each widget will need unique ID)-->
+
+
+
+
+    <form id="comment-form" class="smart-form" novalidate="novalidate">
+        <div class="row">
+            <section class="col col-1">
+                <label class="select">
+                    @Html.DropDownList("Channels", new List<SelectListItem> {
+                    new SelectListItem{ Text = "所有渠道", Value = "0"},
+                    new SelectListItem{ Text = "渠道A", Value = "1"},
+                    new SelectListItem{ Text = "渠道B", Value = "2"}
+                })<i></i>
+                </label>
+            </section>
+
+            <section class="col col-1.2">
+                <label class="input">
+                    <i class="icon-append fa fa-calendar"></i>
+                    @Html.TextBoxFor(m => m.StartDate, new Dictionary<string, object>() {
+                           { "class", "form-control datepicker" },
+                           { "data-dateformat", "yy-mm-dd 00:00:00" }
+                       })
+                </label>
+            </section>
+
+
+
+            <section class="col col-1.2">
+                <label class="input">
+                    <i class="icon-append fa fa-calendar"></i>
+                    @Html.TextBoxFor(m => m.ExpirationDate, new Dictionary<string, object>() {
+                           { "class", "form-control datepicker" },
+                           { "data-dateformat", "yy-mm-dd 00:00:00" }
+                       })
+                </label>
+            </section>
+            <section class="col col-1">
+                <label class="select">
+                    @Html.DropDownList("groupby") <i></i>
+                </label>
+            </section>
+
+
+            <section class="col col-1">
+                <button type="submit" class="btn btn-success btn-sm">查询</button>
+            </section>
+
+        </div>
+    </form>
+
+
+
+
+
+    <section id="widget-grid" class="">
+        <div class="row">
+            <article class="col-xs-12 col-sm-12 col-md-12 col-lg-10">
+                <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-0" data-widget-editbutton="false" data-widget-colorbutton="false"
+                     data-widget-togglebutton="false"
+                     data-widget-deletebutton="false"
+                     data-widget-fullscreenbutton="false"
+                     data-widget-custombutton="false"
+                     data-widget-collapsed="false"
+                     data-widget-sortable="false">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                        <h2>游戏产出消耗</h2>
+                    </header>
+                    <!-- widget div-->
+                    <div>
+                        <!-- widget edit box -->
+                        <div class="jarviswidget-editbox">
+                            <!-- This area used as dropdown edit box -->
+                        </div>
+                        <!-- end widget edit box -->
+                        <!-- widget content -->
+                        <div class="widget-body no-padding" style="min-height: 70px;">
+                            <div class="table-responsive">
+                                <table class="table table-bordered">
+                                    <thead>
+
+                                        <tr>
+                                            <th>日期</th>
+                                            <th>系统总筹码</th>
+                                            <th>水族馆养鱼总额</th>
+                                            <th>当日产出筹码</th>
+                                            <th>当日消耗筹码</th>
+                                            <th>充值筹码</th>
+                                            <th>系统总钻石</th>
+                                            <th>当日产出钻石</th>
+                                            <th>当日消耗钻石</th>
+                                            <th>充值钻石</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @if (bdl.Count == 0)
+                                        {
+                                            <tr>
+                                                <td class="colspan" align="center" colspan="0">
+                                                    没有找到相关记录！
+                                                </td>
+                                            </tr>
+                                        }
+                                        @foreach (var item in bdl)
+                                        {
+                                            <tr>
+                                                <td>@item.date.ToString(ViewBag.Format)</td>
+                                                <td>@item.systemBargainingChip.ToString("#,0.")</td>
+                                                <td>@item.systemFishChip.ToString("#,0.")</td>
+                                                <td>@item.ChipOutput.ToString("#,0.")</td>
+                                                <td>@item.ChipConsume.ToString("#,0.")</td>
+                                                <td>@item.ChipRecharge.ToString("#,0.")</td>
+                                                <td>@item.systemDiamond.ToString("#,0.")</td>
+                                                <td>@item.DiamondOutput.ToString("#,0.")</td>
+                                                <td>@item.DiamondConsume.ToString("#,0.")</td>
+                                                <td>@item.DiamondRecharge.ToString("#,0.")</td>
+                                                <td><input id="btnView" type="button" value="查看详情" class="btn btn-danger btn-mini" onclick="return btnView(this)" /></td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <!-- end widget content -->
+                    </div>
+                    <!-- end widget div -->
+                </div>
+                <!-- end widget -->
+
+            </article>
+        </div>
+    </section>
+
+
+
+
+
+
+
+</div>
+
+<script type="text/javascript">
+    function btnView(obj) {
+        _this = $(obj).parent().parent();
+
+        //alert(_this.find("td").eq(0).html());
+
+        //return false;
+        var _Date = _this.find("td").eq(0).html();
+        $.ajax({
+            url: "/base/GameOutputDetail/",
+            type: "POST",
+            dataType: "html",
+            data: { "StartDate": _Date },
+            success: function (data) {
+                $(".GameOutputDetail").remove();
+                $("#content").append(data);
+
+            }
+        }).fail(function (xhr, textStatus, err) {
+            alert('Error: ' + err);
+        });
+        return false;
+    }
+
+</script>

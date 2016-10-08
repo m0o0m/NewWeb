@@ -1,0 +1,52 @@
+﻿@{
+    ViewBag.Title = "在线提问列表";
+}
+
+
+
+<div id="body">
+    <section class="featured">
+        <div class="content-wrapper">
+            <hgroup class="title">
+                <h1>Welcome to ASP.NET Web API!</h1>
+            </hgroup>
+        </div>
+    </section>
+    <section class="content-wrapper main-content clear-fix">
+
+
+        <table style="width:100%;">
+            <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+            <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+            <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+        </table>
+
+
+
+
+    </section>
+</div>
+
+@section scripts{
+    <script type="text/javascript">
+
+
+        $(function () {
+            $.ajax({
+                url: "/api/a111/",
+                type: "GET",
+                dataType: "json",
+                //data: { "value": document.getElementById("GUName").value },
+                data: { "GUUserID": 2422, "CurrentPage": 1, "PageSize": 5 },
+                success: function (data) {
+                    alert(data)
+                }
+            }).fail(function (xhr, textStatus, err) {
+                    alert('Error: ' + err);
+            });
+        })
+
+        
+    </script>
+}
+

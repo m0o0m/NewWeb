@@ -1,0 +1,156 @@
+﻿@{
+    ViewBag.Title = "在线提问";
+}
+
+
+
+<div id="body">
+    <section class="featured">
+        <div class="content-wrapper">
+            <hgroup class="title">
+                <h1>Welcome to ASP.NET Web API!</h1>
+            </hgroup>
+        </div>
+    </section>
+    <section class="content-wrapper main-content clear-fix">
+        <h3>AAA:</h3>
+
+
+
+
+
+
+
+        <form id ="loginform" name="loginform" action="" method="post" onsubmit="return submitlogin();">
+            <ol>
+                <li>
+                    用户id：
+                    <input id="GUUserID" name="GUUserID" type="text" value="177" />
+                </li>
+                <li>
+                    已解决：
+                    <input id="CSCState" name="CSCState" type="text" value="3" />
+                </li>
+                <li>
+
+
+                    <input id="format" name="format" type="hidden" value="json" />
+                    <input id="Button1" type="submit" value="提交" />
+
+                </li>
+
+            </ol>
+        </form>
+
+
+        <form id="loginform2" name="loginform2" action="" method="post" onsubmit="return submitlogin2();">
+            <ol>
+                <li>
+                    用户id：
+                    <input id="GUUserID" name="GUUserID" type="text" value="2422" />
+                </li>
+                <li>
+                    会员账号：
+                    <input id="GUName" name="GUName" type="text" value="p3333" />
+                </li>
+
+
+                <li>
+                    标题：
+                    <input id="CSCTitle" name="CSCTitle" type="text" value="游戏能玩吗？" />
+                </li>
+
+                <li>
+                    类型：
+                    <select id="CSCType" name="CSCType">
+                        <option value="1">程序错误</option>
+                        <option value="2">改进意见</option>
+                        <option value="3">账号问题</option>
+                        <option value="4">支付问题</option>
+                        <option value="5">活动问题</option>
+                    </select>
+                </li>
+                <li>
+                    内容
+                    <textarea id="CSCContent" name="CSCContent" rows="2" cols="20">游戏能玩吗</textarea>
+
+                </li>
+                <li>
+                    <input id="format" name="format" type="hidden" value="json" />
+                    <input id="Button1" type="submit" value="提交" />
+
+                </li>
+
+            </ol>
+        </form>
+
+    </section>
+</div>
+@section nav{
+    <a href="/home/index">首　页</a>
+    <a class="current" href="/home/lists">游戏中心</a>
+    <a href="/home/download">手机客户端</a>
+}
+
+
+@section scripts{
+    <script type="text/javascript">
+
+        function submitlogin() {
+
+
+                $.ajax({
+                    url: "/api/a222/177",
+                    type: "POST",
+                    dataType: "JSON",
+                    //data: { "value": document.getElementById("GUName").value },
+                    data: $('#loginform').serialize(),
+                    success: function (data) {
+                        switch (data.result) {
+                            case 0:
+                                alert("添加成功");
+                                break;
+                            case 1:
+                                alert("添加失败");
+                                break;
+                            default:
+                                alert('未知错误');
+                                break;
+                        }
+                    }
+                }).fail(function (xhr, textStatus, err) {
+                    alert('Error: ' + err);
+                });
+                return false;
+        }
+
+        function submitlogin2() {
+
+
+            $.ajax({
+                url: "/api/a111/305",
+                type: "POST",
+                dataType: "JSON",
+                //data: { "value": document.getElementById("GUName").value },
+                data: $('#loginform2').serialize(),
+                success: function (data) {
+                    switch (data.result) {
+                        case 0:
+                            alert("添加成功");
+                            break;
+                        case 1:
+                            alert("添加失败");
+                            break;
+                        default:
+                            alert('未知错误');
+                            break;
+                    }
+                }
+            }).fail(function (xhr, textStatus, err) {
+                alert('Error: ' + err);
+            });
+            return false;
+        }
+    </script>
+}
+

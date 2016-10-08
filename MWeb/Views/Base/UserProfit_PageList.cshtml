@@ -1,0 +1,345 @@
+﻿@using Webdiyer.WebControls.Mvc;
+@using GL.Data.Model;
+@model PagedList<BaseDataInfo>
+@{
+    int j = 0;
+    int s = 1;
+    int _userid = -1;
+    GameOutputDetail bdl = new GameOutputDetail();
+    BaseDataInfo GameProfit = new BaseDataInfo();
+    if (ViewData["SearchExt"].ToString() != "")
+    {
+        _userid = Convert.ToInt32(ViewData["SearchExt"].ToString());
+        GameProfit = ((List<BaseDataInfo>)ViewData["GameProfit"])[0];
+    }
+    if (!Request.IsAjaxRequest())
+    {
+        List<UserMoneyRecord> data = (List<UserMoneyRecord>)ViewData["totalData"];
+        bdl = (GameOutputDetail)ViewData["DetailProfit"];
+    }
+}
+
+<input type="hidden" value="@ViewData["SumRecharge"]" id="sumRecharge" />
+
+<section id="widget-grid" class="detail">
+    <div class="row">
+        <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-0" data-widget-editbutton="false" data-widget-colorbutton="false"
+                 data-widget-togglebutton="false"
+                 data-widget-deletebutton="false"
+                 data-widget-fullscreenbutton="false"
+                 data-widget-custombutton="false"
+                 data-widget-collapsed="false"
+                 data-widget-sortable="false">
+                <header>
+                    <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                    <h2 id="tit">用户盈亏统计</h2>
+                </header>
+                <!-- widget div-->
+                <div>
+                    <!-- widget edit box -->
+                    <div class="jarviswidget-editbox">
+                        <!-- This area used as dropdown edit box -->
+                    </div>
+                    <!-- end widget edit box -->
+                    <!-- widget content -->
+                    <div class="widget-body no-padding">
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <thead>
+                                    @if (_userid == -1)
+                                    {
+                                        <tr><th></th><th colspan="3" style="text-align:center;font-size:large;">盈利玩家</th><th colspan="3" style="text-align:center;font-size:large;">亏损玩家</th></tr>
+                                        <tr>
+                                            <th>排名</th>
+                                            <th>用户ID</th>
+                                            <th>用户昵称</th>
+                                            <th>盈利金额</th>
+                                            <th>用户ID</th>
+                                            <th>用户昵称</th>
+                                            <th>亏损金额</th>
+                                        </tr>
+                                    }
+                                    else
+                                    {
+                                        <tr>
+                                            <th>用户ID</th>
+                                            <th>用户昵称</th>
+                                            <th>盈亏金额</th>
+                                            <th>买鱼</th>
+                                            <th>放生</th>
+                                            <th>被赠送</th>
+                                            <th>赠送给</th>
+                                            <th>鱼缸</th>
+                                            <th>购买游戏币</th>
+                                            <th>详细情况</th>
+                                        </tr>
+                                    }
+                                </thead>
+                                <tbody>
+                                    @if (Model.Count == 0)
+                                    {
+                                        <tr class="gradeX">
+                                            <td class="colspan" align="center" colspan="0">
+                                                没有找到相关记录！
+                                            </td>
+                                        </tr>
+                                    }
+                                    @if (_userid == -1)
+                                    {
+                                        foreach (BaseDataInfo m in Model)
+                                        {
+                                            <tr class="gradeA">
+                                                <td>@m.list</td>
+                                                <td><a href="javascript:void" onclick="returnSearch(@m.UserIDAdd)">@m.UserIDAdd</a></td>
+                                                <td>@m.NicknameAdd</td>
+                                                <td>@m.ProfitAdd</td>
+                                                <td><a href="javascript:void" onclick="returnSearch(@m.UserIDDel)">@m.UserIDDel</a></td>
+                                                <td>@m.NicknameDel</td>
+                                                <td>@m.ProfitDel</td>
+                                            </tr>
+
+                                        }
+                                    }
+                                    else
+                                    {
+                                        foreach (BaseDataInfo m in Model)
+                                        {
+                                            <tr class="gradeA">
+                                                <td>@m.UserIDAdd</td>
+                                                <td>@m.NicknameAdd</td>
+                                                <td>@m.ProfitAdd</td>
+                                                <td>@m.FishType2</td>
+                                                <td>@m.FishType3</td>
+                                                <td>@m.FishType1</td>
+                                                <td>@m.FishType0</td>
+                                                <td>@m.FishType4</td>
+                                                <td>@m.ChipChange</td>
+                                                <td><input id="btnFreeze" type="button" value="查看" class="btn btn-primary btn-mini" onclick="return returnData(@m.UserIDAdd)" /></td>
+                                            </tr>
+                                        }
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="widget-content">
+
+                            @Ajax.Pager(
+    Model,
+    new PagerOptions()
+    {
+        CssClass = "pager",
+        ShowMorePagerItems = true,
+        PageIndexParameterName = "page",
+        ShowDisabledPagerItems = true,
+        AlwaysShowFirstLastPageNumber = true,
+        //ShowRecordCountItems = true,
+        HorizontalAlign = "right",
+        //SeparatorHtml = "",
+
+        CurrentPagerItemTemplate = "<li class=\"disabled\"><span>{0}</span></li>",
+        DisabledPagerItemTemplate = "<li class=\"disabled\"><span>{0}</span></li>",
+        PagerItemTemplate = "<li>{0}</li>",
+        //CurrentPagerItemWrapperFormatString = "<li class=\"disabled\"><span>{0}</span></li>",
+        //NumericPagerItemWrapperFormatString = "<li>{0}</li>",
+        //PagerItemWrapperFormatString = "<li>{0}</li>",
+        //RecordCountText = string.Format("共{0}条记录, {1}页", Model.TotalItemCount, Model.TotalPageCount),
+        //RecordCountFormatString = "<li><span>{0}</span></li>",
+        //DisabledPagerItemsFormatString = "<li class=\"disabled\"><span>{0}</span></li>",
+        //PageIndexBoxType = Webdiyer.WebControls.Mvc.PageIndexBoxType.TextBox,
+        //GoButtonText = "跳转到",
+        ShowPrevNext = true,
+        FirstPageText = "第一页",
+        LastPageText = "最后一页",
+        ContainerTagName = "ul",
+        PageIndexBoxId = "pageindexcm",
+        WYWPageIndexString = @"<li><input style='width:50px;' type='text' value='' id='{0}' name = '{1}'></li>
+                                 <li><a id='goto' name='goto' style='margin-right:10px' >跳转</a><li>
+                             ",
+        GoToButtonId = "goto"
+    },
+    new MvcAjaxOptions
+    {
+        HttpMethod = "POST",
+        UpdateTargetId = "box",
+        InsertionMode = InsertionMode.Replace,
+        OnFailure = "errFunc",
+        OnSuccess = "successPageFun"
+    })
+                        </div>
+                    </div>
+                    <!-- end widget content -->
+                </div>
+                <!-- end widget div -->
+            </div>
+            <!-- end widget -->
+
+        </article>
+    </div>
+</section>
+
+@if (_userid != -1)
+{
+    <section id="widget-grid" class="">
+        <div class="row">
+            <article class="col-sm-12 col-md-12 col-lg-12">
+                <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-1" data-widget-editbutton="false" data-widget-togglebutton="true" data-widget-deletebutton="true" data-widget-fullscreenbutton="true" data-widget-custombutton="true" data-widget-collapsed="true">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-sitemap"></i> </span>
+                        <h2>玩牌盈利统计</h2>
+                    </header>
+                    <div>
+                        <div class="jarviswidget-editbox">
+                        </div>
+                        <div class="widget-body no-padding">
+                            <div class="table-responsive">
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>游戏</th>
+                                            <th>盈利</th>
+                                            <th>亏损</th>
+                                            <th>坐庄盈亏</th>
+                                            <th>统计</th>
+                                            <th>玩牌盈亏统计</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @if (GameProfit == null)
+                                        {
+                                            <tr class="gradeX">
+                                                <td class="colspan" align="center" colspan="0">
+                                                    没有找到相关记录！
+                                                </td>
+                                            </tr>
+                                        }
+                                        else
+                                        {
+                                            <tr>
+                                                <td>德州扑克</td>
+                                                <td>@GameProfit.ProfitAdd1</td>
+                                                <td>@GameProfit.ProfitDel1</td>
+                                                <td>0</td>
+                                                <td>@{var _profit1 = GameProfit.ProfitAdd1 + @GameProfit.ProfitDel1;}@_profit1</td>
+                                                <td rowspan="5">@{var _profitAll = GameProfit.ProfitCar + GameProfit.ProfitHorse + GameProfit.ProfitZodiac + GameProfit.ProfitScale + GameProfit.ProfitHundred+ GameProfit.ProfitAdd1 + GameProfit.ProfitDel1 + GameProfit.ProfitAdd2 + GameProfit.ProfitDel2 + GameProfit.ProfitAdd3 + GameProfit.ProfitDel3 + GameProfit.ProfitAdd4 + GameProfit.ProfitDel4 + GameProfit.ProfitAdd5 + GameProfit.ProfitDel5 + GameProfit.ProfitAdd6 + GameProfit.ProfitDel6;}@_profitAll</td>
+                                            </tr>
+                                            <tr>
+                                                <td>中发白</td>
+                                                <td>@GameProfit.ProfitAdd2</td>
+                                                <td>@GameProfit.ProfitDel2</td>
+                                                <td>@GameProfit.ProfitScale</td>
+                                                <td>@{var _profit2 = GameProfit.ProfitAdd2 + GameProfit.ProfitDel2 + GameProfit.ProfitScale;}@_profit2</td>
+                                            </tr>
+                                            <tr>
+                                                <td>十二生肖</td>
+                                                <td>@GameProfit.ProfitAdd3</td>
+                                                <td>@GameProfit.ProfitDel3</td>
+                                                <td>@GameProfit.ProfitZodiac</td>
+                                                <td>@{var _profit3 = GameProfit.ProfitZodiac + GameProfit.ProfitAdd3 + GameProfit.ProfitDel3;}@_profit3</td>
+                                            </tr>
+                                            <tr>
+                                                <td>小马快跑</td>
+                                                <td>@GameProfit.ProfitAdd4</td>
+                                                <td>@GameProfit.ProfitDel4</td>
+                                                <td>@GameProfit.ProfitHorse</td>
+                                                <td>@{var _profit4 = GameProfit.ProfitHorse + GameProfit.ProfitAdd4 + GameProfit.ProfitDel4;}@_profit4</td>
+                                            </tr>
+                                            <tr>
+                                                <td>奔驰宝马</td>
+                                                <td>@GameProfit.ProfitAdd5</td>
+                                                <td>@GameProfit.ProfitDel5</td>
+                                                <td>@GameProfit.ProfitCar</td>
+                                                <td>@{var _profit5 = GameProfit.ProfitCar + GameProfit.ProfitAdd5 + GameProfit.ProfitDel5;}@_profit5</td>
+                                            </tr>
+                                            <tr>
+                                                <td>百人德州</td>
+                                                <td>@GameProfit.ProfitAdd6</td>
+                                                <td>@GameProfit.ProfitDel6</td>
+                                                <td>@GameProfit.ProfitHundred</td>
+                                                <td>@{var _profit6 = GameProfit.ProfitHundred + GameProfit.ProfitAdd6 + GameProfit.ProfitDel6;}@_profit6</td>
+                                            </tr>
+                                                    }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <!-- end widget content -->
+                    </div>
+                </div>
+            </article>
+            @*<article class="col-sm-12 col-md-12 col-lg-6">
+                <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-1" data-widget-editbutton="false" data-widget-togglebutton="true" data-widget-deletebutton="true" data-widget-fullscreenbutton="true" data-widget-custombutton="true" data-widget-collapsed="true">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-sitemap"></i> </span>
+                        <h2>游戏系统盈亏明细</h2>
+                    </header>
+                    <div>
+                        <div class="jarviswidget-editbox">
+                        </div>
+                        <div class="widget-body no-padding">
+                            <div class="table-responsive">
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th colspan="2">盈利：@bdl.ChipAdd</th>
+                                            <th></th>
+                                            <th colspan="2">亏损：@bdl.ChipDel</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            @{
+                                                j = bdl.list.Count;
+                                                int r = 0;
+                                                for (int i = 0; i < j; i++)
+                                                {
+                                                    if (bdl.list[i].Chip >= 0)
+                                                    {
+                                                        r = j - i - 1;
+                                                    <tr>
+                                                        <td>@bdl.list[i].ChipChangeType</td>
+                                                        <td>@bdl.list[i].Chip</td>
+                                                        <td></td>
+                                                        @if (bdl.list[r].Chip < 0)
+                                                        {
+                                                            <td>@bdl.list[r].ChipChangeType</td>
+                                                            <td>@bdl.list[r].Chip</td>
+                                                        }
+                                                        else {
+                                                            <td></td>
+                                                            <td></td>
+                                                        }
+                                                    </tr>
+                                                    }
+                                                    else if (bdl.list[i].Chip < 0)
+                                                    {
+                                                        if (i <= r)
+                                                        {
+                                                            int l = j - i - 1;
+                                                            <tr>
+                                                                <td></td>
+                                                                <td></td>
+                                                                <td></td>
+                                                                <td> @bdl.list[l].ChipChangeType </td>
+                                                                <td> @bdl.list[l].Chip </td>
+                                                            </tr>
+                                                        }
+                                                        else {
+                                                            break;
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                             end widget content 
+                        </div>
+                    </div>
+                </article>*@
+            </div>
+        </section>
+                                                }

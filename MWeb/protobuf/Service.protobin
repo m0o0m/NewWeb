@@ -1,0 +1,452 @@
+
+ƒC
+Service.protoProtoCmd.Service"$
+BGSetZfbPotOpenReq
+isOpen ("5
+BGSetZfbPotOpenRes
+suc (
+
+currStatus (""
+GetPotSwitchResp
+switch ("
+PotSwitchResp
+result (",
+	PotSwitch
+tableid (
+config ("0
+Service_Test_S
+	szAccount (	
+suc (""
+Service_Kick_C
+dwUserID ("
+Service_Kick_S
+suc ("$
+Service_Query_C
+	szAccount (	"ï
+Service_Query_S
+dwUserID (
+	szAccount (	
+
+szNickName (	
+szTelNum (	
+szEmail (	
+isOnline (
+isFreeze (
+
+szTrueName (	
+
+szIdentity	 (	
+sex
+ (
+	dwAgentID (
+szCreateTime (	"H
+Service_Freeze_C
+dwUserID (
+dwFreeze (
+dwMinute ("
+Service_Freeze_S
+suc ("<
+Service_Send_SysMail_C
+szTitle (	
+	szContext (	")
+Service_Send_CloseServer
+close ("-
+Service_Query_ServerStatus_S
+close ("D
+Service_Query_OnlineUser_C
+dwPageIndex (
+	dwShowNum ("c
+Service_OnlineUserInfo
+
+strAccount (	
+dwUserID (
+strIP (	
+strLoginTime (	"š
+Service_Query_OnlineUser_S
+
+startIndex (
+showNum (
+page (
+	pageTotal (6
+list (2(.ProtoCmd.Service.Service_OnlineUserInfo"V
+Service_Query_UseOperHis_C
+dwUserID (
+dwPageIndex (
+	dwShowNum (";
+Service_UserOperHisInfo
+strTime (	
+content (	"±
+Service_Query_UseOperHis_S
+dwUserID (
+
+startIndex (
+showNum (
+page (
+	pageTotal (;
+listInfo (2).ProtoCmd.Service.Service_UserOperHisInfo"T
+Service_Send_AnnounceMent_C
+content (	
+dwRepeat (
+
+dwInterval ("J
+Service_BanSpeak_C
+dwUserID (
+
+dwBanSpeak (
+minute ("!
+Service_BanSpeak_S
+suc (">
+Service_OnlineAddGold_C
+dwUserID (
+	dwAddGold ("&
+Service_OnlineAddGold_S
+suc (".
+Service_QueryInternalLogin_S
+isOpen ("+
+Service_SetInternalLogin_C
+bOpen (",
+Service_SetInternalLogin_S
+isOpen (" 
+Service_ItemMail_C
+userID (
+title (	
+context (	
+itemType (
+	itemValue (
+itemNum (
+isGlobal (
+
+award_type ("!
+Service_ItemMail_S
+suc (" 
+Service_Fish_C
+userID ("F
+FishInfo
+date (	
+itemID (
+name (	
+giveID ("N
+Service_Fish_S
+userID (,
+fishList (2.ProtoCmd.Service.FishInfo",
+Service_BanIP_C
+
+ip (	
+isBan ("
+Service_BanIP_S
+suc ("=
+Service_RegIP_C
+
+ip (	
+total (
+content (	"
+Service_RegIP_S
+suc ("$
+TexasPot_Select_S
+ChipNum ("J
+TexasPot_Operator_C
+opType (
+opValue (
+
+strContent (	"2
+TexasPot_Operator_S
+opType (
+suc ("%
+REDEVENLOPE_SELECT_S
+state ("'
+REDEVENLOPE_OPERATOR_C
+state ("6
+REDEVENLOPE_OPERATOR_S
+state (
+bsucc ("2
+Service_BanMac_C
+macAddr (	
+isBan ("
+Service_BanMac_S
+suc ("*
+Service_ResetSafePwd_C
+dwUserID ("%
+Service_ResetSafePwd_S
+suc ("!
+Scale_Select_S
+ChipNum ("G
+Scale_Operator_C
+opType (
+opValue (
+
+strContent (	"/
+Scale_Operator_S
+opType (
+suc ("(
+Service_ClubUserMode_C
+clubID ("%
+Service_ClubUserMode_S
+suc ("1
+Beland_Club_C
+clubID (
+dwUserID ("
+Beland_Club_S
+suc (""
+IPSTATUS_SELECT_S
+state ("$
+IPSTATUS_OPERATOR_C
+state ("3
+IPSTATUS_OPERATOR_S
+state (
+bsucc ("$
+	IPWHITE_C
+
+ip (	
+add ("1
+	IPWHITE_S
+
+ip (	
+add (
+suc ("!
+CANCEL_CLUB_C
+dwUserID ("
+CANCEL_CLUB_S
+suc ("9
+ROBOT_POT_C
+pot (
+stand (
+gameID ("
+ROBOT_POT_S
+suc ("'
+BGSetTexProPOTOpenReq
+isOpen ("8
+BGSetTexProPOTOpenRes
+suc (
+
+currStatus (""
+TexPro_Select_S
+ChipNum ("H
+TexPro_Operator_C
+opType (
+opValue (
+
+strContent (	"0
+TexPro_Operator_S
+opType (
+suc ("0
+Module_Switch_C
+module (
+opend ("-
+Module_Switch_S
+suc (
+opend ("7
+ClientGame_Switch_C
+gameID (
+platOpen ("4
+ClientGame_Switch_S
+suc (
+platOpen ("-
+BGSetIndebatedRebateOpenReq
+isOpen (">
+BGSetIndebatedRebateOpenRes
+suc (
+
+currStatus ("
+PopUpControl_S
+suc ("£
+MobileSwitch
+
+id (
+mobile_device (
+agent (
+mobile_brand (	
+close_login_type (
+close_register_type (
+mobile_model (	"V
+MobileSwitchs_S6
+mobile_switchs (2.ProtoCmd.Service.MobileSwitch
+suc ("f
+MobileSwitchOperator_C
+operator_type (5
+mobile_switch (2.ProtoCmd.Service.MobileSwitch"s
+MobileSwitchOperator_S
+operator_type (5
+mobile_switch (2.ProtoCmd.Service.MobileSwitch
+suc (",
+BGSetHerocraftTwiceOpenReq
+isOpen ("=
+BGSetHerocraftTwiceOpenRes
+suc (
+
+currStatus ("/
+BGSetMidautumnFestivalOpenReq
+isOpen ("@
+BGSetMidautumnFestivalOpenRes
+suc (
+
+currStatus ("&
+QueryRobotStatu
+module_type ("E
+ModifyRobotConfig
+	game_type (
+limit (
+is_bet ("«
+LoginRequest
+	game_type (
+login_frequency (
+	login_cnt (
+strategy ("J
+Stragety
+TEXAS_RANDOM_JOIN
+TEXAS_QUICK_START
+TEXAS_NORMAL"X
+	GameStatu
+	game_type (
+
+player_cnt (
+player_limit (
+is_bet (""
+GameOverView
+
+player_cnt ("€
+SystemStatu
+cpu_percent (
+mem_used (
+	mem_total (
+	flow_rate (
+conn_cnt (
+
+conn_limit ("¿
+RobotStatus
+module_type (/
+
+game_statu (2.ProtoCmd.Service.GameStatu5
+game_overview (2.ProtoCmd.Service.GameOverView3
+system_statu (2.ProtoCmd.Service.SystemStatu"%
+ErrorMessage
+error_message (	"
+UserStateReq
+user_id ("R
+UserStateRes
+user_id (
+state (
+room_id (
+	room_type (*Ú	
+
+ServiceCmd
+SC_BEGIN
+SC_KICK_USER
+SC_QUERY_USER
+SC_FREEZE_USER
+SC_SEND_SYSMAIL
+SC_SERVER_STOP
+SC_QUERY_ONLINEUSER
+SC_QUERY_USEROPERHIS
+SC_QUERY_SERVERSTATUS
+SC_SEND_ANNOUNCEMENT
+SC_BAN_SPEAK
+SC_ADD_GOLD
+SC_QUERY_INTERNALLOGIN
+SC_SET_INTERALLOGIN
+SC_SEND_ITEMMAIL
+SC_QUERY_FISH
+SC_BAN_LOGIN_IP
+	SC_REG_IP
+SC_SELECT_TEXAS_POT
+SC_OPERTOR_TEXAS_POT
+SC_SELECT_REDEVENLOPE_Q
+SC_OPERTOR_REDEVENLOPE_Q 
+SC_BAN_LOGIN_MAC!
+SC_RESET_SAFEBOXPWD"
+SC_POT_SWITCH#
+SC_SELECT_SCALE_POT$
+SC_OPERTOR_SACLE_POT%
+SC_GET_POT_SWITCH&
+SC_CLUB_USERMODE'
+SC_SELECT_IPSTATUS_Q(
+SC_OPERTOR_IPSTATUS_Q)
+SC_SET_IP_WHITELIST*
+SC_CANCEL_CLUB+
+SC_SET_ROBOT_POT,
+SC_BELAND_CLUB-
+SC_ROBOT_QUERY.
+SC_ROBOT_MODIFY/
+SC_ROBOT_LOGIN0
+SC_SET_ZFBPOT_OPEN2
+SC_USER_STATE3
+SC_SET_TEXPROPOT_OPEN4
+SC_SELECT_TEXPRO_POT5
+SC_OPERTOR_TEXPRO_POT6
+SC_MODULE_SWITCH7
+SC_CLIENT_GAME_SWITCH8 
+SC_SET_INDEBATED_REBATE_OPEN;
+SC_NTF_UPDATE_POPUPCONTROL<
+SC_MOBILE_SWITCHS=
+SC_MOBILE_SWITCH_OPERATOR>
+SC_SET_Herocraft_Twice_OPEN@"
+SC_SET_MIDAUTUMN_FESTIVAL_OPEN?
+SC_TOTALÈ*ì	
+	CenterCmd
+CS_BEGIN
+CS_CONNECT_ERROR
+CS_ACCOUNT_ERROR
+CS_QUERY_UESR
+CS_SERVER_STOP
+CS_KICK_USER
+CS_FREEZE_USER
+CS_QUERY_ONLINEUSER
+CS_QUERY_USEROPERHIS
+CS_SEND_SYSMAIL
+CS_QUERY_SERVERSTATUS
+CS_SEND_ANNOUNCEMENT
+CS_QUERY_INTERNALLOGIN
+CS_SET_INTERALLOGIN
+CS_SEND_ITEMMAIL
+CS_QUERY_FISH
+CS_BAN_SPEAK
+CS_BAN_LOGIN_IP
+	CS_REG_IP
+CS_SELECT_TEXAS_POT
+CS_OPERTOR_TEXAS_POT
+CS_SELECT_REDEVENLOPE_P 
+CS_OPERTOR_REDEVENLOPE_P!
+CS_BAN_LOGIN_MAC"
+CS_RESET_SAFEBOXPWD#
+CS_SELECT_SCALE_POT$
+CS_OPERTOR_SCALE_POT%
+CS_POT_SWITCH_RESP&
+CS_GET_POT_SWITCH_RESP'
+CS_CLUB_USERMODE(
+CS_SELECT_IPSTATUS)
+CS_OPERTOR_IPSTATUS*
+CS_SET_IP_WHITELIST+
+CS_CANCEL_CLUB,
+CS_SET_ROBOT_POT-
+CS_BELAND_CLUB.
+CS_ROBOT_STATU/
+C2S_ROBOT_ERRMSG0
+CS_SET_ZFBPOT_OPEN2
+CS_USER_STATE3
+CS_SET_TEXPROPOT_OPEN4
+CS_SELECT_TEXPROPOT_POT5
+CS_OPERTOR_TEXPROPOT_POT6
+CS_MODULE_SWITCH7
+CS_CLIENT_GAME_SWITCH8 
+CS_SET_INDEBATED_REBATE_OPEN;
+CS_NTF_UPDATE_POPUPCONTROL<
+CS_MOBILE_SWITCHS=
+CS_MOBILE_SWITCH_OPERATOR>
+CS_SET_Herocraft_Twice_OPEN@"
+CS_SET_MIDAUTUMN_FESTIVAL_OPEN?
+CS_TOTALd* 
+
+ModuleType
+ALL 
+
+SYSTEM
+OVERVIEW
+
+MODULE_MAX
+GAME_TYTPE_BEGINd	
+TEXASd
+ZFBe
+CARSf
+
+ZODIACg
+TEXAS_EXh
+GAME_TYPE_MAXh

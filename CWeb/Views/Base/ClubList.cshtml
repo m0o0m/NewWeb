@@ -1,0 +1,271 @@
+﻿@using GL.Data.Model
+@using GL.Data.View
+@model GameRecordView
+@{
+    ViewBag.Title = "会员俱乐部";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+   
+}
+
+<link rel="stylesheet" type="text/css" media="screen" href="~/js/SmartAdmin/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" media="screen" href="~/js/SmartAdmin/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" media="screen" href="~/js/SmartAdmin/css/smartadmin-production.css">
+<link rel="stylesheet" type="text/css" media="screen" href="~/js/SmartAdmin/css/smartadmin-skins.css">
+<link rel="stylesheet" type="text/css" media="screen" href="~/js/SmartAdmin/css/demo.css">
+<link rel="shortcut icon" href="~/js/SmartAdmin/img/favicon/favicon.ico" type="image/x-icon">
+<link rel="icon" href="~/js/SmartAdmin/img/favicon/favicon.ico" type="image/x-icon">
+<link href="~/js/SmartAdmin/css/mygame.css" rel="stylesheet" />
+<script data-pace-options='{ "restartOnRequestAfter": true }' src="~/js/SmartAdmin/js/plugin/pace/pace.min.js"></script>
+
+<script src="~/js/SmartAdmin/js/libs/jquery-2.0.2.min.js"></script>
+<script src="~/Scripts/jquery.history.js"></script>
+
+@*<script src="~/js/SmartAdmin/js/libs/jquery-ui-1.10.3.min.js"></script>*@
+<script src="~/js/SmartAdmin/js/libs/jquery-ui-1.11.4-utf8.js"></script>
+<script src="~/js/SmartAdmin/js/bootstrap/bootstrap.min.js"></script>
+<script src="~/js/SmartAdmin/js/notification/SmartNotification.min.js"></script>
+<script src="~/js/SmartAdmin/js/smartwidgets/jarvis.widget.min.js"></script>
+<script src="~/js/SmartAdmin/js/plugin/easy-pie-chart/jquery.easy-pie-chart.min.js"></script>
+<script src="~/js/SmartAdmin/js/plugin/sparkline/jquery.sparkline.min.js"></script>
+@*<script src="~/js/SmartAdmin/js/plugin/jquery-validate/jquery.validate.min.js"></script>*@
+<script src="~/js/JqueryValidate/jquery.validate.min.js"></script>
+<script src="~/js/SmartAdmin/js/plugin/masked-input/jquery.maskedinput.min.js"></script>
+<script src="~/js/SmartAdmin/js/plugin/select2/select2.min.js"></script>
+<script src="~/js/SmartAdmin/js/plugin/bootstrap-slider/bootstrap-slider.min.js"></script>
+<script src="~/js/SmartAdmin/js/plugin/msie-fix/jquery.mb.browser.min.js"></script>
+<script src="~/js/SmartAdmin/js/plugin/fastclick/fastclick.js"></script>
+<script src="~/js/SmartAdmin/js/demo.js"></script>
+<script src="~/js/SmartAdmin/js/app.js"></script>
+<script src="~/js/SmartAdmin/js/plugin/flot/jquery.flot.cust.js"></script>
+<script src="~/js/SmartAdmin/js/plugin/flot/jquery.flot.resize.js"></script>
+<script src="~/js/SmartAdmin/js/plugin/flot/jquery.flot.tooltip.js"></script>
+<script src="~/js/SmartAdmin/js/plugin/vectormap/jquery-jvectormap-1.2.2.min.js"></script>
+<script src="~/js/SmartAdmin/js/plugin/vectormap/jquery-jvectormap-world-mill-en.js"></script>
+<script src="~/js/SmartAdmin/js/plugin/fullcalendar/jquery.fullcalendar.min.js"></script>
+<script>
+        $(document).ready(function () {
+            // $("#allbody").removeClass("hide-menu");
+            pageSetUp();
+        
+            //if (IsPC() == false) {//是手机，并且是第一次进来
+            //    var beforeurl = document.referrer;
+            //    var url = window.location.href
+            //    if (beforeurl == null || beforeurl == "") {//如果上一页为空
+            //        $('body').toggleClass("hidden-menu");
+            //    } else {
+            //        var beforearr = beforeurl.split('.');
+            //        var arr = url.split('.');
+            //        if()
+            //    }
+
+
+            //}
+
+        });
+</script>
+
+<input type="hidden" value="@ViewData["pageindex"]" id="pageindex" />
+<input type="hidden" value="@ViewData["pageindex2"]" id="pageindex2" />
+
+<div id="content">
+    <form id="comment-form" class="smart-form" novalidate="novalidate">
+        <div class="row">
+            <div class="widget-body">
+
+                <section class="col col-1">
+                    <label class="label">俱乐部ID</label>
+                    <label class="input">
+                        @Html.TextBoxFor(m => m.SearchExter, new { @class = "span2", style = "border-radius:4px" })
+                    </label>
+                </section>
+
+                <section class="col col-1.2">
+                    <label class="label">起始日期</label>
+                    <label class="input">
+                        <i class="icon-append fa fa-calendar"></i>
+                        @Html.TextBoxFor(m => m.StartDate, new Dictionary<string, object>() { { "class", "form-control datepicker" }, { "data-dateformat", "yy-mm-dd 00:00:00" } })
+                    </label>
+                </section>
+
+                <section class="col col-1">
+                    <label class="label">&nbsp;</label>
+                    @*<button type="submit" class="btn btn-success btn-sm">查询</button>*@
+                    <input type="button" onclick="search()"  class="btn btn-success btn-sm" value="查询" />
+                </section>
+
+            </div>
+        </div>
+    </form>
+
+   
+            @Html.Partial("ClubList_PageList", ViewData["ClubList_PageList"])
+ 
+
+  
+            @Html.Partial("ClubListDetail", ViewData["ClubListDetail"])
+ 
+
+ 
+
+</div>
+
+
+
+
+
+
+@section scripts{
+   
+    @using Webdiyer.WebControls.Mvc;
+
+
+     @{Html.RegisterMvcPagerScriptResource();}
+
+
+ 
+
+
+    @*<script src="/js/bootstrap.min.js"></script>
+        <script src="/js/select2.min.js"></script>
+        @Styles.Render("~/Style/bootstrap-datetimepicker")
+        @Scripts.Render("~/bundles/bootstrap-datetimepicker")*@
+<script>
+        $(document).ready(function () {
+            // $("#allbody").removeClass("hide-menu");
+            pageSetUp();
+
+            //if (IsPC() == false) {//是手机，并且是第一次进来
+            //    var beforeurl = document.referrer;
+            //    var url = window.location.href
+            //    if (beforeurl == null || beforeurl == "") {//如果上一页为空
+            //        $('body').toggleClass("hidden-menu");
+            //    } else {
+            //        var beforearr = beforeurl.split('.');
+            //        var arr = url.split('.');
+            //        if()
+            //    }
+
+
+            //}
+
+        });
+</script>
+
+    <script type="text/javascript">
+        function successPageFun() {
+          
+        }
+     
+        function search() {
+            //把#page=去掉就正常了
+
+            //判断如果不包含#就不改浏览器地址:优化
+            var url = window.location.href;
+            var index = url.indexOf('#', 0);
+            if (index < 0) { //说明没有#号
+
+            } else {
+                History.pushState({ state: 1, rand: Math.random() }, "", "?a=1");
+            }
+            $("#comment-form").submit();
+        }
+
+        function btnGetClubList(page,ID, obj) {
+            var page1 = 1;
+            var page2 = 1;
+
+            $("div ul[data-ajax-update=#box]").each(function () {
+                var cur = $(this).attr("data-currentpage");
+                if (cur == undefined) { cur = 1;}
+                page1 = cur;
+            })
+
+            $("div ul[data-ajax-update=#box2]").each(function () {
+                var cur = $(this).attr("data-currentpage");
+                if (cur == undefined) { cur = 1; }
+                page2 = cur;
+            })
+
+
+          
+            window.location = "/Base/ClubList?SearchExter=" + $("#SearchExter").val() + "&page2=" + page2 + "&page=" + page1 + "&Search=" + ID + "&StartDate=" + $("#StartDate").val() + "&btn=1";
+
+
+        }
+        function btnSetClub(ID, obj) {
+            _this = $(obj).parent().parent();
+            if (confirm('确定将此ID设为会员模式的俱乐部吗？')) {
+                //var _Value = $(_this).find("td").eq(0).html();
+                $.ajax({
+                    url: "/Member/SetClub/",
+                    type: "Post",
+                    dataType: "JSON",
+                    data: { "UserID": ID, "flag": 1 },
+                    success: function (data) {
+                        switch (data.result) {
+                            case 0:
+                                alert('已将此ID设为会员模式的俱乐部');
+                                location.reload();
+                                break;
+                            case 1:
+                                alert("设置失败，请稍后再试");
+                                break;
+                            case 2:
+                                alert("服务器未启动，请稍后再试");
+                                break;
+                            default:
+                                alert('未知错误');
+                                break;
+                        }
+                    }
+                }).fail(function (xhr, textStatus, err) {
+                    alert('Error: ' + err);
+                });
+
+            } else {
+                return false;
+            }
+            return false;
+        }
+
+
+        //btnCancelClub
+
+        function btnCancelClub(ID, obj) {
+            _this = $(obj).parent().parent();
+            if (confirm('是否取消俱乐部？')) {
+                //var _Value = $(_this).find("td").eq(0).html();
+                $.ajax({
+                    url: "/Member/CancleClub/",
+                    type: "Post",
+                    dataType: "JSON",
+                    data: { "UserID": ID, "flag": 1 },
+                    success: function (data) {
+                        switch (data.result) {
+                            case 0:
+                                alert('取消俱乐部成功!');
+                                location.reload();
+                                break;
+                            case 1:
+                                alert("设置失败，请稍后再试");
+                                break;
+                            case 2:
+                                alert("服务器未启动，请稍后再试");
+                                break;
+                            default:
+                                alert('未知错误');
+                                break;
+                        }
+                    }
+                }).fail(function (xhr, textStatus, err) {
+                    alert('Error: ' + err);
+                });
+
+            } else {
+                return false;
+            }
+            return false;
+        }
+    </script>
+
+}

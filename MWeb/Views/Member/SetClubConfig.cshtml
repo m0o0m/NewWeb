@@ -1,0 +1,203 @@
+﻿
+@using GL.Data.View
+@model GameRecordView
+@{
+    ViewBag.Title = "俱乐部配置";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+
+
+
+
+<div id="content">
+    <section id="widget-grid" class=" ">
+     
+          
+                <form id="comment-form" class="smart-form" novalidate="novalidate" method="post">
+                    <input type="hidden" value="@Model.UserID" id="userid" name="userid" />
+                    <div class="row">
+
+                        <div class="widget-body">
+
+                            <section class="col col-1.1">
+                                <label class="label">俱乐部ID</label>
+                                <label class="input">
+                                    @Html.TextBoxFor(m => m.SearchExt, new { @class = "span2", style = "border-radius:4px" })
+                                </label>
+                            </section>
+
+
+
+
+
+                            <section class="col col-12">
+                                <label class="label">&nbsp;</label>
+                                @*<button type="submit" class="btn btn-success btn-sm">查询</button>*@
+                                <input type="button" onclick="search()" class="btn btn-success btn-sm" value="查询" />
+                                <font >（请先查询俱乐部后，再设置为发展的俱乐部）</font>
+                               </section>
+
+                        </div>
+
+
+
+
+
+
+
+
+
+                    </div>
+                </form>
+
+
+                <div class="row-fluid">
+                    <div class="widget-box" id="box">
+                        @Html.Partial("SetClubConfig_PageList", Model.DataList)
+
+                    </div>
+                </div>
+    
+
+        <div class="form-actions ">
+            <div class="row">
+                <div class="col-md-12">
+                    <input id="btnGoBack" type="button" value="返回列表" class=" btn btn-warning" />
+                </div>
+            </div>
+        </div>
+
+
+</section>
+</div>
+
+
+
+
+
+
+
+@section scripts{
+    @{Html.RegisterMvcPagerScriptResource();}
+
+
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/select2.min.js"></script>
+    @Styles.Render("~/Style/bootstrap-datetimepicker")
+    @Scripts.Render("~/bundles/bootstrap-datetimepicker")
+
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $('select').select2({
+                allowClear: false,
+                minimumResultsForSearch: -1
+            });
+            $('.datepicker').datetimepicker({
+                minView: "month", //选择日期后，不会再跳转去选择时分秒
+                format: "yyyy-mm-dd hh:ii:ss", //选择日期后，文本框显示的日期格式
+                language: 'zh-CN', //汉化
+                autoclose: true //选择日期后自动关闭
+            });
+
+        });
+
+        function btSetClubCancel(obj) {
+            var oper = 1;
+            if ($(obj).val() == "添加为发展的俱乐部") {
+                oper = 0;
+            } else {
+                oper = 1;
+            }
+            var _this = $(obj).parent().parent();
+            var clubid = $(_this).find("td").eq(0).html();
+            var  userId = $("#userid").val();
+         
+            $.ajax({
+                url: "/Member/CancelClubConfig?userId=" + userId + "&clubid=" + clubid + "&oper=" + oper,
+                type: "Get",
+                //dataType: "JSON",
+                //data: { "userId": userId, "clubid": clubid,"oper":1 },
+                success: function (data) {
+                    switch (data) {
+                        case "1":
+                            alert("操作成功");
+                            $(obj).val("添加为发展的俱乐部");
+                            //location.reload();
+                            break;
+                        case "0":
+                            alert("操作失败，请稍后再试");
+                            break;
+                  
+                        default:
+                            alert('未知错误');
+                            break;
+                    }
+                }
+            }).fail(function (xhr, textStatus, err) {
+                alert('Error: ' + err);
+            });
+        }
+
+
+        function btSetClubAdd(obj) {
+            var oper = 1;
+            if ($(obj).val() == "添加为发展的俱乐部") {
+                oper = 0;
+            } else {
+                oper = 1;
+            }
+            var _this = $(obj).parent().parent();
+            var clubid = $(_this).find("td").eq(0).html();
+            var userId = $("#userid").val();
+            $.ajax({
+                url: "/Member/CancelClubConfig?userId=" + userId + "&clubid=" + clubid + "&oper=" + oper,
+                type: "Get",
+              
+                //data: { "userId": userId, "clubid": clubid, "oper": 0 },
+                success: function (data) {
+                    switch (data) {
+                        case "1":
+                            alert("操作成功");
+                            if (oper == "1") {
+                                $(obj).val("添加为发展的俱乐部");
+                            } else {
+                                $(obj).val("取消发展的俱乐部");
+                            }
+                          
+                            //location.reload();
+                            break;
+                        case "0":
+                            alert("操作失败，请稍后再试");
+                            break;
+
+                        default:
+                            alert('未知错误');
+                            break;
+                    }
+                }
+            }).fail(function (xhr, textStatus, err) {
+                alert('Error: ' + err);
+            });
+
+        }
+
+
+
+
+        $(function () {
+
+
+            $("#btnGoBack").click(function () {
+                location.href = "/Member/ClubConfig";
+            });
+        })
+
+
+
+    </script>
+
+}

@@ -1,0 +1,334 @@
+﻿
+@{
+    Layout = null;
+    ViewBag.Title = "Index";
+}
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+
+    <script charset="utf-8" src="~/Lib/template/js/jquery-1.11.2.min.js"></script>
+    <script src="~/Lib/template/js/main_a.js"></script>
+    <script src="~/Lib/template/js/swfobject.js"></script>
+    <script src="~/Lib/template/js/layer/layer.js"></script>
+    <link href="~/Lib/template/css/main_830DA329.css" rel="stylesheet" />
+
+    <meta charset="utf-8">
+    <title>515</title>
+    <script type="text/javascript">
+var strr='{$querystr}';
+var pokerurl='{$pokerurl}';
+var sandbox={$sandbox};
+		function thisMovie(movieName) {
+			var app=navigator.appName;
+			var verStr=navigator.appVersion;
+			if (app.indexOf('Netscape') != -1) {
+				//alert('Netscape');
+				return window[movieName];
+			}
+			else if (app.indexOf('Microsoft') != -1) {
+				//alert('Microsoft');
+				return document[movieName];
+			}else{
+				//alert('XXXXXXXXXX');
+				return document[movieName];
+			}
+		}
+		function changeFocus(){
+			document.getElementById("ClientLoader").onmousewheel = function scrollWheel(e) {
+				e = e || window.event;
+				if (navigator.userAgent.toLowerCase().indexOf('msie') >= 0) {
+					event.returnValue = false;
+				} else {
+					e.preventDefault();
+				};
+			};
+			if (navigator.userAgent.toLowerCase().indexOf('firefox') >= 0) {
+				//firefox支持onmousewheel
+				addEventListener('DOMMouseScroll', function(e) {
+					var obj = e.target;
+					var onmousewheel;
+					while (obj) {
+						onmousewheel = obj.getAttribute('onmousewheel') || obj.onmousewheel;
+						if (onmousewheel) break;
+						if (obj.tagName == 'BODY') break;
+						obj = obj.parentNode;
+					};
+					if (onmousewheel) {
+						if (e.preventDefault) e.preventDefault();
+						e.returnValue = false; //禁止页面滚动
+						if (typeof obj.onmousewheel != 'function') {
+							//将onmousewheel转换成function
+							eval('window._tmpFun = function(event){' + onmousewheel + '}');
+							obj.onmousewheel = window._tmpFun;
+							window._tmpFun = null;
+						};
+						// 不直接执行是因为若onmousewheel(e)运行时间较长的话，会导致锁定滚动失效，使用setTimeout可避免
+						setTimeout(function() {
+							obj.onmousewheel(e);
+						}, 1);
+					};
+				},
+				false);
+			};
+			//假如flash对像的id为myFlash,getMyFlash方法是获得Flash对象的方法，具体内容不写了。
+			var viFlash = thisMovie("ClientLoader");
+			//CuPlayer.com提示：判断浏览器的类型
+			var ua = navigator.userAgent;
+			if(ua.indexOf("Firefox") > -1){
+				//FireFox浏览器响应mouseWheel的方法。
+				viFlash.addEventListener('DOMMouseScroll',mouseWheelFireFox,false);
+			}else if(ua.indexOf("MSIE") == -1){
+				//Chrome、Safari浏览器响应mouseWheel的方法。
+				viFlash.addEventListener('mousewheel',mouseWheelOtherBrowsing,false);
+			}
+			if(document.attachEvent){
+				viFlash.attachEvent('onmousewheel',mouseWheelOtherBrowsing,false);
+			}
+		}
+
+		function mouseWheelFireFox(event)
+		{
+			var viFlash = thisMovie("ClientLoader");
+			if(viFlash){
+				var obj={delta:event.detail}
+				//Flex给JS提供的接口
+				viFlash.jsCallMouseWheelHandler(event.detail);
+			}
+		}
+		function mouseWheelOtherBrowsing(event)
+		{
+			var viFlash = thisMovie("ClientLoader");
+			if(viFlash){
+				var obj={delta:-event.wheelDelta};
+				//Flex给JS提供的接口
+				viFlash.jsCallMouseWheelHandler(-event.wheelDelta);
+			}
+		}
+
+		function asCallJs_getGameId(gid,gip,gpost){
+			uid=gid;
+			hip=gip;
+			hpost=gpost;
+			$('#span_gameId').html(gid);
+			getUrl(hUrl+'index.php/home/index/getJLB?userid='+uid);
+        	}
+		function checkLeave()
+		{
+			var viFlash = thisMovie("ClientLoader");
+			if(viFlash){
+				var showMgs = viFlash.jsCallLeaveData();
+				event.returnValue="确定离开当前页面吗？:"+showMgs ;
+			}
+ 		}
+ function onGotoGG(){
+	 var viFlash = thisMovie("ClientLoader");
+		 if(viFlash && (viFlash.jsCallGotoGG))
+		{
+			viFlash.jsCallGotoGG();
+		}
+	}
+function onGotoXS(){
+	 var viFlash = thisMovie("ClientLoader");
+		 if(viFlash && (viFlash.jsCallGotoXS))
+		{
+			viFlash.jsCallGotoXS();
+		}
+	}
+	function onGotoJQ(){
+	 var viFlash = thisMovie("ClientLoader");
+		 if(viFlash && (viFlash.jsCallGotoJQ))
+		{
+			viFlash.jsCallGotoJQ();
+		}
+	}
+function getPUrl(){
+	var url = "";
+
+    try {
+        url = window.top.document.referrer
+    } catch(M) {
+        if (window.parent) {
+            try {
+                url = window.parent.document.referrer
+            } catch(L) {
+                url = ""
+            }
+        }
+    }
+    if (url === "") {
+        url = document.referrer
+    }
+    return url
+}
+function getUrl(url) {
+	var head = document.getElementsByTagName("head")[0];
+	var script = document.createElement('script');
+	script.onload = script.onreadystatechange = script.onerror = function () {
+		if (script && script.readyState && /^(?!(?:loaded|complete)$)/.test(script.readyState))
+			return false;
+		script.onload = script.onreadystatechange = script.onerror = null;
+		script.src = '';
+		script.parentNode.removeChild(script);
+		script = null;
+	};
+	script.charset = document.charset || document.characterSet || 'gb2312';
+	script.src = url + '&' + (new Date().valueOf());
+	head.appendChild(script);
+}
+function getJLB_callback(data){
+	if(data!=0){
+		$('#actcenter').css('display','block');
+	}
+}
+$(document).ready(function(){
+
+});
+    </script>
+    <script type="text/javascript">
+function loadVersion(){
+	// For version detection, set to min. required Flash Player version, or 0 (or 0.0.0), for no version detection.
+    var swfVersionStr = "11.1.0";
+    // To use express install, set to playerProductInstall.swf, otherwise the empty string.
+    var xiSwfUrlStr = "{$flashurl}playerProductInstall.swf";
+    var flashvars = "";
+    var params = {};
+    params.quality = "high";
+    params.bgcolor = "#000000";
+    params.allowscriptaccess = "sameDomain";
+    params.allowfullscreen = "true";
+    var attributes = {};
+    attributes.id = "ClientLoader";
+    attributes.name = "ClientLoader";
+    attributes.align = "middle";
+    swfobject.embedSWF(
+        "{$flashurl}ClientLoader.swf"+'{$paramvar}', "flashContent",
+        "950", "900",
+        swfVersionStr, xiSwfUrlStr,
+        flashvars, params, attributes);
+    // JavaScript enabled so display the flashContent div in case it is not replaced with a swf object.
+    swfobject.createCSS("#flashContent", "display:block;text-align:left;");
+}
+    </script>
+</head>
+
+<body onload="changeFocus();" onbeforeunload="checkLeave()">
+    <div id="header">
+        <div id="ad2">
+            <div id="pic_window">   
+                <a target="_black" onClick="onGotoGG()"><img src="../../Lib/template/images/header01.jpg" alt="" /></a>
+                <a target="_black" onClick="onGotoXS()"><img src="../../Lib/template/images/header02.jpg" alt="" /></a>
+                <a target="_black" onClick="onGotoJQ()"><img src="../../Lib/template/images/header03.jpg" alt="" /></a>
+            </div>
+            <div class="pic_dot">
+                <a class="" href="#"><p class="pic_dot_num">1</p></a>
+                <a class="" href="#"><p class="pic_dot_num">2</p></a>
+                <a class="" href="#"><p class="pic_dot_num">3</p></a>
+            </div>
+            <span title="关闭" onclick="$(this).parent().hide(); DeBao.bd_height = $('#bd').height();stop_ad2();"></span>
+        </div>
+    </div>
+
+    <div id="article">
+        <a id="article_logo" class="<if condition='$channel eq 10003'>logooo<elseif condition='$channel eq 10014' />logoo<else/>logoo2</if>" href="javascript:void(0);"  ></a>
+        <ul>
+            <li id="gamecontent" class="li_one"><a href="javascript:void(0);">德州扑克</a></li>
+            <li><a href="http://bbs.open.qq.com/forum.php?mod=forumdisplay&action=list&fid=3487#groupnav" target="_blank">游戏论坛</a></li>
+            <li><a href="http://wpa.b.qq.com/cgi/wpa.php?ln=1&key=XzkzODAwNTkwMV8yNDk5MjdfNDAwMDgyNTUxNV8yXw" target="_blank">客服QQ</a></li>
+            <li id="article_yq"><a href="javascript:void(0);" onclick="return false;">邀请</a></li>
+            <li id="article_sc"><a href="javascript:void(0);" onclick="return false;">收藏</a></li>
+            <li id="actcenter" style="display: none;"><a href="javascript:void(0);">俱乐部</a></li> <!-- javascript:void(0); -->
+        </ul>
+        <img id="mobilebtn" class="phone" src="../../Lib/template/images/downloadmobile.png" alt="" />
+    </div>
+
+    <div id="divError">
+        <span id="spError"></span>
+    </div>
+
+    <div id="flashbody">
+        <div id="content">
+            <div id="flashContent">
+                <p>
+                    To view this page ensure that Adobe Flash Player version
+                    11.1.0 or greater is installed.
+                </p>
+                <script type="text/javascript">
+
+                var pageHost = ((document.location.protocol == "https:") ? "https://" : "http://");
+                document.write("<a href='http://www.adobe.com/go/getflashplayer'><img src='"
+                                + pageHost + "www.adobe.com/images/shared/download_buttons/get_flash_player.gif' alt='Get Adobe Flash player' /></a>" );
+                loadVersion();
+                </script>
+
+            </div>
+        </div>
+    </div>
+    <noscript>
+        <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="950" height="900" id="ClientLoader">
+            <param name="movie" value="{$flashurl}ClientLoader.swf{$paramvar}" />
+            <param name="quality" value="high" />
+            <param name="bgcolor" value="#000000" />
+            <param name="allowScriptAccess" value="sameDomain" />
+            <param name="allowFullScreen" value="true" />
+            <param name="flashvars" value="" />
+
+            <!--[if !IE]>-->
+            <object type="application/x-shockwave-flash" data="{$flashurl}ClientLoader.swf{$paramvar}" width="950" height="900">
+                <param name="quality" value="high" />
+                <param name="bgcolor" value="#000000" />
+                <param name="allowScriptAccess" value="sameDomain" />
+                <param name="allowFullScreen" value="true" />
+                <param name="flashvars" value="" />
+                <!--<![endif]-->
+                <!--[if gte IE 6]>-->
+                <p>
+                    Either scripts and active content are not permitted to run or Adobe Flash Player version
+                    11.1.0 or greater is not installed.
+                </p>
+                <!--<![endif]-->
+                <a href="http://www.adobe.com/go/getflashplayer">
+                    <img src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="Get Adobe Flash Player" />
+                </a>
+                <!--[if !IE]>-->
+            </object>
+            <!--<![endif]-->
+        </object>
+    </noscript>
+
+    <div id="footer">
+        <p><b>为了保证游戏的稳定运行，建议您使用360极速浏览器,谷歌浏览器。</b></p>
+        <span id="qMeImg"><a href="javascript:onReload()" target="_blank"></a></span>
+        <p><span>游戏ID: <span id="span_gameId"></span> 特别提醒：官方严禁私下交易，因私下交易产生的纠纷，官方概不受理。版本号：{$vertime} </span></p>
+        <p><span>声明：《{$gamename}》由“五一五游戏”开发提供，一个玩家只能同时拥有3个账号的,多余的账号会被永久封号。若您在游戏中遇到问题或对游戏有更好的建议和意见，</span></p>
+        <p>
+            <span>请联系我们的专业客服，电话：<span class="footer_qq"><b>4000-825-515</b></span></span>
+            <span>
+                <script charset="utf-8" type="text/javascript" src="http://wpa.b.qq.com/cgi/wpa.php?key=XzkzODAwNTkwMV8yNDk4MTFfNDAwMDgyNTUxNV8"></script>
+            </span>
+        </p>
+        <p>
+            <span><b>游戏官方群号：</b></span> <span class="footer_qq"><b>414653199</b></span>
+            <span> 加入官方QQ群，立即赠送50,000游戏币,充值满10Q币用户再送100,000游戏币！</span>
+        </p>
+    </div>
+
+    <script type="text/javascript" charset="utf-8" src="http://fusion.qq.com/fusion_loader?appid={$appid}&platform={$pf}"></script>
+ 
+    <script src="~/Lib/template/js/tx_com-3.js"></script>
+    <script>
+;!function(){
+   
+//加载扩展模块
+layer.config({
+    extend: '../../Lib/template/js/layer/extend/layer.ext.js'
+});
+
+//页面一打开就执行，放入ready是为了layer所需配件（css、扩展模块）加载完毕
+layer.ready(function(){
+});
+}();
+    </script>
+</body>
+</html>

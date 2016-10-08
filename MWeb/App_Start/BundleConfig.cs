@@ -1,0 +1,82 @@
+﻿using System.Web;
+using System.Web.Optimization;
+
+namespace MWeb
+{
+    public class BundleConfig
+    {
+        // 有关绑定的详细信息，请访问 http://go.microsoft.com/fwlink/?LinkId=301862
+        public static void RegisterBundles(BundleCollection bundles)
+        {
+
+            bundles.Add(new StyleBundle("~/Style/css").Include(
+                        "~/css/fullcalendar.css",
+                        "~/css/uniform.css",
+                        "~/css/select2.css",
+                        "~/css/select2-bootstrap.css",
+                        "~/css/jquery.gritter.css",
+                        "~/css/matrix-style.css",
+                        "~/css/matrix-media.css",
+                        "~/font-awesome/css/font-awesome.css"
+                         
+                       ));
+            bundles.Add(new ScriptBundle("~/bundles/swfobject").Include(
+                        "~/Scripts/swfobject.js"                        
+                       ));
+
+
+            
+
+            bundles.Add(new StyleBundle("~/Style/bootstrap").Include(
+                        "~/css/bootstrap.min.css",
+                        "~/css/bootstrap-responsive.min.css",
+                        "~/css/AspNetPager.css"
+                        ));
+
+
+            bundles.Add(new ScriptBundle("~/bundles/bootstrap-datetimepicker").Include(
+                        "~/Scripts/bootstrap-datetimepicker.min.js",
+                        "~/Scripts/bootstrap-datetimepicker.zh-CN.js"
+                        ));
+            bundles.Add(new ScriptBundle("~/Style/bootstrap-datetimepicker").Include(
+                        "~/Content/bootstrap-datetimepicker.min.css"
+                        ));
+
+
+            bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
+                        "~/Scripts/jquery-{version}.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/jqueryui").Include(
+                        "~/Scripts/jquery-ui-{version}.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
+                        "~/Scripts/jquery.unobtrusive*",
+                        "~/Scripts/jquery.validate*"));
+
+            // 使用要用于开发和学习的 Modernizr 的开发版本。然后，当你做好
+            // 生产准备时，请使用 http://modernizr.com 上的生成工具来仅选择所需的测试。
+            bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
+                        "~/Scripts/modernizr-*"));
+
+            bundles.Add(new StyleBundle("~/Content/css").Include("~/Content/site.css"));
+
+            bundles.Add(new StyleBundle("~/Content/themes/base/css").Include(
+                        "~/Content/themes/base/jquery.ui.core.css",
+                        "~/Content/themes/base/jquery.ui.resizable.css",
+                        "~/Content/themes/base/jquery.ui.selectable.css",
+                        "~/Content/themes/base/jquery.ui.accordion.css",
+                        "~/Content/themes/base/jquery.ui.autocomplete.css",
+                        "~/Content/themes/base/jquery.ui.button.css",
+                        "~/Content/themes/base/jquery.ui.dialog.css",
+                        "~/Content/themes/base/jquery.ui.slider.css",
+                        "~/Content/themes/base/jquery.ui.tabs.css",
+                        "~/Content/themes/base/jquery.ui.datepicker.css",
+                        "~/Content/themes/base/jquery.ui.progressbar.css",
+                        "~/Content/themes/base/jquery.ui.theme.css"));
+
+            // 将 EnableOptimizations 设为 false 以进行调试。有关详细信息，
+            // 请访问 http://go.microsoft.com/fwlink/?LinkId=301862
+            BundleTable.EnableOptimizations = false;
+        }
+    }
+}

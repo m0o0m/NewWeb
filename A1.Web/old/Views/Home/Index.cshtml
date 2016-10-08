@@ -1,0 +1,78 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_index.cshtml";
+}
+@section Js{
+      <script src="/Scripts/yw.js"></script>
+}
+    <section class="login-banner">
+        <div class="wrap">
+
+            @*{
+                Dictionary<string, string> d = MvcApplication1.Method.getUserInfo;
+                
+                if(d.Count>0)
+                {
+                    string phtml = " <section class=\"user-panel\">  <div class=\"user-wrap\"><div class=\"user-pic fl\"><img src=\"Image/user_pic.jpg\" alt=\"用户头像\"></div>"+
+                        "  <div class=\"user-info fl\">  <strong class=\"name\">" + d["account"] + "</strong>   <p>游戏币：" + d["gold"] + "</p>  <p>钻石：" + d["diamond"] + "</p> <p>紫卡：" + d["zicard"] + "</p></div> </div>" +
+                        "<div class=\"login-game\"> <a href=\"#\" title=\"\"></a> </div>  <ul class=\"link\">  <li><a href=\"/logout\">退出</a></li>"+
+                    "<li><a class=\"pay\" href=\"pay.html\">充值</a></li>  </ul>  </section>";
+                    @Html.Raw(phtml);
+                
+                }else
+                {
+                    string html = "<section class=\"login-panel\" ><form action=\"xx.php\"> <fieldset> <label class=\"input-prepend\">"+
+                          "<span class=\"icon person-icon\"></span> <input type=\"text\" placeholder=\"请输入用户名\" id=\"ipt-login-id\">   </label>   </fieldset> "+
+                          " <fieldset> <label class=\"input-prepend\">  <span class=\"icon password-icon\"></span> <input type=\"password\" onkeyup=\"if(event.keyCode==13){$('#login').click()}\" placeholder=\"请输入密码\" id=\"ipt-login-pwd\"> </label> </fieldset>" +
+                          "  <p class=\"server-error\"></p><fieldset class=\"addition\">  <label><input type=\"checkbox\" name=\"\" value=\"\">下次自动登录</label>" +
+                          "    <a class=\"forget\" href=\"#\">忘记密码?</a> <a class=\"reg\" href=\"/reg\">免费注册</a>    </fieldset>  <button id=\"login\" class=\"btn-login\" type=\"button\">登录游戏</button>" +
+                          "  </form> </section>";
+        
+          
+                  @Html.Raw(html);
+                }
+                
+                }*@
+
+
+        </div>
+    </section>
+    <!-- 推荐游戏 -->
+    <section class="hotlists-game">
+        <div class="line-title">
+            <span class="line"></span>
+            <div class="title">
+                <h2 class="icon icon-fire">推荐游戏</h2>
+            </div>
+        </div>
+        <ul class="hotlists-game">
+            <li>
+                <a class="game-panel game-panel-n" href="#">
+                    <img class="pic" src="Image/games/poker.jpg" alt="德州扑克">
+                    <div class="info">
+                        <h3>德州扑克</h3>
+                        <p class="en">TEXAS HOLD’EM POKER<i></i></p>
+                    </div>
+                </a>
+            </li>
+            <li>
+                <a class="game-panel game-panel-n" href="#">
+                    <img class="pic" src="Image/games/landlords.jpg" alt="斗地主">
+                    <div class="info">
+                        <h3>斗地主</h3>
+                        <p class="en">LANDLORDS<i></i></p>
+                    </div>
+                </a>
+            </li>
+            <li>
+                <a class="game-panel game-panel-n" href="#">
+                    <img class="pic" src="Image/games/developing.jpg" alt="开发中...">
+                    <div class="info">
+                        <h3>开发中...</h3>
+                        <p class="en">MORE...<i></i></p>
+                    </div>
+                </a>
+            </li>
+        </ul>
+    </section>
+

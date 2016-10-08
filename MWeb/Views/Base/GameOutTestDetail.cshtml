@@ -1,0 +1,751 @@
+﻿@using GL.Data.Model
+@model BaseDataView
+@using System.Collections.Generic
+@{
+    Layout = null;
+
+    ViewBag.Format = "yyyy-MM-dd";
+
+    switch (Model.Groupby)
+    {
+        case groupby.按日:
+            break;
+        case groupby.按月:
+            ViewBag.Format = "yyyy-MM";
+            break;
+    }
+
+    int j = 0;
+    GameOutputDetail bdl = (GameOutputDetail)Model.BaseDataList;
+
+    List<GameOutputList>   richang = new    List<GameOutputList>();
+    string richangstr= ",1,2,9,37,39,59,60,61,62,63,70,71,74,107,127,128,129,130,144,145,148,151,";
+    decimal richangTotal = 0;
+
+
+    List<GameOutputList>   youxiwanfa = new    List<GameOutputList>();
+    string youxiwanfastr= ",18,46,48,51,67,79,80,81,83,84,85,86,88,90,111,124,166,200,";
+    decimal youxiwanfaTotal = 0;
+
+    List<GameOutputList>   yunyinhuodong = new    List<GameOutputList>();
+    string yunyinhuodongstr= ",12,13,16,20,44,45,108,110,109,139,152,154,155,167,168,201,202,";
+    decimal yunyinhuodongTotal = 0;
+
+
+    List<GameOutputList>   chongzhigoumai = new    List<GameOutputList>();
+    string chongzhigoumaistr= ",3,5,";
+    decimal chongzhigoumaiTotal = 0;
+
+    List<GameOutputList>   dezhoupuke = new    List<GameOutputList>();
+    string dezhoupukestr= ",25,";
+    decimal dezhoupukeTotal = 0;
+
+    List<GameOutputList>   zhongfabai = new    List<GameOutputList>();
+    string zhongfabaistr= ",26,47,50,";
+    decimal zhongfabaiTotal = 0;
+
+    List<GameOutputList>   shiershengxiao = new    List<GameOutputList>();
+    string shiershengxiaostr= ",65,76,106,";
+    decimal shiershengxiaoTotal = 0;
+
+    List<GameOutputList>   xiaomakuaipao = new    List<GameOutputList>();
+    string xiaomakuaipaostr= ",92,99,";
+    decimal xiaomakuaipaoTotal = 0;
+
+    List<GameOutputList>   benchibaoma = new    List<GameOutputList>();
+    string benchibaomastr= ",114,119,121,";
+    decimal benchibaomaTotal = 0;
+
+    List<GameOutputList>   hudong = new    List<GameOutputList>();
+    string hudongstr= ",7,17,19,21,22,68,23,143,199,";
+    decimal hudongTotal = 0;
+
+    List<GameOutputList> bairendezhou = new List<GameOutputList>();
+    string bairenstr = ",157,162,";
+    decimal bairenTotal = 0;
+
+    int inputmark = 0;
+    int outputmark = 0;
+
+
+    for (int i = 0; i < bdl.list.Count; i++) {
+        if(bdl.list[i].Chip == 0) {
+            continue;
+        }
+        int t = (int)bdl.list[i].ChipChangeType;
+        if (richangstr.Contains(","+t+",")) {
+            richang.Add(bdl.list[i]);
+            richangTotal += bdl.list[i].Chip;
+            inputmark++;
+        }
+        else if (youxiwanfastr.Contains("," + t + ",")) {
+            youxiwanfa.Add(bdl.list[i]);
+            youxiwanfaTotal += bdl.list[i].Chip;
+            inputmark++;
+        }
+        else if (yunyinhuodongstr.Contains("," + t + ",")) {
+            yunyinhuodong.Add(bdl.list[i]);
+            yunyinhuodongTotal += bdl.list[i].Chip;
+            inputmark++;
+        }
+        else if (chongzhigoumaistr.Contains("," + t + ",")) {
+            chongzhigoumai.Add(bdl.list[i]);
+            chongzhigoumaiTotal += bdl.list[i].Chip;
+            inputmark++;
+        }
+        else if (dezhoupukestr.Contains("," + t + ",")) {
+            dezhoupuke.Add(bdl.list[i]);
+            dezhoupukeTotal += bdl.list[i].Chip;
+            outputmark++;
+        }
+        else if (zhongfabaistr.Contains("," + t + ",")) {
+            zhongfabai.Add(bdl.list[i]);
+            zhongfabaiTotal += bdl.list[i].Chip; outputmark++;
+        }
+        else if (shiershengxiaostr.Contains("," + t + ",")) {
+            shiershengxiao.Add(bdl.list[i]);
+            shiershengxiaoTotal += bdl.list[i].Chip; outputmark++;
+        }
+        else if (xiaomakuaipaostr.Contains("," + t + ",")) {
+            xiaomakuaipao.Add(bdl.list[i]);
+            xiaomakuaipaoTotal += bdl.list[i].Chip; outputmark++;
+        }
+        else if (benchibaomastr.Contains("," + t + ",")) {
+            benchibaoma.Add(bdl.list[i]);
+            benchibaomaTotal += bdl.list[i].Chip; outputmark++;
+        }
+        else if (hudongstr.Contains("," + t + ",")) {
+            hudong.Add(bdl.list[i]);
+            hudongTotal += bdl.list[i].Chip; outputmark++;
+        }
+        else if (bairenstr.Contains("," + t + ","))
+        {
+            bairendezhou.Add(bdl.list[i]);
+            bairenTotal += bdl.list[i].Chip; outputmark++;
+        }
+
+
+    }
+
+
+
+
+
+
+
+
+
+}
+
+<div class="GameOutputDetail">
+
+
+   
+    <section id="widget-grid" class="">
+
+        <!-- row -->
+        <div class="row">
+
+            @if (inputmark > 0)
+            {
+                 <!-- NEW WIDGET START -->
+                <article class="col-sm-12 col-md-12 col-lg-4">
+                    <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-1" data-widget-editbutton="false"
+                           data-widget-togglebutton="true"
+                     data-widget-deletebutton="true"
+                     data-widget-fullscreenbutton="true"
+                     data-widget-custombutton="true"
+                     data-widget-collapsed="true"
+                         >
+                        <header>
+                            <span class="widget-icon"> <i class="fa fa-sitemap"></i> </span>
+                            <h2>查看游戏币详细-产出项</h2>
+                        </header>
+                        <div>
+                            <div class="jarviswidget-editbox">
+                            </div>
+                            <div class="widget-body">
+                                <form id="subfrom" class="smart-form" action="/SU/SaveUserResource">
+                                    <input type="hidden" id="userid" name="userid" value="@Model.UserID" />
+                                    <fieldset>
+                                        <div class="tree smart-form menu">
+                                            <ul>
+                                                @if (richangTotal > 0)
+                                                {
+                                                    <li>
+                                                        <span><i class="fa fa-lg fa-plus-circle"></i> 日常系统  <span style="color:#ee0000">@richangTotal</span></span>
+                                                        <ul>      
+                                                            @for (int i = 0; i < richang.Count; i++)
+                                                            {
+                                                                if (richang[i].ChipChangeType == chipChangeType.邮件金币)
+                                                                {
+                                                                    <li style="display:none">
+                                                                        <span class="label"><i class=""></i>@richang[i].ChipChangeType <span style="color:#ee0000" ><a style="color:#ee0000;text-decoration-line:underline" href="#" onclick="youjianjinbi('@Model.StartDate')">@richang[i].Chip.ToString("#,0.")</a></span>  </span>
+                                                                    </li>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <li style="display:none">
+                                                                        <span class="label"><i class=""></i>@richang[i].ChipChangeType <span style="color:#ee0000">@richang[i].Chip.ToString("#,0.")</span>  </span>
+                                                                    </li>
+                                                                }
+
+
+                                                            }
+                                                        </ul>
+                                                    </li>
+                                                }
+
+                                                @if (youxiwanfaTotal > 0)
+                                                {
+                                                    <li>
+                                                        <span><i class="fa fa-lg fa-plus-circle"></i>游戏玩法 <span style="color:#ee0000">@youxiwanfaTotal</span>  </span>
+                                                        <ul>
+                                                            @for (int i = 0; i < youxiwanfa.Count; i++)
+                                                            {
+
+                                                                <li style="display:none">
+                                                                    <span class="label"><i class=""></i>@youxiwanfa[i].ChipChangeType  <span style="color:#ee0000">@youxiwanfa[i].Chip.ToString("#,0.")</span></span>
+                                                                </li>
+                                                            }
+                                                        </ul>
+                                                    </li>
+                                                }
+                                                @if (yunyinhuodongTotal > 0)
+                                                {
+                                                    <li>
+                                                        <span><i class="fa fa-lg fa-plus-circle"></i> 运营活动  <span style="color:#ee0000">@yunyinhuodongTotal</span>  </span>
+                                                        <ul>
+                                                            @for (int i = 0; i < yunyinhuodong.Count; i++)
+                                                            {
+
+                                                                <li style="display:none">
+                                                                    <span class="label"><i class=""></i>@yunyinhuodong[i].ChipChangeType <span style="color:#ee0000">@yunyinhuodong[i].Chip.ToString("#,0.")</span></span>
+                                                                </li>
+                                                            }
+
+                                                        </ul>
+                                                    </li>
+                                                }
+                                                @if (chongzhigoumaiTotal > 0)
+                                                {
+                                                    <li>
+                                                        <span><i class="fa fa-lg fa-plus-circle"></i> 充值购买  <span style="color:#ee0000">@chongzhigoumaiTotal</span>  </span>
+                                                        <ul>
+                                                            @for (int i = 0; i < chongzhigoumai.Count; i++)
+                                                            {
+
+                                                                <li style="display:none">
+                                                                    <span class="label"><i class=""></i>@chongzhigoumai[i].ChipChangeType <span style="color:#ee0000">@chongzhigoumai[i].Chip.ToString("#,0.")</span> </span>
+                                                                </li>
+                                                            }
+
+                                                        </ul>
+                                                    </li>
+                                                }
+
+                                            </ul>
+
+
+                                        </div>
+                                    </fieldset>
+
+                                </form>
+                            </div>
+                            <!-- end widget content -->
+                            <!-- end widget div -->
+
+
+
+                        </div>
+
+                    </div>
+                    <!-- end widget -->
+
+                </article>
+            <!-- WIDGET END -->
+
+            }
+            @if (outputmark > 0)
+            {
+                     <!-- NEW WIDGET START -->
+                <article class="col-sm-12 col-md-12 col-lg-4">
+                    <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-1" data-widget-editbutton="false">
+                        <header>
+                            <span class="widget-icon"> <i class="fa fa-sitemap"></i> </span>
+                            <h2>查看游戏币详细=消耗项</h2>
+                        </header>
+                        <div>
+                            <div class="jarviswidget-editbox">
+                            </div>
+                            <div class="widget-body">
+                                <form id="subfrom" class="smart-form" action="/SU/SaveUserResource">
+                                    <fieldset>
+                                        <div class="tree smart-form menu">
+                                            <ul>
+                                                @if (dezhoupukeTotal < 0)
+                                                {
+                                                    <li>
+                                                        <span><i class="fa fa-lg fa-plus-circle"></i> 德州扑克服务费  <span style="color:#ee0000">@dezhoupukeTotal</span>  </span>
+                                                        <ul>
+                                                            @for (int i = 0; i < dezhoupuke.Count; i++)
+                                                            {
+
+                                                                <li style="display:none">
+                                                                    <span class="label"><i class=""></i>@dezhoupuke[i].ChipChangeType <span style="color:#ee0000">@dezhoupuke[i].Chip.ToString("#,0.")</span></span>
+                                                                </li>
+                                                            }
+                                                        </ul>
+                                                    </li>
+                                                }
+                                                @if (zhongfabaiTotal < 0)
+                                                {
+                                                    <li>
+                                                        <span><i class="fa fa-lg fa-plus-circle"></i>中发白服务费 <span style="color:#ee0000">@zhongfabaiTotal</span>  </span>
+                                                        <ul>
+                                                            @for (int i = 0; i < zhongfabai.Count; i++)
+                                                            {
+
+                                                                <li style="display:none">
+                                                                    <span class="label"><i class=""></i>@zhongfabai[i].ChipChangeType  <span style="color:#ee0000">@zhongfabai[i].Chip.ToString("#,0.")</span></span>
+                                                                </li>
+                                                            }
+                                                        </ul>
+                                                    </li>
+                                                }
+                                                @if (shiershengxiaoTotal < 0)
+                                                {
+                                                    <li>
+                                                        <span><i class="fa fa-lg fa-plus-circle"></i>十二生肖服务费 <span style="color:#ee0000">@shiershengxiaoTotal</span>  </span>
+                                                        <ul>
+                                                            @for (int i = 0; i < shiershengxiao.Count; i++)
+                                                            {
+
+                                                                <li style="display:none">
+                                                                    <span class="label"><i class=""></i>@shiershengxiao[i].ChipChangeType  <span style="color:#ee0000">@shiershengxiao[i].Chip.ToString("#,0.")</span></span>
+                                                                </li>
+                                                            }
+                                                        </ul>
+                                                    </li>
+                                                }
+                                                @if (xiaomakuaipaoTotal < 0)
+                                                {
+                                                    <li>
+                                                        <span><i class="fa fa-lg fa-plus-circle"></i>小马快跑服务费   <span style="color:#ee0000">@xiaomakuaipaoTotal</span> </span>
+                                                        <ul>
+                                                            @for (int i = 0; i < xiaomakuaipao.Count; i++)
+                                                            {
+
+                                                                <li style="display:none">
+                                                                    <span class="label"><i class=""></i>@xiaomakuaipao[i].ChipChangeType  <span style="color:#ee0000">@xiaomakuaipao[i].Chip.ToString("#,0.")</span></span>
+                                                                </li>
+                                                            }
+                                                        </ul>
+                                                    </li>
+                                                }
+                                                @if (benchibaomaTotal < 0)
+                                                {
+                                                    <li>
+                                                        <span><i class="fa fa-lg fa-plus-circle"></i>奔驰宝马服务费  <span style="color:#ee0000">@benchibaomaTotal</span></span>
+                                                        <ul>
+                                                            @for (int i = 0; i < benchibaoma.Count; i++)
+                                                            {
+
+                                                                <li style="display:none">
+                                                                    <span class="label"><i class=""></i>@benchibaoma[i].ChipChangeType <span style="color:#ee0000">@benchibaoma[i].Chip.ToString("#,0.")</span></span>
+                                                                </li>
+                                                            }
+                                                        </ul>
+                                                    </li>
+                                                }
+                                                @if (bairenTotal < 0)
+                                                {
+                                                    <li>
+                                                        <span><i class="fa fa-lg fa-plus-circle"></i>百人德州服务费   <span style="color:#ee0000">@bairenTotal</span> </span>
+                                                        <ul>
+                                                            @for (int i = 0; i < bairendezhou.Count; i++)
+                                                            {
+
+                                                                <li style="display:none">
+                                                                    <span class="label"><i class=""></i>@bairendezhou[i].ChipChangeType  <span style="color:#ee0000">@bairendezhou[i].Chip.ToString("#,0.")</span></span>
+                                                                </li>
+                                                            }
+                                                        </ul>
+                                                    </li>
+                                                }
+                                                @if (hudongTotal < 0)
+                                                {
+                                                    <li>
+                                                        <span><i class="fa fa-lg fa-plus-circle"></i> 互动玩法 <span style="color:#ee0000">@hudongTotal</span></span>
+                                                        <ul>
+                                                            @for (int i = 0; i < hudong.Count; i++)
+                                                            {
+
+                                                                <li style="display:none">
+                                                                    <span class="label"><i class=""></i>@hudong[i].ChipChangeType   <span style="color:#ee0000">@hudong[i].Chip.ToString("#,0.")</span></span>
+                                                                </li>
+                                                            }
+
+                                                        </ul>
+                                                    </li>
+                                                }
+
+
+                                            </ul>
+
+
+                                        </div>
+                                    </fieldset>
+
+                                </form>
+                            </div>
+                            <!-- end widget content -->
+                            <!-- end widget div -->
+
+
+
+                        </div>
+
+                    </div>
+                    <!-- end widget -->
+
+                </article>
+            <!-- WIDGET END -->
+
+            }
+
+       
+
+        </div>
+
+        <!-- end row -->
+        <!-- row -->
+
+        <div class="row">
+
+        </div>
+
+        <!-- end row -->
+
+    </section>
+
+
+
+
+    <section id="widget-grid222" class="">
+
+        <!-- row -->
+        <div class="row">
+          
+        </div>
+
+        <!-- end row -->
+        <!-- row -->
+
+        <div class="row">
+
+        </div>
+
+        <!-- end row -->
+
+    </section>
+
+
+
+
+
+
+
+
+
+
+    @*<section id="widget-grid" class="">
+        <div class="row">
+            <article class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
+                <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-0" data-widget-editbutton="false" data-widget-colorbutton="false"
+                     data-widget-togglebutton="false"
+                     data-widget-deletebutton="false"
+                     data-widget-fullscreenbutton="false"
+                     data-widget-custombutton="false"
+                     data-widget-collapsed="false"
+                     data-widget-sortable="false">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                        <h2>查看游戏币详细</h2>
+                    </header>
+                    <!-- widget div-->
+                    <div>
+                        <!-- widget edit box -->
+                        <div class="jarviswidget-editbox">
+                            <!-- This area used as dropdown edit box -->
+                        </div>
+                        <!-- end widget edit box -->
+                        <!-- widget content -->
+                        <div class="widget-body no-padding">
+                            <div class="table-responsive">
+                                <table class="table table-bordered">
+
+                                    <tbody>
+                                        <tr>
+                                            <td class="span3">日期</td>
+                                            <td class="span2">@bdl.date.ToString(ViewBag.Format)</td>
+                                            <td></td>
+                                            <td class="span3">系统总游戏币</td>
+                                            <td class="span2">@bdl.systemBargainingChip.ToString("#,0.")</td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+
+                                            @{j = 0;
+                                                for (int i = 0; i < bdl.list.Count; i++)
+                                                {
+                                                    if (bdl.list[i].Chip == 0)
+                                                    {
+                                                        continue;
+                                                    }
+
+                                                    if (j % 2 == 0)
+                                                    {
+                                                        @Html.Raw("<tr>")
+                                                    }
+
+                                                    <td>@bdl.list[i].ChipChangeType</td>
+                                                    <td>
+                                                        @if (bdl.list[i].Chip > 0)
+                                                        {
+                                                            @bdl.list[i].Chip.ToString("#,0.")
+                                                        }
+                                                        else
+                                                        {
+                                                            <span style="color:#ee0000">@bdl.list[i].Chip.ToString("#,0.")</span>
+                                                        }
+                                                    </td>
+                                                    <td></td>
+                                                    if (j % 2 == 1)
+                                                    {
+                                                        @Html.Raw("</tr>")
+                                                    }
+
+                                                    { j = j + 1; }
+                                                }
+                                                if (j % 2 == 1)
+                                                {
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    @Html.Raw("</tr>")
+                                                }
+
+                                            }
+
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <!-- end widget content -->
+                    </div>
+                    <!-- end widget div -->
+                </div>
+                <!-- end widget -->
+
+            </article>
+        </div>
+    </section>*@
+
+
+
+
+
+    <section id="widget-grid" class="">
+        <div class="row">
+            <article class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
+                <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-0" data-widget-editbutton="false" data-widget-colorbutton="false"
+                     data-widget-togglebutton="false"
+                     data-widget-deletebutton="false"
+                     data-widget-fullscreenbutton="false"
+                     data-widget-custombutton="false"
+                     data-widget-collapsed="false"
+                     data-widget-sortable="false">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                        <h2>查看五币详细</h2>
+                    </header>
+                    <!-- widget div-->
+                    <div>
+                        <!-- widget edit box -->
+                        <div class="jarviswidget-editbox">
+                            <!-- This area used as dropdown edit box -->
+                        </div>
+                        <!-- end widget edit box -->
+                        <!-- widget content -->
+                        <div class="widget-body no-padding">
+                            <div class="table-responsive">
+                                <table class="table table-bordered">
+
+                                    <tbody>
+                                        <tr>
+                                            <td class="span3">日期</td>
+                                            <td class="span2">@bdl.date.ToString(ViewBag.Format)</td>
+                                            <td></td>
+                                            <td class="span3">系统总五币</td>
+                                            <td class="span2">@bdl.systemDiamond.ToString("#,0.")</td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            @{j = 0;
+                                                for (int i = 0; i < bdl.list.Count; i++)
+                                                {
+                                                    if (bdl.list[i].Diamond == 0)
+                                                    {
+                                                        continue;
+                                                    }
+
+                                                    if (j % 2 == 0)
+                                                    {
+                                                        @Html.Raw("<tr>")
+                                                    }
+
+                                                    <td>@bdl.list[i].ChipChangeType</td>
+                                                    <td>
+                                                        @if (bdl.list[i].Diamond > 0)
+                                                        {
+                                                            @bdl.list[i].Diamond.ToString("#,0.")
+                                                        }
+                                                        else
+                                                        {
+                                                            <span style="color:#ee0000">@bdl.list[i].Diamond.ToString("#,0.")</span>
+                                                        }
+                                                    </td>
+                                                    <td></td>
+                                                    if (j % 2 == 1)
+                                                    {
+                                                        @Html.Raw("</tr>")
+                                                    }
+
+                                                    { j = j + 1; }
+                                                }
+                                                if (j % 2 == 1)
+                                                {
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    @Html.Raw("</tr>")
+                                                }
+
+                                            }
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <!-- end widget content -->
+                    </div>
+                    <!-- end widget div -->
+                </div>
+                <!-- end widget -->
+
+            </article>
+        </div>
+    </section>
+
+
+
+
+
+
+    <section id="widget-grid" class="">
+        <div class="row">
+            <article class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
+                <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-0" data-widget-editbutton="false" data-widget-colorbutton="false"
+                     data-widget-togglebutton="false"
+                     data-widget-deletebutton="false"
+                     data-widget-fullscreenbutton="false"
+                     data-widget-custombutton="false"
+                     data-widget-collapsed="false"
+                     data-widget-sortable="false">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                        <h2>查看积分详细</h2>
+                    </header>
+                    <!-- widget div-->
+                    <div>
+                        <!-- widget edit box -->
+                        <div class="jarviswidget-editbox">
+                            <!-- This area used as dropdown edit box -->
+                        </div>
+                        <!-- end widget edit box -->
+                        <!-- widget content -->
+                        <div class="widget-body no-padding">
+                            <div class="table-responsive">
+                                <table class="table table-bordered">
+
+                                    <tbody>
+                                        <tr>
+                                            <td class="span3">日期</td>
+                                            <td class="span2">@bdl.date.ToString(ViewBag.Format)</td>
+                                            <td></td>
+                                            <td class="span3">系统总积分</td>
+                                            <td class="span2">@bdl.systemScore.ToString("#,0.")</td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            @{j = 0;
+                                                for (int i = 0; i < bdl.list.Count; i++)
+                                                {
+                                                    if (bdl.list[i].Score == 0)
+                                                    {
+                                                        continue;
+                                                    }
+
+                                                    if (j % 2 == 0)
+                                                    {
+                                                        @Html.Raw("<tr>")
+                                                    }
+
+                                                    <td>@bdl.list[i].ChipChangeType</td>
+                                                    <td>
+                                                        @if (bdl.list[i].Score > 0)
+                                                        {
+                                                            @bdl.list[i].Score.ToString("#,0.")
+                                                        }
+                                                        else
+                                                        {
+                                                            <span style="color:#ee0000">@bdl.list[i].Score.ToString("#,0.")</span>
+                                                        }
+                                                    </td>
+                                                    <td></td>
+                                                    if (j % 2 == 1)
+                                                    {
+                                                        @Html.Raw("</tr>")
+                                                    }
+
+                                                    { j = j + 1; }
+                                                }
+                                                if (j % 2 == 1)
+                                                {
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    @Html.Raw("</tr>")
+                                                }
+
+                                            }
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <!-- end widget content -->
+                    </div>
+                    <!-- end widget div -->
+                </div>
+                <!-- end widget -->
+
+            </article>
+        </div>
+    </section>
+</div>
+
+
+

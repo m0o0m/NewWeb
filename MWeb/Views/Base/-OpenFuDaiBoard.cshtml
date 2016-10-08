@@ -1,0 +1,113 @@
+﻿@using GL.Data.Model
+@model BaseDataView
+@{
+    ViewBag.Title = "福袋领取排行榜";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+
+    ViewBag.Format = "yyyy-MM-dd";
+    switch (Model.Groupby)
+    {
+        case groupby.按日:
+            break;
+        case groupby.按月:
+            ViewBag.Format = "yyyy-MM";
+            break;
+    }
+    List<OpenFuDai> bdl = (List<OpenFuDai>)Model.BaseDataList;
+
+}
+
+
+<div id="content-header">
+    <div id="breadcrumb"> <a href="#" title="" class="current"><i class="icon-home"></i> @ViewBag.Title</a></div>
+</div>
+
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span8">
+            <form class="form-inline">
+                @Html.DropDownList("Channels", new List<SelectListItem> {
+                    new SelectListItem{ Text = "所有渠道", Value = "0"},
+                    new SelectListItem{ Text = "渠道A", Value = "1"},
+                    new SelectListItem{ Text = "渠道B", Value = "2"}
+                })
+                起始日期
+                @Html.TextBoxFor(m => m.StartDate, new { @class = "datepicker span2", style = "border-radius:4px" })
+                @Html.DropDownList("groupby")
+
+                <button type="submit" class="btn btn-success">查询</button>
+            </form>
+
+
+        </div>
+    </div>
+    <div class="row-fluid">
+        <div class="span4">
+            <div class="widget-box">
+                <div class="widget-title">
+                    <span class="icon"> <i class="icon-eye-open"></i> </span>
+                    <h5>@ViewBag.Title</h5>
+                </div>
+                <div class="widget-content nopadding">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>会员ID</th>
+                                <th>会员账号</th>
+                                <th>数量</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (bdl.Count == 0)
+                            {
+                                <tr>
+                                    <td class="colspan" align="center" colspan="0">
+                                        没有找到相关记录！
+                                    </td>
+                                </tr>
+                            }
+                            @for (int i = 0; i < bdl.Count; i++)
+                            {
+                                <tr>
+                                    <td>@(i+1)</td>
+                                    <td>@bdl[i].UserID</td>
+                                    <td>@bdl[i].UserName</td>
+                                    <td>@bdl[i].Count</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts{
+
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/select2.min.js"></script>
+    @Styles.Render("~/Style/bootstrap-datetimepicker")
+    @Scripts.Render("~/bundles/bootstrap-datetimepicker")
+
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $('select').select2({
+                allowClear: false,
+                minimumResultsForSearch: -1
+            });
+            $('.datepicker').datetimepicker({
+                minView: "month", //选择日期后，不会再跳转去选择时分秒
+                format: "yyyy-mm-dd hh:ii:ss", //选择日期后，文本框显示的日期格式
+                language: 'zh-CN', //汉化
+                autoclose: true //选择日期后自动关闭
+            });
+
+        });
+
+    </script>
+
+}

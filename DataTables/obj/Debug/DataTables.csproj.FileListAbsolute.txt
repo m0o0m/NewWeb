@@ -1,0 +1,10 @@
+C:\Users\Administrator\Documents\Visual Studio 2015\Projects\codelast2\DataTables\bin\Debug\DataTables.xml
+C:\Users\Administrator\Documents\Visual Studio 2015\Projects\codelast2\DataTables\bin\Debug\DataTables.dll
+C:\Users\Administrator\Documents\Visual Studio 2015\Projects\codelast2\DataTables\bin\Debug\DataTables.pdb
+C:\Users\Administrator\Documents\Visual Studio 2015\Projects\codelast2\DataTables\bin\Debug\AntiXssLibrary.dll
+C:\Users\Administrator\Documents\Visual Studio 2015\Projects\codelast2\DataTables\bin\Debug\HtmlSanitizationLibrary.dll
+C:\Users\Administrator\Documents\Visual Studio 2015\Projects\codelast2\DataTables\bin\Debug\AntiXssLibrary.xml
+C:\Users\Administrator\Documents\Visual Studio 2015\Projects\codelast2\DataTables\bin\Debug\HtmlSanitizationLibrary.xml
+C:\Users\Administrator\Documents\Visual Studio 2015\Projects\codelast2\DataTables\obj\Debug\DataTables.csprojResolveAssemblyReference.cache
+C:\Users\Administrator\Documents\Visual Studio 2015\Projects\codelast2\DataTables\obj\Debug\DataTables.dll
+C:\Users\Administrator\Documents\Visual Studio 2015\Projects\codelast2\DataTables\obj\Debug\DataTables.pdb

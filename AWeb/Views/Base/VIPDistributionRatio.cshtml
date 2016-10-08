@@ -1,0 +1,135 @@
+﻿@using GL.Data.Model
+@model BaseDataInfoForVIPDistributionRatio
+@{
+    ViewBag.Title = "用户VIP分布表";
+}
+<div id="content">
+    <!-- Widget ID (each widget will need unique ID)-->
+    <section id="widget-grid" class="">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
+
+                <div class="well">
+                    <form id="comment-form" class="form-inline" novalidate="novalidate" >
+                        <fieldset>
+                            @Html.DropDownList("Channels", null, new { @class = "form-control input-sm" })
+                            <button type="submit" class="btn btn-success btn-sm">查询</button>
+                        </fieldset>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+        <div class="row">
+            <article class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
+                <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-0" data-widget-editbutton="false" data-widget-colorbutton="false"
+                     data-widget-togglebutton="false"
+                     data-widget-deletebutton="false"
+                     data-widget-fullscreenbutton="false"
+                     data-widget-custombutton="false"
+                     data-widget-collapsed="false"
+                     data-widget-sortable="false">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                        <h2>用户VIP分布表</h2>
+                    </header>
+                    <!-- widget div-->
+                    <div>
+                        <!-- widget edit box -->
+                        <div class="jarviswidget-editbox">
+                            <!-- This area used as dropdown edit box -->
+                        </div>
+                        <!-- end widget edit box -->
+                        <!-- widget content -->
+                        <div class="widget-body no-padding" style="min-height: 70px;">
+                            <div class="table-responsive">
+                                <table class="table table-bordered">
+                                    <thead>
+
+                                        <tr>
+                                            <th>等级</th>
+                                            <th>人数</th>
+                                            <th>占比</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td> LV0</td>
+                                            <td>@Model.a1</td>
+                                            <td>@string.Format("{0:0.00%}", Model.a1 * 1.0 / Model.a0)</td>
+                                        </tr>
+                                        <tr>
+                                            <td>LV1</td>
+                                            <td>@Model.a2</td>
+                                            <td>@string.Format("{0:0.00%}", Model.a2 * 1.0 / Model.a0)</td>
+                                        </tr>
+                                        <tr>
+                                            <td>LV2</td>
+                                            <td>@Model.a3</td>
+                                            <td>@string.Format("{0:0.00%}", Model.a3 * 1.0 / Model.a0)</td>
+                                        </tr>
+                                        <tr>
+                                            <td>LV3</td>
+                                            <td>@Model.a4</td>
+                                            <td>@string.Format("{0:0.00%}", Model.a4 * 1.0 / Model.a0)</td>
+                                        </tr>
+                                        <tr>
+                                            <td>LV4</td>
+                                            <td>@Model.a5</td>
+                                            <td>@string.Format("{0:0.00%}", Model.a5 * 1.0 / Model.a0)</td>
+                                        </tr>
+                                        <tr>
+                                            <td>LV5</td>
+                                            <td>@Model.a6</td>
+                                            <td>@string.Format("{0:0.00%}", Model.a6 * 1.0 / Model.a0)</td>
+                                        </tr>
+                                        <tr>
+                                            <td>LV6</td>
+                                            <td>@Model.a7</td>
+                                            <td>@string.Format("{0:0.00%}", Model.a7 * 1.0 / Model.a0)</td>
+                                        </tr>
+                                        <tr>
+                                            <td>LV7</td>
+                                            <td>@Model.a8</td>
+                                            <td>@string.Format("{0:0.00%}", Model.a8 * 1.0 / Model.a0)</td>
+                                        </tr>
+                                        <tr>
+                                            <td>LV8</td>
+                                            <td>@Model.a9</td>
+                                            <td>@string.Format("{0:0.00%}", Model.a9 * 1.0 / Model.a0)</td>
+                                        </tr>
+                                        <tr>
+                                            <td>LV9</td>
+                                            <td>@Model.a10</td>
+                                            <td>@string.Format("{0:0.00%}", Model.a10 * 1.0 / Model.a0)</td>
+                                        </tr>
+                                        <tr>
+                                            <td>LV10</td>
+                                            <td>@Model.a11</td>
+                                            <td>@string.Format("{0:0.00%}", Model.a11 * 1.0 / Model.a0)</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <!-- end widget content -->
+                    </div>
+                    <!-- end widget div -->
+                </div>
+                <!-- end widget -->
+
+            </article>
+        </div>
+    </section>
+
+
+
+
+
+
+
+
+
+
+
+</div>

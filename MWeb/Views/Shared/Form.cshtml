@@ -1,0 +1,172 @@
+﻿@using System.Data;
+
+
+@model Form
+@{
+    List<KeyValue> keyValues = new List<KeyValue>();
+}
+
+
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="portlet box yellow">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-gift"></i>@Model.FormName
+                </div>
+                <div class="tools">
+                    <a href="javascript:;" class="collapse"> </a>
+                    <a href="javascript:;" class="reload"> </a>
+                    <a href="javascript:;" class="remove"> </a>
+                </div>
+            </div>
+            <div class="portlet-body form">
+                <!-- BEGIN FORM-->
+                <form action="#">
+                    <div class="form-body">
+                        @foreach (var item in Model.Controls)
+                        {
+                            switch (item.ControlType)
+                            {
+                                case MWeb.ControlType.Text:
+                                    MWeb.TextControl tcont = item as MWeb.TextControl;
+                                    <div class="form-group">
+                                        <label class="control-label">@tcont.ViewName</label>
+                                        <input id="@tcont.ID" name="@tcont.Name" type="text" class="form-control" placeholder="@tcont.Placeholder" value="@tcont.Text">
+                                    </div>
+
+                                    keyValues.Add(new KeyValue()
+                                    {
+                                        Key = tcont.Name,
+                                        Value = "$('#" + tcont.ID + "').val()"
+                                    });
+
+                                    break;
+                                case MWeb.ControlType.Label:
+                                    MWeb.TextControl lcont = item as MWeb.TextControl;
+                                    <div class="form-group ">
+                                        <label class="control-label">@lcont.ViewName</label>
+                                        <p class="form-control-static"  id="@lcont.ID" name="@lcont.Name">  @lcont.Text</p>
+                                    </div>
+
+                                    keyValues.Add(new KeyValue()
+                                    {
+                                        Key = lcont.Name,
+                                        Value = "$('#" + lcont.ID + "').html()"
+                                    });
+
+                                    break;
+                            }
+
+                        }
+
+                      
+                        @*<div class="form-group">
+                            <label class="control-label">Email Address</label>
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <i class="fa fa-envelope"></i>
+                                </span>
+                                <input type="email" class="form-control" placeholder="Email Address">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Password</label>
+                            <div class="input-group">
+                                <input type="password" class="form-control" placeholder="Password">
+                                <span class="input-group-addon">
+                                    <i class="fa fa-user"></i>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Left Icon</label>
+                            <div class="input-icon">
+                                <i class="fa fa-bell-o"></i>
+                                <input type="text" class="form-control" placeholder="Left icon">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Right Icon</label>
+                            <div class="input-icon right">
+                                <i class="fa fa-microphone"></i>
+                                <input type="text" class="form-control" placeholder="Right icon">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Input With Spinner</label>
+                            <input type="password" class="form-control spinner" placeholder="Password">
+                        </div>*@
+                        @*<div class="form-group last">
+                                <label class="control-label">Static Control</label>
+                                <p class="form-control-static"> email@example.com </p>
+                            </div>*@
+                    </div>
+                    <div class="form-actions">
+                        <div class="btn-set pull-right">
+                            @if (!string.IsNullOrEmpty(Model.Url))
+                            {
+                                <button onclick="btnSubmit()" type="button" class="btn red">确定</button>
+                            }
+
+                            @*@if (Model.EventConfigs != null && Model.EventConfigs.Count() > 0)
+                            {
+                                foreach (var item in Model.EventConfigs)
+                                {
+                                    <button onclick="@item.EventInvoke ()" type="button" class="@item.EventIcon">@item.EventName</button>
+                                }
+                            }*@
+
+
+
+
+                            @*<button type="button" class="btn red">返回</button>*@
+                        </div>
+                    </div>
+                </form>
+                <!-- END FORM-->
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script type="text/javascript">
+    function btnSubmit() {
+        var res = eval("@Model.ValidateFunc ()");
+        if (res == false) {
+            alert("验证失败!");
+            return false;
+        }
+        var obj = {
+            "formsubmit": "1"
+        };
+
+
+
+        @for (int i = 0; i < keyValues.Count(); i++) {
+            KeyValue item = keyValues[i];
+            string jstemp = "obj."+ item.Key+ "=" + item.Value+ ";";
+            @Html.Raw(jstemp);
+        }
+
+
+
+        $.ajax({
+            url: "@Model.Url",
+            type: "post",
+            dataType: "json",
+            data: obj,
+            success: function (data) {
+                eval("@Model.SucCallBackFunc (data)")
+            }
+        }).fail(function (xhr, textStatus, err) {
+            alert('Error: ' + err);
+        });
+
+
+    }
+
+</script>

@@ -1,0 +1,162 @@
+﻿
+@{
+   
+}
+@model BasePopOutDataView
+
+
+    <div id="content">
+        <form id="comment-form" class="smart-form" novalidate="novalidate">
+            <div class="row">
+                <div class="widget-body">
+                    @*<section class="col col-12" style="width:210px;padding-top:5px">
+                        <label>平台</label>
+                        <label class="select">
+                            @Html.DropDownListFor(m => m.Platform, new List<SelectListItem>
+                            {
+                                new SelectListItem { Text= "web", Value = "0" },
+                                   new SelectListItem { Text= "andriod", Value = "1" },
+                                      new SelectListItem { Text= "ios", Value = "2" }
+                            })<i></i>
+                        </label>
+                    </section>*@
+
+                    <section class="col col-12" style="width:210px;padding-top:5px">
+                        <label>弹窗位置</label>
+                        <label class="select">
+                            @Html.DropDownListFor(m=>m.Position, new List<SelectListItem>
+                            {
+                                new SelectListItem { Text= "首登首弹", Value = "0" },
+                                new SelectListItem { Text= "首登后弹", Value = "1" },
+                                new SelectListItem { Text= "返回首弹", Value = "2" },
+                                new SelectListItem { Text= "进房首弹", Value = "3" }
+                            })<i></i>
+                        </label>
+                    </section>
+                    @*<section class="col col-12" style="width:210px;padding-top:5px">
+                        <label>窗口</label>
+                        <label class="select">
+                            @Html.DropDownList("CK", new List<SelectListItem>
+                            {
+                                new SelectListItem { Text= "窗口1", Value = "1" },
+                            })<i></i>
+                        </label>
+                    </section>*@
+
+                    <section class="col col-12" style="width:210px;padding-top:5px">
+                        <label>落地页</label>
+                        <label class="select">
+                            @Html.DropDownListFor(m=>m.JumpPage, new List<SelectListItem>
+                            {
+                                new SelectListItem { Text= "感恩", Value = "0" },
+                            })<i></i>
+                        </label>
+                    </section>
+
+                  
+
+                    <section class="col col-12" style="width:210px;padding-top:5px;display:none">
+                        <label>是否开启</label>
+                        <label class="select">
+                            @Html.DropDownListFor(m => m.IsOpen, new List<SelectListItem>
+                            {
+                                new SelectListItem { Text= "开", Value = "1" },
+                                new SelectListItem { Text= "关", Value = "0" },
+                            })<i></i>
+                        </label>
+                    </section>
+
+
+
+
+                    <section class="col col-1.2">
+                        <label class="label">开始时间</label>
+                        <label class="input">
+                            <i class="icon-append fa fa-calendar"></i>
+                            @Html.TextBoxFor(m => m.StartTime, new Dictionary<string, object>() { { "class", "form-control datepicker" }, { "data-dateformat", "yy-mm-dd 00:00:00" } })
+                        </label>
+                    </section>
+                    <section class="col col-1.2">
+                        <label class="label"> 截止日期</label>
+                        <label class="input">
+                            <i class="icon-append fa fa-calendar"></i>
+                            @Html.TextBoxFor(m => m.EndTime, new Dictionary<string, object>() {
+                           { "class", "form-control datepicker" },
+                           { "data-dateformat", "yy-mm-dd 00:00:00" }
+                       })
+                        </label>
+                    </section>
+                 
+                </div>
+            </div>
+            <div class="row">
+                <div class="widget-body">
+
+                    <section class="col col-11">
+                        <label class="label">平台</label>
+                        <div class="row">
+                            <div class="col col-1.5">
+                              
+                                    <label class="checkbox state-error"><input value="0" mark2="2" mark="1" type="checkbox" name="Platform" checked="checked"><i></i>Web</label>
+                              
+                            </div>
+                            <div class="col col-1.5">
+                             
+                                    <label class="checkbox state-error"><input value="1" mark2="3" mark="0" type="checkbox" name="Platform" checked="checked"><i></i>Android</label>
+                             
+                            </div>
+                            <div class="col col-1.5">
+                             
+                                    <label class="checkbox state-error"><input value="2" mark2="4" mark="0" type="checkbox" name="Platform" checked="checked"><i></i>IOS</label>
+                              
+                            </div>
+                          
+                        </div>
+                        <div class="note note-error"> select the option.</div>
+                    </section>
+
+                    <input type="hidden" value="ispostback"  name="btnAdd" />
+
+                    <section class="col col-1">
+                        <label class="label">&nbsp;</label>
+                        <input type="button" onclick="search()" class="btn btn-success btn-sm" value="添加" />
+                    </section>
+
+                </div>
+            </div>
+         </form>
+
+        <div class="row-fluid">
+            <div class="widget-box" id="box">
+                @Html.Partial("PopUpControl_PageList", Model.DataList)
+            </div>
+        </div>
+    </div>
+
+
+<script type="text/javascript">
+    function deleteData(id) {
+        $.ajax({
+            url: "/System/PopUpDelete/",
+            type: "POST",
+            data: { "id": id },
+            success: function (data) {
+
+               
+
+                if (data == "1") {
+                    alert("删除成功!");
+                    window.location.href = "/System/PopUpControl";
+                    //location.reload();
+                } else {
+                    alert("删除失败，请重新尝试!");
+                }
+            }
+        });
+    }
+
+
+    function updateData(id) {
+        window.location.href = "/System/PopUpUpdate?id=" + id;
+    }
+</script>

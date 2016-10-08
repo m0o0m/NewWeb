@@ -1,0 +1,155 @@
+﻿@model GL.Data.MWeb.Identity.ApplicationUser
+@{
+    ViewBag.Title = "管理员管理 -- 修改";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+
+
+
+<div id="content">
+
+    <article class="col-sm-12 col-md-12 col-lg-6">
+        <div class="jarviswidget" id="wid-id-4" data-widget-editbutton="false" data-widget-custombutton="false">
+            <header>
+                <span class="widget-icon"> <i class="fa fa-edit"></i> </span>
+                <h2>修改管理员</h2>
+            </header>
+            <div>
+                <div class="jarviswidget-editbox">
+                </div>
+                <div class="widget-body no-padding">
+                    <form id="subfrom" class="smart-form" action="/" method="post">
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" name="Id" value="@Model.Id" />
+                        <header>
+                            修改管理员
+                        </header>
+
+                        <fieldset>
+                            <section>
+                                <label>管理员帐号 :</label>
+                                <label class="input">
+                                    @Model.UserName
+                                </label>
+                            </section>
+                            <section>
+                                <label>原密码 :</label>
+                                <label class="input">
+                                    <i class="icon-append fa fa-lock"></i>
+                                    <input type="password" name="OldPassword" class="span11" value="" />
+                                    <b class="tooltip tooltip-bottom-right"></b>
+                                </label>
+                            </section>
+
+                            <section>
+                                <label>新密码 :</label>
+                                <label class="input">
+                                    <i class="icon-append fa fa-lock"></i>
+                                    <input type="password" name="NewPassword" class="span11" value="" />
+                                    <b class="tooltip tooltip-bottom-right"></b>
+                                </label>
+                            </section>
+                        </fieldset>
+
+
+                        <footer>
+                            <input id="btnGoBack" type="button" value="返回列表" class=" btn btn-warning" />
+                            <button type="button" class="btn btn-primary" id="btnKick" onclick="return btnSubmit(this)">
+                                提交
+                            </button>
+                        </footer>
+                    </form>
+
+                </div>
+                <!-- end widget content -->
+
+            </div>
+            <!-- end widget div -->
+
+        </div>
+
+    </article>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@section scripts{
+    @{Html.RegisterMvcPagerScriptResource();}
+
+
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/select2.min.js"></script>
+    <script type="text/javascript">
+
+        // resets the menu selection upon entry to this page:
+        function resetMenu() {
+            document.gomenu.selector.selectedIndex = 2;
+        }
+
+        function btnSubmit(obj) {
+            _this = $(obj).parent().parent();
+
+            $.ajax({
+                url: "/SU/ManagementForUpdate/",
+                type: "POST",
+                dataType: "JSON",
+                data: $('#subfrom').serialize(),
+                success: function (data) {
+                    switch (data.result) {
+                        case 0:
+                            location.href = "/SU/Management";
+                            break;
+                        case 200:
+                            alert("值不能为空，请稍后再试");
+                            break;
+                        default:
+                            alert(data.msg);
+                            break;
+                    }
+                }
+            }).fail(function (xhr, textStatus, err) {
+                alert('Error: ' + err);
+            });
+
+            return false;
+
+        }
+
+
+        $(function () {
+
+
+            $("#btnGoBack").click(function () {
+                location.href = "/SU/Management";
+            });
+        })
+
+    </script>
+}

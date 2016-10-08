@@ -1,0 +1,593 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{F6774CB1-16CF-4E70-94E1-1933E3866416}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>JWeb</RootNamespace>
+    <AssemblyName>JWeb</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="log4net, Version=1.2.14.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\log4net.2.0.4\lib\net45-full\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System.Web.Razor">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.3\lib\net45\System.Web.Webpages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages.Deployment">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.3\lib\net45\System.Web.Webpages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages.Razor">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.3\lib\net45\System.Web.Webpages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Helpers">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_Data\log4net.xml" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Site.css" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Global.asax" />
+    <Content Include="Lib\dist\clipboard.js" />
+    <Content Include="Lib\dist\clipboard.min.js" />
+    <Content Include="Lib\public\css\global_7556B107.css" />
+    <Content Include="Lib\public\images\addsubit.png" />
+    <Content Include="Lib\public\images\arrow1.png" />
+    <Content Include="Lib\public\images\banner.png" />
+    <Content Include="Lib\public\images\box.png" />
+    <Content Include="Lib\public\images\btnclick.png" />
+    <Content Include="Lib\public\images\btnhover.png" />
+    <Content Include="Lib\public\images\closebtn1.png" />
+    <Content Include="Lib\public\images\closebtn2.png" />
+    <Content Include="Lib\public\images\jlb\gold.png" />
+    <Content Include="Lib\public\images\jlb\line.png" />
+    <Content Include="Lib\public\images\jlb\top.png" />
+    <Content Include="Lib\public\images\jlb\wei.png" />
+    <Content Include="Lib\public\images\jlb\wei2.png" />
+    <Content Include="Lib\public\images\login_bg_top.png" />
+    <Content Include="Lib\public\images\newSzg\bgBottom.png" />
+    <Content Include="Lib\public\images\newSzg\box.png" />
+    <Content Include="Lib\public\images\newSzg\select.png" />
+    <Content Include="Lib\public\images\newSzg\szgbanner.png" />
+    <Content Include="Lib\public\images\newSzg\textbox.png" />
+    <Content Include="Lib\public\images\newSzg\unselect.png" />
+    <Content Include="Lib\public\images\newyear\1.png" />
+    <Content Include="Lib\public\images\newyear\2.png" />
+    <Content Include="Lib\public\images\newyear\20.png" />
+    <Content Include="Lib\public\images\newyear\3.png" />
+    <Content Include="Lib\public\images\newyear\4.png" />
+    <Content Include="Lib\public\images\newyear\5.png" />
+    <Content Include="Lib\public\images\newyear\6.png" />
+    <Content Include="Lib\public\images\newyear\ling.png" />
+    <Content Include="Lib\public\images\newyear\yling.png" />
+    <Content Include="Lib\public\images\newyear\广告.png" />
+    <Content Include="Lib\public\images\newyear\广告图.jpg" />
+    <Content Include="Lib\public\images\newyear\我的充值底.png" />
+    <Content Include="Lib\public\images\newyear\按钮0.png" />
+    <Content Include="Lib\public\images\newyear\按钮1.png" />
+    <Content Include="Lib\public\images\newyear\横线.png" />
+    <Content Include="Lib\public\images\newyear\立即充值按钮.png" />
+    <Content Include="Lib\public\images\select1.png" />
+    <Content Include="Lib\public\images\szgbanner.jpg" />
+    <Content Include="Lib\public\images\textbox.png" />
+    <Content Include="Lib\public\images\unselect1.png" />
+    <Content Include="Lib\public\images\zb\award.png" />
+    <Content Include="Lib\public\images\zb\award2.png" />
+    <Content Include="Lib\public\images\zb\bg.png" />
+    <Content Include="Lib\public\images\zb\buttom.png" />
+    <Content Include="Lib\public\images\zb\gg.png" />
+    <Content Include="Lib\public\images\zb\line.png" />
+    <Content Include="Lib\public\image\newplaying\1\1.png" />
+    <Content Include="Lib\public\image\newplaying\1\10.png" />
+    <Content Include="Lib\public\image\newplaying\1\10card.png" />
+    <Content Include="Lib\public\image\newplaying\1\11.png" />
+    <Content Include="Lib\public\image\newplaying\1\12.png" />
+    <Content Include="Lib\public\image\newplaying\1\13.png" />
+    <Content Include="Lib\public\image\newplaying\1\14.png" />
+    <Content Include="Lib\public\image\newplaying\1\15.png" />
+    <Content Include="Lib\public\image\newplaying\1\16.png" />
+    <Content Include="Lib\public\image\newplaying\1\17.png" />
+    <Content Include="Lib\public\image\newplaying\1\18.png" />
+    <Content Include="Lib\public\image\newplaying\1\19.png" />
+    <Content Include="Lib\public\image\newplaying\1\2.png" />
+    <Content Include="Lib\public\image\newplaying\1\20.png" />
+    <Content Include="Lib\public\image\newplaying\1\2000jd.png" />
+    <Content Include="Lib\public\image\newplaying\1\21.png" />
+    <Content Include="Lib\public\image\newplaying\1\22.png" />
+    <Content Include="Lib\public\image\newplaying\1\23.png" />
+    <Content Include="Lib\public\image\newplaying\1\24.png" />
+    <Content Include="Lib\public\image\newplaying\1\3.png" />
+    <Content Include="Lib\public\image\newplaying\1\4.png" />
+    <Content Include="Lib\public\image\newplaying\1\5.png" />
+    <Content Include="Lib\public\image\newplaying\1\500jd.png" />
+    <Content Include="Lib\public\image\newplaying\1\50q.png" />
+    <Content Include="Lib\public\image\newplaying\1\6.png" />
+    <Content Include="Lib\public\image\newplaying\1\7.png" />
+    <Content Include="Lib\public\image\newplaying\1\8.png" />
+    <Content Include="Lib\public\image\newplaying\1\9.png" />
+    <Content Include="Lib\public\image\newplaying\1\Apple watch 38.png" />
+    <Content Include="Lib\public\image\newplaying\1\Apple watch 42.png" />
+    <Content Include="Lib\public\image\newplaying\1\chip.png" />
+    <Content Include="Lib\public\image\newplaying\1\chong100.png" />
+    <Content Include="Lib\public\image\newplaying\1\chongdian.png" />
+    <Content Include="Lib\public\image\newplaying\1\diaozhui.png" />
+    <Content Include="Lib\public\image\newplaying\1\erding.png" />
+    <Content Include="Lib\public\image\newplaying\1\goods1.png" />
+    <Content Include="Lib\public\image\newplaying\1\goods10.png" />
+    <Content Include="Lib\public\image\newplaying\1\goods11.png" />
+    <Content Include="Lib\public\image\newplaying\1\goods12.png" />
+    <Content Include="Lib\public\image\newplaying\1\goods13.png" />
+    <Content Include="Lib\public\image\newplaying\1\goods14.png" />
+    <Content Include="Lib\public\image\newplaying\1\goods15.png" />
+    <Content Include="Lib\public\image\newplaying\1\goods16.png" />
+    <Content Include="Lib\public\image\newplaying\1\goods17.png" />
+    <Content Include="Lib\public\image\newplaying\1\goods18.png" />
+    <Content Include="Lib\public\image\newplaying\1\goods2.png" />
+    <Content Include="Lib\public\image\newplaying\1\goods3.png" />
+    <Content Include="Lib\public\image\newplaying\1\goods4.png" />
+    <Content Include="Lib\public\image\newplaying\1\goods5.png" />
+    <Content Include="Lib\public\image\newplaying\1\goods6.png" />
+    <Content Include="Lib\public\image\newplaying\1\goods7.png" />
+    <Content Include="Lib\public\image\newplaying\1\goods8.png" />
+    <Content Include="Lib\public\image\newplaying\1\goods9.png" />
+    <Content Include="Lib\public\image\newplaying\1\goodsAAA.png" />
+    <Content Include="Lib\public\image\newplaying\1\Ipad Air2.png" />
+    <Content Include="Lib\public\image\newplaying\1\iphone6 plus.png" />
+    <Content Include="Lib\public\image\newplaying\1\iphone6.png" />
+    <Content Include="Lib\public\image\newplaying\1\letv.png" />
+    <Content Include="Lib\public\image\newplaying\1\Macbook.png" />
+    <Content Include="Lib\public\image\newplaying\1\minote.png" />
+    <Content Include="Lib\public\image\newplaying\1\shoulian.png" />
+    <Content Include="Lib\public\image\newplaying\1\wurenji.png" />
+    <Content Include="Lib\public\image\newplaying\1\Xbox one.png" />
+    <Content Include="Lib\public\image\newplaying\2\1.png" />
+    <Content Include="Lib\public\image\newplaying\2\2.png" />
+    <Content Include="Lib\public\image\newplaying\2\3.png" />
+    <Content Include="Lib\public\image\newplaying\2\4.png" />
+    <Content Include="Lib\public\image\newplaying\2\5.png" />
+    <Content Include="Lib\public\image\newplaying\2\6.png" />
+    <Content Include="Lib\public\image\newplaying\big_load.gif" />
+    <Content Include="Lib\public\image\nyplay\loading.gif" />
+    <Content Include="Lib\public\js\app\controller\Base.js" />
+    <Content Include="Lib\public\js\app\controller\c1.js" />
+    <Content Include="Lib\public\js\app\controller\c2.js" />
+    <Content Include="Lib\public\js\app\lib.js" />
+    <Content Include="Lib\public\js\app\main1.js" />
+    <Content Include="Lib\public\js\app\main2.js" />
+    <Content Include="Lib\public\js\app\model\Base.js" />
+    <Content Include="Lib\public\js\app\model\m1.js" />
+    <Content Include="Lib\public\js\app\model\m2.js" />
+    <Content Include="Lib\public\js\common.js" />
+    <Content Include="Lib\public\js\fastclick_01D91217.js" />
+    <Content Include="Lib\public\js\iScroll_4.2.5.js" />
+    <Content Include="Lib\public\js\jquery-1.11.2.min.js" />
+    <Content Include="Lib\public\js\jQuery.fontFlex_01D91217.js" />
+    <Content Include="Lib\public\js\lib\backbone.js" />
+    <Content Include="Lib\public\js\lib\css.js" />
+    <Content Include="Lib\public\js\lib\flotr_lib\bean.js" />
+    <Content Include="Lib\public\js\lib\flotr_lib\flotr2.amd.js" />
+    <Content Include="Lib\public\js\lib\iscroll\iscroll-load-data.js" />
+    <Content Include="Lib\public\js\lib\iscroll\iscroll-probe.js" />
+    <Content Include="Lib\public\js\lib\iscroll\iscroll-probe_old.js" />
+    <Content Include="Lib\public\js\lib\jquery-1.9.1.min.js" />
+    <Content Include="Lib\public\js\lib\require.js" />
+    <Content Include="Lib\public\js\lib\underscore.js" />
+    <Content Include="Lib\template\css\main_830DA329.css" />
+    <Content Include="Lib\template\images\closebtn1.png" />
+    <Content Include="Lib\template\images\closebtn2.png" />
+    <Content Include="Lib\template\images\downloadmobile.png" />
+    <Content Include="Lib\template\images\gg.png" />
+    <Content Include="Lib\template\images\header01.jpg" />
+    <Content Include="Lib\template\images\header01.png" />
+    <Content Include="Lib\template\images\header02.jpg" />
+    <Content Include="Lib\template\images\header02.png" />
+    <Content Include="Lib\template\images\header03.jpg" />
+    <Content Include="Lib\template\images\header\0\logo.png" />
+    <Content Include="Lib\template\images\header\1\logo.png" />
+    <Content Include="Lib\template\images\header\2\logo.png" />
+    <Content Include="Lib\template\images\header\btn1.png" />
+    <Content Include="Lib\template\images\header\btn1_over.png" />
+    <Content Include="Lib\template\images\header\head_bg.jpg" />
+    <Content Include="Lib\template\images\header\head_bg.png" />
+    <Content Include="Lib\template\images\header\logo.png" />
+    <Content Include="Lib\template\images\iPhone.png" />
+    <Content Include="Lib\template\images\layer_jlb.png" />
+    <Content Include="Lib\template\images\layer_leftbg.png" />
+    <Content Include="Lib\template\images\layer_tg_b0.png" />
+    <Content Include="Lib\template\images\layer_tg_b1.png" />
+    <Content Include="Lib\template\images\layer_tg_barhover.png" />
+    <Content Include="Lib\template\images\layer_tg_black.png" />
+    <Content Include="Lib\template\images\layer_tg_blackbg.png" />
+    <Content Include="Lib\template\images\layer_tg_buttom.png" />
+    <Content Include="Lib\template\images\layer_tg_copybg.png" />
+    <Content Include="Lib\template\images\layer_tg_data.png" />
+    <Content Include="Lib\template\images\layer_tg_fx0.png" />
+    <Content Include="Lib\template\images\layer_tg_fx1.png" />
+    <Content Include="Lib\template\images\layer_tg_home.png" />
+    <Content Include="Lib\template\images\layer_tg_input.png" />
+    <Content Include="Lib\template\images\layer_tg_left0.png" />
+    <Content Include="Lib\template\images\layer_tg_left1.png" />
+    <Content Include="Lib\template\images\layer_tg_line.png" />
+    <Content Include="Lib\template\images\layer_tg_menber.png" />
+    <Content Include="Lib\template\images\layer_tg_num.png" />
+    <Content Include="Lib\template\images\layer_tg_pop0.png" />
+    <Content Include="Lib\template\images\layer_tg_pop1.png" />
+    <Content Include="Lib\template\images\layer_tg_redbg.png" />
+    <Content Include="Lib\template\images\layer_tg_right0.png" />
+    <Content Include="Lib\template\images\layer_tg_right1.png" />
+    <Content Include="Lib\template\images\layer_tg_rule.png" />
+    <Content Include="Lib\template\images\LOGO.png" />
+    <Content Include="Lib\template\images\Qme0.png" />
+    <Content Include="Lib\template\images\Qme1.png" />
+    <Content Include="Lib\template\images\refresh0.png" />
+    <Content Include="Lib\template\images\refresh1.png" />
+    <Content Include="Lib\template\js\jquery-1.11.2.min.js" />
+    <Content Include="Lib\template\js\layer\extend\layer.ext.js" />
+    <Content Include="Lib\template\js\layer\layer.js" />
+    <Content Include="Lib\template\js\layer\layer.min_1AD5BE0E.js" />
+    <Content Include="Lib\template\js\layer\skin\default\icon-ext.png" />
+    <Content Include="Lib\template\js\layer\skin\default\icon.png" />
+    <Content Include="Lib\template\js\layer\skin\default\loading-0.gif" />
+    <Content Include="Lib\template\js\layer\skin\default\loading-1.gif" />
+    <Content Include="Lib\template\js\layer\skin\default\loading-2.gif" />
+    <Content Include="Lib\template\js\layer\skin\layer.css" />
+    <Content Include="Lib\template\js\layer\skin\layer.ext.css" />
+    <Content Include="Lib\template\js\main_a.js" />
+    <Content Include="Lib\template\js\share\share_6DD28E9C.js" />
+    <Content Include="Lib\template\js\swfobject.js" />
+    <Content Include="Lib\template\js\tx_com-3.js" />
+    <Content Include="Lib\template\js\zclip\checkmark.png" />
+    <Content Include="Lib\template\js\zclip\js\jquery.zclip.min.js" />
+    <Content Include="Lib\template\js\zclip\js\ZeroClipboard.swf" />
+    <Content Include="Lib\zclip\jquery.zclip.min.js" />
+    <Content Include="mobile\css\global_7556B107.css" />
+    <Content Include="mobile\images\addsubit.png" />
+    <Content Include="mobile\images\arrow1.png" />
+    <Content Include="mobile\images\banner.png" />
+    <Content Include="mobile\images\box.png" />
+    <Content Include="mobile\images\btnclick.png" />
+    <Content Include="mobile\images\btnhover.png" />
+    <Content Include="mobile\images\closebtn1.png" />
+    <Content Include="mobile\images\closebtn2.png" />
+    <Content Include="mobile\images\jlb\gold.png" />
+    <Content Include="mobile\images\jlb\line.png" />
+    <Content Include="mobile\images\jlb\top.png" />
+    <Content Include="mobile\images\jlb\wei.png" />
+    <Content Include="mobile\images\jlb\wei2.png" />
+    <Content Include="mobile\images\login_bg_top.png" />
+    <Content Include="mobile\images\newSzg\bgBottom.png" />
+    <Content Include="mobile\images\newSzg\box.png" />
+    <Content Include="mobile\images\newSzg\select.png" />
+    <Content Include="mobile\images\newSzg\szgbanner.png" />
+    <Content Include="mobile\images\newSzg\textbox.png" />
+    <Content Include="mobile\images\newSzg\unselect.png" />
+    <Content Include="mobile\images\newyear\1.png" />
+    <Content Include="mobile\images\newyear\2.png" />
+    <Content Include="mobile\images\newyear\20.png" />
+    <Content Include="mobile\images\newyear\3.png" />
+    <Content Include="mobile\images\newyear\4.png" />
+    <Content Include="mobile\images\newyear\5.png" />
+    <Content Include="mobile\images\newyear\6.png" />
+    <Content Include="mobile\images\newyear\ling.png" />
+    <Content Include="mobile\images\newyear\yling.png" />
+    <Content Include="mobile\images\newyear\信息底框.png" />
+    <Content Include="mobile\images\newyear\充值礼包奖励-按钮1.png" />
+    <Content Include="mobile\images\newyear\充值礼包奖励-按钮2.png" />
+    <Content Include="mobile\images\newyear\奖励排名-按钮1.png" />
+    <Content Include="mobile\images\newyear\奖励排名-按钮2.png" />
+    <Content Include="mobile\images\newyear\已领取按钮.png" />
+    <Content Include="mobile\images\newyear\广告.png" />
+    <Content Include="mobile\images\newyear\广告图.jpg" />
+    <Content Include="mobile\images\newyear\我的充值底.png" />
+    <Content Include="mobile\images\newyear\我的充值金额-底框.png" />
+    <Content Include="mobile\images\newyear\按钮0.png" />
+    <Content Include="mobile\images\newyear\按钮1.png" />
+    <Content Include="mobile\images\newyear\效果图1.png" />
+    <Content Include="mobile\images\newyear\效果图2.png" />
+    <Content Include="mobile\images\newyear\无法领取按钮.png" />
+    <Content Include="mobile\images\newyear\横线.png" />
+    <Content Include="mobile\images\newyear\活动图标.png" />
+    <Content Include="mobile\images\newyear\立即充值按钮.png" />
+    <Content Include="mobile\images\newyear\立即充值按钮2.png" />
+    <Content Include="mobile\images\newyear\立即充值按钮3.png" />
+    <Content Include="mobile\images\newyear\端午图标效果图.png" />
+    <Content Include="mobile\images\newyear\背景.png" />
+    <Content Include="mobile\images\newyear\背景2.png" />
+    <Content Include="mobile\images\newyear\说明图.png" />
+    <Content Include="mobile\images\newyear\领取奖励按钮.png" />
+    <Content Include="mobile\images\newyear\领取奖励按钮2.png" />
+    <Content Include="mobile\images\newyear\领取奖励按钮3.png" />
+    <Content Include="mobile\images\newyear\领取按钮.png" />
+    <Content Include="mobile\images\select1.png" />
+    <Content Include="mobile\images\szgbanner.jpg" />
+    <Content Include="mobile\images\textbox.png" />
+    <Content Include="mobile\images\unselect1.png" />
+    <Content Include="mobile\images\zb\award.png" />
+    <Content Include="mobile\images\zb\award2.png" />
+    <Content Include="mobile\images\zb\bg.png" />
+    <Content Include="mobile\images\zb\buttom.png" />
+    <Content Include="mobile\images\zb\gg.png" />
+    <Content Include="mobile\images\zb\line.png" />
+    <Content Include="mobile\image\newplaying\1\1.png" />
+    <Content Include="mobile\image\newplaying\1\10.png" />
+    <Content Include="mobile\image\newplaying\1\10card.png" />
+    <Content Include="mobile\image\newplaying\1\11.png" />
+    <Content Include="mobile\image\newplaying\1\12.png" />
+    <Content Include="mobile\image\newplaying\1\13.png" />
+    <Content Include="mobile\image\newplaying\1\14.png" />
+    <Content Include="mobile\image\newplaying\1\15.png" />
+    <Content Include="mobile\image\newplaying\1\16.png" />
+    <Content Include="mobile\image\newplaying\1\17.png" />
+    <Content Include="mobile\image\newplaying\1\18.png" />
+    <Content Include="mobile\image\newplaying\1\19.png" />
+    <Content Include="mobile\image\newplaying\1\2.png" />
+    <Content Include="mobile\image\newplaying\1\20.png" />
+    <Content Include="mobile\image\newplaying\1\2000jd.png" />
+    <Content Include="mobile\image\newplaying\1\21.png" />
+    <Content Include="mobile\image\newplaying\1\22.png" />
+    <Content Include="mobile\image\newplaying\1\23.png" />
+    <Content Include="mobile\image\newplaying\1\24.png" />
+    <Content Include="mobile\image\newplaying\1\3.png" />
+    <Content Include="mobile\image\newplaying\1\4.png" />
+    <Content Include="mobile\image\newplaying\1\5.png" />
+    <Content Include="mobile\image\newplaying\1\500jd.png" />
+    <Content Include="mobile\image\newplaying\1\50q.png" />
+    <Content Include="mobile\image\newplaying\1\6.png" />
+    <Content Include="mobile\image\newplaying\1\7.png" />
+    <Content Include="mobile\image\newplaying\1\8.png" />
+    <Content Include="mobile\image\newplaying\1\9.png" />
+    <Content Include="mobile\image\newplaying\1\Apple watch 38.png" />
+    <Content Include="mobile\image\newplaying\1\Apple watch 42.png" />
+    <Content Include="mobile\image\newplaying\1\chip.png" />
+    <Content Include="mobile\image\newplaying\1\chong100.png" />
+    <Content Include="mobile\image\newplaying\1\chongdian.png" />
+    <Content Include="mobile\image\newplaying\1\diaozhui.png" />
+    <Content Include="mobile\image\newplaying\1\erding.png" />
+    <Content Include="mobile\image\newplaying\1\goods1.png" />
+    <Content Include="mobile\image\newplaying\1\goods10.png" />
+    <Content Include="mobile\image\newplaying\1\goods11.png" />
+    <Content Include="mobile\image\newplaying\1\goods12.png" />
+    <Content Include="mobile\image\newplaying\1\goods13.png" />
+    <Content Include="mobile\image\newplaying\1\goods14.png" />
+    <Content Include="mobile\image\newplaying\1\goods15.png" />
+    <Content Include="mobile\image\newplaying\1\goods16.png" />
+    <Content Include="mobile\image\newplaying\1\goods17.png" />
+    <Content Include="mobile\image\newplaying\1\goods18.png" />
+    <Content Include="mobile\image\newplaying\1\goods2.png" />
+    <Content Include="mobile\image\newplaying\1\goods3.png" />
+    <Content Include="mobile\image\newplaying\1\goods4.png" />
+    <Content Include="mobile\image\newplaying\1\goods5.png" />
+    <Content Include="mobile\image\newplaying\1\goods6.png" />
+    <Content Include="mobile\image\newplaying\1\goods7.png" />
+    <Content Include="mobile\image\newplaying\1\goods8.png" />
+    <Content Include="mobile\image\newplaying\1\goods9.png" />
+    <Content Include="mobile\image\newplaying\1\goodsAAA.png" />
+    <Content Include="mobile\image\newplaying\1\Ipad Air2.png" />
+    <Content Include="mobile\image\newplaying\1\iphone6 plus.png" />
+    <Content Include="mobile\image\newplaying\1\iphone6.png" />
+    <Content Include="mobile\image\newplaying\1\letv.png" />
+    <Content Include="mobile\image\newplaying\1\Macbook.png" />
+    <Content Include="mobile\image\newplaying\1\minote.png" />
+    <Content Include="mobile\image\newplaying\1\shoulian.png" />
+    <Content Include="mobile\image\newplaying\1\wurenji.png" />
+    <Content Include="mobile\image\newplaying\1\Xbox one.png" />
+    <Content Include="mobile\image\newplaying\2\1.png" />
+    <Content Include="mobile\image\newplaying\2\2.png" />
+    <Content Include="mobile\image\newplaying\2\3.png" />
+    <Content Include="mobile\image\newplaying\2\4.png" />
+    <Content Include="mobile\image\newplaying\2\5.png" />
+    <Content Include="mobile\image\newplaying\2\6.png" />
+    <Content Include="mobile\image\newplaying\big_load.gif" />
+    <Content Include="mobile\image\nyplay\loading.gif" />
+    <Content Include="mobile\js\app\controller\Base.js" />
+    <Content Include="mobile\js\app\controller\c1.js" />
+    <Content Include="mobile\js\app\controller\c2.js" />
+    <Content Include="mobile\js\app\lib.js" />
+    <Content Include="mobile\js\app\main1.js" />
+    <Content Include="mobile\js\app\main2.js" />
+    <Content Include="mobile\js\app\model\Base.js" />
+    <Content Include="mobile\js\app\model\m1.js" />
+    <Content Include="mobile\js\app\model\m2.js" />
+    <Content Include="mobile\js\common.js" />
+    <Content Include="mobile\js\fastclick_01D91217.js" />
+    <Content Include="mobile\js\iScroll_4.2.5.js" />
+    <Content Include="mobile\js\jquery-1.11.2.min.js" />
+    <Content Include="mobile\js\jQuery.fontFlex_01D91217.js" />
+    <Content Include="mobile\js\lib\backbone.js" />
+    <Content Include="mobile\js\lib\css.js" />
+    <Content Include="mobile\js\lib\flotr_lib\bean.js" />
+    <Content Include="mobile\js\lib\flotr_lib\flotr2.amd.js" />
+    <Content Include="mobile\js\lib\iscroll\iscroll-load-data.js" />
+    <Content Include="mobile\js\lib\iscroll\iscroll-probe.js" />
+    <Content Include="mobile\js\lib\iscroll\iscroll-probe_old.js" />
+    <Content Include="mobile\js\lib\jquery-1.9.1.min.js" />
+    <Content Include="mobile\js\lib\require.js" />
+    <Content Include="mobile\js\lib\underscore.js" />
+    <Content Include="mobile\js\pako.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Lib\public\images\.DS_Store" />
+    <Content Include="Lib\public\images\newSzg\.DS_Store" />
+    <Content Include="Lib\public\image\newplaying\2\.DS_Store" />
+    <Content Include="mobile\image\newplaying\2\.DS_Store" />
+    <Content Include="mobile\images\.DS_Store" />
+    <Content Include="mobile\images\newSzg\.DS_Store" />
+    <Content Include="mobile\images\newyear\.DS_Store" />
+    <None Include="Properties\PublishProfiles\18.pubxml" />
+    <None Include="Properties\PublishProfiles\club.pubxml" />
+    <None Include="Properties\PublishProfiles\tclub.pubxml" />
+    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\jquery-1.10.2.js" />
+    <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Views\Club\Test.cshtml" />
+    <Content Include="Views\Club\LeftMenu.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\log4netRegister.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Attribute\QueryStringAttribute.cs" />
+    <Compile Include="Attribute\QueryValuesAttribute.cs" />
+    <Compile Include="Attribute\XmlResult.cs" />
+    <Compile Include="Controllers\ClubController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="ExtClass\OpenApiExt.cs" />
+    <Compile Include="ExtClass\SnsNetWorkExt.cs" />
+    <Compile Include="ExtClass\SnsSigCheckExt.cs" />
+    <Compile Include="ExtClass\SnsStatExt.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\web.config" />
+    <Content Include="packages.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Club\Index.cshtml" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Scripts\jquery-1.10.2.min.map" />
+    <Content Include="Views\Club\Nologin.cshtml" />
+    <Content Include="Views\Club\PhoneIndex.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="log\logError\" />
+    <Folder Include="Models\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\GL.Comm\GL.Common.csproj">
+      <Project>{b1253b40-d947-4ed0-b656-c8b8be0b6333}</Project>
+      <Name>GL.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GL.Data.JWeb\GL.Data.JWeb.csproj">
+      <Project>{c074bc73-6697-417f-bc12-7fb766a0d0b3}</Project>
+      <Name>GL.Data.JWeb</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>1716</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:1716/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>此项目引用这台计算机上缺少的 NuGet 程序包。使用 NuGet 程序包还原可下载这些程序包。有关详细信息，请参阅 http://go.microsoft.com/fwlink/?LinkID=322105。缺少的文件是 {0}。</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

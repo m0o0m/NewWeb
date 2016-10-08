@@ -1,0 +1,128 @@
+﻿@model GL.Data.Model.GUIModel
+
+
+
+<article class="col-sm-12 col-md-12 col-lg-7">
+    <div class="jarviswidget" id="wid-id-4" data-widget-editbutton="false" data-widget-custombutton="false">
+        <header>
+            <span class="widget-icon"> <i class="fa fa-edit"></i> </span>
+            <h2>玩家个人信息</h2>
+        </header>
+        <div>
+            <div class="jarviswidget-editbox">
+            </div>
+            <div class="widget-body no-padding">
+                <form id="submitForm" class="smart-form" action="" method="post">
+                    <input type="hidden" name="dwUserID" value="@Model.dwUserID" />
+                    <input type="hidden" name="dwAgentID" value="@Model.dwAgentID" />
+                    <fieldset>
+                      
+                            <section >
+                                <label>玩家账号 :</label>
+                                <label class="input">
+                                    <input type="text" name="szAccount" class="span11" placeholder="First name" value="@Model.szAccount" />
+                                </label>
+                            </section>
+                            <section >
+                                <label>昵称 :</label>
+                                <label class="input">
+                                    <input type="text" class="span11" placeholder="Last name" value="@Model.szNickName" />
+                                </label>
+                            </section>
+                 
+
+                            <section >
+                                <label>性别 :</label>
+                                <label class="input">
+                                    <input type="text" class="span11" placeholder="Last name" value="@Model.sex" />
+                                </label>
+                            </section>
+                            <section >
+                                <label>联系电话 :</label>
+                                <label class="input">
+                                    <input type="text" class="span11" placeholder="Enter Password" value="@Model.szTelNum" />
+                                </label>
+                            </section>
+                      
+                     
+                            <section >
+                                <label>Email :</label>
+                                <label class="input">
+                                    <input type="text" class="span11" placeholder="Company name" value="@Model.szEmail" />
+                                </label>
+                            </section>
+
+                            <section >
+                                <label>在线状态 :</label>
+                                <label class="label">
+                                    <span class="help-block">@Model.isOnline</span>
+                                </label>
+                            </section>
+                      
+                       
+
+                            <section >
+                                <label>账号状态 :</label>
+                                <label class="label">
+                                    <span class="help-block">@Model.isFreeze</span>
+                                </label>
+                            </section>
+                            <section >
+                                <label>真实姓名 :</label>
+                                <label class="input">
+                                    <input type="text" class="span11" placeholder="真实姓名" value="@Model.szTrueName" />
+                                </label>
+                            </section>
+               
+
+
+
+
+
+            
+                            <section >
+                                <label style="width:100px">身份证号码 :</label>
+                                <label class="input">
+                                    <input type="text" class="span11" placeholder="身份证号码" value="@Model.szIdentity" />
+                                </label>
+                            </section>
+                            <section >
+                                <label>注册时间 :</label>
+                                <label class="label">
+                                    <span class="help-block">@Model.szCreateTime</span>
+                                </label>
+                            </section>
+                      
+         
+                      
+
+                    </fieldset>
+
+
+                    <footer>
+                        <input id="btnRecord" type="button" value="玩家操作记录" class="btn btn-inverse btn-mini" onclick="return btnRecord(this)" />
+                        <input id="btnunBan" type="button" value="解除禁言" class="btn btn-info btn-mini" onclick="return btnunBan(this)" />
+                        <input id="btnBan" type="button" value="玩家禁言" class="btn btn-info btn-mini" onclick="return btnBan(this)" />
+                        <input id="btnunFreeze" type="button" value="解封玩家账号" class="btn btn-info btn-mini" onclick="return btnunFreeze(this)" />
+                        <input id="btnFreeze" type="button" value="封号玩家账号" class="btn btn-warning btn-mini" onclick="return btnFreeze(this)" />
+                        <input id="btnKick" type="button" value="踢玩家下线" class="btn btn-danger btn-mini" onclick="return btnKick(this)" />
+           
+                    </footer>
+                </form>
+
+            </div>
+            <!-- end widget content -->
+
+        </div>
+        <!-- end widget div -->
+
+    </div>
+
+</article>
+
+
+
+
+
+
+

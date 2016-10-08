@@ -1,0 +1,124 @@
+﻿
+
+@using GL.Data.Model;
+@model UserLimit
+@{
+
+    string[] limits = Model.AccessNo.Split(',');
+
+}
+
+
+
+<article class="col-sm-12 col-md-12 col-lg-7">
+    <div class="jarviswidget" id="wid-id-4" data-widget-editbutton="false" data-widget-custombutton="false">
+        <header>
+            <span class="widget-icon"> <i class="fa fa-edit"></i> </span>
+            <h2>全局邮件额度配置</h2>
+        </header>
+        <div>
+            <div class="jarviswidget-editbox">
+            </div>
+            <div class="widget-body no-padding">
+                <form id="submitForm" class="smart-form" action="/SU/SaveGlobalEmailLimit" method="post">
+                  
+                    <fieldset>
+                        <div class="row">
+                         
+
+                                <section class="col col-3" id="sec1">
+                                    <label>金币额度</label>
+                                    <label class="input">
+                                        <input type="text" id="gold" name="gold" class="span4" value="@limits[0]" />
+                                    </label>
+                                </section>
+                          
+                          
+
+
+
+                          
+                                <section class="col col-3" id="sec2">
+                                    <label>五币额度</label>
+                                    <label class="input">
+                                        <input type="text" id="wubi" name="wubi" class="span4" value="@limits[1]" />
+                                    </label>
+                                </section>
+                          
+
+                           
+                                <section class="col col-3" id="sec3">
+                                    <label>积分额度</label>
+                                    <label class="input">
+                                        <input type="text" id="jifen" name="jifen" class="span4" value="@limits[2]" />
+                                    </label>
+                                </section>
+                         
+
+                        
+
+
+                        </div>
+                    </fieldset>
+
+
+
+
+
+
+
+                    <footer>
+
+                      
+                        <input onclick="save()" id="btnKick" type="button" value="提交" class="btn btn-danger" />
+                    </footer>
+                </form>
+
+            </div>
+            <!-- end widget content -->
+
+        </div>
+        <!-- end widget div -->
+
+    </div>
+
+</article>
+
+
+
+<script src="~/js/SmartAdmin/js/libs/jquery-1.11.3.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/select2.min.js"></script>
+@Scripts.Render("~/bundles/jqueryval")
+<script type="text/javascript">
+    function save() {
+
+
+        $.ajax({
+            url: "/SU/SaveGlobalEmailLimit",
+            type: "Post",
+            data: { "gold": $("#gold").val(), "wubi": $("#wubi").val(), "jifen": $("#jifen").val() },
+            success: function (data) {
+                switch (data) {
+                    case "1":
+                        alert("配置成功!")
+                        break;
+                    case "-1":
+                        alert("输入的值不规范!")
+                        break;
+                    default:
+                        alert('配置失败!');
+                        break;
+                }
+            }
+        });
+
+
+    }
+
+</script>
+
+
+@section scripts{
+
+}

@@ -1,0 +1,57 @@
+﻿@using GL.Data.Model;
+@using Mweb;
+@model BaseDataView
+@{
+    ViewBag.Title = "SystemPay2";
+    Layout = "~/Views/Shared/_LayoutJR.cshtml";
+}
+
+
+
+@Html.PartialSearch(new Search() { 
+    SearchFunc="mysearch", Items=new List<MWeb.Control>() {
+         new MWeb.DateTimeControl { ID="StartDate", Name="StartDate", ViewName="开始时间" },
+          new MWeb.DateTimeControl { ID="ExpirationDate", Name="ExpirationDate", ViewName="结束时间" },
+    }
+})
+<br>
+@Html.PartialBarAndLine(new BarAndLine() {
+    ID = "myGraph",  URL= "/Statistics/SystemPay2/", Title="万(单位)", BindXField= "CountDate", Unit="万", BandRate=10000,
+    GraphItems = new List<GraphItem>() {
+         new GraphItem { Display=true, BindYField="SystemChip", ViewName="系统金币总量" },
+         new GraphItem { Display=true, BindYField="ChipChange", ViewName="金币涨跌量" },
+         new GraphItem { Display=true, BindYField="ActiveChip", ViewName="当日活跃金币总量" },
+         new GraphItem { Display=false, BindYField="SystemFish", ViewName="水族馆养鱼总额" },
+         new GraphItem { Display=false, BindYField="SendChip", ViewName="系统金币赠送" },
+         new GraphItem { Display=false, BindYField="ConsumeChip", ViewName="系统金币消耗" },
+         new GraphItem { Display=false, BindYField="SystemCoin", ViewName="系统五币总量" },
+         new GraphItem { Display=false, BindYField="CoinChnage", ViewName="五币涨跌量" },
+         new GraphItem { Display=false, BindYField="ActiveCoin", ViewName="当日活跃五币总量" },
+         new GraphItem { Display=false, BindYField="SendCoin", ViewName="系统五币赠送" },
+         new GraphItem { Display=false, BindYField="ConsumeCoin", ViewName="系统五币消耗" },
+
+    },
+    GirdsItems = new List<GirdsItem>() {
+        new GirdsItem { Display=true, BindYField="CountDate", ViewName="时间" },
+        new GirdsItem { Display=true, BindYField="SystemChip", ViewName="系统金币总量" },
+        new GirdsItem { Display=true, BindYField="ChipChange", ViewName="金币涨跌量" },
+        new GirdsItem { Display=true, BindYField="ChipRate", ViewName="金币涨跌比" },
+        new GirdsItem { Display=true, BindYField="ActiveChip", ViewName="当日活跃金币总量" },
+        new GirdsItem { Display=true, BindYField="SystemFish", ViewName="水族馆养鱼总额" },
+        new GirdsItem { Display=true, BindYField="SendChip", ViewName="系统金币赠送" },
+        new GirdsItem { Display=true, BindYField="ConsumeChip", ViewName="系统金币消耗" },
+        new GirdsItem { Display=true, BindYField="SystemCoin", ViewName="系统五币总量" },
+        new GirdsItem { Display=true, BindYField="CoinChnage", ViewName="五币涨跌量" },
+        new GirdsItem { Display=true, BindYField="CoinRate", ViewName="五币涨跌比" },
+        new GirdsItem { Display=true, BindYField="ActiveCoin", ViewName="当日活跃五币总量" },
+        new GirdsItem { Display=true, BindYField="SendCoin", ViewName="系统五币赠送" },
+        new GirdsItem { Display=true, BindYField="ConsumeCoin", ViewName="系统五币消耗" },
+    }
+})
+
+<script type="text/javascript">
+    function mysearch(obj) {
+       
+       myGraph_init(obj);
+    }
+</script>

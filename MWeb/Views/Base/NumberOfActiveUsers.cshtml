@@ -1,0 +1,203 @@
+﻿@using GL.Data.Model
+@model BaseDataView
+@{
+    ViewBag.Title = "活跃用户数";
+    ViewBag.Format = "yyyy-MM-dd";
+    bool isWeek = false;
+    switch (Model.Groupby)
+    {
+        case groupby.按日:
+            break;
+        case groupby.按月:
+            ViewBag.Format = "yyyy-MM";
+            break;
+        default:
+            isWeek = true;
+            break;
+    }
+
+
+    List<BaseDataInfo> bdl = (List<BaseDataInfo>)Model.BaseDataList;
+
+}
+<div id="content">
+
+    <!-- Widget ID (each widget will need unique ID)-->
+
+
+
+
+    <form id="comment-form" class="smart-form" novalidate="novalidate">
+        <div class="row">
+            <section class="col col-12" style="width:210px">
+                <label class="select">
+
+
+                    @*@Html.DropDownList("Channels", null, new { @class = "form-control input-sm" })*@
+
+                    @Html.GetAllAgentGroupList("Channels", Model.Channels)
+
+
+
+                    <i></i>
+                </label>
+            </section>
+
+            <section class="col col-1.2">
+                <label class="input">
+                    <i class="icon-append fa fa-calendar"></i>
+                    @Html.TextBoxFor(m => m.StartDate, new Dictionary<string, object>() {
+                           { "class", "form-control datepicker" },
+                           { "data-dateformat", "yy-mm-dd 00:00:00" }
+                       })
+                </label>
+            </section>
+            <section class="col col-1.2">
+                <label class="input">
+                    <i class="icon-append fa fa-calendar"></i>
+                    @Html.TextBoxFor(m => m.ExpirationDate, new Dictionary<string, object>() {
+                           { "class", "form-control datepicker" },
+                           { "data-dateformat", "yy-mm-dd 00:00:00" }
+                       })
+                </label>
+            </section>
+        
+            <section class="col col-1">
+                <label class="select">
+                    @Html.DropDownList("groupby") <i></i>
+                </label>
+            </section>
+
+
+            <section class="col col-1">
+                <button type="submit" class="btn btn-success btn-sm">查询</button>
+            </section>
+
+        </div>
+    </form>
+
+    <section id="widget-grid" class="">
+        <div class="row">
+            <article class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
+                <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-0" data-widget-editbutton="false" data-widget-colorbutton="false"
+                     data-widget-togglebutton="false"
+                     data-widget-deletebutton="false"
+                     data-widget-fullscreenbutton="false"
+                     data-widget-custombutton="false"
+                     data-widget-collapsed="false"
+                     data-widget-sortable="false">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                        <h2>活跃用户数统计</h2>
+                    </header>
+                    <!-- widget div-->
+                    <div>
+                        <!-- widget edit box -->
+                        <div class="jarviswidget-editbox">
+                            <!-- This area used as dropdown edit box -->
+                        </div>
+                        <!-- end widget edit box -->
+                        <!-- widget content -->
+                        <div class="widget-body no-padding" style="min-height: 70px;">
+                            <div class="table-responsive">
+                                <table class="table table-bordered">
+                                    <thead>
+                                        @*<tr><th colspan="2">活跃用户数</th></tr>*@
+                                        <tr>
+                                            <th>日期</th>
+                                            <th>日登录活跃数</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @if (bdl.Count == 0)
+                                        {
+                                            <tr>
+                                                <td class="colspan" align="center" colspan="0">
+                                                    没有找到相关记录！
+                                                </td>
+                                            </tr>
+                                        }
+                                        @for (int k = 0; k < bdl.Count(); k++)
+                                        {
+                                            BaseDataInfo item = bdl[k];
+                                            <tr>
+                                                @if (isWeek)
+                                                {
+                                                    string timeView = item.date.ToString(ViewBag.Format);
+                                                    string left = "";
+                                                    string right = "";
+                                                    DateTime dts = item.date;
+                                                    <td>
+                                                        @if (k == 0) {
+                                                            var arr =   Model.StartDate.Replace("00:00:00", "").Trim().Split('-') ;
+                                                            dts = new DateTime(Convert.ToInt32(arr[0]), Convert.ToInt32(arr[1]), Convert.ToInt32(arr[2]), 0, 0, 0);
+                                                        }
+                                                        @{ 
+                                                            string leftTimeCheck = dts.DayOfWeek.ToString();
+                                                            switch (leftTimeCheck)
+                                                            {
+                                                                case "Monday": left = dts.ToString(ViewBag.Format); right = dts.AddDays(6).ToString(ViewBag.Format); break; //周一
+                                                                case "Tuesday": left = dts.AddDays(-1).ToString(ViewBag.Format); right = dts.AddDays(5).ToString(ViewBag.Format); break; //周二
+                                                                case "Wednesday": left = dts.AddDays(-2).ToString(ViewBag.Format); right = dts.AddDays(4).ToString(ViewBag.Format); break; //周三
+                                                                case "Thursday": left = dts.AddDays(-3).ToString(ViewBag.Format); right = dts.AddDays(3).ToString(ViewBag.Format); break; //周四
+                                                                case "Friday": left = dts.AddDays(-4).ToString(ViewBag.Format); right = dts.AddDays(2).ToString(ViewBag.Format); break; //周五
+                                                                case "Saturday": left = dts.AddDays(-5).ToString(ViewBag.Format); right = dts.AddDays(1).ToString(ViewBag.Format); break; //周六
+                                                                case "Sunday": left = dts.AddDays(-6).ToString(ViewBag.Format); right = dts.AddDays(0).ToString(ViewBag.Format); break; //周日
+                                                            }
+                                                            if (k == 0) { left = Model.StartDate.Replace("00:00:00", "").Trim(); }
+                                                            else if (k == bdl.Count - 1) { right = Model.ExpirationDate.Replace("00:00:00", "").Trim(); }
+                                                            else { }
+
+                                                            if (left == right)
+                                                            {
+                                                                timeView = left;
+                                                            }
+                                                            else
+                                                            {
+                                                                timeView = left + "  到  " + right;
+                                                            }
+                                                        }
+
+                                                           @timeView
+                                                               </td>
+                                                               <td>@item.count</td>
+                                                }
+                                                               else
+                                                               {
+                                                    <td>@item.date.ToString(ViewBag.Format)</td>
+                                                    <td>@item.count</td>
+                                                               }
+
+                                            </tr>
+                                        }
+                                        @*@foreach (var item in bdl)
+                                        {
+                                            <tr>
+                                                @if (isWeek)
+                                                {
+                                                    <td>@item.date.ToString(ViewBag.Format)</td>
+                                                    <td>@item.count</td>
+                                                }
+                                                else
+                                                {
+                                                    <td>@item.date.ToString(ViewBag.Format)</td>
+                                                    <td>@item.count</td>
+                                                }
+
+                                            </tr>
+                                        }*@
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <!-- end widget content -->
+                    </div>
+                    <!-- end widget div -->
+                </div>
+                <!-- end widget -->
+
+            </article>
+        </div>
+    </section>
+</div>
+

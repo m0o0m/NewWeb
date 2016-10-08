@@ -1,0 +1,410 @@
+﻿@model object
+@{
+    ViewBag.Title = "封号 -- 列表";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="content">
+    <form id="comment-form" class="smart-form" novalidate="novalidate" method="post">
+        <div class="row">
+            @*<section class="col col-1">
+                    <label class="select">
+                        @Html.DropDownList("seachtype", new List<SelectListItem> {
+                        new SelectListItem{ Text = "会员ID", Value = "0", Selected = object.Equals(ViewData["seachtype"], 0) },
+                        new SelectListItem{ Text = "IP地址", Value = "9", Selected = object.Equals(ViewData["seachtype"], 9) },
+                        new SelectListItem{ Text = "禁言列表", Value = "10", Selected = object.Equals(ViewData["seachtype"], 10) },
+                        new SelectListItem{ Text = "封号列表", Value = "11", Selected = object.Equals(ViewData["seachtype"], 11) }
+                    })<i></i>
+                    </label>
+                </section>*@
+            <section class="col col-1.2">
+                <label class="label">用户ID/账户/昵称</label>
+                <label class="input">
+                    <i class="icon-append fa fa-calendar"></i>
+                    @Html.TextBox("Value", ViewData["Value"], new { @class = "span2", style = "border-radius:4px" })
+                </label>
+            </section>
+
+
+
+            <section class="col col-1">
+                <label class="label">&nbsp;</label>
+                @*<button type="submit" class="btn btn-success btn-sm">查询</button>*@
+                <input type="button" onclick="search()" class="btn btn-success btn-sm" value="查询" />
+            </section>
+
+        </div>
+    </form>
+    <div class="row-fluid">
+        <div class="widget-box" id="box">
+            @Html.Partial("MemberIsFreeze_PageList", Model)
+        </div>
+    </div>
+
+
+
+    <div id="dialog" title="封号" style="display:none">
+        <form style="width:95%" id="comment-form" class="smart-form" novalidate="novalidate" method="get">
+            <input type="hidden" value="" id="hidUID" />
+            <section>
+                <label class="label"><font size="4">被封账号</font>:<span id="spanFreeze"></span></label>
+            </section>
+            <section>
+                <label class="label"><font size="4">封号原因:</font></label>
+                <div class="inline-group">
+
+                    <label class="radio">
+                        <input type="radio" name="result" value="2" checked="checked">
+                        <i></i>刷游戏币
+                    </label>
+                    <label class="radio">
+                        <input type="radio" name="result" value="1" id="radefault">
+                        <i></i>注册账号已超过3个
+                    </label>
+                </div>
+            </section>
+            <section style="padding-left:200px">
+                <div class="row">
+                    <section class="col col-lg-12">
+
+                        <button type="button" class="btn btn-success btn-sm" onclick="FreezeNum()">确定</button>
+                        <button type="button" class="btn btn-success btn-sm" onclick="closeFreez()">取消</button>
+                    </section>
+
+                </div>
+            </section>
+        </form>
+    </div>
+
+
+</div>
+
+
+
+
+
+
+
+@section scripts{
+    @{Html.RegisterMvcPagerScriptResource();}
+
+
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/select2.min.js"></script>
+    <script src="/js/matrix.tables.js"></script>
+    <script type="text/javascript">
+        function closeFreez() {
+
+            dialog.dialog("close");
+            $("#hidUID").val("");
+
+
+        }
+
+
+        function FreezeNum() {
+            var _UserID = $("#hidUID").val();//id
+            var _Reason = $("input[name=result]:checked").val();//原因
+
+            // return false;
+            $.ajax({
+                url: "/Member/FMPut/",
+                type: "post",
+                dataType: "json",
+                data: { "dwUserID": _UserID, "strAccount": "true", "Reason": _Reason },
+                success: function (data) {
+                    if (data == 2020) {
+                        window.location.reload();
+                        return false;
+                    }
+                    switch (data.result) {
+
+                        case 0:
+                            alert('已将玩家【' + $("#spanFreeze").html() + '】的账号封号');
+                            closeFreez();
+                            break;
+                        case 1:
+                            alert("封号失败，请稍后再试");
+                            break;
+                        case 2:
+                            alert("服务器未启动，请稍后再试");
+                            break;
+                        default:
+                            alert('未知错误');
+                            break;
+                    }
+                }
+            }).fail(function (xhr, textStatus, err) {
+                alert('服务器繁忙，请稍候再试');
+            });
+        }
+            // resets the menu selection upon entry to this page:
+            function resetMenu() {
+                document.gomenu.selector.selectedIndex = 2;
+            }
+
+            function UpdateUser(obj) {
+                location.href = "/Manage/MemberForUpdate?id=" + obj;
+            }
+
+            function ConfirmDelUser() {
+                return confirm("你确认要执行此操作吗？");
+            }
+
+            function errFunc(res) {
+                alert(res["responseText"]);
+            }
+            function successPageFun() {
+
+            }
+            function OutputView(obj) {
+                location.href = "/Manage/MemberForSearchGameRecord?UserID=" + obj;
+            }
+            function OpenFudaiView(obj) {
+                location.href = "/Manage/MemberForOpenFuDaiOutPut?UserID=" + obj;
+            }
+            function DuiHuanView(obj) {
+                location.href = "/Manage/MemberForDuiHuan?UserID=" + obj;
+            }
+
+            function PaymentOfPrizes(obj) {
+                location.href = "/Manage/SendUserEmail?UEUserID=" + obj;
+            }
+
+            function btnFreeze(id, acc) {
+                //弹出一个选择原因的框，来选封的原因
+                $("#spanFreeze").html(acc);//账号
+                $("#hidUID").val(id);//账号id
+                dialog = $("#dialog").dialog({
+                    width: 620,
+                    modal: true
+                });
+
+
+                return false;
+            }
+            function btnunFreeze(id, acc) {
+                if (confirm('确定将玩家【' + acc + '】的账号解封？')) {
+                    var _UserID = id;
+                    $.ajax({
+                        url: "/Member/FMPut/",
+                        type: "post",
+                        dataType: "json",
+                        data: { "dwUserID": _UserID, "strAccount": "false" },
+                        success: function (data) {
+
+                            if (data == 2020) {
+                                window.location.reload();
+                                return false;
+                            }
+
+                            switch (data.result) {
+                                case 0:
+                                    alert('已将玩家【' + acc + '】的账号解封');
+                                    break;
+                                case 1:
+                                    alert("解封失败，请稍后再试");
+                                    break;
+                                case 2:
+                                    alert("服务器未启动，请稍后再试");
+                                    break;
+                                default:
+                                    alert('未知错误');
+                                    break;
+                            }
+                        }
+                    }).fail(function (xhr, textStatus, err) {
+                        alert('服务器繁忙，请稍候再试');
+                    });
+                } else {
+                    return false;
+                }
+                return false;
+            }
+            function btnBan(id, acc) {
+                if (confirm('确定将玩家【' + acc + '】禁言？')) {
+                    var _UserID = id;
+                    $.ajax({
+                        url: "/Member/FMDelete/",
+                        type: "post",
+                        dataType: "json",
+                        data: { "dwUserID": _UserID, "strAccount": "true" },
+                        success: function (data) {
+
+                            if (data == 2020) {
+                                window.location.reload();
+                                return false;
+                            }
+
+                            switch (data.result) {
+                                case 0:
+                                    alert('已将玩家【' + acc + '】禁言');
+                                    break;
+                                case 1:
+                                    alert("禁言失败，请稍后再试");
+                                    break;
+                                case 2:
+                                    alert("服务器未启动，请稍后再试");
+                                    break;
+                                default:
+                                    alert('未知错误');
+                                    break;
+                            }
+                        }
+                    }).fail(function (xhr, textStatus, err) {
+                        alert('服务器繁忙，请稍候再试');
+                    });
+
+                } else {
+                    return false;
+                }
+                return false;
+            }
+
+            function btnunBan(id, acc) {
+                if (confirm('确定将玩家【' + acc + '】解除禁言？')) {
+                    var _UserID = id;
+                    $.ajax({
+                        url: "/Member/FMDelete/",
+                        type: "post",
+                        dataType: "json",
+                        data: { "dwUserID": _UserID, "strAccount": "false" },
+                        success: function (data) {
+
+                            if (data == 2020) {
+                                window.location.reload();
+                                return false;
+                            }
+
+                            switch (data.result) {
+                                case 0:
+                                    alert('已将玩家【' + acc + '】解除禁言');
+                                    break;
+                                case 1:
+                                    alert("解除禁言失败，请稍后再试");
+                                    break;
+                                case 2:
+                                    alert("服务器未启动，请稍后再试");
+                                    break;
+                                default:
+                                    alert('未知错误');
+                                    break;
+                            }
+                        }
+                    }).fail(function (xhr, textStatus, err) {
+                        alert('服务器繁忙，请稍候再试');
+                    });
+
+                } else {
+                    return false;
+                }
+                return false;
+            }
+
+            function btnIP(id, acc) {
+                if (confirm('确定将IP【' + acc + '】封禁？')) {
+                    var _UserID = acc;
+                    $.ajax({
+                        url: "/member/banip/",
+                        type: "Post",
+                        dataType: "JSON",
+                        data: { "strIP": _UserID, "strAccount": "true" },
+                        success: function (data) {
+                            switch (data.result) {
+                                case 0:
+                                    alert('已将IP【' + acc + '】封禁');
+                                    location.reload();
+                                    break;
+                                case 1:
+                                    alert("封IP失败，请稍后再试");
+                                    break;
+                                case 2:
+                                    alert("服务器未启动，请稍后再试");
+                                    break;
+                                default:
+                                    alert('未知错误');
+                                    break;
+                            }
+                        }
+                    }).fail(function (xhr, textStatus, err) {
+                        alert('服务器繁忙，请稍候再试');
+                    });
+
+                } else {
+                    return false;
+                }
+                return false;
+            }
+
+            function btnMac(id, acc) {
+                if (confirm('确定将IMEI【' + acc + '】封禁？')) {
+                    var _UserID = acc;
+                    $.ajax({
+                        url: "/member/banMac/",
+                        type: "Post",
+                        dataType: "JSON",
+                        data: { "strIP": _UserID, "strAccount": "true" },
+                        success: function (data) {
+                            switch (data.result) {
+                                case 0:
+                                    alert('已将IMEI【' + acc + '】封禁');
+                                    location.reload();
+                                    break;
+                                case 1:
+                                    alert("封IMEI失败，请稍后再试");
+                                    break;
+                                case 2:
+                                    alert("服务器未启动，请稍后再试");
+                                    break;
+                                default:
+                                    alert('未知错误');
+                                    break;
+                            }
+                        }
+                    }).fail(function (xhr, textStatus, err) {
+                        alert('服务器繁忙，请稍候再试');
+                    });
+
+                } else {
+                    return false;
+                }
+                return false;
+            }
+
+            function btnResetSafeBox(id, acc) {
+                if (confirm('确定将【' + acc + '】的保险箱重置？')) {
+                    var _UserID = id;
+                    $.ajax({
+                        url: "/member/btnResetSafeBox/",
+                        type: "Post",
+                        dataType: "JSON",
+                        data: { "dwUserID": _UserID },
+                        success: function (data) {
+                            switch (data.result) {
+                                case 0:
+                                    alert('已将【' + acc + '】的保险箱重置');
+                                    location.reload();
+                                    break;
+                                case 1:
+                                    alert("保险箱重置失败，请稍后再试");
+                                    break;
+                                case 2:
+                                    alert("服务器未启动，请稍后再试");
+                                    break;
+                                default:
+                                    alert('未知错误');
+                                    break;
+                            }
+                        }
+                    }).fail(function (xhr, textStatus, err) {
+                        alert('服务器繁忙，请稍候再试');
+                    });
+
+                } else {
+                    return false;
+                }
+                return false;
+            }
+
+    </script>
+}

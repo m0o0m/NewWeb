@@ -1,0 +1,121 @@
+﻿
+@using GL.Data.Model
+@model BaseDataView
+@{
+    ViewBag.Title = "用户盈亏统计";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    ViewBag.Format = "yyyy-MM-dd";
+
+    switch (Model.Groupby)
+    {
+        case groupby.按日:
+            break;
+        case groupby.按月:
+            ViewBag.Format = "yyyy-MM";
+            break;
+    }
+}
+
+<div id="content">
+    <div class="alert alert-block alert-success">
+        <a class="close" data-dismiss="alert" href="#">×</a>
+        <h4 class="alert-heading"><i></i> @ViewBag.Title <span id="refresh" class="" data-title="refresh" rel="tooltip" data-placement="bottom" data-original-title="<i class=''></i> 数据每10分钟更新一次" data-html="true"><i class="fa fa-question "></i></span> </span></h4>
+    </div>
+
+    <form id="comment-form" class="smart-form" novalidate="novalidate">
+        <input type="hidden" value="@ViewData["tab"]" id="tab" name="tab" />
+        <input type="hidden" value="@Guid.NewGuid()" id="rank" name="rank" />
+        <div class="row">
+            <div class="widget-body">
+                <section class="col col-1.2">
+                    <label class="label">会员ID</label>
+                    <label class="input">
+                        @Html.TextBoxFor(m => m.SearchExt, new { @class = "span2", style = "border-radius:4px;width:120px", id = "searchExt" })
+                    </label>
+                </section>
+                <section class="col col-1.2">
+                    <label class="label"> 渠道 </label>
+                    <label class="select" style="width:150px">
+                        @Html.GetAllAgentGroupList("Channels", Model.Channels)
+                    </label>
+                </section>
+                <section class="col col-1.2">
+                    <label class="label">起始日期</label>
+                    <label class="input">
+                        <i class="icon-append fa fa-calendar"></i>
+                        @Html.TextBoxFor(m => m.StartDate, new Dictionary<string, object>() { { "class", "form-control datepicker" }, { "data-dateformat", "yy-mm-dd 00:00:00" }, { "id", "beginDate" } })
+                    </label>
+                </section>
+                <section class="col col-1.2">
+                    <label class="label"> 截止日期</label>
+                    <label class="input">
+                        <i class="icon-append fa fa-calendar"></i>
+                        @Html.TextBoxFor(m => m.ExpirationDate, new Dictionary<string, object>() {
+                           { "class", "form-control datepicker" },
+                           { "data-dateformat", "yy-mm-dd 00:00:00" },{"id","endDate" }
+                       })
+                    </label>
+                </section>
+
+                @*<section class="col col-1">
+                        <label class="label"> 类型</label>
+                        <label class="select">
+                            @Html.DropDownListFor(m => m.Channels, new List<SelectListItem>
+                    {
+                        new SelectListItem { Text= "所有", Value = "0" },
+                        new SelectListItem { Text= "首充礼包", Value = "1" }
+                    })<i></i>
+                        </label>
+                    </section>*@
+
+                <section class="col col-1">
+                    <label class="label">&nbsp;</label>
+                    @*<button type="submit" class="btn btn-success btn-sm">查询</button>*@
+                    <input type="button" onclick="search()" class="btn btn-success btn-sm" value="查询" />
+                </section>
+            </div>
+        </div>
+    </form>
+
+    <div class="row-fluid">
+        <div class="widget-box" id="box">
+            @Html.Partial("UserProfit_PageList", Model.BaseDataList)
+        </div>
+    </div>
+</div>
+
+@section scripts{
+
+    @{Html.RegisterMvcPagerScriptResource();}
+
+}
+
+<script type="text/javascript">
+    function returnSearch(userid) {
+        _StartDate = $("#beginDate").val();
+        _ExpirationDate = $("#endDate").val();
+        _SearchExt = userid ;
+
+        location.href = "/Base/UserProfit?SearchExt=" + _SearchExt + "&StartDate=" + _StartDate + "&ExpirationDate=" + _ExpirationDate;
+    }
+
+    //function btnSelect(userid) {
+    //    _StartDate = $("#beginDate").val();
+    //    _ExpirationDate = $("#endDate").val();
+    //    _SearchExt = userid;
+    //    $.ajax({
+    //        url: "/Manage/MemberForRecord" ,
+    //        type: "get",
+    //        dataType: "html",
+    //        data: { "SearchExt": _SearchExt, "StartDate": _StartDate, "ExpirationDate": _ExpirationDate }
+    //    })
+    //}
+
+    function returnData(id) {
+        _StartDate = $("#beginDate").val();
+        _ExpirationDate = $("#endDate").val();
+        _SearchExt = id;
+        window.open("/Manage/MemberForRecord?hidDataCount=&Gametype=0&SearchExt=" + _SearchExt + "&StartDate=" + _StartDate + "&_ExpirationDate=" + _ExpirationDate);
+    }
+</script>

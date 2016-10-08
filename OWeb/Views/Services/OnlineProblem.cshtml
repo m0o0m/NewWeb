@@ -1,0 +1,205 @@
+﻿@using Webdiyer.WebControls.Mvc;
+@using GL.Data.Model;
+@model PagedList<CustomerServCenter>
+@{
+    ViewBag.Title = "在线问题列表";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    //ViewBag.PageId = "extr-page";
+    ViewBag.PageClass = "fixed-header fixed-page-footer";
+}
+<!-- MAIN CONTENT -->
+<div id="content">
+    <div class="row">
+        <div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
+            <h1 class="page-title txt-color-blueDark">
+                <i class="fa fa-table fa-fw "></i>
+                @ViewBag.Title
+            </h1>
+        </div>
+    </div>
+    <!-- widget grid -->
+    <section id="widget-grid" class="">
+        <!-- row -->
+        <div class="row">
+            <!-- NEW WIDGET START -->
+            <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <!-- Widget ID (each widget will need unique ID)-->
+                <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-0" data-widget-editbutton="false">
+                    <!-- widget options:
+                    usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+
+                    data-widget-colorbutton="false"
+                    data-widget-editbutton="false"
+                    data-widget-togglebutton="false"
+                    data-widget-deletebutton="false"
+                    data-widget-fullscreenbutton="false"
+                    data-widget-custombutton="false"
+                    data-widget-collapsed="true"
+                    data-widget-sortable="false"
+
+                    -->
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                        <h2>Table</h2>
+                    </header>
+                    <!-- widget div-->
+                    <div>
+                        <!-- widget edit box -->
+                        <div class="jarviswidget-editbox">
+                            <!-- This area used as dropdown edit box -->
+                        </div>
+                        <!-- end widget edit box -->
+                        <!-- widget content -->
+                        <div class="widget-body no-padding" id="box">
+                            @Html.Partial("OnlineProblem_PageList", Model)
+                        </div>
+                        <!-- end widget content -->
+                    </div>
+                    <!-- end widget div -->
+                </div>
+                <!-- end widget -->
+            </article>
+            <!-- WIDGET END -->
+        </div>
+        <!-- end row -->
+        <!-- end row -->
+    </section>
+    <!-- end widget grid -->
+</div>
+<!-- END MAIN CONTENT -->
+
+
+
+
+
+<div class="modal" id="modelPanel" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="modelTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        </div>
+    </div>
+</div>
+
+
+
+@section pagespecific {
+
+    <script type="text/javascript">
+
+
+        //$('#exampleModal').on('show.bs.modal', function (event) {
+        //    var button = $(event.relatedTarget) // Button that triggered the modal
+        //    var recipient = button.data('whatever') // Extract info from data-* attributes
+        //    // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+        //    // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+        //    var modal = $(this)
+        //    modal.find('.modal-title').text('New message to ' + recipient)
+        //    modal.find('.modal-body input').val(recipient)
+        //})
+
+        $(document).ready(function () {
+
+            $('#modelPanel').on('show.bs.modal', function (event) {
+            }).on('hidden.bs.modal', function (event) {
+                var modal = $(this)
+                //modal.find('.modal-title').text("");
+                modal.find('.modal-content').html("");
+                //$('#modelPanel').removeData("modal");
+            })
+
+
+
+        })
+
+        function btnDel(obj) {
+            if (confirm('确定删除此记录？')) {
+                $.ajax({
+                    url: "/Services/DeleteProblem/",
+                    type: "POST",
+                    dataType: "JSON",
+                    data: { "value": obj },
+                    success: function (data) {
+                        switch (data.result) {
+                            case 0:
+                                location.reload();
+                                break;
+                            case 1:
+                                alert("删除失败，请稍后再试");
+                                break;
+                            default:
+                                alert('未知错误');
+                                break;
+                        }
+                    }
+                }).fail(function (xhr, textStatus, err) {
+                    alert('Error: ' + err);
+                });
+            } else {
+                return false;
+            }
+            return false;
+        }
+
+
+        function btnView(id, _static, obj) {
+            //alert("/Services/PopupboxForReply/?i=" + new Date().getTime());
+            _this = $(obj).parent().parent();
+            var _Title = $(_this).find("td").eq(2).html();
+            $("#modalLabel").html(_Title);
+            $("#modalVal").val(id);
+            $('#modelPanel').removeData("modal");
+
+
+            if (_static == 3) {
+                $("#chat-messages").hide();
+            } else {
+                $("#chat-messages").show();
+            }
+
+            $('#modelPanel').modal({
+                keyboard: true
+                , show: true
+                , remote: "/Services/PopupboxForReply/?CSCMainID=" + id + "&i=" + new Date().getTime()
+            });
+        }
+
+        function btnSend() {
+            if ($('#textarea-expand').val() == '') {
+                alert("回复内容不能为空");
+                $('#textarea-expand').focus();
+                return false;
+            }
+            $.ajax({
+                url: "/Services/PopupboxForReply/",
+                type: "POST",
+                dataType: "JSON",
+                data: $("#submitForm").serialize(),
+                success: function (data) {
+                    //alert(data.result)
+                    switch (data.result) {
+                        case 0:
+                            $('#modelPanel').modal('hide');
+                            location.reload();
+                            break;
+                        case 1:
+                            alert("回复失败，请稍后再试");
+                            break;
+                        default:
+                            alert('未知错误');
+                            break;
+                    }
+                }
+            }).fail(function (xhr, textStatus, err) {
+                alert('Error: ' + err);
+            });
+        }
+
+
+        function ConfirmDelUser() {
+            return confirm("你确认要执行此操作吗？");
+        }
+
+
+
+
+    </script>
+}

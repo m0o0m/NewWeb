@@ -1,0 +1,146 @@
+﻿@using GL.Data.View
+@model GameRecordView
+@{
+    ViewBag.Title = "账户信息";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+
+
+
+<div id="content">
+    <div class="row">
+        <section class="col col-1">
+            <label class="label">&nbsp;</label>
+          
+            <input type="button" onclick="addUser()" class="btn btn-success btn-sm" value="添加账户" />
+        </section>
+    </div>
+
+    <form id="comment-form" class="smart-form" novalidate="novalidate" method="post">
+        <div class="row">
+
+            <div class="widget-body">
+
+                <section class="col col-1.1">
+                    <label class="label">&nbsp;</label>
+                    <label class="input">
+                        @Html.TextBoxFor(m => m.SearchExt, new { @class = "span2", style = "border-radius:4px" })
+                    </label>
+                </section>
+
+
+
+
+
+                <section class="col col-1">
+                    <label class="label">&nbsp;</label>
+                    @*<button type="submit" class="btn btn-success btn-sm">查询</button>*@
+                    <input type="button" onclick="search()" class="btn btn-success btn-sm" value="查询账户" />
+                </section>
+
+            </div>
+
+
+
+
+
+
+
+
+
+        </div>
+    </form>
+
+
+    <div class="row-fluid">
+        <div class="widget-box" id="box">
+            @Html.Partial("ClubConfig_PageList", Model.DataList)
+
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+@section scripts{
+    @{Html.RegisterMvcPagerScriptResource();}
+
+
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/select2.min.js"></script>
+    @Styles.Render("~/Style/bootstrap-datetimepicker")
+    @Scripts.Render("~/bundles/bootstrap-datetimepicker")
+
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $('select').select2({
+                allowClear: false,
+                minimumResultsForSearch: -1
+            });
+            $('.datepicker').datetimepicker({
+                minView: "month", //选择日期后，不会再跳转去选择时分秒
+                format: "yyyy-mm-dd hh:ii:ss", //选择日期后，文本框显示的日期格式
+                language: 'zh-CN', //汉化
+                autoclose: true //选择日期后自动关闭
+            });
+
+        });
+
+        function btSetClub(obj) {
+         
+            var _this = $(obj).parent().parent();
+            var userId = $(_this).find("td").eq(0).html();
+            var userAccount = $(_this).find("td").eq(1).html();
+            location.href = "/Member/SetClubConfig?userId=" + userId + "&userAccount=" + userAccount;
+          
+        }
+
+
+        function btDeleteUser(obj) {
+            var _this = $(obj).parent().parent();
+            var userId = $(_this).find("td").eq(0).html();
+            if (confirm("是否删除用户id：" + userId)) {
+                $.ajax({
+                    url: "/Member/CancelUserConfig",
+                    type: "Post",
+                    dataType: "JSON",
+                    data: { "userId": userId, "oper": 1 },
+                    success: function (data) {
+                        switch (data.result) {
+                            case 1:
+
+                                location.reload();
+                                break;
+                            case 0:
+                                alert("操作失败，请稍后再试");
+                                break;
+
+                            default:
+                                alert('未知错误');
+                                break;
+                        }
+                    }
+                }).fail(function (xhr, textStatus, err) {
+                    alert('Error: ' + err);
+                });
+            }
+         
+         
+        }
+
+
+        function addUser() {
+            location.href = "/Member/ClubConfigUserIndex";
+        }
+
+    </script>
+
+}

@@ -1,0 +1,116 @@
+﻿
+@using Webdiyer.WebControls.Mvc
+@using GL.Data.Model
+@model PagedList<Roulette>
+@{
+    ViewBag.Format = "yyyy-MM-dd";
+}
+
+<div class="row-fluid">
+    <div class="widget-box" id="boxGroup">
+        <section id="widget-grid" class="">
+            <div class="row">
+                <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-0" data-widget-editbutton="false" data-widget-colorbutton="false"
+                         data-widget-togglebutton="false"
+                         data-widget-deletebutton="false"
+                         data-widget-fullscreenbutton="false"
+                         data-widget-custombutton="false"
+                         data-widget-collapsed="false"
+                         data-widget-sortable="false">
+                        <header>
+                            <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                            <h2>轮盘抽奖数据</h2>
+                        </header>
+                        <div>
+                            <div class="jarviswidget-editbox"></div>
+                            <div class="widget-body no-padding" style="min-height: 70px;">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>日期</th>
+                                                <th>抽奖总次数</th>
+                                                <th>金钥匙抽奖总次数</th>
+                                                <th>抽奖总消耗游戏币</th>
+                                                <th>抽奖总产出游戏币</th>
+                                                <th>抽奖总产出兑换劵</th>
+                                                <th>抽奖总产出五币</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @if (Model.Count == 0)
+                                    {
+                                                <tr>
+                                                    <td class="colspan" align="center" colspan="0">
+                                                        没有找到相关记录！
+                                                    </td>
+                                                </tr>
+                                    }
+                                            @foreach (Roulette item in Model)
+                                    {
+                                                <tr>
+                                                    <th>@item.Date.ToString(ViewBag.Format)</th>
+                                                    <th><a href="javascript:void" onclick="btnView(this)">@item.CountSum.ToString("#,0.")</a></th>
+                                                    <th>@item.CountKey.ToString("#,0.")</th>
+                                                    <th>@item.GoldConsume.ToString("#,0.")</th>
+                                                    <th>@item.GoldIncome.ToString("#,0.")</th>
+                                                    <th>@item.DHQIncome.ToString("#,0.")</th>
+                                                    <th>@item.DiamondIncome.ToString("#,0.")</th>
+                                                </tr>
+                                    }
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="widget-content">
+                                    @Ajax.Pager(
+                            Model,
+                            new PagerOptions()
+                            {
+                                CssClass = "pager",
+                                ShowMorePagerItems = true,
+                                PageIndexParameterName = "pageGroup",
+                                ShowDisabledPagerItems = true,
+                                AlwaysShowFirstLastPageNumber = true,
+                                //ShowRecordCountItems = true,
+                                HorizontalAlign = "right",
+                                //SeparatorHtml = "",
+
+                                CurrentPagerItemTemplate = "<li class=\"disabled\"><span>{0}</span></li>",
+                                DisabledPagerItemTemplate = "<li class=\"disabled\"><span>{0}</span></li>",
+                                PagerItemTemplate = "<li>{0}</li>",
+                                //CurrentPagerItemWrapperFormatString = "<li class=\"disabled\"><span>{0}</span></li>",
+                                //NumericPagerItemWrapperFormatString = "<li>{0}</li>",
+                                //PagerItemWrapperFormatString = "<li>{0}</li>",
+                                //RecordCountText = string.Format("共{0}条记录, {1}页", Model.TotalItemCount, Model.TotalPageCount),
+                                //RecordCountFormatString = "<li><span>{0}</span></li>",
+                                //DisabledPagerItemsFormatString = "<li class=\"disabled\"><span>{0}</span></li>",
+                                //PageIndexBoxType = Webdiyer.WebControls.Mvc.PageIndexBoxType.TextBox,
+                                //GoButtonText = "跳转到",
+                                ShowPrevNext = true,
+                                FirstPageText = "第一页",
+                                LastPageText = "最后一页",
+                                ContainerTagName = "ul",
+                                PageIndexBoxId = "pageindexcmGroup",
+                                WYWPageIndexString = @"<li><input style='width:50px;' type='text' value='' id='{0}' name = '{1}'></li>
+                                                            <li><a id='goto2' name='goto2' style='margin-right:10px' >跳转</a><li>
+                                                        ",
+                                GoToButtonId = "goto2"
+                            },
+                            new MvcAjaxOptions
+                            {
+                                HttpMethod = "POST",
+                                UpdateTargetId = "boxGroup",
+                                InsertionMode = InsertionMode.Replace,
+                                OnFailure = "errFunc",
+                                OnSuccess = "successPageFun"
+                            }).Options(o => o.AddRouteValue("target", "boxGroup"))
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                </article>
+            </div>
+        </section>
+    </div>
+</div>

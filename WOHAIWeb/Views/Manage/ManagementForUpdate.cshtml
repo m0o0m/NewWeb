@@ -1,0 +1,97 @@
+﻿@model GL.Data.Model.ManagerInfo
+@{
+    ViewBag.Title = "管理员管理 -- 修改";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!--breadcrumbs-->
+<div id="content-header">
+    <div id="breadcrumb"> <a href="#" title="" class="current"><i class="icon-home"></i> 修改管理员</a></div>
+</div>
+
+<!--End-breadcrumbs-->
+<div class="container-fluid">
+    <div class="row-fluid">
+
+        <div class="widget-box span4" id="box">
+            <div class="widget-title">
+                <span class="icon"><i class="icon-align-justify"></i></span>
+                <h5></h5>
+            </div>
+            <div class="widget-content nopadding">
+                <div class="form-horizontal">
+                    <input type="hidden" name="AdminID" value="@Model.AdminID" />
+                    <div class="control-group">
+                        <label class="control-label">管理员帐号 :</label>
+                        <div class="controls">
+                            @Model.AdminAccount
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">管理员密码 :</label>
+                        <div class="controls">
+                            <input type="password" name="AdminPasswd" class="span11" value="" />
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <input id="btnKick" type="button" value="提交" class="btn btn-danger" onclick="return btnSubmit(this)" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+
+@section scripts{
+    @{Html.RegisterMvcPagerScriptResource();}
+
+
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/select2.min.js"></script>
+    <script type="text/javascript">
+
+        // resets the menu selection upon entry to this page:
+        function resetMenu() {
+            document.gomenu.selector.selectedIndex = 2;
+        }
+
+
+
+        function btnSubmit(obj) {
+            _this = $(obj).parent().parent();
+
+            var _AdminID = _this.find("input[name=AdminID]").val();
+            var _AdminPasswd = _this.find("input[name=AdminPasswd]").val();
+
+
+            $.ajax({
+                url: "/api/ManageApi/",
+                type: "OPTIONS",
+                dataType: "JSON",
+                data: { "AdminID": _AdminID, "AdminPasswd": _AdminPasswd },
+                success: function (data) {
+                    switch (data.result) {
+                        case 0:
+                            location.href = "/Manage/Management";
+                            break;
+                        case 200:
+                            alert("值不能为空，请稍后再试");
+                            break;
+                        default:
+                            alert('未知错误');
+                            break;
+                    }
+                }
+            }).fail(function (xhr, textStatus, err) {
+                alert('Error: ' + err);
+            });
+
+            return false;
+
+        }
+
+    </script>
+}

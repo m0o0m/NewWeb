@@ -1,0 +1,74 @@
+﻿@using GL.Data.Model
+@using GL.Data.View
+@model GameRecordView
+@{
+    ViewBag.Title = "查询用户道具";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+
+    Role user = (Role)Model.Data;
+
+}
+
+
+<div id="content-header">
+    <div id="breadcrumb"> <a href="#" title="" class="current"><i class="icon-home"></i> @ViewBag.Title</a></div>
+</div>
+
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span8">
+            <form class="form-inline">
+                会员ID
+                @Html.TextBoxFor(m => m.UserID, new { @class = "span2", style = "border-radius:4px" })
+                <button type="submit" class="btn btn-success">查询</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="row-fluid">
+        <div class="widget-box" id="box">
+
+            @if (user != null)
+            {
+               <text> @System.Text.Encoding.Default.GetString(user.ExtInfo)</text>
+            }
+
+        </div>
+    </div>
+
+
+</div>
+
+
+@section scripts{
+    @{Html.RegisterMvcPagerScriptResource();}
+
+
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/select2.min.js"></script>
+    @Styles.Render("~/Style/bootstrap-datetimepicker")
+    @Scripts.Render("~/bundles/bootstrap-datetimepicker")
+
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $('select').select2({
+                allowClear: false,
+                minimumResultsForSearch: -1
+            });
+            $('.datepicker').datetimepicker({
+                minView: "month", //选择日期后，不会再跳转去选择时分秒
+                format: "yyyy-mm-dd hh:ii:ss", //选择日期后，文本框显示的日期格式
+                language: 'zh-CN', //汉化
+                autoclose: true //选择日期后自动关闭
+            });
+
+        });
+
+
+
+    </script>
+
+}

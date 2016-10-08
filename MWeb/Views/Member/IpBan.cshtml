@@ -1,0 +1,178 @@
+﻿@model GL.Data.Model.RedisterIP
+@{
+    ViewBag.Title = "注册IP限制设置";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<article class="col-sm-12 col-md-12 col-lg-7">
+    <div class="jarviswidget" id="wid-id-4" data-widget-editbutton="false" data-widget-custombutton="false">
+        <header>
+            <span class="widget-icon"> <i class="fa fa-edit"></i> </span>
+            <h2>操作</h2>
+        </header>
+        <div>
+            <div class="jarviswidget-editbox">
+            </div>
+            <div class="widget-body no-padding">
+                <form id="subfrom" class="smart-form" action="/" method="post">
+                    @Html.AntiForgeryToken()
+                    <fieldset>
+
+                        <section>
+                            <label>IP :</label>
+                            <label class="input">
+                                <input type="text" name="IP" readonly="readonly" class="span11" value="@Model.IP" />
+                            </label>
+                        </section>
+                        <section>
+                            <label>设置此IP下可注册账号的数量 :</label>
+                            <label class="input">
+                                <input type="text" name="Total" class="span11" value="@Model.Total" />
+                            </label>
+                        </section>
+                        <section>
+                            <label>修改原因 :</label>
+                            <label class="input">
+                                <input type="text" name="Reason" class="span11" value="@Model.Reason" />
+                            </label>
+                        </section>
+                    </fieldset>
+                    <footer>
+                        <input id="btnKick" type="button" value="提交" class="btn btn-danger" onclick="return btnSubmit(this)" />
+                    </footer>
+                </form>
+
+            </div>
+            <!-- end widget content -->
+
+        </div>
+        <!-- end widget div -->
+
+    </div>
+
+</article>
+<!--End-breadcrumbs
+<div class="container-fluid">
+    <div class="row-fluid">
+
+        <div class="widget-box span4" id="box">
+            <div class="widget-title">
+                <span class="icon"><i class="icon-align-justify"></i></span>
+                <h5>操作</h5>
+            </div>
+
+            <div class="widget-content nopadding">
+                <div class="form-horizontal">
+                    <form id="subfrom" action="/" method="post">
+                          @*  @Html.AntiForgeryToken()*@
+                        @*<input type="hidden" name="IP" value="@Model.IP" />*@
+                        <div class="control-group">
+                            <label class="control-label">IP :</label>
+                            <div class="controls">
+                                <input type="text" name="IP" readonly="readonly" class="span11" value="@Model.IP" />
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">设置此IP下可注册账号的数量 :</label>
+                            <div class="controls">
+                                <input type="text" name="Total" class="span11" value="@Model.Total" />
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">修改原因 :</label>
+                            <div class="controls">
+                                <input type="text" name="Reason" class="span11" value="@Model.Reason" />
+                            </div>
+                        </div>
+                        <div class="form-actions">
+                            <input id="btnKick" type="button" value="提交" class="btn btn-danger" onclick="return btnSubmit(this)" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+    -->
+
+@section scripts{
+    @{Html.RegisterMvcPagerScriptResource();}
+
+
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/select2.min.js"></script>
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+
+        // resets the menu selection upon entry to this page:
+        function resetMenu() {
+            document.gomenu.selector.selectedIndex = 2;
+        }
+
+        function byteRangeLength(value, param) {
+            var length = value.length;
+            for (var i = 0; i < value.length; i++) {
+                if (value.charCodeAt(i) > 127) {
+                    length++;
+                }
+            }
+            return (length >= param[0] && length <= param[1]);
+        }
+
+        function btnSubmit(obj) {
+            _this = $(obj).parent().parent();
+
+            var _Total = _this.find("input[name=Total]").val();
+            var _Reason = _this.find("input[name=Reason]").val();
+
+
+            if (_Total.length == 0) {
+                alert("数量不能为空");
+                return false;
+            }
+            if (_Reason.length == 0) {
+                alert("修改原因不能为空");
+                return false;
+            }
+
+            if (!byteRangeLength(_Reason, [0, 90])) {
+                alert("修改原因不能超过45个字");
+                return false;
+            }
+
+
+            $.ajax({
+                url: "/Member/IpBan/",
+                type: "POST",
+                dataType: "JSON",
+                data: $('#subfrom').serialize(),
+                success: function (data) {
+                    switch (data.result) {
+                        case 0:
+                            location.href = "/Member/RedisterIP";
+                            break;
+                        case 1:
+                            alert("添加失败，请与管理员联系");
+                            break;
+                        case 200:
+                            alert("值不能为空，请稍后再试");
+                            break;
+                        default:
+                            alert(data.msg);
+                            break;
+                    }
+                }
+            }).fail(function (xhr, textStatus, err) {
+                alert('Error: ' + err);
+            });
+
+            return false;
+
+        }
+
+    </script>
+}

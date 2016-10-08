@@ -1,0 +1,252 @@
+﻿@model GL.Data.Model.GUIModel
+@{
+    ViewBag.Title = "发送游戏公告";
+
+    if (Request.IsAjaxRequest())
+    {
+        Layout =null;
+    }
+    else {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+}
+
+
+<script src="~/js/SmartAdmin/js/libs/jquery-2.0.2.min.js"></script>
+
+
+
+
+
+
+<article class="col-sm-12 col-md-12 col-lg-7">
+    <div class="jarviswidget" id="wid-id-4" data-widget-editbutton="false" data-widget-custombutton="false">
+        <header>
+            <span class="widget-icon"> <i class="fa fa-edit"></i> </span>
+            <h2>发送游戏公告</h2>
+        </header>
+        <div>
+            <div class="jarviswidget-editbox">
+            </div>
+            <div class="widget-body no-padding">
+                <form id="basic_validate" name="basic_validate" class="smart-form" action="" method="post">
+                    
+                    <fieldset>
+
+                        <section>
+                            <label>连续播放次数</label>
+                            <label class="input">
+                                <input id="ServEmailTitle" name="ServEmailTitle" type="text" class="span10" />
+                            </label>
+                        </section>
+
+                        <section>
+                            <label>时间间隔(秒)</label>
+                            <label class="input">
+                                <input id="ServEmailInterval" name="ServEmailInterval" type="text" class="span10" />
+                            </label>
+                        </section>
+
+                        <section>
+                            <label>广播内容</label>
+                            <label class="textarea">
+                                <textarea id="ServEmailContent" name="ServEmailContent" class="custom-scroll" ></textarea>
+                            </label>
+                        </section>
+
+                    </fieldset>
+
+
+                    <footer>
+
+                        <input type="submit" id="btnSubmit" name="btnSubmit" value=" 发送 " class="btn btn-success">
+                    </footer>
+                </form>
+
+            </div>
+            <!-- end widget content -->
+
+        </div>
+        <!-- end widget div -->
+
+    </div>
+
+</article>
+
+
+
+
+<!--End-breadcrumbs
+<div class="container-fluid">
+    <div class="row-fluid">
+
+
+
+        <div class="span6">
+            <div class="widget-box">
+                <div class="widget-title">
+                    <span class="icon"> <i class="icon-info-sign"></i> </span>
+                    <h5>@ViewBag.Title</h5>
+                </div>
+                <div class="widget-content nopadding">
+                    <form class="form-horizontal" method="post" action="#" name="basic_validate" id="basic_validate" novalidate="novalidate">
+                        <div class="control-group">
+                            <label class="control-label">连续播放次数</label>
+                            <div class="controls">
+                                <input id="ServEmailTitle" name="ServEmailTitle" type="text" class="span10" />
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">时间间隔(秒)</label>
+                            <div class="controls">
+                                <input id="ServEmailInterval" name="ServEmailInterval" type="text" class="span10" />
+                            </div>
+                        </div>
+                       <div class="control-group">
+                            <label class="control-label">广播内容</label>
+                            <div class="controls">
+                                <textarea id="ServEmailContent" name="ServEmailContent" rows="10" class="span10"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-actions">
+                            <input type="submit" id="btnSubmit" name="btnSubmit" value=" 发送 " class="btn btn-success">
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+    -->
+<div id="markbox"></div>
+
+
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/select2.min.js"></script>
+<script src="/js/jquery.validate.js"></script>
+
+<style type="text/css">
+    .loading {
+        position: absolute;
+        z-index: 10000;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        background: url(...) center center;
+    }
+    .help-inline {
+    color:red
+    }
+</style>
+<script type="text/javascript">
+   
+
+        $(function () {
+            var lock = false;
+            $("#basic_validate").validate({
+                onsubmit: true,
+                rules: {
+                    ServEmailContent: {
+                        required: true
+                        , maxlength: 200
+                    },
+                    ServEmailTitle: {
+                        required: true
+                        , number: true
+                        , range: [1,999]
+                    },
+                    ServEmailInterval: {
+                        required: true
+                        , number: true
+                        , range: [1,9999]
+                    }
+                },
+                messages: {
+                    ServEmailContent: {
+                        required: "请输入系统广播的内容",
+                        maxlength: "内容不能超过200个字符"
+                    },
+                    ServEmailTitle: {
+                        required: "请输入要播放的次数",
+                        number: "请输入数字",
+                        range: "请输入一个介于 {0} 和 {1} 之间的值"
+                    },
+                    ServEmailInterval: {
+                        required: "请输入要播放的时间间隔",
+                        number: "请输入数字",
+                        range: "请输入一个介于 {0} 和 {1} 之间的值"
+                    }
+                },
+                errorClass: "help-inline",
+                errorElement: "span",
+                highlight: function (element, errorClass, validClass) {
+                    $(element).parents('.control-group').addClass('error');
+                    $(element).parents('.control-group').removeClass('success');
+                },
+                unhighlight: function (element, errorClass, validClass) {
+                    $(element).parents('.control-group').removeClass('error');
+                    $(element).parents('.control-group').addClass('success');
+                },
+                submitHandler: function (form) {  //通过之后回调
+                    locksubmit()
+                    $.ajax({
+                        url: "/System/SendSystemBroadcasts/",
+                        type: "POST",
+                        //dataType: "JSON",
+                        //data: { "value": document.getElementById("GUName").value },
+                        data: { "ServEmailContent": $("#ServEmailContent").val(), "ServEmailTitle": $("#ServEmailTitle").val(), "ServEmailInterval": $("#ServEmailInterval").val() },
+                        success: function (data) {
+                            unlocksubmit();
+                            switch (data.result)
+                            {
+                                case 210:
+                                    alert("发送成功");
+                                    window.location = "/System/ServEmail/"
+                                    break;
+                                case 1:
+                                    alert("发送失败，请稍后再试");
+                                    break;
+                            }
+                            //$("#box").empty().append(data).show();
+                        }
+                    }).fail(function (xhr, textStatus, err) {
+                        unlocksubmit();
+                        alert('Error: ' + err);
+                    });
+                },
+                invalidHandler: function (form, validator) {  //不通过回调
+                    unlocksubmit();
+                    //alert("not pass");
+                    return false;
+                }
+            });
+
+            function locksubmit() {
+                if (lock) { return; }
+                lock = true;
+                $('#basic_validate').append($('#markbox').addClass('loading'));
+            }
+            function unlocksubmit() {
+                lock = false;
+                $('#basic_validate').find('#markbox').detach();
+            }
+
+            $('#ServEmailContent').keydown(function (e) {
+                if (e.which == 13) {
+                    return false;
+                }
+               
+            });
+        })
+
+
+
+</script>
+
+@section scripts{
+
+  
+}

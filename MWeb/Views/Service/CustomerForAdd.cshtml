@@ -1,0 +1,297 @@
+﻿@using GL.Data.OWeb.Identity;
+@model CustomerUser
+@{
+    ViewBag.Title = "客服管理 -- 添加";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+
+}
+
+
+
+<article class="col-sm-12 col-md-12 col-lg-7">
+    <div class="jarviswidget" id="wid-id-4" data-widget-editbutton="false" data-widget-custombutton="false">
+        <header>
+            <span class="widget-icon"> <i class="fa fa-edit"></i> </span>
+            <h2>添加客服</h2>
+        </header>
+        <div>
+            <div class="jarviswidget-editbox">
+            </div>
+            <div class="widget-body no-padding">
+                <form id="submitForm" class="smart-form" action="" method="post">
+                   
+                    <fieldset>
+                        <div class="row">
+                            <section class="col col-5">
+                                <label>客服账号 :</label>
+                                <label class="input">
+                                    <input type="text" id="UserName" name="UserName" class="span4" value="@Model.UserName" />
+                                </label>
+                            </section>
+                        </div>
+                        <div class="row">
+                            <section class="col col-5">
+                                <label>客服昵称 :</label>
+                                <label class="input">
+                                    <input type="text" id="NickName" name="NickName" class="span4" value="@Model.NickName" />
+                                </label>
+                            </section>
+                        </div>
+
+                        <div class="row">
+                            <section class="col col-5">
+                                <label>客服手机 :</label>
+                                <label class="input">
+                                    <input type="text" id="PhoneNumber" name="PhoneNumber" class="span4" value="@Model.PhoneNumber" />
+                                </label>
+                            </section>
+                        </div>
+                        <div class="row">
+                            <section class="col col-5">
+                                <label>客服邮箱 :</label>
+                                <label class="input">
+                                    <input type="text" id="Email" name="Email" class="span4" value="@Model.Email" />
+                                </label>
+                            </section>
+                        </div>
+                        <div class="row">
+                            <section class="col col-5">
+                                <label>用户密码 :</label>
+                                <label class="input">
+                                    <input type="password" id="CustomerPwd" name="CustomerPwd" class="span4" value="" />
+                                </label>
+                            </section>
+                        </div>
+                        <div class="row">
+                            <section class="col col-5">
+                                <label>确认密码 :</label>
+                                <label class="input">
+                                    <input type="password" id="ConfirmPasswd" name="ConfirmPasswd" class="span4" value="" />
+                                </label>
+                            </section>
+                        </div>
+
+
+
+
+
+
+
+                    </fieldset>
+
+
+                    <footer>
+
+                        <input id="btnGoBack" type="button" value="返回列表" onclick="return GoBack()" class=" btn btn-warning" />
+                        <input id="btnKick" type="submit" value="提交" class="btn btn-danger" />
+                    </footer>
+                </form>
+
+            </div>
+            <!-- end widget content -->
+
+        </div>
+        <!-- end widget div -->
+
+    </div>
+
+</article>
+
+
+
+
+
+
+@section scripts{
+    @{Html.RegisterMvcPagerScriptResource();}
+
+
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/select2.min.js"></script>
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+
+    // resets the menu selection upon entry to this page:
+    function resetMenu() {
+        document.gomenu.selector.selectedIndex = 2;
+    }
+    function GoBack() {
+        location.href = "/Service/CustomerInfo";
+    }
+
+    $(function () {
+
+
+        $.validator.setDefaults({
+            submitHandler: function (form) {
+                //form.submit();
+                $.ajax({
+                    url: "/Service/CustomerForAdd/",
+                    type: "POST",
+                    dataType: "JSON",
+                    data: $("#submitForm").serialize(),
+                    success: function (data) {
+                        switch (data.result) {
+                            case 0:
+                                location.href = "/Service/CustomerInfo";
+                                break;
+                            case 200:
+                                alert("值不能为空，请稍后再试");
+                                break;
+                            case 204:
+                                alert("账号已存在，请重新添加");
+                                break;
+                            case 205:
+                                alert("添加失败，账号只能由字母和数字组成");
+                                break;
+                            default:
+                                alert('添加失败['+msg+'],请与管理员联系');
+                                break;
+                        }
+                    }
+                }).fail(function (xhr, textStatus, err) {
+                    alert('Error: ' + err);
+                });
+                return false;
+            }
+        });
+
+        // 字符验证
+
+        jQuery.validator.addMethod("stringCheck", function (value, element) {
+            return this.optional(element) || /^[\w]+$/.test(value);
+        }, "只能包括英文字母、数字和下划线");
+        // 字符验证
+        jQuery.validator.addMethod("stringCheckWithChinese", function (value, element) {
+            return this.optional(element) || /^[\u0391-\uFFE5\w]+$/.test(value);
+        }, "只能包括中文字、英文字母、数字和下划线");
+
+        // 中文字两个字节
+        jQuery.validator.addMethod("byteRangeLength", function (value, element, param) {
+            var length = value.length;
+            for (var i = 0; i < value.length; i++) {
+                if (value.charCodeAt(i) > 127) {
+                    length++;
+                }
+            }
+            return this.optional(element) || (length >= param[0] && length <= param[1]);
+        }, "请确保输入的值在3-15个字节之间(一个中文字算2个字节)");
+
+        // 身份证号码验证
+        jQuery.validator.addMethod("isIdCardNo", function (value, element) {
+            return this.optional(element) || isIdCardNo(value);
+        }, "请正确输入您的身份证号码");
+
+        // 手机号码验证
+        jQuery.validator.addMethod("isMobile", function (value, element) {
+            var length = value.length;
+            var mobile = /^(((13[0-9]{1})|(15[0-9]{1})|(17[0-9]{1})|(18[0-9]{1}))+\d{8})$/;
+            return this.optional(element) || (length == 11 && mobile.test(value));
+        }, "请正确填写您的手机号码");
+
+        // 电话号码验证
+        jQuery.validator.addMethod("isTel", function (value, element) {
+            var tel = /^\d{3,4}-?\d{7,9}$/;    //电话号码格式010-12345678
+            return this.optional(element) || (tel.test(value));
+        }, "请正确填写您的电话号码");
+
+        // 联系电话(手机/电话皆可)验证
+        jQuery.validator.addMethod("isPhone", function (value, element) {
+            var length = value.length;
+            var mobile = /^(((13[0-9]{1})|(15[0-9]{1})|(17[0-9]{1})|(18[0-9]{1}))+\d{8})$/;
+            //var tel = /^\d{3,4}-?\d{7,9}$/;
+            //return this.optional(element) || (tel.test(value) || mobile.test(value));
+            return this.optional(element) || mobile.test(value);
+
+        }, "请正确填写您的联系电话");
+
+        // 邮政编码验证
+        jQuery.validator.addMethod("isZipCode", function (value, element) {
+            var tel = /^[0-9]{6}$/;
+            return this.optional(element) || (tel.test(value));
+        }, "请正确填写您的邮政编码");
+
+
+        $('#submitForm').validate({
+            /* 设置验证规则 */
+            errorElement: "span",
+            rules: {
+                UserName: {
+                    required: true,
+                    stringCheck: true,
+                    byteRangeLength: [4, 16]
+                },
+                NickName: {
+                    required: true,
+                    stringCheckWithChinese: true,
+                    byteRangeLength: [4, 16]
+                },
+                PhoneNumber: {
+                    required: true,
+                    isPhone: true
+                },
+                Email: {
+                    required: true,
+                    email: true
+                },
+                CustomerPwd: {
+                    required: true,
+                    minlength: 6
+                },
+                ConfirmPasswd: {
+                    required: true,
+                    minlength: 6,
+                    equalTo: "#CustomerPwd"
+                }
+            },
+
+            /* 设置错误信息 */
+            messages: {
+                UserName: {
+                    required: "请填写客服账号",
+                    stringCheck: "客服账号只能包括英文字母、数字和下划线",
+                    byteRangeLength: "客服账号必须在4-16个字符之间"
+                },
+                NickName: {
+                    required: "请填写客服昵称",
+                    stringCheckWithChinese: "客服昵称只能包括中文字、英文字母、数字和下划线",
+                    byteRangeLength: "客服昵称必须在4-15个字符之间(一个中文字算2个字符)"
+                },
+                PhoneNumber: {
+                    required: "请填写客服手机",
+                    isPhone: "请填写正确的手机号码"
+                },
+                Email: {
+                    required: "请填写客服邮箱",
+                    email: "请填写正确的客服邮箱"
+                },
+                CustomerPwd: {
+                    required: "请输入客服密码",
+                    minlength: "密码不能少于6个字符"
+                },
+                ConfirmPasswd: {
+                    required: "请输入确认密码",
+                    minlength: "确认密码不能少于6个字符",
+                    equalTo: "请确保输入的密码一致"
+                }
+            },
+
+            /* 设置验证触发事件 */
+            focusInvalid: false,
+            onkeyup: false,
+
+            /* 设置错误信息提示DOM */
+            errorPlacement: function (error, element) {
+                error.appendTo(element.parent());
+            },
+
+        });
+
+
+
+    })
+
+
+    </script>
+}

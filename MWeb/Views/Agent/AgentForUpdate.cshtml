@@ -1,0 +1,651 @@
+﻿@using GL.Data.Model;
+@model GL.Data.Model.AgentInfo
+@{
+    ViewBag.Title = "代理管理 -- 修改";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    AgentInfo Higher = (AgentInfo)ViewData["Higher"];
+    AgentInfo Lower = (AgentInfo)ViewData["Lower"];
+
+}
+
+@if (!ViewBag.Top) {
+
+
+    <article class="col-sm-12 col-md-12 col-lg-7">
+        <div class="jarviswidget" id="wid-id-4" data-widget-editbutton="false" data-widget-custombutton="false">
+            <header>
+                <span class="widget-icon"> <i class="fa fa-edit"></i> </span>
+                <h2>@(Higher.AgentLv)信息</h2>
+            </header>
+            <div>
+                <div class="jarviswidget-editbox">
+                </div>
+                <div class="widget-body no-padding">
+                    <form class="smart-form" action="" method="post">
+                        <fieldset>
+                            <div class="row">
+
+                                <section class="col col-2">
+                                    <label>用户账号 :</label>
+                                    <label class="input">
+                                        <input type="text" disabled="disabled" class="span4" value="@Higher.AgentAccount" />
+                                    </label>
+                                </section>
+                                <section class="col col-2">
+                                    <label>可用额度 :</label>
+                                    <label class="input">
+                                        <input type="text" id="HigherAmountAvailable" disabled="disabled" class="span4" value="@Higher.AmountAvailable.Value.ToString(" 0.")" />
+                                    </label>
+                                </section>
+                                <section class="col col-2">
+                                    <label>收益模式 :</label>
+                                    <label class="input">
+                                        <input type="text" disabled="disabled" class="span4" value="@Higher.RevenueModel" />
+                                    </label>
+                                </section>
+                                <section class="col col-2">
+                                    <label>占成比例 (％):</label>
+                                    <label class="input">
+                                        <input type="text" disabled="disabled" class="span4" value="@Higher.EarningsRatio" />
+                                    </label>
+                                </section>
+                                <section class="col col-2">
+                                    <label>抽水比例 (‰):</label>
+                                    <label class="input">
+                                        <input type="text" disabled="disabled" class="span4" value="@Higher.RebateRate" />
+                                    </label>
+                                </section>
+                            </div>
+
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </article>
+
+}
+
+
+
+
+
+<article class="col-sm-12 col-md-12 col-lg-7">
+    <div class="jarviswidget" id="wid-id-4" data-widget-editbutton="false" data-widget-custombutton="false">
+        <header>
+            <span class="widget-icon"> <i class="fa fa-edit"></i> </span>
+            <h2>修改@(ViewBag.AgentLv)</h2>
+        </header>
+        <div>
+            <div class="jarviswidget-editbox">
+            </div>
+            <div class="widget-body no-padding">
+                <form id="submitForm" class="smart-form" action="" method="post">
+                    <input type="hidden" name="AgentID" value="@Model.AgentID" />
+                    <fieldset>
+                        <div class="row">
+                            <section class="col col-5">
+                                <label>用户账号 :</label>
+                                <label class="label">
+                                    @Model.AgentAccount
+                                </label>
+                            </section>
+                            <section class="col col-5">
+                                <label>用户昵称 :</label>
+                                <label class="input">
+                                    <input type="text" id="AgentName" name="AgentName" class="span4" value="@Model.AgentName" />
+                                </label>
+                            </section>
+                        </div>
+
+                        <div class="row">
+                            <section class="col col-5">
+                                <label>用户密码 :</label>
+                                <label class="input">
+                                    <input type="password" id="AgentPasswd" name="AgentPasswd" class="span4" value="" />
+                                    <b class="tooltip tooltip-bottom-right">Needed to verify your password</b>
+                                </label>
+                            </section>
+                            <section class="col col-5">
+                                <label>确认密码 :</label>
+                                <label class="input">
+                                    <input type="password" id="ConfirmPasswd" name="ConfirmPasswd" class="span4" value="" />
+                                    <b class="tooltip tooltip-bottom-right">Needed to verify your password</b>
+                                </label>
+                            </section>
+                        </div>
+                        <div class="row">
+                            <section class="col col-5">
+                                <label>用户QQ :</label>
+                                <label class="input">
+                                    <input type="text" name="AgentQQ" class="span4" value="@Model.AgentQQ" />
+                                    <b class="tooltip tooltip-bottom-right">Needed to enter the QQ</b>
+                                </label>
+                            </section>
+
+                            <section class="col col-5">
+                                <label>用户手机 :</label>
+                                <label class="input">
+                                    <input type="text" name="AgentTel" class="span4" value="@Model.AgentTel" />
+                                    <b class="tooltip tooltip-bottom-right">Needed to enter the Tel</b>
+                                </label>
+                            </section>
+                        </div>
+                        <div class="row">
+
+                            <section class="col col-5">
+                                <label>用户邮箱 :</label>
+                                <label class="input">
+                                    <input type="text" name="AgentEmail" class="span4" value="@Model.AgentEmail" />
+                                    <b class="tooltip tooltip-bottom-right">Needed to enter the Tel</b>
+                                </label>
+                            </section>
+                         
+                        </div>
+
+
+
+
+
+                        <div class="row">
+                            <section class="col col-1">
+                                <label style="width:100px">安全密码 :</label>
+                                <label class="select">
+                                    <select id="aa" name="aa" style="width:50px">
+                                        <option>-</option>
+                                        <option>0</option>
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                        <option>5</option>
+                                        <option>6</option>
+                                        <option>7</option>
+                                        <option>8</option>
+                                        <option>9</option>
+                                    </select>
+                                </label>
+                            </section>
+                            <section class="col col-1">
+                                <label>&nbsp;</label>
+                                <label class="select">
+                                    <select id="bb" name="bb" style="width:50px">
+                                        <option>-</option>
+                                        <option>0</option>
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                        <option>5</option>
+                                        <option>6</option>
+                                        <option>7</option>
+                                        <option>8</option>
+                                        <option>9</option>
+                                    </select>
+                                </label>
+                            </section>
+                            <section class="col col-1">
+                                <label>&nbsp;</label>
+                                <label class="select">
+                                    <select id="cc" name="cc" style="width:50px">
+                                        <option>-</option>
+                                        <option>0</option>
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                        <option>5</option>
+                                        <option>6</option>
+                                        <option>7</option>
+                                        <option>8</option>
+                                        <option>9</option>
+                                    </select>
+                                </label>
+                            </section>
+                            <section class="col col-1">
+                                <label>&nbsp;</label>
+                                <label class="select">
+                                    <select id="dd" name="dd" style="width:50px">
+                                        <option>-</option>
+                                        <option>0</option>
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                        <option>5</option>
+                                        <option>6</option>
+                                        <option>7</option>
+                                        <option>8</option>
+                                        <option>9</option>
+                                    </select>
+                                </label>
+                            </section>
+                            <input type="hidden" id="DrawingPasswd" name="DrawingPasswd" class="span4" value="@Model.DrawingPasswd" />
+                        </div>
+                        @if (ViewBag.Top)
+                                {
+                            <div class="row">
+                                <section class="col col-2">
+                                    <label>收益模式 :</label>
+                                    <label class="select">
+                                        <select id="RevenueModel" name="RevenueModel" style="width:70px">
+                                            @foreach (var item in Model.RevenueModel.ToSelectListItem())
+                                                    {
+                                                <option>@item.Text</option>
+                                                    }
+                                        </select>
+                                    </label>
+                                </section>
+                                <section class="col col-2">
+                                    <label>占成比例 (％):</label>
+                                    <label class="select">
+                                        <select id="EarningsRatio" name="EarningsRatio" style="width:60px">
+                                            <option>95</option>
+                                            <option>90</option>
+                                            <option>85</option>
+                                            <option>80</option>
+                                            <option>75</option>
+                                            <option>70</option>
+                                            <option>65</option>
+                                            <option>60</option>
+                                            <option>55</option>
+                                            <option>50</option>
+                                            <option>45</option>
+                                            <option>40</option>
+                                            <option>35</option>
+                                            <option>30</option>
+                                            <option>25</option>
+                                            <option>20</option>
+                                            <option>15</option>
+                                            <option>10</option>
+                                            <option>5</option>
+                                        </select>
+                                    </label>
+                                </section>
+                                <section class="col col-2">
+                                    <label>抽水比例 (‰):</label>
+                                    <label class="select">
+                                        <select id="RebateRate" name="RebateRate" style="width:60px">
+                                            <option>20</option>
+                                            <option>18</option>
+                                            <option>16</option>
+                                            <option>14</option>
+                                            <option>12</option>
+                                            <option>10</option>
+                                            <option>8</option>
+                                            <option>6</option>
+                                            <option>4</option>
+                                            <option>2</option>
+                                        </select>
+                                    </label>
+                                </section>
+                            </div>
+
+
+                                }
+                                else
+                                {
+                            <input type="hidden" name="HigherLevel" value="@Higher.AgentID" />
+                            <div class="row">
+                                <section class="col col-2">
+                                    <label>收益模式 :</label>
+                                    <label class="input">
+                                        <input type="text" disabled="disabled" id="RevenueModel" name="RevenueModel" class="span4" value="@Higher.RevenueModel" />
+                                    </label>
+                                </section>
+                                <section class="col col-2">
+                                    <label>占成比例 (％):</label>
+                                    <label class="select">
+                                        <select id="EarningsRatio" name="EarningsRatio" style="width:60px">
+                                            <option>95</option>
+                                            <option>90</option>
+                                            <option>85</option>
+                                            <option>80</option>
+                                            <option>75</option>
+                                            <option>70</option>
+                                            <option>65</option>
+                                            <option>60</option>
+                                            <option>55</option>
+                                            <option>50</option>
+                                            <option>45</option>
+                                            <option>40</option>
+                                            <option>35</option>
+                                            <option>30</option>
+                                            <option>25</option>
+                                            <option>20</option>
+                                            <option>15</option>
+                                            <option>10</option>
+                                            <option>5</option>
+                                        </select>
+                                    </label>
+                                </section>
+                                <section class="col col-2">
+                                    <label>抽水比例 (‰):</label>
+                                    <label class="select">
+                                        <select id="RebateRate" name="RebateRate" style="width:60px">
+                                            <option>20</option>
+                                            <option>18</option>
+                                            <option>16</option>
+                                            <option>14</option>
+                                            <option>12</option>
+                                            <option>10</option>
+                                            <option>8</option>
+                                            <option>6</option>
+                                            <option>4</option>
+                                            <option>2</option>
+                                        </select>
+                                    </label>
+                                </section>
+                            </div>
+                                }
+
+
+                    </fieldset>
+
+
+                    <footer>
+
+                        <input id="btnGoBack" type="button" value="返回列表" onclick="return GoBack(@ViewBag.HigherID)" class=" btn btn-warning" />
+                        <input id="btnKick" type="submit" value="提交" class="btn btn-danger" />
+                    </footer>
+                </form>
+
+            </div>
+            <!-- end widget content -->
+
+        </div>
+        <!-- end widget div -->
+
+    </div>
+
+</article>
+
+
+
+
+
+
+
+
+
+
+
+
+@section scripts{
+    @{Html.RegisterMvcPagerScriptResource();}
+
+
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/select2.min.js"></script>
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+
+    // resets the menu selection upon entry to this page:
+    function resetMenu() {
+        document.gomenu.selector.selectedIndex = 2;
+    }
+    function GoBack(obj) {
+        location.href = "/Agent/Agent?id=" + obj;
+    }
+
+
+    $(function () {
+        //$('#AgentLv').select2({
+        //    allowClear: true,
+        //    minimumResultsForSearch: -1
+        //});
+
+        @if (!ViewBag.Top) {
+        <text>
+        $('#EarningsRatio option').each(function () {
+            if ($(this).val() > @Higher.EarningsRatio ) {
+                $(this).remove();
+            }
+        })
+        $('#RebateRate option').each(function () {
+            if ($(this).val() > @Higher.RebateRate ) {
+                $(this).remove();
+            }
+        })
+        </text>
+        }
+        
+        @if (!ViewBag.Low) {
+        <text>
+        $('#EarningsRatio option').each(function () {
+            if ($(this).val() < @Lower.EarningsRatio) {
+                $(this).remove();
+            }
+        })
+        $('#RebateRate option').each(function () {
+            if ($(this).val() < @Lower.RebateRate) {
+                $(this).remove();
+            }
+        })
+        </text>
+        }
+        
+
+        $('#EarningsRatio option').each(function () {
+            if ($(this).val() == @Model.EarningsRatio) {
+                $(this).attr("selected", true);
+            }
+        })
+        $('#RebateRate option').each(function () {
+            if ($(this).val() == @Model.RebateRate) {
+                $(this).attr("selected", true);
+            }
+        })
+
+
+
+        $("#aa,#bb,#cc,#dd").change(function () {
+            $("#DrawingPasswd").val($("#aa").val().replace("-", "") + $("#bb").val().replace("-", "") + $("#cc").val().replace("-", "") + $("#dd").val().replace("-", ""));
+        })
+
+
+
+
+        $.validator.setDefaults({
+            submitHandler: function (form) {
+
+                //form.submit();
+                $.ajax({
+                    url: "/Agent/AgentForUpdate/",
+                    type: "POST",
+                    dataType: "JSON",
+                    data: $("#submitForm").serialize(),
+                    success: function (data) {
+                        switch (data.result) {
+                            case 0:
+                                @if (!ViewBag.Top)
+                                {<text>
+                                location.href = "/Agent/Agent?id=@Higher.AgentID";
+                                </text>}
+                                else
+                                {<text>
+                                location.href = "/Agent/Agent";
+                                </text>}
+                                break;
+                            case 200:
+                                alert("值不能为空，请稍后再试");
+                                break;
+                            case 204:
+                                alert("账号已存在，请重新添加");
+                                break;
+                            case 205:
+                                alert("添加失败，账号只能由字母和数字组成");
+                                break;
+                            case 10202:
+                                alert("添加失败，分成比例超出允许范围");
+                                break;
+                            default:
+                                alert('添加失败,请与管理员联系');
+                                break;
+                        }
+                    }
+                }).fail(function (xhr, textStatus, err) {
+                    alert('Error: ' + err);
+                });
+                return false;
+            }
+        });
+
+        // 字符验证
+        jQuery.validator.addMethod("stringCheck", function (value, element) {
+            return this.optional(element) || /^[\w]+$/.test(value);
+        }, "只能包括英文字母、数字和下划线");
+        // 字符验证
+        jQuery.validator.addMethod("stringCheckWithChinese", function (value, element) {
+            return this.optional(element) || /^[\u0391-\uFFE5\w]+$/.test(value);
+        }, "只能包括中文字、英文字母、数字和下划线");
+
+        // 中文字两个字节
+        jQuery.validator.addMethod("byteRangeLength", function (value, element, param) {
+            var length = value.length;
+            for (var i = 0; i < value.length; i++) {
+                if (value.charCodeAt(i) > 127) {
+                    length++;
+                }
+            }
+            return this.optional(element) || (length >= param[0] && length <= param[1]);
+        }, "请确保输入的值在3-15个字节之间(一个中文字算2个字节)");
+
+        // 身份证号码验证
+        jQuery.validator.addMethod("isIdCardNo", function (value, element) {
+            return this.optional(element) || isIdCardNo(value);
+        }, "请正确输入您的身份证号码");
+
+        // 手机号码验证
+        jQuery.validator.addMethod("isMobile", function (value, element) {
+            var length = value.length;
+            var mobile = /^(((13[0-9]{1})|(15[0-9]{1})|(17[0-9]{1})|(18[0-9]{1}))+\d{8})$/;
+            return this.optional(element) || (length == 11 && mobile.test(value));
+        }, "请正确填写您的手机号码");
+
+        // 电话号码验证
+        jQuery.validator.addMethod("isTel", function (value, element) {
+            var tel = /^\d{3,4}-?\d{7,9}$/;    //电话号码格式010-12345678
+            return this.optional(element) || (tel.test(value));
+        }, "请正确填写您的电话号码");
+
+        // 联系电话(手机/电话皆可)验证
+        jQuery.validator.addMethod("isPhone", function (value, element) {
+            var length = value.length;
+            var mobile = /^(((13[0-9]{1})|(15[0-9]{1})|(17[0-9]{1})|(18[0-9]{1}))+\d{8})$/;
+            //var tel = /^\d{3,4}-?\d{7,9}$/;
+            //return this.optional(element) || (tel.test(value) || mobile.test(value));
+            return this.optional(element) || mobile.test(value);
+
+        }, "请正确填写您的联系电话");
+
+        // 邮政编码验证
+        jQuery.validator.addMethod("isDrawingPasswd", function (value, element) {
+            var tel = /^[0-9]{4}$/;
+            return this.optional(element) || (tel.test(value));
+        }, "请正确填写您的安全密码");
+
+        $('#submitForm').validate({
+            /* 设置验证规则 */
+            ignore: '',
+            errorElement: "span",
+            rules: {
+                AgentAccount: {
+                    required: true,
+                    stringCheck: true,
+                    byteRangeLength: [4, 16]
+                },
+                AgentName: {
+                    required: true,
+                    stringCheckWithChinese: true,
+                    byteRangeLength: [4, 16]
+                },
+                AgentPasswd: {
+                    minlength: 6
+                },
+                ConfirmPasswd: {
+                    minlength: 6,
+                    equalTo: "#AgentPasswd"
+                },
+                AgentQQ: {
+                    required: true,
+                    digits: true,
+                    minlength: 5
+                },
+                AgentTel: {
+                    required: true,
+                    isMobile: true
+                },
+                AgentEmail: {
+                    required: true,
+                    email: true
+                },
+                DrawingPasswd: {
+                    isDrawingPasswd: true
+                },
+                InitialAmount: {
+                    required: true,
+                    digits: true
+                }
+            },
+
+            /* 设置错误信息 */
+            messages: {
+                AgentAccount: {
+                    required: "请填写用户账号",
+                    stringCheck: "用户账号只能包括英文字母、数字和下划线",
+                    byteRangeLength: "用户账号必须在4-16个字符之间"
+                },
+                AgentName: {
+                    required: "请填写用户昵称",
+                    stringCheckWithChinese: "用户昵称只能包括中文字、英文字母、数字和下划线",
+                    byteRangeLength: "用户昵称必须在4-15个字符之间(一个中文字算2个字符)"
+                },
+                AgentPasswd: {
+                    minlength: "密码不能少于6个字符"
+                },
+                ConfirmPasswd: {
+                    minlength: "确认密码不能少于6个字符",
+                    equalTo: "请确保输入的密码一致"
+                },
+                AgentQQ: {
+                    required: "请输入用户QQ",
+                    digits: "用户QQ必须由数字组成",
+                    minlength: "用户QQ不能少于5个数字"
+                },
+                AgentTel: {
+                    required: "请输入您的联系电话",
+                    isMobile: "请输入一个有效的联系电话"
+                },
+                AgentEmail: {
+                    required: "请输入一个Email地址",
+                    email: "请输入一个有效的Email地址"
+                },
+                DrawingPasswd: {
+                    isDrawingPasswd: "请选择安全密码"
+                },
+                InitialAmount: {
+                    required: "请输入初始金额",
+                    digits: "初始金额必须为整数,并且大于等于0"
+                }
+            },
+
+            /* 设置验证触发事件 */
+            focusInvalid: false,
+            onkeyup: false,
+
+            /* 设置错误信息提示DOM */
+            errorPlacement: function (error, element) {
+                error.appendTo(element.parent());
+            },
+
+        });
+
+
+
+    })
+
+
+    </script>
+}

@@ -1,0 +1,146 @@
+﻿@model object
+@{
+
+    ViewBag.Title = "渠道管理";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    //ViewBag.PageId = "extr-page";
+    ViewBag.PageClass = "fixed-header fixed-page-footer";
+
+
+}
+
+<!-- MAIN CONTENT -->
+<div id="content">
+    <!-- widget grid -->
+    <section id="widget-grid" class="">
+        <!-- row -->
+        <div class="row">
+            <!-- NEW WIDGET START -->
+            <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <!-- Widget ID (each widget will need unique ID)-->
+                <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-0" data-widget-editbutton="false">
+                    <!-- widget options:
+                    usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+
+                    data-widget-colorbutton="false"
+                    data-widget-editbutton="false"
+                    data-widget-togglebutton="false"
+                    data-widget-deletebutton="false"
+                    data-widget-fullscreenbutton="false"
+                    data-widget-custombutton="false"
+                    data-widget-collapsed="true"
+                    data-widget-sortable="false"
+
+                    -->
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                        <h2>@(ViewBag.AgentLv)列表</h2>
+                    </header>
+                    <!-- widget div-->
+                    <div>
+                        <!-- widget edit box -->
+                        <div class="jarviswidget-editbox">
+                            <!-- This area used as dropdown edit box -->
+                        </div>
+                        <!-- end widget edit box -->
+                        <!-- widget content -->
+                        <div class="widget-body no-padding" id="box">
+                            @Html.Partial("AgentList_PageList", Model)
+                        </div>
+                        <!-- end widget content -->
+                    </div>
+                    <!-- end widget div -->
+                </div>
+                <!-- end widget -->
+            </article>
+            <!-- WIDGET END -->
+        </div>
+        <!-- end row -->
+        <!-- end row -->
+    </section>
+    <!-- end widget grid -->
+</div>
+<!-- END MAIN CONTENT -->
+
+
+@section pagespecific {
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+        })
+
+        function errFunc(res) {
+            alert(res["responseText"]);
+        }
+        function successPageFun() {
+
+        }
+        function RoleUser(obj) {
+            location.href = "/Agent/AgentForRole?id=" + obj;
+        }
+
+        function AddAgent(obj) {
+            location.href = "/Agent/AgentForAdd?id=" + obj;
+        }
+
+        function GoBack(obj) {
+            location.href = "/Agent/AgentList?id=" + obj;
+        }
+
+
+        function AddScoresUser(obj)
+        {
+            location.href = "/Agent/AgentForUpperScores?id=" + obj;
+        }
+        function SubScoresUser(obj) {
+            location.href = "/Agent/AgentForLowerScores?id=" + obj;
+        }
+        function UpdateUser(obj) {
+            //_this = $(obj).parent().parent();
+            //var _UserID = $(_this).find("td").eq(0).html();
+            location.href = "/Agent/AgentForUpdate?id=" + obj;
+        }
+
+        function ConfirmDelUser(obj) {
+            if (confirm("你确定要删除此记录吗？")) {
+                //_this = $(obj).parent().parent();
+                //var _UserID = $(_this).find("td").eq(0).html();
+
+                $.ajax({
+                    url: "/Agent/AgentForDelete/",
+                    type: "POST",
+                    dataType: "JSON",
+                    data: { "AgentID": obj },
+                    success: function (data) {
+                        switch (data.result) {
+                            case 0:
+                                location.reload();
+                                break;
+                            case 1:
+                                alert("删除失败，请稍后再试");
+                                break;
+                            case 10200:
+                                alert("账号的下级代理必须为空，请清空账号或转移账号");
+                                break;
+                            case 10201:
+                                alert("账号的下级会员必须为空，请清空账号或转移账号");
+                                break;
+                            default:
+                                alert('未知错误');
+                                break;
+                        }
+                    }
+                }).fail(function (xhr, textStatus, err) {
+                    alert('Error: ' + err);
+                });
+            }
+            else {
+                return false;
+            }
+
+            return false;
+        }
+
+    </script>
+}

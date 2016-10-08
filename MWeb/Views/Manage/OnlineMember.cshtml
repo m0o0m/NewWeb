@@ -1,0 +1,474 @@
+﻿@using GL.Data.View;
+
+@{
+    ViewBag.Title = "在线玩家 -- 列表";
+    Layout = null;
+    //if (Request.IsAjaxRequest())
+    //{
+    //    Layout = null;
+    //}
+    //else
+    //{
+    //    Layout = "~/Views/Shared/_Layout.cshtml";
+    //}
+}
+
+预留页面
+
+@*<div id="content">
+    <form id="comment-form" class="smart-form" novalidate="novalidate" method="post">
+        <div class="row">
+
+            <section class="col col-1">
+                <label class="select">
+                    @Html.DropDownList("seachtype", new List<SelectListItem> {
+                    new SelectListItem{ Text = "会员ID", Value = "0", Selected = object.Equals(ViewData["seachtype"], 0) }
+                })<i></i>
+                </label>
+</section>
+
+
+            <section class="col col-1.2">
+              
+                <label class="input">
+        
+                    @Html.TextBox("Value", ViewData["Value"], new { @class = "span2", style = "border-radius:4px" })
+                </label>
+            </section>
+
+        
+
+
+            <section class="col col-1">
+                <button type="submit" class="btn btn-success btn-sm">查询</button>
+            </section>
+
+        </div>
+    </form>
+
+
+
+
+    <section id="widget-grid" class="">
+        <div class="row">
+            <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-0" data-widget-editbutton="false" data-widget-colorbutton="false"
+                     data-widget-togglebutton="false"
+                     data-widget-deletebutton="false"
+                     data-widget-fullscreenbutton="false"
+                     data-widget-custombutton="false"
+                     data-widget-collapsed="false"
+                     data-widget-sortable="false">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                        <h2>玩家在线列表</h2>
+                    </header>
+                    <!-- widget div-->
+                    <div>
+                        <!-- widget edit box -->
+                        <div class="jarviswidget-editbox">
+                            <!-- This area used as dropdown edit box -->
+                        </div>
+                        <!-- end widget edit box -->
+                        <!-- widget content -->
+                        <div class="widget-body no-padding">
+                            <div class="table-responsive">
+                                <table class="table table-bordered">
+                                    <tbody>
+                                        <tr>
+                                            <th>在线总人数 @ViewBag.AllLineCount</th>
+                                            <td></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <table class="table table-bordered">
+                                    <thead>
+
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>昵称</th>
+                                            <th>IP</th>
+                                            <th>登录时间</th>
+                                            <th>上次活动时间</th>
+                                            <th>所在位置</th>
+                                            <th>在线状态</th>
+                                            <th>基本操作</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @if (Model.Count == 0)
+                            {
+                                            <tr class="gradeX">
+                                                <td class="colspan" align="center" colspan="0">
+                                                    没有找到相关记录！
+                                                </td>
+                                            </tr>
+                            }
+                                        @foreach (OMModel m in Model)
+                            {
+                                            <tr class="gradeA">
+                                                <td>@m.dwUserID</td>
+                                                <td>@m.strAccount</td>
+                                                <td>@m.strIP</td>
+                                                <td>@m.strLoginTime</td>
+                                                <td>@m.strActiveTime</td>
+                                                <td>@m.strGame</td>
+                                                <td>@m.online</td>
+
+
+                                                <td style="text-align:center">
+                                                    <input id="btnKick" type="button" value="踢玩家下线" class="btn btn-danger btn-mini" onclick="return btnKick(this);" />
+                                                    |<input id="btnSearch" type="button" value="查询玩家信息" class="btn btn-primary btn-mini" onclick="return btnSearch(this)" />
+                                                    |<input id="btnFreeze" type="button" value="封号玩家账号" class="btn btn-warning btn-mini" onclick="return btnFreeze(this)" />
+                                                    |<input id="btnunFreeze" type="button" value="解封玩家账号" class="btn btn-info btn-mini" onclick="return btnunFreeze(this)" />
+                                                    |<input id="btnBan" type="button" value="玩家禁言" class="btn btn-info btn-mini" onclick="return btnBan(this)" />
+                                                    |<input id="btnunBan" type="button" value="解除禁言" class="btn btn-info btn-mini" onclick="return btnunBan(this)" />
+                                                    |<input id="btnRecord" type="button" value="玩家操作记录" class="btn btn-inverse btn-mini" onclick="return btnRecord(this)" />
+                                                    |<input id="btnIP" type="button" value="封IP" class="btn btn-inverse btn-mini" onclick="return btnIP(this)" />
+                                                    |<input id="btnunIP" type="button" value="解封IP" class="btn btn-inverse btn-mini" onclick="return btnunIP(this)" />
+                                                </td>
+                                            </tr>
+
+                            }
+                                    </tbody>
+                                </table>
+                            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                        </div>
+                        <!-- end widget content -->
+                    </div>
+                    <!-- end widget div -->
+                </div>
+                <!-- end widget -->
+
+            </article>
+        </div>
+    </section>
+
+
+
+
+
+</div>*@
+
+
+
+
+
+
+    <!--breadcrumbs
+
+
+    section scripts{-->
+
+<!--{Html.RegisterMvcPagerScriptResource();}
+        <script src="/js/bootstrap.min.js"></script>
+        <script src="/js/select2.min.js"></script>
+
+        <script src="/js/matrix.tables.js"></script>
+
+        <script type="text/javascript">
+
+
+            // resets the menu selection upon entry to this page:
+            function resetMenu() {
+                document.gomenu.selector.selectedIndex = 2;
+            }
+            function btnKick(obj) {
+                _this = $(obj).parent().parent();
+                if (confirm('确定将玩家【' + $(_this).find("td").eq(1).html() + '】踢下线？')) {
+                    var _UserID = $(_this).find("td").eq(0).html();
+                    $.ajax({
+                        url: "/api/FM/",
+                        type: "POST",
+                        dataType: "JSON",
+                        data: { "dwUserID": _UserID },
+                        success: function (data) {
+                            switch (data.result) {
+                                case 0:
+                                    alert('已将玩家【' + $(_this).find("td").eq(1).html() + '】踢下线');
+                                    location.reload();
+                                    break;
+                                case 1:
+                                    alert("踢除失败，请稍后再试");
+                                    break;
+                                case 2:
+                                    alert("服务器未启动，请稍后再试");
+                                    break;
+                                default:
+                                    alert('未知错误');
+                                    break;
+                            }
+                        }
+                    }).fail(function (xhr, textStatus, err) {
+                        alert('Error: ' + err);
+                    });
+                } else {
+                    return false;
+                }
+                return false;
+            }
+
+            function btnFreeze(obj) {
+                _this = $(obj).parent().parent();
+                if (confirm('确定将玩家【' + $(_this).find("td").eq(1).html() + '】的账号封号？')) {
+                    var _UserID = $(_this).find("td").eq(0).html();
+                    $.ajax({
+                        url: "/api/FM/",
+                        type: "Put",
+                        dataType: "JSON",
+                        data: { "dwUserID": _UserID, "strAccount": "true" },
+                        success: function (data) {
+                            switch (data.result) {
+                                case 0:
+                                    alert('已将玩家【' + $(_this).find("td").eq(1).html() + '】的账号封号');
+                                    break;
+                                case 1:
+                                    alert("封号失败，请稍后再试");
+                                    break;
+                                case 2:
+                                    alert("服务器未启动，请稍后再试");
+                                    break;
+                                default:
+                                    alert('未知错误');
+                                    break;
+                            }
+                        }
+                    }).fail(function (xhr, textStatus, err) {
+                        alert('Error: ' + err);
+                    });
+
+                } else {
+                    return false;
+                }
+                return false;
+            }
+            function btnunFreeze(obj) {
+                _this = $(obj).parent().parent();
+                if (confirm('确定将玩家【' + $(_this).find("td").eq(1).html() + '】的账号解封？')) {
+                    var _UserID = $(_this).find("td").eq(0).html();
+                    $.ajax({
+                        url: "/api/FM/",
+                        type: "PUT",
+                        dataType: "JSON",
+                        data: { "dwUserID": _UserID, "strAccount": "false" },
+                        success: function (data) {
+                            switch (data.result) {
+                                case 0:
+                                    alert('已将玩家【' + $(_this).find("td").eq(1).html() + '】的账号解封');
+                                    break;
+                                case 1:
+                                    alert("解封失败，请稍后再试");
+                                    break;
+                                case 2:
+                                    alert("服务器未启动，请稍后再试");
+                                    break;
+                                default:
+                                    alert('未知错误');
+                                    break;
+                            }
+                        }
+                    }).fail(function (xhr, textStatus, err) {
+                        alert('Error: ' + err);
+                    });
+
+                } else {
+                    return false;
+                }
+                return false;
+            }
+            function btnBan(obj) {
+                _this = $(obj).parent().parent();
+                if (confirm('确定将玩家【' + $(_this).find("td").eq(1).html() + '】禁言？')) {
+                    var _UserID = $(_this).find("td").eq(0).html();
+                    $.ajax({
+                        url: "/api/FM/",
+                        type: "Delete",
+                        dataType: "JSON",
+                        data: { "dwUserID": _UserID, "strAccount": "true" },
+                        success: function (data) {
+                            switch (data.result) {
+                                case 0:
+                                    alert('已将玩家【' + $(_this).find("td").eq(1).html() + '】禁言');
+                                    break;
+                                case 1:
+                                    alert("禁言失败，请稍后再试");
+                                    break;
+                                case 2:
+                                    alert("服务器未启动，请稍后再试");
+                                    break;
+                                default:
+                                    alert('未知错误');
+                                    break;
+                            }
+                        }
+                    }).fail(function (xhr, textStatus, err) {
+                        alert('Error: ' + err);
+                    });
+
+                } else {
+                    return false;
+                }
+                return false;
+            }
+
+            function btnunBan(obj) {
+                _this = $(obj).parent().parent();
+                if (confirm('确定将玩家【' + $(_this).find("td").eq(1).html() + '】解除禁言？')) {
+                    var _UserID = $(_this).find("td").eq(0).html();
+                    $.ajax({
+                        url: "/api/FM/",
+                        type: "Delete",
+                        dataType: "JSON",
+                        data: { "dwUserID": _UserID, "strAccount": "false" },
+                        success: function (data) {
+                            switch (data.result) {
+                                case 0:
+                                    alert('已将玩家【' + $(_this).find("td").eq(1).html() + '】解除禁言');
+                                    break;
+                                case 1:
+                                    alert("解除禁言失败，请稍后再试");
+                                    break;
+                                case 2:
+                                    alert("服务器未启动，请稍后再试");
+                                    break;
+                                default:
+                                    alert('未知错误');
+                                    break;
+                            }
+                        }
+                    }).fail(function (xhr, textStatus, err) {
+                        alert('Error: ' + err);
+                    });
+
+                } else {
+                    return false;
+                }
+                return false;
+            }
+
+            function btnIP(obj) {
+                _this = $(obj).parent().parent();
+                if (confirm('确定将IP【' + $(_this).find("td").eq(2).html() + '】封禁？')) {
+                    var _UserID = $(_this).find("td").eq(2).html();
+                    $.ajax({
+                        url: "/api/FM2/",
+                        type: "Post",
+                        dataType: "JSON",
+                        data: { "strIP": _UserID, "strAccount": "true" },
+                        success: function (data) {
+                            switch (data.result) {
+                                case 0:
+                                    alert('已将IP【' + $(_this).find("td").eq(2).html() + '】封禁');
+                                    break;
+                                case 1:
+                                    alert("封IP失败，请稍后再试");
+                                    break;
+                                case 2:
+                                    alert("服务器未启动，请稍后再试");
+                                    break;
+                                default:
+                                    alert('未知错误');
+                                    break;
+                            }
+                        }
+                    }).fail(function (xhr, textStatus, err) {
+                        alert('Error: ' + err);
+                    });
+
+                } else {
+                    return false;
+                }
+                return false;
+            }
+
+            function btnunIP(obj) {
+                _this = $(obj).parent().parent();
+                if (confirm('确定将IP【' + $(_this).find("td").eq(2).html() + '】解封？')) {
+                    var _UserID = $(_this).find("td").eq(2).html();
+                    $.ajax({
+                        url: "/api/FM2/",
+                        type: "Post",
+                        dataType: "JSON",
+                        data: { "strIP": _UserID, "strAccount": "false" },
+                        success: function (data) {
+                            switch (data.result) {
+                                case 0:
+                                    alert('已将IP【' + $(_this).find("td").eq(2).html() + '】解封');
+                                    break;
+                                case 1:
+                                    alert("解封IP失败，请稍后再试");
+                                    break;
+                                case 2:
+                                    alert("服务器未启动，请稍后再试");
+                                    break;
+                                default:
+                                    alert('未知错误');
+                                    break;
+                            }
+                        }
+                    }).fail(function (xhr, textStatus, err) {
+                        alert('Error: ' + err);
+                    });
+
+                } else {
+                    return false;
+                }
+                return false;
+            }
+
+
+            function btnSearch(obj) {
+                _this = $(obj).parent().parent();
+                var _UserAccount = $(_this).find("td").eq(1).html();
+                window.location = "/Manage/SearchMember/?value=" + _UserAccount
+                return false;
+            }
+
+            function btnRecord(obj) {
+                _this = $(obj).parent().parent();
+                var _UserID = $(_this).find("td").eq(0).html();
+                window.location = "/Manage/OperationRecord/?dwUserID=" + _UserID
+                return false;
+            }
+
+
+            function ConfirmDelUser() {
+                return confirm("你确认要执行此操作吗？");
+            }
+            function errFunc(res) {
+                alert(res["responseText"]);
+            }
+            function successPageFun() {
+
+            }
+
+        </script>
+      
+     
+
+    }
+       -->

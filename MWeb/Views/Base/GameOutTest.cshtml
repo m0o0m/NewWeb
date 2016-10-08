@@ -1,0 +1,290 @@
+﻿
+@using GL.Data.Model
+@model BaseDataView
+@{
+    ViewBag.Title = "游戏产出消耗";
+    ViewBag.Format = "yyyy-MM-dd";
+
+    switch (Model.Groupby)
+    {
+        case groupby.按日:
+            break;
+        case groupby.按月:
+            ViewBag.Format = "yyyy-MM";
+            break;
+    }
+
+
+    List<GameOutput> bdl = (List<GameOutput>)Model.BaseDataList;
+
+}
+<style type="text/css">
+    /* 所有class为menu的div中的ul中的li样式 */
+    .smart-form .radio, .smart-form .checkbox {
+        margin-bottom: 4px;
+        padding-left: 0px;
+        font-size: 15px;
+        line-height: 25px;
+        color: #404040;
+        cursor: pointer;
+        font-size: 13px;
+    }
+
+    .tree li span {
+        -moz-border-radius: 5px;
+        -webkit-border-radius: 5px;
+        border: 0px dotted #999;
+        border-radius: 1px;
+        display: inline-block;
+        padding: 1px 1px;
+        text-decoration: none;
+    }
+</style>
+<div id="content">
+
+    <!-- Widget ID (each widget will need unique ID)-->
+
+
+
+
+    <form id="comment-form" class="smart-form" novalidate="novalidate">
+        <div class="row">
+            @*<section class="col col-1" style="width:150px">
+                    <label class="select">
+                        @Html.DropDownList("Channels", null, new { @class = "form-control input-sm" })<i></i>
+                    </label>
+                </section>*@
+
+            <section class="col col-12" style="width:210px">
+                <label class="select">
+
+
+                    @*@Html.DropDownList("Channels", null, new { @class = "form-control input-sm" })*@
+
+                    @Html.GetAllAgentGroupList("Channels", Model.Channels)
+
+
+
+                    <i></i>
+                </label>
+            </section>
+
+
+            <section class="col col-1.2">
+                <label class="input">
+                    <i class="icon-append fa fa-calendar"></i>
+                    @Html.TextBoxFor(m => m.StartDate, new Dictionary<string, object>() {
+                           { "class", "form-control datepicker" },
+                           { "data-dateformat", "yy-mm-dd 00:00:00" }
+                       })
+                </label>
+            </section>
+
+
+
+            <section class="col col-1.2">
+                <label class="input">
+                    <i class="icon-append fa fa-calendar"></i>
+                    @Html.TextBoxFor(m => m.ExpirationDate, new Dictionary<string, object>() {
+                           { "class", "form-control datepicker" },
+                           { "data-dateformat", "yy-mm-dd 00:00:00" }
+                       })
+                </label>
+            </section>
+            <section class="col col-1">
+                <label class="select">
+                    @Html.DropDownList("groupby") <i></i>
+                </label>
+            </section>
+
+
+            <section class="col col-1">
+                <button type="submit" class="btn btn-success btn-sm">查询</button>
+            </section>
+
+        </div>
+    </form>
+   
+
+   
+
+
+    <section id="widget-grid" class="">
+        <div class="row">
+            <article class="col-xs-12 col-sm-12 col-md-12 col-lg-10">
+                <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-0" data-widget-editbutton="false" data-widget-colorbutton="false"
+                     data-widget-togglebutton="false"
+                     data-widget-deletebutton="false"
+                     data-widget-fullscreenbutton="false"
+                     data-widget-custombutton="false"
+                     data-widget-collapsed="false"
+                     data-widget-sortable="false">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                        <h2>游戏产出消耗</h2>
+                    </header>
+                    <!-- widget div-->
+                    <div>
+                        <!-- widget edit box -->
+                        <div class="jarviswidget-editbox">
+                            <!-- This area used as dropdown edit box -->
+                        </div>
+                        <!-- end widget edit box -->
+                        <!-- widget content -->
+                        <div class="widget-body no-padding" style="min-height: 70px;">
+                            <div class="table-responsive">
+                                <table class="table table-bordered">
+                                    <thead>
+
+                                        <tr>
+                                            <th>日期 &nbsp;<span id="refresh" class="" data-title="refresh" rel="tooltip" data-placement="bottom" data-original-title="<i class=''></i> 年月日的时间显示 " data-html="true" data-reset-msg="Would you like to RESET all your saved widgets and clear LocalStorage?"><i class="fa fa-question "></i></span> </span>
+                                                </th>
+                                            <th>系统总游戏币 &nbsp;<span id="refresh" class="" data-title="refresh" rel="tooltip" data-placement="bottom" data-original-title="<i class=''></i> 包含所有用户携带、保险箱、水族馆、外部彩池、游戏携带的总额，每五分钟更新！" data-html="true" data-reset-msg="Would you like to RESET all your saved widgets and clear LocalStorage?"><i class="fa fa-question "></i></span> </span></th>
+                                            <th>当日产出游戏币 &nbsp;<span id="refresh" class="" data-title="refresh" rel="tooltip" data-placement="bottom" data-original-title="<i class=''></i> 当日游戏中产出的游戏币" data-html="true" data-reset-msg="Would you like to RESET all your saved widgets and clear LocalStorage?"><i class="fa fa-question "></i></span> </span></th>
+                                            <th>当日消耗游戏币 &nbsp;<span id="refresh" class="" data-title="refresh" rel="tooltip" data-placement="bottom" data-original-title="<i class=''></i> 当日游戏中消耗的游戏币" data-html="true" data-reset-msg="Would you like to RESET all your saved widgets and clear LocalStorage?"><i class="fa fa-question "></i></span> </span></th>
+                                            <th>水族馆养鱼总额 &nbsp;<span id="refresh" class="" data-title="refresh" rel="tooltip" data-placement="bottom" data-original-title="<i class=''></i> 开心水族馆鱼缸中鱼的总额" data-html="true" data-reset-msg="Would you like to RESET all your saved widgets and clear LocalStorage?"><i class="fa fa-question "></i></span> </span></th>
+                                            <th>外部彩池 &nbsp;<span id="refresh" class="" data-title="refresh" rel="tooltip" data-placement="bottom" data-original-title="<i class=''></i> 百人街机游戏外部彩池总金额，不区分渠道" data-html="true" data-reset-msg="Would you like to RESET all your saved widgets and clear LocalStorage?"><i class="fa fa-question "></i></span> </span></th>
+                                            <th>游戏携带金额 &nbsp;<span id="refresh" class="" data-title="refresh" rel="tooltip" data-placement="bottom" data-original-title="<i class=''></i> 德州扑克买入、概率游戏申请上庄，下注，坐庄金额" data-html="true" data-reset-msg="Would you like to RESET all your saved widgets and clear LocalStorage?"><i class="fa fa-question "></i></span> </span></th>
+                                            <th>德州007赢利 &nbsp;<span id="refresh" class="" data-title="refresh" rel="tooltip" data-placement="bottom" data-original-title="<i class=''></i> 德州扑克007的赢利总额，不区分渠道" data-html="true" data-reset-msg="Would you like to RESET all your saved widgets and clear LocalStorage?"><i class="fa fa-question "></i></span> </span></th>
+                                            @*<th>充值游戏币 &nbsp;<span id="refresh" class="" data-title="refresh" rel="tooltip" data-placement="bottom" data-original-title="<i class=''></i> 充值游戏币" data-html="true" data-reset-msg="Would you like to RESET all your saved widgets and clear LocalStorage?"><i class="fa fa-question "></i></span> </span></th>*@
+                                            <th>系统总五币 &nbsp;<span id="refresh" class="" data-title="refresh" rel="tooltip" data-placement="bottom" data-original-title="<i class=''></i> 统计所有用户携带五币" data-html="true" data-reset-msg="Would you like to RESET all your saved widgets and clear LocalStorage?"><i class="fa fa-question "></i></span> </span></th>
+                                            <th>当日产出五币 &nbsp;<span id="refresh" class="" data-title="refresh" rel="tooltip" data-placement="bottom" data-original-title="<i class=''></i> 当日游戏中产出的五币" data-html="true" data-reset-msg="Would you like to RESET all your saved widgets and clear LocalStorage?"><i class="fa fa-question "></i></span> </span></th>
+                                            <th>当日消耗五币 &nbsp;<span id="refresh" class="" data-title="refresh" rel="tooltip" data-placement="bottom" data-original-title="<i class=''></i> 当日游戏中消耗的五币" data-html="true" data-reset-msg="Would you like to RESET all your saved widgets and clear LocalStorage?"><i class="fa fa-question "></i></span> </span></th>
+                                            <th>充值五币 &nbsp;<span id="refresh" class="" data-title="refresh" rel="tooltip" data-placement="bottom" data-original-title="<i class=''></i> 当日充值五币的总额" data-html="true" data-reset-msg="Would you like to RESET all your saved widgets and clear LocalStorage?"><i class="fa fa-question "></i></span> </span></th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @if (bdl.Count == 0)
+                                        {
+                                            <tr>
+                                                <td class="colspan" align="center" colspan="0">
+                                                    没有找到相关记录！
+                                                </td>
+                                            </tr>
+                                        }
+                                        @foreach (var item in bdl)
+                                        {
+                                            <tr>
+                                                <td>@item.date.ToString(ViewBag.Format)</td>
+                                                <td>@{var all = item.systemBargainingChip + item.chipPot + item.ChipGame + item.systemFishChip;}@all.ToString("#,0.")</td>
+                                                <td>@item.ChipOutput.ToString("#,0.")</td>
+                                                <td>@item.ChipConsume.ToString("#,0.")</td>
+                                                <td>@item.systemFishChip.ToString("#,0.")</td>
+                                                @*<td>@item.ChipRecharge.ToString("#,0.")</td>*@
+                                                <td>@item.chipPot.ToString("#,0.")</td>
+                                                <td>@item.ChipGame.ToString("#,0.")</td>
+                                                <td>@item.chip007.ToString("#,0.")</td>
+                                                <td>@item.systemDiamond.ToString("#,0.")</td>
+                                                <td>@item.DiamondOutput.ToString("#,0.")</td>
+                                                <td>@item.DiamondConsume.ToString("#,0.")</td>
+                                                <td>@item.DiamondRecharge.ToString("#,0.")</td>
+                                                <td><input id="btnView" type="button" value="查看详情" class="btn btn-danger btn-mini" onclick="return btnView(this)" /></td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <!-- end widget content -->
+                    </div>
+                    <!-- end widget div -->
+                </div>
+                <!-- end widget -->
+
+            </article>
+        </div>
+    </section>
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+
+<script src="~/js/SmartAdmin/js/libs/jquery-2.0.2.min.js"></script>
+<script type="text/javascript">
+    function btnView(obj) {
+        _this = $(obj).parent().parent();
+
+        //alert(_this.find("td").eq(0).html());
+
+        //return false;
+        var _Date = _this.find("td").eq(0).html();
+        $.ajax({
+            url: "/base/GameOutTestDetail/",
+            type: "POST",
+            dataType: "html",
+            data: { "StartDate": _Date },
+            success: function (data) {
+                $(".GameOutputDetail").remove();
+                $("#content").append(data);
+                treehid();
+            }
+        }).fail(function (xhr, textStatus, err) {
+            alert('Error: ' + err);
+        });
+        return false;
+    }
+
+
+	// DO NOT REMOVE : GLOBAL FUNCTIONS!
+
+
+	// PAGE RELATED SCRIPTS
+    $(function () {
+        // PAGE RELATED SCRIPTS
+
+        $('.tree > ul').attr('role', 'tree').find('ul').attr('role', 'group');
+        $('.tree').find('li:has(ul)').addClass('parent_li').attr('role', 'treeitem').find(' > span').attr('title', 'Collapse this branch').on('click', function (e) {
+            var children = $(this).parent('li.parent_li').find(' > ul > li');
+            if (children.is(':visible')) {
+                children.hide('fast');
+                $(this).attr('title', 'Expand this branch').find(' > i').removeClass().addClass('fa fa-lg fa-plus-circle');
+            } else {
+                children.show('fast');
+                $(this).attr('title', 'Collapse this branch').find(' > i').removeClass().addClass('fa fa-lg fa-minus-circle');
+            }
+            e.stopPropagation();
+        });
+
+    })
+
+    function treehid() {
+        $('.tree > ul').attr('role', 'tree').find('ul').attr('role', 'group');
+        $('.tree').find('li:has(ul)').addClass('parent_li').attr('role', 'treeitem').find(' > span').attr('title', 'Collapse this branch').on('click', function (e) {
+            var children = $(this).parent('li.parent_li').find(' > ul > li');
+            if (children.is(':visible')) {
+                children.hide('fast');
+                $(this).attr('title', 'Expand this branch').find(' > i').removeClass().addClass('fa fa-lg fa-plus-circle');
+            } else {
+                children.show('fast');
+                $(this).attr('title', 'Collapse this branch').find(' > i').removeClass().addClass('fa fa-lg fa-minus-circle');
+            }
+            e.stopPropagation();
+        });
+    }
+   
+    function youjianjinbi(time) {
+        var StartDate = time+" 00:00:00";
+       
+        var Channels = $("#Channels option:selected").val();
+        var url = "/Manage/UserEmail?page=1&StartDate=" + StartDate + "&Channels=" + Channels;
+
+        window.open(url);
+    }
+
+
+</script>

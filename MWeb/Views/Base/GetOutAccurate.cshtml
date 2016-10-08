@@ -1,0 +1,74 @@
+﻿
+@{
+   
+}
+
+
+
+    <div> 
+               <input onclick="jisuan()" type="button" value="计算" name="open" id="open"   />
+             
+    </div>
+  <table id="mytable" border="1">
+      <tr>
+          <td>时间</td><td>总游戏币</td>
+          <td>身上+保险箱</td><td>水族馆鱼</td>
+          <td>游戏携带</td><td>外部彩池</td>
+          <td>产出</td><td>消耗</td><td>产出+消耗</td>
+      </tr>
+  </table>
+
+  <input type="hidden" value="1" id="isfirst" /> 
+  <input type="hidden" value="" id="time" />
+<script type="text/javascript">
+
+
+    function jisuan() {
+
+     
+
+        //查询当前系统的游戏币
+        var oper = "first";
+        if ($("#isfirst").val() == "1") {//说明是第一次
+            oper = "first";
+        } else {
+            oper = "notfirst";
+        }
+       
+        $.ajax({
+            url: "/base/GetOutAccurate/",
+            type: "POST",
+            dataType: "json",
+            data: { "oper": oper ,"time":$("#time").val()},
+            success: function (data) {
+              
+                var d = data.Data;
+                var time = d.CurTime;
+                var gold1 = d.Gold1;
+                var gold2 = d.Gold2;
+                var gold3 = d.Gold3;
+                var gold4 = d.Gold4;
+                var output = d.OutPut;//产出
+                var inPut = d.InPut;//消耗
+                var t = ( parseInt(inPut) + parseInt(output) );
+
+                var s = "<tr><td>" + time + "</td><td>" + (gold1 + gold2 + gold3 + gold4) + "</td>" +
+
+                    "<td>" + gold1 + "</td><td>" + gold2 + "</td>" +
+                    "<td>" + gold3 + "</td><td>" + gold4 + "</td>" +
+                    "<td>" + output + "</td><td>" + inPut + "</td><td>" +t+ "</td></tr>";
+
+                $("#mytable").append(s);
+
+                $("#time").val(time);
+              
+
+                $("#isfirst").val(2);
+
+            }
+        })
+     
+    }
+
+
+</script>

@@ -1,0 +1,90 @@
+﻿@{
+    ViewBag.Title = "客户端下载";
+}
+
+<section id="db" class="down">
+        <div class="w1000 dbody">
+            <div class="carousel">
+                <div id="box">
+                    <pre class="prev"></pre>
+                    <pre class="next"></pre>
+                    <ul>
+
+
+                        <li class="list" style="display: block; width: 571px; height: 295px; top: 49px; left: 190px; z-index: 3;">
+                            <img src="/pic/apple.png">
+                            <span class="mengbanw" style="opacity: 1;"><span class="mengban1"></span></span>
+                            <div class="wenzi1" style="opacity: 0; width: 0px; height: 0px;"><span class="p_btn"><a href="https://itunes.apple.com/cn/app/de-bao-pu-ke-gao-shou/id667788066?mt=8" class="phone_btn" style="opacity: 0; height: 0px; width: 0px;"><span id="apple_btns"></span></a></span></div>
+                            <div class="window1">
+                                <div class="image_reel1" style="opacity: 0; width: 1644px; left: -822px;">
+                                    <a href=""><img src="/pic/phone_pic1.jpg" alt="" width="411" height="247"></a>
+                                    <a href=""><img src="/pic/phone_pic2.jpg" alt="" width="411" height="247"></a>
+                                    <a href=""><img src="/pic/phone_pic3.jpg" alt="" width="411" height="247"></a>
+                                    <a href=""><img src="/pic/phone_pic4.jpg" alt="" width="411" height="247"></a>
+                                </div>
+                            </div>
+                            <div class="paging1" style="opacity: 0; width: 0px; height: 0px;">
+                                <a href="#" rel="1" class="active1"></a>
+                                <a href="#" rel="2" class=""></a>
+                                <a href="#" rel="3" class=""></a>
+                                <a href="#" rel="4" class=""></a>
+                            </div>
+                        </li>
+                        <li class="list" style="display: block; width: 571px; height: 295px; top: 19px; left: 30px; z-index: 4;">
+                            <img src="/pic/android.png">
+                            <span class="mengbanw" style="opacity: 0;"><span class="mengban"></span></span>
+                            <div class="wenzi" style="opacity: 1; width: 507px; height: 164px;"><span class="p_btn"><a href="http://soft.debao.com/MobileClient/Install/mobile_debaotexaspoker.apk" class="android_btn" style="opacity: 1; height: 84px; width: 334px;"><span id="android_btns"></span></a></span></div>
+                            <div class="window">
+                                <div class="image_reel" style="opacity: 1; width: 1644px; left: -1233px;">
+                                    <a href=""><img src="/pic/android_pic1.jpg" alt="" width="411" height="247"></a>
+                                    <a href=""><img src="/pic/android_pic2.jpg" alt="" width="411" height="247"></a>
+                                    <a href=""><img src="/pic/android_pic3.jpg" alt="" width="411" height="247"></a>
+                                    <a href=""><img src="/pic/android_pic4.jpg" alt="" width="411" height="247"></a>
+                                </div>
+                            </div>
+                            <div class="paging" style="width: 120px; height: 25px; opacity: 1;">
+                                <a href="#" rel="1" class="active"></a>
+                                <a href="#" rel="2" class=""></a>
+                                <a href="#" rel="3" class=""></a>
+                                <a href="#" rel="4" class=""></a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+</section>
+
+@section nav{
+    <a href="/home/index">首　页</a>
+    <a href="/home/lists">游戏中心</a>
+    <a class="current" href="/home/download">手机客户端</a>
+}
+@section scripts{
+<script type="text/javascript" src="~/Scripts/slides.min.jquery.js"></script>
+<script src="~/Scripts/gd.js"></script>
+<script type="text/javascript">
+    var zoomPic = new ZoomPic("box");
+    var k = 1;
+    var timer = setInterval(function () {
+        if (k < 3) {
+            zoomPic.doNext();
+            k = k + 1;
+        } else {
+            zoomPic.doStop();//切换两次之后停止
+            clearInterval(timer);//清除定时器对象
+        }
+    }, 2000);
+    $(document).ready(function () {
+        $('#android_btns').mousedown(function () {
+            $(this).addClass("android_btns");
+        });
+        $('#apple_btns').mousedown(function () {
+            $(this).addClass("apple_btns");
+        });
+    });
+</script>
+
+
+}

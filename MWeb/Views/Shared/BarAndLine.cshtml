@@ -1,0 +1,483 @@
+﻿@using GL.Data.Model;
+@using Mweb;
+@model BarAndLine
+@{
+    ViewBag.Title = "BarAndLine";
+
+    string init = Model.ID + "_init";
+}
+
+
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css" />
+<link href="~/Lib/Metronic/assets/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css" />
+<link href="~/Lib/Metronic/assets/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<link href="~/Lib/Metronic/assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css" rel="stylesheet" type="text/css" />
+<link href="~/Lib/Metronic/assets/global/css/components.min.css" rel="stylesheet" id="style_components" type="text/css" />
+<link href="~/Lib/Metronic/assets/global/css/plugins.min.css" rel="stylesheet" type="text/css" />
+<link href="~/Lib/Metronic/assets/layouts/layout/css/custom.min.css" rel="stylesheet" type="text/css" />
+<script src="~/Lib/Metronic/assets/global/plugins/jquery.min.js" type="text/javascript"></script>
+<script src="~/Lib/Metronic/assets/global/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+<script src="~/Lib/Metronic/ext/bootstrap-datepicker-cn.js"></script>
+<script src="~/Lib/Metronic/assets/global/scripts/app.min.js" type="text/javascript"></script>
+<script src="~/Lib/Metronic/assets/pages/scripts/components-date-time-pickers.min.js" type="text/javascript"></script>
+<script src="~/Lib/Metronic/assets/global/plugins/echarts/echarts.js"></script>
+<script src="~/Lib/Metronic/assets/global/plugins/echarts/chart/bar.js"></script>
+<script src="~/Lib/Metronic/assets/global/plugins/echarts/chart/chord.js"></script>
+<script src="~/Lib/Metronic/assets/global/plugins/echarts/chart/eventRiver.js"></script>
+<script src="~/Lib/Metronic/assets/global/plugins/echarts/chart/force.js"></script>
+<script src="~/Lib/Metronic/assets/global/plugins/echarts/chart/funnel.js"></script>
+<script src="~/Lib/Metronic/assets/global/plugins/echarts/chart/gauge.js"></script>
+<script src="~/Lib/Metronic/assets/global/plugins/echarts/chart/heatmap.js"></script>
+<script src="~/Lib/Metronic/assets/global/plugins/echarts/chart/k.js"></script>
+<script src="~/Lib/Metronic/assets/global/plugins/echarts/chart/line.js"></script>
+<script src="~/Lib/Metronic/assets/global/plugins/echarts/chart/map.js"></script>
+<script src="~/Lib/Metronic/assets/global/plugins/echarts/chart/pie.js"></script>
+<script src="~/Lib/Metronic/assets/global/plugins/echarts/chart/radar.js"></script>
+<script src="~/Lib/Metronic/assets/global/plugins/echarts/chart/scatter.js"></script>
+<script src="~/Lib/Metronic/assets/global/plugins/echarts/chart/tree.js"></script>
+<script src="~/Lib/Metronic/assets/global/plugins/echarts/chart/treemap.js"></script>
+<script src="~/Lib/Metronic/assets/global/plugins/echarts/chart/venn.js"></script>
+<script src="~/Lib/Metronic/assets/global/plugins/echarts/chart/wordCloud.js"></script>
+
+
+
+
+<div class="portlet-body" style="">
+    @if (string.IsNullOrEmpty(Model.Style))
+    {
+        <div id="@Model.ID" name="@Model.Name" style="height:800px;"></div>
+    }
+    else if (Model.Style.ToLower().Contains("height"))
+    {
+        <div id="@Model.ID" name="@Model.Name" style="@Model.Style"></div>
+    }
+    else
+    {
+        <div id="@Model.ID" name="@Model.Name" style="height:800px; @Model.Style "></div>
+    }
+</div>
+
+
+
+
+<script type="text/javascript">
+    var myChart;
+
+    jQuery(document).ready(function () {
+        // ECHARTS
+        require.config({
+            paths: {
+                echarts: '../assets/global/plugins/echarts/'
+            }
+        });
+        // DEMOS
+        require(
+            [
+                'echarts',
+                'echarts/chart/bar',
+                'echarts/chart/chord',
+                'echarts/chart/eventRiver',
+                'echarts/chart/force',
+                'echarts/chart/funnel',
+                'echarts/chart/gauge',
+                'echarts/chart/heatmap',
+                'echarts/chart/k',
+                'echarts/chart/line',
+                'echarts/chart/map',
+                'echarts/chart/pie',
+                'echarts/chart/radar',
+                'echarts/chart/scatter',
+                'echarts/chart/tree',
+                'echarts/chart/treemap',
+                'echarts/chart/venn',
+                'echarts/chart/wordCloud'
+            ],
+            function (ec) {
+
+                //--- BAR ---
+                myChart = ec.init(document.getElementById('@Model.ID'));
+                var option = {
+                    tooltip: {
+                        trigger: 'axis'
+                    },
+                    title : {   text: '@Model.Title'} ,
+                    legend: {
+
+                        data: []
+                    },
+                    toolbox: {
+                        show: true,
+                        feature: {
+                            mark: {
+                                show: true
+                            },
+                            dataView: {
+                                show: true,
+                                readOnly: false
+                            },
+                            magicType: {
+                                show: true,
+                                type: ['line', 'bar']
+                            },
+                            restore: {
+                                show: true
+                            },
+                            saveAsImage: {
+                                show: true
+                            }
+                        }
+                    },
+                    calculable: true,
+                    xAxis: [{
+                        type: 'category',
+                        data: []
+                    }],
+                    yAxis: [{
+                        type: 'value',
+                        splitArea: {
+                            show: false
+                        },
+                        axisLabel: { formatter: '{value}' }
+                    }],
+                    series: []
+                };
+                myChart.setOption(option);
+            }
+        );
+    });
+
+    @*function searchAjax() {
+        var stime = $("#StartDate").val();
+        var etime = $("#ExpirationDate").val();
+
+        var mydata = { "StartDate": stime, "ExpirationDate": etime };
+        @init (mydata);
+    }*@
+
+    function @init (mydata) {
+
+        $.ajax({
+            url: "@Model.URL",
+            type: "post",
+            dataType: "json",
+            data: mydata,
+            success: function (data) {
+                if (data.ret == 0) {//成功
+                    LoadListData(data.data);
+                    initTable(data.data);
+                }
+            }
+        });
+
+
+    }
+
+    function LoadListData(data) {
+
+        var xAxisData1=new Array();　
+        var legendData1 = new Array();
+        var data1 = [];
+        for (var i = 0; i < data.length; i++) {
+            var x = data[i].@Model.BindXField;
+            xAxisData1.push(x);
+        }
+
+        @for (int i = 0; i < Model.GraphItems.Count(); i++) {
+               @Html.Raw("legendData1.push('" + Model.GraphItems[i].ViewName + "');");
+        }
+
+
+        var arr = new Array();
+        @{ string forarr = "if(n==-1){obj.name='';}"; string displayLegend = ""; }
+        for (var i = 0; i < data.length; i++) {
+            @{string arrsif = ""; string arrselse = ""; }
+            @for (int i = 0; i < Model.GraphItems.Count(); i++)
+            {
+                var item = Model.GraphItems[i];
+                  @Html.Raw("var " + item.BindYField + "=data[i]." + item.BindYField + ";");
+                  @Html.Raw("if (" + item.BindYField + " == null) {" + item.BindYField + " = 0;}");
+                  @Html.Raw(item.BindYField + "  = " + item.BindYField + " / " + Model.BandRate + ";");
+                arrsif += ("arr[" + i + "]=" + item.BindYField + ";");
+                arrselse += ("arr[" + i + "]=arr[" + i + "]+','+" + item.BindYField + ";");
+                forarr += ("else if(n==" + i + "){obj.name='" + item.ViewName + "';}");
+                if (item.Display) {
+                    displayLegend += "option.legend.selected['" + item.ViewName + "'] = true;";
+                }
+                else {
+                    displayLegend += "option.legend.selected['" + item.ViewName + "'] = false;";
+                }
+            }
+            //var SystemChip = data[i].SystemChip;
+            //var ChipChange = data[i].ChipChange;
+            //var ChipRate = data[i].ChipRate;
+
+            //if (SystemChip == null) {SystemChip = 0;}
+            //if (ChipChange == null) {
+            //    ChipChange = 0;
+            //}
+            //if (ChipRate == null) {
+            //    ChipRate = 0;
+            //}
+            //SystemChip = SystemChip / 10000;
+            //ChipChange = ChipChange / 10000;
+            //ChipRate = ChipRate / 10000;
+
+            if (i == 0) {
+
+                //arr[0] = SystemChip;
+                //arr[1] = ChipChange;
+                //arr[2] = ChipRate;
+                @Html.Raw(arrsif)
+            } else {
+
+                arr[0] = arr[0] + "," + SystemChip;
+                arr[1] = arr[1] + "," + ChipChange;
+                arr[2] = arr[2] + "," + ChipRate;
+                @Html.Raw(arrselse)
+            }
+
+
+
+        }
+
+
+        for (var n = 0; n < arr.length; n++) {
+            var obj = {};
+            //if (n == 0) {
+            //    obj.name = "系统金币总量";
+            //}else if(n==1){
+            //    obj.name = "金币涨跌量";
+            //} else if (n == 2) {
+            //    obj.name = "金币涨跌比";
+            //}
+            @Html.Raw(forarr)
+
+            if (arr[n] == "null") {
+
+                arrT.push(0);
+            } else {
+
+
+                var d = arr[n].toString().split(',');
+
+
+                var arrT = new Array();
+                for (j = 0; j < d.length; j++) {
+                    if (d[j] == "null") {
+                        arrT.push(0);
+                    } else {
+
+                        arrT.push(d[j]);
+                    }
+
+                }
+            }
+
+            obj.data = arrT;
+            obj.type = "bar";
+            data1.push(obj);
+        }
+        //var xAxisData = ['14月22', '14月23', '14月24', '14月25', '14月26', '14月27'];
+        //var legendData = ['系统金币总量', '金币涨跌量', '金币涨跌比'];
+        //var data = [{
+        //    name: '系统金币总量',
+        //    type: 'bar',
+        //    data: [2.0, 4.9, 7.0, 123.2, 1, 2]
+        //}, {
+        //    name: '金币涨跌量',
+        //    type: 'bar',
+        //    data: [2.6, 5.9, 9.0, 126.4, 6, 7]
+        //}, {
+        //    name: '金币涨跌比',
+        //    type: 'bar',
+        //    data: [20, 30, 40, 50, 160, 60]
+        //}];
+
+
+
+        var xAxisData = xAxisData1;
+        var legendData = legendData1;
+        var data = data1;
+        //option.xAxis[0]['data'] = xAxisData;
+
+        //myChart.setOption(option);
+        //myChart.setSeries(seriesData);
+
+        //var option = myChart.getOption();
+
+
+        //option.series[0].data = data;
+        //myChart.setOption(option);
+
+
+        //option.legend = legendData;
+        // option.xAxis[0].data = xAxisData;
+        // myChart.setSeries(data);
+
+        var option = {
+            tooltip: {
+                trigger: 'axis'
+            },
+            title: { text: '@Model.Title' },
+            legend: {
+
+                data: legendData
+            },
+            toolbox: {
+                show: true,
+                feature: {
+                    mark: {
+                        show: false
+                    },
+                    dataView: {
+                        show: false,
+                        readOnly: false
+                    },
+                    magicType: {
+                        show: true,
+                        //type: ['line', 'bar', 'stack', 'tiled']
+                        type: ['line', 'bar']
+                    },
+                    restore: {
+                        show: false
+                    },
+                    saveAsImage: {
+                        show: true
+                    },
+                    //myTool : {
+                    //    show : true,
+                    //    title : '自定义扩展方法',
+                    //   // icon : 'image://../asset/ico/favicon.png',
+                    //    onclick: function () {
+
+                    //    }
+                    //},
+                    dataView: {
+                        show: true,
+                        title: '数据视图',
+                        readOnly: true,
+                        lang: ['数据视图', '关闭', '刷新'],
+                        optionToContent: function (opt) {
+                            var table = '<div class="portlet box purple">'
+   + ' <div class="portlet-title">'
+     + '      <div class="caption">'
+           + '    <i class="fa fa-cogs"></i>表格显示'
+       + '    </div>'
+        + '   <div class="tools">'
+            + '   <a href="javascript:;" class="collapse"> </a>'
+           + '    <a href="#portlet-config" data-toggle="modal" class="config"> </a>'
+             + '  <a href="javascript:;" class="reload"> </a>'
+            + '   <a href="javascript:;" class="remove"> </a>'
+         + '  </div>'
+     + '  </div>'
+           + '  <div class="portlet-body">'
+    + '  <div class="table-scrollable">';
+                            var axisData = opt.xAxis[0].data;
+                            var series = opt.series;
+
+                            table += '<table class="table table-striped table-bordered table-hover"><thead><tr>'
+                                         + '<th>时间</th>'
+                                         + '<th>' + series[0].name + '</th>'
+                                         + '<th>' + series[1].name + '</th>'
+                                         + '</tr> </thead><tbody>';
+                            for (var i = 0, l = axisData.length; i < l; i++) {
+                                table += '<tr>'
+                                         + '<td>' + axisData[i] + '</td>'
+                                         + '<td>' + series[0].data[i] + '</td>'
+                                         + '<td>' + series[1].data[i] + '</td>'
+                                         + '</tr>';
+                            }
+                            table += '</tbody></table>';
+                            table += '</div></div> </div>';
+                            return table;
+                        }
+                    }
+                }
+            },
+            calculable: true,
+            xAxis: [{
+                type: 'category',
+                data: xAxisData
+            }],
+            yAxis: [{
+                type: 'value',
+                splitArea: {
+                    show: false
+                },
+                axisLabel: { formatter:function(v){
+                    @Html.Raw("return v+'" + Model.Unit+"'");
+                } }
+            }],
+            series: data
+        };
+
+        myChart.clear();
+
+
+        var dt = option.legend.data;
+        option.legend.selected = {};
+
+        @Html.Raw(displayLegend);
+
+
+
+        myChart.setOption(option);
+
+
+    }
+
+
+
+
+    function initTable(data) {
+        $("#mytable").remove();
+        var opt = myChart.getOption();
+        var axisData = opt.xAxis[0].data;
+        var series = opt.series;
+        var table = '<div id="mytable" class="portlet box purple" style="margin-bottom:50px">'
++ ' <div class="portlet-title">'
++ '      <div class="caption">'
++ '    <i class="fa fa-cogs"></i>表格显示'
++ '    </div>'
++ '   <div class="tools">'
++ '   <a href="javascript:;" class="collapse"> </a>'
++ '    <a href="#portlet-config" data-toggle="modal" class="config"> </a>'
++ '  <a href="javascript:;" class="reload"> </a>'
++ '   <a href="javascript:;" class="remove"> </a>'
++ '  </div>'
++ '  </div>'
++ '  <div class="portlet-body">'
++ '  <div class="table-scrollable">';
+        @{ string head = ""; }
+        @for (int i = 0; i < Model.GirdsItems.Count(); i++) {
+            var item = Model.GirdsItems[i];
+            string vname = item.ViewName;
+            head += ("<th>" + vname + "</th>");
+        }
+
+        table += '<table class="table table-striped table-bordered table-hover"><thead><tr>'
+
+        @Html.Raw("table+='" + head + "'");
+
+        table +=  '</tr> </thead><tbody>';
+        @{ string trContent = "";}
+        for(var i=0;i<data.length;i++){
+            var itemdata = data[i];
+            @{trContent += "<tr>";}
+            @for (int i = 0; i < Model.GirdsItems.Count(); i++) {
+                GirdsItem gitem = Model.GirdsItems[i];
+
+                trContent += "<td>'+itemdata." + gitem.BindYField + "+'</td>";
+            }
+            @{trContent += "</tr>";}
+
+            @Html.Raw("table+='" + trContent+"'" )
+        }
+
+
+        table += '</tbody></table>';
+        table += '</div></div> </div>';
+
+        $("#main").append(table);
+    }
+</script>

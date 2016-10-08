@@ -1,0 +1,164 @@
+﻿@using GL.Data.Model
+@model BaseDataInfoForUsersDiamondDistributionRatio
+@{
+    ViewBag.Title = "用户五币分布比";
+}
+
+<div id="content">
+
+    <form id="comment-form" class="smart-form" novalidate="novalidate">
+        <div class="row">
+
+            <section class="col col-12" style="width:210px">
+                <label class="select">
+
+                    @Html.GetAllAgentGroupList("Channels", Model.Channels)
+
+                    <i></i>
+                </label>
+            </section>
+
+            <section class="col col-1">
+                @*<label class="label"> 类型</label>*@
+                <label class="select">
+                    @Html.DropDownList("UserType", new List<SelectListItem>
+                {
+                     new SelectListItem { Text= "所有", Value = "0" },
+                    new SelectListItem { Text= "登陆用户", Value = "1" },
+                    new SelectListItem { Text= "新增用户", Value = "2" },
+                    new SelectListItem { Text= "活跃用户", Value = "3" },
+                    new SelectListItem { Text= "历史付费用户", Value = "4" },
+                    new SelectListItem { Text= "付费用户", Value = "5" },
+                    new SelectListItem { Text= "玩牌用户", Value = "6" },
+                    new SelectListItem { Text= "俱乐部用户", Value = "7" },
+                    new SelectListItem { Text= "登陆俱乐部用户", Value = "8" }
+                })<i></i>
+                </label>
+            </section>
+
+            <section class="col col-1">
+                <button type="submit" class="btn btn-success btn-sm">查询</button>
+            </section>
+
+        </div>
+    </form>
+
+
+
+    <section id="widget-grid" class="">
+        <div class="row">
+            <article class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
+                <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-0" data-widget-editbutton="false" data-widget-colorbutton="false"
+                     data-widget-togglebutton="false"
+                     data-widget-deletebutton="false"
+                     data-widget-fullscreenbutton="false"
+                     data-widget-custombutton="false"
+                     data-widget-collapsed="false"
+                     data-widget-sortable="false">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                        <h2>用户五币分布比</h2>
+                    </header>
+                    <!-- widget div-->
+                    <div>
+                        <!-- widget edit box -->
+                        <div class="jarviswidget-editbox">
+                            <!-- This area used as dropdown edit box -->
+                        </div>
+                        <!-- end widget edit box -->
+                        <!-- widget content -->
+                        <div class="widget-body no-padding" style="min-height: 70px;">
+                            <div class="table-responsive">
+                                <table class="table table-bordered">
+                                    <thead>
+
+                                        <tr>
+                                            <th>游戏币区间</th>
+                                            <th>人数</th>
+                                            <th>占比</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td> 0</td>
+                                            <td><a href="/Manage/MemberList?upper=0&lower=0&seachtype=5&robot=0">@Model.a1</a></td>
+                                            <td>@string.Format("{0:0.00%}", Model.a0 == 0 ? 0 : (Model.a1 * 1.0 / Model.a0))</td>
+                                        </tr>
+                                        <tr>
+                                            <td>1-10</td>
+                                            <td><a href="/Manage/MemberList?upper=1&lower=10&seachtype=4&robot=0">@Model.a2</a></td>
+                                            <td>@string.Format("{0:0.00%}", Model.a0 == 0 ? 0 : (Model.a2 * 1.0 / Model.a0))</td>
+                                        </tr>
+                                        <tr>
+                                            <td>11-50</td>
+                                            <td><a href="/Manage/MemberList?upper=11&lower=50&seachtype=4&robot=0">@Model.a3</a></td>
+                                            <td>@string.Format("{0:0.00%}", Model.a0 == 0 ? 0 : (Model.a3 * 1.0 / Model.a0))</td>
+                                        </tr>
+                                        <tr>
+                                            <td>51—99</td>
+                                            <td><a href="/Manage/MemberList?upper=51&lower=99&seachtype=4&robot=0">@Model.a4</a></td>
+                                            <td>@string.Format("{0:0.00%}", Model.a0 == 0 ? 0 : (Model.a4 * 1.0 / Model.a0))</td>
+                                        </tr>
+                                        <tr>
+                                            <td>100-1,000</td>
+                                            <td><a href="/Manage/MemberList?upper=100&lower=1000&seachtype=4&robot=0">@Model.a5</a></td>
+                                            <td>@string.Format("{0:0.00%}", Model.a0 == 0 ? 0 : (Model.a5 * 1.0 / Model.a0))</td>
+                                        </tr>
+                                        <tr>
+                                            <td>1,001-5,000</td>
+                                            <td><a href="/Manage/MemberList?upper=1001&lower=5000&seachtype=4&robot=0">@Model.a6</a></td>
+                                            <td>@string.Format("{0:0.00%}", Model.a0 == 0 ? 0 : (Model.a6 * 1.0 / Model.a0))</td>
+                                        </tr>
+                                        <tr>
+                                            <td>5,001-20,000</td>
+                                            <td><a href="/Manage/MemberList?upper=5001&lower=20000&seachtype=4&robot=0">@Model.a7</a></td>
+                                            <td>@string.Format("{0:0.00%}", Model.a0 == 0 ? 0 : (Model.a7 * 1.0 / Model.a0))</td>
+                                        </tr>
+                                        <tr>
+                                            <td>20,001-50,000</td>
+                                            <td><a href="/Manage/MemberList?upper=20001&lower=50000&seachtype=4&robot=0">@Model.a8</a></td>
+                                            <td>@string.Format("{0:0.00%}", Model.a0 == 0 ? 0 : (Model.a8 * 1.0 / Model.a0))</td>
+                                        </tr>
+                                        <tr>
+                                            <td>50,001-100,000</td>
+                                            <td><a href="/Manage/MemberList?upper=50001&lower=100000&seachtype=4&robot=0">@Model.a9</a></td>
+                                            <td>@string.Format("{0:0.00%}", Model.a0 == 0 ? 0 : (Model.a9 * 1.0 / Model.a0))</td>
+                                        </tr>
+                                        <tr>
+                                            <td>100,001-300,000</td>
+                                            <td><a href="/Manage/MemberList?upper=100001&lower=300000&seachtype=4&robot=0">@Model.a10</a></td>
+                                            <td>@string.Format("{0:0.00%}", Model.a0 == 0 ? 0 : (Model.a10 * 1.0 / Model.a0))</td>
+                                        </tr>
+                                        <tr>
+                                            <td>300,001-1,000,000</td>
+                                            <td><a href="/Manage/MemberList?upper=300001&lower=1000000&seachtype=4&robot=0">@Model.a11</a></td>
+                                            <td>@string.Format("{0:0.00%}", Model.a0 == 0 ? 0 : (Model.a11 * 1.0 / Model.a0))</td>
+                                        </tr>
+                                        <tr>
+                                            <td>1,000,001以上</td>
+                                            <td><a href="/Manage/MemberList?upper=1000000&lower=1000000&seachtype=6&robot=0">@Model.a12</a></td>
+                                            <td>@string.Format("{0:0.00%}", Model.a0 == 0 ? 0 : (Model.a12 * 1.0 / Model.a0))</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <!-- end widget content -->
+                    </div>
+                    <!-- end widget div -->
+                </div>
+                <!-- end widget -->
+
+            </article>
+        </div>
+    </section>
+
+
+
+
+
+
+
+
+
+</div>

@@ -1,0 +1,248 @@
+﻿@using GL.Data.View
+@model Role
+@{
+    ViewBag.Title = "玩家数据修改";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<article class="col-sm-12 col-md-12 col-lg-7">
+    <div class="jarviswidget" id="wid-id-4" data-widget-editbutton="false" data-widget-custombutton="false">
+        <header>
+            <span class="widget-icon"> <i class="fa fa-edit"></i> </span>
+            <h2>@ViewBag.AgentLv</h2>
+        </header>
+        <div>
+            <div class="jarviswidget-editbox">
+            </div>
+            <div class="widget-body no-padding">
+                <form id="submitForm" class="smart-form" action="" method="post">
+                    <input id="GameID" name="GameID" type="hidden" value="@Model.ID" />
+                    @if (Model.UpdateProperty == 1)
+                    {
+                        <fieldset>
+                            <div class="row">
+                                <section class="col col-5">
+                                    <label>修改玩家VIP等级 :</label>
+                                    <label class="input">
+                                        <input type="text" id="Grade" name="Grade" class="span4" value="@Model.VipGrade" />
+                                    </label>
+                                </section>
+                            </div>
+                            <div class="row">
+                                <section class="col col-5">
+                                    <label>修改玩家VIP当前等级经验 :</label>
+                                    <label class="input">
+                                        <input type="text" id="Point" name="Point" class="span4" value="@Model.VipPoint" />
+                                    </label>
+                                </section>
+                            </div>
+                        </fieldset>
+                    }
+                    else if (Model.UpdateProperty == 2)
+                    {
+                        <fieldset>
+                            <div class="row">
+                                <section class="col col-5">
+                                    <label>修改玩家等级 :</label>
+                                    <label class="input">
+                                        <input type="text" id="Grade" name="Grade" class="span4" value="@Model.LevelGrade" />
+                                    </label>
+                                </section>
+                            </div>
+                            <div class="row">
+                                <section class="col col-5">
+                                    <label>修改玩家当前等级经验 :</label>
+                                    <label class="input">
+                                        <input type="text" id="Point" name="Point" class="span4" value="@Model.LevelPoint"/>
+                                    </label>
+                                </section>
+                            </div>
+                        </fieldset>
+                    }
+                    else if (Model.UpdateProperty == 3)
+                    {
+                        <fieldset>
+                            <div class="row">
+                                <section class="col col-5">
+                                    <label>绑定玩家俱乐部 :</label>
+                                    <label class="input">
+                                        <input type="text" id="Grade" name="Grade" class="span4" value="@Model.ClubID" />
+                                    </label>
+                                </section>
+                            </div>
+                        </fieldset>
+                    }
+                    <footer>
+                        <input type="button" value="返回" class="btn btn-warning" onclick="return reLoad(@Model.ID)" />
+                        <input id="btnUpdate" type="button" value="提交"  class="btn btn-danger" onclick="return UpdateUser(@Model.ID ,@Model.UpdateProperty)"/>
+                    </footer>
+                </form>
+            </div>
+        </div>
+    </div>
+</article>
+
+@section scripts{
+<script src="~/FileDataBase/grade.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/select2.min.js"></script>
+    <style type="text/css">
+        .quick-actions1 {
+            display: block;
+            list-style: outside none none;
+            margin: 15px 0;
+            text-align: center;
+        }
+
+            .quick-actions1 li a {
+                color: #fff;
+                display: block;
+                font-size: 14px;
+                font-weight: lighter;
+            }
+
+            .quick-actions1 li a {
+                padding: 10px 30px;
+            }
+
+        .quick-actions_homepage .quick-actions1 .span3 {
+            width: 30%;
+        }
+
+        .quick-actions_homepage .quick-actions1 li {
+            position: relative;
+        }
+
+        .quick-actions1 li {
+            min-height: 70px;
+            min-width: 14%;
+        }
+
+        .quick-actions1 li {
+            float: left;
+            line-height: 18px;
+            margin: 0 10px 10px 0;
+            padding: 0 10px;
+        }
+
+            .quick-actions1 li a i[class^="icon-"], .quick-actions1 li a i[class*=" icon-"] {
+                display: block;
+                font-size: 30px;
+                margin: 0 auto 5px;
+            }
+
+        .quick-actions1 li {
+            padding: 0;
+        }
+    </style>
+
+    <script type="text/javascript">
+        function resetMenu() {
+            document.gomenu.selector.selectedIndex = 2;
+        }
+
+        function reLoad(id){
+            location.href = "/Manage/MemberManage?Value=" + id;
+        }
+        //请求修改
+        function request(point ,grade ,id ,type){
+            $.ajax({
+                url: "/Manage/MemberUpdate/",
+                type: "POST",
+                //dataType: "JSON",
+                data: { "Grade": grade, "Point": point, "ID": id, "Type": type },
+                success: function (data) {
+                    switch (data) {
+                        case "-2":
+                            alert("修改失败，玩家数据为空");
+                            break;
+                        case "-1":
+                            alert("修改失败，玩家未被封号");
+                            location.href = "/Manage/MemberManage?Value=" + id;
+                            break;
+                        case "0":
+                            alert("修改失败，影响行数为0");
+                            break;
+                        case "1":
+                            alert("修改成功");
+                            break;
+                        case "2":
+                            alert("俱乐部绑定成功");
+                            break;                        
+                        case "3":
+                            alert("俱乐部修改成功");
+                            break;
+                        case "4":
+                            alert("俱乐部修改失败，绑定的为非俱乐部");
+                            break;
+                        case "5":
+                            alert("操作成功!")
+                            break;
+                        case "6":
+                            alert("操作失败!")
+                            break;
+                        case "100":
+                              alert("操作失败!")
+                            break;
+                        default:
+                            alert('修改失败,请与管理员联系');
+                            break;
+                    }
+                    location.href = "/Manage/MemberManage?Value=" + id;
+                }
+            }).fail(function (xhr, textStatus, err) {
+                alert('Error: ' + err);
+            });
+        }
+
+        function UpdateUser(id, type) {
+            var _point = $("#Point").val();
+            var _grade = $("#Grade").val();
+            try {
+                //判断是否为正整数
+                if(parseInt(_grade)==_grade && _grade>0){
+                    if (type != 3) {
+                        if(parseInt(_point)==_point && _point>=0){
+                            var _maxPoint = 0;
+                            var _item = "";
+                            var _key = "";
+                            if (type == 1) {
+                                if(_grade <= 10){
+                                    _item = "VIP" + _grade.toString();
+                                    _maxPoint = this[_item];
+                                }
+                            }
+                            else if (type == 2) {
+                                if(_grade < 100){
+                                    _item = "LV" + _grade.toString();
+                                    _maxPoint = this[_item];
+                                }
+                            }else {
+                                alert("修改类型不正确");
+                                location.href = "/Manage/MemberManage";
+                            }
+                            if(_point<_maxPoint){
+                                request(_point ,_grade ,id ,type);
+                            }else{
+                                alert("输入数值超出范围！");
+                            }
+                        }else{
+                            alert("输入数值超出范围！");
+                        }
+                    }else{
+                        request(0 ,_grade ,id ,type);
+                    }
+                }else{
+                    if(_grade==0){
+                        request(0 ,_grade ,id ,type);
+                    }else{
+                        alert("输入数值超出范围3！");
+                    }
+                  
+                }
+            } catch (err) {
+                alert('Error: ' + err);
+            }
+        } 
+    </script>
+}

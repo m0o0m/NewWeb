@@ -1,0 +1,148 @@
+
+ 
+记录时间：2015-11-12 19:45:43,565 
+线程ID:[386] 
+日志级别：  ERROR 
+错误描述：Moons
+ 
+
+ 
+记录时间：2015-11-12 19:45:47,154 
+线程ID:[385] 
+日志级别：  ERROR 
+错误描述：Moons
+ 
+
+ 
+记录时间：2015-11-12 19:45:48,283 
+线程ID:[391] 
+日志级别：  ERROR 
+错误描述：Moons
+ 
+
+ 
+记录时间：2015-11-12 19:45:49,609 
+线程ID:[379] 
+日志级别：  ERROR 
+错误描述：Moons
+ 
+
+ 
+记录时间：2015-11-12 19:50:09,821 
+线程ID:[390] 
+日志级别：  ERROR 
+错误描述：Application级别错误
+ 
+System.Web.HttpException (0x80004005): 在控制器“Web.Pay.Controllers.HomeController”上未找到公共操作方法“ind”。
+   在 System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+   在 System.Web.Mvc.Controller.<BeginExecuteCore>b__1d(IAsyncResult asyncResult, ExecuteCoreState innerState)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+   在 System.Web.Mvc.Controller.EndExecuteCore(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Controller.<BeginExecute>b__15(IAsyncResult asyncResult, Controller controller)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+   在 System.Web.Mvc.Controller.EndExecute(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Controller.System.Web.Mvc.Async.IAsyncController.EndExecute(IAsyncResult asyncResult)
+   在 System.Web.Mvc.MvcHandler.<BeginProcessRequest>b__5(IAsyncResult asyncResult, ProcessRequestState innerState)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+   在 System.Web.Mvc.MvcHandler.EndProcessRequest(IAsyncResult asyncResult)
+   在 System.Web.Mvc.MvcHandler.System.Web.IHttpAsyncHandler.EndProcessRequest(IAsyncResult result)
+   在 System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   在 System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+
+ 
+记录时间：2015-11-12 19:54:17,801 
+线程ID:[375] 
+日志级别：  INFO  
+错误描述：tttttttttttt
+ 
+
+ 
+记录时间：2015-11-12 20:03:31,788 
+线程ID:[360] 
+日志级别：  INFO  
+错误描述：Web.Pay.Controllers.CallbackControllerorder query 
+ 
+
+ 
+记录时间：2015-11-12 20:07:34,806 
+线程ID:[343] 
+日志级别：  INFO  
+错误描述：Web.Pay.Controllers.CallbackControllerorder query 
+ 
+
+ 
+记录时间：2015-11-12 20:15:50,325 
+线程ID:[366] 
+日志级别：  INFO  
+错误描述：Web.Pay.Controllers.CallbackControllerorder query 
+ 
+
+ 
+记录时间：2015-11-12 20:17:27,456 
+线程ID:[379] 
+日志级别：  INFO  
+错误描述：Web.Pay.Controllers.CallbackControllerorder query 
+ 
+
+ 
+记录时间：2015-11-12 20:18:21,802 
+线程ID:[371] 
+日志级别：  INFO  
+错误描述：Web.Pay.Controllers.CallbackControllerorder query 
+ 
+
+ 
+记录时间：2015-11-12 20:18:32,263 
+线程ID:[375] 
+日志级别：  INFO  
+错误描述：Web.Pay.Controllers.CallbackControllerorder query 
+ 
+
+ 
+记录时间：2015-11-12 20:21:22,109 
+线程ID:[384] 
+日志级别：  INFO  
+错误描述：Web.Pay.Controllers.CallbackControllerorder query 
+ 
+
+ 
+记录时间：2015-11-12 20:21:22,117 
+线程ID:[384] 
+日志级别：  INFO  
+错误描述：GL.Pay.WxPay.MvcResultNotify
+Receive data from WeChat : 
+ 
+
+ 
+记录时间：2015-11-12 20:21:22,118 
+线程ID:[384] 
+日志级别：  ERROR 
+错误描述：GL.Pay.WxPay.WxPayData
+将空的xml串转换为WxPayData不合法!
+ 
+
+ 
+记录时间：2015-11-12 20:21:22,119 
+线程ID:[384] 
+日志级别：  ERROR 
+错误描述：GL.Pay.WxPay.MvcResultNotify
+Sign check error : <xml><return_code><![CDATA[FAIL]]></return_code><return_msg><![CDATA[将空的xml串转换为WxPayData不合法!]]></return_msg></xml>
+ 
+
+ 
+记录时间：2015-11-12 20:24:14,956  线程ID:[384]  日志级别：INFO  
+错误描述：GL.Pay.WxPay.MvcResultNotify
+Receive data from WeChat : 
+
+ 
+记录时间：2015-11-12 20:24:14,963  线程ID:[384]  日志级别：ERROR 
+错误描述：GL.Pay.WxPay.WxPayData
+将空的xml串转换为WxPayData不合法!
+
+ 
+记录时间：2015-11-12 20:24:14,964  线程ID:[384]  日志级别：ERROR 
+错误描述：GL.Pay.WxPay.MvcResultNotify
+Sign check error : <xml><return_code><![CDATA[FAIL]]></return_code><return_msg><![CDATA[将空的xml串转换为WxPayData不合法!]]></return_msg></xml>

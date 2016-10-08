@@ -1,0 +1,85 @@
+﻿
+@using GL.Data.View
+@using GL.Data.Model
+@model GameRecordView
+@{
+    Layout = null;
+
+    IEnumerable<ClubDataDetail> bdl = (IEnumerable<ClubDataDetail>)Model.DataList;
+
+
+}
+
+
+
+
+<section id="widget-grid" class="ClubDataDetail">
+    <div class="row">
+        <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-0" data-widget-editbutton="false" data-widget-colorbutton="false"
+                 data-widget-togglebutton="false"
+                 data-widget-deletebutton="false"
+                 data-widget-fullscreenbutton="false"
+                 data-widget-custombutton="false"
+                 data-widget-collapsed="false"
+                 data-widget-sortable="false">
+                <header>
+                    <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                    <h2>俱乐部数据详细信息</h2>
+                </header>
+                <!-- widget div-->
+                <div>
+                    <!-- widget edit box -->
+                    <div class="jarviswidget-editbox">
+                        <!-- This area used as dropdown edit box -->
+                    </div>
+                    <!-- end widget edit box -->
+                    <!-- widget content -->
+                    <div class="widget-body no-padding">
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <thead>
+
+                                    <tr>
+                                        <th>俱乐部ID</th>
+                                        <th>昵称</th>
+                                        <th>下家人数</th>
+                                        <th>下家昨日总贡献</th>
+                                        <th>下家上周总贡献</th>
+                                        <th>昨日活跃人数</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (bdl.Count() == 0)
+                                    {
+                                        <tr class="gradeX">
+                                            <td class="colspan" align="center" colspan="0">
+                                                没有找到相关记录！
+                                            </td>
+                                        </tr>
+                                    }
+                                    @foreach (ClubDataDetail m in bdl)
+                                    {
+                                        <tr class="gradeA">
+                                            <td>@m.Club</td>
+                                            <td>@m.Nickname</td>
+                                            <td>@m.ClubCount</td>
+                                            <td>@m.GiveYes</td>
+                                            <td>@m.GiveLast</td>
+                                            <td>@m.Login</td>
+                                        </tr>
+
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- end widget content -->
+                </div>
+                <!-- end widget div -->
+            </div>
+            <!-- end widget -->
+
+        </article>
+    </div>
+</section>

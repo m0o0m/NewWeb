@@ -1,0 +1,195 @@
+﻿@using GL.Data.Model
+@using Webdiyer.WebControls.Mvc;
+@model BaseDataView
+@{
+    ViewBag.Title = "完成新手任务的用户统计";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    ViewBag.Format = "yyyy-MM-dd";
+
+
+ 
+}
+
+
+
+<div id="content">
+    <form id="comment-form" class="smart-form" novalidate="novalidate" method="get">
+        <div class="row">
+            <div class="widget-body">
+                @*<section class="col col-" 1style="width:150px">
+                    <label class="label">渠道</label>
+                    <label class="select">
+
+
+                        @Html.DropDownList("Channels", null, new { @class = "form-control input-sm" })
+                        <i></i>
+                    </label>
+                </section>*@
+                <section class="col col-12" style="width:210px">
+                    <label class="label">渠道</label>
+                    <label class="select">
+
+
+                        @*@Html.DropDownList("Channels", null, new { @class = "form-control input-sm" })*@
+
+                        @Html.GetAllAgentGroupList("Channels", Model.Channels)
+
+
+
+                        <i></i>
+                    </label>
+                </section>
+                <section class="col col-2">
+                    <label class="label">起始日期</label>
+                    <label class="input">
+                        <i class="icon-append fa fa-calendar"></i>
+                        @Html.TextBoxFor(m => m.StartDate, new Dictionary<string, object>() { { "class", "form-control datepicker" }, { "data-dateformat", "yy-mm-dd 00:00:00" } })
+                    </label>
+                </section>
+                <section class="col col-2">
+                    <label class="label">截止日期</label>
+                    <label class="input">
+                        <i class="icon-append fa fa-calendar"></i>
+                        @Html.TextBoxFor(m => m.ExpirationDate, new Dictionary<string, object>() {
+                           { "class", "form-control datepicker" },
+                           { "data-dateformat", "yy-mm-dd 00:00:00" }
+                       })
+                    </label>
+                </section>
+                <section class="col col-1">
+                    <label class="label">&nbsp;</label>
+                    @*<button type="submit" class="btn btn-success btn-sm">查询</button>*@
+                    <input type="button" onclick="search()" class="btn btn-success btn-sm" value="查询" />
+                </section>
+            </div>
+        </div>
+    </form>
+
+
+
+
+    @*<section id="widget-grid" class="">
+        <div class="row">
+            <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-0" data-widget-editbutton="false" data-widget-colorbutton="false"
+                     data-widget-togglebutton="false"
+                     data-widget-deletebutton="false"
+                     data-widget-fullscreenbutton="false"
+                     data-widget-custombutton="false"
+                     data-widget-collapsed="false"
+                     data-widget-sortable="false">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                        <h2>@ViewBag.Title</h2>
+                    </header>
+                    <!-- widget div-->
+                    <div>
+                        <!-- widget edit box -->
+                        <div class="jarviswidget-editbox">
+                            <!-- This area used as dropdown edit box -->
+                        </div>
+                        <!-- end widget edit box -->
+                        <!-- widget content -->
+                        <div class="widget-body no-padding">
+                            <div class="table-responsive">
+                                <table class="table table-bordered">
+                                    <thead>
+
+                                        <tr>
+                                            <th>日期</th>
+                                            <th>日完成新手任务用户数</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @if (bdl.Count == 0)
+                                {
+                                            <tr>
+                                                <td class="colspan" align="center" colspan="0">
+                                                    没有找到相关记录！
+                                                </td>
+                                            </tr>
+                                }
+                                        @foreach (var item in bdl)
+                                {
+                                            <tr>
+                                                <td>@item.date.ToString(ViewBag.Format)</td>
+                                                <td>@item.count</td>
+                                            </tr>
+                                }
+                                    </tbody>
+                                </table>
+                            </div>
+
+
+
+
+
+                       
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                        </div>
+                        <!-- end widget content -->
+                    </div>
+                    <!-- end widget div -->
+                </div>
+                <!-- end widget -->
+
+            </article>
+        </div>
+    </section>*@
+
+ 
+            @Html.Partial("CountNoviceTaskGroup_PageList", ViewData["taskGroup"])
+     
+
+            @Html.Partial("CountNoviceTask_PageList", ViewData["Data"])
+        
+</div>
+
+  
+
+    @section scripts{
+        @{Html.RegisterMvcPagerScriptResource();}
+
+        @*<script src="/js/bootstrap.min.js"></script>
+        <script src="/js/select2.min.js"></script>
+        @Styles.Render("~/Style/bootstrap-datetimepicker")
+        @Scripts.Render("~/bundles/bootstrap-datetimepicker")*@
+
+
+        <script type="text/javascript">
+
+            $(document).ready(function () {
+                //$('select').select2({
+                //    allowClear: false,
+                //    minimumResultsForSearch: -1
+                //});
+                //$('.datepicker').datetimepicker({
+                //    minView: "month", //选择日期后，不会再跳转去选择时分秒
+                //    format: "yyyy-mm-dd hh:ii:ss", //选择日期后，文本框显示的日期格式
+                //    language: 'zh-CN', //汉化
+                //    autoclose: true //选择日期后自动关闭
+                //});
+
+            });
+
+
+
+        </script>
+
+    }

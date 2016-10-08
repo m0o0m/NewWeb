@@ -1,0 +1,152 @@
+﻿<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="keywords" content="棋牌游戏,515,手游">
+    <meta name="description" content="515游戏">
+    <title>充值专区-515游戏</title>
+    <link rel="stylesheet" type="text/css" href="CSS/main.css">
+    <link rel="shortcut icon" href="~/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="~/favicon.ico" type="image/x-icon">
+   <script type="text/javascript" src="Scripts/jquery.js"></script>
+    <script type="text/javascript" src="Scripts/main.js"></script>
+    <!--[if lt IE 9]>
+    <script src="Scripts/html5shiv.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+    <header class="global-header">
+        <div class="top">
+            <div class="wrap">
+                <p class="intro">五一五游戏！最专业的棋牌游戏平台！</p>
+                <ul>
+                    <!-- <li><a href="#">设为首页</a></li>
+                    <li><a href="#">保存游戏</a></li>
+                    <li><a href="#">加入收藏</a></li>
+                    <li><a href="#">注册</a></li>
+                    <li><a href="#">意见反馈</a></li> -->
+                </ul>
+            </div>
+        </div>
+        <div class="wrap">
+            <h1 class="logo"><a href="/"><img src="Image/logo.png" alt="515扑克在线"></a></h1>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="index.html">首页</a></li>
+                    <li><a href="gamecenter.html">游戏中心</a></li>
+                    <li class="active"><a href="pay.html">充值中心</a></li>
+                    <li><a href="service.html">客服中心</a></li>
+                    <li><a href="cooperation.html">加盟我们</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <section class="main-banner pay-banner"></section>
+    <!-- 充值 -->
+    <div class="main">
+        <!-- 面包屑导航 -->
+        <div class="line-title">
+            <h2 class="pay">充值专区</h2>
+            <span class="line"></span>
+            <ul class="crumb">
+                <li class="home"><a href="/"></a></li>
+                <li class="last"><a href="#">充值专区</a></li>
+            </ul>
+        </div>
+        <!-- <div style="padding-bottom:300px;">
+        <h2 style="font-size:16px;margin-top:15px;">&nbsp;&nbsp;&nbsp;&nbsp;即将开放...</h2>
+            
+        </div> -->
+        <style>
+        </style>
+        <div class="pay-wrap">
+            <ul class="pay-list">
+                <li class="active"><a href="pay.html"><span class="icon yxb"></span>充值游戏币</a><i class="arrow"></i></li>
+                <li><a href="pay5.html"><span class="icon wb"></span>充值五币</a><i class="arrow"></i></li>
+                <div class="pay-des">
+                    客服电话：4000-825-515<br/>
+                    服务时间：9:00-22:00
+                </div>
+            </ul>
+            
+            <section class="pay-area">
+                <form id="form-pay" action="pay_submit.asp" method="get">
+                    <div class="step diamond">
+                        <div class="label-group">
+                            <label class="lab">要充值的ID号：</label>
+                            <input class="user-id" name="userId" type="text" placeholder="请输入要充值的ID号">
+                            <!-- <p class="error">请输入正确的ID号</p> -->
+                        </div>
+                        <div class="label-group">
+                            <label class="lab">确认ID号：</label>
+                            <input class="user-id-again" type="text" placeholder="">
+                            <!-- <p class="error">请输入正确的ID号</p> -->
+                        </div>
+                        <div class="label-group pay">
+                            <label class="lab">充值数量：</label>
+                            <div class="custom-select js-custom-select">
+                                <!-- 初始值 -->
+                                <input class="val" name="czNum" type="hidden" val="30">
+                                <ul class="pay">
+                                    <li class="active"><a href="javascript:;" data-val="2">2 RMB=20,000游戏币</a></li>
+                                    <li><a href="javascript:;" data-val="10">10 RMB=100,000游戏币</a></li>
+                                    <li><a href="javascript:;" data-val="30">30 RMB=300,000游戏币</a></li>
+                                    <li><a href="javascript:;" data-val="50">50 RMB=500,000游戏币</a></li>
+                                    <li><a href="javascript:;" data-val="100">100 RMB=1,000,000游戏币</a></li>
+                                    <li><a href="javascript:;" data-val="500">500 RMB=5,000,000游戏币</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="label-group">
+                            <label class="lab">充值方式：</label>
+                            <div class="custom-select pay js-custom-select">
+                                <input class="val" name="czfs" type="hidden" val="zfb">
+                                <ul class="pay-platform">
+                                    <li class="active"><a href="javascript:;" data-val="zfb">支付宝</a></li>
+                                    <li><a href="javascript:;" data-val="cft">财付通</a></li>
+                                    <li><a href="javascript:;" data-val="wy">网银在线</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="label-group">
+                            <button class="btn-pay" type="submit">立即充值</button>
+                        </div>
+                    </div>
+                </form>
+            </section>
+        </div>
+    </div>
+    <div class="jion-us">
+        <h2>加入我们&nbsp;就是现在</h2>
+        <h3>CONTACT&nbsp;US</h3>
+        <a href="javascript:;" class="lx-btn">联系方式</a>
+        <div class="contact-list">
+            <div class="contact-panel">
+                <i class="icon mail"></i>
+                <h4>邮箱地址：</h4>
+                <strong>WEBMASTER@515.COM</strong>
+            </div>
+            <div class="contact-panel">
+                <i class="icon phone"></i>
+                <h4>全国免费热线：</h4>
+                <strong>4000-825-515</strong>
+            </div>
+            <div class="contact-panel">
+                <i class="icon adr"></i>
+                <h4>公司地址：</h4>
+                <strong class="adr">深圳市南山区深南大道北侧艺园路西佳嘉豪商务大厦18D</strong>
+            </div>
+        </div>
+    </div>
+    <div class="global-footer-wrap">
+        <footer class="global-footer">
+            <ul class="footer-list">
+                <li><a href="javascript:;" onclick="javascript:window.open('disclaimer.html','disclaimer','status=yes,scrollbars=no,width=350,height=400')">免责声明</a><span class="split">|</span></li>
+                <li><a href="aboutus.html">关于五一五</a></li>
+            </ul>
+            <p class="copyright">Copyright © 2011 - 2015 深圳市五一五游戏网络有限公司 <a target="_blank" href="http://www.miitbeian.gov.cn">粤ICP备14100538号-1</a></p>
+        </footer>
+    </div>
+</body>
+</html>

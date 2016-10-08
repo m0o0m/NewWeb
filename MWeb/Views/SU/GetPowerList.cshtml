@@ -1,0 +1,243 @@
+﻿
+
+
+@using GL.Data.Model
+@using GL.Data.View
+@model ResourceView
+@{
+    ViewBag.Title = "权限查询";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+
+
+}
+<style type="text/css">
+
+/* 所有class为menu的div中的ul中的li样式 */
+    .smart-form .radio, .smart-form .checkbox {
+    margin-bottom: 4px;
+    padding-left: 0px;
+    font-size: 15px;
+    line-height: 25px;
+    color: #404040;
+    cursor: pointer;
+    font-size: 13px;
+}
+
+    .tree li span {
+        -moz-border-radius: 5px;
+        -webkit-border-radius: 5px;
+        border: 0px dotted #999;
+        border-radius: 1px;
+        display: inline-block;
+        padding: 1px 1px;
+        text-decoration: none;
+    }
+
+</style>
+
+<div id="content">
+    <form id="comment-form" class="smart-form" novalidate="novalidate" method="get">
+        <div class="row">
+
+            <section class="col col-1" style="width:150px">
+                <label class="select">
+                    @Html.DropDownList("seachtype", new List<SelectListItem> {
+                    new SelectListItem{ Text = "用户账号", Value = "2", Selected = object.Equals(ViewData["seachtype"], 1) },
+                    new SelectListItem{ Text = "角色名称", Value = "1", Selected = object.Equals(ViewData["seachtype"], 2) }
+                })<i></i>
+                </label>
+            </section>
+
+
+            <section class="col col-1.2">
+                <label class="input">
+                    <i class="icon-append fa fa-calendar"></i>
+                    @Html.TextBox("Value", ViewData["Value"], new { @class = "span2", style = "border-radius:4px" })
+                </label>
+            </section>
+
+
+
+            <section class="col col-1">
+                @*<button type="submit" class="btn btn-success btn-sm">查询</button>*@
+                <input type="button" onclick="search()" class="btn btn-success btn-sm" value="查询" />
+            </section>
+
+        </div>
+    </form>
+
+    <!-- widget grid -->
+    <section id="widget-grid" class="">
+
+        <!-- row -->
+        <div class="row">
+
+
+
+            <!-- NEW WIDGET START -->
+            <article class="col-sm-12 col-md-12 col-lg-12">
+
+                <!-- Widget ID (each widget will need unique ID)-->
+                <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-1" data-widget-editbutton="false">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-sitemap"></i> </span>
+                        <h2>权限查询</h2>
+                    </header>
+                    <div>
+                        <div class="jarviswidget-editbox">
+                            <!-- This area used as dropdown edit box -->
+
+                        </div>
+                        <!-- widget div-->
+                        <!-- widget edit box -->
+                        <!-- end widget edit box -->
+                        <!-- widget content -->
+                        <div class="widget-body">
+                            <form id="subfrom" class="smart-form" action="/SU/SaveUserResource">
+                                <input type="hidden" id="userid" name="userid" value="@Model.UserID" />
+                                <fieldset>
+                                    <div class="tree smart-form menu">
+                                      
+                                        <ul>
+                                            @{
+                                                IEnumerable<Resource> datalist = (IEnumerable<Resource>)Model.DataList;
+                                                IEnumerable<Resource> datalistL1 = datalist.Where(m => m.Level == 1);
+                                                foreach (Resource item1 in datalistL1)
+                                                {
+                                                    <li style="float:left">
+                                                        <span><i class="fa fa-lg fa-minus-circle"></i> @item1.Name</span>
+                                                        @{
+                                                            IEnumerable<Resource> datalistL2 = datalist.Where(m => m.PNo == item1.No);
+                                                            if (datalistL2.Count() != 0)
+                                                            {
+                                                                <ul>
+                                                                    @{
+                                                                        foreach (Resource item2 in datalistL2)
+                                                                        {
+                                                                            IEnumerable<Resource> datalistL3 = datalist.Where(m => m.PNo == item2.No);
+                                                                            if (datalistL3.Count() != 0)
+                                                                            {
+                                                                                <li >
+                                                                                    <span><i class="fa fa-lg fa-minus-circle"></i> @item2.Name</span>
+                                                                                    <ul>
+                                                                                        @{
+                                                                                            foreach (Resource item3 in datalistL3)
+                                                                                            {
+                                                                                                <li >
+                                                                                                    <span>
+                                                                                                        <label class="checkbox inline-block">
+                                                                                                            @{
+                                                                                                                if (item3.Checked)
+                                                                                                                {
+                                                                                                                 
+                                                                                                                  <span><img src="~/images/yes.png" /></span> @item3.Name
+                                                                                                                    @*<input type="checkbox" checked="checked" value="@item3.No" name="checkbox-inline" /><i></i>@item3.Name*@
+                                                                                                                }
+                                                                                                                else
+                                                                                                                {
+                                                                                                                    <span><img src="~/images/error.png" /></span> @item3.Name
+                                                                                                                    @*<input type="checkbox" value="@item3.No" name="checkbox-inline" /><i></i>@item3.Name*@
+                                                                                                                }
+                                                                                                            }
+                                                                                                        </label>
+                                                                                                    </span>
+                                                                                                </li>
+                                                                                                                }
+                                                                                        }
+                                                                                    </ul>
+                                                                                </li>
+                                                                                                                }
+                                                                                                                else
+                                                                                                                {
+                                                                                                                    <li >
+                                                                                                                        <span>
+                                                                                                                            <label class="checkbox inline-block">
+                                                                                                                                @{
+                                                                                                                                    if (item2.Checked)
+                                                                                                                                    {
+                                                                                                                                        <span><img src="~/images/yes.png" /></span> @item2.Name
+                                                                                                                                    }
+                                                                                                                                    else
+                                                                                                                                    {
+                                                                                                                                        <span><img src="~/images/error.png" /></span> @item2.Name
+                                                                                                                                    }
+
+                                                                                                                                }
+                                                                                                                            </label>
+                                                                                                                        </span>
+                                                                                                                    </li>
+                                                                                                                                        }
+                                                                                                                                    }
+                                                                    }
+                                                                </ul>
+                                                                                                                                    }
+                                                        }
+
+
+                                                    </li>
+                                                                                                                                    }
+
+                                            }
+
+
+                                          
+                                        </ul>
+
+
+                                     </div>
+                                </fieldset>
+                              
+                            </form>
+                        </div>
+                        <!-- end widget content -->
+                        <!-- end widget div -->
+
+
+
+                    </div>
+
+                </div>
+                <!-- end widget -->
+
+            </article>
+            <!-- WIDGET END -->
+
+        </div>
+
+        <!-- end row -->
+        <!-- row -->
+
+        <div class="row">
+
+        </div>
+
+        <!-- end row -->
+
+    </section>
+    <!-- end widget grid -->
+</div>
+<script src="~/js/SmartAdmin/js/libs/jquery-2.0.2.min.js"></script>
+<script type="text/javascript">
+	// DO NOT REMOVE : GLOBAL FUNCTIONS!
+    $(function () {
+        // PAGE RELATED SCRIPTS
+
+        $('.tree > ul').attr('role', 'tree').find('ul').attr('role', 'group');
+        $('.tree').find('li:has(ul)').addClass('parent_li').attr('role', 'treeitem').find(' > span').attr('title', 'Collapse this branch').on('click', function (e) {
+            var children = $(this).parent('li.parent_li').find(' > ul > li');
+            if (children.is(':visible')) {
+                children.hide('fast');
+                $(this).attr('title', 'Expand this branch').find(' > i').removeClass().addClass('fa fa-lg fa-plus-circle');
+            } else {
+                children.show('fast');
+                $(this).attr('title', 'Collapse this branch').find(' > i').removeClass().addClass('fa fa-lg fa-minus-circle');
+            }
+            e.stopPropagation();
+        });
+
+    })
+
+
+
+</script>

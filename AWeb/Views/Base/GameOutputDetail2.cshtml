@@ -1,0 +1,309 @@
+﻿@using GL.Data.Model
+@model BaseDataView
+@{
+    Layout = null;
+
+    ViewBag.Format = "yyyy-MM-dd";
+
+    switch (Model.Groupby)
+    {
+        case groupby.按日:
+            break;
+        case groupby.按月:
+            ViewBag.Format = "yyyy-MM";
+            break;
+    }
+
+    int j = 0;
+    GameOutputDetail bdl = (GameOutputDetail)Model.BaseDataList;
+
+
+}
+<div class="GameOutputDetail">
+    <section id="widget-grid" class="">
+        <div class="row">
+            <article class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
+                <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-0" data-widget-editbutton="false" data-widget-colorbutton="false"
+                     data-widget-togglebutton="false"
+                     data-widget-deletebutton="false"
+                     data-widget-fullscreenbutton="false"
+                     data-widget-custombutton="false"
+                     data-widget-collapsed="false"
+                     data-widget-sortable="false">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                        <h2>查看筹码详细</h2>
+                    </header>
+                    <!-- widget div-->
+                    <div>
+                        <!-- widget edit box -->
+                        <div class="jarviswidget-editbox">
+                            <!-- This area used as dropdown edit box -->
+                        </div>
+                        <!-- end widget edit box -->
+                        <!-- widget content -->
+                        <div class="widget-body no-padding">
+                            <div class="table-responsive">
+                                <table class="table table-bordered">
+
+                                    <tbody>
+                                        <tr>
+                                            <td class="span3">日期</td>
+                                            <td class="span2">@bdl.date.ToString(ViewBag.Format)</td>
+                                            <td></td>
+                                            <td class="span3">系统总筹码</td>
+                                            <td class="span2">@bdl.systemBargainingChip.ToString("#,0.")</td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+
+                                            @{j = 0;
+                                                for (int i = 0; i < bdl.list.Count; i++)
+                                                {
+                                                    if (bdl.list[i].Chip == 0)
+                                                    {
+                                                        continue;
+                                                    }
+
+                                                    if (j % 2 == 0)
+                                                    {
+                                                        @Html.Raw("<tr>")
+                                                    }
+
+                                                    <td>@bdl.list[i].ChipChangeType</td>
+                                                    <td>
+                                                        @if (bdl.list[i].Chip > 0)
+                                                        {
+                                                            @bdl.list[i].Chip.ToString("#,0.")
+                                                        }
+                                                        else
+                                                        {
+                                                            <span style="color:#ee0000">@bdl.list[i].Chip.ToString("#,0.")</span>
+                                                        }
+                                                    </td>
+                                                    <td></td>
+                                                    if (j % 2 == 1)
+                                                    {
+                                                        @Html.Raw("</tr>")
+                                                    }
+
+                                                    { j = j + 1; }
+                                                }
+                                                if (j % 2 == 1)
+                                                {
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    @Html.Raw("</tr>")
+                                                }
+
+                                            }
+
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <!-- end widget content -->
+                    </div>
+                    <!-- end widget div -->
+                </div>
+                <!-- end widget -->
+
+            </article>
+        </div>
+    </section>
+
+
+
+
+
+    <section id="widget-grid" class="">
+        <div class="row">
+            <article class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
+                <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-0" data-widget-editbutton="false" data-widget-colorbutton="false"
+                     data-widget-togglebutton="false"
+                     data-widget-deletebutton="false"
+                     data-widget-fullscreenbutton="false"
+                     data-widget-custombutton="false"
+                     data-widget-collapsed="false"
+                     data-widget-sortable="false">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                        <h2>查看钻石详细</h2>
+                    </header>
+                    <!-- widget div-->
+                    <div>
+                        <!-- widget edit box -->
+                        <div class="jarviswidget-editbox">
+                            <!-- This area used as dropdown edit box -->
+                        </div>
+                        <!-- end widget edit box -->
+                        <!-- widget content -->
+                        <div class="widget-body no-padding">
+                            <div class="table-responsive">
+                                <table class="table table-bordered">
+
+                                    <tbody>
+                                        <tr>
+                                            <td class="span3">日期</td>
+                                            <td class="span2">@bdl.date.ToString(ViewBag.Format)</td>
+                                            <td></td>
+                                            <td class="span3">系统总钻石</td>
+                                            <td class="span2">@bdl.systemDiamond.ToString("#,0.")</td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            @{j = 0;
+                                                for (int i = 0; i < bdl.list.Count; i++)
+                                                {
+                                                    if (bdl.list[i].Diamond == 0)
+                                                    {
+                                                        continue;
+                                                    }
+
+                                                    if (j % 2 == 0)
+                                                    {
+                                                        @Html.Raw("<tr>")
+                                                    }
+
+                                                    <td>@bdl.list[i].ChipChangeType</td>
+                                                    <td>
+                                                        @if (bdl.list[i].Diamond > 0)
+                                                        {
+                                                            @bdl.list[i].Diamond.ToString("#,0.")
+                                                        }
+                                                        else
+                                                        {
+                                                            <span style="color:#ee0000">@bdl.list[i].Diamond.ToString("#,0.")</span>
+                                                        }
+                                                    </td>
+                                                    <td></td>
+                                                    if (j % 2 == 1)
+                                                    {
+                                                        @Html.Raw("</tr>")
+                                                    }
+
+                                                    { j = j + 1; }
+                                                }
+                                                if (j % 2 == 1)
+                                                {
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    @Html.Raw("</tr>")
+                                                }
+
+                                            }
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <!-- end widget content -->
+                    </div>
+                    <!-- end widget div -->
+                </div>
+                <!-- end widget -->
+
+            </article>
+        </div>
+    </section>
+
+
+
+
+
+
+    <section id="widget-grid" class="">
+        <div class="row">
+            <article class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
+                <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-0" data-widget-editbutton="false" data-widget-colorbutton="false"
+                     data-widget-togglebutton="false"
+                     data-widget-deletebutton="false"
+                     data-widget-fullscreenbutton="false"
+                     data-widget-custombutton="false"
+                     data-widget-collapsed="false"
+                     data-widget-sortable="false">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                        <h2>查看积分详细</h2>
+                    </header>
+                    <!-- widget div-->
+                    <div>
+                        <!-- widget edit box -->
+                        <div class="jarviswidget-editbox">
+                            <!-- This area used as dropdown edit box -->
+                        </div>
+                        <!-- end widget edit box -->
+                        <!-- widget content -->
+                        <div class="widget-body no-padding">
+                            <div class="table-responsive">
+                                <table class="table table-bordered">
+
+                                    <tbody>
+                                        <tr>
+                                            <td class="span3">日期</td>
+                                            <td class="span2">@bdl.date.ToString(ViewBag.Format)</td>
+                                            <td></td>
+                                            <td class="span3">系统总积分</td>
+                                            <td class="span2">@bdl.systemScore.ToString("#,0.")</td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            @{j = 0;
+                                                for (int i = 0; i < bdl.list.Count; i++)
+                                                {
+                                                    if (bdl.list[i].Score == 0)
+                                                    {
+                                                        continue;
+                                                    }
+
+                                                    if (j % 2 == 0)
+                                                    {
+                                                        @Html.Raw("<tr>")
+                                                    }
+
+                                                    <td>@bdl.list[i].ChipChangeType</td>
+                                                    <td>
+                                                        @if (bdl.list[i].Score > 0)
+                                                        {
+                                                            @bdl.list[i].Score.ToString("#,0.")
+                                                        }
+                                                        else
+                                                        {
+                                                            <span style="color:#ee0000">@bdl.list[i].Score.ToString("#,0.")</span>
+                                                        }
+                                                    </td>
+                                                    <td></td>
+                                                    if (j % 2 == 1)
+                                                    {
+                                                        @Html.Raw("</tr>")
+                                                    }
+
+                                                    { j = j + 1; }
+                                                }
+                                                if (j % 2 == 1)
+                                                {
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    @Html.Raw("</tr>")
+                                                }
+
+                                            }
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <!-- end widget content -->
+                    </div>
+                    <!-- end widget div -->
+                </div>
+                <!-- end widget -->
+
+            </article>
+        </div>
+    </section>
+</div>

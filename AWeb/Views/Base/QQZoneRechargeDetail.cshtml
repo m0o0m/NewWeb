@@ -1,0 +1,108 @@
+﻿
+
+@using Webdiyer.WebControls.Mvc;
+@using GL.Data.Model;
+@model IEnumerable<QQZoneRechargeCountDetail>
+@{
+    Layout = null;
+
+
+}
+
+<div class="detail">
+    <div class="row-fluid">
+        <div class="widget-box" id="box">
+
+            <section id="widget-grid" class="">
+                <div class="row">
+                    <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-0" data-widget-editbutton="false" data-widget-colorbutton="false"
+                             data-widget-togglebutton="false"
+                             data-widget-deletebutton="false"
+                             data-widget-fullscreenbutton="false"
+                             data-widget-custombutton="false"
+                             data-widget-collapsed="false"
+                             data-widget-sortable="false">
+                            <header>
+                                <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+
+                                <h2 id="tit"></h2>
+                            </header>
+                            <!-- widget div-->
+                            <div>
+                                <!-- widget edit box -->
+                                <div class="jarviswidget-editbox">
+                                    <!-- This area used as dropdown edit box -->
+                                </div>
+                                <!-- end widget edit box -->
+                                <!-- widget content -->
+                                <div class="widget-body no-padding">
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered">
+                                            <thead>
+                                                <tr><th style="font-size: 14px;color:black" colspan="11">@ViewData["AllCount"]</th></tr>
+                                                <tr>
+                                                    <th>用户ID</th>
+                                                    <th>用户昵称</th>
+                                                    <th>充值总额</th>
+                                                    <th></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @if (Model.Count() == 0)
+            {
+                                                    <tr class="gradeX">
+                                                        <td class="colspan" align="center" colspan="0">
+                                                            没有找到相关记录！
+                                                        </td>
+                                                    </tr>
+                                                }
+                                                @foreach (QQZoneRechargeCountDetail m in Model)
+                                                {
+                                                    <tr class="gradeA">
+                                                        <td>@m.UserID</td>
+                                                        <td>@m.NickName</td>
+                                                        <td>
+                                                        @Math.Round(Convert.ToDecimal(m.Total), 2).ToString()
+                                                        </td>
+                                                        <td style="text-align:center"></td>
+                                                    </tr>
+
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                </div>
+                                <!-- end widget content -->
+                            </div>
+                            <!-- end widget div -->
+                        </div>
+                        <!-- end widget -->
+
+                    </article>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+
+   

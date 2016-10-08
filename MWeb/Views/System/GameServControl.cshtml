@@ -1,0 +1,232 @@
+﻿@{
+    ViewBag.Title = "服务控制";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+
+<section id="widget-grid" class="">
+    <div class="row">
+        <article class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
+            <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-0" data-widget-editbutton="false" data-widget-colorbutton="false"
+                 data-widget-togglebutton="false"
+                 data-widget-deletebutton="false"
+                 data-widget-fullscreenbutton="false"
+                 data-widget-custombutton="false"
+                 data-widget-collapsed="false"
+                 data-widget-sortable="false">
+                <header>
+                    <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                    <h2>系统玩法开关</h2>
+                </header>
+                <!-- widget div-->
+                <div>
+                    <!-- widget edit box -->
+                    <div class="jarviswidget-editbox">
+                        <!-- This area used as dropdown edit box -->
+                    </div>
+                    <!-- end widget edit box -->
+                    <!-- widget content -->
+                    <div class="widget-body no-padding">
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <tbody>
+                                        <tr>
+                                            <td>
+                                                <div class="form-group">
+
+                                                    <div class="col-md-2 control-label" >
+                                                        <div class="user-thumb"> 中发白抢红包 </div>
+                                                    </div>
+                                                    <div class="col-md-10">
+                                                        <input type="button" value="修改" class="btn btn-danger btn-xs" onclick="return btngo(0);" />
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+
+                                    <tr>
+                                        <td>
+                                            <div class="form-group">
+                                                <div class="col-md-2 control-label">
+                                                    <div class="user-thumb"> 德州金银宝盆 </div>
+                                                </div>
+                                                <div class="col-md-10">
+                                                    <input type="button" value="修改" class="btn btn-danger btn-xs" onclick="return btngo(1);" />
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+
+
+                                    <tr>
+                                        <td>
+                                            <div class="form-group">
+                                                <div class="col-md-2 control-label">
+                                                    <div class="user-thumb"> 德州ip限制 </div>
+                                                </div>
+                                                <div class="col-md-10">
+                                                    <input type="button" value="修改" class="btn btn-danger btn-xs" onclick="return btngo(2);" />
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                    @*<tr>
+                                        <td>
+                                            <div class="form-group">
+                                                <div class="col-md-2 control-label">
+                                                    <div class="user-thumb"> 轮盘抽奖开关 </div>
+                                                </div>
+                                                <div class="col-md-10">
+                                                    <input type="button" value="修改" class="btn btn-danger btn-xs" onclick="return btngo(3);" />
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>*@
+                                    <tr>
+                                        <td>
+                                            <div class="form-group">
+                                                <div class="col-md-2 control-label">
+                                                    <div class="user-thumb"> 中发白大彩池 </div>
+                                                </div>
+                                                <div class="col-md-10">
+                                                    <input type="button" value="修改" class="btn btn-danger btn-xs" onclick="return btngo(4);" />
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="form-group">
+                                                <div class="col-md-2 control-label">
+                                                    <div class="user-thumb"> 百人德州大彩池 </div>
+                                                </div>
+                                                <div class="col-md-10">
+                                                    <input type="button" value="修改" class="btn btn-danger btn-xs" onclick="return btngo(5);" />
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    @*<tr>
+                                        <td>
+                                            <div class="form-group">
+                                                <div class="col-md-2 control-label">
+                                                    <div class="user-thumb"> 游客新账号注册 </div>
+                                                </div>
+                                                <div class="col-md-10">
+                                                    <input type="button" value="修改" class="btn btn-danger btn-xs" onclick="return btngo(6);" />
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>*@
+                                    <tr>
+                                        <td>
+                                            <div class="form-group">
+                                                <div class="col-md-2 control-label">
+                                                    <div class="user-thumb"> 感恩返利开关 </div>
+                                                </div>
+                                                <div class="col-md-10">
+                                                    <input type="button" value="修改" class="btn btn-danger btn-xs" onclick="return btngo(7);" />
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="form-group">
+                                                <div class="col-md-2 control-label">
+                                                    <div class="user-thumb"> 翻翻乐开关 </div>
+                                                </div>
+                                                <div class="col-md-10">
+                                                    <input type="button" value="修改" class="btn btn-danger btn-xs" onclick="return btngo(8);" />
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="form-group">
+                                                <div class="col-md-2 control-label">
+                                                    <div class="user-thumb"> 中秋返利开关 </div>
+                                                </div>
+                                                <div class="col-md-10">
+                                                    <input type="button" value="修改" class="btn btn-danger btn-xs" onclick="return btngo(9);" />
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- end widget content -->
+                </div>
+                <!-- end widget div -->
+            </div>
+            <!-- end widget -->
+
+        </article>
+    </div>
+</section>
+
+
+
+
+
+@section scripts{
+
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/select2.min.js"></script>
+
+    <script type="text/javascript">
+        function btngo(obj) {
+            switch (obj) {
+                case 0:
+                    location.href = "/System/RedevenlopeGameControl";
+                    break;
+                case 1:
+                    location.href = "/System/PotGameControl";
+                    break;
+                case 2:
+                    location.href = "/System/PotGameIpControl";
+                    break;
+                case 3:
+                    location.href = "/System/LunPanControl";
+                    break;
+                case 4:
+                    location.href = "/System/ZFBPotControl";
+                    break;
+                case 5:
+                    location.href = "/System/TexProControl";
+                    break;
+                case 6:
+                    location.href = "/System/YouKeControl";
+                    break;
+                case 7:
+                    location.href = "/System/ThanksGivingControl";
+                    break;
+                case 8:
+                    location.href = "/System/HerocraftTwiceControl";
+                    break;
+                case 9:
+                    location.href = "/System/MFestivalGivingControl";
+                    break;
+                default:
+
+            }
+            return false;
+        }
+
+
+
+    // resets the menu selection upon entry to this page:
+    function resetMenu() {
+        document.gomenu.selector.selectedIndex = 2;
+    }
+
+
+
+    </script>
+}

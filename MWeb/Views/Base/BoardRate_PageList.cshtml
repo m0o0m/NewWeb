@@ -1,0 +1,236 @@
+﻿@using Webdiyer.WebControls.Mvc;
+@using GL.Data.Model;
+@using GL.Data.BLL;
+@model PagedList<BoardDist>
+
+<script src="~/Scripts/jquery-2.1.4.min.js"></script>
+<script type="text/javascript">
+    function successPageFun() {
+        $("#trBody tr td").each(function () {
+            var td = $(this).text();
+            if (td.indexOf('%') >= 0) {
+                var d = td.split('%');
+                var res = parseInt(d[0]);
+               
+                switch (true) {
+                    case res <= 0: $(this).css("backgroundColor", "rgb(237,246,239)"); break;
+                    case res <= 5: $(this).css("backgroundColor", "rgb(224,238,227)"); break;
+                    case res <= 10: $(this).css("backgroundColor", "rgb(205,226,209)"); break;
+                    case res <= 15: $(this).css("backgroundColor", "rgb(187,216,193)"); break;
+                    case res <= 20: $(this).css("backgroundColor", "rgb(170,209,178)"); break;
+                    case res <= 25: $(this).css("backgroundColor", "rgb(159,204,168)"); break;
+                    case res <= 30: $(this).css("backgroundColor", "rgb(145,195,153)"); break;
+                    case res <= 35: $(this).css("backgroundColor", "rgb(136,190,144)"); break;
+                    case res <= 40: $(this).css("backgroundColor", "rgb(125,182,133)"); break;
+                    case res <= 45: $(this).css("backgroundColor", "rgb(120,179,128)"); break;
+                    case res <= 50: $(this).css("backgroundColor", "rgb(115,174,123)"); break;
+                    case res <= 55: $(this).css("backgroundColor", "rgb(105,165,113)"); break;
+                    case res <= 60: $(this).css("backgroundColor", "rgb(93,155,101)"); break;
+                    case res <= 65: $(this).css("backgroundColor", "rgb(83,149,91)"); break;
+                    case res <= 70: $(this).css("backgroundColor", "rgb(74,141,82)"); break;
+                    case res <= 75: $(this).css("backgroundColor", "rgb(65,136,74)"); break;
+                    case res <= 80: $(this).css("backgroundColor", "rgb(55,127,64)"); break;
+                    case res <= 85: $(this).css("backgroundColor", "rgb(46,121,55)"); break;
+                    case res <= 90: $(this).css("backgroundColor", "rgb(37,114,46)"); break;
+
+                    case res <= 100: $(this).css("backgroundColor", "rgb(31,107,40)"); break;
+                }
+
+            }
+
+        });
+    }
+
+
+    $(function () {
+
+      
+        successPageFun();
+      
+    });
+</script>
+
+
+
+
+<section id="widget-grid" class="">
+    <div class="row">
+        <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-0" data-widget-editbutton="false" data-widget-colorbutton="false"
+                 data-widget-togglebutton="false"
+                 data-widget-deletebutton="false"
+                 data-widget-fullscreenbutton="false"
+                 data-widget-custombutton="false"
+                 data-widget-collapsed="false"
+                 data-widget-sortable="false">
+                <header>
+                    <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                    <h2>牌局留存率</h2>
+                </header>
+                <!-- widget div-->
+                <div>
+                    <!-- widget edit box -->
+                    <div class="jarviswidget-editbox">
+                        <!-- This area used as dropdown edit box -->
+                    </div>
+                    <!-- end widget edit box -->
+                    <!-- widget content -->
+                    <div class="widget-body no-padding">
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <thead>
+
+                                    <tr>
+                                        <th rowspan="2">日期</th>
+                                        <th rowspan="2">新增用户</th>
+                                        <th>0局</th>
+                                        <th>1局</th>
+                                        <th>2局</th>
+                                        <th>3局</th>
+                                        <th>4局</th>
+                                        <th>5局</th>
+                                        <th>6-10局</th>
+                                        <th>11-15局</th>
+                                        <th>16-20局</th>
+                                        <th>21-25局</th>
+                                        <th>26-30局</th>
+                                        <th>31-35局</th>
+                                        <th>36-40局</th>
+                                        <th>41-45局</th>
+                                        <th>46-50局</th>
+                                        <th>50+局</th>
+                                    </tr>
+                                    <tr>
+                                        <th>次日留存</th>
+                                        <th>次日留存</th>
+                                        <th>次日留存</th>
+                                        <th>次日留存</th>
+                                        <th>次日留存</th>
+                                        <th>次日留存</th>
+                                        <th>次日留存</th>
+                                        <th>次日留存</th>
+                                        <th>次日留存</th>
+                                        <th>次日留存</th>
+                                        <th>次日留存</th>
+                                        <th>次日留存</th>
+                                        <th>次日留存</th>
+                                        <th>次日留存</th>
+                                        <th>次日留存</th>
+                                        <th>次日留存</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="trBody">
+                                    @if (Model.Count == 0)
+            {
+                                        <tr class="gradeX">
+                                            <td class="colspan" align="center" colspan="0">
+                                                没有找到相关记录！
+                                            </td>
+                                        </tr>
+                                    }
+                                    @foreach (BoardDist m in Model)
+                                    {
+                                        <tr>
+                                            <td >@m.CreateTime</td>
+                                            <td >@m.NewAddUser</td>
+                                            <td>@m.Board0%</td>
+                                            <td>@m.Board1%</td>
+                                            <td>@m.Board2%</td>
+                                            <td>@m.Board3%</td>
+                                            <td>@m.Board4%</td>
+                                            <td>@m.Board5%</td>
+                                            <td>@m.Board6_10%</td>
+                                            <td>@m.Board11_15%</td>
+                                            <td>@m.Board16_20%</td>
+                                            <td>@m.Board21_25%</td>
+                                            <td>@m.Board26_30%</td>
+                                            <td>@m.Board31_35%</td>
+                                            <td>@m.Board36_40%</td>
+                                            <td>@m.Board41_45%</td>
+                                            <td>@m.Board46_50%</td>
+                                            <td>@m.BoardMore50%</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+
+
+
+
+
+
+
+
+                        <div class="widget-content">
+
+                            @Ajax.Pager(
+    Model,
+    new PagerOptions()
+    {
+        CssClass = "pager",
+        ShowMorePagerItems = true,
+        PageIndexParameterName = "page",
+        ShowDisabledPagerItems = true,
+        AlwaysShowFirstLastPageNumber = true,
+        //ShowRecordCountItems = true,
+        HorizontalAlign = "right",
+        //SeparatorHtml = "",
+
+        CurrentPagerItemTemplate = "<li class=\"disabled\"><span>{0}</span></li>",
+        DisabledPagerItemTemplate = "<li class=\"disabled\"><span>{0}</span></li>",
+        PagerItemTemplate = "<li>{0}</li>",
+        //CurrentPagerItemWrapperFormatString = "<li class=\"disabled\"><span>{0}</span></li>",
+        //NumericPagerItemWrapperFormatString = "<li>{0}</li>",
+        //PagerItemWrapperFormatString = "<li>{0}</li>",
+        //RecordCountText = string.Format("共{0}条记录, {1}页", Model.TotalItemCount, Model.TotalPageCount),
+        //RecordCountFormatString = "<li><span>{0}</span></li>",
+        //DisabledPagerItemsFormatString = "<li class=\"disabled\"><span>{0}</span></li>",
+        //PageIndexBoxType = Webdiyer.WebControls.Mvc.PageIndexBoxType.TextBox,
+        //GoButtonText = "跳转到",
+        ShowPrevNext = true,
+        FirstPageText = "第一页",
+        LastPageText = "最后一页",
+        ContainerTagName = "ul",
+        PageIndexBoxId = "pageindexcm",
+        WYWPageIndexString = @"<li><input style='width:50px;' type='text' value='' id='{0}' name = '{1}'></li>
+                                 <li><a id='goto' name='goto' style='margin-right:10px' >跳转</a><li>
+                             ",
+        GoToButtonId = "goto"
+    },
+    new MvcAjaxOptions
+    {
+        HttpMethod = "POST",
+        UpdateTargetId = "box",
+        InsertionMode = InsertionMode.Replace,
+        OnFailure = "errFunc",
+        OnSuccess = "successPageFun"
+    })
+                        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    </div>
+                    <!-- end widget content -->
+                </div>
+                <!-- end widget div -->
+            </div>
+            <!-- end widget -->
+
+        </article>
+    </div>
+</section>

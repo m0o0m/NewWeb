@@ -1,0 +1,80 @@
+﻿@model RoleViewModel
+@{
+    ViewBag.Title = "权限管理 -- 添加";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="content">
+
+
+
+    <div class="row">
+        <article class="col-sm-12 col-md-12 col-lg-6">
+            <div class="jarviswidget" id="wid-id-4" data-widget-editbutton="false" data-widget-custombutton="false">
+                <header>
+                    <span class="widget-icon"> <i class="fa fa-edit"></i> </span>
+                    <h2>添加权限</h2>
+                </header>
+                <div>
+                    <div class="jarviswidget-editbox">
+                    </div>
+                    <div class="widget-body">
+
+                        @using (Html.BeginForm("RoleForCreate", "Agent", FormMethod.Post, new { @class = "form-horizontal" }))
+                        {
+                            @Html.AntiForgeryToken()
+
+                            if (ViewData.ModelState[""] != null && ViewData.ModelState[""].Errors.Count > 0)
+                            {
+                                <div class="alert alert-danger alert-block">
+                                    <a class="close" data-dismiss="alert" href="#">×</a>
+                                    <h4 class="alert-heading">Error!</h4>
+                                    @Html.ValidationSummary(true)
+                                </div>
+                            }
+                            <fieldset>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.RoleName, new { @class = "col-md-1 control-label" })
+                                    <div class="col-md-11">
+                                        <div class="input-group">
+                                            @Html.EditorFor(model => model.RoleName, new { htmlAttributes = new { @class = "form-control" } })
+                                            <span class="input-group-addon"><i class="fa fa-edit"></i></span>
+                                        </div>
+                                        @Html.ValidationMessageFor(model => model.RoleName)
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Description, new { @class = "col-md-1 control-label" })
+                                    <div class="col-md-11">
+                                        <div class="input-group">
+                                            @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                                            <span class="input-group-addon"><i class="fa fa-edit"></i></span>
+                                        </div>
+                                        @Html.ValidationMessageFor(model => model.Description)
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <div class="form-actions">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <input type="submit" value="提交" class="btn btn-primary" />
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        }
+                    </div>
+                    <!-- end widget content -->
+
+                </div>
+                <!-- end widget div -->
+
+            </div>
+
+        </article>
+
+    </div>
+</div>
+

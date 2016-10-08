@@ -1,0 +1,108 @@
+﻿@using GL.Data.Model
+@model BaseDataView
+@{
+    Layout = null;
+    ViewBag.Title = "注册详情";
+
+    ViewBag.Format = "yyyy-mm-dd 00:00:00";
+    switch (Model.Groupby)
+    {
+        case groupby.按日:
+            break;
+        case groupby.按月:
+            ViewBag.Format = "yyyy-MM";
+            break;
+    }
+    List<BaseDataInfo> bdl = (List<BaseDataInfo>)Model.BaseDataList;
+   
+  
+}
+
+<script type="text/javascript">
+    $(function () {
+        @{ Ajax.LoadMvcPagerScript(); }
+    });
+</script>
+
+    <section id="widget-grid" class="detail">
+        <div class="row">
+            <article class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
+                <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-0" data-widget-editbutton="false" data-widget-colorbutton="false"
+                     data-widget-togglebutton="false"
+                     data-widget-deletebutton="false"
+                     data-widget-fullscreenbutton="false"
+                     data-widget-custombutton="false"
+                     data-widget-collapsed="false"
+                     data-widget-sortable="false">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                        <h2>注册详情</h2>
+                    </header>
+                    <!-- widget div-->
+                    <div>
+                        <!-- widget edit box -->
+                        <div class="jarviswidget-editbox">
+                            <!-- This area used as dropdown edit box -->
+                        </div>
+                        <!-- end widget edit box -->
+                        <!-- widget content -->
+                        <div class="widget-body no-padding">
+                            <div class="table-responsive">
+                                <table class="table table-bordered">
+                                    <thead>
+
+                                        <tr>
+                                            <th>小时</th>
+                                            <th>小时内注册用户数</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @if (bdl.Count == 0)
+                                        {
+                                            <tr>
+                                                <td class="colspan" align="center" colspan="0">
+                                                    没有找到相关记录！
+                                                </td>
+                                            </tr>
+                                        }
+                                        @foreach (var item in bdl)
+                                        {
+                                            int h = Convert.ToInt32(item.Hour);
+                                            int h2 = h + 1;
+                                            string hs = h + ":00";
+                                            string hs2 = h2 + ":00";
+                                            <tr>
+                                                @if (item.Hour == "0")
+                                                {
+                                                    <td>0:00-1:00</td>
+                                                }
+                                                else if (item.Hour == "23")
+                                                {
+                                                    <td>23:00-24:00</td>
+                                                }
+                                                else
+                                                {
+                                                    <td>@hs-@hs2</td>
+                                                }
+
+                                                <td>@item.count</td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <!-- end widget content -->
+                    </div>
+                    <!-- end widget div -->
+                </div>
+                <!-- end widget -->
+
+            </article>
+        </div>
+    </section>
+
+
+
+
+

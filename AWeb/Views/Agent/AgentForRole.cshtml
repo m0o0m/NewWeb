@@ -1,0 +1,110 @@
+﻿@model SelectUserRolesViewModel
+@{
+    ViewBag.Title = "管理员管理 -- 权限设置";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div id="content">
+    <div class="row">
+        <article class="col-sm-12 col-md-12 col-lg-6">
+            <div class="jarviswidget" id="wid-id-4" data-widget-editbutton="false" data-widget-custombutton="false">
+                <header>
+                    <span class="widget-icon"> <i class="fa fa-edit"></i> </span>
+                    <h2>设置管理员权限</h2>
+                </header>
+                <div>
+                    <div class="jarviswidget-editbox">
+                    </div>
+                    <div class="widget-body">
+                        @using (Html.BeginForm("AgentForRole", "Agent", FormMethod.Post, new { @class = "form-horizontal" }))
+                        {
+                            @Html.AntiForgeryToken()
+
+                            if (ViewData.ModelState[""] != null && ViewData.ModelState[""].Errors.Count > 0)
+                            {
+                                <div class="alert alert-danger alert-block">
+                                    <a class="close" data-dismiss="alert" href="#">×</a>
+                                    <h4 class="alert-heading">Error!</h4>
+                                    @Html.ValidationSummary(true)
+                                </div>
+                            }
+                            <fieldset>
+                                <legend>账号信息</legend>
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.UserName, "管理员账号", new { @class = "col-md-2 control-label" })
+                                    <div class="col-md-10">
+                                        @Html.HiddenFor(m => m.UserName)
+                                        @Html.Hidden("ReturnUrl")
+                                        <div class="input-group">
+                                            <span class="form-control">@Model.UserName</span>
+                                            <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <legend>选择账号权限</legend>
+
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.Roles)
+                                </div>
+
+                                <hr />
+                            </fieldset>
+                            <div class="form-actions">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <input type="submit" value="提交" class="btn btn-primary" />
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        }
+
+
+                    </div>
+
+                </div>
+            </div>
+
+        </article>
+
+    </div>
+</div>
+
+@section scripts{
+
+    <script type="text/javascript">
+
+        function btnSubmit(obj) {
+            _this = $(obj).parent().parent();
+
+            $.ajax({
+                url: "/Agent/AgentForRole/",
+                type: "POST",
+                dataType: "JSON",
+                data: $('#subfrom').serialize(),
+                success: function (data) {
+                    switch (data.result) {
+                        case 0:
+                            location.href = "/Agent/AgentList";
+                            break;
+                        case 200:
+                            alert("值不能为空，请稍后再试");
+                            break;
+                        default:
+                            alert(data.msg);
+                            break;
+                    }
+                }
+            }).fail(function (xhr, textStatus, err) {
+                alert('Error: ' + err);
+            });
+
+            return false;
+
+        }
+
+    </script>
+}

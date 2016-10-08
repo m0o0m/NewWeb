@@ -1,0 +1,293 @@
+﻿@using Webdiyer.WebControls.Mvc;
+@using GL.Data.Model;
+@using GL.Data.BLL;
+@model MonthReport
+
+
+
+
+
+
+
+<section id="widget-grid" class="">
+    <div class="row">
+        <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-0" data-widget-editbutton="false" data-widget-colorbutton="false"
+                 data-widget-togglebutton="false"
+                 data-widget-deletebutton="false"
+                 data-widget-fullscreenbutton="false"
+                 data-widget-custombutton="false"
+                 data-widget-collapsed="false"
+                 data-widget-sortable="false">
+                <header>
+                    <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                    <h2>月报</h2>
+                </header>
+                <!-- widget div-->
+                <div>
+                    <!-- widget edit box -->
+                    <div class="jarviswidget-editbox">
+                        <!-- This area used as dropdown edit box -->
+                    </div>
+                    <!-- end widget edit box -->
+                    <!-- widget content -->
+                    <div class="widget-body no-padding">
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <tbody>
+                                    <tr>
+                                        <td>日期&nbsp;<span id="refresh" class="" data-title="refresh" rel="tooltip" data-placement="bottom" data-original-title="<i class=''></i>本月，上月，上一年 " data-html="true" data-reset-msg="Would you like to RESET all your saved widgets and clear LocalStorage?"><i class="fa fa-question "></i></span> </span>
+                                        </td>
+                                        <td>@Model.MonthTime</td>
+                                        <td>@Model.LmMonthTime</td>
+                                        <td>同比&nbsp;<span id="refresh" class="" data-title="refresh" rel="tooltip" data-placement="bottom" data-original-title="<i class=''></i> (本月-上月)/上月 " data-html="true" data-reset-msg="Would you like to RESET all your saved widgets and clear LocalStorage?"><i class="fa fa-question "></i></span> </span>
+                                        </td>
+                                        <td>@Model.LyMonthTime</td>
+                                        <td>环比&nbsp;<span id="refresh" class="" data-title="refresh" rel="tooltip" data-placement="bottom" data-original-title="<i class=''></i> （本月-1年前同个月份）/1年前同个月份 " data-html="true" data-reset-msg="Would you like to RESET all your saved widgets and clear LocalStorage?"><i class="fa fa-question "></i></span> </span>
+                                        </td>
+
+                                    </tr>
+                                    <tr>
+                                        <td>月新增&nbsp;<span id="refresh" class="" data-title="refresh" rel="tooltip" data-placement="bottom" data-original-title="<i class=''></i> 本月总新增量 " data-html="true" data-reset-msg="Would you like to RESET all your saved widgets and clear LocalStorage?"><i class="fa fa-question "></i></span> </span>
+                                        </td>
+                                        <td>@Model.MonthAdd</td>
+                                        <td>@Model.LmMonthAdd</td>
+                                        <td>
+                                            @{
+                                                string zhouxinzeng = "0.00%";
+                                                if (Model.LmMonthAdd > 0)
+                                                {
+                                                    zhouxinzeng = String.Format("{0:F}", (Model.MonthAdd - Model.LmMonthAdd) * 100 / Model.LmMonthAdd) + "%";//默认为保留两位
+
+                                                }
+
+                                            }
+
+                                            @zhouxinzeng
+                                        </td>
+                                        <td>@Model.LyMonthAdd</td>
+                                        <td>
+                                            @{
+                                                string zhouxinzengH = "0.00%";
+                                                if (Model.LyMonthAdd > 0)
+                                                {
+                                                    zhouxinzengH = String.Format("{0:F}", (Model.MonthAdd - Model.LyMonthAdd) * 100 / Model.LyMonthAdd) + "%";//默认为保留两位
+
+                                                }
+
+                                            }
+
+                                            @zhouxinzengH
+
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>月登录&nbsp;<span id="refresh" class="" data-title="refresh" rel="tooltip" data-placement="bottom" data-original-title="<i class=''></i> 本月总登陆量（去重，即某用户今日登陆，明天再登陆，仅算1人） " data-html="true" data-reset-msg="Would you like to RESET all your saved widgets and clear LocalStorage?"><i class="fa fa-question "></i></span> </span>
+                                        </td>
+                                        <td>@Model.MonthLogin</td>
+                                        <td>@Model.LmMonthLogin</td>
+                                        <td>
+                                            @{
+                                                string zhoudenglu = "0.00%";
+                                                if (Model.LmMonthLogin > 0)
+                                                {
+                                                    zhoudenglu = String.Format("{0:F}", (Model.MonthLogin - Model.LmMonthLogin) * 100 / Model.LmMonthLogin) + "%";//默认为保留两位
+
+                                                }
+
+                                            }
+
+                                            @zhoudenglu
+
+                                        </td>
+                                        <td>@Model.LyMonthLogin</td>
+                                        <td>
+                                            @{
+                                                string zhoudengluH = "0.00%";
+                                                if (Model.LyMonthLogin > 0)
+                                                {
+                                                    zhoudengluH = String.Format("{0:F}", (Model.MonthLogin - Model.LyMonthLogin) * 100 / Model.LyMonthLogin) + "%";//默认为保留两位
+
+                                                }
+
+                                            }
+
+                                            @zhoudengluH
+
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>月付费率&nbsp;<span id="refresh" class="" data-title="refresh" rel="tooltip" data-placement="bottom" data-original-title="<i class=''></i> 本月付费用户数（去重）/月登陆（去重） " data-html="true" data-reset-msg="Would you like to RESET all your saved widgets and clear LocalStorage?"><i class="fa fa-question "></i></span> </span>
+                                        </td>
+                                        <td>
+                                            @{
+                                                string zhoufufeilv = "0.00%";
+                                                if (Model.MonthLogin > 0)
+                                                {
+                                                    zhoufufeilv = String.Format("{0:F}", (Model.MonthPayCount * 100 / Model.MonthLogin)) + "%";//默认为保留两位
+
+                                                }
+
+                                            }
+
+                                            @zhoufufeilv
+                                        </td>
+                                        <td>
+                                            @{
+                                                string zhoufufeilvL = "0.00%";
+                                                if (Model.LmMonthLogin > 0)
+                                                {
+                                                    zhoufufeilvL = String.Format("{0:F}", (Model.LmMonthPayCount * 100 / Model.LmMonthLogin)) + "%";//默认为保留两位
+
+                                                }
+
+                                            }
+
+                                            @zhoufufeilvL
+                                        </td>
+                                        <td>
+                                            @{
+                                                string zhoufufeilvT = "0.00%";
+                                                if (Model.LmMonthLogin > 0 && Model.MonthLogin>0)
+                                                {
+                                                    zhoufufeilvT = String.Format("{0:F}", (
+                                                        (Model.MonthPayCount / Model.MonthLogin - Model.LmMonthPayCount / Model.LmMonthLogin) * 100) /
+                                                        (Model.LmMonthPayCount / Model.LmMonthLogin)
+
+                                                        ) + "%";//默认为保留两位
+
+                                                }
+
+                                            }
+
+                                            @zhoufufeilvT
+
+                                        </td>
+                                        <td>
+                                            @{
+                                            string zhoufufeilvLm = "0.00%";
+                                            if (Model.LyMonthLogin > 0)
+                                            {
+                                                zhoufufeilvLm = String.Format("{0:F}", (Model.LyMonthPayCount * 100 / Model.LyMonthLogin)) + "%";//默认为保留两位
+
+                                            }
+
+                                        }
+
+                                        @zhoufufeilvLm
+                                    </td>
+                                    <td>
+                                        @{
+                                            string zhoufufeilvH = "0.00%";
+                                            if (Model.LyMonthLogin > 0)
+                                            {
+                                                zhoufufeilvH = String.Format("{0:F}", (
+                                                                                        (Model.MonthPayCount / Model.MonthLogin - Model.LyMonthPayCount / Model.LyMonthLogin) * 100) /
+                                                                                        (Model.LyMonthPayCount / Model.LyMonthLogin)
+
+                                                                                        ) + "%";//默认为保留两位
+
+                                            }
+
+                                        }
+
+                                        @zhoufufeilvH
+
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>月累计付费人数&nbsp;<span id="refresh" class="" data-title="refresh" rel="tooltip" data-placement="bottom" data-original-title="<i class=''></i> 本月累计付费的人数（去重） " data-html="true" data-reset-msg="Would you like to RESET all your saved widgets and clear LocalStorage?"><i class="fa fa-question "></i></span> </span>
+                                    </td>
+                                    <td>@Model.MonthPayCount</td>
+                                    <td>@Model.LmMonthPayCount</td>
+                                    <td>
+                                        @{
+                                            string zhoufufeiRenShuT = "0.00%";
+                                            if (Model.LmMonthPayCount > 0)
+                                            {
+                                                zhoufufeiRenShuT = String.Format("{0:F}", (Model.MonthPayCount - Model.LmMonthPayCount) * 100 / Model.LmMonthPayCount) + "%";//默认为保留两位
+
+                                            }
+
+                                        }
+
+
+                                        @zhoufufeiRenShuT
+
+
+                                    </td>
+                                    <td>@Model.LyMonthPayCount</td>
+                                    <td>
+                                        @{
+                                            string zhoufufeiRenShuH = "0.00%";
+                                            if (Model.LyMonthPayCount > 0)
+                                            {
+                                                zhoufufeiRenShuH = String.Format("{0:F}", (Model.MonthPayCount - Model.LyMonthPayCount) * 100 / Model.LyMonthPayCount) + "%";//默认为保留两位
+
+                                            }
+
+                                        }
+
+
+                                        @zhoufufeiRenShuH
+
+
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>月付费总额&nbsp;<span id="refresh" class="" data-title="refresh" rel="tooltip" data-placement="bottom" data-original-title="<i class=''></i> 本月累计收入 " data-html="true" data-reset-msg="Would you like to RESET all your saved widgets and clear LocalStorage?"><i class="fa fa-question "></i></span> </span>
+                                    </td>
+                                    <td>@Model.MonthPaySum</td>
+                                    <td>@Model.LmMonthPaySum</td>
+                                    <td>
+                                        @{
+                                            string zhoufufeiZongeT = "0.00%";
+                                            if (Model.LmMonthPaySum > 0)
+                                            {
+                                                zhoufufeiZongeT = String.Format("{0:F}", (Model.MonthPaySum - Model.LmMonthPaySum) * 100 / Model.LmMonthPaySum) + "%";//默认为保留两位
+
+                                            }
+
+                                        }
+
+
+                                        @zhoufufeiZongeT
+
+
+
+
+                                    </td>
+                                    <td>@Model.LyMonthPaySum</td>
+                                    <td>
+                                        @{
+                                            string zhoufufeiZongeH = "0.00%";
+                                            if (Model.LyMonthPaySum > 0)
+                                            {
+                                                zhoufufeiZongeH = String.Format("{0:F}", (Model.MonthPaySum - Model.LyMonthPaySum) * 100 / Model.LyMonthPaySum) + "%";//默认为保留两位
+
+                                            }
+
+                                        }
+                                        @zhoufufeiZongeH
+
+
+
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+                <!-- end widget content -->
+            </div>
+            <!-- end widget div -->
+        </div>
+        <!-- end widget -->
+
+    </article>
+</div>
+</section>

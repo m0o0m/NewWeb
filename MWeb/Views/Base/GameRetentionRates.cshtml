@@ -1,0 +1,163 @@
+﻿@using GL.Data.Model
+@model BaseDataView
+@{
+    ViewBag.Title = "用户留存率";
+
+
+    ViewBag.Format = "yyyy-MM-dd";
+    switch (Model.Groupby)
+    {
+        case groupby.按日:
+            break;
+        case groupby.按月:
+            ViewBag.Format = "yyyy-MM";
+            break;
+    }
+    List<GameKeep> bdl = (List<GameKeep>)Model.BaseDataList;
+
+
+}
+
+
+<div id="content">
+    <!-- Widget ID (each widget will need unique ID)-->
+    <form id="comment-form" class="smart-form" novalidate="novalidate">
+        <div class="row">
+            @*<section class="col col-" 1style="width:180px">
+                <label class="select">
+                
+                    @Html.DropDownList("Channels", null, new { @class = "form-control input-sm" })
+                    <i></i>
+                </label>
+            </section>*@
+            <section class="col col-12" style="width:210px">
+                <label class="select">
+                    @Html.GetAllAgentGroupList("Channels", Model.Channels)
+                    <i></i>
+                </label>
+            </section>
+
+            <section class="col col-1.2">
+                <label class="input">
+                    <i class="icon-append fa fa-calendar"></i>
+                    @Html.TextBoxFor(m => m.StartDate, new Dictionary<string, object>() {
+                           { "class", "form-control datepicker" },
+                           { "data-dateformat", "yy-mm-dd 00:00:00" }
+                       })
+                </label>
+            </section>
+         
+            <section class="col col-1.2">
+                <label class="input">
+                    <i class="icon-append fa fa-calendar"></i>
+                    @Html.TextBoxFor(m => m.ExpirationDate, new Dictionary<string, object>() {
+                           { "class", "form-control datepicker" },
+                           { "data-dateformat", "yy-mm-dd 00:00:00" }
+                       })
+                </label>
+            </section>
+
+            <section class="col col-1">
+                <button type="submit" class="btn btn-success btn-sm">查询</button>
+            </section>
+        </div>
+    </form>
+
+    <section id="widget-grid" class="">
+        <div class="row">
+            <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-0" data-widget-editbutton="false" data-widget-colorbutton="false"
+                     data-widget-togglebutton="false"
+                     data-widget-deletebutton="false"
+                     data-widget-fullscreenbutton="false"
+                     data-widget-custombutton="false"
+                     data-widget-collapsed="false"
+                     data-widget-sortable="false">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                        <h2>用户牌局留存率</h2>
+                    </header>
+                    <!-- widget div-->
+                    <div>
+                        <!-- widget edit box -->
+                        <div class="jarviswidget-editbox">
+                            <!-- This area used as dropdown edit box -->
+                        </div>
+                        <!-- end widget edit box -->
+                        <!-- widget content -->
+                        <div class="widget-body no-padding" style="min-height: 70px;">
+                            <div class="table-responsive">
+                                <table class="table table-bordered">
+                                    <thead>
+
+                                        <tr>
+                                            <th>日期</th><th>新增用户</th>
+                                            <th>0局</th><th>次日留存</th>
+                                            <th>1局</th><th>次日留存</th>
+                                            <th>2局</th><th>次日留存</th>
+                                            <th>3局</th><th>次日留存</th>
+                                            <th>4局</th><th>次日留存</th>
+                                            <th>5局</th><th>次日留存</th>
+                                            <th>6~10局</th><th>次日留存</th>
+                                            <th>11~15局</th><th>次日留存</th>
+                                            <th>16~20局</th><th>次日留存</th>
+                                            <th>21~25局</th><th>次日留存</th>
+                                            <th>26~30局</th><th>次日留存</th>
+                                            <th>31~35局</th><th>次日留存</th>
+                                            <th>36~40局</th><th>次日留存</th>
+                                            <th>41~45局</th><th>次日留存</th>
+                                            <th>46~50局</th><th>次日留存</th>
+                                            <th>50+局</th><th>次日留存</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @if (bdl.Count == 0)
+                                        {
+                                            <tr>
+                                                <td class="colspan" align="center" colspan="0">
+                                                    没有找到相关记录！
+                                                </td>
+                                            </tr>
+                                        }
+                                        @foreach (var item in bdl)
+                                        {
+                                            <tr>
+                                                <td>@item.CountDate.ToString(ViewBag.Format)</td><td>@item.RG</td>
+                                                <td>@item.GC0</td> @if (item.RU0 == 0){<td>0%</td>}else{<td>@{var Rate = item.KU0 * 100 / item.RU0;}@Rate%</td>}
+                                                <td>@item.GC1</td> @if (item.RU1 == 0){<td>0%</td>}else{<td>@{var Rate = item.KU1 * 100 / item.RU1;}@Rate%</td>}
+                                                <td>@item.GC2</td> @if (item.RU2 == 0){<td>0%</td>}else{<td>@{var Rate = item.KU2 * 100 / item.RU2;}@Rate%</td>}
+                                                <td>@item.GC3</td> @if (item.RU3 == 0){<td>0%</td>}else{<td>@{var Rate = item.KU3 * 100 / item.RU3;}@Rate%</td>}
+                                                <td>@item.GC4</td> @if (item.RU4 == 0){<td>0%</td>}else{<td>@{var Rate = item.KU4 * 100 / item.RU4;}@Rate%</td>}
+                                                <td>@item.GC5</td> @if (item.RU5 == 0){<td>0%</td>}else{<td>@{var Rate = item.KU5 * 100 / item.RU5;}@Rate%</td>}
+                                                <td>@item.GC6</td> @if (item.RU6 == 0){<td>0%</td>}else{<td>@{var Rate = item.KU6 * 100 / item.RU6;}@Rate%</td>}
+                                                <td>@item.GC11</td>@if (item.RU11 == 0){<td>0%</td>}else{<td>@{var Rate = item.KU11 * 100 / item.RU11;}@Rate%</td>}
+                                                <td>@item.GC16</td>@if (item.RU16 == 0){<td>0%</td>}else{<td>@{var Rate = item.KU16 * 100 / item.RU16;}@Rate%</td>}
+                                                <td>@item.GC21</td>@if (item.RU21 == 0){<td>0%</td>}else{<td>@{var Rate = item.KU21 * 100 / item.RU21;}@Rate%</td>}
+                                                <td>@item.GC26</td>@if (item.RU26 == 0){<td>0%</td>}else{<td>@{var Rate = item.KU26 * 100 / item.RU26;}@Rate%</td>}
+                                                <td>@item.GC31</td>@if (item.RU31 == 0){<td>0%</td>}else{<td>@{var Rate = item.KU31 * 100 / item.RU31;}@Rate%</td>}
+                                                <td>@item.GC36</td>@if (item.RU36 == 0){<td>0%</td>}else{<td>@{var Rate = item.KU36 * 100 / item.RU36;}@Rate%</td>}
+                                                <td>@item.GC41</td>@if (item.RU41 == 0){<td>0%</td>}else{<td>@{var Rate = item.KU41 * 100 / item.RU41;}@Rate%</td>}
+                                                <td>@item.GC46</td>@if (item.RU46 == 0){<td>0%</td>}else{<td>@{var Rate = item.KU46 * 100 / item.RU46;}@Rate%</td>}
+                                                <td>@item.GC51</td>@if (item.RU51 == 0){<td>0%</td>}else{<td>@{var Rate = item.KU51 * 100 / item.RU51;}@Rate%</td>}
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <!-- end widget content -->
+                    </div>
+                    <!-- end widget div -->
+                </div>
+                <!-- end widget -->
+
+            </article>
+        </div>
+    </section>
+
+
+
+
+
+
+</div>

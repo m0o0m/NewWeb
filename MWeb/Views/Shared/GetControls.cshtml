@@ -1,0 +1,80 @@
+﻿@using System.Data;
+
+@model List<MWeb.Control>
+@{
+    ViewBag.Title = "GetControls";
+}
+<script src="~/Lib/Metronic/assets/pages/scripts/components-date-time-pickers.min.js" type="text/javascript"></script>
+
+
+@foreach (MWeb.Control item in Model)
+{
+    switch (item.ControlType)
+    {
+        case ControlType.Text:
+            TextControl tcont = item as TextControl;
+            <div class="col-md-2">
+                <input name="@tcont.Name" id="@tcont.ID" type="text" class="form-control" placeholder="@tcont.Placeholder">
+            </div>
+          
+            break;
+        case ControlType.Select:
+            SelectControl scont = item as SelectControl;
+            <div class="col-md-2">
+                <label>@scont.ViewName</label>
+                <select class="bs-select form-control" id="@scont.ID" name="@scont.Name" >
+                    @*<optgroup label="Picnic">
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                    </optgroup>
+                    <optgroup label="Camping">
+                        <option>4</option>
+                        <option>5</option>
+                        <option>6</option>
+                    </optgroup>*@
+                </select>
+            </div>
+            <script type="text/javascript">
+                $(function () {
+                    $.ajax({
+                        url: "@scont.Url",
+                        type: "POST",
+                        dataType: "html",
+                        success: function (data) {
+                            $("#@scont.ID optgroup").each(function () {
+                                $(this).remove();
+                            });
+                            $("#@scont.ID option").each(function () {
+                                $(this).remove();
+                            });
+                            $("#@scont.ID").append(data);
+                        }
+                    })
+                })
+            </script>
+
+            break;
+        case ControlType.DateTime:
+            DateTimeControl dtcont = item as DateTimeControl;
+          
+            <div class="col-md-2">
+                <label>@dtcont.ViewName</label>
+                <div class="input-group  date date-picker" data-date-format="yyyy-mm-dd" data-date-start-date="+0d">
+                    <input id="@dtcont.ID" name="@dtcont.Name"  value="" type="text" class="form-control date-picker" data-date-format="yyyy-mm-dd" readonly>
+                    <span class="input-group-btn">
+                        <button class="btn default date-set" type="button">
+                            <i class="fa fa-calendar"></i>
+                        </button>
+                    </span>
+                </div>
+                <!-- /input-group -->
+            </div>
+
+            break;
+
+    }
+}
+
+
+

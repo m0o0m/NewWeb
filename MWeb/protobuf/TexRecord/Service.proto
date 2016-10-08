@@ -1,0 +1,50 @@
+
+package proto.db515; 
+
+
+
+// 德州每步操作记录
+message TexasOperate
+{
+	optional int32 operate_index = 1;	// 操作顺序索引
+	optional int32 operate_kind = 2;	// 操作类型
+	optional int64 score = 3;			// 积分数量
+}
+
+// 德州每轮单个玩家的操作记录
+message TexasRound
+{
+	optional int32 round_index = 1;
+	repeated TexasOperate texas_operates = 2; 
+}
+
+message TexasRole
+{
+	optional int32 UserID = 1;			// 角色ID
+	repeated string handle_cards = 2;	// 手牌
+	repeated TexasRound rounds = 3;		// 轮数	
+	optional int32 card_type = 4;		// 牌型
+	optional int64 win_score = 5;		// 输赢数量
+}
+
+message TexasGameRecord
+{
+	repeated TexasRole roles = 1;		// 所有角色的操作记录
+	repeated string table_cards = 2;		// 桌面牌
+}
+
+// 德州扑克对局
+message BG_TexasGameRecord
+{
+	optional string CreateTime = 1;		// datetime NOT NULL COMMENT '创建时间',
+	optional int32 RoomID = 2;			// int(11) NOT NULL COMMENT '桌子ID',
+	optional uint64 Round = 3;			// bigint(20) NOT NULL COMMENT '第几局',
+	optional string BaseScore = 4;		// varchar(64) NOT NULL,
+	optional int32 Service = 5;			// int(11) NOT NULL COMMENT '服务器id',
+	optional string BankCard = 6;		// varchar(64) NOT NULL COMMENT '底牌',
+	optional string UserData = 7;		// varchar(1200) NOT NULL COMMENT '用户数据',
+	optional string UserID = 8;			// varchar(128) NOT NULL COMMENT '参赛玩家id',
+	optional string GiveUp = 9;			// varchar(128) NOT NULL COMMENT '弃牌数据',
+	optional TexasGameRecord Record = 10;
+}
+

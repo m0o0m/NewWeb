@@ -1,0 +1,481 @@
+/////////////////////////////////////////////////////////////////
+////
+////			后台服务通讯
+////
+/////////////////////////////////////////////////////////////////
+package ProtoCmd.Service;
+
+// 枚举定义通讯协议号
+enum ServiceCmd
+{
+	SC_BEGIN 		= 11;
+	SC_KICK_USER 		= 12;		//踢玩家下线
+	SC_QUERY_USER 		= 13; 		//查询个人信息
+	SC_FREEZE_USER 		= 14;		//玩家封号与解封
+	SC_SEND_SYSMAIL 	= 15;		//发送系统邮件
+	SC_SERVER_STOP  	= 16;		//服务器维护安全关服
+	SC_QUERY_ONLINEUSER 	= 17;		//查询在线玩家列表
+	SC_QUERY_USEROPERHIS	= 18;		//查询玩家操作历史记录
+	SC_QUERY_SERVERSTATUS	= 19;		//查询服务器状态
+	SC_SEND_ANNOUNCEMENT	= 20;		//发送公告
+	SC_BAN_SPEAK		= 21;		//禁言
+	SC_ADD_GOLD		= 22;		//系统加钱(在线加钱,临时处理)
+	SC_QUERY_INTERNALLOGIN	= 23;		//查询是否打开内部登录
+	SC_SET_INTERALLOGIN	= 24;		//设置内部登录模式
+	SC_SEND_ITEMMAIL	= 25;		//发送物品邮件(包含金币,五币,礼物,权贵等)
+	SC_QUERY_FISH		= 26;		//查询养鱼
+	SC_BAN_LOGIN_IP		= 27;		//封登录IP
+	SC_REG_IP		= 28;		//设置同IP下的注册数
+	SC_SELECT_TEXAS_POT	= 29;		//查询德州彩池金币数
+	SC_OPERTOR_TEXAS_POT	= 30;		//增加或者减少德州彩池金币数
+	SC_SELECT_REDEVENLOPE_Q = 31;		//抢红包开关查询请求
+	SC_OPERTOR_REDEVENLOPE_Q= 32;		//抢红包开关查询请求
+	SC_BAN_LOGIN_MAC	= 33;		//封登录MAC地址
+	SC_RESET_SAFEBOXPWD	= 34;		//重置保险箱密码
+	SC_POT_SWITCH 		= 35;		//宝盆开关
+	SC_SELECT_SCALE_POT	= 36;		//查询中发白彩池金币数
+	SC_OPERTOR_SACLE_POT	= 37;		//增加或者减少中发白彩池金币数
+	SC_GET_POT_SWITCH 	= 38;		//获得宝盆开关
+	SC_CLUB_USERMODE	= 39;		//设置俱乐部会员模式
+	SC_SELECT_IPSTATUS_Q 	= 40;		//ip状态开关查询请求
+	SC_OPERTOR_IPSTATUS_Q	= 41;		//ip状态开关操作请求
+	SC_SET_IP_WHITELIST	= 42;		//设置IP白名单
+	SC_CANCEL_CLUB		= 43;		//取消俱乐部
+	SC_SET_ROBOT_POT 	= 44;		//设置机器人彩池
+	SC_TOTAL = 200;
+}
+
+enum CenterCmd
+{
+	CS_BEGIN	 	= 11;
+	CS_CONNECT_ERROR	= 12;		//连接错误
+	CS_ACCOUNT_ERROR 	= 13;		//账号错误
+	CS_QUERY_UESR	 	= 14;		//返回查询
+	CS_SERVER_STOP   	= 15;		//返回关服
+	CS_KICK_USER	 	= 16;		//返回踢人
+	CS_FREEZE_USER	 	= 17;		//返回封号
+	CS_QUERY_ONLINEUSER 	= 18;		//返回在线列表
+	CS_QUERY_USEROPERHIS	= 19;		//返回玩家操作历史记录
+	CS_SEND_SYSMAIL		= 20;		//发送系统邮件
+	CS_QUERY_SERVERSTATUS	= 21;		//返回服务器状态
+	CS_SEND_ANNOUNCEMENT	= 22;		//公告返回
+	CS_QUERY_INTERNALLOGIN  = 23;		//查询是否打开内部登录
+	CS_SET_INTERALLOGIN	= 24;		//设置内部登录模式
+	CS_SEND_ITEMMAIL	= 25;		//发送物品邮件返回
+	CS_QUERY_FISH		= 26;		//返回养鱼
+	CS_BAN_SPEAK		= 27;		//返回禁言
+	CS_BAN_LOGIN_IP		= 28;		//封登录IP
+	CS_REG_IP		= 29;		//设置同IP下的注册数
+	CS_SELECT_TEXAS_POT	= 30;		//返回德州大彩池金币数
+	CS_OPERTOR_TEXAS_POT	= 31;		//返回增加或者减少德州彩池金币数
+	CS_SELECT_REDEVENLOPE_P = 32;		//抢红包开关查询响应
+	CS_OPERTOR_REDEVENLOPE_P= 33;		//抢红包开关配置响应
+	CS_BAN_LOGIN_MAC	= 34;		//封登录MAC地址
+	CS_RESET_SAFEBOXPWD	= 35;		//重置保险箱密码
+	CS_SELECT_SCALE_POT	= 36;		//返回中发白大彩池金币数
+	CS_OPERTOR_SCALE_POT	= 37;		//返回增加或者减少中发白彩池金币数
+	CS_POT_SWITCH_RESP	= 38;		//宝盆设置开关返回
+	CS_GET_POT_SWITCH_RESP 	= 39;    	//获得宝盆开关返回
+	CS_CLUB_USERMODE	= 40;		//设置俱乐部会员模式
+	CS_SELECT_IPSTATUS 	= 41;		//ip状态开关查询响应
+	CS_OPERTOR_IPSTATUS	= 42;		//ip状态开关操作响应
+	CS_SET_IP_WHITELIST	= 43;		//设置IP白名单
+	CS_CANCEL_CLUB		= 44;		//取消俱乐部
+	CS_SET_ROBOT_POT 	= 45;		//设置机器人彩池
+	CS_TOTAL	 	= 100;
+}
+
+message GetPotSwitchResp
+{
+	required uint32 switch = 1; //0关闭，1打开
+}
+
+message PotSwitchResp
+{
+	required uint32 result = 1; //0成功，1失败
+}
+
+message PotSwitch
+{
+	required uint32 tableid = 1;
+	required uint32	config	= 2;
+}
+
+message Service_Test_S
+{
+	required string szAccount = 1;
+	required bool	suc	  = 2;
+}
+
+// 结构定义通讯协议内容
+
+///	请求踢人(暂时只有请求没有应答，玩家可能在不同网关上)
+message Service_Kick_C
+{
+	required uint32 dwUserID = 1;	//	ID
+}
+
+message Service_Kick_S
+{
+	required bool	suc	= 1;	//
+}
+
+///	查询玩家信息
+message Service_Query_C
+{
+	required string	szAccount = 1;	//帐户名字 
+}
+
+///	服务器反馈查询玩家信息
+message Service_Query_S
+{
+	required uint32	dwUserID 	= 1;	//ID
+	required string szAccount 	= 2;	//帐户
+	required string szNickName 	= 3;	//昵称
+	required string	szTelNum 	= 4;	//手机号码
+	required string	szEmail		= 5;	//邮箱
+	optional bool	isOnline	= 6;	//在线状态
+	required bool	isFreeze	= 7;	//帐户是否冻结
+	required string	szTrueName	= 8;	//真实姓名
+	required string	szIdentity	= 9;	//身份证
+	required uint32	sex		= 10;	//性别
+	required uint32	dwAgentID	= 11;	//代理商ID
+	required string	szCreateTime	= 12;	//创建时间
+}
+
+///	玩家封号
+message	Service_Freeze_C
+{
+	required uint32 dwUserID  = 1;	//帐户ID
+	required uint32	dwFreeze  = 2;	//0是解封 1~n 是封号(1 您的注册账号已超3个 2 查询到您有刷游戏币)
+	required uint32	dwMinute  = 3;	//分钟 (永久传10年过来)
+}
+
+message Service_Freeze_S
+{
+	required bool	suc = 1;	//返回冻结
+}
+
+///	发送系统邮件
+message Service_Send_SysMail_C
+{
+	required string szTitle   = 1;	//标题
+	required string szContext = 2;	//内容
+}
+
+///	安全关服(只有命令没有结构部分
+message Service_Send_CloseServer
+{
+	required bool close = 1;	//true 关 false 开
+}
+
+
+///	查询返回服务器状态
+message Service_Query_ServerStatus_S
+{
+	required bool close = 1;	//true 关 false 开
+}
+
+// 在线玩家列表请求
+message	Service_Query_OnlineUser_C
+{
+	required uint32 dwPageIndex = 1;	// 页面ID(启始1开始)
+	required uint32 dwShowNum   = 2;	// 单个页面显示数量
+}
+
+message Service_OnlineUserInfo
+{
+	required string	strAccount 	= 1;	
+	required uint32	dwUserID   	= 2;
+	required string	strIP	   	= 3;
+	required string strLoginTime	= 4;
+}
+
+//  在线玩家列表请求返回
+message Service_Query_OnlineUser_S
+{
+	required uint32 startIndex = 1;		// 启始的记录索引总编号
+	required uint32	showNum = 2;		// 现实数目
+	required uint32 page = 3;		// 当前页面
+	required uint32 pageTotal = 4;		// 总页面
+	repeated Service_OnlineUserInfo	list = 5;	// 玩家信息数组
+}
+
+//  后台请求用户操作历史记录
+message Service_Query_UseOperHis_C
+{
+	required uint32	dwUserID    = 1;	//用户ID
+	required uint32 dwPageIndex = 2;	// 页面ID(启始1开始)
+	required uint32 dwShowNum   = 3;	// 单个页面显示数量
+}
+
+message Service_UserOperHisInfo
+{
+	required string strTime = 1;		//时间
+	required string content = 2;		//记录内容
+}
+
+//  服务器返回用户操作历史记录
+message Service_Query_UseOperHis_S
+{
+	required uint32 dwUserID = 1;				// 用户ID
+	required uint32 startIndex = 2;				// 启始的记录索引总编号
+	required uint32	showNum = 3;				// 现实数目
+	required uint32 page = 4;				// 当前页面
+	required uint32 pageTotal = 5;				// 总页
+	repeated Service_UserOperHisInfo listInfo = 6;		// 记录数组
+}
+
+//  系统公告
+message Service_Send_AnnounceMent_C
+{
+	required string	content = 1;				// 公告内容(200汉字)
+	required uint32 dwRepeat = 2;				// 重复次数
+	required uint32 dwInterval = 3;				// 间隔时间(单位秒)
+}
+
+// 禁言
+message Service_BanSpeak_C
+{
+	required uint32 dwUserID  = 1;	//帐户ID
+	required uint32 dwBanSpeak = 2;	//0 是解封 1是恶意刷屏 2 发布恶意辱骂消息 3发布虚假信息 4 言论与国家法律法规冲突
+	required uint32	minute	  = 3;	//分钟 （永久传10年过来）
+}
+// 禁言返回
+message Service_BanSpeak_S
+{
+	required bool	suc = 1;	//是否成功
+}
+
+// 在线加钱
+message Service_OnlineAddGold_C
+{
+	required uint32 dwUserID = 1;	//角色ID
+	required uint32 dwAddGold = 2;	//加的钱
+}
+
+// 加钱返回
+message Service_OnlineAddGold_S
+{
+	required bool suc = 1;		//是否成功
+}
+
+// 后台查询内部登录模式 
+// 服务器返回内部登录模式
+message Service_QueryInternalLogin_S
+{
+	required bool isOpen = 1;	// true说明是打开状态 false是没有打开
+}
+
+// 后台设置内部登录模式
+message Service_SetInternalLogin_C
+{
+	required bool bOpen = 1;	// true 说明是要打开 false 说明是要关闭
+}
+
+// 后台设置内部登录模式返回
+message Service_SetInternalLogin_S
+{
+	required bool isOpen = 1;	// true说明是打开状态 false是没有打开
+}
+
+// 后台物品邮件(发送物品邮件(包含金币,五币,礼物,权贵等))
+message Service_ItemMail_C
+{
+	repeated uint32 userID = 1;	// 角色ID(最多10个)
+	required string title = 2;	// 标题(30汉字内)
+	required string context = 3;	// 内容(50汉字内)
+	optional uint32 itemType = 4;	// 物品类型 (1 金币 2 五币 3积分 4 礼物 5 权贵 6 宝石)
+	optional uint32 itemValue = 5;	// 物品的数值 或者 ID (货币就是数值 物品就是ID)
+	optional uint32 itemNum	= 6;	// 数量
+}
+
+// 物品邮件
+message Service_ItemMail_S
+{
+	required bool suc = 1;		// 是否成功
+}
+
+//
+message Service_Fish_C
+{
+	required uint32 userID = 1;	// 角色ID
+}
+
+message FishInfo
+{
+	required string date = 1;	// 日期
+	required uint32 itemID = 2;	// 物品ID
+	required string name = 3;	// 物品名称
+	required uint32 giveID = 4;	// 给予者的ID
+}
+
+//
+message Service_Fish_S
+{
+	required uint32 userID = 1;	// 角色ID
+	repeated FishInfo fishList = 2;	// 鱼列表
+}
+
+//
+message Service_BanIP_C
+{
+	required string ip	= 1;	//ip地址
+	required bool isBan	= 2;	//是封还是解
+}
+
+message Service_BanIP_S
+{
+	required bool	suc = 1;	//是否成功
+}
+
+message Service_RegIP_C
+{
+	required string ip	=1;	//IP地址
+	required uint32 total	=2;	//可以注册的总数
+	required string content =3;	//描述原因(50 汉字限制)
+}
+
+message Service_RegIP_S
+{
+	required bool	suc	=1;	//是否成功
+}
+
+//////////////////////////////////////////////////////////////////////////////德州大彩池
+message TexasPot_Select_S		//CS_SELECT_TEXAS_POT
+{
+	required uint32 ChipNum	=1;	//彩池金币数量
+}
+
+message TexasPot_Operator_C		//SC_OPERTOR_TEXAS_POT
+{
+	required uint32 opType	   =1;	//操作类型 1增加  2减少
+	required uint32 opValue	   =2;	//要操作 增加或者减少的数
+	required string	strContent =3;	//修改原因
+}
+
+message TexasPot_Operator_S		//CS_OPERTOR_TEXAS_POT
+{
+	required uint32 opType	=1;	//操作类型 1增加  2减少
+	required bool 	suc	=2;	//是否成功 true为成功
+}
+////////////////////////////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////////////////////////////中发白抢红包
+message REDEVENLOPE_SELECT_S		    //CS_SELECT_REDEVENLOPE_P 	= 32;
+{
+	required bool state   = 1;	    //状态开关 true:开  false：关
+}
+
+message REDEVENLOPE_OPERATOR_C		    //SC_OPERTOR_REDEVENLOPE_Q 	= 32;
+{
+	required bool state   = 1;	    //配置的状态开关 true:开  false：关
+}
+
+message REDEVENLOPE_OPERATOR_S		    //CS_OPERTOR_REDEVENLOPE_P 	= 33;
+{
+	required bool state   = 1;	    //配置的状态开关 true:开  false：关
+    	required bool bsucc   = 2;	    //成功标志 true成功
+}
+////////////////////////////////////////////////////////////////////////////////////
+message Service_BanMac_C
+{
+	required string macAddr	= 1;	//MAC地址
+	required bool isBan	= 2;	//是封还是解
+}
+
+message Service_BanMac_S		//CS_BAN_LOGIN_MAC
+{
+	required bool suc	= 1;	//是否成功
+}
+
+message Service_ResetSafePwd_C		//重置保险箱密码	SC_RESET_SAFEBOXPWD
+{
+	required uint32 dwUserID	= 1;	// 角色ID
+}
+
+message Service_ResetSafePwd_S		//重置保险箱密码返回	CS_RESET_SAFEBOXPWD
+{
+	required bool suc		= 1;	// 是否成功
+}
+//////////////////////////////////////////////////////////////////////////////中发白大彩池
+message Scale_Select_S			//CS_SELECT_SCALE_POT
+{
+	required uint32 ChipNum	=1;	//彩池金币数量
+}
+
+message Scale_Operator_C		//SC_OPERTOR_SACLE_POT
+{
+	required uint32 opType	   =1;	//操作类型 1增加  2减少
+	required uint32 opValue	   =2;	//要操作 增加或者减少的数
+	required string	strContent =3;	//修改原因
+}
+
+message Scale_Operator_S		//CS_OPERTOR_SCALE_POT
+{
+	required uint32 opType	=1;	//操作类型 1增加  2减少
+	required bool 	suc	=2;	//是否成功 true为成功
+}
+//////////////////////////////////////////////////////////////////////////////
+
+message Service_ClubUserMode_C
+{
+	required uint32 clubID = 1;	//俱乐部的ID
+}
+
+message Service_ClubUserMode_S
+{
+	required bool suc = 1;		//是否成功 true为成功
+}
+
+////////////////////////////////////////////////////////////////////////////////////ip状态开关
+message IPSTATUS_SELECT_S		    //CS_SELECT_IPSTATUS 	= 41
+{
+	required bool state   = 1;	    //状态开关 true:开  false：关
+}
+
+message IPSTATUS_OPERATOR_C		    //SC_OPERTOR_IPSTATUS_Q 	= 40
+{
+	required bool state   = 1;	    //配置的状态开关 true:开  false：关
+}
+
+message IPSTATUS_OPERATOR_S		    //CS_OPERTOR_IPSTATUS	= 42;
+{
+	required bool state   = 1;	    //配置的状态开关 true:开  false：关
+    	required bool bsucc   = 2;	    //成功标志 true成功
+}
+
+message IPWHITE_C			    //SC_SET_IP_WHITELIST
+{
+	required string	ip	= 1;
+	required bool	add	= 2;	    //ture 是添加 false 是删除
+}
+
+message IPWHITE_S			    //CS_SET_IP_WHITELIST
+{
+	required string ip	= 1;	    //IP 地址
+	required bool	add	= 2;	    //true 是添加 false 是删除
+	required bool	suc	= 3;	    //true 是成功
+}
+
+message CANCEL_CLUB_C			    //
+{
+	required uint32 dwUserID = 1;	    // 取消俱乐部ID
+}
+
+message CANCEL_CLUB_S
+{
+	required bool suc	= 1;	    // 是否成功
+}
+
+message ROBOT_POT_C
+{
+	required double pot 	= 1;	    // 池
+	required double stand   = 2;	    // 标准
+	required uint32 gameID  = 3;	    // 游戏类型
+}
+
+message ROBOT_POT_S
+{
+	required bool suc = 1;		    //
+}

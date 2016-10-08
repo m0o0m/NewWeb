@@ -1,0 +1,25 @@
+
+ 
+记录时间：2016-03-21 15:31:04,001  线程ID:[17]  日志级别：ERROR 
+错误描述：TaskAction(定时读取在线人数到缓存):Timeout performing HGETALL UserInfo, inst: 0, mgr: ExecuteSelect, err: never, queue: 0, qu: 0, qs: 0, qc: 0, wr: 0, wq: 0, in: 0, ar: 0, IOCP: (Busy=0,Free=1000,Min=4,Max=1000), WORKER: (Busy=3,Free=4092,Min=4,Max=4095), clientName: RedisGate
+
+
+ 
+记录时间：2016-03-21 15:31:04,001  线程ID:[6]  日志级别：ERROR 
+错误描述：TaskAction(定时读取在线人数到缓存):Timeout in IO operation
+
+
+ 
+记录时间：2016-03-21 15:49:47,162  线程ID:[13]  日志级别：ERROR 
+错误描述：TaskAction(定时读取在线人数到缓存):Timeout performing HGETALL UserInfo, inst: 1, mgr: ExecuteSelect, err: never, queue: 1, qu: 0, qs: 1, qc: 0, wr: 0, wq: 0, in: 186, ar: 0, IOCP: (Busy=0,Free=1000,Min=4,Max=1000), WORKER: (Busy=3,Free=4092,Min=4,Max=4095), clientName: RedisGate
+
+
+ 
+记录时间：2016-03-21 16:12:14,450  线程ID:[8]  日志级别：ERROR 
+错误描述：TaskAction(定时读取在线人数到缓存):Timeout performing HGETALL UserInfo, inst: 1, mgr: ExecuteSelect, err: never, queue: 0, qu: 0, qs: 0, qc: 0, wr: 0, wq: 0, in: 0, ar: 0, IOCP: (Busy=0,Free=1000,Min=4,Max=1000), WORKER: (Busy=3,Free=4092,Min=4,Max=4095), clientName: RedisGate
+
+
+ 
+记录时间：2016-03-21 18:06:02,493  线程ID:[1]  日志级别：ERROR 
+错误描述：TaskAction(定时读取在线人数到缓存):It was not possible to connect to the redis server(s); to create a disconnected multiplexer, disable AbortOnConnectFail. SocketFailure on PING
+

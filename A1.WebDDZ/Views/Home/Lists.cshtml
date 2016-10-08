@@ -1,0 +1,165 @@
+﻿@{
+    ViewBag.Title = "游戏中心";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    
+    
+}
+
+<section class="gamebanner"></section>
+<section id="main">
+    <div class="location area">
+        <span class="qlink"><a href="index" class="home"></a> <em></em> <label>玩一玩</label></span>
+        <h2 class="game_t">游戏中心</h2>
+    </div>
+    <section id="protab" class="area combox">
+        <section class="gleft">
+            <nav id="ptabt" class="gnav">
+                <ul class="gnavlist">
+                    <li class="on"><a href="javascript:">iPhone <i class="iphone"></i></a></li>
+                    <li><a href="javascript:">Android <i class="android"></i></a></li>
+                    <li><a href="javascript:">iPad <i class="ipad"></i></a></li>
+                    <li><a href="javascript:">PC <i class="pc"></i></a></li>
+                </ul>
+            </nav>
+        </section>
+        <section id="ptabcon" class="gright">
+            <div class="gamelistcon">
+                <ul class="gamelist cl">
+                    <li>
+                        <h3><a href="texas_poker">德州扑克 <span>Texas Hold’em poker</span></a></h3>
+                        <div class="gamepic"><a href="texas_poker"><img src="~/pic/gamepic1.jpg" height="195" width="331" alt="德州扑克"></a></div>
+                        <div class="gamelink"><span class="appstore"><a href="http://itunes.apple.com/app/id391090493?mt=8" target="_blank">App Store</a></span><span class="ewmlink"><a href="#">二维码下载</a><i><img src="~/pic/texas_poker116.png" alt="德州扑克"></i></span></div>
+                    </li>
+                    <li>
+                        <h3><a href="landlords">斗地主 <span>landlords</span></a></h3>
+                        <div class="gamepic"><a href="landlords"><img src="~/pic/gamepic3.jpg" height="195" width="331" alt="斗地主"></a></div>
+                        <div class="gamelink"><span class="appstore"><a href="https://itunes.apple.com/cn/app/bo-ya-dou-de-zhu-zhi-chi-lan-ya/id463242371?mt=8" target="_blank">App Store</a></span><span class="ewmlink"><a href="#">二维码下载</a><i><img src="~/pic/landlords116.png" alt="斗地主"></i></span></div>
+                    </li>
+                    @*<li>
+                        <h3><a href="sichuan_mahjong">四川麻将 <span>sichuan mahjong</span></a></h3>
+                        <div class="gamepic"><a href="sichuan_mahjong"><img src="~/pic/gamepic2.jpg" height="195" width="331" alt="四川麻将"></a></div>
+                        <div class="gamelink"><span class="appstore"><a href="https://itunes.apple.com/cn/app/bo-ya-si-chuan-ma-jiang/id510582247?mt=8" target="_blank">App Store</a></span><span class="ewmlink"><a href="#">二维码下载</a><i><img src="~/pic/sichuan_mahjong116.png" alt="四川麻将"></i></span></div>
+                    </li>
+                    <li>
+                        <h3><a href="boyaa_szechwan">四川棋牌 <span>boyaa szechwan game</span></a></h3>
+                        <div class="gamepic"><a href="boyaa_szechwan"><img src="~/pic/gamepic9.jpg" height="195" width="331" alt="四川棋牌"></a></div>
+                        <div class="gamelink"><span class="appstore"><a href="https://itunes.apple.com/cn/app/bo-ya-si-chuan-qi-pai/id839853761?mt=8" target="_blank">App Store</a></span><span class="ewmlink"><a href="#">二维码下载</a><i><img src="~/pic/szechwan116.png" alt="四川棋牌"></i></span></div>
+                    </li>
+                    <li>
+                        <h3><a href="two_mah_jongg">二人麻将 <span>two mah jongg</span></a></h3>
+                        <div class="gamepic"><a href="two_mah_jongg"><img src="~/pic/gamepic12.jpg" height="195" width="331" alt=""></a></div>
+                        <div class="gamelink"><span class="appstore"><a href="https://itunes.apple.com/cn/app/bo-ya-er-ren-ma-jiang/id687598024?l=en&mt=8" target="_blank">App Store</a></span><span class="ewmlink"><a href="#">二维码下载</a><i><img src="~/pic/two_mah_jongg116.png" alt=""></i></span></div>
+                    </li>
+                    <li>
+                        <h3><a href="dig_two_poker">锄大地 <span>DIG TWO POKER</span></a></h3>
+                        <div class="gamepic"><a href="dig_two_poker"><img src="~/pic/gamepic5.jpg" height="195" width="331" alt="锄大地"></a></div>
+                        <div class="gamelink"><span class="appstore"><a href="https://itunes.apple.com/cn/app/bo-ya-chu-da-de/id549724881?mt=8" target="_blank">App Store</a></span><span class="ewmlink"><a href="#">二维码下载</a><i><img src="~/pic/dig_two_poker116.png" alt="锄大地"></i></span></div>
+                    </li>
+                    <li>
+                        <h3><a href="four_landlords">四人斗地主 <span>FOUR LANDLORDS</span></a></h3>
+                        <div class="gamepic"><a href="four_landlords"><img src="~/pic/gamepic6.jpg" height="195" width="331" alt="四人斗地主"></a></div>
+                        <div class="gamelink"><span class="appstore"><a href="https://itunes.apple.com/cn/app/bo-ya-si-ren-dou-zhu-ku-xuan/id556517961?mt=8" target="_blank">App Store</a></span><span class="ewmlink"><a href="#">二维码下载</a><i><img src="~/pic/four_landlords116.png" alt="四人斗地主"></i></span></div>
+                    </li>
+                    <li>
+                        <h3><a href="chinese_chess">中国象棋 <span>chinese chess of boyaa</span></a></h3>
+                        <div class="gamepic"><a href="chinese_chess"><img src="~/pic/gamepic10.jpg" height="195" width="331" alt="中国象棋"></a></div>
+                        <div class="gamelink"><span class="appstore"><a href="https://itunes.apple.com/cn/app/bo-ya-zhong-guo-xiang-qi/id543097382?mt=8" target="_blank">App Store</a></span><span class="ewmlink"><a href="#">二维码下载</a><i><img src="~/pic/chinese_chess116.png" alt="中国象棋"></i></span></div>
+                    </li>
+                    <li>
+                        <h3><a href="billiards">博雅台球 <span>BILLIARDS</span></a></h3>
+                        <div class="gamepic"><a href="billiards"><img src="~/pic/gamepic11.jpg" height="195" width="331" alt="博雅台球"></a></div>
+                        <div class="gamelink"><span class="appstore"><a href="https://itunes.apple.com/cn/app/bo-ya-tai-qiu/id606151394?mt=8" target="_blank">App Store</a></span><span class="ewmlink"><a href="#">二维码下载</a><i><img src="~/pic/billiards116.png" alt="博雅台球"></i></span></div>
+                    </li>*@
+                </ul>
+                <div class="loadmore"><a href="#">点击加载更多</a></div>
+            </div>
+            <div class="gamelistcon">
+                <ul class="gamelist cl">
+                    <li>
+                        <h3><a href="texas_poker">德州扑克 <span>Texas Hold’em poker</span></a></h3>
+                        <div class="gamepic"><a href="texas_poker"><img src="~/pic/gamepic1.jpg" height="195" width="331" alt="德州扑克"></a></div>
+                        <div class="gamelink"><span class="android"><a href="http://www.boyaa.com/mobile/apk/sina_slb_3.0.5.apk" target="_blank">下载游戏</a></span><span class="ewmlink"><a href="#">二维码下载</a><i><img src="~/pic/texas_poker116.png" alt="德州扑克"></i></span></div>
+                    </li>
+                    <li>
+                        <h3><a href="landlords">斗地主 <span>landlords</span></a></h3>
+                        <div class="gamepic"><a href="landlords"><img src="~/pic/gamepic3.jpg" height="195" width="331" alt="斗地主"></a></div>
+                        <div class="gamelink"><span class="android"><a href="http://bigfile-ws.static.17c.cn/bigfile-ws/guonei/boyaalandlord_boyaa_5.1_300002890169_3003916748.apk" target="_blank">下载游戏</a></span><span class="ewmlink"><a href="#">二维码下载</a><i><img src="~/pic/landlords116.png" alt="斗地主"></i></span></div>
+                    </li>
+                </ul>
+                <div class="loadmore"><a href="#">点击加载更多</a></div>
+            </div>
+            <div class="gamelistcon">
+                <ul class="gamelist cl">
+                    <li>
+                        <h3><a href="texas_poker">德州扑克 <span>Texas Hold’em poker</span></a></h3>
+                        <div class="gamepic"><a href="texas_poker"><img src="~/pic/gamepic1.jpg" height="195" width="331" alt="德州扑克"></a></div>
+                        <div class="gamelink"><span class="appstore"><a href="http://itunes.apple.com/app/id395072693?mt=8" target="_blank">App Store</a></span><span class="ewmlink"><a href="#">二维码下载</a><i><img src="~/pic/texas_poker116.png" alt="德州扑克"></i></span></div>
+                    </li>
+                    <li>
+                        <h3><a href="landlords">斗地主 <span>landlords</span></a></h3>
+                        <div class="gamepic"><a href="landlords"><img src="~/pic/gamepic3.jpg" height="195" width="331" alt="斗地主"></a></div>
+                        <div class="gamelink"><span class="appstore"><a href="https://itunes.apple.com/cn/app/bo-ya-dou-zhuhd-zhi-chi-si/id491274558?mt=8" target="_blank">App Store</a></span><span class="ewmlink"><a href="#">二维码下载</a><i><img src="~/pic/landlords116.png" alt="斗地主"></i></span></div>
+                    </li>
+
+                </ul>
+                <div class="loadmore"><a href="#">点击加载更多</a></div>
+            </div>
+            <div class="gamelistcon">
+                <ul class="gamelist cl">
+                    <li>
+                        <h3><a href="texas_poker">德州扑克 <span>Texas Hold’em poker</span></a></h3>
+                        <div class="gamepic"><a href="texas_poker"><img src="~/pic/gamepic1.jpg" height="195" width="331" alt=""></a></div>
+                        <div class="gamelink"><span class="pc">在线游戏：<a href="http://apps.facebook.com/twtexas" class="l1" target="_blank" title="Facebook"></a> <a href="http://rc.qzone.qq.com/23006?via=DLJ" class="l2" target="_blank" title="QQ空间"></a> <a href="http://game.weibo.com/texaspoker/" class="l5" target="_blank" title="新浪微游戏"></a> <a href="http://apps.renren.com/boyaa_texas/" class="l4" target="_blank" title="人人网"></a> <a href="http://www.kaixin001.com/!holdem/index.php" class="l3" target="_blank" title="开心网"></a></span></div>
+                    </li>
+                    <li>
+                        <h3><a href="landlords">斗地主 <span>landlords</span></a></h3>
+                        <div class="gamepic"><a href="landlords"><img src="~/pic/gamepic3.jpg" height="195" width="331" alt=""></a></div>
+                        <div class="gamelink"><span class="pc">在线游戏：<a href="https://apps.facebook.com/twdoudizhu/" class="l1" target="_blank" title="Facebook"></a> <a href="http://www.kaixin001.com/!app_landlord/" class="l3" target="_blank" title="开心网"></a> <a href="http://game.weibo.com/boyadoudizhu?origin=1421" class="l5" target="_blank" title="新浪微游戏"></a></span></div>
+                    </li>
+                </ul>
+                <div class="loadmore"><a href="#">点击加载更多</a></div>
+            </div>
+        </section>
+    </section>
+</section>
+<a href="#top" class="gotop"></a>
+
+
+
+
+
+@section nav{
+    <a href="/home/index">首　页</a>
+    <a class="current" href="/home/lists">游戏中心</a>
+    <a href="/home/download">手机客户端</a>
+}
+
+
+@section scripts{
+<script src="~/Scripts/jquerycode.js"></script>
+<script type="text/javascript">
+	// TAB调用
+	jQuery("#protab").slide({ titCell:"#ptabt li", mainCell:"#ptabcon",trigger:"click",delayTime:0 });
+	$.fn.boyaaLimitUL = function() {
+		return $(this).each(function() {
+			var $this = $(this),
+				$loadMore = $this.parent().find('.loadmore'),
+				$li = $this.find('li');
+
+			if ($li.length > 8) {
+				$loadMore.find('a').click(function(e) {
+					e.preventDefault();
+					$li.show();
+					$loadMore.hide();
+				});
+				$li.filter(function() {
+					return $(this).index() > 7;
+				}).hide();
+			} else {
+				$loadMore.hide();
+			}
+		});
+	};
+	$('.gamelist').boyaaLimitUL();
+</script>
+    }

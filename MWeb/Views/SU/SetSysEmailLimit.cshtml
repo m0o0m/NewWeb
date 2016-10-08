@@ -1,0 +1,38 @@
+﻿
+@model object
+@{
+    ViewBag.Title = "发送邮件额度配置";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<!--End-breadcrumbs-->
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="widget-box span8" id="box">
+            @Html.Partial("SetSysEmailLimit_PageList", Model)
+        </div>
+    </div>
+</div>
+
+
+@section scripts{
+    @{Html.RegisterMvcPagerScriptResource();}
+
+
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/select2.min.js"></script>
+    <script type="text/javascript">
+
+   
+        function SetLimit(obj) {
+            _this = $(obj).parent().parent();
+            var _UserID = $(_this).find("td").eq(0).html();
+            location.href = "/SU/SetSysEmailLimitForUpdate?id=" + _UserID;
+        }
+
+    
+
+    </script>
+}

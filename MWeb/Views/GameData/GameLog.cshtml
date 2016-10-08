@@ -1,0 +1,135 @@
+﻿
+@using GL.Data.Model
+@using GL.Data.View
+@model GameRecordView
+@{
+    ViewBag.Title = "牌局查询";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+
+    int type = Model.Gametype;
+
+}
+
+
+
+
+
+<div id="content">
+    <form id="comment-form" class="smart-form" novalidate="novalidate">
+        <div class="row">
+            <div class="widget-body">
+               
+                <section class="col col-1">
+                    <label class="label"> 游戏类型</label>
+                    <label class="select">
+                        <select id="Gametype" name="Gametype" onchange="changType()">
+                            <option  value="0" @Html.GetOptionsSelectedAttr(type,0)>斗地主</option>
+                            <option value="1"  @Html.GetOptionsSelectedAttr(type,1)>德州扑克</option>
+                            <option value="2"  @Html.GetOptionsSelectedAttr(type,2)>中发白</option>
+                            <option value="3"  @Html.GetOptionsSelectedAttr(type,3)>十二生肖</option>
+                            <option value="4"  @Html.GetOptionsSelectedAttr(type,4)>小马快跑</option>
+                            <option value="5"  @Html.GetOptionsSelectedAttr(type,5)>奔驰宝马</option>
+                            <option value="6" @Html.GetOptionsSelectedAttr(type, 6)>百人德州</option>
+                        </select><i></i>
+                       
+                    </label>
+                </section>
+                <section class="col col-1.2" id="sectionUser" style=" @Html.GetMVCstring(type,"2,3,4,5","display:none") ">
+                    <label class="label">会员ID</label>
+                    <label class="input">
+                        @Html.TextBoxFor(m => m.SearchExt, new { @class = "span2", style = "border-radius:4px;width:120px" })
+                    </label>
+                </section>
+
+
+                <section class="col col-1.2" style="width:150px;@Html.GetMVCstring(type,"0,1","display:none")" id="sectionNO">
+                    <label class="label">牌局号</label>
+                    <label class="input">
+                        @Html.TextBoxFor(m => m.Data, new { @class = "span2", style = "border-radius:4px" })
+                    </label>
+                </section>
+
+
+                <section class="col col-1.2">
+                    <label class="label">起始日期</label>
+                    <label class="input">
+                        <i class="icon-append fa fa-calendar"></i>
+                        @Html.TextBoxFor(m => m.StartDate, new Dictionary<string, object>() { { "class", "form-control datepicker" }, { "data-dateformat", "yy-mm-dd 00:00:00" } })
+                    </label>
+                </section>
+                <section class="col col-1.2">
+                    <label class="label"> 截止日期</label>
+                    <label class="input">
+                        <i class="icon-append fa fa-calendar"></i>
+                        @Html.TextBoxFor(m => m.ExpirationDate, new Dictionary<string, object>() {
+                           { "class", "form-control datepicker" },
+                           { "data-dateformat", "yy-mm-dd 00:00:00" }
+                       })
+                    </label>
+                </section>
+                <section class="col col-1">
+                    <label class="label">&nbsp;</label>
+                    <input type="button" onclick="search()" class="btn btn-success btn-sm" value="查询" />
+                </section>
+
+            </div>
+        </div>
+    </form>
+
+    <div class="row-fluid">
+        <div class="widget-box" id="box">
+            @Html.Partial(Model.PageList, Model.DataList)
+        </div>
+    </div>
+</div>
+
+
+
+
+
+@section scripts{
+    @{Html.RegisterMvcPagerScriptResource();}
+
+
+    @*<script src="/js/bootstrap.min.js"></script>
+        <script src="/js/select2.min.js"></script>
+        @Styles.Render("~/Style/bootstrap-datetimepicker")
+        @Scripts.Render("~/bundles/bootstrap-datetimepicker")*@
+
+
+    <script type="text/javascript">
+
+        //$(document).ready(function () {
+        //    $('select').select2({
+        //        allowClear: false,
+        //        minimumResultsForSearch: -1
+        //    });
+        //    $('.datepicker').datetimepicker({
+        //        minView: "month", //选择日期后，不会再跳转去选择时分秒
+        //        format: "yyyy-mm-dd hh:ii:ss", //选择日期后，文本框显示的日期格式
+        //        language: 'zh-CN', //汉化
+        //        autoclose: true //选择日期后自动关闭
+        //    });
+
+        //});
+        changType();
+        function changType() {
+            var Gametype = $("#Gametype option:selected").val();
+       
+            if (Gametype == "0" || Gametype == "1" ) {
+                $("#sectionUser").css("display", "");
+                $("#sectionNO").css("display", "none");
+            }
+            else {
+                $("#sectionUser").css("display", "none");
+                $("#sectionNO").css("display", "");
+            }
+           
+         
+
+        }
+
+    </script>
+
+}

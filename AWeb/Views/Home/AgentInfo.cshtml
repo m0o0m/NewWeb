@@ -1,0 +1,146 @@
+﻿@model AgentUser
+@{
+    ViewBag.Title = "账户信息";
+
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.PageClass = "fixed-header fixed-page-footer";
+}
+
+
+
+<!-- MAIN CONTENT -->
+<div id="content">
+    <!-- widget grid -->
+    <section id="widget-grid" class="">
+        <!-- row -->
+        <div class="row">
+            <!-- NEW WIDGET START -->
+            <article class="col-sm-12 col-md-12 col-lg-6">
+                <!-- Widget ID (each widget will need unique ID)-->
+                <div class="jarviswidget" id="wid-id-0" data-widget-colorbutton="false" data-widget-editbutton="false">
+                    <!-- widget options:
+                    usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+
+                    data-widget-colorbutton="false"
+                    data-widget-editbutton="false"
+                    data-widget-togglebutton="false"
+                    data-widget-deletebutton="false"
+                    data-widget-fullscreenbutton="false"
+                    data-widget-custombutton="false"
+                    data-widget-collapsed="true"
+                    data-widget-sortable="false"
+
+                    -->
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-columns"></i> </span>
+                        <h2></h2>
+                    </header>
+                    <!-- widget div-->
+                    <div>
+                        <!-- widget edit box -->
+                        <div class="jarviswidget-editbox">
+                            <!-- This area used as dropdown edit box -->
+                        </div>
+                        <!-- end widget edit box -->
+                        <!-- widget content -->
+                        <div class="widget-body">
+                            <form class="form-horizontal">
+                                <fieldset>
+                                    <div class="form-group">
+                                        <label class="col-md-2 control-label">渠道账号</label>
+                                        <div class="col-md-10"><input class="form-control" disabled="disabled" placeholder="" type="text" value="@Model.UserName"></div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-2 control-label">渠道昵称</label>
+                                        <div class="col-md-10"><input class="form-control" disabled="disabled" placeholder="" type="text" value="@Model.AgentName"></div>
+                                    </div>
+                                    @*<div class="form-group">
+                                        <label class="col-md-2 control-label">渠道等级</label>
+                                        <div class="col-md-10"><input class="form-control" disabled="disabled" placeholder="" type="text" value="@Model.AgentLv"></div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-2 control-label">渠道QQ</label>
+                                        <div class="col-md-10"><input class="form-control" disabled="disabled" placeholder="" type="text" value="@Model.AgentQQ"></div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-2 control-label">渠道手机</label>
+                                        <div class="col-md-10"><input class="form-control" disabled="disabled" placeholder="" type="text" value="@Model.PhoneNumber"></div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-2 control-label">渠道Email</label>
+                                        <div class="col-md-10"><input class="form-control" disabled="disabled" placeholder="" type="text" value="@Model.Email"></div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-2 control-label">保证金</label>
+                                        <div class="col-md-10"><input class="form-control" disabled="disabled" placeholder="" type="text" value="@Model.Deposit"></div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-2 control-label">可用余额</label>
+                                        <div class="col-md-10"><input class="form-control" disabled="disabled" placeholder="" type="text" value="@Model.AmountAvailable"></div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-2 control-label">账号状态</label>
+                                        <div class="col-md-10"><input class="form-control" disabled="disabled" placeholder="" type="text" value="@Model.AgentState"></div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-2 control-label">在线状态</label>
+                                        <div class="col-md-10"><input class="form-control" disabled="disabled" placeholder="" type="text" value="@Model.OnlineState"></div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-2 control-label">注册时间</label>
+                                        <div class="col-md-10"><input class="form-control" disabled="disabled" placeholder="" type="text" value="@Model.RegisterTime"></div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-2 control-label">登录时间</label>
+                                        <div class="col-md-10"><input class="form-control" disabled="disabled" placeholder="" type="text" value="@Model.LoginTime"></div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-2 control-label">登录IP</label>
+                                        <div class="col-md-10"><input class="form-control" disabled="disabled" placeholder="" type="text" value="@Model.LoginIP"></div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-2 control-label">充值</label>
+                                        <div class="col-md-10"><input class="form-control" disabled="disabled" placeholder="" type="text" value="@Model.Recharge"></div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-2 control-label">兑换</label>
+                                        <div class="col-md-10"><input class="form-control" disabled="disabled" placeholder="" type="text" value="@Model.Drawing"></div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-2 control-label">收益模式</label>
+                                        <div class="col-md-10"><input class="form-control" disabled="disabled" placeholder="" type="text" value="@Model.RevenueModel"></div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-2 control-label">收益占成</label>
+                                        <div class="col-md-10"><input class="form-control" disabled="disabled" placeholder="" type="text" value="@Model.EarningsRatio"></div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-2 control-label">佣金返水</label>
+                                        <div class="col-md-10"><input class="form-control" disabled="disabled" placeholder="" type="text" value="@Model.RebateRate"></div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-2 control-label">是否为主站</label>
+                                        <div class="col-md-10"><input class="form-control" disabled="disabled" placeholder="" type="text" value="@Model.Extend_isDefault"></div>
+                                    </div>*@
+
+                                </fieldset>
+                            </form>
+
+
+
+
+                        </div>
+                        <!-- end widget content -->
+                    </div>
+                    <!-- end widget div -->
+                </div>
+                <!-- end widget -->
+            </article>
+            <!-- WIDGET END -->
+        </div>
+        <!-- end row -->
+
+    </section>
+    <!-- end widget grid -->
+</div>
+<!-- END MAIN CONTENT -->

@@ -1,0 +1,50 @@
+﻿@model GL.Data.Model.Yeepay
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>访问移动终端网页收银台</title>
+</head>
+<body>
+@using (Html.BeginForm("YeePay", "Pay", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+        <div class="content2">
+            <h2>移动终端网页收银台示例</h2>
+            <ul>
+                <li>交易金额：@Html.TextBoxFor(x => x.orderAmount)</li>
+                <li>商户交易订单号： @Html.TextBoxFor(x => x.traderOrderID)</li>
+
+                <li>用户身份标识： @Html.TextBoxFor(x => x.identityID)</li>
+                <li>用户身份标识类型： @Html.TextBoxFor(x => x.identityType)</li>
+                <li>用户IP： @Html.TextBoxFor(x => x.userIP)</li>
+                <li>用户UA： @Html.TextBoxFor(x => x.userUA)</li>
+
+                <li>终端类型： @Html.TextBoxFor(x => x.terminalType)</li>
+                <li>终端ID： @Html.TextBoxFor(x => x.terminalID)</li>
+
+
+                <li>商品类别： @Html.TextBoxFor(x => x.productCatalog)</li>
+                <li>商品名称： @Html.TextBoxFor(x => x.productName)</li>
+                <li>商品描述： @Html.TextBoxFor(x => x.productDesc)</li>
+
+                <li>支付成功商户前台回调地址： @Html.TextBoxFor(x => x.fcallbackURL)</li>
+                <li>支付成功商户后台台回调地址： @Html.TextBoxFor(x => x.callbackURL)</li>
+
+                <li><input type="submit" value="提交"></li>
+            </ul>
+        </div>
+}
+</body>
+</html>
+
+
+
+
+

@@ -1,0 +1,171 @@
+﻿@model SelectUserRolesViewModel
+@{
+    ViewBag.Title = "管理员管理 -- 权限设置";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div id="content">
+
+    <article class="col-sm-12 col-md-12 col-lg-6">
+        <div class="jarviswidget" id="wid-id-4" data-widget-editbutton="false" data-widget-custombutton="false">
+            <header>
+                <span class="widget-icon"> <i class="fa fa-edit"></i> </span>
+                <h2>设置管理员权限</h2>
+            </header>
+            <div>
+                <div class="jarviswidget-editbox">
+                </div>
+                <div class="widget-body">
+                    @using (Html.BeginForm("ManagementForRole", "SU", FormMethod.Post, new { @class = "form-horizontal" }))
+                    {
+                        @Html.AntiForgeryToken()
+
+                        if (ViewData.ModelState[""] != null && ViewData.ModelState[""].Errors.Count > 0)
+                        {
+                            <div class="alert alert-danger alert-block">
+                                <a class="close" data-dismiss="alert" href="#">×</a>
+                                <h4 class="alert-heading">Error!</h4>
+                                @Html.ValidationSummary(true)
+                            </div>
+                        }
+                        <fieldset>
+                            <legend>账号信息</legend>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.UserName, "管理员账号", new { @class = "col-md-2 control-label" })
+                                <div class="col-md-10">
+                                    @Html.HiddenFor(m=>m.UserName)
+                                    <div class="input-group">
+                                        <span class="form-control">@Model.UserName</span>
+                                        <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <legend>选择账号权限</legend>
+
+                            <div class="col-md-10">
+                                @*@Html.EditorFor(model => model.Roles)*@
+
+                                @for (int i = 0; i < Model.Roles.Count(); i++)
+                                {
+                                    bool selected = Model.Roles[i].Selected;
+                                    string checkedStr = selected == true ? "checked=checked" : "";
+                                    string id = "Roles_" + i + "__RoleName";
+                                    string idname = "Roles[" + i + "].RoleName";
+                                    string sel = "Roles_" + i + "__Selected";
+                                    string namesel = "Roles[" + i + "].Selected";
+                                    <input data-val="true" data-val-required="RoleName 字段是必需的。" id="@id" name="@idname" value="@Model.Roles[i].RoleName" type="hidden">
+                                    <div class="checkbox" style="text-transform : capitalize">
+                                        <label>
+                                            <input @checkedStr data-val="true" data-val-required="Selected 字段是必需的。" id="@sel" name="@namesel" value="true" type="checkbox">
+                                            <input name="@namesel" value="false" type="hidden">
+                                            @Model.Roles[i].RoleName
+
+                                        </label>
+                                    </div>
+                                }
+
+                            </div>
+
+                            <hr />
+                        </fieldset>
+                        <div class="form-actions">
+                            <div class="row">
+                                <div class="col-md-12">
+                                  
+                                    <input type="submit" value="提交" class="btn btn-primary" />
+                                    <input id="btnGoBack" type="button" value="返回列表" class=" btn btn-warning" />
+                                </div>
+                            </div>
+                        </div>
+
+                    }
+
+
+                </div>
+
+            </div>
+        </div>
+
+    </article>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@section scripts{
+    @{Html.RegisterMvcPagerScriptResource();}
+
+
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/select2.min.js"></script>
+    <script type="text/javascript">
+
+        // resets the menu selection upon entry to this page:
+        function resetMenu() {
+            document.gomenu.selector.selectedIndex = 2;
+        }
+
+        function btnSubmit(obj) {
+            _this = $(obj).parent().parent();
+
+            $.ajax({
+                url: "/SU/ManagementForRole/",
+                type: "POST",
+                dataType: "JSON",
+                data: $('#subfrom').serialize(),
+                success: function (data) {
+                    switch (data.result) {
+                        case 0:
+                            location.href = "/SU/Management";
+                            break;
+                        case 200:
+                            alert("值不能为空，请稍后再试");
+                            break;
+                        default:
+                            alert(data.msg);
+                            break;
+                    }
+                }
+            }).fail(function (xhr, textStatus, err) {
+                alert('Error: ' + err);
+            });
+
+            return false;
+
+        }
+
+        $(function () {
+
+
+            $("#btnGoBack").click(function () {
+                location.href = "/SU/Management";
+            });
+        })
+
+    </script>
+}

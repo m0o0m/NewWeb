@@ -1,0 +1,190 @@
+﻿@{
+    ViewBag.Title = "account";
+    Layout = "~/Views/Shared/_index.cshtml";
+}
+@section Js{
+
+    <script type="text/javascript">
+    $(function(){
+    $.Tipmsg.r=" ";
+    
+    $("#form-account").Validform({
+        tiptype:3,
+            datatype:{//传入自定义datatype类型【方式二】;
+            "idcard":function(gets,obj,curform,datatype){
+                //该方法由佚名网友提供;
+            
+                var Wi = [ 7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2, 1 ];// 加权因子;
+                var ValideCode = [ 1, 0, 10, 9, 8, 7, 6, 5, 4, 3, 2 ];// 身份证验证位值，10代表X;
+            
+                if (gets.length == 15) {   
+                    return isValidityBrithBy15IdCard(gets);   
+                }else if (gets.length == 18){   
+                    var a_idCard = gets.split("");// 得到身份证数组   
+                    if (isValidityBrithBy18IdCard(gets)&&isTrueValidateCodeBy18IdCard(a_idCard)) {   
+                        return true;   
+                    }   
+                    return false;
+                }
+                return false;
+                
+                function isTrueValidateCodeBy18IdCard(a_idCard) {   
+                    var sum = 0; // 声明加权求和变量   
+                    if (a_idCard[17].toLowerCase() == 'x') {   
+                        a_idCard[17] = 10;// 将最后位为x的验证码替换为10方便后续操作   
+                    }   
+                    for ( var i = 0; i < 17; i++) {   
+                        sum += Wi[i] * a_idCard[i];// 加权求和   
+                    }   
+                    valCodePosition = sum % 11;// 得到验证码所位置   
+                    if (a_idCard[17] == ValideCode[valCodePosition]) {   
+                        return true;   
+                    }
+                    return false;   
+                }
+                
+                function isValidityBrithBy18IdCard(idCard18){   
+                    var year = idCard18.substring(6,10);   
+                    var month = idCard18.substring(10,12);   
+                    var day = idCard18.substring(12,14);   
+                    var temp_date = new Date(year,parseFloat(month)-1,parseFloat(day));   
+                    // 这里用getFullYear()获取年份，避免千年虫问题   
+                    if(temp_date.getFullYear()!=parseFloat(year) || temp_date.getMonth()!=parseFloat(month)-1 || temp_date.getDate()!=parseFloat(day)){   
+                        return false;   
+                    }
+                    return true;   
+                }
+                
+                function isValidityBrithBy15IdCard(idCard15){   
+                    var year =  idCard15.substring(6,8);   
+                    var month = idCard15.substring(8,10);   
+                    var day = idCard15.substring(10,12);
+                    var temp_date = new Date(year,parseFloat(month)-1,parseFloat(day));   
+                    // 对于老身份证中的你年龄则不需考虑千年虫问题而使用getYear()方法   
+                    if(temp_date.getYear()!=parseFloat(year) || temp_date.getMonth()!=parseFloat(month)-1 || temp_date.getDate()!=parseFloat(day)){   
+                        return false;   
+                    }
+                    return true;
+                }
+                
+            }
+            
+        }
+    });     
+    });
+        </script>
+}
+<div class="wrap">
+        <!-- 位置 -->
+        <section class="crumbs">
+            <strong>您现在的位置:</strong>
+            <a href="/" title="">首页</a><span>&gt;</span>
+            <a href="#" title="">会员中心</a><span>&gt;</span>
+            <p>首页</p>
+        </section>
+        <!-- 主体包裹 -->
+        <div class="main-wrap">
+            <!-- 侧栏 -->
+            <nav class="side-nav">
+                <ul>
+                     <li class="active"><a href="/account"><i class="st-icon icon-person"></i>我的账户</a></li>
+                    <li ><a href="/changepwd"><i class="st-icon icon-pwd"></i>修改密码</a></li>
+                </ul>
+            </nav>
+            <!-- 主体内容 -->
+            <section class="main-area main-area-account">
+                <!-- 账户资料 -->
+                <div class="my-account-area">
+                    <img class="head" src="Image/account_user_head.jpg" alt="用户头像">
+                    <div class="info">
+                        <form id="form-account" action="account_submit" method="get">
+                        <div class="hor-group">
+                            <div class="item-6">
+                                <label>用户昵称：</label>
+                                <div class="group">
+                                    <span class="strong item">homeing</span>
+                                </div>
+                            </div>
+                            <div class="item-6">
+                                <label>游戏币：</label>
+                                <div class="group">
+                                    <span class="item">162</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="hor-group">
+                            <div class="item-6">
+                                <label>资料完善：</label>
+                                <div class="group">
+                                    <div class="data-per">
+                                        <!-- 此处样式的width百分比应和p标签中的百分比相同 -->
+                                        <div class="per" style="width:70%;"></div>
+                                        <p>70%</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="item-6">
+                                <label>钻石：</label>
+                                <div class="group">
+                                    <span class="item">5125</span>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <a class="small-btn" href="pay.html">充值</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="hor-group">
+                            <div class="item-6">
+                                <label>性别：</label>
+                                <div class="group">
+                                    <select name="sex" style="width:64px;">
+                                        <option value="man">男</option>
+                                        <option value="women">女</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="item-6">
+                                <label>紫卡：</label>
+                                <div class="group">
+                                    <span class="item">1212</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="hor-group">
+                            <label>真实姓名：</label>
+                            <div class="group">
+                                <input type="text" name="" ignore="ignore" value="" datatype="*">
+                                <span class="Validform_checktip Validform_wrong">这是错误信息</span>
+                            </div>
+                        </div>
+                        <div class="hor-group">
+                            <label>身份证：</label>
+                            <div class="group">
+                                <input type="text" name="" datatype="idcard" ignore="ignore" value="" errormsg="您填写的身份证号码不对！">
+                            </div>
+                        </div>
+                        <div class="hor-group">
+                            <label>手机号：</label>
+                            <div class="group">
+                                <span>188****5612</span><a class="set-phone" href="#">修改</a>
+                            </div>
+                        </div>
+                        <div class="hor-group">
+                            <label>邮箱：</label>
+                            <div class="group">
+                                <input type="text" datatype="e" ignore="ignore" name="" value="" placeholder="">
+                                <span class="Validform_checktip"></span>
+                                <p class="server-error">服务器返回的错误</p>
+                            </div>
+                        </div>
+                        <div class="hor-group">
+                            <button class="button-sbt" type="button">保存</button>
+                        </div>
+
+
+                        </form>
+                    </div>
+                        
+                </div>
+            </section>
+        </div>
+    </div>

@@ -1,0 +1,111 @@
+﻿@using GL.Data.Model
+@model BaseDataView
+@{
+    ViewBag.Title = "版本统计";
+    ViewBag.Format = "yyyy-MM-dd";
+
+    List<VersionSum> bdl = (List<VersionSum>)Model.BaseDataList;
+
+}
+<div id="content">
+
+    <form id="comment-form" class="smart-form" novalidate="novalidate">
+        <div class="row">
+          
+
+            <section class="col col-1.2">
+                <label class="input">
+                    <i class="icon-append fa fa-calendar"></i>
+                    @Html.TextBoxFor(m => m.StartDate, new Dictionary<string, object>() {
+                           { "class", "form-control datepicker" },
+                           { "data-dateformat", "yy-mm-dd 00:00:00" }
+                       })
+                </label>
+            </section>
+          
+            <section class="col col-1">
+                <button type="submit" class="btn btn-success btn-sm">查询</button>
+            </section>
+
+        </div>
+    </form>
+
+    <section id="widget-grid" class="">
+        <div class="row">
+            <article class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
+                <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-0" data-widget-editbutton="false" data-widget-colorbutton="false"
+                     data-widget-togglebutton="false"
+                     data-widget-deletebutton="false"
+                     data-widget-fullscreenbutton="false"
+                     data-widget-custombutton="false"
+                     data-widget-collapsed="false"
+                     data-widget-sortable="false">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                        <h2>版本统计</h2>
+                    </header>
+                    <!-- widget div-->
+                    <div>
+                        <!-- widget edit box -->
+                        <div class="jarviswidget-editbox">
+                            <!-- This area used as dropdown edit box -->
+                        </div>
+                        <!-- end widget edit box -->
+                        <!-- widget content -->
+                        <div class="widget-body no-padding" style="min-height: 70px;">
+                            <div class="table-responsive">
+                                <table class="table table-bordered">
+                                    <thead>
+                                        @*<tr><th colspan="2">活跃用户数</th></tr>*@
+                                        <tr>
+                                            <th>版本号</th>
+                                            <th>日新增</th>
+                                            <th>新增玩牌率</th>
+                                            <th>日活跃</th>
+                                            <th>付费渗透率</th>
+                                            <th>付费用户数</th>
+                                            <th>Arppu值</th>
+                                            <th>Arpu值</th>
+                                            <th>总收入</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @if (bdl.Count == 0)
+                                        {
+                                            <tr>
+                                                <td class="colspan" align="center" colspan="0">
+                                                    没有找到相关记录！
+                                                </td>
+                                            </tr>
+                                        }
+                                        @for (int k = 0; k < bdl.Count(); k++)
+                                        {
+                                            VersionSum item = bdl[k];
+                                            <tr>
+                                                <td>@item.VersionNo</td>
+                                                <td>@item.DayAdd.ToString("#,0.")</td>
+                                                <td>@item.NewBoardRate.ToString("#,0.00%")</td>
+                                                <td>@item.DayActive.ToString("#,0.")</td>
+                                                <td>@item.PayST.ToString("#,0.00%")</td>
+                                                <td>@item.PayUserCount.ToString("#,0.")</td>
+                                                <td>@item.Arppu.ToString("#,0.00%")</td>
+                                                <td>@item.Arpu.ToString("#,0.00%")</td>
+                                                <td>@item.TotalPay.ToString("#,0.00")</td>
+                                             
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <!-- end widget content -->
+                    </div>
+                    <!-- end widget div -->
+                </div>
+                <!-- end widget -->
+
+            </article>
+        </div>
+    </section>
+</div>
+

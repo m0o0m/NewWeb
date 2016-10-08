@@ -1,0 +1,110 @@
+﻿@{
+
+    ViewBag.Title = "概率游戏控制台";
+}
+
+
+<div id="content" style="height:100%">
+    <div class="row" style="height:868px">
+
+        <div id="flashContent">
+            <p>
+                To view this page ensure that Adobe Flash Player version
+                11.1.0 or greater is installed.
+            </p>
+            <script type="text/javascript">
+                    var pageHost = ((document.location.protocol == "https:") ? "https://" : "http://");
+                    document.write("<a href='http://www.adobe.com/go/getflashplayer'><img src='"
+                                    + pageHost + "www.adobe.com/images/shared/download_buttons/get_flash_player.gif' alt='Get Adobe Flash player' /></a>");
+            </script>
+        </div>
+        <noscript>
+            <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="1380px" @*height="868px"*@ id="OperBack">
+                <param name="movie" value="OperBack.swf?v=@ViewData["version"]" />
+                <param name="quality" value="high" />
+                <param name="bgcolor" value="#ffffff" />
+                <param name="allowScriptAccess" value="sameDomain" />
+                <param name="allowFullScreen" value="true" />
+                <!--[if !IE]>-->
+                <object type="application/x-shockwave-flash" data="OperBack.swf?v=@ViewData["version"]" width="1380px" @*height="868px"*@>
+                    <param name="quality" value="high" />
+                    <param name="bgcolor" value="#ffffff" />
+                    <param name="allowScriptAccess" value="sameDomain" />
+                    <param name="allowFullScreen" value="true" />
+                    <!--<![endif]-->
+                    <!--[if gte IE 6]>-->
+                    <p>
+                        Either scripts and active content are not permitted to run or Adobe Flash Player version
+                        11.1.0 or greater is not installed.
+                    </p>
+                    <!--<![endif]-->
+                    <a href="http://www.adobe.com/go/getflashplayer">
+                        <img src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="Get Adobe Flash Player" />
+                    </a>
+                    <!--[if !IE]>-->
+                </object>
+                <!--<![endif]-->
+            </object>
+        </noscript>
+
+    </div>
+
+</div>
+
+
+@*<div class="container-fluid">
+    <div class="row-fluid">
+
+
+
+
+
+
+    </div>
+
+
+</div>*@
+
+
+@section scripts{
+
+    <script src="/js/bootstrap.min.js"></script>
+    @Scripts.Render("~/bundles/swfobject")
+
+
+    <script type="text/javascript">
+
+        // For version detection, set to min. required Flash Player version, or 0 (or 0.0.0), for no version detection. 
+        var swfVersionStr = "11.1.0";
+        // To use express install, set to playerProductInstall.swf, otherwise the empty string. 
+        var xiSwfUrlStr = "playerProductInstall.swf";
+        var flashvars = {};
+        var params = {};
+        params.quality = "high";
+        params.bgcolor = "#ffffff";
+        params.allowscriptaccess = "sameDomain";
+        params.allowfullscreen = "true";
+        var attributes = {};
+        attributes.id = "OperBack";
+        attributes.name = "OperBack";
+        attributes.align = "middle";
+        swfobject.embedSWF(
+            "OperBack.swf?v=6", "flashContent",
+            "1380px", "868px",
+            swfVersionStr, xiSwfUrlStr,
+            flashvars, params, attributes);
+        // JavaScript enabled so display the flashContent div in case it is not replaced with a swf object.
+        swfobject.createCSS("#flashContent", "display:block;text-align:left;");
+
+
+
+        function viewUserInfo(id) {
+            window.open("/Manage/MemberManage?Value=" + id);
+        }
+
+        function viewLog() {
+            window.open("/Console/PotCtrlList");
+        }
+    </script>
+
+}

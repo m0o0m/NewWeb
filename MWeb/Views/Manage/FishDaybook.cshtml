@@ -1,0 +1,111 @@
+﻿@using GL.Data.Model
+@using GL.Data.View
+@model GameRecordView
+@{
+    ViewBag.Title = "购买与放生流水日志";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+<div id="content">
+    <form id="comment-form" class="smart-form" novalidate="novalidate">
+        <div class="row">
+            <div class="widget-body">
+                <section class="col col-1.2">
+                    <label class="label">会员ID</label>
+                    <label class="input">
+                        @Html.TextBoxFor(m => m.SearchExt, new { @class = "span2", style = "border-radius:4px;width:120px", id = "searchExt" })
+                    </label>
+                </section>
+
+                <section class="col col-1.2">
+                    <label class="label">起始日期</label>
+                    <label class="input">
+                        <i class="icon-append fa fa-calendar"></i>
+                        @Html.TextBoxFor(m => m.StartDate, new Dictionary<string, object>() { { "class", "form-control datepicker" }, { "data-dateformat", "yy-mm-dd 00:00:00" },
+                           {"id","beginDate" } })
+                    </label>
+                </section>
+                <section class="col col-1.2">
+                    <label class="label"> 截止日期</label>
+                    <label class="input">
+                        <i class="icon-append fa fa-calendar"></i>
+                        @Html.TextBoxFor(m => m.ExpirationDate, new Dictionary<string, object>() {
+                           { "class", "form-control datepicker" },
+                           { "data-dateformat", "yy-mm-dd 00:00:00" },
+                           {"id","endDate" }
+                       })
+                    </label>
+                </section>
+                <section class="col col-1">
+                    <label class="label">&nbsp;</label>
+                    @*<button type="submit" class="btn btn-success btn-sm">查询</button>*@
+                    <input type="button" onclick="search()" class="btn btn-success btn-sm" value="查询" />
+                </section>
+
+            </div>
+        </div>
+    </form>
+    <div class="row-fluid">
+        <div class="widget-box" id="box">
+            @Html.Partial("FishDaybook_PageList", Model.DataList)
+        </div>
+    </div>
+</div>
+
+
+
+
+@section scripts{
+    @{Html.RegisterMvcPagerScriptResource();}
+    @*<script src="/js/bootstrap.min.js"></script>
+        <script src="/js/select2.min.js"></script>
+        @Styles.Render("~/Style/bootstrap-datetimepicker")
+        @Scripts.Render("~/bundles/bootstrap-datetimepicker")*@
+
+
+
+    <script type="text/javascript">
+    function btnView(fishID, commandID) {
+        _StartDate = $("#beginDate").val();
+        _ExpirationDate = $("#endDate").val();
+        _SearchExt = $("#searchExt").val();
+        $.ajax({
+            url: "/Manage/FishDaybook",
+            type: "get",
+            dataType: "html",
+            data: { "fishID": fishID, "commandID": commandID, "StartDate": _StartDate, "ExpirationDate": _ExpirationDate, "SearchExt": _SearchExt },
+            success: function (data) {
+                $(".detail").remove();
+                $("#content").append(data);
+            }
+        }).fail(function (xhr, textStatus, err) {
+            alert('Error: ' + err);
+
+        });
+        return false;
+    }
+
+    function returnID(ID) {
+        _StartDate = $("#beginDate").val();
+        _ExpirationDate = $("#endDate").val();
+        _SearchExt = ID;
+        location.href = "/Manage/FishDaybook?StartDate=" + _StartDate + "&ExpirationDate=" + _ExpirationDate + "&SearchExt=" + _SearchExt;
+        //$.ajax({
+        //    url: "/Manage/FishDaybook",
+        //    type: "post",
+        //    dataType: "html",
+        //    data: { "StartDate": _StartDate, "ExpirationDate": _ExpirationDate, "SearchExt": _SearchExt },
+        //    success: function (data) {
+        //        $(".detail").remove();
+        //        $("#content").append(data);
+        //    }
+        //}).fail(function (xhr, textStatus, err) {
+        //    alert('Error: ' + err);
+
+        //});
+        return false;
+    }
+    </script>
+
+}

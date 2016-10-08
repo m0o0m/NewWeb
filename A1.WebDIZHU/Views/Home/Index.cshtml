@@ -1,0 +1,69 @@
+﻿@{
+    ViewBag.Title = "玩一玩 ▪ 515";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+<section id="banner">
+    <div class="bd">
+        <ul>
+            <li id="b1" class="darkcolor" style="background-image: url(/pic/probanner1.jpg); display: none;">
+                <div class="intro">
+                    <h2>德州扑克</h2>
+                    @*<dl class="online">
+                            <dt>在线游戏</dt>
+                            <dd>
+                                <a href="http://apps.facebook.com/twtexas" class="pt1" target="_blank" title="Facebook"></a>
+                                <a href="http://rc.qzone.qq.com/23006?via=DLJ" class="pt2" target="_blank" title="QQ空间"></a>
+                                <a href="http://www.kaixin001.com/!holdem/index.php" class="pt3" target="_blank" title="开心网"></a>
+                                <a href="http://apps.renren.com/boyaa_texas/" class="pt4" target="_blank" title="人人网"></a>
+                                <a href="http://game.weibo.com/texaspoker/" class="pt5" target="_blank" title="新浪微游戏"></a>
+                            </dd>
+                        </dl>*@
+                    <p>与其说德州扑克是一种扑克游戏，倒不如说德州扑克是一种心理游戏，你的心理足够强大吗？</p>
+                    <dl class="download">
+                        <dt>下载游戏：</dt>
+                        <dd>
+                            <a href="http://itunes.apple.com/app/id395072693?mt=8" class="downlink ipad" target="_blank">iPad</a>
+                            <a href="http://itunes.apple.com/app/id391090493?mt=8" class="downlink iphone" target="_blank">iPhone</a>
+                            <a href="/mobile/apk/sina_slb_3.0.5.apk" class="downlink android" target="_blank">Android</a>
+                            <span class="ewm"><img src="/images/texas_poker80.png" height="80" width="80" alt=""></span>
+                        </dd>
+                    </dl>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="hd">
+        @*<ul><li class="on">1</li></ul>*@
+    </div>
+</section>
+<section id="indexmain">
+    <article id="indexpro" class="area indexpro">
+        <div class="bd">
+            <div class="tempWrap" style="overflow:hidden; position:relative; width:1044px">
+                <ul style="width: 5220px; position: relative; overflow: hidden; padding: 0px; margin: 0px; left: -1433.136384px;">
+                    <li style="float: left; width: 282px;"><a href="landlords"><img src="/images/gamepic3.jpg" height="140" width="282" alt=""><h5>斗地主</h5><p><span>LANDLORDS</span></p></a></li>
+                    <li style="float: left; width: 282px;"><a href="texas_poker"><img src="/images/gamepic1.jpg" height="140" width="282" alt=""><h5>德州扑克</h5><p><span>texas hold'em poker</span></p></a></li>
+                    <li style="float: left; width: 282px;"><a href="lists"><img src="/images/gamepic2.jpg" height="140" width="282" alt=""><h5>更多游戏</h5><p><span>More..</span></p></a></li>
+                </ul>
+            </div>
+        </div>
+    </article>
+
+</section>
+
+@section nav{
+<a class="current" href="/home/index">首　页</a>
+<a href="/home/lists">游戏中心</a>
+<a href="/home/download">手机客户端</a>
+}
+@section scripts{
+@Scripts.Render("~/bundles/SuperSlide")
+<script type="text/javascript">
+    // 焦点图调用
+    jQuery("#banner").slide({ titCell: ".hd ul", mainCell: ".bd ul", autoPlay: true, autoPage: true, delayTime: 1500, interTime: 4000, trigger: "click" });
+    // 滚动图片调用
+    jQuery("#indexpro").slide({ titCell: ".hd ul", mainCell: ".bd ul", effect: "leftLoop", autoPlay: false, autoPage: true, vis: 3, scroll: 3, trigger: "click", interTime: 4500 });
+</script>
+}

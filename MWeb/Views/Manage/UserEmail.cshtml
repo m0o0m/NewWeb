@@ -1,0 +1,146 @@
+﻿@model BaseDataView
+@{
+    ViewBag.Title = "会员邮件 -- 列表";
+    if (Request.IsAjaxRequest())
+    {
+        Layout = null;
+
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+}
+
+<link rel="stylesheet" type="text/css" media="screen" href="~/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" media="screen" href="~/css/smartadmin-production.css">
+<script src="~/js/libs/jquery-2.0.2.min.js"></script>
+<script src="~/js/libs/jquery-ui-1.11.4-utf8.js"></script>
+<script src="~/js/bootstrap/bootstrap.min.js"></script>
+<script type="text/javascript">
+
+      // DO NOT REMOVE : GLOBAL FUNCTIONS!
+
+      $(document).ready(function () {
+          pageSetUp();
+      })
+
+</script>
+
+
+<div id="content">
+    <form id="comment-form" class="smart-form" novalidate="novalidate">
+        <div class="row">
+            <div class="widget-body">
+
+                <section class="col col-1" style="width:210px">
+                    <label class="label">&nbsp;</label>
+                    <label class="select">
+                        @Html.GetAllUserGroupList("UEUser", Model.SearchExt)<i></i>
+                    </label>
+                </section>
+
+                <section class="col col-1.2">
+                    <label class="label">起始日期</label>
+                    <label class="input">
+                        <i class="icon-append fa fa-calendar"></i>
+                        @Html.TextBoxFor(m => m.StartDate, new Dictionary<string, object>() { { "class", "form-control datepicker" }, { "data-dateformat", "yy-mm-dd 00:00:00" } })
+                    </label>
+                </section>
+                <section class="col col-1.2">
+                    <label class="label"> 截止日期</label>
+                    <label class="input">
+                        <i class="icon-append fa fa-calendar"></i>
+                        @Html.TextBoxFor(m => m.ExpirationDate, new Dictionary<string, object>() {
+                           { "class", "form-control datepicker" },
+                           { "data-dateformat", "yy-mm-dd 00:00:00" }
+                       })
+                    </label>
+                </section>
+                <section class="col col-1">
+                    <label class="label">&nbsp;</label>
+                    @*<button type="submit" class="btn btn-success btn-sm">查询</button>*@
+                    <input type="button" onclick="search()" class="btn btn-success btn-sm" value="查询" />
+                </section>
+
+            </div>
+        </div>
+    </form>
+
+    <div class="row-fluid">
+        <div class="widget-box" id="box">
+            @Html.Partial("UserEmail_PageList", Model.BaseDataList);
+        </div>
+    </div>
+</div>
+
+
+
+
+
+@section scripts{
+    @{Html.RegisterMvcPagerScriptResource();}
+
+
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/select2.min.js"></script>
+
+
+    <script type="text/javascript">
+
+
+        //function btnDelete(obj) {
+        //    _this = $(obj).parent().parent();
+        //    if (confirm('确定删除本记录？')) {
+        //        var _UEID = _this.find("input[type='hidden']").val();
+        //        $.ajax({
+        //            url: "/api/FM/",
+        //            type: "OPTIONS",
+        //            dataType: "JSON",
+        //            data: { "UEID": _UEID },
+        //            success: function (data) {
+        //                switch (data.result) {
+        //                    case 0:
+        //                        location.reload();
+        //                        break;
+        //                    case 1:
+        //                        alert("删除失败，请稍后再试");
+        //                        break;
+        //                    default:
+        //                        alert('未知错误');
+        //                        break;
+        //                }
+        //            }
+        //        }).fail(function (xhr, textStatus, err) {
+        //            alert('Error: ' + err);
+        //        });
+        //    } else {
+        //        return false;
+        //    }
+        //    return false;
+        //}
+
+
+    $(function () {
+
+
+    })
+
+
+
+
+
+
+    // resets the menu selection upon entry to this page:
+    function resetMenu() {
+        document.gomenu.selector.selectedIndex = 2;
+    }
+
+
+
+    </script>
+}
+
+
+
+

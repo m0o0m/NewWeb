@@ -1,0 +1,182 @@
+﻿
+
+
+@using GL.Data.Model
+@model SimulatorRecharge
+@{
+    ViewBag.Title = "充值列表";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    ViewBag.Format = "yyyy-MM-dd";
+
+
+}
+
+
+
+
+
+<div id="content">
+    <form id="comment-form" class="smart-form" novalidate="novalidate">
+        <div class="row">
+            <div class="widget-body">
+                <input type="hidden" id="ispostback" name="ispostback" value="1" />
+                <section class="col col-1">
+                    <label class="label">会员ID</label>
+                    <label class="input">
+                        @Html.TextBoxFor(m => m.UserID, new { @class = "span2", style = "border-radius:4px" })
+                    </label>
+                </section>
+                <section class="col col-1">
+                    <label class="label"> 接口</label>
+                    <label class="select">
+                        <select id="URL" name="URL" >
+                            <option mark="yybtestpay" value="applicationtreasure?">应用宝</option>
+                            <option mark="qqtestpay" value="resultnotifypageforqq?">腾讯</option>
+                            <option mark="hmtestpay" value="hippocampipay?">海马</option>
+                        </select><i></i>
+                    </label>
+                </section>
+                <section class="col col-1">
+                    <label class="label"> 充值类型</label>
+                    <label class="select">
+                        <select id="Type" name="Type" onchange="changType()">
+                            <option  value="1">游戏币</option>
+                            <option  value="2">五币</option>
+                        </select><i></i>
+                     
+                    </label>
+                </section>
+                <section class="col col-1">
+                    <label class="label"> 商品</label>
+                    <label class="select">
+                        <select id="ProductID" name="ProductID">
+                          
+
+                            <option mark="1" value="firstCharge_1" money="1">1元首冲大礼包</option>
+                            <option mark="1" value="firstCharge_2" money="6">6元首冲大礼包</option>   
+                            <option mark="1" value="Chip_8" money="6">60000游戏币</option>
+                            <option mark="1" value="Chip_9" money="18">180000游戏币</option>
+                            <option mark="1" value="Chip_3" money="30">300000游戏币</option>
+                            <option mark="1" value="Chip_10" money="68">680000游戏币</option>
+                            <option mark="1" value="Chip_11" money="128">1280000游戏币</option>
+                            <option mark="1" value="Chip_12" money="328">3280000游戏币</option>
+                            <option mark="1" value="Chip_13" money="648">6480000游戏币</option>
+                          
+
+
+                            <option style="display:none" mark="2" value="5b_7" money="6">60五币</option>
+                            <option style="display:none" mark="2" value="5b_8" money="18">180五币</option>
+                            <option style="display:none" mark="2" value="5b_3" money="30">300五币</option>
+                            <option style="display:none" mark="2" value="5b_9" money="68">680五币</option>
+                            <option style="display:none" mark="2" value="5b_10" money="128">1280五币</option>
+                            <option style="display:none" mark="2" value="5b_11" money="328">3280五币</option>
+                            <option style="display:none" mark="2" value="5b_12" money="648">6480五币</option>
+                         
+
+                        </select><i></i>
+                    </label>
+                </section>
+                <section class="col col-1">
+                    <label class="label">折扣(折)</label>
+                    <label class="input">
+                        @Html.TextBoxFor(m => m.Discounted, new { @class = "span2", style = "border-radius:4px" })
+                    </label>
+                </section>
+                <section class="col col-1">
+                    <label class="label">&nbsp;</label>
+                    <input type="button" onclick="searchCZ()" class="btn btn-success btn-sm" value="模拟充值" />
+                </section>
+
+            </div>
+        </div>
+    </form>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+@section scripts{
+    @{Html.RegisterMvcPagerScriptResource();}
+
+
+    <script type="text/javascript">
+        function changType() {
+            var Type = $("#Type option:selected").val();
+            var options = $("#ProductID option");
+            if (Type == "1") {
+                $("#ProductID").val("Chip_8");
+            } else {
+                $("#ProductID").val("5b_7");
+            }
+                options.each(function () {
+                    var m = $(this).attr("mark");
+                    if (m == Type) {
+                        $(this).css("display", "");
+                    } else {
+                        $(this).css("display", "none");
+                    }
+                })
+         
+        }
+
+        function searchCZ() {
+            var UserID = $("#UserID").val();
+            var Type = $("#Type option:selected").val();
+
+        
+
+            var ProductID = $("#ProductID option:selected").val();
+            var Money = $("#ProductID option:selected").attr("money");
+            var URL = $("#URL option:selected").val();
+            var Discounted = $("#Discounted").val();
+            var name = $("#URL option:selected").attr("mark");
+            if (parseInt(Money) != Money || parseInt(Money)<=0) {
+                alert("金额必须为正整数!");
+                return false;
+            }
+
+            if (isNaN(Discounted) || Discounted < 0 || Discounted>10) {
+                alert("折扣必须为1-10的数字!");
+                return false;
+            }
+
+        
+            $.ajax({
+              //  url: "/Recharge/SimulatorRechargeMoney/",
+                url: "/SimulatorRecharge/CommonPay",
+                type: "Post",
+                data: { "Name":name,"URL":URL,"ProductID":ProductID, "UserID": UserID, "Type": Type, "Money": Money, "Discounted": Discounted },
+                success: function (data) {
+                    switch (data) {
+                        case "1":
+                            alert("操作成功");
+                            break;
+                        case "2":
+                            alert("操作成功,特殊情况(请联系开发人员)");
+
+                            break;
+                        case "3":
+                            alert("无法连接服务器");
+
+                            break;
+                        default:
+                            alert(data);
+                            break;
+                    }
+                }
+            });
+
+
+        }
+
+    </script>
+}
+

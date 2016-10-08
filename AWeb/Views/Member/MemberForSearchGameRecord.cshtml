@@ -1,0 +1,212 @@
+﻿@using GL.Data.Model
+@using GL.Data.View
+@model GameRecordView
+@{
+    ViewBag.Title = "个人产出消耗";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    UserInfo ui = (UserInfo)Model.Data;
+
+}
+
+<div id="content">
+ 
+    <section id="widget-grid" class="">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
+                <form id="comment-form" class="smart-form" novalidate="novalidate">
+                    <div class="row">
+                        <div class="widget-body">
+                            <section class="col col-1.2">
+                                <label class="label">会员ID/账户/昵称</label>
+                                <label class="input">
+                                    @Html.TextBoxFor(m => m.SearchExt, new { @class = "form-control input-sm", style = "border-radius:4px;width:120px" })
+                                </label>
+                            </section>
+                            <section class="col col-1.2">
+                                <label class="label">起始日期</label>
+                                <label class="input">
+                                    <i class="icon-append fa fa-calendar"></i>
+                                    @Html.TextBoxFor(m => m.StartDate, new Dictionary<string, object>() { { "class", "form-control input-sm datepicker" }, { "data-dateformat", "yy-mm-dd 00:00:00" } })
+                                </label>
+                            </section>
+                            <section class="col col-1.2">
+                                <label class="label"> 截止日期</label>
+                                <label class="input">
+                                    <i class="icon-append fa fa-calendar"></i>
+                                    @Html.TextBoxFor(m => m.ExpirationDate, new Dictionary<string, object>() { { "class", "form-control input-sm datepicker" }, { "data-dateformat", "yy-mm-dd 00:00:00" } })
+                                </label>
+                            </section>
+                            <section class="col col-1">
+                                <label class="label">&nbsp;</label>
+                                <button type="submit" class="btn btn-success btn-sm">查询</button>
+                            </section>
+
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="row">
+            <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-0" data-widget-editbutton="false" data-widget-colorbutton="false"
+                     data-widget-togglebutton="false"
+                     data-widget-deletebutton="false"
+                     data-widget-fullscreenbutton="false"
+                     data-widget-custombutton="false"
+                     data-widget-collapsed="false"
+                     data-widget-sortable="false">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                        <h2>个人信息</h2>
+                    </header>
+                    <!-- widget div-->
+                    <div>
+                        <!-- widget edit box -->
+                        <div class="jarviswidget-editbox">
+                            <!-- This area used as dropdown edit box -->
+                        </div>
+                        <!-- end widget edit box -->
+                        <!-- widget content -->
+                        <div class="widget-body no-padding">
+                            <div class="table-responsive">
+                                <table class="table table-bordered">
+                                    <thead>
+
+                                        <tr>
+                                            <th>注册日期</th>
+                                            <th>注册IP</th>
+                                            <th>充值金额</th>
+                                            <th>充值次数</th>
+                                            <th>筹码数</th>
+                                            @*<th>昨日积分换豪礼数</th>*@
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @if (ui == null)
+                                        {
+                                            <tr>
+                                                <td></td>
+                                                <td></td>
+                                                <td>0</td>
+                                                <td>0</td>
+                                                <td>0</td>
+                                                <td>0</td>
+                                            </tr>
+                                        }
+                                        else
+                                        {
+                                            <tr>
+                                                <td>@ui.CreateTime</td>
+                                                <td>@ui.CreateIP</td>
+                                                <td>@ui.recharge</td>
+                                                <td>@ui.rechargecount</td>
+                                                <td>@ui.money</td>
+                                                @*<td>@ui.Score</td>*@
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="dt-toolbar-footer">
+                                <div class="col-sm-6 col-xs-12 hidden-xs">
+                                    <div class="dataTables_info" id="dt_basic_info" role="status" aria-live="polite">Showing <span class="txt-color-darken">1</span> to <span class="txt-color-darken">1</span> of <span class="text-primary">1</span> entries</div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!-- end widget content -->
+                    </div>
+                    <!-- end widget div -->
+                </div>
+                <!-- end widget -->
+
+            </article>
+        </div>
+    </section>
+
+    <div class="row">
+        <!-- NEW WIDGET START -->
+        <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <!-- Widget ID (each widget will need unique ID)-->
+            <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-0" data-widget-editbutton="false">
+                <!-- widget options:
+                usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+
+                data-widget-colorbutton="false"
+                data-widget-editbutton="false"
+                data-widget-togglebutton="false"
+                data-widget-deletebutton="false"
+                data-widget-fullscreenbutton="false"
+                data-widget-custombutton="false"
+                data-widget-collapsed="true"
+                data-widget-sortable="false"
+
+                -->
+                <header>
+                    <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                    <h2>@ViewBag.Title</h2>
+                </header>
+                <!-- widget div-->
+                <div>
+                    <!-- widget edit box -->
+                    <div class="jarviswidget-editbox">
+                        <!-- This area used as dropdown edit box -->
+                    </div>
+                    <!-- end widget edit box -->
+                    <!-- widget content -->
+                    <div class="widget-body no-padding" id="box">
+                        @Html.Partial("MemberForSearchGameRecord_PageList", Model.DataList)
+                    </div>
+                    <!-- end widget content -->
+                </div>
+                <!-- end widget div -->
+            </div>
+            <!-- end widget -->
+        </article>
+        <!-- WIDGET END -->
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    
+
+    @section scripts{
+@{Html.RegisterMvcPagerScriptResource();}
+        <script src="/js/bootstrap.min.js"></script>
+        <script src="/js/select2.min.js"></script>
+
+
+        <script type="text/javascript">
+
+            $(document).ready(function () {
+                //$('select').select2({
+                //    allowClear: false,
+                //    minimumResultsForSearch: -1
+                //});
+                //$('.datepicker').datetimepicker({
+                //    minView: "month", //选择日期后，不会再跳转去选择时分秒
+                //    format: "yyyy-mm-dd hh:ii:ss", //选择日期后，文本框显示的日期格式
+                //    language: 'zh-CN', //汉化
+                //    autoclose: true //选择日期后自动关闭
+                //});
+
+            });
+
+
+
+
+        </script>
+
+    }

@@ -1,0 +1,214 @@
+﻿@using GL.Data.Model
+@model BaseDataView
+@{
+    ViewBag.Title = "用户留存率";
+
+
+    ViewBag.Format = "yyyy-MM-dd";
+    switch (Model.Groupby)
+    {
+        case groupby.按日:
+            break;
+        case groupby.按月:
+            ViewBag.Format = "yyyy-MM";
+            break;
+    }
+    List<BaseDataInfoForRetentionRates> bdl = (List<BaseDataInfoForRetentionRates>)Model.BaseDataList;
+
+
+}
+
+
+<div id="content">
+
+    <!-- Widget ID (each widget will need unique ID)-->
+
+
+    <form id="comment-form" class="smart-form" novalidate="novalidate">
+        <div class="row">
+            @*<section class="col col-" 1style="width:180px">
+                <label class="select">
+                
+                    @Html.DropDownList("Channels", null, new { @class = "form-control input-sm" })
+                    <i></i>
+                </label>
+            </section>*@
+            <section class="col col-12" style="width:210px">
+                <label class="select">
+
+
+                    @*@Html.DropDownList("Channels", null, new { @class = "form-control input-sm" })*@
+
+                    @Html.GetAllAgentGroupList("Channels", Model.Channels)
+
+
+
+                    <i></i>
+                </label>
+            </section>
+
+            <section class="col col-1">
+                @*<label class="label"> 类型</label>*@
+                <label class="select">
+                    @Html.DropDownList("TypeID", new List<SelectListItem>
+                {
+                    new SelectListItem { Text= "登陆用户", Value = "1" },
+                    new SelectListItem { Text= "新增用户", Value = "2" },
+                    new SelectListItem { Text= "活跃用户", Value = "3" },
+                    new SelectListItem { Text= "历史付费用户", Value = "4" },
+                    new SelectListItem { Text= "付费用户", Value = "5" },
+                    new SelectListItem { Text= "玩牌用户", Value = "6" },
+                    new SelectListItem { Text= "俱乐部用户", Value = "7" },
+                    new SelectListItem { Text= "登陆俱乐部用户", Value = "8" }
+                })<i></i>
+                </label>
+            </section>
+
+            <section class="col col-1.2">
+                <label class="input">
+                    <i class="icon-append fa fa-calendar"></i>
+                    @Html.TextBoxFor(m => m.StartDate, new Dictionary<string, object>() {
+                           { "class", "form-control datepicker" },
+                           { "data-dateformat", "yy-mm-dd 00:00:00" }
+                       })
+                </label>
+            </section>
+
+
+         
+            <section class="col col-1.2">
+                <label class="input">
+                    <i class="icon-append fa fa-calendar"></i>
+                    @Html.TextBoxFor(m => m.ExpirationDate, new Dictionary<string, object>() {
+                           { "class", "form-control datepicker" },
+                           { "data-dateformat", "yy-mm-dd 00:00:00" }
+                       })
+                </label>
+            </section>
+
+
+
+            <section class="col col-1">
+                <button type="submit" class="btn btn-success btn-sm">查询</button>
+            </section>
+
+        </div>
+    </form>
+
+
+
+    <section id="widget-grid" class="">
+        <div class="row">
+            <article class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
+                <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-0" data-widget-editbutton="false" data-widget-colorbutton="false"
+                     data-widget-togglebutton="false"
+                     data-widget-deletebutton="false"
+                     data-widget-fullscreenbutton="false"
+                     data-widget-custombutton="false"
+                     data-widget-collapsed="false"
+                     data-widget-sortable="false">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                        <h2>用户留存率</h2>
+                    </header>
+                    <!-- widget div-->
+                    <div>
+                        <!-- widget edit box -->
+                        <div class="jarviswidget-editbox">
+                            <!-- This area used as dropdown edit box -->
+                        </div>
+                        <!-- end widget edit box -->
+                        <!-- widget content -->
+                        <div class="widget-body no-padding" style="min-height: 70px;">
+                            <div class="table-responsive">
+                                <table class="table table-bordered">
+                                    <thead>
+
+                                        <tr>
+                                            <th>注册日期</th>
+                                            <th>
+                                                @if(Model.TypeID == 1)
+                                                {
+                                                    @Html.Raw("登陆用户");
+                                                }else if(Model.TypeID == 2){
+                                                    @Html.Raw("新增用户");
+                                                }
+                                                else if (Model.TypeID == 3)
+                                                {
+                                                    @Html.Raw("活跃用户");
+                                                }
+                                                else if (Model.TypeID == 4)
+                                                {
+                                                    @Html.Raw("历史付费用户");
+                                                }
+                                                else if (Model.TypeID == 5)
+                                                {
+                                                    @Html.Raw("付费用户");
+                                                }
+                                                else if (Model.TypeID == 6)
+                                                {
+                                                    @Html.Raw("玩牌用户");
+                                                }
+                                                else if (Model.TypeID == 7)
+                                                {
+                                                    @Html.Raw("俱乐部用户");
+                                                }
+                                                else if (Model.TypeID == 8)
+                                                {
+                                                    @Html.Raw("登陆俱乐部用户");
+                                                }
+                                            </th>
+                                            <th>1日留存</th>
+                                            <th>2日留存</th>
+                                            <th>3日留存</th>
+                                            <th>5日留存</th>
+                                            <th>7日留存</th>
+                                            <th>10日留存</th>
+                                            <th>15日留存</th>
+                                            <th>30日留存</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @if (bdl.Count == 0)
+                                        {
+                                            <tr>
+                                                <td class="colspan" align="center" colspan="0">
+                                                    没有找到相关记录！
+                                                </td>
+                                            </tr>
+                                        }
+                                        @foreach (var item in bdl)
+                                        {
+                                            <tr>
+                                                <td>@item.date.ToString(ViewBag.Format)</td>
+                                                <td>@item.newuser</td>
+                                                <td>@item.oneday.ToString("0.00%")</td>
+                                                <td>@item.twoday.ToString("0.00%")</td>
+                                                <td>@item.threeday.ToString("0.00%")</td>
+                                                <td>@item.fiveday.ToString("0.00%")</td>
+                                                <td>@item.sevenday.ToString("0.00%")</td>
+                                                <td>@item.tenday.ToString("0.00%")</td>
+                                                <td>@item.fifteenday.ToString("0.00%")</td>
+                                                <td>@item.thirtyday.ToString("0.00%")</td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <!-- end widget content -->
+                    </div>
+                    <!-- end widget div -->
+                </div>
+                <!-- end widget -->
+
+            </article>
+        </div>
+    </section>
+
+
+
+
+
+
+</div>

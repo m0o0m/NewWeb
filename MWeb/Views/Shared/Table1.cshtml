@@ -1,0 +1,228 @@
+﻿
+@using System.Data;
+@using Framework.Web;
+
+@model Table
+@{
+    string search = Model.ID + "_search";
+    string init = Model.ID + "_init";
+    string tableContentID = Model.ID + "_tableContent";
+    string initTable = Model.ID + "_initTable";
+    string initPage = Model.ID + "_initPage";
+    string grid_paging = Model.ID + "_grid_paging";
+    string hid = Model.ID + "_searchHid";
+
+    string hidcolumn = Model.ID + "_column";
+
+    string hidbutton = Model.ID + "_button";
+
+    string ConNames = "";
+    string Events = "";
+
+}
+
+<div class="row" style="@Model.Style" id="@Model.ID">
+    <div class="col-md-12">
+        <div class="portlet box green">
+
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-cogs"></i>@Model.TableName
+                </div>
+                <div class="tools">
+                    <a href="javascript:;" class="collapse"> </a>
+                    <a href="javascript:;" class="reload"> </a>
+                    <a href="javascript:;" class="remove"> </a>
+                </div>
+            </div>
+            <div class="portlet-body flip-scroll">
+                 <!--表格上面的按钮集合显示-->
+                 @if (Model.Events != null && Model.Events.Count() > 0)
+                 {
+                    <div class="table-toolbar">
+                        <div class="row">
+                            <div class="col-md-12">
+                                @foreach (var item in Model.Events)
+                                {
+                                    <div class="btn-group">
+                                        <button id="yy" class="btn green" onclick="@item.Invoke">
+                                            @item.Value
+                                            <i class="@item.Icon"></i>
+
+                                            @*<i class="fa fa-remove"></i>*@
+                                        </button>
+                                    </div>
+                                }
+
+
+                            </div>
+
+                        </div>
+                    </div>
+                 }
+                
+                <table class="table table-bordered table-striped table-condensed flip-content">
+                    <thead class="flip-content">
+                        <tr>
+                            <!--组装表格 表头列-->
+                            @foreach (TableHeader item in Model.TableHeaders)
+                            {
+                                <th style="@item.Style" width="@item.Width"> @item.HeaderName </th>
+                                ConNames += (item.ConName+",");
+                            }
+                            @if (Model.EventsLine != null && Model.EventsLine.Count() > 0) {
+                                 <th >操作</th>
+                                foreach (var itemEvent in Model.EventsLine)
+                                {
+                                    string eve = "<button onclick=\"" + itemEvent.Invoke + "('{0}')\"  class='btn btn-sm green btn-outline filter-submit margin-bottom'><i class='" + itemEvent.Icon + "'></i> " + itemEvent.Value + "</button>";
+                                    Events += (eve + ",");
+                                }
+                            }
+                            @{
+                                ConNames = ConNames.Trim(',');
+                                Events = Events.Trim(',');
+                            }
+                        </tr>
+                    </thead>
+                    <tbody id="@tableContentID">
+                      
+                    </tbody>
+                </table>
+                <div class="paging-toolbar">
+                    <ul id='@grid_paging'></ul>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+<div>
+    <input type="hidden" id="@hidcolumn" value="@ConNames" />
+    <input type="hidden" id="@hidbutton" value="@Events" />
+</div>
+
+
+<script src="~/Scripts/bootstrap-paginator.min.js"></script>
+<script src="~/Lib/json2/json2.js"></script>
+
+
+
+
+<script type="text/javascript">
+    //变化
+    var @Model.ID = null;
+
+    function @init (obj){
+        //去请求需要的表格数据
+
+
+
+        @Model.ID = obj;
+
+        var res = @initTable (obj);
+
+
+        //变化分页的值
+        if(res.Result==true){
+            @initPage (res.Page,res.CountPerPage,res.totalPages);
+        }
+
+    }
+
+    //变化表格的值
+    function  @initTable (obj){
+        //去请求需要的表格数据
+        var myPage;
+        var myCountPerPage;
+        var myTotal ;
+        $.ajax({
+            url: "@Model.Url",
+            type: "post",
+            dataType: "json",
+            async: false,
+            data: obj,
+            success: function (data) {
+                var tableContentHtml = "";
+
+                var columns =  $("#@hidcolumn").val().split(',');
+                var events = $("#@hidbutton").val().split(',');
+
+                var dtstr = "";
+                for(var i=0;i< data.Data.length;i++){
+                    var item = data.Data[i];
+                    dtstr += "<tr>";
+
+                    for(var z=0;z<columns.length;z++){
+                        dtstr+="<td>"+   eval("item."+columns[z])    +"</td>";
+                    }
+                    if(events.length>0){
+                        dtstr+="<td>";
+                        for(var j=0;j<events.length;j++){
+                            var pri = eval("item."+columns[0]);
+                           
+                            var rep =  events[j].replace('{0}',pri);
+                          
+                            dtstr+= rep ;
+                        }
+                        dtstr+="</td>";
+                    }
+                    dtstr+="</tr>";
+                }
+
+                $("#@tableContentID").empty();
+               
+                $("#@tableContentID").append(dtstr);
+
+                myPage = data.Page;
+                myCountPerPage = data.CountPerPage;
+                myTotal = data.TotalPage;
+
+
+            }
+        });
+
+        var arr = {};
+        arr.Result = true;
+        arr.currentPage = myPage;
+        arr.numberOfPages = myCountPerPage;
+        arr.totalPages = myTotal;
+        return arr;
+    }
+
+
+
+    function @initPage (currentPage,numberOfPages,totalPages){
+        var options = {
+            bootstrapMajorVersion: 3,
+            currentPage: currentPage,
+            numberOfPages:numberOfPages,
+            totalPages: totalPages,
+            itemTexts: function (type, page, current) {
+                switch (type) {
+                    case "first":
+                        return "第一页";
+                    case "prev":
+                        return "上一页";
+                    case "next":
+                        return "下一页";
+                    case "last":
+                        return "最后一页";
+                    case "page":
+                        return page;
+                }
+            },
+            onPageChanged: function (event, oldPage, newPage) {
+                var obj =  @Model.ID
+                obj.page = newPage;
+                @initTable (obj);
+            }
+
+        }
+        $('#@grid_paging').bootstrapPaginator(options);
+    }
+
+
+
+</script>

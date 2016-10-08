@@ -1,0 +1,293 @@
+﻿
+
+@model CWeb.Models.MLogin
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="utf-8">
+    <!--<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">-->
+
+    <title> 主系统 </title>
+    <link rel="stylesheet" type="text/css" media="screen" href="~/js/SmartAdmin/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="~/js/SmartAdmin/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="~/js/SmartAdmin/css/smartadmin-production.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="~/js/SmartAdmin/css/smartadmin-skins.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="~/js/SmartAdmin/css/demo.css">
+    <link rel="shortcut icon" href="~/js/SmartAdmin/img/favicon/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="~/js/SmartAdmin/img/favicon/favicon.ico" type="image/x-icon">
+
+</head>
+<body id="login" class="animated fadeInDown">
+    <!-- possible classes: minified, no-right-panel, fixed-ribbon, fixed-header, fixed-width-->
+    <header id="header">
+        <!--<span id="logo"></span>-->
+
+        <div id="logo-group">
+            <span id="logo"> <img src="~/img/logo.png" alt="SmartAdmin"> </span>
+
+            <!-- END AJAX-DROPDOWN -->
+        </div>
+
+
+
+    </header>
+
+    <div id="main" role="main">
+        <div id="content" class="container" style="width:400px">
+
+            <div class="row">
+                <!-- MAIN CONTENT -->
+
+
+                <div style="padding-top:200px">
+                    <div class="well no-padding">
+                        @using (Html.BeginForm("Login", "Home", new { }, FormMethod.Post, new { @class = "smart-form client-form", role = "form", @name = "loginform", @id = "loginform" }))
+                        {
+                           
+                            <input name="ReturnUrl" type="hidden" value="@ViewBag.ReturnUrl" />
+
+                            <header>
+                                登录
+                            </header>
+
+                            <fieldset>
+
+                                <section>
+                                    <label class="label">账号</label>
+                                    <label class="input">
+                                        <i class="icon-append fa fa-user"></i>
+                                        <input type="text" name="username" id="username" value="@Model.UserName">
+                                        <b class="tooltip tooltip-top-right"><i class="fa fa-user txt-color-teal"></i> 请输入账户!</b>
+                                    </label>
+                                </section>
+
+                                <section>
+                                    <label class="label">密码</label>
+                                    <label class="input">
+                                        <i class="icon-append fa fa-lock"></i>
+                                        <input type="password" id="password" name="password" value="@Model.Password">
+                                        <b class="tooltip tooltip-top-right"><i class="fa fa-user txt-color-teal"></i> 请输入密码!</b>
+                                    </label>
+
+                                </section>
+
+
+                            </fieldset>
+                            <footer>
+                                <button onclick="return login.submitlogin();" type="button" class="btn btn-primary" name="btnlogin" id="btnlogin">
+                                    登录
+                                </button>
+                            </footer>
+                        }
+
+                    </div>
+
+
+
+
+
+                </div>
+
+            </div>
+
+            <div class="row " style="padding-left:20px;display:none" id="lowBrowser">
+                <form id="comment-form" class="smart-form" novalidate="novalidate">
+                    <div class="row">
+                        <h2 style="color:black">
+
+                            您的ie内核过低!<br>
+                            请您升级ie或使用其他浏览器!
+
+
+                        </h2>
+                    </div>
+                    <div class="row" style="padding-top:20px;">
+                        <a style="padding-right:" target="_blank" href="http://windows.microsoft.com/zh-cn/internet-explorer/download-ie"> <img src="~/img/browser/ie2.png" /></a>
+                        <a target="_blank" href="http://www.firefox.com.cn/download/"><img src="~/img/browser/firefox2.png" /></a>
+                        <a target="_blank" href="http://www.google.cn/intl/zh-CN/chrome/browser/desktop/index.html"><img src="~/img/browser/Chrome2.png" /></a>
+                    </div>
+
+                </form>
+            </div>
+
+        </div>
+
+    </div>
+
+    <script data-pace-options='{ "restartOnRequestAfter": true }' src="~/js/SmartAdmin/js/plugin/pace/pace.min.js"></script>
+    <script src="~/js/jquery-1.7.2.min.js"></script>
+
+
+    <script type="text/javascript">
+                $(function () {
+                    //获取内核版本
+                    var _uat = navigator.userAgent.toString();
+
+                    if (_uat.indexOf("Trident") > 0) { //IE浏览器
+
+                        var version = $.browser.version;
+
+                        if (version < 9 ) {
+                            $("#lowBrowser").css("display", "");
+                        }
+
+
+
+
+                    } else if (_uat.indexOf("Chrome") > 0) {
+                        //  alert("使用的Chrome内核,google");
+                    } else if (_uat.indexOf("Firefox") > 0) {
+                        // alert("使用的Gecko内核.firefox");
+                    }
+                    //
+                });
+
+    </script>
+
+
+
+
+
+    @*<script src="~/js/SmartAdmin/js/bootstrap/bootstrap.min.js"></script>*@
+    @*<script src="~/js/SmartAdmin/js/notification/SmartNotification.min.js"></script>
+        <script src="~/js/SmartAdmin/js/smartwidgets/jarvis.widget.min.js"></script>
+        <script src="~/js/SmartAdmin/js/plugin/easy-pie-chart/jquery.easy-pie-chart.min.js"></script>
+        <script src="~/js/SmartAdmin/js/plugin/sparkline/jquery.sparkline.min.js"></script>
+        <script src="~/js/SmartAdmin/js/plugin/jquery-validate/jquery.validate.min.js"></script>
+        <script src="~/js/SmartAdmin/js/plugin/masked-input/jquery.maskedinput.min.js"></script>
+        <script src="~/js/SmartAdmin/js/plugin/select2/select2.min.js"></script>
+        <script src="~/js/SmartAdmin/js/plugin/bootstrap-slider/bootstrap-slider.min.js"></script>
+        <script src="~/js/SmartAdmin/js/plugin/msie-fix/jquery.mb.browser.min.js"></script>
+        <script src="~/js/SmartAdmin/js/plugin/fastclick/fastclick.js"></script>*@
+    @*<script src="~/js/SmartAdmin/js/demo.js"></script>
+        <script src="~/js/SmartAdmin/js/app.js"></script>*@
+    @*<script src="~/js/SmartAdmin/js/plugin/flot/jquery.flot.cust.js"></script>
+        <script src="~/js/SmartAdmin/js/plugin/flot/jquery.flot.resize.js"></script>
+        <script src="~/js/SmartAdmin/js/plugin/flot/jquery.flot.tooltip.js"></script>
+        <script src="~/js/SmartAdmin/js/plugin/vectormap/jquery-jvectormap-1.2.2.min.js"></script>
+        <script src="~/js/SmartAdmin/js/plugin/vectormap/jquery-jvectormap-world-mill-en.js"></script>
+        <script src="~/js/SmartAdmin/js/plugin/fullcalendar/jquery.fullcalendar.min.js"></script>*@
+
+    @*<script type="text/javascript">
+                runAllForms();
+
+                $(function() {
+                    // Validation
+                    $("#loginform").validate({
+                        // Rules for form validation
+                        rules : {
+                            username: {
+                                required : true
+                            },
+                            password : {
+                                required : true,
+                                minlength : 3,
+                                maxlength : 20
+                            }
+                        },
+
+                        // Messages for form validation
+                        messages : {
+                            email : {
+                                required : '请输入账户!'
+                            },
+                            password : {
+                                required : '请输入密码!'
+                            }
+                        },
+
+                        // Do not change code below
+                        errorPlacement : function(error, element) {
+                            error.insertAfter(element.parent());
+                        }
+                    });
+                });
+        </script>*@
+    <script src="~/Scripts/spin.js"></script>
+    <script type="text/javascript">
+
+                var login = new function () {
+                    var opts = {
+                        lines: 15, // The number of lines to draw
+                        length: 20, // The length of each line
+                        width: 21, // The line thickness
+                        radius: 44, // The radius of the inner circle
+                        corners: 1, // Corner roundness (0..1)
+                        rotate: 34, // The rotation offset
+                        direction: 1, // 1: clockwise, -1: counterclockwise
+                        color: '#000', // #rgb or #rrggbb or array of colors
+                        speed: 1.2, // Rounds per second
+                        trail: 56, // Afterglow percentage
+                        shadow: true, // Whether to render a shadow
+                        hwaccel: false, // Whether to use hardware acceleration
+                        className: 'spinner', // The CSS class to assign to the spinner
+                        zIndex: 2e9, // The z-index (defaults to 2000000000)
+                        top: '50%', // Top position relative to parent
+                        left: '50%' // Left position relative to parent
+                    };
+
+                    a = this.foodiv = $('<div id="foo"></div>');
+
+                    b = this.childdiv = $('<div id="spinner" style="position: absolute;z-index: 10000;top: 0;left: 0; height: 100%;width: 100%; center center;"></div>');
+
+                    c = this.spinner = new Spinner(opts).spin();
+
+                    d = this.submitlogin = function () {
+                        _this = this;
+
+                        _this.Loading()
+
+                        if ($('#username').val() == '') {
+                            alert("账号不能为空");
+                            $('#username').focus();
+                            _this.stopLoading();
+                            return false;
+                        }
+                        if ($('#password').val() == '') {
+                            alert("密码不能为空");
+                            $('#password').focus();
+                            _this.stopLoading();
+                            return false;
+                        } else {
+                           
+                            $.post('/Home/Login', $('#loginform').serialize(), function (data) {
+
+                                switch (data.result) {
+                                    case 0:
+                                        window.location.href = '/Base/ClubList';
+                                        break;
+                                    case 210:
+                                        window.location.href = data.msg;
+                                        break;
+                                    case 201:
+                                        alert("用户名不存在，请重新输入");
+                                        break;
+                                    case 202:
+                                        alert("密码错误，请重新输入");
+                                        break;
+                                    default:
+                                        alert("未知错误");
+                                        break;
+                                }
+                                _this.stopLoading();
+                            });
+                        }
+                        return false;
+                    },
+                    e = this.Loading = function () { //小的loading图标
+                        this.foodiv.appendTo("body");
+                        this.foodiv.append(this.spinner.el);
+                        this.foodiv.append(this.childdiv);
+                    }
+                    f = this.stopLoading = function () {
+                        this.foodiv.detach();
+                    }
+                }
+    </script>
+    <script type="text/javascript" src="~/js/stats.js"></script>
+</body>
+</html>

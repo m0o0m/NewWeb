@@ -1,0 +1,343 @@
+﻿@using Webdiyer.WebControls.Mvc;
+@using GL.Data.Model;
+@using GL.Data.BLL;
+@model PagedList<FruitGameRecord>
+<script type="text/javascript">
+    function detail(id,obj) {
+
+     
+        var jq = eval('$("#' + id + '")');
+        var jqtr = eval('$("#' + obj + '")');
+        if (jq.css("display") == "none") {
+            jq.css("display", "");
+            jqtr.css("background-color", "gray");
+        } else {
+            jq.css("display", "none");
+
+            jqtr.css("background-color", "");
+        }
+    }
+</script>
+
+
+
+<section id="widget-grid" class="">
+    <div class="row">
+        <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-0" data-widget-editbutton="false" data-widget-colorbutton="false"
+                 data-widget-togglebutton="false"
+                 data-widget-deletebutton="false"
+                 data-widget-fullscreenbutton="false"
+                 data-widget-custombutton="false"
+                 data-widget-collapsed="false"
+                 data-widget-sortable="false">
+                <header>
+                    <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                    <h2>@ViewBag.Title</h2>
+                </header>
+                <!-- widget div-->
+                <div>
+                    <!-- widget edit box -->
+                    <div class="jarviswidget-editbox">
+                        <!-- This area used as dropdown edit box -->
+                    </div>
+                    <!-- end widget edit box -->
+                    <!-- widget content -->
+                    <div class="widget-body no-padding">
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <thead>
+
+                                    <tr>
+                                     
+                                        <th>时间</th>
+                                        <th>牌局号</th>
+                                        <th>场次</th>
+                                        <th>房间ID</th>
+                                   
+                                        <th>玩家ID</th>
+                                        <th>变化前游戏币</th>
+                                        <th>变化后游戏币</th>
+                                    
+                                        <th>操作</th>
+                                    
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model.Count == 0)
+            {
+                                        <tr class="gradeX">
+                                            <td class="colspan" align="center" colspan="0">
+                                                没有找到相关记录！
+                                            </td>
+                                        </tr>
+                                    }
+                                    @foreach (FruitGameRecord m in Model)
+                                    {
+                                        <tr id="@("tr"+m.RoundID)">
+                                            <td>@m.CreateTime</td>
+                                            <td>@m.RoundID</td>
+                                            <td>@(((FruitPlatze)m.PlazeID).ToString())</td>
+                                            <td>@m.RoomID</td>
+                                       
+                                            <td>@m.UserID</td>
+                                            <td>@m.BeforeGold</td>
+                                            <td>@m.AfterGold</td>
+                                         
+                                        
+                                            <td>
+
+                                                <section class="col col-1">
+                                                    <label class="label">&nbsp;</label>
+                                                    <input type="button" onclick="detail(@m.RoundID,'@("tr"+m.RoundID)' )" class="btn btn-success btn-sm" value="详细" />
+                                                </section>
+                                            </td>
+                                        
+                                        </tr>
+
+                                        <tr style="display:none" id="@m.RoundID">
+                                            <td colspan="14" style="padding-left:100px;padding-right:100px">
+                                                    <label style="color:black;background-color:white"> 爆灯</label>
+                                                            <table border="1" class="table table-bordered ">
+                                                                <tr>
+                                                                    <td rowspan="2">总押注</td>
+                                                                    <td rowspan="2">赔付金币</td>
+                                                                    <td colspan="8">押注</td>
+                                                                    <td rowspan="2">爆灯种类</td>
+                                                                    <td rowspan="2">动态赔率</td>
+                                                                    <td rowspan="2">爆灯结果</td>
+                                                                    <td rowspan="2">奖池金币</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>苹果</td>
+                                                                    <td>橘子</td>
+                                                                    <td>芒果</td>
+                                                                    <td>铃铛</td>
+                                                                    <td>西瓜</td>
+                                                                    <td>双星</td>
+                                                                    <td>双七</td>
+                                                                    <td>Bar</td>
+                                                                 
+                                                                </tr>
+                                                             
+                                                                    <tr>
+                                                                        @*<td>@m.CreateTime</td>*@
+                                                                    <td>@m.BetGold</td>
+                                                                    <td>@m.WinGold</td>
+                                                                    @{
+                                                                        if (string.IsNullOrEmpty(m.LampBet))
+                                                                        {
+                                                                            <td>空</td><td>空</td><td>空</td><td>空</td>
+                                                                            <td>空</td><td>空</td><td>空</td><td>空</td>
+                                                                        }
+                                                                        else
+                                                                        {
+                                                                            string[] lamBetNew = new string[8];
+                                                                            lamBetNew[0] = "0"; lamBetNew[1] = "0"; lamBetNew[2] = "0"; lamBetNew[3] = "0";
+                                                                            lamBetNew[4] = "0"; lamBetNew[5] = "0"; lamBetNew[6] = "0"; lamBetNew[7] = "0";
+                                                                            string lampBet = m.LampBet.Trim('_');
+                                                                            string[] lampBets = lampBet.Split('_');
+                                                                            for (int i = 0; i < lampBets.Length; i++)
+                                                                            {
+                                                                                string itemBet = lampBets[i];
+                                                                                string[] itemBets = itemBet.Split(':');
+                                                                                lamBetNew[Convert.ToInt32(itemBets[0])] = itemBets[1];
+                                                                            }
+
+                                                                            for (int i = 0; i < lamBetNew.Length; i++)
+                                                                            {
+                                                                                <td>@lamBetNew[i]</td>
+                                                                            }
+
+                                                                        }
+
+
+                                                                    }
+                                                                    <td>
+                                                                        @( ((FruitLampAwardType)m.LampAwardType)) 
+                                                                    </td>
+                                                                    
+                                                                       @{
+                                                                           if (string.IsNullOrEmpty(m.LampInfo))
+                                                                           {
+                                                                              <td>0</td><td>0</td>                         ;
+                                                                           }
+                                                                           else
+                                                                           {
+                                                                               string[] lams = m.LampInfo.Trim(':').Split('_');
+                                                                               string[] lampinfo = lams[0].Trim(':').Split(':');
+                                                                               string res = "";
+                                                                               for (int k = 0; k < lampinfo.Length; k++)
+                                                                               {
+                                                                                   string tempS = lampinfo[k];
+                                                                                   int tempI = Convert.ToInt32(tempS);
+                                                                                   // FruitlampInfo
+                                                                                   string tempS2 = ((FruitlampInfo)tempI).ToString();
+
+                                                                                   res += tempS2 + "，";
+                                                                               }
+                                                                            <td>@lams[1]</td>
+                                                                            <td> @(res.Trim('，'))  </td>                                                                          
+                                                                                }
+
+                                                                                }
+
+
+<td>
+                                                                        @m.BigPot
+                                                                    </td>
+                                                                </tr>
+                                                              
+
+                                                            </table>
+                                           
+                                            
+                                            
+                                                @if (!string.IsNullOrEmpty(m.SbInfo))
+                                                {
+                                                    <label style="color:black;background-color:white"> 比倍</label>
+                                                    <table border="1" class="table table-bordered ">
+                                                        <tr>
+                                                            <td>押注</td>
+                                                            <td>押注区</td>
+                                                            <td>开奖结果</td>
+                                                            <td>赔付金币</td>
+                                                            <td>局数</td>
+
+                                                        </tr>
+                                                       
+                                                            @{
+                                                                string[] sbinfos = m.SbInfo.Trim('_').Split('_');
+                                                                for (int z = 0; z < sbinfos.Length; z++) {
+                                                                    string[] tempSbs = sbinfos[z].Split(',');
+                                                                    <tr>
+                                                                        <td>@tempSbs[0]</td>
+                                                                        <td>
+                                                                            @if (tempSbs[1] == "1")
+                                                                            {
+                                                                                @("小")
+                                                                            }
+                                                                            else {
+                                                                                @("大")
+                                                                            }
+                                                                        </td>
+                                                                        <td>
+                                                                        @if (Convert.ToInt32(tempSbs[2]) <= 7)
+                                                                        {
+                                                                            @(tempSbs[2] + "(小)")
+                                                                        }
+                                                                        else
+                                                                        {
+                                                                            @(tempSbs[2] + "(大)")
+                                                                        } 
+                                                                        </td>
+                                                                        <td>
+                                                                            @if (Convert.ToInt32(tempSbs[2]) <= 7 && tempSbs[1] == "1")
+                                                                            {
+                                                                                @(Convert.ToDouble(tempSbs[0]) * 2)
+                                                                            }
+                                                                            else if (Convert.ToInt32(tempSbs[2]) > 7 && tempSbs[1] == "2")
+                                                                            {
+                                                                                @(Convert.ToDouble(tempSbs[0]) * 2)
+                                                                            }
+                                                                            else
+                                                                            {
+                                                                                @(0)
+                                                                            }
+                                                                        </td>
+                                                                        <td>@(z+1)</td>
+                                                                    </tr>
+                                                                }
+                                                            }
+                                                      
+
+
+                                                    </table>
+                                                 }
+
+                                              
+                                            
+                                            
+                                             </td>
+
+                                        </tr>
+
+
+                                   }
+                                </tbody>
+                            </table>
+                        </div>
+
+
+                        <div class="widget-content">
+
+                            @Ajax.Pager(
+    Model,
+    new PagerOptions()
+    {
+        CssClass = "pager",
+        ShowMorePagerItems = true,
+        PageIndexParameterName = "page",
+        ShowDisabledPagerItems = true,
+        AlwaysShowFirstLastPageNumber = true,
+        //ShowRecordCountItems = true,
+        HorizontalAlign = "right",
+        //SeparatorHtml = "",
+
+        CurrentPagerItemTemplate = "<li class=\"disabled\"><span>{0}</span></li>",
+        DisabledPagerItemTemplate = "<li class=\"disabled\"><span>{0}</span></li>",
+        PagerItemTemplate = "<li>{0}</li>",
+        //CurrentPagerItemWrapperFormatString = "<li class=\"disabled\"><span>{0}</span></li>",
+        //NumericPagerItemWrapperFormatString = "<li>{0}</li>",
+        //PagerItemWrapperFormatString = "<li>{0}</li>",
+        //RecordCountText = string.Format("共{0}条记录, {1}页", Model.TotalItemCount, Model.TotalPageCount),
+        //RecordCountFormatString = "<li><span>{0}</span></li>",
+        //DisabledPagerItemsFormatString = "<li class=\"disabled\"><span>{0}</span></li>",
+        //PageIndexBoxType = Webdiyer.WebControls.Mvc.PageIndexBoxType.TextBox,
+        //GoButtonText = "跳转到",
+        ShowPrevNext = true,
+        FirstPageText = "第一页",
+        LastPageText = "最后一页",
+        ContainerTagName = "ul",
+        PageIndexBoxId = "pageindexcm",
+        WYWPageIndexString = @"<li><input style='width:50px;' type='text' value='' id='{0}' name = '{1}'></li>
+                                 <li><a id='goto' name='goto' style='margin-right:10px' >跳转</a><li>
+                             ",
+        GoToButtonId = "goto"
+    },
+    new MvcAjaxOptions
+    {
+        HttpMethod = "POST",
+        UpdateTargetId = "box",
+        InsertionMode = InsertionMode.Replace,
+        OnFailure = "errFunc",
+        OnSuccess = "successPageFun"
+    })
+                        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    </div>
+                    <!-- end widget content -->
+                </div>
+                <!-- end widget div -->
+            </div>
+            <!-- end widget -->
+
+        </article>
+    </div>
+</section>

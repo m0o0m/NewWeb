@@ -1,4 +1,5 @@
-﻿using GL.Common;
+﻿using GL.Command.DBUtility;
+using GL.Common;
 using GL.Data;
 using GL.Data.BLL;
 using GL.Data.Model;
@@ -18,6 +19,8 @@ namespace MWeb.Controllers
     [Authorize]
     public class MemberController : Controller
     {
+        public static readonly string Coin = PubConstant.GetConnectionString("coin");
+
         #region Member
 
         [QueryValues]
@@ -843,8 +846,8 @@ namespace MWeb.Controllers
                 return PartialView("ClubList_PageList", model.DataList);
             }
 
-
          
+
 
             return View(model);
 

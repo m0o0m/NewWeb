@@ -15,6 +15,12 @@ namespace GL.Data.DAL
     {
         public static readonly string sqlconnectionString = PubConstant.GetConnectionString("ConnectionStringForGameData");
         public static readonly string sqlconnectionString2 = PubConstant.GetConnectionString("ConnectionString");
+
+        public static readonly string database1 = PubConstant.GetConnectionString("database1");
+        public static readonly string database2 = PubConstant.GetConnectionString("database2");
+        public static readonly string database3 = PubConstant.GetConnectionString("database3");
+
+
         internal static Role GetModelByID(Role model)
         {
             using (var cn = new MySqlConnection(sqlconnectionString))
@@ -30,8 +36,8 @@ namespace GL.Data.DAL
             {
                 cn.Open();
                 int i = cn.Execute(@"
-update 515game.Role set IsFreeze = 0  where ID = @ID and FreezeTime <='"+DateTime.Now+@"';
-update 515game.Role set NoSpeak = 0  where ID = @ID and SpeakTime <='"+DateTime.Now+@"';
+update "+ database1 + @".Role set IsFreeze = 0  where ID = @ID and FreezeTime <='"+DateTime.Now+@"';
+update "+ database1 + @".Role set NoSpeak = 0  where ID = @ID and SpeakTime <='"+DateTime.Now+@"';
 ", 
                     new Role { ID = userid});
                 cn.Close();
@@ -48,8 +54,8 @@ update 515game.Role set NoSpeak = 0  where ID = @ID and SpeakTime <='"+DateTime.
                     select * from (
                     select a.* ,if(ifnull(b.IP ,'0') = '0' ,0 ,1) SwitchIP ,if(ifnull(c.Mac ,'0') = '0' ,0 ,1) SwitchMac ,d.IP LastLoginIP ,ifnull(t.agentname ,'默认渠道') AgentName ,ifnull(r.NextMoney ,0) lastMoney
                     from (select * from Role where ID = @ID ) a
-                        left join 515game.RoleOrder r on a.id = r.id
-                        left join GServerInfo.AgentUsers t on a.agent =t.id
+                        left join "+ database1 + @".RoleOrder r on a.id = r.id
+                        left join "+ database2+ @".AgentUsers t on a.agent =t.id
                         left join BG_BanIPList b on a.CreateIP = b.IP
                         left join BG_BanMacList c on a.CreateMac = c.Mac
                         left join BG_LoginRecord d on a.id = d.userid order by d.LoginTime desc limit 1)t;", model);
@@ -69,8 +75,8 @@ update 515game.Role set NoSpeak = 0  where ID = @ID and SpeakTime <='"+DateTime.
                     select * from (
                     select d.AgentName as LoginAgent, a.* ,if(ifnull(b.IP ,'0') = '0' ,0 ,1) SwitchIP ,if(ifnull(c.Mac ,'0') = '0' ,0 ,1) SwitchMac ,d.IP LastLoginIP ,ifnull(t.agentname ,'默认渠道') AgentName ,ifnull(r.NextMoney ,0) lastMoney
                     from (select * from Role where ID = @ID ) a
-                        left join 515game.RoleOrder r on a.id = r.id
-                        left join GServerInfo.AgentUsers t on a.agent =t.id
+                        left join "+ database1 + @".RoleOrder r on a.id = r.id
+                        left join "+ database2+ @".AgentUsers t on a.agent =t.id
                         left join BG_BanIPList b on a.CreateIP = b.IP
                         left join BG_BanMacList c on a.CreateMac = c.Mac
                         left join V_LoginRecord d on a.id = d.userid order by d.LoginTime desc limit 1)t;", model);
@@ -209,7 +215,7 @@ update 515game.Role set NoSpeak = 0  where ID = @ID and SpeakTime <='"+DateTime.
             using (var cn = new MySqlConnection(sqlconnectionString))
             {
                 cn.Open();
-                int i = cn.Execute(@"update 515game.Role set ExtInfo = @ExtInfo where id = @ID ;", model);
+                int i = cn.Execute(@"update "+ database1 + @".Role set ExtInfo = @ExtInfo where id = @ID ;", model);
                 cn.Close();
                 return i; 
             }
@@ -219,7 +225,7 @@ update 515game.Role set NoSpeak = 0  where ID = @ID and SpeakTime <='"+DateTime.
             using (var cn = new MySqlConnection(sqlconnectionString))
             {
                 cn.Open();
-                int i = cn.Execute(@"update 515game.Role set NoSpeak = @NoSpeak,SpeakTime=@SpeakTime  where id = @ID ;", new
+                int i = cn.Execute(@"update "+ database1 + @".Role set NoSpeak = @NoSpeak,SpeakTime=@SpeakTime  where id = @ID ;", new
                 {
                     NoSpeak = nospeak,
                     SpeakTime = speakTime,
@@ -234,7 +240,7 @@ update 515game.Role set NoSpeak = 0  where ID = @ID and SpeakTime <='"+DateTime.
             using (var cn = new MySqlConnection(sqlconnectionString))
             {
                 cn.Open();
-                int i = cn.Execute(@"update 515game.Role set SafePwd = @Password  where id = @ID ;", new
+                int i = cn.Execute(@"update "+ database1 + @".Role set SafePwd = @Password  where id = @ID ;", new
                 {
                     Password = pwd,
                     ID = id
@@ -250,7 +256,7 @@ update 515game.Role set NoSpeak = 0  where ID = @ID and SpeakTime <='"+DateTime.
             using (var cn = new MySqlConnection(sqlconnectionString))
             {
                 cn.Open();
-                int i = cn.Execute(@"update 515game.Role set SafePwd = @Password  where id = @ID ;", new
+                int i = cn.Execute(@"update "+ database1 + @".Role set SafePwd = @Password  where id = @ID ;", new
                 {
                     Password = pwd,
                     ID = id
@@ -266,7 +272,7 @@ update 515game.Role set NoSpeak = 0  where ID = @ID and SpeakTime <='"+DateTime.
             using (var cn = new MySqlConnection(sqlconnectionString))
             {
                 cn.Open();
-                int i = cn.Execute(@"update 515game.Role set IsFreeze = @IsFreeze,FreezeTime=@FreezeTime  where id = @ID ;", new
+                int i = cn.Execute(@"update "+ database1 + @".Role set IsFreeze = @IsFreeze,FreezeTime=@FreezeTime  where id = @ID ;", new
                 {
                     IsFreeze = isfreeze,
                     FreezeTime = freezeTime,
@@ -281,7 +287,7 @@ update 515game.Role set NoSpeak = 0  where ID = @ID and SpeakTime <='"+DateTime.
             using (var cn = new MySqlConnection(sqlconnectionString))
             {
                 cn.Open();
-                int i = cn.Execute(@"update 515game.Role left join ClubInfo b on b.id = @ClubID  set Clubid = ifnull(b.id ,Clubid) where 515game.Role.id = @ID ;
+                int i = cn.Execute(@"update "+ database1 + @".Role left join ClubInfo b on b.id = @ClubID  set Clubid = ifnull(b.id ,Clubid) where "+ database1 + @".Role.id = @ID ;
                             replace into ClubUser(userid ,ClubID ,AgentID ,NickName ,CreateTime) 
                             select @ID ,@ClubID ,@Agent ,@NickName ,now() from ClubInfo where id = @ClubID;"
                     , model);

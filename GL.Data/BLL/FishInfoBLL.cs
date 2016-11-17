@@ -15,7 +15,9 @@ namespace GL.Data.BLL
     public class FishInfoBLL
     {
         public static readonly string sqlconnectionString = PubConstant.GetConnectionString("ConnectionStringForGameData");
-
+        public static readonly string database1 = PubConstant.GetConnectionString("database1");
+        public static readonly string database2 = PubConstant.GetConnectionString("database2");
+        public static readonly string database3 = PubConstant.GetConnectionString("database3");
         public static PagedList<FishInfo> GetListByPage(GameRecordView grv)
         {
             PagerQuery pq = new PagerQuery();
@@ -23,8 +25,8 @@ namespace GL.Data.BLL
             pq.PageSize = 10;
             if (string.IsNullOrEmpty(grv.SearchExt))
             {
-                pq.RecordCount = PagedListDAL<FishInfo>.GetRecordCount(string.Format(@"select count(0) from FishInfoRecord a join 515game.Role r on a.UserID = r.id and r.agent <> 10010 where a.CreateTime between '{0}' and '{1}'", grv.StartDate, grv.ExpirationDate), sqlconnectionString);
-                pq.Sql = string.Format(@"select a.* from FishInfoRecord a join 515game.Role r on a.UserID = r.id  and r.agent <> 10010 where a.CreateTime between '{2}' and '{3}' order by a.CreateTime desc limit {0}, {1}", pq.StartRowNumber, pq.PageSize, grv.StartDate, grv.ExpirationDate);
+                pq.RecordCount = PagedListDAL<FishInfo>.GetRecordCount(string.Format(@"select count(0) from FishInfoRecord a join "+ database1 + @".Role r on a.UserID = r.id and r.agent <> 10010 where a.CreateTime between '{0}' and '{1}'", grv.StartDate, grv.ExpirationDate), sqlconnectionString);
+                pq.Sql = string.Format(@"select a.* from FishInfoRecord a join "+ database1 + @".Role r on a.UserID = r.id  and r.agent <> 10010 where a.CreateTime between '{2}' and '{3}' order by a.CreateTime desc limit {0}, {1}", pq.StartRowNumber, pq.PageSize, grv.StartDate, grv.ExpirationDate);
             }
             else
             {
@@ -46,19 +48,19 @@ namespace GL.Data.BLL
             if (grv.commandID == 5)
             {
                 pq.RecordCount = PagedListDAL<FishInfo>.GetRecordCount(string.Format(@"
-                    select count(0) from FishInfoRecord a join 515game.Role r on a.UserID = r.id and  r.agent <> 10010 where a.CreateTime between '{0}' and '{1}' and FishID = {2} and Type < 3 and Flag = 1 and a.UserID = case when '{4}' = '' then a.UserID else '{4}' end "
+                    select count(0) from FishInfoRecord a join "+ database1 + @".Role r on a.UserID = r.id and  r.agent <> 10010 where a.CreateTime between '{0}' and '{1}' and FishID = {2} and Type < 3 and Flag = 1 and a.UserID = case when '{4}' = '' then a.UserID else '{4}' end "
                     , grv.StartDate, grv.ExpirationDate, grv.ItemID, grv.commandID, grv.SearchExt), sqlconnectionString);
                 pq.Sql = string.Format(@"
-                    select * from FishInfoRecord a join 515game.Role r on a.UserID = r.id  and r.agent <> 10010 where a.CreateTime between '{2}' and '{3}' and a.FishID = {4} and a.Type < 3 and a.Flag = 1 and a.UserID = case when '{5}' = '' then a.UserID else '{5}' end order by a.CreateTime desc limit {0}, {1}"
+                    select * from FishInfoRecord a join "+ database1 + @".Role r on a.UserID = r.id  and r.agent <> 10010 where a.CreateTime between '{2}' and '{3}' and a.FishID = {4} and a.Type < 3 and a.Flag = 1 and a.UserID = case when '{5}' = '' then a.UserID else '{5}' end order by a.CreateTime desc limit {0}, {1}"
                     , pq.StartRowNumber, pq.PageSize, grv.StartDate, grv.ExpirationDate, grv.ItemID, grv.SearchExt);
             }
             else
             {
                 pq.RecordCount = PagedListDAL<FishInfo>.GetRecordCount(string.Format(@"
-                    select count(0) from FishInfoRecord as f join 515game.Role r on f.UserID = r.id and r.agent <> 10010 where f.CreateTime between '{0}' and '{1}' and f.FishID = {3} and f.Type = {4} and UserID = case when '{2}' = '' then UserID else '{2}' end"
+                    select count(0) from FishInfoRecord as f join "+ database1 + @".Role r on f.UserID = r.id and r.agent <> 10010 where f.CreateTime between '{0}' and '{1}' and f.FishID = {3} and f.Type = {4} and UserID = case when '{2}' = '' then UserID else '{2}' end"
                     , grv.StartDate, grv.ExpirationDate, grv.SearchExt, grv.ItemID, grv.commandID), sqlconnectionString);
                 pq.Sql = string.Format(@"
-                    select f.* from FishInfoRecord as f join 515game.Role r on f.UserID = r.id and r.agent <> 10010 where  UserID = case when '{4}' = '' then UserID else '{4}' end 
+                    select f.* from FishInfoRecord as f join "+ database1 + @".Role r on f.UserID = r.id and r.agent <> 10010 where  UserID = case when '{4}' = '' then UserID else '{4}' end 
                     and f.CreateTime between '{2}' and '{3}' and f.FishID = {5} and f.Type = {6} order by f.CreateTime desc limit {0}, {1}"
                     , pq.StartRowNumber, pq.PageSize, grv.StartDate, grv.ExpirationDate, grv.SearchExt, grv.ItemID, grv.commandID);
             }

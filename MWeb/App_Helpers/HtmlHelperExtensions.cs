@@ -10,6 +10,7 @@ using Microsoft.Ajax.Utilities;
 using GL.Data.BLL;
 using GL.Data.Model;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 
 
 #endregion
@@ -172,9 +173,6 @@ namespace MWeb
                     }
                     optgroup = " <optgroup label = '" + item.AgentName + "' >@replace</ optgroup >";
                     option = "";
-
-                    
-
                 }
                 else {
                     if (selectedValue == item.ID)
@@ -184,7 +182,6 @@ namespace MWeb
                     else {
                         option += " <option value = '" + item.ID + "' > " + item.AgentName + " </option >";
                     }
-                  
                 }
             }
             optgroup=  optgroup.Replace("@replace", option);
@@ -196,6 +193,7 @@ namespace MWeb
                           "</select>";
             return new MvcHtmlString(alloptgroup);
         }
+
 
 
 

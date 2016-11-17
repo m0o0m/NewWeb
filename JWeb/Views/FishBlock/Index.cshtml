@@ -1,0 +1,1681 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = null;
+}
+
+<!doctype html>
+<html>
+<!--[if lt IE 7 ]> <html class="ie6"> <![endif]-->
+<!--[if IE 7 ]>    <html class="ie7"> <![endif]-->
+<!--[if IE 8 ]>    <html class="ie8"> <![endif]-->
+<!--[if IE 9 ]>    <html class="ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!-->
+<html>
+<!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <title>515</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="format-detection" content="email=no" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0" />
+    <link rel="stylesheet" href="/Lib/active/public/css/global_7556B107.css" type="text/css">
+   
+    <script src="/Lib/active/public/js/jquery-1.11.2.min.js"></script>
+    <script src="/Lib/active/public/js/fastclick_01D91217.js"></script>
+    <script src="/Lib/active/public/js/jQuery.fontFlex_01D91217.js"></script>
+</head>
+<script>
+function browser(){
+	 return 'click';
+}
+</script>
+<body>
+    <section id="wrapper">
+        <div id="scroller">
+            <style>
+                body {
+                    font-size: 12px;
+                    font-family: "微软雅黑", ubuntu, helvetica, arial;
+                    overflow: hidden;
+                    background: #fff;
+                }
+
+                .nheader {
+                    position: relative;
+                    overflow: hidden;
+                    line-height: 0px;
+                    background: #fff;
+                    width: 100%;
+                    min-height: 44px;
+                }
+
+                .fishfl {
+                    float: left;
+                    margin-left: 3%;
+                }
+
+                .fishdn {
+                    display: none;
+                }
+
+                .clear {
+                    clear: both;
+                    float: none;
+                }
+
+                .fishheader {
+                    width: 100%;
+                    background: #005995;
+                    height: 46px;
+                    line-height: 46px;
+                    float: left;
+                    text-align: center;
+                }
+
+                .fish {
+                    width: 30%;
+                    overflow: hidden;
+                }
+
+                    .fish a {
+                        color: #fff;
+                        display: block;
+                        text-decoration: none;
+                        color: #fff;
+                        text-decoration: none;
+                        height: 30px;
+                        line-height: 30px;
+                        margin-top: 8px;
+                        font-size: 16px;
+                        border: 1px solid #00D0FC;
+                        border-radius: 20px;
+                        -webkit-border-radius: 20px;
+                        -moz-border-radius: 20px;
+                    }
+
+                        .fish a.current {
+                            background: #00D0FC;
+                            border: none;
+                        }
+
+                input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
+                    background-color: rgb(250, 255, 189);
+                    background-image: none;
+                    color: #ccc;
+                    !important;
+                }
+
+                .fishList, li, .fishbtngetorbuy {
+                    width: 100%;
+                    list-style-type: none;
+                    box-sizing: border-box;
+                    -webkit-box-sizing: border-box;
+                }
+
+                .fishList, .fishbtngetorbuy {
+                    width: 100%;
+                    list-style-type: none;
+                    box-sizing: border-box;
+                    -webkit-box-sizing: border-box;
+                    background: transparent;
+                }
+
+                    .fishList > li, .fishbtngetorbuy > li {
+                        position: relative;
+                        border-radius: 1em;
+                        width: 100%;
+                        margin: 1% auto 0;
+                        margin-top: 6px;
+                    }
+
+                    .fishList hr {
+                        margin-top: 6px;
+                    }
+
+                .fishList_img, .fishList_info {
+                    display: inline-block;
+                    vertical-align: middle;
+                }
+
+                .fishList_img {
+                    width: 30%;
+                    max-width: 100px;
+                    position: relative;
+                    margin-right: 1.5%;
+                    margin-left: 5px;
+                }
+
+                    .fishList_img:before {
+                        content: '';
+                        position: absolute;
+                        width: 100%;
+                        height: 100%;
+                        top: 0;
+                        left: 0;
+                    }
+
+                    .fishList_img > img {
+                        width: 100%;
+                        display: block;
+                    }
+
+                .fishList_info {
+                    width: 40%;
+                }
+
+                    .fishList_info > ul > li:nth-child (3) {
+                        width: 72%;
+                    }
+
+                .fishspan {
+                    color: #999;
+                    font-size: 10px;
+                }
+
+                .fishdesc {
+                    float: left;
+                    width: 100%;
+                    color: #808080;
+                    height: 21px;
+                    line-height: 21px;
+                    overflow: hidden;
+                    font-family: 微软雅黑;
+                    font-size: 14px;
+                }
+
+                .fishdesc1 {
+                    float: left;
+                    width: 100%;
+                    color: #006DBD;
+                    height: 21px;
+                    line-height: 21px;
+                    overflow: hidden;
+                    font-family: 微软雅黑;
+                    font-size: 16px;
+                }
+
+                .fishList_btn > ul > li:nth-child (3) {
+                    width: 72%;
+                }
+
+                .fishbtn_get, .fishbtn_give, .fishbtn_fangsheng {
+                    cursor: pointer;
+                    display: block;
+                    height: 35px;
+                    line-height: 35px;
+                    width: 30%;
+                    text-align: center;
+                    border-radius: 5px;
+                    -webkit-border-radius: 5px;
+                    -moz-border-radius: 5px;
+                    position: absolute;
+                    right: 2.2%;
+                    top: 50%;
+                    color: #ffffff;
+                    text-decoration: none;
+                    font-size: 16px;
+                    font-family: 微软雅黑;
+                    border: none;
+                    background: #FFA32D;
+                    background-size: 100% 100%;
+                    -webkit-background-size: 100% 100%;
+                    -moz-background-size: 100% 100%;
+                    transform: translateY(-50%);
+                    -webkit-transform: translateY(-50%);
+                    -moz-transform: translateY(-50%);
+                }
+
+                .fishbtn_get {
+                    top: 50%;
+                }
+
+                .fishbtn_give {
+                    top: 74%;
+                }
+
+                .fishbtn_fangsheng {
+                    top: 25%;
+                    background: #00B346;
+                }
+
+                .fishbtngetorbuy > li {
+                    border-radius: 0em;
+                    border-bottom: 1px solid #93E2FD;
+                    height: 60px;
+                    line-height: 15px;
+                    padding-top: 5px;
+                }
+
+                .fishbtngetorbuyfish {
+                    color: #009900;
+                    float: right;
+                    font-size: 16px;
+                    font-family: 微软雅黑;
+                }
+
+                .giveawayList {
+                    width: 100%;
+                    list-style-type: none;
+                    line-height: 30px;
+                    font-size: 12px;
+                    background: transparent;
+                    text-align: left;
+                }
+
+                    .giveawayList .text_1 {
+                        color: #807a62;
+                        width: 120px;
+                        height: 28px;
+                        line-height: 28px;
+                        border-radius: 0px;
+                        -webkit-border-radius: 0px;
+                        -moz-border-radius: 0px;
+                        background: url(/Lib/active/public/images/newSzg/textbox.png?v=2) no-repeat 0px 0px;
+                        border: hidden;
+                    }
+
+                    .giveawayList .text_2 {
+                        color: #807a62;
+                        width: 120px;
+                        height: 28px;
+                        line-height: 28px;
+                        border-radius: 0px;
+                        -webkit-border-radius: 0px;
+                        -moz-border-radius: 0px;
+                        background: url(/Lib/active/public/images/newSzg/textbox.png?v=2) no-repeat 0px 0px;
+                        border: hidden;
+                    }
+
+                .p {
+                    font-size: 16px;
+                    float: left;
+                    font-family: 微软雅黑;
+                    width: 150px;
+                    overflow: hidden;
+                }
+
+                .buyFish1 {
+                    width: 90%;
+                    float: left;
+                    margin: 20px 5%;
+                    margin-bottom: 10px;
+                    background: #fff;
+                    height: 40px;
+                    line-height: 40px;
+                    padding: 0px 5px;
+                    border-radius: 5px;
+                }
+
+                    .buyFish1 .text {
+                        float: left;
+                        font-family: 微软雅黑;
+                        font-size: 14px;
+                        width: 40%;
+                        color: #3f3f3f;
+                        margin-left: 2%;
+                    }
+
+                    .buyFish1 .input {
+                        float: right;
+                        width: 50%;
+                        padding-right: 10px;
+                    }
+
+                .input > input {
+                    width: 100%;
+                    border: none;
+                    height: 40px;
+                    line-height: 40px;
+                    color: #ccc;
+                    text-align: right;
+                    font-size: 16px;
+                }
+
+                .buyFish1btn {
+                    margin-top: 40px;
+                    text-align: center;
+                }
+
+                    .buyFish1btn a {
+                        background: #FFD700;
+                        text-decoration: none;
+                        border-radius: 5px;
+                        -webkit-border-radius: 5px;
+                        -moz-border-radius: 5px;
+                        color: #b1b1b1;
+                        display: block;
+                        width: 90%;
+                        margin-left: 5%;
+                        height: 45px;
+                        line-height: 45px;
+                        color: #ffffff;
+                        font-size: 16px;
+                    }
+
+                        .buyFish1btn a:hover, .buyFish1btn a:active {
+                        }
+
+                .buyFishICON {
+                    text-align: center;
+                    margin-top: 20px;
+                    line-height: 25px;
+                }
+
+                    .buyFishICON img {
+                        border-radius: 40px;
+                        width: 40px;
+                    }
+
+                #buyFish2 .role {
+                    width: 90%;
+                    margin-left: 7%;
+                    color: #ccc;
+                }
+
+                .msgNDD {
+                    min-width: 200px;
+                    min-height: 120px;
+                    text-align: center;
+                    padding: 10px;
+                    font-size: 16px;
+                    font-family: 微软雅黑;
+                }
+
+                    .msgNDD a {
+                        background: #ffa32d;
+                        text-decoration: none;
+                        border-radius: 5px;
+                        display: block;
+                        -webkit-border-radius: 5px;
+                        -moz-border-radius: 5px;
+                        color: #b1b1b1;
+                        width: 90%;
+                        height: 45px;
+                        line-height: 45px;
+                        color: #ffffff;
+                        font-size: 16px;
+                    }
+
+                        .msgNDD a:hover, .msgNDD a:active {
+                        }
+
+                .msgrep {
+                    min-height: 120px;
+                    padding: 10px;
+                    font-size: 16px;
+                    font-family: 微软雅黑;
+                }
+
+                    .msgrep em {
+                        color: #e85946;
+                        font-style: normal;
+                    }
+
+                .msgrepT {
+                    height: 30px;
+                    line-height: 30px;
+                    margin-left: 10px;
+                }
+
+                .msgrep a {
+                    background: #ffa32d;
+                    display: block;
+                    text-decoration: none;
+                    border-radius: 5px;
+                    -webkit-border-radius: 5px;
+                    -moz-border-radius: 5px;
+                    height: 45px;
+                    line-height: 45px;
+                    color: #b1b1b1;
+                    color: #ffffff;
+                    font-size: 16px;
+                }
+
+                    .msgrep a:hover, .msgrep a:active {
+                    }
+
+                    .msgrep a.x {
+                        margin-left: 0;
+                    }
+
+                .x {
+                }
+
+                .bg {
+                    background: #ffa32d;
+                }
+
+                .hover {
+                }
+
+                .msgNDDtext {
+                    text-align: center;
+                    margin: 40px 10px;
+                }
+
+                .userName {
+                    margin-top: 10px;
+                    color: #a3a3a3;
+                }
+                /*弹出层*/
+                #background {
+                    position: absolute;
+                    z-index: 998;
+                    top: 0px;
+                    left: 0px;
+                    background: rgb(50, 50, 50);
+                    background: rgba(0, 0, 0, 0.5);
+                    display: none;
+                }
+
+                #newMsg {
+                    position: absolute;
+                    width: 90%;
+                    z-index: 999;
+                    display: none;
+                    background: #fff;
+                    border-radius: 5px; /*display:none;*/
+                }
+
+                #msg .cnt {
+                    padding: 5px 10px 10px 10px;
+                }
+
+                #msg .text {
+                    margin: 8px 3px;
+                    padding: 0 5px;
+                    width: 212px;
+                    height: 30px;
+                    line-height: 30px;
+                    background: #E4E4E4;
+                    -webkit-border-radius: 5px;
+                    -moz-border-radius: 5px;
+                    border-radius: 5px;
+                    border-color: #adadad;
+                }
+
+                #msg .submit {
+                    margin-left: 5%;
+                    margin-right: 5%;
+                    position: relative;
+                    float: left;
+                    display: block;
+                    width: 40%;
+                    color: #ffffff;
+                    height: 40px;
+                    line-height: 40px;
+                    border: none;
+                    -webkit-border-radius: 5px;
+                    -moz-border-radius: 5px;
+                    border-radius: 5px;
+                    background: #ffa32d;
+                    color: #fff;
+                }
+
+                #msg .submitC {
+                    width: 100%;
+                    text-align: center;
+                    margin-left: 0%;
+                    margin-right: 0%;
+                    margin-bottom: 10%;
+                    margin-top: 2%;
+                }
+
+                #msg #phone_cnt {
+                    font-weight: bold;
+                }
+
+                #msg #addr_address {
+                    height: 60px;
+                    line-height: 20px;
+                }
+
+                #msg #err {
+                    display: none;
+                    color: red;
+                    text-align: center;
+                    font-size: 12px;
+                    height: 15px;
+                }
+
+                #msg #err2 {
+                    display: none;
+                    color: red;
+                    text-align: center;
+                    font-size: 12px;
+                    height: 15px;
+                }
+
+                #msg .keyzi {
+                    color: #e8821e;
+                }
+
+                .giveawayList input[type="radio"] {
+                    margin: 3px 3px 0px 5px;
+                    display: none;
+                }
+
+                .giveawayList label {
+                    padding-left: 20px;
+                    cursor: pointer;
+                    font-size: 10px;
+                    background: url(/Lib/active/public/images/newSzg/unselect.png?v=2) no-repeat left top;
+                }
+
+                    .giveawayList label.checked {
+                        background: url(/Lib/active/public/images/newSzg/select.png?v=2) no-repeat left top;
+                    }
+
+                .disconfig {
+                    width: 100%;
+                    margin: 0px;
+                    position: absolute;
+                    color: #fff;
+                    background: rgba(0, 0, 0, 0.6);
+                    bottom: -2px;
+                }
+
+                #dropdown {
+                    width: 136px;
+                    margin: 0px auto;
+                    position: absolute;
+                    right: 20px;
+                    top: 130px;
+                }
+
+                    #dropdown p {
+                        width: 103px;
+                        height: 28px;
+                        line-height: 28px;
+                        padding-left: 4px;
+                        padding-right: 30px;
+                        border: hidden;
+                        background: url(/Lib/active/public/images/newSzg/box.png?v=2) no-repeat left top;
+                        color: #807a62;
+                        cursor: pointer;
+                    }
+
+                        #dropdown p span {
+                            display: block;
+                            height: 24px;
+                            color: #807a62;
+                            text-decoration: none;
+                            white-space: nowrap;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                        }
+
+                    #dropdown ul {
+                        width: 134px;
+                        overflow: scroll;
+                        max-height: 72px;
+                        background: #EEE;
+                        margin-top: 2px;
+                        border: 1px solid #bbb;
+                        position: absolute;
+                        display: none;
+                        z-index: 1;
+                    }
+
+                        #dropdown ul li {
+                            height: 24px;
+                            line-height: 24px;
+                        }
+
+                            #dropdown ul li a {
+                                display: block;
+                                height: 24px;
+                                color: #807a62;
+                                text-decoration: none;
+                                white-space: nowrap;
+                                overflow: hidden;
+                                text-overflow: ellipsis;
+                            }
+
+                                #dropdown ul li a:hover {
+                                    background: #ffa32d;
+                                    color: #369;
+                                }
+            </style>
+            <div class="nheader" id="banner">
+                <img width="100%" id="bannerImg" src="/Lib/active/public/images/newSzg/szgbanner.png"><div>
+                    <div class="fishheader">
+                        <div class="fishfl fish" style="margin-left: 2%">
+                            <a class="AmyFish item current tab" tab="myFish" href="javascript:;">我的鱼缸222</a>
+                        </div>
+                        <div class="fishfl fish" style="margin-left: 3%">
+                            <a class="AfishBazaar item tab" tab="fishBazaar" href="javascript:;">水族馆</a>
+                        </div>
+                        <div class="fishfl fish" style="margin-right: 2%; float: right;">
+                            <a class="Agetorbuy item tab" tab="getorbuy" href="javascript:;">互动记录</a>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="clear"></div>
+                    <div class="fishdn" style="display: block;" id="myFish"></div>
+                    <div class="fishdn" id="fishBazaar">
+                        <ul class="fishList">
+
+                            <li class="cl">
+                                <div class="fishList_img">
+                                    <img src="/Lib/active/public/image/newplaying/2/6.png">
+                                    <!-- <div>￥5万</div> -->
+                                </div>
+                                <div class="fishList_info">
+                                    <ul>
+                                        <li>
+                                            <div class="fishdesc1">小鱼儿5万</div>
+                                        </li>
+                                        <li>
+                                            <div class="fishdesc">成长:7天</div>
+                                        </li>
+                                        <li>
+                                            <div class="fishdesc">收益:5/天</div>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="fishList_btn">
+                                    <ul>
+                                        <li>
+                                            <a itema="6" itemb="小鱼儿5万" itemc="50000" href="javascript:;"
+                                               class="fishbtn_get buyFish_defined">购买</a>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <hr width="100%" color="#9FDFFD" size="1">
+                            </li>
+
+
+
+                            <li class="cl">
+                                <div class="fishList_img">
+                                    <img src="/Lib/active/public/image/newplaying/2/5.png">
+                                </div>
+                                <div class="fishList_info">
+                                    <ul>
+                                        <li>
+                                            <div class="fishdesc1">小虾米10万</div>
+                                        </li>
+                                        <li>
+                                            <div class="fishdesc">成长:7天</div>
+                                        </li>
+                                        <li>
+                                            <div class="fishdesc">收益:10/天</div>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="fishList_btn">
+                                    <ul>
+                                        <li>
+                                            <a itema="5" itemb="小虾米10万" itemc="100000" href="javascript:;"
+                                               class="fishbtn_get buyFish_defined">购买</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <hr width="100%" color="#9FDFFD" size="1">
+                            </li>
+
+                            <li class="cl">
+                                <div class="fishList_img">
+                                    <img src="/Lib/active/public/image/newplaying/2/1.png">
+                                </div>
+                                <div class="fishList_info">
+                                    <ul>
+                                        <li>
+                                            <div class="fishdesc1">银龙鱼20万</div>
+                                        </li>
+                                        <li>
+                                            <div class="fishdesc">成长:7天</div>
+                                        </li>
+                                        <li>
+                                            <div class="fishdesc">收益:20/天</div>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="fishList_btn">
+                                    <ul>
+                                        <li>
+                                            <a itema="1" itemb="银龙鱼20万" itemc="200000" href="javascript:;"
+                                               class="fishbtn_get buyFish_defined">购买</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <hr width="100%" color="#9FDFFD" size="1">
+                            </li>
+
+                            <li class="cl">
+                                <div class="fishList_img">
+                                    <img src="/Lib/active/public/image/newplaying/2/2.png">
+                                </div>
+                                <div class="fishList_info">
+                                    <ul>
+                                        <li>
+                                            <div class="fishdesc1">金龙鱼100万</div>
+                                        </li>
+                                        <li>
+                                            <div class="fishdesc">成长:7天</div>
+                                        </li>
+                                        <li>
+                                            <div class="fishdesc">收益:100/天</div>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="fishList_btn">
+                                    <ul>
+                                        <li>
+                                            <a itema="2" itemb="金龙鱼100万" itemc="1000000" href="javascript:;"
+                                               class="fishbtn_get buyFish_defined">购买</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <hr width="100%" color="#9FDFFD" size="1">
+                            </li>
+                            <li class="cl">
+                                <div class="fishList_img">
+                                    <img src="/Lib/active/public/image/newplaying/2/3.png">
+                                </div>
+                                <div class="fishList_info">
+                                    <ul>
+                                        <li>
+                                            <div class="fishdesc1">海豚200万</div>
+                                        </li>
+                                        <li>
+                                            <div class="fishdesc">成长:7天</div>
+                                        </li>
+                                        <li>
+                                            <div class="fishdesc">收益:200/天</div>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="fishList_btn">
+                                    <ul>
+                                        <li>
+                                            <a itema="3" itemb="海豚200万" itemc="2000000" href="javascript:;"
+                                               class="fishbtn_get buyFish_defined">购买</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <hr width="100%" color="#9FDFFD" size="1">
+                            </li>
+                            <li class="cl">
+                                <div class="fishList_img">
+                                    <img src="/Lib/active/public/image/newplaying/2/4.png">
+                                </div>
+                                <div class="fishList_info">
+                                    <ul>
+                                        <li>
+                                            <div class="fishdesc1">鲨鱼500万</div>
+                                        </li>
+                                        <li>
+                                            <div class="fishdesc">成长:7天</div>
+                                        </li>
+                                        <li>
+                                            <div class="fishdesc">收益:500/天</div>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="fishList_btn">
+                                    <ul>
+                                        <li>
+                                            <a itema="4" itemb="鲨鱼500万" itemc="5000000" href="javascript:;"
+                                               class="fishbtn_get buyFish_defined">购买</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <hr width="100%" color="#9FDFFD" size="1">
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="fishdn" id="getorbuy"></div>
+                    <div class="fishdn" id="buyFish2">
+                        <div class="buyFish1">
+                            <div id="isself" class="text">购买条数</div>
+                            <div class="input"><input value="输入条数" autocomplete="off" type="tel" id='fishnum' name="fishnum" /></div>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="clear"></div>
+                        <div class="buyFish1btn">
+                            <a class=" fishnumBtn buyFishs_req"
+                               href="javascript:;">确认</a>
+                        </div>
+                    </div>
+
+
+
+
+                    <script>
+//a 1购买给自己 2 购买给好友
+//b 1 鱼缸内直接赠送 2 购买赠送
+//d 数据库中鱼的标识 0 表示新购买
+//f 1 银龙鱼 2 金龙鱼
+//fishsU  赠送给谁，默认是赠送给自己
+var uICON = '',uNAME= '';
+var appid ='998';
+var ispop=false;
+var hUrl='';
+var uid='2905205';
+var fishsReq = 0,fishnum=0;
+function buyFishs(a,b,c){
+	fishsA = a,fishsB = b,fishsC = c;
+	tab("buyFish2");
+	var dom1 = document.documentElement;
+	var dom2 = document.body;
+	var sHeight = dom1.scrollTop ? dom1.scrollTop : dom2.scrollTop;
+	curscroll=sHeight;
+}
+
+function checkNum(){
+	$("#fishnum").val("10");
+	hideMsg();
+}
+function getuserchipback(chip){
+	fishnum = parseInt($("#fishnum").val());
+	if(chip<fishnum*fishsC){
+		var cnt = '<p style="color:#888888">很抱歉，您的游戏币不足，让娜娜陪您去买一点儿吧！</p>';
+		cnt += '<div class="submitC"><a class="submit" style="background:#999999;" href="javascript:hideMsg();">取消</a><a class="submit"  href="mobilecall://gotochongzhi">去购买</a></div>';
+		showMsg(cnt);
+	}else{
+		var html = '<div class="msgrep">';
+		html += '<div style="margin-top:15px;"><div class="msgrepT">'+fishsB+':&nbsp;<em>'+fishnum+'</em>&nbsp;<span style="color:#888888">条</span></div>';
+
+		html += '<div class="msgrepT">单价：&nbsp;<em>'+ fishsC+'</em>&nbsp;<span  style="color:#888888">游戏币</span></div>';
+		html += '<div class="msgrepT">总价：&nbsp;<em>'+ (fishnum*fishsC)+'</em>&nbsp;<span  style="color:#888888">游戏币</span></div>';
+
+		html += '<div class="buyFish1btn">';
+		html += '<div style="float:left;width: 46%;"><a class="button bg buyFishsReq" href="javascript:">确定购买</a></div>';
+
+		html += '<div style="width: 46%;margin-left: 4%;float: left;"><a style="background:#999;" href="javascript:hideOpenwin();">取消</a></div>';
+		html += '<div class="clear"></div>';
+		html += '</div></div>';
+		setOpenwin_header({'display':'none'});
+		setOpenwin_content({'border-radius':'5px'});
+		showOpenwin(html);
+		//setOpenwin({'top':'120px'});
+	 //    $(".button").on("touchstart", function() {
+	 //        $(this).css({background: "green"});
+		// }).on("touchend", function() {
+		//     $(this).css({background: "#ffa32d"});
+		// });
+		$('.buyFishsReq').on('click',function(){
+			if(fishsReq ==1){
+				return ;
+			}
+			fishsReq = 1;
+			location.href = "mobilecall://buyfishs//"+fishsA+"//"+fishnum;
+		})
+	}
+}
+function buyFishs_req(){
+	$("body").scrollTop(curscroll);
+	fishsReq = 0;
+	fishnum = parseInt($("#fishnum").val());
+	if (isNaN(fishnum) || fishnum == 0){
+		return false;
+	}
+	if(fishnum>10){
+		var cnt = '<p>购买最大数额不能超过10条</p>';
+		cnt += '<div class="submitC"><a class="submit" onclick="checkNum();">确定</a><a class="submit" style="background:#999999;" href="javascript:hideMsg();">取消</a></div>';
+		showMsg(cnt);
+		return false;
+	}
+	location.href = "mobilecall://getuserchip";
+}
+
+function buyFishs_callback(ret){
+	fishsReq = 0;
+	if (ret.checkCode == 0){
+		var html = '<div class="msgrep" style="text-align:center">';
+		html += '<div style="margin-top:15px;"><div class="msgrepT">恭喜您成功购买了'+ret.bCount+'条<em>'+setFishName(ret.FishID)+'</em></div>';
+		html += '<div class="buyFish1btn">';
+		html += '<div style="float:left;width: 46%;"><a class="button bg" href="javascript:hideOpenwin();">确定</a></div>';
+
+		html += '<div style="width: 46%;margin-left: 4%;float: left;"><a style="background:#999;" href="javascript:hideOpenwin();">取消</a></div>';
+		html += '<div class="clear"></div>';
+		html += '</div></div>';
+		setOpenwin_header({'display':'none'});
+		setOpenwin_content({'border-radius':'5px'});
+		showOpenwin(html);
+		tab("myFish");
+		//setOpenwin({'top':'120px'});
+	}else if(ret.checkCode == 1){
+		var html = '<div class="msgrep"  style="text-align:center">';
+		html += '<div class="msgNDDtext">很抱歉，您的游戏币不足，购买失败！</div>';
+		html += '<div class="buyFish1btn">';
+		html += '<div style="float:left;width: 46%;"><a class="button" href="mobilecall://gotochongzhi">去购买</a></div>';
+		html += '<div style="width: 46%;float: left;margin-left: 2%;"><a style="background:#999;" href="javascript:hideOpenwin();">关闭</a></div>';
+		html += '<div class="clear"></div>';
+		html += '</div></div>';
+		setOpenwin_header({'display':'none'});
+		setOpenwin_content({'border-radius':'5px'});
+		showOpenwin(html);
+		//setOpenwin({'top':'120px'});
+	}else if(ret.checkCode == 2){
+		var html = '<div class="msgNDD">';
+		html += '<div class="msgNDDtext">购买失败，最多只能同时拥有10条鱼！</div>';
+		html += '<div class="buyFish1btn  x"><a class="button" href="javascript:hideOpenwin();">我知道了</a></div>';
+		html += '</div>';
+		setOpenwin_header({'display':'none'});
+		setOpenwin_content({'border-radius':'5px'});
+		showOpenwin(html);
+		//setOpenwin({'top':'120px'});
+	}else if(ret.checkCode == 3){
+		var html = '<div class="msgNDD">';
+		html += '<div class="msgNDDtext">配置中没有此鱼！</div>';
+		html += '<div class="buyFish1btn  x"><a class="button" href="javascript:hideOpenwin();">我知道了</a></div>';
+		html += '</div>';
+		setOpenwin_header({'display':'none'});
+		setOpenwin_content({'border-radius':'5px'});
+		showOpenwin(html);
+		//setOpenwin({'top':'120px'});
+	}else{
+
+	}
+ //    $(".button").on("touchstart", function() {
+ //        $(this).css({background: "green"});
+	// }).on("touchend", function() {
+	//     $(this).css({background: "#ffa32d"});
+	// });
+}
+
+
+function catchFishs_callback(gold){
+	hideMsg();
+	var msg = totalchip*10000+gold;
+	var html = '<div class="msgNDD">';
+	html += '<div class="msgNDDtext">放生成功，您获得了'+msg+'游戏币！</div>';
+	html += '<div class="buyFish1btn  x"><a class="button" href="javascript:hideOpenwin();">确定</a></div>';
+	html += '</div>';
+	setOpenwin_header({'display':'none'});
+	setOpenwin_content({'border-radius':'5px'});
+	showOpenwin(html);
+	//setOpenwin({'top':'120px'});
+	// $(".button").on("touchstart", function() {
+ //        $(this).css({background: "green"});
+	// }).on("touchend", function() {
+	//     $(this).css({background: "#ffa32d"});
+	// });
+	$("li[itemabc="+fishid+"]").remove();
+	if($("#myFish .fishList .cl").length == 0){
+		$('#myFish').html('<div class="buyFishICON"><p  style="font-size:16px;color:#999;font-family: 微软雅黑; position:relative;">您的鱼缸空空如也</p><p style=" position:relative;"><a style="font-size:16px;color:#0099FF;font-family: 微软雅黑;" href="javascript:tab(\'fishBazaar\');">前往鱼商店>></a></p></div>');
+	}
+}
+
+function getMyFishLogs_callback(ret){
+	fishsReq = 0;
+	myFishLogData = ret.data;
+
+	if(myFishLogData.length == 0 && showedLogPage==1){
+		$('#getorbuy').html('<div style="margin-top: 10px;color:#999;text-align: center;line-height:30px; font-size: 16px;font-family: 微软雅黑;">暂无记录!</div>');
+		return ;
+	}
+	showMyFishLogs10();
+}
+
+function showMyFishLogs10(){
+	var count = myFishLogData.length;
+	if(showedLogPage==1){
+		$('#getorbuy').html('');
+		var html = '<ul class="fishbtngetorbuy" id="fishbtngetorbuyid">';
+		for (var i = 1; i <= count; i++) {
+			var c = 'style=""';
+			 var c = 'style="color:#ffa32d"';
+			 html += '<li class="cl">';
+			 if(myFishLogData[i-1]['type']==0){
+				 html += '<p class="p" style="width:100%;">您赠送给了<span '+c+' >'+myFishLogData[i-1]['givename']+'(ID:'+ myFishLogData[i-1]['giveid'] +')</span> 一条<span '+c+' >'+myFishLogData[i-1]['fishname']+'</span>, 赠送成功。</p><p class="clear"></p>';
+			 }else{
+				 html += '<p class="p" style="width:100%;">哇!<span '+c+' >'+myFishLogData[i-1]['givename']+'(ID:'+ myFishLogData[i-1]['giveid'] +')</span> 送给您一条<span '+c+'>'+myFishLogData[i-1]['fishname']+'</span>, 到您的水族馆中查看吧。</p><p class="clear"></p>';
+			 }
+
+			 html += '<p style="color:#b2b2b2;margin-top: 5px;">'+myFishLogData[i-1]['createtime']+'</p>';
+			 html += '</li>';
+		}
+		html += '</ul>';
+		$('#getorbuy').html(html);
+	}else{
+		var html = '';
+		for (var i = 1; i <= count; i++) {
+			var c = 'style=""';
+			 var c = 'style="color:#ffa32d"';
+			 html += '<li class="cl">';
+			 if(myFishLogData[i-1]['type']==0){
+				 html += '<p class="p" style="width:100%;">您赠送给了<span '+c+' >'+myFishLogData[i-1]['givename']+'(ID:'+ myFishLogData[i-1]['giveid'] +')</span> 一条<span '+c+' >'+myFishLogData[i-1]['fishname']+'</span>, 赠送成功。</p><p class="clear"></p>';
+			 }else{
+				 html += '<p class="p" style="width:100%;">哇!<span '+c+' >'+myFishLogData[i-1]['givename']+'(ID:'+ myFishLogData[i-1]['giveid'] +')</span> 送给您一条<span '+c+'>'+myFishLogData[i-1]['fishname']+'</span>, 到您的水族馆中查看吧。</p><p class="clear"></p>';
+			 }
+
+			 html += '<p style="color:#b2b2b2;margin-top: 5px;">'+myFishLogData[i-1]['createtime']+'</p>';
+			 html += '</li>';
+		}
+		$('#fishbtngetorbuyid').append(html);
+	}
+
+
+	refeshScroll();
+}
+
+function getMyFishs_callback(ret){
+	fishsReq = 0;
+	var data = ret.List;
+	myfishData = data
+	if(data == null || data.length == 0){
+		$('#myFish').html('<div class="buyFishICON"><p  style="font-size:16px;color:#999;font-family: 微软雅黑; position:relative;">您的鱼缸空空如也</p><p style=" position:relative;"><a style="font-size:16px;color:#0099FF;font-family: 微软雅黑;" href="javascript:tab(\'fishBazaar\');">前往鱼商店>></a></p></div>');
+		return ;
+	}
+	$('#myFish').html('');
+	var html = '<ul class="fishList">';
+	for(i in data){
+		 html += '<li class="cl" itemabc="'+data[i]['Id']+'">';
+		 html += '<div class="fishList_img"><img src="/Lib/active/public/image/newplaying/2/'+data[i]['FishId']+'.png"></div>';
+		 html += '<div class="fishList_info" style="width:50%"><ul>';
+		 html += '<li><div class="fishdesc1">'+ setFishName(data[i]['FishId'])+'</div></li>';
+		 html += '<li><div class="fishdesc" style="color:#999;font-size:11px;">(放生后可获得'+setFishchip(data[i]['FishId'])+'万游戏币)</div></li>';
+		 html += '<li><div class="fishdesc" style="color:#999;font-size:11px;">剩余成长时间:'+ (data[i]['Fate']) +'天</div></li>';
+		 html += '<li><div class="fishdesc" style="color:#999;font-size:11px;">累计收益:'+ data[i]['AddGold'] +' 每日收益:'+setFishchip(data[i]['FishId'])+'</div></li>';
+		 html += '</ul></div>';
+		 html += '<div  class="fishList_btn"><ul>';
+		 html += '<li><a href="javascript:;" fishid="'+data[i]['Id']+'" totalchip="'+setFishchip(data[i]['FishId'])+'" fishname="'+setFishName(data[i]['FishId'])+'" addchip="'+data[i]['AddGold']+'" class="fishbtn_fangsheng catchFishs" style="width:20%">放生</a></li>';
+		 html += '<li><a fishTypeId="'+data[i]['FishId']+'" itemd="'+data[i]['Id']+'"  href="javascript:;" class="fishbtn_give buyFishs" style="width:20%;background: #ffa32d;">赠送</a></li>';
+		 html += '</ul></div><hr width="100%" color="#9FDFFD" size="1">';
+		 html += '</li>';
+	}
+	html += '</ul>';
+	html += '<div style="height:45px;"></div>';
+	$('#myFish').html(html);
+	$('.buyFishs').on(browser(),function(){
+		fishTypeId=$(this).attr('fishTypeId');
+		fishIDD=$(this).attr('itemd');
+		// location.href = "mobilecall://getmyFriend";
+		getUrl(hUrl+'/getmyFriend?userid='+{$userid});
+	})
+	$('.catchFishs').on(browser(),function(){
+		fishid = $(this).attr('fishid');
+		totalchip = $(this).attr('totalchip');
+		var fishname = $(this).attr('fishname');
+		var addchip = $(this).attr('addchip');
+		var cnt = '<p>您确定放生 "<span class="keyzi">'+fishname+'</span>" 吗？</p><p>如果放生您将获得<span class="keyzi">'+totalchip+'</span>万游戏币,</p><p>和<span class="keyzi">'+addchip+'</span>游戏币累积收益。</p>';
+		cnt += '<div class="submitC"><a class="submit" onclick="catchFishs('+fishid+');">确定</a><a class="submit" style="background:#999999;" href="javascript:hideMsg();">取消</a></div>';
+		showMsg(cnt);
+	})
+	refeshScroll();
+}
+function catchFishs(fishid){
+	location.href = "mobilecall://catchfishs//"+fishid;
+	loading();
+}
+function giveawayFishs(id,fishTypeId){
+	hideerr();
+	$("body").scrollTop(curscroll);
+	if($("#radio1").attr('checked')=='checked'){
+		var str = $(".text_1").val();
+		var count = $(".text_2").val();
+		if(str.length<=0){
+			showerr('ID不能为空!'); return false;
+		}
+		if (str=={$userid}) {
+			showerr('不能送给自己!'); return false;
+		};
+		if (isPositiveNum(count)==false) {
+			showerr2('请输入正整数!'); return false;
+		}
+
+		var tempCount = 0;
+		for(i in myfishData){
+			if (myfishData[i]['FishId']==parseInt(fishTypeId)) {tempCount++;};
+		}
+		if (tempCount<parseInt(count)) {
+			showerr2('您的鱼不足!'); return false;
+		};
+		if(songNickName=="" || songNickName=="?"){
+			showerr2('玩家不存在!'); return false;
+		}
+		m_id = id;
+		m_fishTypeId = fishTypeId;
+		m_selectUserid = str;
+		m_count = count;
+		var cnt = '<p>您确定赠送给'+songNickName+'('+str+'),'+count+'条'+setFishName(fishTypeId)+'吗?</p>';
+		cnt += '<div class="submitC"><a class="submit" href="javascript:sendFish1()">确定赠送</a><a class="submit" style="background:#999999;" href="javascript:hideMsg();">取消</a></div>';
+		hideMsg();
+		showMsg(cnt);
+	}
+	else
+	{
+		var str = $("#dropdown p span").text();
+		var count = $(".text_2").val();
+		if(str=="请选择好友"){
+			showerr('请选择好友!'); return false;
+		}
+		if (isPositiveNum(count)==false) {
+			showerr2('请输入正整数!'); return false;
+		}
+		var tempCount = 0;
+		for(i in myfishData){
+			if (myfishData[i]['FishId']==parseInt(fishTypeId)) {tempCount++;};
+		}
+		if (tempCount<parseInt(count)) {
+			showerr2('您的鱼不足!'); return false;
+		};
+		m_id = id;
+		m_fishTypeId = fishTypeId;
+		m_selectUserid = selectUserid;
+		m_count = count;
+		var cnt = '<p>您确定赠送给'+str+','+count+'条'+setFishName(fishTypeId)+'吗?</p>';
+		cnt += '<div class="submitC"><a class="submit" href="javascript:sendFish1()">确定赠送</a><a class="submit" style="background:#999999;" href="javascript:hideMsg();">取消</a></div>';
+		hideMsg();
+		showMsg(cnt);
+	}
+
+}
+var m_id;
+var m_fishTypeId;
+var m_selectUserid;
+var m_count;
+function sendFish1(){
+	hideMsg();
+	location.href = "mobilecall://giveawayfishs//"+m_id+"//"+m_fishTypeId+"//"+m_selectUserid+"//"+m_count;
+	loading();
+}
+
+//是否为正整数
+function isPositiveNum(s){
+	var re = /^[0-9]*[1-9][0-9]*$/;
+	return re.test(s);
+}
+
+function giveFishs_callback(ret){
+	hideMsg();
+	var msg = "";
+	if(ret.code==0){
+		msg="恭喜您，赠送成功！";
+		if (ret.id) {
+			for (var i = ret.id.length - 1; i >= 0; i--) {
+				$("li[itemabc="+ret.id[i]+"]").remove();
+			};
+		};
+		// $("li[itemabc="+ret.id+"]").remove();
+		if($("#myFish .fishList .cl").length == 0){
+			$('#myFish').html('<div class="buyFishICON"><p  style="font-size:16px;color:#999;font-family: 微软雅黑; position:relative;">您的鱼缸空空如也</p><p style=" position:relative;"><a style="font-size:16px;color:#0099FF;font-family: 微软雅黑;" href="javascript:tab(\'fishBazaar\');">前往鱼商店>></a></p></div>');
+		}
+	}else if(ret.code==1){
+		msg="赠送失败，您赠送的用户ID错误或不在线哦！";
+	}else if(ret.code==2){
+		msg="赠送失败，对方拥有的鱼已经达到上限！";
+	}else if(ret.code==3){
+		msg="赠送失败，您的鱼不够！";
+	}
+	var html = '<div class="msgNDD">';
+	html += '<div class="msgNDDtext">'+msg+'</div>';
+	html += '<div class="buyFish1btn  x"><a class="button" href="javascript:hideOpenwin();">我知道了</a></div>';
+	html += '</div>';
+	setOpenwin_header({'display':'none'});
+	setOpenwin_content({'border-radius':'5px'});
+	showOpenwin(html);
+	//setOpenwin({'top':'120px'});
+	// $(".button").on("touchstart", function() {
+ //        $(this).css({background: "green"});
+	// }).on("touchend", function() {
+	//     $(this).css({background: "#ffa32d"});
+	// });
+}
+
+
+
+var selectUserid = 0;
+function getFriend_callback(ret){
+	var data = ret;
+	var dom1 = document.documentElement;
+	var dom2 = document.body;
+	var sHeight = dom1.scrollTop ? dom1.scrollTop : dom2.scrollTop;
+	curscroll=sHeight;
+	var html = '<ul class="giveawayList" style="color:#505050>';
+	html += '<li style="font-size:16px;">请选择以下赠送方式：</li>';
+	html += '<li><input type="radio" id="radio1" name="question" value="input" checked="checked" ><label name="radio1" class="checked" for="input">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;输入对方ID赠送：</label><input class="text_1" value="" type="tel" autocomplete="off"></li>';
+	html += '<li id="catchIdTips" style="height:25px;color:#505050;text-align: right;"></li>';
+	html += '<li><input type="radio" id="radio2" name="question" value="sel" ><label name="radio2" for="sel">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;选择好友赠送：</label><div id="dropdown"><p><span>请选择好友</span></p><ul style="overflow:scroll;">';
+	for(i in data){
+		html += '<li><a href="#" rel="'+data[i]['FriendId']+'">'+data[i]['szRoleName']+'('+data[i]['FriendId']+')'+'</a></li>';
+	}
+	html += '</ul></div></li><li></li>';
+	html += '<li id="err"></li>';
+	html += '<li  style="height:15px;color:#505050;text-align: right;"></li>';
+	html += '<hr style="height:1px;border:none;border-top:1px solid #93E2FD;" />';
+	html += '<li  style="height:13px;color:#505050;text-align: right;"></li>';
+	html += '<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;输入赠送数量：<input class="text_2" value="1" type="tel" autocomplete="off"></li>';
+	html += '<li id="err2"></li>';
+	html += '<li style="height:45px;text-align:center;margin-top:10px;"><a class="submit" style="position:absolute;left:28%;bottom:10%;" onclick="giveawayFishs('+fishIDD+','+fishTypeId+');">确定赠送</a></li>';
+	html += '</ul>';
+	showMsg(html);
+	 $('label').click(function(){
+	     var radioId = $(this).attr('name');
+	     $('label').removeAttr('class') && $(this).attr('class', 'checked');
+	     $('input[type="radio"]').removeAttr('checked') && $('#' + radioId).attr('checked', 'checked');
+	   });
+	 $("#dropdown p").click(function(){
+			var ul = $("#dropdown ul");
+			if(ul.css("display")=="none"){
+				ul.slideDown("fast");
+			}else{
+				ul.slideUp("fast");
+			}
+			$("body").scrollTop(curscroll);
+		});
+		$("#dropdown ul li a").click(function(){
+			var txt = $(this).text();
+			selectUserid = $(this).attr("rel");
+			$("#dropdown p span").html(txt);
+			$("#dropdown ul").hide();
+			$("body").scrollTop(curscroll);
+			event.preventDefault();
+		});
+
+		$(":input").blur(function(){
+			$("body").scrollTop(curscroll);
+			var str = $(".text_1").val();
+			  if(str.length>=1){
+				  getUrl(hUrl+"/getCatchID?userid="+str);
+			  }else{
+					songNickName="";
+					if(str.length==0){
+						document.getElementById('catchIdTips').innerHTML = '';
+					}else{
+						document.getElementById('catchIdTips').innerHTML = '(昵称：?)&nbsp;&nbsp;&nbsp;&nbsp;';
+					}
+			  }
+		});
+
+		$(".text_1").keyup( function() {
+			var str = $(".text_1").val();
+			  if(str.length>=1){
+				  getUrl(hUrl+"/getCatchID?userid="+str);
+			  }else{
+					songNickName="";
+					if(str.length==0){
+						document.getElementById('catchIdTips').innerHTML = '';
+					}else{
+						document.getElementById('catchIdTips').innerHTML = '(昵称：?)&nbsp;&nbsp;&nbsp;&nbsp;';
+					}
+			  }
+		});
+}
+var songNickName="";
+function getCatchID_callback(msg){
+	songNickName=msg;
+	document.getElementById('catchIdTips').innerHTML = '(昵称：'+msg+')&nbsp;&nbsp;&nbsp;&nbsp;';
+}
+
+function loading(){
+	var cnt = "<img src='/Lib/active/public/image//nyplay/loading.gif' style='width:40%; margin:10px auto;' />";
+	cnt += "<p>正在发送请求，请稍等</p>";
+	showMsg(cnt);
+}
+function showerr(msg){
+	document.getElementById('err').innerHTML = msg;
+	document.getElementById('err').style.display='block';
+}
+function hideerr(){
+	document.getElementById('err').style.display='none';
+}
+function showerr2(msg){
+	document.getElementById('err2').innerHTML = msg;
+	document.getElementById('err2').style.display='block';
+}
+function hideerr2(){
+	document.getElementById('err2').style.display='none';
+}
+function tab(id){
+	showedLogPage = 0;
+	$('.fishdn').css('display','none');
+	$('#'+id).css('display','block');
+	$('.item').removeClass('current');
+	if (typeof($('.A'+id)) != 'undefined'){
+		$('.A'+id).addClass('current');
+	}
+	if (id == 'getorbuy'){
+		if(fishsReq ==1){
+			return ;
+		}
+		fishsReq = 1;
+		showedLogPage = 1;
+		getUrl(hUrl+"/getMyFishLogsPage?userid="+{$userid}+"&page="+showedLogPage);
+	}
+	if (id == 'myFish'){
+		$(".disconfig").show();
+		if(fishsReq ==1){
+			return ;
+		}
+		fishsReq = 1;
+		location.href = "mobilecall://getmyfishInfo";
+		//getUrl(hUrl+'/getMyfish?userid='+{$userid});
+	}else{
+		$(".disconfig").hide();
+	}
+	refeshScroll();
+	cssInit();
+}
+function cssInit(){
+	$("#fishnum").val('输入条数').css('color','#ccc');
+	//$('.buyFish1btn a').css('background','#f9aea5');
+	search_up = search_up2  = false;
+}
+var search_up = search_up2  = false;
+$(document).ready(function () {
+
+    return false;
+
+	hUrl=document.URL.split( "?" )[0];
+	//getUrl(hUrl+'/getMyfish?userid='+{$userid});
+	$(document).css('background-color','#f7f7f7');
+	location.href = "/FishBlock/GetMyFishInfo";
+	$('.tab').on(browser(),function(){
+		var t = $(this).attr('tab');
+		tab(t);
+	})
+	$('.buyFish_defined').on(browser(),function(){
+		var a=$(this).attr('itema');
+		var b=$(this).attr('itemb');
+		var c=$(this).attr('itemc');
+		buyFishs(a,b,c);
+	})
+	$('.buyFishs_req').on(browser(),{},buyFishs_req);
+
+
+	$("#fishnum").keyup(function(){
+		var fishnumv = parseInt($(this).val());
+		if (isNaN(fishnumv)){
+			fishnumv = '';
+		}
+		if(event.keyCode > 57 || event.keyCode < 48) {
+			$(this).val(fishnumv);
+		}
+		if (fishnumv > 0 && !isNaN(fishnumv)){
+			$('.fishnumBtn').css('background','#FFA32D');
+			search_up2 = true;
+		}
+	}).focus(function(){
+		$(this).css("color", "#000000");
+			if (!search_up2) {
+				$(this).val('');
+			}
+	}).blur(function(){
+		var val = $.trim($(this).val());
+		if (val == "") {
+			search_up2 = false;
+			$(this).css("color", "#999999").val("输入条数");
+			$('.fishnumBtn').css('background','#FFD700');
+		} else {
+			$(this).val(val);
+		}
+	});
+	$(document).scroll(function(){
+		$(".disconfig").css("bottom",-$(window).scrollTop());
+        var display = $('#getorbuy').css('display');
+        if (display=='block') {
+        	if ($(document).scrollTop()+5 >= $(document).height() - $(window).height()) {
+        		setTimeout(function () {
+					if(fishsReq==1){
+						return;
+					}
+					if(myFishLogData==null || myFishLogData.length==0)
+					{
+						return;
+					}
+					fishsReq = 1;
+				    showedLogPage = showedLogPage+1;
+					var mydate = new Date();
+					getUrl(hUrl+"/getMyFishLogsPage?userid="+{$userid}+"&page="+showedLogPage+"&t="+mydate.getTime());
+				}, 200);
+        	}
+        };
+	});
+ //    $(".button").on("touchstart", function() {
+ //        $(this).css({background: "green"});
+	// }).on("touchend", function() {
+	//     $(this).css({background: "#ffa32d"});
+	// });
+//     document.body.addEventListener('touchmove', function (event) {
+// 	    if(ispop){
+// 	    	event.preventDefault();
+// 	    }
+// 	}, false);
+});
+                    </script>
+                </div>
+    </section>
+    <script>
+var myscroll;
+$(document).ready(function(){
+	var u = navigator.userAgent, app = navigator.appVersion;
+	var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+	if (!isiOS){
+		$(function() {
+		    FastClick.attach(document.body);
+		});
+	}
+//	myscroll = new IScroll('#wrapper', { mouseWheel: true, click: true });
+//	setTimeout(function () { myscroll.refresh();}, 500);//刷新滚动条属性
+});
+//document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
+function refeshScroll(){
+	if (typeof(myscroll) != 'undefined'){
+		myscroll.refresh();
+	}
+	if (typeof(window.parent.updateHeight) == 'Function' || typeof(window.parent.updateHeight) == 'function'){
+		window.parent.updateHeight($(document).height());
+	}
+}
+function getUrl(url) {
+	var head = document.getElementsByTagName("head")[0];
+	var script = document.createElement('script');
+	script.onload = script.onreadystatechange = script.onerror = function () {
+		if (script && script.readyState && /^(?!(?:loaded|complete)$)/.test(script.readyState))
+			return false;
+		script.onload = script.onreadystatechange = script.onerror = null;
+		script.src = '';
+		script.parentNode.removeChild(script);
+		script = null;
+	};
+	script.charset = document.charset || document.characterSet || 'gb2312';
+	script.src = url + '&' + (new Date().valueOf());
+	head.appendChild(script);
+};
+function hideOpenwin(){
+	$("#open_win_background, #open_win").hide();
+	if (typeof(Refresh) != 'undefined' && Refresh == 1){
+		window.location.href=window.location.href;
+	}
+}
+function showOpenwin(html,title){
+	var T = arguments[1] ? arguments[1] : '系统';
+
+	$('#open_win_header').html(T);
+	$('#open_win_content').html(html);
+	var oBackground = document.getElementById("open_win_background");
+    var dw = $(document).width();
+    var dh = $(document).height();
+    oBackground.style.width = dw+'px';
+//    oBackground.style.height = '100%';
+	oBackground.style.height = dh+'px';
+    $("#open_win_background, #open_win").show();
+    $("#open_win_background").click(function() {hideOpenwin()});
+    var oContent 	= document.getElementById('open_win');
+    var scrollTop 	= document.documentElement.scrollTop || document.body.scrollTop;
+    var vHeight 	= document.documentElement.clientHeight ? document.documentElement.clientHeight : document.body.clientHeight;
+    var l = (document.documentElement.clientWidth - oContent.offsetWidth) / 2;
+    var t = Math.max(((vHeight- oContent.offsetHeight) / 2) + scrollTop,0);
+    	//t =  Math.max(parseInt((vHeight/2 - oContent.offsetHeight)) + scrollTop/2,0);
+        oContent.style.left = l + 'px';
+    oContent.style.top = t+ 'px';
+}
+function setOpenwin(jsonObj){
+	$('#open_win').css(jsonObj);
+}
+function setOpenwin_header(jsonObj){
+	$('#open_win_header').css(jsonObj);
+}
+function setOpenwin_content(jsonObj){
+	$('#open_win_content').css(jsonObj);
+}
+var ispop = false;
+var curscroll= 0;
+function afxMessageBox(opt){
+
+	opt = typeof opt != 'object' ? {} : opt;
+	opt.tit = (typeof opt.tit != 'undefined') ? opt.tit : 'info';
+	opt.width = (typeof opt.width != 'undefined') ? opt.width : '280';
+	//document.getElementById('msg.tit').innerHTML = opt.tit;
+	document.getElementById('msg.cnt').innerHTML = opt.cnt;
+	document.getElementById('msg').style.display='block';
+	document.getElementById('content').style.width=opt.width+'px';
+	if(opt.height!='undefined'){
+		document.getElementById('content').style.height=opt.height+'px';
+	}
+	document.getElementById('msg.cnt').style.textAlign=opt.align;
+	document.getElementById('msg.cnt').style.color=opt.color;
+	var oBackground = document.getElementById("open_win_background");
+    var dw = $(document).width();
+    var dh = $(document).height();
+    oBackground.style.width = dw+'px';
+	oBackground.style.height = dh+'px';
+    $("#open_win_background").show();
+    $("#open_win_background").click(function() {hideMsg()});
+	var divWidth = opt.width;
+	var divHeight = document.getElementById('content').offsetHeight;
+	var dom1 = document.documentElement;
+	var dom2 = document.body;
+	var vWidth = dom1.clientWidth ? dom1.clientWidth : dom2.clientWidth;
+	var vHeight = dom1.clientHeight ? dom1.clientHeight : dom2.clientHeight;
+	document.getElementById('msg').style.width=divWidth+'px';
+	document.getElementById('msg').style.height=divHeight+'px';
+	var sHeight = dom1.scrollTop ? dom1.scrollTop : dom2.scrollTop;
+	var scrollTop 	= document.documentElement.scrollTop || document.body.scrollTop;
+	var left = parseInt((vWidth - divWidth)/2);
+	var top = parseInt((vHeight/2 - divHeight/2)+scrollTop);
+	ispop=true;
+	curscroll = sHeight;
+	//document.getElementById('msg').style.left = 0;
+	//document.getElementById('msg').style.top = sHeight+'px';
+	document.getElementById('msg').style.left = left+'px';
+	document.getElementById('msg').style.top = top+'px';
+}
+function hideMsg(){
+	ispop=false;
+	$("#open_win_background").hide();
+	document.getElementById('msg').style.display='none';
+	if (typeof(hideMsg_callback) == 'function'){
+		hideMsg_callback();
+	}
+}
+function showMsg2(ret){
+	hideOpenwin();
+	var html = '<p style="text-align:center">'+ret.msg+'</p>';
+	showOpenwin(html);
+}
+function showMsg(opt){
+	opt = typeof opt != 'object' ? {'cnt':opt} : opt;
+	opt.tit = '提示';
+	afxMessageBox(opt);
+}
+function setFishName(_fishid){
+	switch (_fishid) {
+		case 6:
+            return "小鱼儿";
+            break;
+		case 5:
+        return "小虾米";
+        break;
+        case 1:
+        return "银龙鱼";
+        break;
+        case 2:
+        return "金龙鱼";
+        break;
+        case 3:
+        return "海豚";
+        break;
+        case 4:
+        return "鲨鱼";
+        break;
+        default:
+            ;
+        }
+}
+function setFishchip(_value){
+    switch (_value) {
+    	case 6:
+                return 5;
+                break;
+        case 5:
+            return 10;
+            break;
+        case 1:
+            return 20;
+            break;
+        case 2:
+            return 100;
+            break;
+        case 3:
+            return 200;
+            break;
+        case 4:
+            return 500;
+            break;
+        default:
+            ;
+            break;
+    }
+}
+
+
+// setTimeout(function(){
+// var html = '<ul class="giveawayList">';
+// 	html += '<li style="font-size:16px;">请选择以下赠送方式：</li>';
+// 	html += '<li><input type="radio" id="radio1" name="question" value="input" checked="checked" ><label name="radio1" class="checked" for="input">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;输入对方ID赠送：</label><input class="text_1" value="" type="tel" autocomplete="off"></li>';
+// 	html += '<li id="catchIdTips" style="height:25px;color:#888;text-align: right;"></li>';
+// 	html += '<li><input type="radio" id="radio2" name="question" value="sel" ><label name="radio2" for="sel">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;选择好友赠送：</label><div id="dropdown"><p><span>请选择好友</span></p><ul style="overflow:scroll;">';
+// 	html += '</ul></div></li><li></li>';
+// 	html += '<li id="err"></li>';
+// 	html += '<li id="catchIdTips" style="height:15px;color:#888;text-align: right;"></li>';
+// 	html += '<hr style="height:1px;border:none;border-top:1px solid #EEE9E9;" />';
+// 	html += '<li id="catchIdTips" style="height:13px;color:#888;text-align: right;"></li>';
+// 	html += '<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;输入赠送数量：<input class="text_2" value="1" type="tel" autocomplete="off"></li>';
+// 	html += '<li style="height:45px;text-align:center;margin-top:10px;"><a class="submit" style="position:absolute;left:28%;bottom:10%;" onclick="giveawayFishs();">确定</a></li>';
+// 	html += '</ul>';
+// 	showMsg(html);
+// },1000);
+
+
+
+    </script>
+    <script>
+if (window.console) {
+
+}
+
+ window.onscroll=function(){
+
+}
+
+    </script>
+    <!-- 弹窗 -->
+    <div id="open_win_background"></div>
+    <div id="open_win">
+        <div id="open_win_header">系统消息</div>
+        <div class="body" id="open_win_content"></div>
+    </div>
+    <div id='msg' style="background:transparent;">
+        <div id='content'>
+            <div class='tit'><span id='msg.tit'></span></div>
+            <div class='cnt' id='msg.cnt'></div>
+            <div class='btm'></div>
+        </div>
+    </div>
+    <div class="disconfig"><p>1、累积收益在放生时自动获得，您最多可同时拥有10条小鱼。</p><p>2、当鱼的成长周期为0时系统会自动放生。</p></div>
+</body>
+</html>
+

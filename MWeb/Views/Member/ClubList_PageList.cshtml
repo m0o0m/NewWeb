@@ -1,5 +1,7 @@
 ﻿@using Webdiyer.WebControls.Mvc;
+@using GL.Command.DBUtility;
 @using GL.Data.Model;
+@using GL.Common;
 @model List<UserClub>
 
 
@@ -33,6 +35,8 @@
 
                                     <tr>
                                         <th>俱乐部ID</th>
+                                        @*<th>推广链接短域名</th>
+                                        <th>二维码</th>*@
                                         <th>上周总贡献</th>
                                         <th>上周总返利</th>
                                         <th>俱乐部成员数量</th>
@@ -56,6 +60,56 @@
             {
                                         <tr class="gradeA">
                                             <td>@m.ClubID</td>
+                                            @*<td>
+                                            @{
+                                                string gameUrl = PubConstant.GetConnectionString("clubTGUrl");
+                                                Dictionary<char, char> arrC = new Dictionary<char, char>();
+
+                                                arrC.Add('0', 'a'); arrC.Add('1', 'b'); arrC.Add('2', 'c');
+                                                arrC.Add('3', 'd'); arrC.Add('4', 'e'); arrC.Add('5', 'f');
+                                                arrC.Add('6', 'g'); arrC.Add('7', 'h'); arrC.Add('8', 'i');
+                                                arrC.Add('9', 'j');
+                                                string uidStr = m.ClubID.ToString();
+                                                string resStr = "";
+                                                for (int i = 0; i < uidStr.Length; i++)
+                                                {
+                                                    char ci = arrC[uidStr[i]];
+                                                    resStr += ci;
+                                                }
+                                                string code = resStr;
+                                                resStr = gameUrl + resStr;
+
+                                                //生成短网址
+
+                                                resStr = BaiDuHelper.TransLongUrlToTinyUrl(resStr);
+
+
+
+                                                if (m.ClubType == clubType.未激活俱乐部)
+                                                {
+
+                                                }
+                                                else
+                                                {
+
+                                                    @resStr
+                                                }
+
+
+
+                                            }
+                                            </td>
+                                            <td>
+                                                @if (m.ClubType == clubType.未激活俱乐部)
+                                                {
+                                                  
+                                                }
+                                                else
+                                                {
+                                                    <img style="height:30px;width:30px" src="http://www.gbtags.com/gb/qrcode?t=@resStr">
+                                                }
+
+ </td>*@
                                             <td>@m.Give_LastWeek</td>
                                             <td>@m.Rebate_LastWeek</td>
                                             <td>@m.ClubCount</td>

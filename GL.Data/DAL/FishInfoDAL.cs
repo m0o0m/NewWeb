@@ -15,7 +15,10 @@ namespace GL.Data.DAL
     {
         public static readonly string sqlconnectionString = PubConstant.GetConnectionString("ConnectionStringForGameData");
 
-        
+        public static readonly string database1 = PubConstant.GetConnectionString("database1");
+        public static readonly string database2 = PubConstant.GetConnectionString("database2");
+        public static readonly string database3 = PubConstant.GetConnectionString("database3");
+
 
         internal static IEnumerable<FishCount> GetFishCount(GameRecordView vbd)
         {
@@ -60,8 +63,8 @@ namespace GL.Data.DAL
                         ,sum(case a.FishID when 1 then 1 else 0 end ) Fish1 ,sum(case a.FishID when 2 then 1 else 0 end ) Fish2
                         ,sum(case a.FishID when 3 then 1 else 0 end ) Fish3 ,sum(case a.FishID when 4 then 1 else 0 end ) Fish4 
                         ,sum(case a.FishID when 5 then 1 else 0 end ) Fish5,sum(case a.FishID when 6 then 1 else 0 end ) Fish6
-                    from 515game.FishInfoRecord a join record.S_FishInfo b on a.FishID = b.FishID
-                        join 515game.Role r on a.UserID = r.id  and r.agent <> 10010
+                    from "+database1+@".FishInfoRecord a join "+ database3+ @".S_FishInfo b on a.FishID = b.FishID
+                        join "+ database1 + @".Role r on a.UserID = r.id  and r.agent <> 10010
                     where a.Type in (0,1,2,3) and a.CreateTime between @StartDate and @ExpirationDate and a.CreateTime>='2016-05-28 06:00:00'
                     group by a.Type ,case a.Type when 1 then '被赠送' when 2 then '购买' when 3 then '放生' when 0 then '赠送给' end
                     union all 
@@ -69,8 +72,8 @@ namespace GL.Data.DAL
                         ,sum(case a.FishID when 1 then 1 else 0 end ) Fish1 ,sum(case a.FishID when 2 then 1 else 0 end ) Fish2
                         ,sum(case a.FishID when 3 then 1 else 0 end ) Fish3 ,sum(case a.FishID when 4 then 1 else 0 end ) Fish4 
                         ,sum(case a.FishID when 5 then 1 else 0 end ) Fish5,sum(case a.FishID when 6 then 1 else 0 end ) Fish6
-                    from FishInfoRecord a join record.S_FishInfo b on a.FishID = b.FishID 
-                        join 515game.Role r on a.UserID = r.id  and r.agent <> 10010 
+                    from FishInfoRecord a join "+ database3 + @".S_FishInfo b on a.FishID = b.FishID 
+                        join "+ database1 + @".Role r on a.UserID = r.id  and r.agent <> 10010 
                     where a.Type in (1,2,3) and a.Flag = 1 and a.CreateTime between @StartDate and @ExpirationDate  ;
                 ");
                 }
@@ -81,8 +84,8 @@ namespace GL.Data.DAL
                         ,sum(case a.FishID when 1 then 1 else 0 end ) Fish1 ,sum(case a.FishID when 2 then 1 else 0 end ) Fish2
                         ,sum(case a.FishID when 3 then 1 else 0 end ) Fish3 ,sum(case a.FishID when 4 then 1 else 0 end ) Fish4 
                         ,sum(case a.FishID when 5 then 1 else 0 end ) Fish5,sum(case a.FishID when 6 then 1 else 0 end ) Fish6
-                    from 515game.FishInfoRecord a join record.S_FishInfo b on a.FishID = b.FishID
-                        join 515game.Role r on a.UserID = r.id and r.agent <> 10010
+                    from "+ database1 + @".FishInfoRecord a join "+ database3 + @".S_FishInfo b on a.FishID = b.FishID
+                        join "+ database1 + @".Role r on a.UserID = r.id and r.agent <> 10010
                     where a.Type in (0,1,2,3) and a.CreateTime between @StartDate and @ExpirationDate and a.userid = @SearchExt and a.CreateTime>='2016-05-28 06:00:00'
                     group by a.Type ,case a.Type when 1 then '被赠送' when 2 then '购买' when 3 then '放生' when 0 then '赠送给' end 
                     union all 
@@ -90,12 +93,12 @@ namespace GL.Data.DAL
                         ,sum(case a.FishID when 1 then 1 else 0 end ) Fish1 ,sum(case a.FishID when 2 then 1 else 0 end ) Fish2
                         ,sum(case a.FishID when 3 then 1 else 0 end ) Fish3 ,sum(case a.FishID when 4 then 1 else 0 end ) Fish4 
                         ,sum(case a.FishID when 5 then 1 else 0 end ) Fish5,sum(case a.FishID when 6 then 1 else 0 end ) Fish6
-                    from FishInfoRecord a join record.S_FishInfo b on a.FishID = b.FishID 
-                        join 515game.Role r on a.UserID = r.id and r.agent <> 10010 
+                    from FishInfoRecord a join "+ database3 + @".S_FishInfo b on a.FishID = b.FishID 
+                        join "+ database1 + @".Role r on a.UserID = r.id and r.agent <> 10010 
                     where a.Type in (1,2,3) and a.Flag = 1 and a.CreateTime between @StartDate and @ExpirationDate and a.userid = @SearchExt ;
                 ");
                 }
-
+                
 
                 IEnumerable<UserFishInfo> i = cn.Query<UserFishInfo>(str.ToString(), vbd);
                 cn.Close();

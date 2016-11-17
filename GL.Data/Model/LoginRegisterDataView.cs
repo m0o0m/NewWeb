@@ -44,7 +44,7 @@ namespace GL.Data.Model
         /// </summary>
         public int RWeiXin { get; set; }
         /// <summary>
-        /// 515注册开关
+        /// 注册开关
         /// </summary>
         public int R515 { get; set; }
         /// <summary>

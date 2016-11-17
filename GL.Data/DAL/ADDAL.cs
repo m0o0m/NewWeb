@@ -15,6 +15,10 @@ namespace GL.Data.DAL
     {
         public static readonly string sqlconnectionString = PubConstant.GetConnectionString("ConnectionStringForGameData");
 
+        public static readonly string database1 = PubConstant.GetConnectionString("database1");
+        public static readonly string database2 = PubConstant.GetConnectionString("database2");
+        public static readonly string database3 = PubConstant.GetConnectionString("database3");
+
         internal static int Add(ADInfo model)
         {
 
@@ -22,7 +26,7 @@ namespace GL.Data.DAL
             {
                 cn.Open();
                 StringBuilder str = new StringBuilder();
-                str.Append(@"515game.sp_update_channel");
+                str.Append(@""+ database1 + @".sp_update_channel");
                 cn.Query<ADInfo>(str.ToString(), param: new { V_IP = model.IP, V_Channel =model.ChannlID, V_URL=model.Url }, commandType: CommandType.StoredProcedure);
 
                 return 1;
@@ -39,7 +43,7 @@ namespace GL.Data.DAL
             {
                 cn.Open();
                 StringBuilder str = new StringBuilder();
-                str.Append(@"515game.sp_click_channel");
+                str.Append(@""+ database1 + @".sp_click_channel");
                 cn.Query<ADInfo>(str.ToString(), param: new { V_IP = model.IP, V_Channel = model.ChannlID, V_URL = model.Url }, commandType: CommandType.StoredProcedure);
 
                 return 1;

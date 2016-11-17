@@ -21,6 +21,8 @@ namespace GL.Data.Model
         public long ServiceSum { get; set; }
         public long GiveSum { get; set; }
         public string GroupName { get; set; }
+
+        public string TGUrl { get; set; }
     }
 
     public enum clubType

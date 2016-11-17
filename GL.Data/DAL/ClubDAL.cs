@@ -17,6 +17,10 @@ namespace GL.Data.DAL
 
         public static readonly string sqlconnectionString = PubConstant.GetConnectionString("ConnectionStringForGameRecord");
 
+        public static readonly string database1 = PubConstant.GetConnectionString("database1");
+        public static readonly string database2 = PubConstant.GetConnectionString("database2");
+        public static readonly string database3 = PubConstant.GetConnectionString("database3");
+
         internal static IEnumerable<UserClub> GetRebate(GameRecordView model)
         {
 
@@ -44,19 +48,19 @@ namespace GL.Data.DAL
 
             pq.RecordCount = 1;
             pq.Sql = string.Format(@"select a.UserID ,d.LoginTime ,c.TexasCount ,c.ScaleCount ,c.ZodiacCount ,c.HorseCount ,c.CarCount ,b.ServiceSum ,b.GiveSum 
-                        from (select ID UserID ,NickName from 515game.Role where id = {0}) a
+                        from (select ID UserID ,NickName from "+ database1 + @".Role where id = {0}) a
                           left join (
                             select a.UserID ,sum(ServiceSum) ServiceSum ,sum(GiveSum) GiveSum 
-                            from GServerInfo.C_RebateGive a 
+                            from "+ database2+ @".C_RebateGive a 
                             where a.CountDate >= '{1}' and a.CountDate <'{2}' and a.UserID = {0} group by a.UserID
                           )b on a.UserID = b.UserID 
                           left join (
                             select userid ,sum(Texas_LCount+Texas_MCount+Texas_HCount) TexasCount ,sum(Scale_Count) ScaleCount
                                 ,sum(Zodiac_Count) ZodiacCount ,sum(Horse_Count) HorseCount ,sum(Car_Count) CarCount 
-                            from record.Clearing_Game where userid = {0} and CountDate >= '{1}' and CountDate < '{2}' group by userid  
+                            from "+ database3+ @".Clearing_Game where userid = {0} and CountDate >= '{1}' and CountDate < '{2}' group by userid  
                           )c on a.UserID = c.UserID 
                           left join (
-                            select userid ,max(LoginTime) LoginTime from 515game.BG_LoginRecord where userid = {0} group by userid 
+                            select userid ,max(LoginTime) LoginTime from "+ database1 + @".BG_LoginRecord where userid = {0} group by userid 
                           )d on a.UserID = d.UserID ;",
                 vbd.SearchExt, vbd.StartDate, vbd.ExpirationDate);
 
@@ -73,9 +77,9 @@ namespace GL.Data.DAL
                     cn.Open();
                     string sql = string.Format(@"
                         select a.UserID ,c.NickName UserName ,ifnull(sum(b.ServiceSum) ,0) ServiceSum ,ifnull(sum(b.GiveSum) ,0) GiveSum ,a.CreateTime  
-                        from GServerInfo.C_RebateUser a 
-                            left join 515game.Role c on a.UserID = c.ID 
-                            left join GServerInfo.C_RebateGive b on a.UserID = b.UserID and date(a.CreateTime) <= b.CountDate  
+                        from "+ database2+ @".C_RebateUser a 
+                            left join "+ database1 + @".Role c on a.UserID = c.ID 
+                            left join "+ database2+ @".C_RebateGive b on a.UserID = b.UserID and date(a.CreateTime) <= b.CountDate  
                         where a.GroupID = @UserID group by a.UserID ,c.NickName ,a.CreateTime; ");
                     IEnumerable<UserClubDetail> i = cn.Query<UserClubDetail>(sql, model);
                     cn.Close();
@@ -94,9 +98,9 @@ namespace GL.Data.DAL
                 cn.Open();
                 string sql = string.Format(@"
                     select a.GroupID ClubID ,a.GroupName ,ifnull(sum(c.ServiceSum) ,0) ServiceSum ,ifnull(sum(c.GiveSum) ,0) GiveSum ,a.CreateTime ClubUpdate ,a.RebatePer 
-                    from GServerInfo.C_RebateGroup a 
-                        left join GServerInfo.C_RebateUser b on a.GroupID = b.GroupID 
-                        left join GServerInfo.C_RebateGive c on b.UserID = c.UserID and date(b.CreateTime) <= c.CountDate 
+                    from "+ database2 + @".C_RebateGroup a 
+                        left join "+ database2 + @".C_RebateUser b on a.GroupID = b.GroupID 
+                        left join "+ database2 + @".C_RebateGive c on b.UserID = c.UserID and date(b.CreateTime) <= c.CountDate 
                     where a.GroupID = case @UserID when 0 then a.GroupID else @UserID end group by a.GroupID ,a.GroupName ,a.CreateTime ; ");
                 IEnumerable<UserClub> i = cn.Query<UserClub>(sql, model);
                 cn.Close();
@@ -119,14 +123,14 @@ when Give_LastWeek >= 500000000  then Give_LastWeek * 0.25
 )as Rebate_LastWeek,
 
 (   
- select IFNULL(ClubID,0)   from 515game.ClubUser where userid = a.ClubId limit 1 
+ select IFNULL(ClubID,0)   from gamedata.ClubUser where userid = a.ClubId limit 1 
 ) as HighClub
  from (
 
 select cc.ClubId ,
-( select  count(1)  from 515game.ClubUser where ClubID = cc.ClubId)as ClubCount ,
+( select  count(1)  from gamedata.ClubUser where ClubID = cc.ClubId)as ClubCount ,
 (  select IFNULL(sum(Gold),0) 
-           from 515game.ClubGive
+           from gamedata.ClubGive
           where ClubID = cc.ClubId  
 ) as Give_LastWeek 
 
@@ -155,19 +159,19 @@ when Give_LastWeek >= 500000000  then Give_LastWeek * 0.25
                else Give_LastWeek * 0.2 end 
 )as Rebate_LastWeek,
 (   
- select IFNULL(ClubID,0)   from 515game.ClubUser where userid = a.ClubId limit 1 
+ select IFNULL(ClubID,0)   from "+ database1+ @".ClubUser where userid = a.ClubId limit 1 
 ) as HighClub
  from (
 
 select cc.ClubId ,
-( select  count(1)  from 515game.ClubUser where ClubID = cc.ClubId)as ClubCount ,
+( select  count(1)  from "+ database1 + @".ClubUser where ClubID = cc.ClubId)as ClubCount ,
 (  select IFNULL(sum(Gold),0) 
-           from 515game.ClubGive
+           from "+ database1 + @".ClubGive
           where ClubID = cc.ClubId  and CreateTime < subdate(@StartDate,weekday(@StartDate)) and ClubType = 2 
                  and CreateTime >= date_sub(subdate(@StartDate,weekday(@StartDate)) ,interval 7 day) 
 
 ) as Give_LastWeek 
- from GServerInfo.C_LoginUserClub as cc,GServerInfo.C_LoginUser as cu
+ from "+ database2+ @".C_LoginUserClub as cc,"+ database2 + @".C_LoginUser as cu
 where cc.UserId=cu.UserId and cu.UserAccount =@SearchExt   {0}
 ) a
 ", model.SearchExter<=0?"": " and cc.ClubId = @SearchExter");
@@ -231,7 +235,7 @@ where cc.UserId=cu.UserId and cu.UserAccount =@SearchExt   {0}
             using (var cn = new MySqlConnection(sqlconnectionString))
             {
                
-                string sql = "insert into GServerInfo.C_LoginUser(UserAccount,UserPassword,DateTime) values(@UserAccount,@UserPassword,'"+DateTime.Now+"')";
+                string sql = "insert into "+ database2 + @".C_LoginUser(UserAccount,UserPassword,DateTime) values(@UserAccount,@UserPassword,'"+DateTime.Now+"')";
                  
 
                 cn.Open();
@@ -255,12 +259,12 @@ where cc.UserId=cu.UserId and cu.UserAccount =@SearchExt   {0}
                 cn.Open();
                 if (loginUser.Name != "")
                 {
-                    sql = "insert into GServerInfo.C_RebateGroup(GroupName,GroupDesc,RebatePer) values(@Name,@Desc,@Num)";
+                    sql = "insert into "+ database2 + @".C_RebateGroup(GroupName,GroupDesc,RebatePer) values(@Name,@Desc,@Num)";
                     i = cn.Execute(sql, loginUser);
                 }
                 else
                 {
-                    sql = "call GServerInfo.f_split(@GroupID ,@ClubIds)";
+                    sql = "call "+ database2 + @".f_split(@GroupID ,@ClubIds)";
                     //i = Convert.ToInt32(cn.Query(sql, loginUser).First());
                     i = cn.Execute(sql, loginUser);
                 }
@@ -276,11 +280,11 @@ where cc.UserId=cu.UserId and cu.UserAccount =@SearchExt   {0}
                 string sql = "";
                 if(loginUser.Num == 1)
                 {
-                    sql = @"delete from GServerInfo.C_RebateUser where GroupID=@GroupID;delete from GServerInfo.C_RebateGroup where GroupID = @GroupID;";
+                    sql = @"delete from "+ database2 + @".C_RebateUser where GroupID=@GroupID;delete from "+ database2 + @".C_RebateGroup where GroupID = @GroupID;";
                 }
                 if(loginUser.Num == 2)
                 {
-                    sql = @"delete from GServerInfo.C_RebateUser where UserID=@GroupID;";
+                    sql = @"delete from "+ database2 + @".C_RebateUser where UserID=@GroupID;";
                 }
 
                 cn.Open();
@@ -296,8 +300,8 @@ where cc.UserId=cu.UserId and cu.UserAccount =@SearchExt   {0}
             using (var cn = new MySqlConnection(sqlconnectionString))
             {
 
-                string sql = @"delete from GServerInfo.C_LoginUser where UserId =@UserId;
-                               delete from GServerInfo.C_LoginUserClub where UserId =@UserId;  
+                string sql = @"delete from "+ database2 + @".C_LoginUser where UserId =@UserId;
+                               delete from "+ database2 + @".C_LoginUserClub where UserId =@UserId;  
                     ";
 
 
@@ -319,7 +323,7 @@ where cc.UserId=cu.UserId and cu.UserAccount =@SearchExt   {0}
             using (var cn = new MySqlConnection(sqlconnectionString))
             {
 
-                string sql = "delete from GServerInfo.C_LoginUserClub where UserId =@UserId and ClubId=@ClubId";
+                string sql = "delete from "+ database2 + @".C_LoginUserClub where UserId =@UserId and ClubId=@ClubId";
 
 
                 cn.Open();
@@ -341,7 +345,7 @@ where cc.UserId=cu.UserId and cu.UserAccount =@SearchExt   {0}
             using (var cn = new MySqlConnection(sqlconnectionString))
             {
 
-                string sql = "insert into GServerInfo.C_LoginUserClub(UserId,ClubId,JoinDate) values(@UserId,@ClubId,'"+DateTime.Now+"')";
+                string sql = "insert into "+ database2 + @".C_LoginUserClub(UserId,ClubId,JoinDate) values(@UserId,@ClubId,'"+DateTime.Now+"')";
 
 
                 cn.Open();
@@ -361,7 +365,7 @@ where cc.UserId=cu.UserId and cu.UserAccount =@SearchExt   {0}
             using (var cn = new MySqlConnection(sqlconnectionString))
             {
                 cn.Open();
-                IEnumerable<CLoginUser> i = cn.Query<CLoginUser>(@"select * from GServerInfo.C_LoginUser where UserAccount = @UserAccount", user);
+                IEnumerable<CLoginUser> i = cn.Query<CLoginUser>(@"select * from "+ database2 + @".C_LoginUser where UserAccount = @UserAccount", user);
                 cn.Close();
                 return i.FirstOrDefault();
             }
@@ -375,7 +379,7 @@ where cc.UserId=cu.UserId and cu.UserAccount =@SearchExt   {0}
             {
                 cn.Open();
                 string sql = string.Format(@"
-               select * from 515game.ClubInfo where ID=@ID;    
+               select * from "+ database1+ @".ClubInfo where ID=@ID;    
 ");
                 IEnumerable<ClubInfo> i = cn.Query<ClubInfo>(sql, new {
                     ID = id

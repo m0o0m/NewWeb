@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GL.Command.DBUtility;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -32,22 +33,22 @@ namespace Web.Redis
             TaskAction.SetContent();
             //这里设置你的web地址，可以随便指向你的任意一个aspx页面甚至不存在的页面，目的是要激发Application_Start 
             //使用您自己的URL
-#if DEBUG
-            string url = "http://localhost:25664//api/OnLinePlay/GetOnLineUser?pageSize=112&pageIndex=1";
-#endif
-#if R17
-           string url = "http://192.168.1.17:8017/api/OnLinePlay/GetOnLineUser?pageSize=112&pageIndex=1";
-#endif
-#if Release
-             string url = "http://api.515.com/api/OnLinePlay/GetOnLineUser?pageSize=10&pageIndex=1";
-#endif
-#if Test
-            string url = "http://tapi.515.com/api/OnLinePlay/GetOnLineUser?pageSize=10&pageIndex=1";
-#endif
+//#if DEBUG
+//            string url = "http://localhost:25664//api/OnLinePlay/GetOnLineUser?pageSize=112&pageIndex=1";
+//#endif
+//#if R17
+//           string url = "http://192.168.1.17:8017/api/OnLinePlay/GetOnLineUser?pageSize=112&pageIndex=1";
+//#endif
+//#if Release
+//             string url = "http://api.515.com/api/OnLinePlay/GetOnLineUser?pageSize=10&pageIndex=1";
+//#endif
+//#if Test
+//            string url = "http://tapi.515.com/api/OnLinePlay/GetOnLineUser?pageSize=10&pageIndex=1";
+//#endif
 
+           string url = PubConstant.GetConnectionString("homeUrl");
 
-
-
+  
             System.Net.HttpWebRequest myHttpWebRequest = (System.Net.HttpWebRequest)System.Net.WebRequest.Create(url);
             System.Net.HttpWebResponse myHttpWebResponse = (System.Net.HttpWebResponse)myHttpWebRequest.GetResponse();
             System.IO.Stream receiveStream = myHttpWebResponse.GetResponseStream();//得到回写的字节流

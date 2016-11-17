@@ -18,6 +18,11 @@ namespace GL.Data.BLL
     {
         public static readonly string sqlconnectionString = PubConstant.GetConnectionString("ConnectionStringForGameData");
 
+        public static readonly string database1 = PubConstant.GetConnectionString("database1");
+        public static readonly string database2 = PubConstant.GetConnectionString("database2");
+        public static readonly string database3 = PubConstant.GetConnectionString("database3");
+
+
 #if MWeb
         public static PagedList<Role> GetListByPage(MemberSeachView msv)
         {
@@ -59,8 +64,8 @@ namespace GL.Data.BLL
                 case seachType.IP地址:
                     pq.RecordCount = DAL.PagedListDAL<Role>.GetRecordCount(string.Format(@"select count(0) from Role where CreateIP = '{0}'", msv.Value), sqlconnectionString);
                     pq.Sql = string.Format(@"
-update 515game.Role set IsFreeze = 0  where   CreateIP = '{2}'  and FreezeTime <='" + DateTime.Now + @"';
-update 515game.Role set NoSpeak = 0  where   CreateIP = '{2}'   and SpeakTime <='" + DateTime.Now + @"';
+update "+database1+@"Role set IsFreeze = 0  where   CreateIP = '{2}'  and FreezeTime <='" + DateTime.Now + @"';
+update "+ database1 + @".Role set NoSpeak = 0  where   CreateIP = '{2}'   and SpeakTime <='" + DateTime.Now + @"';
 
 select FreezeTime,SpeakTime,ID, Account, Email, Tel, TrueName, Identity, Agent, Password, Gold, Diamond, Zicard, Telfare, MaxNoble, ShowGift, NickName, Gender, Country, Province, City, FigureUrl, IsYellowVip, IsYellowVipYear, YellowVipLevel, IsYellowHighVip, PF, OpenID, IOpenID, Invkey, Itime, LoginDevice, LastModify, CreateTime, CreateIP,  (CASE  WHEN NoSpeak=0  THEN 0 when NoSpeak>=1 then 1  ELSE NoSpeak END) as NoSpeak,(CASE  WHEN IsFreeze=0  THEN 0 when IsFreeze>=1 then 1  ELSE IsFreeze END) as IsFreeze, SafeBox, SafePwd, CreateMac from Role where CreateIP = '{2}' order by ID desc limit {0}, {1}", pq.StartRowNumber, pq.PageSize, msv.Value);
                     break;
@@ -75,8 +80,8 @@ select FreezeTime,SpeakTime,ID, Account, Email, Tel, TrueName, Identity, Agent, 
                     {
                         pq.RecordCount = DAL.PagedListDAL<Role>.GetRecordCount(string.Format(@"select count(0) from Role where NoSpeak = 1 and ID in ( select ID from Role where ID = '{0}' or Account='{0}' or NickName='{0}' ) ", msv.Value), sqlconnectionString);
                         pq.Sql = string.Format(@"
-update 515game.Role set IsFreeze = 0  where  (ID = '{2}') and FreezeTime <='"+DateTime.Now+@"';
-update 515game.Role set NoSpeak = 0  where (ID = '{2}') and SpeakTime <='"+DateTime.Now+@"';
+update "+ database1 + @".Role set IsFreeze = 0  where  (ID = '{2}') and FreezeTime <='"+DateTime.Now+@"';
+update "+ database1 + @".Role set NoSpeak = 0  where (ID = '{2}') and SpeakTime <='"+DateTime.Now+@"';
 select FreezeTime,SpeakTime,ID, Account, Email, Tel, TrueName, Identity, Agent, Password, Gold, Diamond, Zicard, Telfare, MaxNoble, ShowGift, NickName, Gender, Country, Province, City, FigureUrl, IsYellowVip, IsYellowVipYear, YellowVipLevel, IsYellowHighVip, PF, OpenID, IOpenID, Invkey, Itime, LoginDevice, LastModify, CreateTime, CreateIP,  (CASE  WHEN NoSpeak=0  THEN 0 when NoSpeak>=1 then 1  ELSE NoSpeak END) as NoSpeak, (CASE  WHEN IsFreeze=0  THEN 0 when IsFreeze>=1 then 1  ELSE IsFreeze END) as IsFreeze, SafeBox, SafePwd, CreateMac from Role where NoSpeak = 1 and ID in ( select ID from Role where ID = '{2}' or Account='{2}' or NickName='{2}') order by ID desc limit {0}, {1}", pq.StartRowNumber, pq.PageSize, msv.Value);
                     }
 
@@ -91,8 +96,8 @@ select FreezeTime,SpeakTime,ID, Account, Email, Tel, TrueName, Identity, Agent, 
                     else {
                         pq.RecordCount = DAL.PagedListDAL<Role>.GetRecordCount(string.Format(@"select count(0) from Role where IsFreeze !=0 and ID in (select ID from Role where ID = '{0}' or Account='{0}' or NickName='{0}' )", msv.Value), sqlconnectionString);
                         pq.Sql = string.Format(@"
-update 515game.Role set IsFreeze = 0  where  (ID = '{2}') and FreezeTime <='" + DateTime.Now + @"';
-update 515game.Role set NoSpeak = 0  where (ID = '{2}') and SpeakTime <='" + DateTime.Now + @"';
+update "+ database1 + @".Role set IsFreeze = 0  where  (ID = '{2}') and FreezeTime <='" + DateTime.Now + @"';
+update "+ database1 + @".Role set NoSpeak = 0  where (ID = '{2}') and SpeakTime <='" + DateTime.Now + @"';
 select FreezeTime,SpeakTime,ID, Account, Email, Tel, TrueName, Identity, Agent, Password, Gold, Diamond, Zicard, Telfare, MaxNoble, ShowGift, NickName, Gender, Country, Province, City, FigureUrl, IsYellowVip, IsYellowVipYear, YellowVipLevel, IsYellowHighVip, PF, OpenID, IOpenID, Invkey, Itime, LoginDevice, LastModify, CreateTime, CreateIP,  (CASE  WHEN NoSpeak=0  THEN 0 when NoSpeak>=1 then 1  ELSE NoSpeak END) as NoSpeak,(CASE  WHEN IsFreeze=0  THEN 0 when IsFreeze>=1 then 1  ELSE IsFreeze END) as IsFreeze, SafeBox, SafePwd, CreateMac from Role where IsFreeze !=0 and ID in (select ID from Role where ID = '{2}' or Account='{2}' or NickName='{2}') order by ID desc limit {0}, {1}", pq.StartRowNumber, pq.PageSize, msv.Value);
                     }
                         break;
@@ -101,8 +106,8 @@ select FreezeTime,SpeakTime,ID, Account, Email, Tel, TrueName, Identity, Agent, 
                     {
                         pq.RecordCount = DAL.PagedListDAL<Role>.GetRecordCount(string.Format(@"select count(0) from Role where Account = '{0}'", msv.Value), sqlconnectionString);
                         pq.Sql = string.Format(@"
-update 515game.Role set IsFreeze = 0  where   Account='{2}'  and FreezeTime <='" + DateTime.Now + @"';
-update 515game.Role set NoSpeak = 0  where  Account='{2}'  and SpeakTime <='" + DateTime.Now + @"';
+update "+ database1 + @".Role set IsFreeze = 0  where   Account='{2}'  and FreezeTime <='" + DateTime.Now + @"';
+update "+ database1 + @".Role set NoSpeak = 0  where  Account='{2}'  and SpeakTime <='" + DateTime.Now + @"';
 
 select FreezeTime,SpeakTime,ID, Account, Email, Tel, TrueName, Identity, Agent, Password, Gold, Diamond, Zicard, Telfare, MaxNoble, ShowGift, NickName, Gender, Country, Province, City, FigureUrl, IsYellowVip, IsYellowVipYear, YellowVipLevel, IsYellowHighVip, PF, OpenID, IOpenID, Invkey, Itime, LoginDevice, LastModify, CreateTime, CreateIP,  (CASE  WHEN NoSpeak=0  THEN 0 when NoSpeak>=1 then 1  ELSE NoSpeak END) as NoSpeak,(CASE  WHEN IsFreeze=0  THEN 0 when IsFreeze>=1 then 1  ELSE IsFreeze END) as IsFreeze, SafeBox, SafePwd, CreateMac from Role where Account = '{2}' order by ID desc limit {0}, {1}", pq.StartRowNumber, pq.PageSize, msv.Value);
                     }
@@ -117,8 +122,8 @@ select FreezeTime,SpeakTime,ID, Account, Email, Tel, TrueName, Identity, Agent, 
                     {
                         pq.RecordCount = DAL.PagedListDAL<Role>.GetRecordCount(string.Format(@"select count(0) from Role where locate ('{0}' ,NickName) > 0", msv.Value), sqlconnectionString);
                         pq.Sql = string.Format(@"
-update 515game.Role set IsFreeze = 0  where   locate ('{2}' ,NickName) > 0  and FreezeTime <='" + DateTime.Now + @"';
-update 515game.Role set NoSpeak = 0  where  locate ('{2}' ,NickName) > 0  and SpeakTime <='" + DateTime.Now + @"';
+update "+ database1 + @".Role set IsFreeze = 0  where   locate ('{2}' ,NickName) > 0  and FreezeTime <='" + DateTime.Now + @"';
+update "+ database1 + @".Role set NoSpeak = 0  where  locate ('{2}' ,NickName) > 0  and SpeakTime <='" + DateTime.Now + @"';
 
 select FreezeTime,SpeakTime,ID, Account, Email, Tel, TrueName, Identity, Agent, Password, Gold, Diamond, Zicard, Telfare, MaxNoble, ShowGift, NickName, Gender, Country, Province, City, FigureUrl, IsYellowVip, IsYellowVipYear, YellowVipLevel, IsYellowHighVip, PF, OpenID, IOpenID, Invkey, Itime, LoginDevice, LastModify, CreateTime, CreateIP,  (CASE  WHEN NoSpeak=0  THEN 0 when NoSpeak>=1 then 1  ELSE NoSpeak END) as NoSpeak,(CASE  WHEN IsFreeze=0  THEN 0 when IsFreeze>=1 then 1  ELSE IsFreeze END) as IsFreeze, SafeBox, SafePwd, CreateMac from Role where locate ('{2}' ,NickName) > 0 order by ID desc limit {0}, {1}", pq.StartRowNumber, pq.PageSize, msv.Value);
                     }
@@ -134,8 +139,8 @@ select FreezeTime,SpeakTime,ID, Account, Email, Tel, TrueName, Identity, Agent, 
                     {
                         pq.RecordCount = DAL.PagedListDAL<Role>.GetRecordCount(string.Format(@"select count(0) from Role where ID = {0}", msv.Value), sqlconnectionString);
                         pq.Sql = string.Format(@"
-update 515game.Role set IsFreeze = 0  where    ID = {2}  and FreezeTime <='" + DateTime.Now + @"';
-update 515game.Role set NoSpeak = 0  where   ID = {2}  and SpeakTime <='" + DateTime.Now + @"';
+update "+ database1 + @".Role set IsFreeze = 0  where    ID = {2}  and FreezeTime <='" + DateTime.Now + @"';
+update "+ database1 + @".Role set NoSpeak = 0  where   ID = {2}  and SpeakTime <='" + DateTime.Now + @"';
 
 select FreezeTime,SpeakTime,ID, Account, Email, Tel, TrueName, Identity, Agent, Password, Gold, Diamond, Zicard, Telfare, MaxNoble, ShowGift, NickName, Gender, Country, Province, City, FigureUrl, IsYellowVip, IsYellowVipYear, YellowVipLevel, IsYellowHighVip, PF, OpenID, IOpenID, Invkey, Itime, LoginDevice, LastModify, CreateTime, CreateIP,  (CASE  WHEN NoSpeak=0  THEN 0 when NoSpeak>=1 then 1  ELSE NoSpeak END) as NoSpeak,(CASE  WHEN IsFreeze=0  THEN 0 when IsFreeze>=1 then 1  ELSE IsFreeze END) as IsFreeze, SafeBox, SafePwd, CreateMac from Role where ID = {2} order by ID desc limit {0}, {1}", pq.StartRowNumber, pq.PageSize, msv.Value);
                     }
@@ -195,8 +200,8 @@ select FreezeTime,SpeakTime,ID, Account, Email, Tel, TrueName, Identity, Agent, 
                 case seachType.IP地址:
                     pq.RecordCount = DAL.PagedListDAL<Role>.GetRecordCount(string.Format(@"select count(0) from Role where CreateIP = '{0}'", msv.Value), sqlconnectionString);
                     pq.Sql = string.Format(@"
-update 515game.Role set IsFreeze = 0  where   CreateIP = '{2}'  and FreezeTime <='" + DateTime.Now + @"';
-update 515game.Role set NoSpeak = 0  where   CreateIP = '{2}'   and SpeakTime <='" + DateTime.Now + @"';
+update "+ database1 + @".Role set IsFreeze = 0  where   CreateIP = '{2}'  and FreezeTime <='" + DateTime.Now + @"';
+update "+ database1 + @".Role set NoSpeak = 0  where   CreateIP = '{2}'   and SpeakTime <='" + DateTime.Now + @"';
 
 select FreezeTime,SpeakTime,ID, Account, Email, Tel, TrueName, Identity, Agent, Password, Gold, Diamond, Zicard, Telfare, MaxNoble, ShowGift, NickName, Gender, Country, Province, City, FigureUrl, IsYellowVip, IsYellowVipYear, YellowVipLevel, IsYellowHighVip, PF, OpenID, IOpenID, Invkey, Itime, LoginDevice, LastModify, CreateTime, CreateIP,  (CASE  WHEN NoSpeak=0  THEN 0 when NoSpeak>=1 then 1  ELSE NoSpeak END) as NoSpeak,(CASE  WHEN IsFreeze=0  THEN 0 when IsFreeze>=1 then 1  ELSE IsFreeze END) as IsFreeze, SafeBox, SafePwd, CreateMac from Role where CreateIP = '{2}' order by ID desc limit {0}, {1}", pq.StartRowNumber, pq.PageSize, msv.Value);
                     break;
@@ -211,8 +216,8 @@ select FreezeTime,SpeakTime,ID, Account, Email, Tel, TrueName, Identity, Agent, 
                     {
                         pq.RecordCount = DAL.PagedListDAL<Role>.GetRecordCount(string.Format(@"select count(0) from Role where NoSpeak = 1 and ID in ( select ID from Role where ID = '{0}' or Account='{0}' or NickName='{0}' ) ", msv.Value), sqlconnectionString);
                         pq.Sql = string.Format(@"
-update 515game.Role set IsFreeze = 0  where  (ID = '{2}' ) and FreezeTime <='" + DateTime.Now + @"';
-update 515game.Role set NoSpeak = 0  where (ID = '{2}' ) and SpeakTime <='" + DateTime.Now + @"';
+update "+ database1 + @".Role set IsFreeze = 0  where  (ID = '{2}' ) and FreezeTime <='" + DateTime.Now + @"';
+update "+ database1 + @".Role set NoSpeak = 0  where (ID = '{2}' ) and SpeakTime <='" + DateTime.Now + @"';
 select FreezeTime,SpeakTime,ID, Account, Email, Tel, TrueName, Identity, Agent, Password, Gold, Diamond, Zicard, Telfare, MaxNoble, ShowGift, NickName, Gender, Country, Province, City, FigureUrl, IsYellowVip, IsYellowVipYear, YellowVipLevel, IsYellowHighVip, PF, OpenID, IOpenID, Invkey, Itime, LoginDevice, LastModify, CreateTime, CreateIP,  (CASE  WHEN NoSpeak=0  THEN 0 when NoSpeak>=1 then 1  ELSE NoSpeak END) as NoSpeak, (CASE  WHEN IsFreeze=0  THEN 0 when IsFreeze>=1 then 1  ELSE IsFreeze END) as IsFreeze, SafeBox, SafePwd, CreateMac from Role where NoSpeak = 1 and ID in ( select ID from Role where ID = '{2}' or Account='{2}' or NickName='{2}') order by ID desc limit {0}, {1}", pq.StartRowNumber, pq.PageSize, msv.Value);
                     }
 
@@ -228,8 +233,8 @@ select FreezeTime,SpeakTime,ID, Account, Email, Tel, TrueName, Identity, Agent, 
                     {
                         pq.RecordCount = DAL.PagedListDAL<Role>.GetRecordCount(string.Format(@"select count(0) from Role where IsFreeze !=0 and ID in (select ID from Role where ID = '{0}' or Account='{0}' or NickName='{0}' )", msv.Value), sqlconnectionString);
                         pq.Sql = string.Format(@"
-update 515game.Role set IsFreeze = 0  where  (ID = '{2}' ) and FreezeTime <='" + DateTime.Now + @"';
-update 515game.Role set NoSpeak = 0  where (ID = '{2}' ) and SpeakTime <='" + DateTime.Now + @"';
+update "+ database1 + @".Role set IsFreeze = 0  where  (ID = '{2}' ) and FreezeTime <='" + DateTime.Now + @"';
+update "+ database1 + @".Role set NoSpeak = 0  where (ID = '{2}' ) and SpeakTime <='" + DateTime.Now + @"';
 select FreezeTime,SpeakTime,ID, Account, Email, Tel, TrueName, Identity, Agent, Password, Gold, Diamond, Zicard, Telfare, MaxNoble, ShowGift, NickName, Gender, Country, Province, City, FigureUrl, IsYellowVip, IsYellowVipYear, YellowVipLevel, IsYellowHighVip, PF, OpenID, IOpenID, Invkey, Itime, LoginDevice, LastModify, CreateTime, CreateIP,  (CASE  WHEN NoSpeak=0  THEN 0 when NoSpeak>=1 then 1  ELSE NoSpeak END) as NoSpeak,(CASE  WHEN IsFreeze=0  THEN 0 when IsFreeze>=1 then 1  ELSE IsFreeze END) as IsFreeze, SafeBox, SafePwd, CreateMac from Role where IsFreeze !=0 and ID in (select ID from Role where ID = '{2}' or Account='{2}' or NickName='{2}') order by ID desc limit {0}, {1}", pq.StartRowNumber, pq.PageSize, msv.Value);
                     }
                     break;
@@ -238,8 +243,8 @@ select FreezeTime,SpeakTime,ID, Account, Email, Tel, TrueName, Identity, Agent, 
                     {
                         pq.RecordCount = DAL.PagedListDAL<Role>.GetRecordCount(string.Format(@"select count(0) from Role where Account = '{0}'", msv.Value), sqlconnectionString);
                         pq.Sql = string.Format(@"
-update 515game.Role set IsFreeze = 0  where   Account='{2}'  and FreezeTime <='" + DateTime.Now + @"';
-update 515game.Role set NoSpeak = 0  where  Account='{2}'  and SpeakTime <='" + DateTime.Now + @"';
+update "+ database1 + @".Role set IsFreeze = 0  where   Account='{2}'  and FreezeTime <='" + DateTime.Now + @"';
+update "+ database1 + @".Role set NoSpeak = 0  where  Account='{2}'  and SpeakTime <='" + DateTime.Now + @"';
 
 select FreezeTime,SpeakTime,ID, Account, Email, Tel, TrueName, Identity, Agent, Password, Gold, Diamond, Zicard, Telfare, MaxNoble, ShowGift, NickName, Gender, Country, Province, City, FigureUrl, IsYellowVip, IsYellowVipYear, YellowVipLevel, IsYellowHighVip, PF, OpenID, IOpenID, Invkey, Itime, LoginDevice, LastModify, CreateTime, CreateIP,  (CASE  WHEN NoSpeak=0  THEN 0 when NoSpeak>=1 then 1  ELSE NoSpeak END) as NoSpeak,(CASE  WHEN IsFreeze=0  THEN 0 when IsFreeze>=1 then 1  ELSE IsFreeze END) as IsFreeze, SafeBox, SafePwd, CreateMac from Role where Account = '{2}' order by ID desc limit {0}, {1}", pq.StartRowNumber, pq.PageSize, msv.Value);
                     }
@@ -254,8 +259,8 @@ select FreezeTime,SpeakTime,ID, Account, Email, Tel, TrueName, Identity, Agent, 
                     {
                         pq.RecordCount = DAL.PagedListDAL<Role>.GetRecordCount(string.Format(@"select count(0) from Role where locate ('{0}' ,NickName) > 0", msv.Value), sqlconnectionString);
                         pq.Sql = string.Format(@"
-update 515game.Role set IsFreeze = 0  where   locate ('{2}' ,NickName) > 0  and FreezeTime <='" + DateTime.Now + @"';
-update 515game.Role set NoSpeak = 0  where  locate ('{2}' ,NickName) > 0  and SpeakTime <='" + DateTime.Now + @"';
+update "+ database1 + @".Role set IsFreeze = 0  where   locate ('{2}' ,NickName) > 0  and FreezeTime <='" + DateTime.Now + @"';
+update "+ database1 + @".Role set NoSpeak = 0  where  locate ('{2}' ,NickName) > 0  and SpeakTime <='" + DateTime.Now + @"';
 
 select FreezeTime,SpeakTime,ID, Account, Email, Tel, TrueName, Identity, Agent, Password, Gold, Diamond, Zicard, Telfare, MaxNoble, ShowGift, NickName, Gender, Country, Province, City, FigureUrl, IsYellowVip, IsYellowVipYear, YellowVipLevel, IsYellowHighVip, PF, OpenID, IOpenID, Invkey, Itime, LoginDevice, LastModify, CreateTime, CreateIP,  (CASE  WHEN NoSpeak=0  THEN 0 when NoSpeak>=1 then 1  ELSE NoSpeak END) as NoSpeak,(CASE  WHEN IsFreeze=0  THEN 0 when IsFreeze>=1 then 1  ELSE IsFreeze END) as IsFreeze, SafeBox, SafePwd, CreateMac from Role where locate ('{2}' ,NickName) > 0 order by ID desc limit {0}, {1}", pq.StartRowNumber, pq.PageSize, msv.Value);
                     }
@@ -271,8 +276,8 @@ select FreezeTime,SpeakTime,ID, Account, Email, Tel, TrueName, Identity, Agent, 
                     {
                         pq.RecordCount = DAL.PagedListDAL<Role>.GetRecordCount(string.Format(@"select count(0) from Role where ID = {0}", msv.Value), sqlconnectionString);
                         pq.Sql = string.Format(@"
-update 515game.Role set IsFreeze = 0  where    ID = {2}  and FreezeTime <='" + DateTime.Now + @"';
-update 515game.Role set NoSpeak = 0  where   ID = {2}  and SpeakTime <='" + DateTime.Now + @"';
+update "+ database1 + @".Role set IsFreeze = 0  where    ID = {2}  and FreezeTime <='" + DateTime.Now + @"';
+update "+ database1 + @".Role set NoSpeak = 0  where   ID = {2}  and SpeakTime <='" + DateTime.Now + @"';
 
 select FreezeTime,SpeakTime,ID, Account, Email, Tel, TrueName, Identity, Agent, Password, Gold, Diamond, Zicard, Telfare, MaxNoble, ShowGift, NickName, Gender, Country, Province, City, FigureUrl, IsYellowVip, IsYellowVipYear, YellowVipLevel, IsYellowHighVip, PF, OpenID, IOpenID, Invkey, Itime, LoginDevice, LastModify, CreateTime, CreateIP,  (CASE  WHEN NoSpeak=0  THEN 0 when NoSpeak>=1 then 1  ELSE NoSpeak END) as NoSpeak,(CASE  WHEN IsFreeze=0  THEN 0 when IsFreeze>=1 then 1  ELSE IsFreeze END) as IsFreeze, SafeBox, SafePwd, CreateMac from Role where ID = {2} order by ID desc limit {0}, {1}", pq.StartRowNumber, pq.PageSize, msv.Value);
                     }
@@ -303,7 +308,7 @@ select FreezeTime,SpeakTime,ID, Account, Email, Tel, TrueName, Identity, Agent, 
 
         public static int GetRecordCount(int id)
         {
-            return DAL.PagedListDAL<GameUserInfo>.GetRecordCount(string.Format(@"select count(0) from 515game.Role where Agent = {0}", id));
+            return DAL.PagedListDAL<GameUserInfo>.GetRecordCount(string.Format(@"select count(0) from gamedata.Role where Agent = {0}", id));
         }
 
         public static PagedList<Role> GetListByPage(int page, int id)
@@ -407,7 +412,7 @@ select FreezeTime,SpeakTime,ID, Account, Email, Tel, TrueName, Identity, Agent, 
             {
                 pq.RecordCount = DAL.PagedListDAL<Role>.GetRecordCount(string.Format(@"select count(0) from Role where CreateTime >= '{0}' and CreateTime<'{1}' and Agent in ({2})", bdv.StartDate, bdv.ExpirationDate, bdv.UserList), sqlconnectionString);
                 pq.Sql = string.Format(@"select ID, Account, Email, Tel, TrueName, Identity, Agent, Password, Gold, Diamond, Zicard, Telfare, MaxNoble, ShowGift, NickName, Gender, Country, Province, City, FigureUrl, IsYellowVip, IsYellowVipYear, YellowVipLevel, IsYellowHighVip, PF, OpenID, IOpenID, Invkey, Itime, LoginDevice, LastModify, CreateTime, CreateIP, NoSpeak, (CASE  WHEN IsFreeze=0  THEN 0 when IsFreeze>=1 then 1  ELSE IsFreeze END) as IsFreeze, SafeBox, SafePwd, CreateMac, ClubID 
-                                     from Role where CreateTime >= '{2}' and CreateTime<'{3}' and Agent in ({4}) and order by CreateTime desc ", pq.StartRowNumber, pq.PageSize, bdv.StartDate, bdv.ExpirationDate, bdv.UserList);
+                                     from Role where CreateTime >= '{2}' and CreateTime<'{3}' and Agent in ({4})  order by CreateTime desc ", pq.StartRowNumber, pq.PageSize, bdv.StartDate, bdv.ExpirationDate, bdv.UserList);
             }
             else {
                 pq.RecordCount = DAL.PagedListDAL<Role>.GetRecordCount(string.Format(@"select count(0) from Role where CreateTime >= '{0}' and CreateTime<'{1}' and Agent!=10010", bdv.StartDate, bdv.ExpirationDate), sqlconnectionString);

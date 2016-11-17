@@ -18,6 +18,7 @@
         totalCount = ViewData["totalData"].ToString();
     }
 
+    string Coin = MWeb.Controllers.ManageController.Coin;
 }
 
 <div id="content">
@@ -30,7 +31,7 @@
                     <label class="label"> 流水类型</label>
                     <label class="select">
                         <select id="Gametype" name="Gametype" onchange="changType()">
-                            <option value="0" @Html.GetOptionsSelectedAttr(type, 0)>游戏币&五币</option>
+                            <option value="0" @Html.GetOptionsSelectedAttr(type, 0)>游戏币&@(Coin)</option>
                             <option value="1" @Html.GetOptionsSelectedAttr(type, 1)>积分</option>
                             <option value="2" @Html.GetOptionsSelectedAttr(type, 2)>经验</option>
                             <option value="3" @Html.GetOptionsSelectedAttr(type, 3)>道具</option>

@@ -11,6 +11,7 @@ using System.Web.SessionState;
 using GL.Data.BLL;
 using System.Collections;
 using MWeb.Models;
+using GL.Common;
 
 namespace MWeb
 {
@@ -60,7 +61,7 @@ namespace MWeb
 
           
 
-            OperLog("/"+controllerName + "/" + actionName, filterContext.HttpContext.Request, userName);
+            OperLog("/"+controllerName + "/" + actionName, filterContext, userName);
 
 
 
@@ -123,44 +124,64 @@ namespace MWeb
         }
 
 
-        private void OperLog(string Action,HttpRequestBase Request,string UserName) {
+        private void OperLog(string Action, ActionExecutingContext filterContext, string UserName) {
 
-            List<string> querystringlist = new List<string>();
-            if (Request.QueryString.Count > 0)
+            HttpRequestBase Request = filterContext.HttpContext.Request;
+            string queryvalues = "";
+            if (!((filterContext.RouteData.Values["queryvalues"] == null) || string.IsNullOrWhiteSpace(filterContext.RouteData.Values["queryvalues"].ToString())))
             {
-                foreach (string key in Request.QueryString)
+                queryvalues = filterContext.RouteData.Values["queryvalues"].ToString();
+            }
+
+            Dictionary<string, string> queryvalueslist = Utils.GetDicFormUrl(queryvalues);
+            if (filterContext.HttpContext.Request.QueryString.Count > 0)
+            {
+                foreach (string key in filterContext.HttpContext.Request.QueryString)
                 {
-                    querystringlist.Add(key);
+                    queryvalueslist.Add(key, filterContext.HttpContext.Request.QueryString[key]);
                 }
 
             }
-            if (Request.Form.Count > 0)
+            if (filterContext.HttpContext.Request.Form.Count > 0)
             {
-                foreach (string key in Request.Form)
+                foreach (string key in filterContext.HttpContext.Request.Form)
                 {
-                    querystringlist.Add(key);
+                    queryvalueslist.Add(key, filterContext.HttpContext.Request.Form[key]);
                 }
+
             }
+
             string param = "";
-            for (int i=0;i<querystringlist.Count();i++)
+            string value = "";
+            int i = 0;
+            foreach (var item in queryvalueslist)
             {
-                string item = querystringlist[i];
                 if (i == 0)
                 {
-                    param += "%%"+item +":%%";
+                    param += "%%" + item.Key + ":%%";
+                    value += item.Key + ":" + item.Value;
                 }
-                else {
-                    param += (  "%%%"+item+":%%%"  );
+                else
+                {
+                    param += ("%%%" + item.Key + ":%%%");
+                    value += "," + item.Key + ":" + item.Value ;
                 }
+                i++;
             }
+
+            string Method = Request.HttpMethod;
 
 
             //// 'Channels:%StartDate:%%ExpirationDate:%'
+            if (value.Length > 200)
+            {
+                OperLogBLL.WriteOperLog(Action, param, UserName, Request.UserHostAddress);
+            }
+            else { 
 
+                OperLogBLL.WriteOperLog(Action, param, value, UserName, Request.UserHostAddress);
 
-            OperLogBLL.WriteOperLog(Action, param, UserName, Request.UserHostAddress);
-
-
+            }
 
 
 

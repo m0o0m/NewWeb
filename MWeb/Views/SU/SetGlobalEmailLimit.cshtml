@@ -5,7 +5,7 @@
 @{
 
     string[] limits = Model.AccessNo.Split(',');
-
+    string Coin = MWeb.Controllers.SUController.Coin;
 }
 
 
@@ -39,7 +39,7 @@
 
                           
                                 <section class="col col-3" id="sec2">
-                                    <label>五币额度</label>
+                                    <label>@(Coin)额度</label>
                                     <label class="input">
                                         <input type="text" id="wubi" name="wubi" class="span4" value="@limits[1]" />
                                     </label>

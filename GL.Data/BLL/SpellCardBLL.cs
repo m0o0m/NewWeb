@@ -15,14 +15,19 @@ namespace GL.Data.BLL
     {
         public static readonly string sqlconnectionString = PubConstant.GetConnectionString("ConnectionStringForGameRecord");
 
+        public static readonly string database1 = PubConstant.GetConnectionString("database1");
+        public static readonly string database2 = PubConstant.GetConnectionString("database2");
+        public static readonly string database3 = PubConstant.GetConnectionString("database3");
+
+
         public static PagedList<SpellCard> GetListByPage(GameRecordView bdv)
         {
             PagerQuery pq = new PagerQuery();
             pq.CurrentPage = bdv.Page;
             pq.PageSize = 10;
 
-            pq.RecordCount = PagedListDAL<SpellCard>.GetRecordCount(string.Format(@"select count(0) from 515game.SpellCardRecord where  Time>='"+bdv.StartDate+"' and Time<'"+bdv.ExpirationDate+"' {0} ", string.IsNullOrEmpty(bdv.SearchExt)?"": " and  PlayerID='" + bdv.SearchExt + "'"), sqlconnectionString);
-            pq.Sql = string.Format(@"select * from 515game.SpellCardRecord where Time>='"+bdv.StartDate+"' and Time<'"+bdv.ExpirationDate+"'  {2}  order by Time desc limit {0}, {1}", pq.StartRowNumber, pq.PageSize, string.IsNullOrEmpty(bdv.SearchExt) ? "" : " and PlayerID='" + bdv.SearchExt + "'");
+            pq.RecordCount = PagedListDAL<SpellCard>.GetRecordCount(string.Format(@"select count(0) from "+ database1 + @".SpellCardRecord where  Time>='"+bdv.StartDate+"' and Time<'"+bdv.ExpirationDate+"' {0} ", string.IsNullOrEmpty(bdv.SearchExt)?"": " and  PlayerID='" + bdv.SearchExt + "'"), sqlconnectionString);
+            pq.Sql = string.Format(@"select * from "+ database1 + @".SpellCardRecord where Time>='"+bdv.StartDate+"' and Time<'"+bdv.ExpirationDate+"'  {2}  order by Time desc limit {0}, {1}", pq.StartRowNumber, pq.PageSize, string.IsNullOrEmpty(bdv.SearchExt) ? "" : " and PlayerID='" + bdv.SearchExt + "'");
 
 
             PagedList<SpellCard> obj = new PagedList<SpellCard>(PagedListDAL<SpellCard>.GetListByPage(pq, sqlconnectionString), pq.CurrentPage, pq.PageSize, pq.RecordCount);

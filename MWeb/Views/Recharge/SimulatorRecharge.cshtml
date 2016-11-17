@@ -9,7 +9,7 @@
 
     ViewBag.Format = "yyyy-MM-dd";
 
-
+    string Coin = MWeb.Controllers.RechargeController.Coin;
 }
 
 
@@ -33,7 +33,7 @@
                         @Html.DropDownListFor(m => m.Type, new List<SelectListItem>
                 {
                     new SelectListItem { Text= "游戏币", Value = "1" },
-                     new SelectListItem { Text= "五币", Value = "2" },
+                     new SelectListItem { Text= Coin, Value = "2" },
                       new SelectListItem { Text= "首冲", Value = "3" }
                 })<i></i>
                     </label>

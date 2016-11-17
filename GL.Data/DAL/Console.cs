@@ -14,6 +14,11 @@ namespace GL.Data.DAL
     public class Console
     {
         public static readonly string sqlconnectionString = PubConstant.GetConnectionString("ConnectionStringForGameRecord");
+
+        public static readonly string database1 = PubConstant.GetConnectionString("database1");
+        public static readonly string database2 = PubConstant.GetConnectionString("database2");
+        public static readonly string database3 = PubConstant.GetConnectionString("database3");
+
         internal static int AddModel(ModelBaseData model)
         {
             using (var cn = new MySqlConnection(sqlconnectionString))
@@ -21,13 +26,13 @@ namespace GL.Data.DAL
                 if(model.ID == 0)
                 {
                     cn.Open();
-                    int i = cn.Execute(@"insert into record.S_DataModel(ModelName ,Para ,Model ,Createtime ) select @ModelName ,@Para ,@Model ,now();", model);
+                    int i = cn.Execute(@"insert into "+ database3 + @".S_DataModel(ModelName ,Para ,Model ,Createtime ) select @ModelName ,@Para ,@Model ,now();", model);
                     cn.Close();
                     return i;
                 }
                 else { 
                     cn.Open();
-                    int i = cn.Execute(@"update record.S_DataModel set ModelName = @ModelName ,Para = @Para ,Model = @Model ,Createtime = now() where id = @ID ;", model);
+                    int i = cn.Execute(@"update "+ database3 + @".S_DataModel set ModelName = @ModelName ,Para = @Para ,Model = @Model ,Createtime = now() where id = @ID ;", model);
                     cn.Close();
                     return i;
                 }
@@ -43,7 +48,7 @@ namespace GL.Data.DAL
                 cn.Open();
                 //记录查询次数
                
-                IEnumerable<CommonIDName> i = cn.Query<CommonIDName>("select DISTINCT Proj as Name from record.BG_ScaleRecord");
+                IEnumerable<CommonIDName> i = cn.Query<CommonIDName>("select DISTINCT Proj as Name from "+ database3 + @".BG_ScaleRecord");
                 cn.Close();
                 return i;
             }

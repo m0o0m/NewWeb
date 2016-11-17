@@ -15,7 +15,10 @@
         Layout = "~/Views/Shared/_LayoutNoJQ.cshtml";
     }
 
+    string Coin = MWeb.Controllers.ManageController.Coin;
+
 }
+
 <link rel="stylesheet" type="text/css" media="screen" href="~/js/SmartAdmin/css/bootstrap.min.css">
 
 <link rel="stylesheet" type="text/css" media="screen" href="~/js/SmartAdmin/css/smartadmin-production.css">
@@ -210,7 +213,7 @@
                                         }
                                         @if (dic.ContainsKey(2))
                                         {
-                                            <option value="2">五币</option>
+                                            <option value="2">@(Coin)</option>
                                         }
                                         @if (dic.ContainsKey(3))
                                         {
@@ -615,6 +618,18 @@
                                     break;
                                 case -303:
                                     alert("无权限");
+                                    break;
+
+                                case -515:
+                                    alert("您的用户没有分配库存组，无法邮件发送游戏币");
+                                    break;
+
+                                case -516:
+                                    alert("配置参数有误,请联系开发人员");
+                                    break;
+
+                                case -517:
+                                    alert("库存值余额不足,请购买游戏币库存！");
                                     break;
                                 default:
                                     alert("发送失败，请稍后再试");

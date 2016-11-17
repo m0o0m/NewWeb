@@ -16,6 +16,8 @@ namespace GL.Data.Model
         public ulong CreateTime { get; set; }
         public string CheckInfo { get; set; }
 
+        public int AgentID { get; set; }
+
 
     }
 

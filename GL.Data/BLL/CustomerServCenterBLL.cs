@@ -1,4 +1,5 @@
-﻿using GL.Common;
+﻿using GL.Command.DBUtility;
+using GL.Common;
 using GL.Data.Model;
 using GL.Data.View;
 using System;
@@ -12,6 +13,12 @@ namespace GL.Data.BLL
 {
     public class CustomerServCenterBLL
     {
+
+        public static readonly string database1 = PubConstant.GetConnectionString("database1");
+        public static readonly string database2 = PubConstant.GetConnectionString("database2");
+        public static readonly string database3 = PubConstant.GetConnectionString("database3");
+
+
         public static IEnumerable<CSCModel> GetList(int GUUserID)
         {
             IEnumerable<CustomerServCenter> csc = DAL.CustomerServCenterDAL.GetList(GUUserID);
@@ -51,7 +58,7 @@ namespace GL.Data.BLL
             pq.RecordCount = DAL.PagedListDAL<CustomerServCenter>.GetRecordCount(@"select count(0) from CustomerServCenter where CSCSubId = 0");
             pq.Sql = string.Format(@"
 select CSCMainID,CSCSubId,GUUserID,CSCTime,CSCTitle,CSCType,CSCContent,CSCState,GUName,GUType,IFNULL(CSCUpdateTime,CSCTime)  as CSCUpdateTime
-from GServerInfo.CustomerServCenter where CSCSubId = 0 order by CSCUpdateTime desc limit {0}, {1}", pq.StartRowNumber, pq.PageSize);
+from "+database2+@".CustomerServCenter where CSCSubId = 0 order by CSCUpdateTime desc limit {0}, {1}", pq.StartRowNumber, pq.PageSize);
 
             PagedList<CustomerServCenter> csc = new PagedList<CustomerServCenter>(DAL.PagedListDAL<CustomerServCenter>.GetListByPage(pq), pq.CurrentPage, pq.PageSize, pq.RecordCount);
             return csc;

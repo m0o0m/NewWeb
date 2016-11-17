@@ -9,12 +9,16 @@ using Webdiyer.WebControls.Mvc;
 
 
 using GL.Common;
+using GL.Command.DBUtility;
 
 namespace MWeb.Controllers
 {
     [Authorize]
     public class RechargeController : Controller
     {
+
+        public static readonly string Coin = PubConstant.GetConnectionString("coin");
+
         // GET: Recharge
         [QueryValues]
         public ActionResult List(Dictionary<string, string> queryvalues)

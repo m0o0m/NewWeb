@@ -1,5 +1,5 @@
 
-ƒC
+ÎR
 Service.protoProtoCmd.Service"$
 BGSetZfbPotOpenReq
 isOpen ("5
@@ -279,7 +279,28 @@ currStatus ("/
 BGSetMidautumnFestivalOpenRes
 suc (
 
-currStatus ("&
+currStatus ("
+
+DbPvpCfg_S
+suc ("=
+ArcadeGameStock_C
+mod (
+type (
+value (" 
+ArcadeGameStock_S
+suc ("7
+ShuiHuPot_C
+mod (
+type (
+value ("
+ShuiHuPot_S
+suc (":
+FruiteBigPot_C
+mod (
+type (
+value ("
+FruiteBigPot_S
+suc ("&
 QueryRobotStatu
 module_type ("E
 ModifyRobotConfig
@@ -326,7 +347,77 @@ game_statu (2.ProtoCmd.Service.GameStatu5
 user_id (
 state (
 room_id (
-	room_type (*Ú	
+	room_type ("‘
+UserScoreAward
+tLastGetAwardTime (
+tFinalGetScoreTime (
+tLastGetScoreTime (
+dwLastGetScore (
+dwNowGetScore ("š
+UserSign
+wConti (
+tlastLoginTime (
+tSignLuckTime (
+tSignAwardTime (
+	byStatus0 (
+	byStatus1 (
+	byStatus2 ("Í
+
+UserExData
+
+wMaxFriend (
+lastLoginTime (
+lastMoneyTime (
+finalGetScoreTime (
+	lastMoney (
+nowMoney (
+maxCard (,
+listInfo (2.ProtoCmd.Service.GameInfo"N
+GameInfo
+GameID (
+dwWin (
+dwTotal (
+
+maxWinChip ("g
+SpellCardInfo
+time (
+
+join_times (
+	win_times (
+	rob_times (
+getBox ("y
+	toolsData
+tools_id (
+bmark (
+get_time (
+	last_time (
+	use_times (
+total_times (";
+	ToolsInfo.
+	listTools (2.ProtoCmd.Service.toolsData"]
+VipInfo
+grade (
+current (
+last_get ( 
+last_levelup_award_level (">
+	LevelInfo
+level (
+exp (
+reaward_level ("
+VipCard
+tEndTime ("Œ
+BExtInfo4
+
+scoreAward (2 .ProtoCmd.Service.UserScoreAward,
+userSign (2.ProtoCmd.Service.UserSign0
+
+userExData (2.ProtoCmd.Service.UserExData2
+	spellCard (2.ProtoCmd.Service.SpellCardInfo.
+	toolsInfo (2.ProtoCmd.Service.ToolsInfo*
+vipInfo (2.ProtoCmd.Service.VipInfo.
+	levelInfo (2.ProtoCmd.Service.LevelInfo*
+vipCard (2.ProtoCmd.Service.VipCard*Ë
+
 
 ServiceCmd
 SC_BEGIN
@@ -379,8 +470,13 @@ ServiceCmd
 SC_MOBILE_SWITCHS=
 SC_MOBILE_SWITCH_OPERATOR>
 SC_SET_Herocraft_Twice_OPEN@"
-SC_SET_MIDAUTUMN_FESTIVAL_OPEN?
-SC_TOTALÈ*ì	
+SC_SET_MIDAUTUMN_FESTIVAL_OPEN?
+SC_NTF_UPDATE_DBPVPCFGA!
+SC_NTF_UPDATE_ARCADEGAMESTOCKB
+SC_NTF_UPDATE_SHUIHUPOTC
+SC_FRUITEBIGPOTD
+SC_TOTALÈ*Ý
+
 	CenterCmd
 CS_BEGIN
 CS_CONNECT_ERROR
@@ -432,7 +528,11 @@ ServiceCmd
 CS_MOBILE_SWITCHS=
 CS_MOBILE_SWITCH_OPERATOR>
 CS_SET_Herocraft_Twice_OPEN@"
-CS_SET_MIDAUTUMN_FESTIVAL_OPEN?
+CS_SET_MIDAUTUMN_FESTIVAL_OPEN?
+CS_NTF_UPDATE_DBPVPCFGA!
+CS_NTF_UPDATE_ARCADEGAMESTOCKB
+CS_NTF_UPDATE_SHUIHUPOTC
+CS_FRUITEBIGPOTD
 CS_TOTALd* 
 
 ModuleType

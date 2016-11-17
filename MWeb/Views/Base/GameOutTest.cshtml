@@ -17,6 +17,9 @@
 
     List<GameOutput> bdl = (List<GameOutput>)Model.BaseDataList;
 
+
+    string Coin = MWeb.Controllers.BaseController.Coin;
+
 }
 <style type="text/css">
     /* 所有class为menu的div中的ul中的li样式 */
@@ -147,10 +150,10 @@
                                             <th>游戏携带金额 &nbsp;<span id="refresh" class="" data-title="refresh" rel="tooltip" data-placement="bottom" data-original-title="<i class=''></i> 德州扑克买入、概率游戏申请上庄，下注，坐庄金额" data-html="true" data-reset-msg="Would you like to RESET all your saved widgets and clear LocalStorage?"><i class="fa fa-question "></i></span> </span></th>
                                             <th>德州007赢利 &nbsp;<span id="refresh" class="" data-title="refresh" rel="tooltip" data-placement="bottom" data-original-title="<i class=''></i> 德州扑克007的赢利总额，不区分渠道" data-html="true" data-reset-msg="Would you like to RESET all your saved widgets and clear LocalStorage?"><i class="fa fa-question "></i></span> </span></th>
                                             @*<th>充值游戏币 &nbsp;<span id="refresh" class="" data-title="refresh" rel="tooltip" data-placement="bottom" data-original-title="<i class=''></i> 充值游戏币" data-html="true" data-reset-msg="Would you like to RESET all your saved widgets and clear LocalStorage?"><i class="fa fa-question "></i></span> </span></th>*@
-                                            <th>系统总五币 &nbsp;<span id="refresh" class="" data-title="refresh" rel="tooltip" data-placement="bottom" data-original-title="<i class=''></i> 统计所有用户携带五币" data-html="true" data-reset-msg="Would you like to RESET all your saved widgets and clear LocalStorage?"><i class="fa fa-question "></i></span> </span></th>
-                                            <th>当日产出五币 &nbsp;<span id="refresh" class="" data-title="refresh" rel="tooltip" data-placement="bottom" data-original-title="<i class=''></i> 当日游戏中产出的五币" data-html="true" data-reset-msg="Would you like to RESET all your saved widgets and clear LocalStorage?"><i class="fa fa-question "></i></span> </span></th>
-                                            <th>当日消耗五币 &nbsp;<span id="refresh" class="" data-title="refresh" rel="tooltip" data-placement="bottom" data-original-title="<i class=''></i> 当日游戏中消耗的五币" data-html="true" data-reset-msg="Would you like to RESET all your saved widgets and clear LocalStorage?"><i class="fa fa-question "></i></span> </span></th>
-                                            <th>充值五币 &nbsp;<span id="refresh" class="" data-title="refresh" rel="tooltip" data-placement="bottom" data-original-title="<i class=''></i> 当日充值五币的总额" data-html="true" data-reset-msg="Would you like to RESET all your saved widgets and clear LocalStorage?"><i class="fa fa-question "></i></span> </span></th>
+                                            <th>系统总@(Coin)&nbsp;<span id="refresh" class="" data-title="refresh" rel="tooltip" data-placement="bottom" data-original-title="<i class=''></i> 统计所有用户携带@(Coin)" data-html="true" data-reset-msg="Would you like to RESET all your saved widgets and clear LocalStorage?"><i class="fa fa-question "></i></span> </span></th>
+                                            <th>当日产出@(Coin)&nbsp;<span id="refresh" class="" data-title="refresh" rel="tooltip" data-placement="bottom" data-original-title="<i class=''></i> 当日游戏中产出的@(Coin)" data-html="true" data-reset-msg="Would you like to RESET all your saved widgets and clear LocalStorage?"><i class="fa fa-question "></i></span> </span></th>
+                                            <th>当日消耗@(Coin)&nbsp;<span id="refresh" class="" data-title="refresh" rel="tooltip" data-placement="bottom" data-original-title="<i class=''></i> 当日游戏中消耗的@(Coin)" data-html="true" data-reset-msg="Would you like to RESET all your saved widgets and clear LocalStorage?"><i class="fa fa-question "></i></span> </span></th>
+                                            <th>充值@(Coin)&nbsp;<span id="refresh" class="" data-title="refresh" rel="tooltip" data-placement="bottom" data-original-title="<i class=''></i> 当日充值@(Coin)的总额" data-html="true" data-reset-msg="Would you like to RESET all your saved widgets and clear LocalStorage?"><i class="fa fa-question "></i></span> </span></th>
                                             <th></th>
                                         </tr>
                                     </thead>
@@ -167,7 +170,7 @@
                                         {
                                             <tr>
                                                 <td>@item.date.ToString(ViewBag.Format)</td>
-                                                <td>@{var all = item.systemBargainingChip + item.chipPot + item.ChipGame + item.systemFishChip;}@all.ToString("#,0.")</td>
+                                                <td>@{var all = item.systemBargainingChip + item.chipPot + item.ChipGame + item.systemFishChip+item.ChipKuCun;}@all.ToString("#,0.")</td>
                                                 <td>@item.ChipOutput.ToString("#,0.")</td>
                                                 <td>@item.ChipConsume.ToString("#,0.")</td>
                                                 <td>@item.systemFishChip.ToString("#,0.")</td>

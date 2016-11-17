@@ -14,6 +14,9 @@ namespace GL.Data.BLL
     public class LoginRecordBLL
     {
         public static readonly string sqlconnectionString = PubConstant.GetConnectionString("ConnectionStringForGameData");
+        public static readonly string database1 = PubConstant.GetConnectionString("database1");
+        public static readonly string database2 = PubConstant.GetConnectionString("database2");
+        public static readonly string database3 = PubConstant.GetConnectionString("database3");
 
         public static PagedList<LoginRecord> GetListByPage(int page, ValueView vv)
         {
@@ -23,9 +26,9 @@ namespace GL.Data.BLL
 
             if (vv.Type == seachType.同IP登陆玩家)
             {
-                pq.RecordCount = DAL.PagedListDAL<LoginRecord>.GetRecordCount(string.Format(@"select count(1) from(select ip from 515game.V_LoginRecord  where LoginTime >= '{0}' and LoginTime < '{1}' group by ip ,date(LoginTime) having count(distinct userid) > 3 ) t", vv.StartDate, vv.ExpirationDate), sqlconnectionString);
+                pq.RecordCount = DAL.PagedListDAL<LoginRecord>.GetRecordCount(string.Format(@"select count(1) from(select ip from "+ database1 + @".V_LoginRecord  where LoginTime >= '{0}' and LoginTime < '{1}' group by ip ,date(LoginTime) having count(distinct userid) > 3 ) t", vv.StartDate, vv.ExpirationDate), sqlconnectionString);
                 pq.Sql = string.Format(
-                    @"select ip as IP ,count(distinct userid) as Acc ,date(LoginTime) as LoginTime ,group_concat(distinct userid separator '_') as UserIDS ,-1 Flag from 515game.V_LoginRecord where LoginTime >= '{3}' and LoginTime < '{4}' group by ip ,date(LoginTime) having count(distinct userid) > 3 order by LoginTime ,Acc desc limit {0}, {1}"
+                    @"select ip as IP ,count(distinct userid) as Acc ,date(LoginTime) as LoginTime ,group_concat(distinct userid separator '_') as UserIDS ,-1 Flag from "+ database1 + @".V_LoginRecord where LoginTime >= '{3}' and LoginTime < '{4}' group by ip ,date(LoginTime) having count(distinct userid) > 3 order by LoginTime ,Acc desc limit {0}, {1}"
                     , pq.StartRowNumber, pq.PageSize, vv.Value, vv.StartDate, vv.ExpirationDate);
             }
             else if (!string.IsNullOrEmpty(vv.Value))
@@ -96,8 +99,8 @@ namespace GL.Data.BLL
             pq.CurrentPage = vv.Page;
             pq.PageSize = 5;
 
-            pq.RecordCount = DAL.PagedListDAL<LoginRepeat>.GetRecordCount(string.Format(@"select count(1) from(select ip from 515game.V_LoginRecord  where LoginTime >= '{0}' and LoginTime < '{1}' group by ip ,date(LoginTime) having count(distinct userid) > 3 ) t", vv.StartDate, vv.ExpirationDate), sqlconnectionString);
-            pq.Sql = string.Format(@"select ip as IP ,count(distinct userid) as Account ,date(LoginTime) as LoginTime ,group_concat(distinct userid separator '_') as UserID from 515game.V_LoginRecord where LoginTime >= '{3}' and LoginTime < '{4}' group by ip ,date(LoginTime) having count(distinct userid) > 3 order by 3 ,2 desc limit {0}, {1}", pq.StartRowNumber, pq.PageSize, vv.Value, vv.StartDate, vv.ExpirationDate);
+            pq.RecordCount = DAL.PagedListDAL<LoginRepeat>.GetRecordCount(string.Format(@"select count(1) from(select ip from "+ database1 + @".V_LoginRecord  where LoginTime >= '{0}' and LoginTime < '{1}' group by ip ,date(LoginTime) having count(distinct userid) > 3 ) t", vv.StartDate, vv.ExpirationDate), sqlconnectionString);
+            pq.Sql = string.Format(@"select ip as IP ,count(distinct userid) as Account ,date(LoginTime) as LoginTime ,group_concat(distinct userid separator '_') as UserID from "+ database1 + @".V_LoginRecord where LoginTime >= '{3}' and LoginTime < '{4}' group by ip ,date(LoginTime) having count(distinct userid) > 3 order by 3 ,2 desc limit {0}, {1}", pq.StartRowNumber, pq.PageSize, vv.Value, vv.StartDate, vv.ExpirationDate);
 
             PagedList<LoginRepeat> obj = new PagedList<LoginRepeat>(DAL.PagedListDAL<LoginRepeat>.GetListByPage(pq, sqlconnectionString), pq.CurrentPage, pq.PageSize, pq.RecordCount);
             return obj;

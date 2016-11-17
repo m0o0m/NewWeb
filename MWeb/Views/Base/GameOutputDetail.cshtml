@@ -18,7 +18,7 @@
     int s = 1;
     GameOutputDetail bdl = (GameOutputDetail)Model.BaseDataList;
 
-
+    string Coin = MWeb.Controllers.BaseController.Coin;
 }
 
 
@@ -138,7 +138,7 @@
                          data-widget-sortable="false">
                         <header>
                             <span class="widget-icon"> <i class="fa fa-table"></i> </span>
-                            <h2>查看五币详细</h2>
+                            <h2>查看@(Coin)详细</h2>
                         </header>
                         <!-- widget div-->
                         <div>
@@ -157,7 +157,7 @@
                                                 <td class="span3">日期</td>
                                                 <td class="span2">@bdl.date.ToString(ViewBag.Format)</td>
                                                 <td></td>
-                                                <td class="span3">系统总五币</td>
+                                                <td class="span3">系统总@(Coin)</td>
                                                 <td class="span2">@bdl.systemDiamond.ToString("#,0.")</td>
                                                 <td></td>
                                             </tr>

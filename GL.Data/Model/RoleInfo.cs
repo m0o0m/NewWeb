@@ -44,7 +44,7 @@ namespace GL.Data.Model
         /// </summary>
         public long Gold { get; set; }
         /// <summary>
-        /// 515币
+        /// 币
         /// </summary>
         public long Diamond { get; set; }
         /// <summary>
@@ -274,7 +274,7 @@ namespace GL.Data.Model
     {
         public int dwWin;          //赢的局数
         public int dwTotal;        //玩的总局数
-        public int maxWinChip;     //最高一把赢取
+        public Int64 maxWinChip;     //最高一把赢取
     }
 
     public enum isSwitch

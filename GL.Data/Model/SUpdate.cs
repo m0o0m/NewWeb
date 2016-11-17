@@ -17,7 +17,5 @@ namespace GL.Data.Model
     public class SingleData
     {
         public object Obj { get; set; }
-
-    
     }
 }

@@ -16,21 +16,34 @@ using Webdiyer.WebControls.Mvc;
 using GL.Data.Model;
 using System.Threading;
 using MWeb.Models;
+using GL.Command.DBUtility;
 
 /// <summary>
 ///Action 的摘要说明
 /// </summary>
 public static class TaskAction
 {
-
+    public static string database3 = PubConstant.GetConnectionString("database3");
     public static void TaskRegister()
     {
+        //timerTask
 
-        /*  
-            http://localhost:25664/api/OnLinePlay/GetOnLineUser?pageSize=10&pageIndex=1
-        */
-        Thread t = new Thread(new ThreadStart(TaskAction.SetContent));
-        t.Start();
+        string timerTask = PubConstant.GetConnectionString("timerTask");
+
+
+        if (timerTask == "1")
+        {//定时器开关
+            Thread t = new Thread(new ThreadStart(TaskAction.SetContent));
+            t.Start();
+
+
+
+            Thread t2 = new Thread(new ThreadStart(TaskAction.SetContentShuihu));
+            t2.Start();
+
+
+        }
+
     }
 
   
@@ -44,9 +57,9 @@ public static class TaskAction
     public static void SetContent()
     {
      //   ILog log = LogManager.GetLogger("TaskAction");
-       // log.Info("牌局解析:进入SetContent方法" + DateTime.Now.ToString());
+     // log.Info("牌局解析:进入SetContent方法" + DateTime.Now.ToString());
 
-
+       
        
 
         while (true)
@@ -57,17 +70,20 @@ public static class TaskAction
             {
                 DateTime endTime = GetDataBaseTime();
                 //德州扑克数据解析
-                TexasGameLog(endTime);
+               TexasGameLog(endTime);
                 //中发白数据解析
                ScaleGameLog(endTime);
                 //十二生肖数据解析
                ZodiacGameLog(endTime);
                 //小马快跑数据解析
-               HorseGameLog(endTime);
+              HorseGameLog(endTime);
                 //奔驰宝马数据解析
-               CarGameLog(endTime);
+             CarGameLog(endTime);
                 //百人德州扑克数据解析
                TexProGameLog(endTime);
+                //水浒传数据解析
+                ShuihuGameLog(endTime);
+
             }
             catch
             {
@@ -99,9 +115,200 @@ public static class TaskAction
 
     }
 
+
+    public static void SetContentShuihu() {
+
+      
+
+
+
+
+
+        while (true)
+        {
+            DateTime endTime = GetDataBaseTime();
+
+
+            GetShuihuLog(endTime);
+
+
+
+
+            Thread.Sleep(5 * 60 * 1000);
+
+        }
+    }
+
+    public static void GetShuihuLog(DateTime endTime)
+    {
+        GameRecordView grv = new GameRecordView { Gametype = 1, Data = 0, UserID = 0, SearchExt = "Analyse_Shuihu", StartDate = DateTime.Now.ToString("yyyy-MM-dd 00:00:00"), ExpirationDate = endTime.ToString(), Page = 1, SeachType = (seachType)0 };
+        grv.StartDate = GameDataBLL.GetBeginTimeForGame(grv);
+        //2016-10-13 10:22:51
+
+        DateTime bCheckTime = TransStringToDateTime(grv.StartDate);
+        DateTime eCheckTime = endTime;
+
+        
+        if (DateTime.Compare(bCheckTime, eCheckTime) >= 0)
+        {
+            //开始时间比结束时间大
+            return;
+        }
+
+        DateTime chEnd = bCheckTime.AddHours(2);
+        if (endTime >= chEnd) {
+            endTime = chEnd;
+        }
+
+        //开始时间StartDate   结束时间endTime
+        //判断开始时间和结束时间是不是跨天了，如果跨天了，那么就吧结束时间修改成零点
+
+        if (bCheckTime.Year != eCheckTime.Year || bCheckTime.Month != eCheckTime.Month || bCheckTime.Day != eCheckTime.Day) {
+            //说明不是同一天,修改时间为开始时间的第二天的零点
+            endTime = TransStringToDate( bCheckTime.AddDays(1).ToString());
+            grv.ExpirationDate = endTime.ToString();
+        }
+        
+        //查询数据
+        IEnumerable<ShuihuGameRecord> data = GameDataBLL.GetListForShuihu(grv);
+
+        if (data.Count() >= 1000) {
+
+        }
+
+
+
+        List<ShuihuPot> ShuihuPotList = new List<ShuihuPot>();
+        List<ShuihuMary> ShuihuMaryList = new List<ShuihuMary>();
+        foreach (ShuihuGameRecord item in data)
+        {
+            //彩池解析
+            ShuihuPot shuihuPot = new ShuihuPot();
+            string potDetail = item.PotDetail;
+            if (!string.IsNullOrEmpty(potDetail)) {
+                string[] potDetails = potDetail.Split(',');
+                shuihuPot.BeforeGold = Convert.ToInt64(potDetails[0]);
+                shuihuPot.Board = item.Board;
+                shuihuPot.CreateTime = item.CreateTime;
+                shuihuPot.GetGold = Convert.ToInt64(potDetails[1]);
+                shuihuPot.RoundID = item.RoundID;
+                shuihuPot.UserID = item.UserID;
+                ShuihuPotList.Add(shuihuPot);
+            }
+           
+
+
+        
+            string maryDetail = item.MaryDetail;
+         
+            if (!string.IsNullOrEmpty(maryDetail)) {
+                string[] maryTemp = maryDetail.Split('|');
+                for (int j = 1; j < maryTemp.Length; j++) {
+                    string maryLun = maryTemp[j];
+                    string[] marys = maryLun.Split(',');
+                    ShuihuMary shuihuMary = new ShuihuMary();
+                    shuihuMary.CreateTime = item.CreateTime;
+                    shuihuMary.Board = item.Board;
+                    shuihuMary.UserID = item.UserID;
+                    shuihuMary.RoundID = item.RoundID;
+                    shuihuMary.InitGold = Convert.ToInt64( marys[2]);
+                    shuihuMary.WinGold = Convert.ToInt64(marys[3]);
+                    shuihuMary.PayGold = item.Bet;
+                    ShuihuMaryList.Add(shuihuMary);
+                }
+            }
+           
+        }
+
+       
+
+
+        string sql = "";
+        if (ShuihuPotList.Count() > 0)
+        {
+            string potSql = @"
+insert into "+ database3 + ".Clearing_Shuihupot(CreateTime,Board,UserID,RoundID,BeforeGold,GetGold) ";
+            for (var i = 0; i < ShuihuPotList.Count(); i++)
+            {
+                ShuihuPot itemPot = ShuihuPotList[i];
+                if (i == ShuihuPotList.Count() - 1)
+                {
+                    potSql += "select '" + itemPot.CreateTime + "'," + itemPot.Board + "," + itemPot.UserID + "," + itemPot.RoundID + "," + itemPot.BeforeGold + "," + itemPot.GetGold + " ; ";
+                }
+                else
+                {
+                    potSql += "select '" + itemPot.CreateTime + "'," + itemPot.Board + "," + itemPot.UserID + "," + itemPot.RoundID + "," + itemPot.BeforeGold + "," + itemPot.GetGold + "  union all  ";
+                }
+            }
+
+            sql += potSql;
+        }
+
+
+        if (ShuihuMaryList.Count() > 0)
+        {
+            string marySql = @"
+insert into "+ database3 + ".Clearing_Shuihumary(CreateTime,Board,UserID,RoundID,InitGold,WinGold,PayGold) ";
+            for (var i = 0; i < ShuihuMaryList.Count(); i++)
+            {
+                ShuihuMary itemMary = ShuihuMaryList[i];
+                if (i == ShuihuMaryList.Count() - 1)
+                {
+ marySql += "select '" + itemMary.CreateTime + "'," + itemMary.Board + "," + itemMary.UserID + "," +
+                        itemMary.RoundID + "," + itemMary.InitGold + "," + itemMary.WinGold + ","+itemMary.PayGold+  "; ";
+                }
+                else
+                {
+marySql += "select '" + itemMary.CreateTime + "'," + itemMary.Board + "," + itemMary.UserID + "," +
+                                            itemMary.RoundID + "," + itemMary.InitGold + "," + itemMary.WinGold + "," + itemMary.PayGold + " union all ";
+                }
+            }
+
+            sql += marySql;
+        } 
+
+
+
+
+        if (sql != "")
+        {
+
+            GameDataBLL.Add(sql);
+
+            SystemPayBLL.ShuihuAfter(grv.StartDate,grv.ExpirationDate);
+            //ShuihuAfter
+        }
+
+        GameDataBLL.UpdateBeginTimeForGame(grv);
+        //修改时间
+
+
+
+
+
+
+    }
+
+
     private static DateTime GetDataBaseTime() {
         DateTime dt = GameDataBLL.GetDataBaseTime();
         return dt.AddSeconds(-1);
+    }
+
+    private static DateTime TransStringToDate(string time) {
+        string[] s = time.Replace("/","-").Split(' ');
+        string[] s1s = s[0].Split('-');
+        string[] s2s = s[1].Split(':');
+        return new DateTime( Convert.ToInt32(s1s[0]), Convert.ToInt32(s1s[1]), Convert.ToInt32(s1s[2]),
+           0,0,0);
+    }
+    private static DateTime TransStringToDateTime(string time)
+    {
+        string[] s = time.Replace("/","-").Split(' ');
+        string[] s1s = s[0].Split('-');
+        string[] s2s = s[1].Split(':');
+        return new DateTime(Convert.ToInt32(s1s[0]), Convert.ToInt32(s1s[1]), Convert.ToInt32(s1s[2]),
+            Convert.ToInt32(s2s[0]), Convert.ToInt32(s2s[1]), Convert.ToInt32(s2s[2]));
     }
 
     private static void TexasGameLog(DateTime endTime)
@@ -192,7 +399,7 @@ public static class TaskAction
         {
 
 
-            sql = sql + @"replace into record.Clearing_Game(
+            sql = sql + @"replace into "+ database3 + @".Clearing_Game(
 UserID ,CountDate ,
  Texas_LCount, Texas_LAward_L ,Texas_LAward_W,
 Texas_MCount,Texas_MAward_L ,Texas_MAward_W,
@@ -213,7 +420,7 @@ ifnull(b.Horse_Count,0)   ,ifnull(b.Horse_Banker,0),ifnull(b.Horse_Award_L,0)  ,
 ifnull(b.Car_Count,0)  ,ifnull(b.Car_Banker,0),ifnull(b.Car_Award_L,0),ifnull(b.Car_Award_W,0) ,
 ifnull(b.Hundred_Count,0)  ,ifnull(b.Hundred_Banker,0),ifnull(b.Hundred_Award_L,0),ifnull(b.Hundred_Award_W,0) 
 from (select " + comdata.UserID + @" userid ) a left join (
-select * from record.Clearing_Game where UserID = " + comdata.UserID + @" and CountDate = '" + comdata.CountDate + @"') b on 1 = 1;
+select * from "+ database3 + @".Clearing_Game where UserID = " + comdata.UserID + @" and CountDate = '" + comdata.CountDate + @"') b on 1 = 1;
 ";
         }
 
@@ -366,7 +573,7 @@ from (select "+comdata.UserID+ @" UserID)a
             //";
 
 
-            sql = sql + @"replace into record.Clearing_Game(
+            sql = sql + @"replace into "+ database3 + @".Clearing_Game(
 UserID ,CountDate ,
  Texas_LCount, Texas_LAward_L ,Texas_LAward_W,
 Texas_MCount,Texas_MAward_L ,Texas_MAward_W,
@@ -386,7 +593,7 @@ ifnull(b.Horse_Count,0)  ,ifnull(b.Horse_Banker,0),ifnull(b.Horse_Award_L,0)  ,i
 ifnull(b.Car_Count,0)  ,ifnull(b.Car_Banker,0),ifnull(b.Car_Award_L,0) ,ifnull(b.Car_Award_W,0) ,
 ifnull(b.Hundred_Count,0)  ,ifnull(b.Hundred_Banker,0),ifnull(b.Hundred_Award_L,0),ifnull(b.Hundred_Award_W,0) 
 from (select " + comdata.UserID + @" userid ) a left join (
-select * from record.Clearing_Game where UserID = " + comdata.UserID + @" and CountDate = '" + comdata.CountDate + @"') b on 1 = 1;
+select * from "+ database3 + @".Clearing_Game where UserID = " + comdata.UserID + @" and CountDate = '" + comdata.CountDate + @"') b on 1 = 1;
 ";
         }
 
@@ -537,7 +744,7 @@ from (select " + comdata.UserID + @" UserID)a
             //select * from record.Clearing_Game where UserID = " + comdata.UserID + @" and CountDate = '" + comdata.CountDate + @"') b on 1 = 1;
             //";
 
-            sql = sql + @"replace into record.Clearing_Game(
+            sql = sql + @"replace into "+ database3 + @".Clearing_Game(
 UserID ,CountDate ,
  Texas_LCount, Texas_LAward_L ,Texas_LAward_W,
 Texas_MCount,Texas_MAward_L ,Texas_MAward_W,
@@ -557,7 +764,7 @@ ifnull(b.Horse_Count,0)  ,ifnull(b.Horse_Banker,0),ifnull(b.Horse_Award_L,0)  ,i
 ifnull(b.Car_Count,0)  ,ifnull(b.Car_Banker,0),ifnull(b.Car_Award_L,0) ,ifnull(b.Car_Award_W,0) ,
 ifnull(b.Hundred_Count,0)  ,ifnull(b.Hundred_Banker,0),ifnull(b.Hundred_Award_L,0),ifnull(b.Hundred_Award_W,0) 
 from (select " + comdata.UserID + @" userid ) a left join (
-select * from record.Clearing_Game where UserID = " + comdata.UserID + @" and CountDate = '" + comdata.CountDate + @"') b on 1 = 1;
+select * from "+ database3 + @".Clearing_Game where UserID = " + comdata.UserID + @" and CountDate = '" + comdata.CountDate + @"') b on 1 = 1;
 ";
 
         }
@@ -706,7 +913,7 @@ from (select " + comdata.UserID + @" UserID)a
             //select * from record.Clearing_Game where UserID = " + comdata.UserID + @" and CountDate = '" + comdata.CountDate + @"') b on 1 = 1;
             //";
 
-            sql = sql + @"replace into record.Clearing_Game(
+            sql = sql + @"replace into "+ database3 + @".Clearing_Game(
 UserID ,CountDate ,
  Texas_LCount, Texas_LAward_L ,Texas_LAward_W,
 Texas_MCount,Texas_MAward_L ,Texas_MAward_W,
@@ -726,7 +933,7 @@ ifnull(b.Horse_Count,0) + " + comdata.InitialCount + @"  ,ifnull(b.Horse_Banker,
 ifnull(b.Car_Count,0)  ,ifnull(b.Car_Banker,0),ifnull(b.Car_Award_L,0) ,ifnull(b.Car_Award_W,0) ,
 ifnull(b.Hundred_Count,0)  ,ifnull(b.Hundred_Banker,0),ifnull(b.Hundred_Award_L,0),ifnull(b.Hundred_Award_W,0)
 from (select " + comdata.UserID + @" userid ) a left join (
-select * from record.Clearing_Game where UserID = " + comdata.UserID + @" and CountDate = '" + comdata.CountDate + @"') b on 1 = 1;
+select * from "+ database3 + @".Clearing_Game where UserID = " + comdata.UserID + @" and CountDate = '" + comdata.CountDate + @"') b on 1 = 1;
 ";
 
         }
@@ -841,7 +1048,7 @@ select * from record.Clearing_Game where UserID = " + comdata.UserID + @" and Co
             //select * from record.Clearing_Game where UserID = " + comdata.UserID + @" and CountDate = '" + comdata.CountDate + @"') b on 1 = 1;
             //";
 
-            sql = sql + @"replace into record.Clearing_Game(
+            sql = sql + @"replace into "+ database3 + @".Clearing_Game(
 UserID ,CountDate ,
  Texas_LCount, Texas_LAward_L ,Texas_LAward_W,
 Texas_MCount,Texas_MAward_L ,Texas_MAward_W,
@@ -861,7 +1068,7 @@ ifnull(b.Horse_Count,0)   ,ifnull(b.Horse_Banker,0),ifnull(b.Horse_Award_L,0)  ,
 ifnull(b.Car_Count,0) + " + comdata.InitialCount + @" ,ifnull(b.Car_Banker,0),ifnull(b.Car_Award_L,0)+ " + comdata.InitialL + @" ,ifnull(b.Car_Award_W,0) + " + comdata.InitialW + @", 
 ifnull(b.Hundred_Count,0)  ,ifnull(b.Hundred_Banker,0),ifnull(b.Hundred_Award_L,0),ifnull(b.Hundred_Award_W,0)
 from (select " + comdata.UserID + @" userid ) a left join (
-select * from record.Clearing_Game where UserID = " + comdata.UserID + @" and CountDate = '" + comdata.CountDate + @"') b on 1 = 1;
+select * from "+ database3 + @".Clearing_Game where UserID = " + comdata.UserID + @" and CountDate = '" + comdata.CountDate + @"') b on 1 = 1;
 ";
 
 
@@ -997,7 +1204,7 @@ from (select " + comdata.UserID + @" UserID)a
             //";
 
 
-            sql = sql + @"replace into record.Clearing_Game(
+            sql = sql + @"replace into "+ database3 + @".Clearing_Game(
 UserID ,CountDate ,
  Texas_LCount, Texas_LAward_L ,Texas_LAward_W,
 Texas_MCount,Texas_MAward_L ,Texas_MAward_W,
@@ -1017,7 +1224,7 @@ ifnull(b.Horse_Count,0)  ,ifnull(b.Horse_Banker,0),ifnull(b.Horse_Award_L,0)  ,i
 ifnull(b.Car_Count,0)  ,ifnull(b.Car_Banker,0),ifnull(b.Car_Award_L,0) ,ifnull(b.Car_Award_W,0) ,
 ifnull(b.Hundred_Count,0) + " + comdata.InitialCount + @" ,ifnull(b.Hundred_Banker,0),ifnull(b.Hundred_Award_L,0)+ " + comdata.InitialL + @" ,ifnull(b.Hundred_Award_W,0) + " + comdata.InitialW+@" 
 from (select " + comdata.UserID + @" userid ) a left join (
-select * from record.Clearing_Game where UserID = " + comdata.UserID + @" and CountDate = '" + comdata.CountDate + @"') b on 1 = 1;
+select * from "+ database3 + @".Clearing_Game where UserID = " + comdata.UserID + @" and CountDate = '" + comdata.CountDate + @"') b on 1 = 1;
 ";
         }
 
@@ -1068,6 +1275,9 @@ from (select " + comdata.UserID + @" UserID)a
 
     }
 
+    private static void ShuihuGameLog(DateTime endTime) {
+
+    }
 
 }
 

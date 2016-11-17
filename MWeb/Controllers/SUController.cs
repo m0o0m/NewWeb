@@ -17,6 +17,7 @@ using GL.Data.MWeb.Identity;
 using MWeb.Models;
 using GL.Data.View;
 using System.Web.UI;
+using GL.Command.DBUtility;
 
 namespace MWeb.Controllers
 {
@@ -25,6 +26,8 @@ namespace MWeb.Controllers
     {
         private ApplicationUserManager _userManager;
         private ApplicationRoleManager _roleManager;
+
+        public static readonly string Coin = PubConstant.GetConnectionString("coin");
 
         public SUController()
         {
@@ -721,6 +724,195 @@ namespace MWeb.Controllers
 
         }
 
+
+        [QueryValues]
+        public ActionResult OperLog2(Dictionary<string, string> queryvalues)
+        {
+
+            int _page = queryvalues.ContainsKey("page") ? Convert.ToInt32(queryvalues["page"]) : 1;
+
+            string _StartDate = queryvalues.ContainsKey("StartTime") ? queryvalues["StartTime"] : DateTime.Now.ToString("yyyy-MM-dd 00:00:00");
+            string _ExpirationDate = queryvalues.ContainsKey("EndTime") ? queryvalues["EndTime"] : DateTime.Now.AddDays(1).ToString("yyyy-MM-dd 00:00:00");
+
+            string UserAccount = queryvalues.ContainsKey("UserAccount") ? queryvalues["UserAccount"] : "";
+            OperLogView olv = new OperLogView
+            {
+                StartTime = _StartDate,
+                EndTime = _ExpirationDate,
+                UserAccount = UserAccount,
+                Page = _page
+            };
+
+
+
+
+            if (Request.IsAjaxRequest())
+            {
+                return PartialView("OperLog2_PageList", OperLogBLL.GetListByPageForOperLog2(olv));
+            }
+
+            olv.DataList = OperLogBLL.GetListByPageForOperLog2(olv);
+
+            return View(olv);
+        }
+
+
+
+
+        [QueryValues]
+        public ActionResult EmailStock(Dictionary<string, string> queryvalues) {
+
+
+            int _page = queryvalues.ContainsKey("page") ? Convert.ToInt32(queryvalues["page"]) : 1;
+            string UserName = queryvalues.ContainsKey("SearchExt") ? queryvalues["SearchExt"] : "";
+            string GroupName = queryvalues.ContainsKey("SearchExt2") ? queryvalues["SearchExt2"] : "";
+            //
+            BaseDataView bdv = new BaseDataView()
+            {
+               SearchExt = UserName,
+                SearchExt2 = GroupName,
+                Page = _page
+            };
+
+       
+            if (Request.IsAjaxRequest())
+            {
+                return PartialView("EmailStock_PageList", ServEmailBLL.GetListByUserStock(bdv));
+            }
+
+
+
+            //UserStock
+
+            bdv.BaseDataList = ServEmailBLL.GetListByUserStock(bdv);
+
+            return View(bdv);
+
+          
+        }
+
+        [QueryValues]
+        public ActionResult EmailStockUUser(Dictionary<string, string> queryvalues) {
+
+            int id = queryvalues.ContainsKey("id") ? Convert.ToInt32(queryvalues["id"]) : -1;
+
+            UserStock model = ServEmailBLL.GetModelStockAll(id);
+
+            model.GroupID = id;
+
+            //查询剩余没有分配的库存用户，显示到界面上，让其添加
+
+            return View(model);
+        }
+
+
+
+        [QueryValues]
+        public ActionResult EmailUpdateStock(Dictionary<string, string> queryvalues)
+        {
+
+            int id = queryvalues.ContainsKey("id") ? Convert.ToInt32(queryvalues["id"]) : -1;
+
+            UserStock model = ServEmailBLL.GetModelStock(id);
+
+            model.GroupID = id;
+
+           
+
+            return View(model);
+        }
+
+        [QueryValues]
+        public ActionResult SaveStockValue(Dictionary<string, string> queryvalues) {
+            Int64 ChipPot = queryvalues.ContainsKey("ChipPot") ? Convert.ToInt64(queryvalues["ChipPot"]) : -1;//添加，减少的库存值
+            int GroupID = queryvalues.ContainsKey("GroupID") ? Convert.ToInt32(queryvalues["GroupID"]) : -1;//库组
+            string Oper = queryvalues.ContainsKey("Oper") ? queryvalues["Oper"].ToString() : "";//库组
+
+            if (Oper == "delete") {
+                ChipPot = ChipPot * -1;
+            }
+
+            //Oper
+            int res = ServEmailBLL.AddStock(GroupID, ChipPot);
+            if (res >= 1)
+            {
+                return Content("1");
+            }
+            else {
+                return Content("0");
+            }
+
+        }
+
+
+        //SaveStockUser
+
+        [QueryValues]
+        public ActionResult SaveStockUser(Dictionary<string, string> queryvalues)
+        {
+         
+            int GroupID = queryvalues.ContainsKey("GroupID") ? Convert.ToInt32(queryvalues["GroupID"]) : -1;//库组
+            string UserName = queryvalues.ContainsKey("UserName") ? queryvalues["UserName"].ToString() : "";//用户名
+            //检测非法字符
+            if (UserName.Contains("'")) {
+                return Content("2");
+            }
+            //检测用户是否已经被其他的库存分配了
+            if (UserName != "") { 
+                IEnumerable<UserStock> users =  ServEmailBLL.GetOtherUsers(GroupID, UserName);
+                if (users.Count() > 0)
+                {
+                    return Content("3");
+                }
+
+                //说明有用户不存在
+                IEnumerable<AspNetUser> aspnetUsers = SUBLL.GetAspNetUsersByUserName(UserName);
+                int num = UserName.Split(',').Length;
+                if (aspnetUsers.Count() != num) {
+                    return Content("4");
+                }
+
+            }
+            //用户是否存在
+
+         
+
+
+
+
+
+
+            //Oper
+            int res = ServEmailBLL.AddStockUser(GroupID, UserName);
+            if (res >= 1)
+            {
+                return Content("1");
+            }
+            else
+            {
+                return Content("0");
+            }
+
+        }
+
+
+        [QueryValues]
+        public ActionResult AddStockGroup(Dictionary<string, string> queryvalues) {
+            string GroupName = queryvalues.ContainsKey("GroupName") ? queryvalues["GroupName"].ToString() : "";//库组名称
+
+            Int64 Value = queryvalues.ContainsKey("Value") ? Convert.ToInt64(queryvalues["Value"]) : 0;//库存值
+
+          
+
+            if(Request.IsAjaxRequest())
+            {
+                int res = ServEmailBLL.AddStockGroup(GroupName, Value);
+                return Content(res.ToString());
+            }
+
+            return View();
+
+        }
 
     }
 }

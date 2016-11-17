@@ -9,7 +9,7 @@ namespace GL.Data.Model
     public class IAPProduct
     {
         /// <summary>
-        /// 首冲赠送5币
+        /// 首冲赠送币
         /// </summary>
         public int attach_5b {get;set;} 
         /// <summary>
@@ -25,7 +25,7 @@ namespace GL.Data.Model
         /// </summary>
         public int goods { get; set; } 
         /// <summary>
-        /// 1:游戏币 2:5币 
+        /// 1:游戏币 2:币 
         /// </summary>
         public int goodsType { get; set; } 
         /// <summary>

@@ -15,6 +15,9 @@ namespace GL.Data.BLL
     public class OperLogBLL
     {
         public static readonly string sqlconnectionString = PubConstant.GetConnectionString("ConnectionStringForGameData");
+        public static readonly string database1 = PubConstant.GetConnectionString("database1");
+        public static readonly string database2 = PubConstant.GetConnectionString("database2");
+        public static readonly string database3 = PubConstant.GetConnectionString("database3");
 
 
         public static IEnumerable<OperLog> GetModelByIDList()
@@ -30,6 +33,19 @@ namespace GL.Data.BLL
         }
 
 
+        public static int UpdateASPNetUserLimit(ASPNetUserLimit model) {
+            return OperLogDAL.UpdateASPNetUserLimit(model);
+        }
+        public static ASPNetUserLimit GetASPNetUserLimit(ASPNetUserLimit model)
+        {
+            return OperLogDAL.GetASPNetUserLimit(model);
+        }
+
+        public static int UpdateASPNetUserReset(ASPNetUserLimit model)
+        {
+            return OperLogDAL.UpdateASPNetUserReset(model);
+        }
+
         //FreezeLog
 
         public static int InsertFreezeLog(FreezeLog model)
@@ -43,9 +59,12 @@ namespace GL.Data.BLL
         {
             return OperLogDAL.GetOperConfigExist(url,param);
         }
+        public static void WriteOperLog(string url, string param, string UserAccount, string IP)
+        {
+            WriteOperLog(url, param, "", UserAccount, IP);
+        }
 
-
-        public static void WriteOperLog(string url, string param,string UserAccount,string IP)
+        public static void WriteOperLog(string url, string param, string Detail, string UserAccount,string IP)
         {
             OperConfig config = OperLogDAL.GetOperConfigExist(url, param);
             if (config != null)
@@ -60,7 +79,7 @@ namespace GL.Data.BLL
                 {
                     CreateTime = DateTime.Now.ToString(),
                     LeftMenu = config.ActionName,
-                    OperDetail = "",
+                    OperDetail = Detail,
                     OperType = config.ActionOper,
                     UserAccount = UserAccount,
                      UserName = UserAccount,
@@ -79,7 +98,7 @@ namespace GL.Data.BLL
             pq.PageSize = 10;
 
             pq.RecordCount = DAL.PagedListDAL<OperLog>.GetRecordCount(string.Format(@"
-select count(0) from Q_OperLog where CreateTime >= '{0}' and CreateTime<'{1}'  {2} ", 
+select count(0) from Q_OperLog where CreateTime >= '{0}' and CreateTime<'{1}'  {2} and OperType <> '操作'", 
 model.StartTime, 
 model.EndTime, 
 model.UserAccount == "" ? " " : " and  UserAccount = '" + model.UserAccount + "'"
@@ -87,7 +106,7 @@ model.UserAccount == "" ? " " : " and  UserAccount = '" + model.UserAccount + "'
 
             pq.Sql = string.Format(@"
 select * from Q_OperLog
-where CreateTime >= '{2}' and CreateTime< '{3}' {4}  
+where CreateTime >= '{2}' and CreateTime< '{3}' and OperType <> '操作' {4}
 order by CreateTime desc 
 limit {0}, {1}
 ",
@@ -99,7 +118,32 @@ pq.PageSize, model.StartTime, model.EndTime, model.UserAccount == "" ? " " : " a
             return obj;
         }
 
+        public static PagedList<OperLog> GetListByPageForOperLog2(OperLogView model)
+        {
+            PagerQuery pq = new PagerQuery();
+            pq.CurrentPage = model.Page;
+            pq.PageSize = 10;
 
+            pq.RecordCount = DAL.PagedListDAL<OperLog>.GetRecordCount(string.Format(@"
+select count(0) from Q_OperLog where CreateTime >= '{0}' and CreateTime<'{1}'  {2}",
+model.StartTime,
+model.EndTime,
+model.UserAccount == "" ? " " : " and  UserAccount = '" + model.UserAccount + "'"
+), sqlconnectionString);
+
+            pq.Sql = string.Format(@"
+select * from Q_OperLog
+where CreateTime >= '{2}' and CreateTime< '{3}' {4}
+order by CreateTime desc 
+limit {0}, {1}
+",
+pq.StartRowNumber,
+pq.PageSize, model.StartTime, model.EndTime, model.UserAccount == "" ? " " : " and  UserAccount = '" + model.UserAccount + "'");
+
+
+            PagedList<OperLog> obj = new PagedList<OperLog>(DAL.PagedListDAL<OperLog>.GetListByPage(pq, sqlconnectionString), pq.CurrentPage, pq.PageSize, pq.RecordCount);
+            return obj;
+        }
 
 
         public static PagedList<FreezeLog> GetListByPageForFreezeLog(FreezeLogView model)
@@ -114,7 +158,7 @@ select * from Q_FreezeLog
 union all
 select ID,CreateTime,UserID,'','','永久','系统',
 case when MonitorID=27 then '凭空出现的游戏币' else '非法协议' end ,'封号' 
-from GServerInfo.MonitorLog where MonitorID in (27,28)
+from "+database2+@".MonitorLog where MonitorID in (27,28)
 
 ) as a
 where a.CreateTime >= '{0}' and a.CreateTime<'{1}'  {2} ",
@@ -129,7 +173,7 @@ select * from Q_FreezeLog
 union all
 select ID,CreateTime,UserID,'','','永久','系统',
 case when MonitorID=27 then '凭空出现的游戏币' else '非法协议' end ,'封号' 
-from GServerInfo.MonitorLog where MonitorID in (27,28)
+from "+database2+@".MonitorLog where MonitorID in (27,28)
 ) as a
 where a.CreateTime >= '{2}' and a.CreateTime< '{3}' {4}  
 order by a.CreateTime desc 

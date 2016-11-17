@@ -23,12 +23,12 @@ public static class TaskAction
         /*  
             http://localhost:25664/api/OnLinePlay/GetOnLineUser?pageSize=10&pageIndex=1
         */
-        SetContent(null,null);
-        System.Timers.Timer myTimer = new System.Timers.Timer(1000 * 60*2);
-        //TaskAction.SetContent 表示要调用的方法
-        myTimer.Elapsed += new System.Timers.ElapsedEventHandler(TaskAction.SetContent);
-        myTimer.Enabled = true;
-        myTimer.AutoReset = true;
+        //SetContent(null,null);
+        //System.Timers.Timer myTimer = new System.Timers.Timer(1000 * 60*2);
+        ////TaskAction.SetContent 表示要调用的方法
+        //myTimer.Elapsed += new System.Timers.ElapsedEventHandler(TaskAction.SetContent);
+        //myTimer.Enabled = true;
+        //myTimer.AutoReset = true;
     }
     /// <summary>
     /// 定时器委托任务 调用的方法

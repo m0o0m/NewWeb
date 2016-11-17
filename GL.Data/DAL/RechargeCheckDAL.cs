@@ -14,6 +14,10 @@ namespace GL.Data.DAL
     {
         public static readonly string sqlconnectionString = PubConstant.ConnectionString;
 
+        public static readonly string database1 = PubConstant.GetConnectionString("database1");
+        public static readonly string database2 = PubConstant.GetConnectionString("database2");
+        public static readonly string database3 = PubConstant.GetConnectionString("database3");
+
 
         internal static RechargeCheck GetModelByID(RechargeCheck model)
         {
@@ -32,7 +36,7 @@ namespace GL.Data.DAL
             {
                 cn.Open();
                 IEnumerable<RechargeCheck> i = cn.Query<RechargeCheck>(@"
-select r.* from GServerInfo.RechargeCheck as r left JOIN 515game.QQZoneRecharge as q  on  r.SerialNo = q.BillNo
+select r.* from "+ database2+ @".RechargeCheck as r left JOIN "+ database1+ @".QQZoneRecharge as q  on  r.SerialNo = q.BillNo
 where r.UserID = @UserID and r.SerialNo like 'AppTreasure%' and q.BillNo is NULL", model);
                 cn.Close();
                 return i;
@@ -80,7 +84,7 @@ where r.UserID = @UserID and r.SerialNo like 'AppTreasure%' and q.BillNo is NULL
             using (var cn = new MySqlConnection(sqlconnectionString))
             {
                 cn.Open();
-                int i = cn.Execute(@"insert into RechargeCheck(SerialNo,UserID,ProductID,Money,CreateTime,CheckInfo) values (@SerialNo,@UserID,@ProductID,@Money,@CreateTime,@CheckInfo);", model);
+                int i = cn.Execute(@"insert into RechargeCheck(SerialNo,UserID,ProductID,Money,CreateTime,CheckInfo,AgentID) values (@SerialNo,@UserID,@ProductID,@Money,@CreateTime,@CheckInfo,@AgentID);", model);
                 cn.Close();
                 return i;
             }
@@ -93,7 +97,7 @@ where r.UserID = @UserID and r.SerialNo like 'AppTreasure%' and q.BillNo is NULL
             using (var cn = new MySqlConnection(sqlconnectionString))
             {
                 cn.Open();
-                int i = cn.Execute(@"insert into record.Charge_OrderIPRecord(OrderID,CreateTime,UserID,ChargeType) values 
+                int i = cn.Execute(@"insert into "+ database3+ @".Charge_OrderIPRecord(OrderID,CreateTime,UserID,ChargeType) values 
                                     (@OrderID,@CreateTime,@UserID,@ChargeType);", model);
                 cn.Close();
                 return i;
@@ -106,7 +110,7 @@ where r.UserID = @UserID and r.SerialNo like 'AppTreasure%' and q.BillNo is NULL
             using (var cn = new MySqlConnection(sqlconnectionString))
             {
                 cn.Open();
-                int i = cn.Execute(@"insert into record.Charge_CallBackIPRecord(OrderID,CallBackIP,CallBackTime,CallBackChargeType,CallBackUserID,Method) values 
+                int i = cn.Execute(@"insert into "+ database3 + @".Charge_CallBackIPRecord(OrderID,CallBackIP,CallBackTime,CallBackChargeType,CallBackUserID,Method) values 
                                     (@OrderID,@CallBackIP,@CallBackTime,@CallBackChargeType,@CallBackUserID,@Method);", model);
                 cn.Close();
                 return i;
@@ -118,7 +122,7 @@ where r.UserID = @UserID and r.SerialNo like 'AppTreasure%' and q.BillNo is NULL
             using (var cn = new MySqlConnection(sqlconnectionString))
             {
                 cn.Open();
-                IEnumerable<UserIpInfo> i = cn.Query<UserIpInfo>(@"select * from record.Charge_CallBackIPRecord where OrderID ='"+ orderID+"'");
+                IEnumerable<UserIpInfo> i = cn.Query<UserIpInfo>(@"select * from "+ database3 + @".Charge_CallBackIPRecord where OrderID ='"+ orderID+"'");
                 cn.Close();
                 return i;
             }
@@ -132,7 +136,7 @@ where r.UserID = @UserID and r.SerialNo like 'AppTreasure%' and q.BillNo is NULL
                 cn.Open();
                 IEnumerable<CallBackRechargeIP> i = cn.Query<CallBackRechargeIP>(string.Format(@"
 select CallBackIP,count(*) as Num from (
-select *  from record.Charge_CallBackIPRecord 
+select *  from "+ database3 + @".Charge_CallBackIPRecord 
 where 1=1   {0} {1}
 GROUP BY CallBackUserID,CallBackIP,CallBackChargeType
 )as a
@@ -151,7 +155,7 @@ GROUP BY CallBackIP
                 cn.Open();
                 int i = cn.Execute(@"
 
-insert into   record.Charge_IP(IP,ChargeType)
+insert into   "+ database3 + @".Charge_IP(IP,ChargeType)
 values('"+ip+"',"+type+@")
 
 ");
@@ -168,7 +172,7 @@ values('"+ip+"',"+type+@")
                 cn.Open();
                 int i = cn.Execute(@"
 
-delete from  record.Charge_IP
+delete from  "+ database3 + @".Charge_IP
 where  IP='"+ ip + @"' and ChargeType="+ type +@"
 
 ");
@@ -185,7 +189,7 @@ where  IP='"+ ip + @"' and ChargeType="+ type +@"
                 cn.Open();
                 IEnumerable<dynamic> i = cn.Query(@"
 
-select * from  record.Charge_IP
+select * from  "+ database3 + @".Charge_IP
 where  IP='" + ip + @"' and ChargeType=" + type + @"
 
 ");
@@ -206,7 +210,7 @@ where  IP='" + ip + @"' and ChargeType=" + type + @"
             {
             
                 int i = cn.Execute(@"
-insert into 515game.RechargeBanlance(
+insert into "+ database1+ @".RechargeBanlance(
 Appid,Balance,Openid,Openkey,Pay_token,Pf,
 Pfkey,Session_id,Session_type,Userid,CreateTime
 ) values 
@@ -224,7 +228,7 @@ Pfkey,Session_id,Session_type,Userid,CreateTime
             using (var cn = new MySqlConnection(sqlconnectionString))
             {
                 cn.Open();
-                IEnumerable<AppTreasure> i = cn.Query<AppTreasure>(@"select * from 515game.RechargeBanlance where Userid=@userId ORDER BY CreateTime desc limit 1", new { userId = userid });
+                IEnumerable<AppTreasure> i = cn.Query<AppTreasure>(@"select * from "+ database1 + @".RechargeBanlance where Userid=@userId ORDER BY CreateTime desc limit 1", new { userId = userid });
                 cn.Close();
                 return i.FirstOrDefault();
             }

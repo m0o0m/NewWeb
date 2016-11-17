@@ -47,8 +47,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BLL\ClubBLL.cs" />
+    <Compile Include="BLL\FishBLL.cs" />
+    <Compile Include="BLL\RoleBLL.cs" />
     <Compile Include="DAL\ClubDAL.cs" />
+    <Compile Include="DAL\FishDAL.cs" />
+    <Compile Include="DAL\RoleDAL.cs" />
     <Compile Include="Model\ClubGive.cs" />
+    <Compile Include="Model\FishInfoRecord.cs" />
+    <Compile Include="Model\SingleData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

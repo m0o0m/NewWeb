@@ -122,6 +122,8 @@
     <Compile Include="BLL\AgentUserBLL.cs" />
     <Compile Include="BLL\ClubBLL.cs" />
     <Compile Include="BLL\CustomerUserBLL.cs" />
+    <Compile Include="BLL\DaiLiBLL.cs" />
+    <Compile Include="BLL\FruitGameBLL.cs" />
     <Compile Include="BLL\IPWhiteListBLL.cs" />
     <Compile Include="BLL\LoginRecordBLL.cs" />
     <Compile Include="BLL\NoAuthBLL.cs" />
@@ -133,9 +135,12 @@
     <Compile Include="BLL\RobotBLL.cs" />
     <Compile Include="BLL\SpellCardBLL.cs" />
     <Compile Include="BLL\SystemPayBLL.cs" />
+    <Compile Include="BLL\WaterMarginBLL.cs" />
     <Compile Include="DAL\ActiveDAL.cs" />
     <Compile Include="DAL\ADDAL.cs" />
     <Compile Include="DAL\Console.cs" />
+    <Compile Include="DAL\DaiLiDAL.cs" />
+    <Compile Include="DAL\FruitGameDAL.cs" />
     <Compile Include="DAL\IPWhiteListDAL.cs" />
     <Compile Include="DAL\NoAuthDAL.cs" />
     <Compile Include="DAL\OperLogDAL.cs" />
@@ -144,6 +149,7 @@
     <Compile Include="DAL\RobotDAL.cs" />
     <Compile Include="DAL\SpellCardDAL.cs" />
     <Compile Include="DAL\SystemPayDAL.cs" />
+    <Compile Include="DAL\WaterMarginDAL.cs" />
     <Compile Include="enum\ActiveType.cs" />
     <Compile Include="enum\agentLv.cs" />
     <Compile Include="enum\revenueModel.cs" />
@@ -152,16 +158,19 @@
     <Compile Include="Identity\ApplicationRoleManager.cs" />
     <Compile Include="Model\ADInfo.cs" />
     <Compile Include="Model\AppTreasure.cs" />
+    <Compile Include="Model\BaccaratGameRecord.cs" />
     <Compile Include="Model\BoardDetail.cs" />
     <Compile Include="Model\BoardDist.cs" />
     <Compile Include="Model\CallBackRechargeIP.cs" />
     <Compile Include="Model\CarGameRecord.cs" />
     <Compile Include="Model\CLoginUser.cs" />
     <Compile Include="Model\CommonIDName.cs" />
+    <Compile Include="Model\DaiLi.cs" />
     <Compile Include="Model\DataReport.cs" />
     <Compile Include="Model\DotSum.cs" />
     <Compile Include="Model\DownLevel.cs" />
     <Compile Include="Model\Festival515.cs" />
+    <Compile Include="Model\FruitGame.cs" />
     <Compile Include="Model\GameAnnouncement.cs" />
     <Compile Include="Model\GameOutputRecursion.cs" />
     <Compile Include="Model\HorseGameRecord.cs" />
@@ -181,6 +190,7 @@
     <Compile Include="Model\RobotControl.cs" />
     <Compile Include="Model\RobotOutPut.cs" />
     <Compile Include="Model\ScalePot.cs" />
+    <Compile Include="Model\ShuihuGameRecord.cs" />
     <Compile Include="Model\SignDraw.cs" />
     <Compile Include="Model\SimulatorRecharge.cs" />
     <Compile Include="Model\SpellCard.cs" />
@@ -193,8 +203,10 @@
     <Compile Include="Model\ThanksGiving.cs" />
     <Compile Include="Model\Time.cs" />
     <Compile Include="Model\UserLimit.cs" />
+    <Compile Include="Model\UserStock.cs" />
     <Compile Include="Model\VersionData.cs" />
     <Compile Include="Model\VersionSum.cs" />
+    <Compile Include="Model\WaterMargin.cs" />
     <Compile Include="Model\WhiteList.cs" />
     <Compile Include="ServiceStackManage.cs" />
     <Compile Include="DAL\AgentUserDAL.cs" />
@@ -344,6 +356,7 @@
     <Compile Include="View\SUOHIModel.cs" />
     <Compile Include="View\OMModel.cs" />
     <Compile Include="View\ValueView.cs" />
+    <Compile Include="View\WaterMarginView.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\GL.Comm\GL.Common.csproj">

@@ -179,7 +179,7 @@ namespace Web.Pay.Controllers
 
                 RechargeCheck rc = RechargeCheckBLL.GetModelBySerialNo(new RechargeCheck { SerialNo = m.orderid });
                 Role user = RoleBLL.GetModelByID(new Role { ID = rc.UserID });
-
+                
                 IAPProduct iap = IAPProductBLL.GetModelByID(rc.ProductID);
                 isFirst iF = iap.product_id.Split('_')[0].Equals("firstCharge") ? isFirst.是 : isFirst.否;
                 chipType ct = iF == isFirst.是 ? chipType.首冲礼包 : (chipType)iap.goodsType;
@@ -223,7 +223,7 @@ namespace Web.Pay.Controllers
                 log.Error("fYeePay易宝回调 传给服务器的钱：" + rmb);
 
                 //解决延迟导致游戏服务器发货并且补单了
-                RechargeBLL.Add(new Recharge { BillNo = m.yborderid, OpenID = rc.SerialNo, UserID = rc.UserID, Money = rc.Money, CreateTime = DateTime.Now, Chip = gold, Diamond = dia, ChipType = ct, IsFirst = iF, NickName = iap.productname, PayItem = iap.product_id, PF = raType.易宝, UserAccount = user.NickName, ActualMoney= Convert.ToInt64(iap.price * 100), ProductNO=list.Trim(',') });
+                RechargeBLL.Add(new Recharge { BillNo = m.yborderid, OpenID = rc.SerialNo, UserID = rc.UserID, Money = rc.Money, CreateTime = DateTime.Now, Chip = gold, Diamond = dia, ChipType = ct, IsFirst = iF, NickName = iap.productname, PayItem = iap.product_id, PF = raType.易宝, UserAccount = user.NickName, ActualMoney= Convert.ToInt64(iap.price * 100), ProductNO=list.Trim(','), AgentID=rc.AgentID });
 
                 normal ServiceNormalS = normal.CreateBuilder()
                 .SetUserID((uint)rc.UserID)
@@ -375,7 +375,7 @@ namespace Web.Pay.Controllers
                     log.Error("user.NickName" + user.NickName);
                     log.Error("iap.price*100" + iap.price * 100);
                     log.Error("list" + list); 
-                    RechargeBLL.Add(new Recharge { BillNo = notifyData.GetValue("transaction_id").ToString(), OpenID = rc.SerialNo, UserID = rc.UserID, Money = rc.Money, CreateTime = DateTime.Now, Chip = gold, Diamond = dia, ChipType = ct, IsFirst = iF, NickName = iap.productname, PayItem = iap.product_id, PF = raType.微信, UserAccount = user.NickName, ActualMoney= Convert.ToInt64(iap.price*100), ProductNO=list.Trim(',') });
+                    RechargeBLL.Add(new Recharge { BillNo = notifyData.GetValue("transaction_id").ToString(), OpenID = rc.SerialNo, UserID = rc.UserID, Money = rc.Money, CreateTime = DateTime.Now, Chip = gold, Diamond = dia, ChipType = ct, IsFirst = iF, NickName = iap.productname, PayItem = iap.product_id, PF = raType.微信, UserAccount = user.NickName, ActualMoney= Convert.ToInt64(iap.price*100), ProductNO=list.Trim(','), AgentID=rc.AgentID });
                     normal ServiceNormalS = normal.CreateBuilder()
                     .SetUserID((uint)rc.UserID)
                     .SetList(list)
@@ -606,7 +606,7 @@ namespace Web.Pay.Controllers
                             list = list.Trim(',') + ",";
                             uint rmb = (uint)rc.Money;
                             log.Error("ResultNotifyPageForAliPay易宝回调 充钱(分)：" + rmb);
-                            RechargeBLL.Add(new Recharge { BillNo = trade_no, OpenID = rc.SerialNo, UserID = rc.UserID, Money = rc.Money, CreateTime = DateTime.Now, Chip = gold, Diamond = dia, ChipType = ct, IsFirst = iF, NickName = iap.productname, PayItem = iap.product_id, PF = raType.支付宝, UserAccount = user.NickName , ActualMoney = Convert.ToInt64(iap.price * 100), ProductNO = list.Trim(',') });
+                            RechargeBLL.Add(new Recharge { BillNo = trade_no, OpenID = rc.SerialNo, UserID = rc.UserID, Money = rc.Money, CreateTime = DateTime.Now, Chip = gold, Diamond = dia, ChipType = ct, IsFirst = iF, NickName = iap.productname, PayItem = iap.product_id, PF = raType.支付宝, UserAccount = user.NickName , ActualMoney = Convert.ToInt64(iap.price * 100), ProductNO = list.Trim(','), AgentID=rc.AgentID });
 
 
                             log.Info("ResultNotifyPageForAliPay易宝回调 订单号=" + trade_no + ",用户ID=" + rc.UserID);
@@ -864,7 +864,7 @@ namespace Web.Pay.Controllers
                         }
                         log.Error("ResultNotifyPageForQQ腾讯回调rmb：" + rmb);
 
-                        RechargeBLL.Add(new Recharge { Num= (int)num,BillNo = billno, OpenID = openid, UserID = user.ID, Money = (long)rmb, CreateTime = DateTime.Now, Chip = gold, Diamond = dia, ChipType = ct, IsFirst = iF, NickName = iap.productname, PayItem = iap.product_id, PF = raType.腾讯, UserAccount = user.NickName, ActualMoney = Convert.ToInt64(oldRmb), ProductNO = list.Trim(',') });
+                        RechargeBLL.Add(new Recharge { Num= (int)num,BillNo = billno, OpenID = openid, UserID = user.ID, Money = (long)rmb, CreateTime = DateTime.Now, Chip = gold, Diamond = dia, ChipType = ct, IsFirst = iF, NickName = iap.productname, PayItem = iap.product_id, PF = raType.腾讯, UserAccount = user.NickName, ActualMoney = Convert.ToInt64(oldRmb), ProductNO = list.Trim(','),AgentID=rc.AgentID });
 
                         normal ServiceNormalS = normal.CreateBuilder()
                         .SetUserID((uint)user.ID)
@@ -1113,7 +1113,7 @@ namespace Web.Pay.Controllers
                     uint rmb = (uint)(rc.Money);
 
                     log.Error("baiduPay百度回调 rmb：" + rmb);
-                    RechargeBLL.Add(new Recharge { BillNo = orderSerial, OpenID = rc.SerialNo, UserID = rc.UserID, Money = rmb, CreateTime = DateTime.Now, Chip = gold, Diamond = dia, ChipType = ct, IsFirst = iF, NickName = iap.productname, PayItem = iap.product_id, PF = raType.百度, UserAccount = user.NickName, ActualMoney = Convert.ToInt64(iap.price * 100), ProductNO = list.Trim(',') });
+                    RechargeBLL.Add(new Recharge { BillNo = orderSerial, OpenID = rc.SerialNo, UserID = rc.UserID, Money = rmb, CreateTime = DateTime.Now, Chip = gold, Diamond = dia, ChipType = ct, IsFirst = iF, NickName = iap.productname, PayItem = iap.product_id, PF = raType.百度, UserAccount = user.NickName, ActualMoney = Convert.ToInt64(iap.price * 100), ProductNO = list.Trim(','),AgentID=rc.AgentID });
                     //log.Error("测试分rmb：" + rmb);
                     //log.Error("测试分voucherMoney：" + voucherMoney);
                     //if (voucherMoney < rmb)
@@ -1139,7 +1139,9 @@ namespace Web.Pay.Controllers
                             log.Info(" baiduPay百度回调 ServiceResult : " + ServiceNormalC.Suc);
                             if (ServiceNormalC.Suc)
                             {
-                                RechargeBLL.UpdateReachTime(rc.SerialNo);
+                                log.Info(" baiduPay百度回调 传入的订单号为"+ rc.SerialNo);
+                                int ii = RechargeBLL.UpdateReachTime(orderSerial);
+                                log.Info(" baiduPay百度回调 ii="+ii);
                                 log.Info(" baiduPay百度回调 ServiceResult [" + orderSerial + "]: " + ServiceNormalC.Suc);
 
                             }
@@ -1350,7 +1352,7 @@ System.Collections.Generic.KeyNotFoundException: 给定关键字不在字典中�
                     uint rmb = (uint)(rc.Money);
 
                     log.Error("diandaiPay联通回调 rmb：" + rmb);
-                    RechargeBLL.Add(new Recharge { BillNo = notifyData.GetValue("orderid").ToString(), OpenID = rc.SerialNo, UserID = rc.UserID, Money = rc.Money, CreateTime = DateTime.Now, Chip = gold, Diamond = dia, ChipType = ct, IsFirst = iF, NickName = iap.productname, PayItem = iap.product_id, PF = raType.联通, UserAccount = user.NickName, ActualMoney = Convert.ToInt64(iap.price * 100), ProductNO = list.Trim(',') });
+                    RechargeBLL.Add(new Recharge { BillNo = notifyData.GetValue("orderid").ToString(), OpenID = rc.SerialNo, UserID = rc.UserID, Money = rc.Money, CreateTime = DateTime.Now, Chip = gold, Diamond = dia, ChipType = ct, IsFirst = iF, NickName = iap.productname, PayItem = iap.product_id, PF = raType.联通, UserAccount = user.NickName, ActualMoney = Convert.ToInt64(iap.price * 100), ProductNO = list.Trim(','),AgentID=rc.AgentID });
 
                     normal ServiceNormalS = normal.CreateBuilder()
                     .SetUserID((uint)rc.UserID)
@@ -1533,7 +1535,7 @@ System.Collections.Generic.KeyNotFoundException: 给定关键字不在字典中�
                         log.Error("ResultNotifyPageForXY苹果助手回调rmb：" + rmb);
                         log.Error("ResultNotifyPageForXY苹果助手回调amount(观察amount值是否为打折后的)：" + amount);
 
-                        RechargeBLL.Add(new Recharge { BillNo = orderid, OpenID = rc.SerialNo, UserID = user.ID, Money = rc.Money, CreateTime = DateTime.Now, Chip = gold, Diamond = dia, ChipType = ct, IsFirst = iF, NickName = iap.productname, PayItem = iap.product_id, PF = raType.XY助手, UserAccount = user.NickName, ActualMoney = Convert.ToInt64(iap.price * 100), ProductNO = list.Trim(',') });
+                        RechargeBLL.Add(new Recharge { BillNo = orderid, OpenID = rc.SerialNo, UserID = user.ID, Money = rc.Money, CreateTime = DateTime.Now, Chip = gold, Diamond = dia, ChipType = ct, IsFirst = iF, NickName = iap.productname, PayItem = iap.product_id, PF = raType.XY助手, UserAccount = user.NickName, ActualMoney = Convert.ToInt64(iap.price * 100), ProductNO = list.Trim(','),AgentID=rc.AgentID });
 
                         normal ServiceNormalS = normal.CreateBuilder()
                         .SetUserID((uint)user.ID)
@@ -1683,6 +1685,9 @@ System.Collections.Generic.KeyNotFoundException: 给定关键字不在字典中�
         [QueryValues]
         public ActionResult AppTrePay(Dictionary<string, string> queryvalues)
         {
+            /*
+            http://pay.515.com:80/Callback/AppTrePay?userid=408931&productID=firstCharge_2
+            */
             string userid = queryvalues.ContainsKey("userid") ? queryvalues["userid"] : string.Empty;
            
             string productID = queryvalues.ContainsKey("productID") ? queryvalues["productID"] : string.Empty;
@@ -1740,7 +1745,7 @@ System.Collections.Generic.KeyNotFoundException: 给定关键字不在字典中�
               
                 log.Error("测试分：" + rmb * 100);
                
-                RechargeBLL.Add(new Recharge { BillNo = serialNo, OpenID = openid, UserID = Convert.ToInt64(userid), Money = (long)rmb * 100, CreateTime = DateTime.Now, Chip = gold, Diamond = dia, ChipType = ct, IsFirst = iF, NickName = iap.productname, PayItem = iap.product_id, PF = raType.应用宝, UserAccount = "", ActualMoney = Convert.ToInt64(iap.price * 100), ProductNO = list.Trim(',') });
+                RechargeBLL.Add(new Recharge { BillNo = serialNo, OpenID = openid, UserID = Convert.ToInt64(userid), Money = (long)rmb * 100, CreateTime = DateTime.Now, Chip = gold, Diamond = dia, ChipType = ct, IsFirst = iF, NickName = iap.productname, PayItem = iap.product_id, PF = raType.应用宝, UserAccount = "", ActualMoney = Convert.ToInt64(iap.price * 100), ProductNO = list.Trim(','), AgentID= recharge.AgentID});
 
                 normal ServiceNormalS = normal.CreateBuilder()
                          .SetUserID((uint)Convert.ToInt64(userid))
@@ -2022,7 +2027,7 @@ System.Collections.Generic.KeyNotFoundException: 给定关键字不在字典中�
                                 //string ver = RechargeDAL.GetVersion(new Recharge { BillNo = billno, OpenID = rc.SerialNo, UserID = user.ID, Money = (long)rmb * 100, CreateTime = DateTime.Now, Chip = gold, Diamond = dia, ChipType = ct, IsFirst = iF, NickName = iap.productname, PayItem = iap.product_id, PF = raType.应用宝, UserAccount = user.NickName });
                                 //log.Info("版本号:"+ver);
 
-                                RechargeBLL.Add(new Recharge { BillNo = billno, OpenID = rc.SerialNo, UserID = user.ID, Money = (long)rmb * 100, CreateTime = DateTime.Now, Chip = gold, Diamond = dia, ChipType = ct, IsFirst = iF, NickName = iap.productname, PayItem = iap.product_id, PF = raType.应用宝, UserAccount = user.NickName, ActualMoney = Convert.ToInt64(iap.price * 100), ProductNO = list.Trim(',') });
+                                RechargeBLL.Add(new Recharge { BillNo = billno, OpenID = rc.SerialNo, UserID = user.ID, Money = (long)rmb * 100, CreateTime = DateTime.Now, Chip = gold, Diamond = dia, ChipType = ct, IsFirst = iF, NickName = iap.productname, PayItem = iap.product_id, PF = raType.应用宝, UserAccount = user.NickName, ActualMoney = Convert.ToInt64(iap.price * 100), ProductNO = list.Trim(','),AgentID=rc.AgentID });
                                 //20000|300,
                                 log.Info("list:" + list);
 
@@ -2274,7 +2279,7 @@ System.Collections.Generic.KeyNotFoundException: 给定关键字不在字典中�
                     log.Info("HippocampiPay海马支付回调接口 user.ID =" + user.ID + ",  gold=" + gold + ",dia=" + dia + ",rmb=" + rmb + ",billno=" + billno);
 
                     log.Error("HippocampiPay海马支付回调接口 充钱：" + rmb * 100);
-                    RechargeBLL.Add(new Recharge { BillNo = billno, OpenID = rc.SerialNo, UserID = user.ID, Money = (long)rmb * 100, CreateTime = DateTime.Now, Chip = gold, Diamond = dia, ChipType = ct, IsFirst = iF, NickName = iap.productname, PayItem = iap.product_id, PF = raType.海马玩, UserAccount = user.NickName });
+                    RechargeBLL.Add(new Recharge { BillNo = billno, OpenID = rc.SerialNo, UserID = user.ID, Money = (long)rmb * 100, CreateTime = DateTime.Now, Chip = gold, Diamond = dia, ChipType = ct, IsFirst = iF, NickName = iap.productname, PayItem = iap.product_id, PF = raType.海马玩, UserAccount = user.NickName,AgentID=rc.AgentID });
 
                     normal ServiceNormalS = normal.CreateBuilder()
                     .SetUserID((uint)user.ID)
@@ -2573,7 +2578,7 @@ System.Collections.Generic.KeyNotFoundException: 给定关键字不在字典中�
                     log.Info(" yidongFGP移动支付回调 user.ID =" + user.ID + ",  gold=" + gold + ",dia=" + dia + ",rmb=" + rmb + ",billno=" + cpparam);
                     log.Error("yidongFGP移动支付回调测试分：" + rmb * 100);
                     log.Info("yidongFGP移动支付回调开始加入数据：BillNo=" + cpparam + ",OpenID=" + rc.SerialNo + ",UserID=" + user.ID + "Money=" + rmb + ",CreateTime=" + DateTime.Now + ",Chip=" + gold + ",Diamond=" + dia + ",ChipType=" + ct + ",IsFirst=" + iF + ",NickName=" + iap.productname + ",PayItem=" + iap.product_id);
-                    RechargeBLL.Add(new Recharge { BillNo = cpparam, OpenID = rc.SerialNo, UserID = user.ID, Money = (long)rmb * 100, CreateTime = DateTime.Now, Chip = gold, Diamond = dia, ChipType = ct, IsFirst = iF, NickName = iap.productname, PayItem = iap.product_id, PF = raType.移动, UserAccount = user.NickName, ActualMoney = Convert.ToInt64(iap.price * 100), ProductNO = list.Trim(',') });
+                    RechargeBLL.Add(new Recharge { BillNo = cpparam, OpenID = rc.SerialNo, UserID = user.ID, Money = (long)rmb * 100, CreateTime = DateTime.Now, Chip = gold, Diamond = dia, ChipType = ct, IsFirst = iF, NickName = iap.productname, PayItem = iap.product_id, PF = raType.移动, UserAccount = user.NickName, ActualMoney = Convert.ToInt64(iap.price * 100), ProductNO = list.Trim(','),AgentID=rc.AgentID });
 
                     normal ServiceNormalS = normal.CreateBuilder()
                         .SetUserID((uint)user.ID)
@@ -2790,7 +2795,7 @@ System.Collections.Generic.KeyNotFoundException: 给定关键字不在字典中�
 
                     log.Info("ZYPay卓悠支付回调接口 user.ID =" + user.ID + ",  gold=" + gold + ",dia=" + dia + ",rmb=" + rmb + ",billno=" + Urecharge_Id);
                     log.Error("ZYPay卓悠支付回调接口 分：" + rmb * 100);
-                    RechargeBLL.Add(new Recharge { BillNo = Recharge_Id, OpenID = rc.SerialNo, UserID = user.ID, Money = (long)rmb * 100, CreateTime = DateTime.Now, Chip = gold, Diamond = dia, ChipType = ct, IsFirst = iF, NickName = iap.productname, PayItem = iap.product_id, PF = raType.卓悠, UserAccount = user.NickName, ActualMoney = Convert.ToInt64(iap.price * 100), ProductNO = list.Trim(',') });
+                    RechargeBLL.Add(new Recharge { BillNo = Recharge_Id, OpenID = rc.SerialNo, UserID = user.ID, Money = (long)rmb * 100, CreateTime = DateTime.Now, Chip = gold, Diamond = dia, ChipType = ct, IsFirst = iF, NickName = iap.productname, PayItem = iap.product_id, PF = raType.卓悠, UserAccount = user.NickName, ActualMoney = Convert.ToInt64(iap.price * 100), ProductNO = list.Trim(','),AgentID=rc.AgentID });
 
                     normal ServiceNormalS = normal.CreateBuilder()
                     .SetUserID((uint)user.ID)
@@ -3026,7 +3031,7 @@ System.Collections.Generic.KeyNotFoundException: 给定关键字不在字典中�
 
                     log.Error("YYHPay应用汇支付回调接口 分：" + rmb * 100);
 
-                    RechargeBLL.Add(new Recharge { BillNo = transdata_obj.transid, OpenID = transdata_obj.exorderno, UserID = user.ID, Money = (long)rmb * 100, CreateTime = DateTime.Now, Chip = gold, Diamond = dia, ChipType = ct, IsFirst = iF, NickName = iap.productname, PayItem = iap.product_id, PF = raType.应用汇, UserAccount = user.NickName, ActualMoney = Convert.ToInt64(iap.price * 100), ProductNO = list.Trim(',') });
+                    RechargeBLL.Add(new Recharge { BillNo = transdata_obj.transid, OpenID = transdata_obj.exorderno, UserID = user.ID, Money = (long)rmb * 100, CreateTime = DateTime.Now, Chip = gold, Diamond = dia, ChipType = ct, IsFirst = iF, NickName = iap.productname, PayItem = iap.product_id, PF = raType.应用汇, UserAccount = user.NickName, ActualMoney = Convert.ToInt64(iap.price * 100), ProductNO = list.Trim(','),AgentID=rc.AgentID });
 
                     normal ServiceNormalS = normal.CreateBuilder()
                     .SetUserID((uint)user.ID)
@@ -3235,7 +3240,7 @@ System.Collections.Generic.KeyNotFoundException: 给定关键字不在字典中�
 
                     log.Info(" MZPay魅族支付回调接口 user.ID =" + user.ID + ",  gold=" + gold + ",dia=" + dia + ",rmb=" + rmb + ",billno=" + order_id);
                     log.Error("MZPay魅族支付回调接口 分：" + rmb * 100);
-                    RechargeBLL.Add(new Recharge { BillNo = order_id, OpenID = rc.SerialNo, UserID = user.ID, Money = (long)rmb * 100, CreateTime = DateTime.Now, Chip = gold, Diamond = dia, ChipType = ct, IsFirst = iF, NickName = iap.productname, PayItem = iap.product_id, PF = raType.魅族, UserAccount = user.NickName, ActualMoney = Convert.ToInt64(iap.price * 100), ProductNO = list.Trim(',') });
+                    RechargeBLL.Add(new Recharge { BillNo = order_id, OpenID = rc.SerialNo, UserID = user.ID, Money = (long)rmb * 100, CreateTime = DateTime.Now, Chip = gold, Diamond = dia, ChipType = ct, IsFirst = iF, NickName = iap.productname, PayItem = iap.product_id, PF = raType.魅族, UserAccount = user.NickName, ActualMoney = Convert.ToInt64(iap.price * 100), ProductNO = list.Trim(','),AgentID=rc.AgentID });
 
                     normal ServiceNormalS = normal.CreateBuilder()
                     .SetUserID((uint)user.ID)
@@ -3476,7 +3481,7 @@ System.Collections.Generic.KeyNotFoundException: 给定关键字不在字典中�
                         rmb = rmb * 100;
                     }
                     log.Error("HuaWei华为回调接口 rmb测试分：" + rmb );
-                    RechargeBLL.Add(new Recharge { BillNo = requestId, OpenID = orderId, UserID = user.ID, Money = (long)rmb, CreateTime = DateTime.Now, Chip = gold, Diamond = dia, ChipType = ct, IsFirst = iF, NickName = iap.productname, PayItem = iap.product_id, PF = raType.华为, UserAccount = user.NickName, ActualMoney = Convert.ToInt64(iap.price * 100), ProductNO = list.Trim(',') });
+                    RechargeBLL.Add(new Recharge { BillNo = requestId, OpenID = orderId, UserID = user.ID, Money = (long)rmb, CreateTime = DateTime.Now, Chip = gold, Diamond = dia, ChipType = ct, IsFirst = iF, NickName = iap.productname, PayItem = iap.product_id, PF = raType.华为, UserAccount = user.NickName, ActualMoney = Convert.ToInt64(iap.price * 100), ProductNO = list.Trim(','),AgentID=rc.AgentID });
 
                     normal ServiceNormalS = normal.CreateBuilder()
                    .SetUserID((uint)user.ID)

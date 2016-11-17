@@ -46,6 +46,8 @@ namespace GL.Data.Model
         /// 游戏携带
         /// </summary>
         public long ChipGame { get; set; }
+
+        public long ChipKuCun { get; set; }
     }
 
 
@@ -97,7 +99,9 @@ namespace GL.Data.Model
         德州扑克 = 15,
         小马快跑 = 16,
         奔驰宝马 = 17,
-        百人德州 = 18
+        百人德州 = 18,
+        水浒传 = 19,
+        水果机 = 20
     }
 
     public enum itemName
@@ -125,7 +129,7 @@ namespace GL.Data.Model
         /// <summary>
         /// 扣五币买游戏币 - UCR_BUYCHIP_BYDIA
         /// </summary>
-        五币购买游戏币 = 4,
+        _Replace_购买游戏币 = 4,
         /// <summary>
         /// 充值游戏币 + UCR_CHARGECHIP
         /// </summary>
@@ -133,7 +137,7 @@ namespace GL.Data.Model
         /// <summary>
         /// 充值五币 UCR_CHARGEDIA
         /// </summary>
-        充值五币 = 6,
+        充值_Replace_ = 6,
         /// <summary>
         /// 购买礼物金币 - UCR_BUGGIFT_GOLD
         /// </summary>
@@ -141,7 +145,7 @@ namespace GL.Data.Model
         /// <summary>
         /// 购买礼物五币 - UCR_BUGGIFT_DIA
         /// </summary>
-        五币购买礼物 = 8,
+        _Replace_购买礼物 = 8,
         /// <summary>
         /// 出售礼物 + UCR_SELLGIFT
         /// </summary>
@@ -149,7 +153,7 @@ namespace GL.Data.Model
         /// <summary>
         /// 购买权贵五币 - UCR_BUGNoble_DIA
         /// </summary>
-        购买权贵五币 = 10,
+        购买权贵_Replace_ = 10,
         /// <summary>
         /// 购买权贵金币 + UCR_BUGNoble_GOLD
         /// </summary>
@@ -261,7 +265,7 @@ namespace GL.Data.Model
         /// <summary>
         /// 邮件五币 UCR_MAIL_DIA
         /// </summary>
-        邮件五币 = 38,
+        邮件_Replace_ = 38,
         /// <summary>
         /// 创建角色金币 + UCR_CREATEROLE_GOLD
         /// </summary>
@@ -269,7 +273,7 @@ namespace GL.Data.Model
         /// <summary>
         /// 创建角色五币 + UCR_CREATEROLE_DIA
         /// </summary>
-        创建角色五币 = 40,
+        创建角色_Replace_ = 40,
         /// <summary>
         /// 玩牌给积分 + UCR_PLAYGIVE_SCORE
         /// </summary>
@@ -361,7 +365,7 @@ namespace GL.Data.Model
         /// <summary>
         /// 五币买宝石 UCR_BUYGEM_BYDIA
         /// </summary>
-        五币买宝石 = 64	,
+        _Replace_买宝石 = 64	,
         /// <summary>
         /// 十二生肖服务费 UCR_ZODIAC_SERVICEFEE
         /// </summary>
@@ -433,7 +437,7 @@ namespace GL.Data.Model
         /// <summary>
         /// 中发白抢红包获得五币+ UCR_ROBEVENLOPE_DIA
         /// </summary>
-        中发白抢红包获得五币 = 82,
+        中发白抢红包获得_Replace_ = 82,
         /// <summary>
         /// 银宝盆功能获得金币+ URC_YIN_POT_COIN
         /// </summary>
@@ -595,18 +599,18 @@ namespace GL.Data.Model
         保险箱取 = 131,
         保险箱存 = 132,
         轮盘抽奖获取金币 = 133,
-        轮盘抽奖获取五币 = 134,
+        轮盘抽奖获取_Replace_ = 134,
         兑换券兑换金币 = 135,
-        兑换券兑换五币 = 136,
+        兑换券兑换_Replace_ = 136,
         轮盘抽奖消耗金币 = 137,
 
         棋牌日领游戏币 = 139,
 
         棋牌日VIP奖励 = 140,
 
-        首充五币奖励 = 141,
+        首充_Replace_奖励 = 141,
 
-        任务五币奖励 = 142,
+        任务_Replace_奖励 = 142,
 
         玩就送兑换游戏币 = 154,
 
@@ -622,9 +626,9 @@ namespace GL.Data.Model
 
         领取破产奖励 = 148,
 
-        任务达人奖励五币 = 149,
+        任务达人奖励_Replace_ = 149,
 
-        超级任务奖励五币 = 150,
+        超级任务奖励_Replace_ = 150,
 
         后台赠送 = 151,
         加群奖励 = 152,
@@ -649,7 +653,7 @@ namespace GL.Data.Model
         免费红包游戏币 = 168,
 
         数据回滚_扣游戏币成功后人物离线 = 169,
-        数据回滚_扣五币成功后人物离线 = 170,
+        数据回滚_扣_Replace_成功后人物离线 = 170,
         数据回滚_奔驰宝马下注 = 171,
         数据回滚_奔驰宝马重复下注 = 172,
         数据回滚_奔驰宝马上庄总数量上限超过30个 = 173,
@@ -658,7 +662,7 @@ namespace GL.Data.Model
         数据回滚_德州自动加入 = 176,
         数据回滚_德州主动坐下抢最后一个位置失败 = 177,
         数据回滚_德州主动坐下同一IP两个号同时坐下 = 178,
-        数据回滚_百人德州使用互动道具扣五币 = 179,
+        数据回滚_百人德州使用互动道具扣_Replace_ = 179,
         数据回滚_百人德州互动道具扣游戏币 = 180,
         数据回滚_百人德州下注超过庄家可下注金额 = 181,
         数据回滚_百人德州下注超过自己可下注金额 = 182,
@@ -671,7 +675,7 @@ namespace GL.Data.Model
         数据回滚_中发白下注 = 189,
         数据回滚_中发白重复下注 = 190,
         数据回滚_中发白补庄 = 191,
-        数据回滚_中发白使用互动道具扣五币 = 192,
+        数据回滚_中发白使用互动道具扣_Replace_ = 192,
         数据回滚_中发白互动道具扣游戏币 = 193,
         数据回滚_十二生肖上庄总数量上限超过30个 = 194,
         数据回滚_十二生肖上庄个人数量上限超过5个 = 195,
@@ -686,6 +690,24 @@ namespace GL.Data.Model
         中秋节领取月饼 = 202,
 
 
+        水浒传获得游戏币  = 203,
+        水浒传拉霸消耗游戏币 = 204,
+        水浒传比倍消耗游戏币 = 205,
+        水浒传彩池奖励游戏币  = 206,
+
+        水浒传获得经验 = 207,
+        水浒传获得积分 = 208,
+        水浒传回收游戏币 = 999,
+
+
+        水果机下注 = 220,
+        水果机结算 = 221,
+        水果机兑换加钱 = 222,
+        水果机兑换减钱 = 223,
+        水果机加经验 = 224,
+        水果机加积分 = 225,
+        水果机大彩池 = 226,
+        水果机回收游戏币 = 998,
 
         转盘使用金钥匙 = 10001,
         签到得到金钥匙 = 10002,

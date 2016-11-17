@@ -19,7 +19,7 @@ namespace MWeb.Controllers
 {
     [Authorize]
 
-    public class HomeController : Controller
+    public class HomeController : CaptchaController
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
@@ -72,9 +72,12 @@ namespace MWeb.Controllers
             _login.UserName = "";
             _login.Password = "";
 
+           
 
             return View(_login);
         }
+
+     
 
 
         [HttpPost]
@@ -82,6 +85,12 @@ namespace MWeb.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> login(MLogin _login, string returnUrl)
         {
+            string yzm = _login.YZM;
+            string sessYZM = Session["ValidateCode"].ToString();
+
+         
+
+
             var user = await UserManager.FindByNameAsync(_login.UserName);
 
             string username = _login.UserName;
@@ -94,6 +103,31 @@ namespace MWeb.Controllers
                 );
             }
 
+            ASPNetUserLimit limit = OperLogBLL.GetASPNetUserLimit(new ASPNetUserLimit()
+            {
+                Username = username
+            });
+            if (limit != null)
+            {
+                if (limit.ErrorNum >= 3) {
+                    return Json(
+                         new { result = Result.ParaErrorCount }
+                     );
+                }
+            }
+           
+
+
+            if (yzm != sessYZM)
+            {
+                OperLogBLL.UpdateASPNetUserLimit(new ASPNetUserLimit() {
+                     Username = username
+                });
+
+                return Json(
+                   new { result = Result.ParaYZMError }
+               );
+            }
             // 这不会计入到为执行帐户锁定而统计的登录失败次数中
             // 若要在多次输入错误密码的情况下触发帐户锁定，请更改为 shouldLockout: true
             var result = await SignInManager.PasswordSignInAsync(username, passwd, isPersistent : true, shouldLockout: false);
@@ -126,7 +160,10 @@ namespace MWeb.Controllers
                         IP = Request.UserHostAddress
                     });
 
-
+                    OperLogBLL.UpdateASPNetUserReset(new ASPNetUserLimit()
+                    {
+                        Username = username
+                    });
 
                     return Json(RedirectToLocal(returnUrl));
 
@@ -138,6 +175,13 @@ namespace MWeb.Controllers
                 default:
                     //ModelState.AddModelError("", "无效的登录尝试。");
                     //return View(model);
+
+                    OperLogBLL.UpdateASPNetUserLimit(new ASPNetUserLimit()
+                    {
+                        Username = username
+                    });
+
+
                     return Json(new { result = Result.PasswordIsIncorrect });
             }
 

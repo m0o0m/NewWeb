@@ -1,4 +1,5 @@
-﻿using GL.Data.BLL;
+﻿using GL.Command.DBUtility;
+using GL.Data.BLL;
 using GL.Data.Model;
 using GL.Data.View;
 using GL.Protocol;
@@ -15,6 +16,9 @@ namespace MWeb.Controllers
 {
     public class ActiveController : Controller
     {
+        public static readonly string Coin = PubConstant.GetConnectionString("coin");
+
+
         [QueryValues]
         public ActionResult RouletteData(Dictionary<string, string> queryvalues)
         {

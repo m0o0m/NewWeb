@@ -16,6 +16,8 @@
 
     List<GameOutput> bdl = (List<GameOutput>)Model.BaseDataList;
 
+    string Coin = MWeb.Controllers.BaseController.Coin;
+
 }
 
 <div id="content">
@@ -121,10 +123,10 @@
                                             <th>当日产出游戏币</th>
                                             <th>当日消耗游戏币</th>
                                             <th>充值游戏币</th>
-                                            <th>系统总五币</th>
-                                            <th>当日产出五币</th>
-                                            <th>当日消耗五币</th>
-                                            <th>充值五币</th>
+                                            <th>系统总@(Coin)</th>
+                                            <th>当日产出@(Coin)</th>
+                                            <th>当日消耗@(Coin)</th>
+                                            <th>充值@(Coin)</th>
                                             <th></th>
                                         </tr>
                                     </thead>

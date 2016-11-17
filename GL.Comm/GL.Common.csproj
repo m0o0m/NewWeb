@@ -106,6 +106,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BaiDuHelper.cs" />
     <Compile Include="DataReaderExtensions.cs" />
     <Compile Include="DESEncrypt.cs" />
     <Compile Include="EnumExtensions.cs" />

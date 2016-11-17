@@ -201,6 +201,9 @@
     <Compile Include="..\GL.Data\Model\SignDraw.cs">
       <Link>Model\SignDraw.cs</Link>
     </Compile>
+    <Compile Include="..\GL.Data\Model\SUpdate.cs">
+      <Link>Model\SUpdate.cs</Link>
+    </Compile>
     <Compile Include="..\GL.Data\Model\UserMoneyRecord.cs">
       <Link>Model\UserMoneyRecord.cs</Link>
     </Compile>
@@ -218,7 +221,6 @@
     <Compile Include="Model\VersionSum.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />

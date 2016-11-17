@@ -36,6 +36,8 @@ namespace MWeb
             app.UseCookieAuthentication(new CookieAuthenticationOptions
             {
                 AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie,
+                SlidingExpiration = false,
+                ExpireTimeSpan = TimeSpan.FromMinutes(30),
                 LoginPath = new PathString("/Home/Login"),
                 LogoutPath = new PathString("/Home/LogOff"),
                 CookieName = CookieAuthenticationDefaults.CookiePrefix + System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString(),
@@ -45,7 +47,7 @@ namespace MWeb
                     // 当用户登录时使应用程序可以验证安全戳。
                     // 这是一项安全功能，当你更改密码或者向帐户添加外部登录名时，将使用此功能。
                     OnValidateIdentity = SecurityStampValidator.OnValidateIdentity<ApplicationUserManager, ApplicationUser>(
-                        validateInterval: TimeSpan.FromMinutes(30),
+                        validateInterval: TimeSpan.FromMinutes(5),
                         regenerateIdentity: (manager, user) => user.GenerateUserIdentityAsync(manager))
                 }
             });            

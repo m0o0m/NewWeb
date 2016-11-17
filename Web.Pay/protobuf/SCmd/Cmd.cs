@@ -1,4 +1,6 @@
-﻿using GL.Protocol;
+﻿using GL.Command.DBUtility;
+using GL.Protocol;
+using log4net;
 using ProtoCmd.BackRecharge;
 using System;
 using System.Collections.Generic;
@@ -11,6 +13,10 @@ namespace Web.Pay.protobuf.SCmd
 {
     public class Cmd
     {
+        public static readonly string host = PubConstant.GetConnectionString("serverhost");
+        public static readonly string port = PubConstant.GetConnectionString("serverport");
+   
+
         internal static Bind runClient(Bind tbind)
         {
             Bind bind;
@@ -21,24 +27,9 @@ namespace Web.Pay.protobuf.SCmd
                 tbind.ToBytes().CopyTo(bit, 0);
                 using (TcpClient client = new TcpClient())
                 {
-                    //10.237.154.102
-#if Debug
-                    client.Connect(new IPEndPoint(IPAddress.Parse("192.168.1.18"), 5500));
-#endif
-
-#if P17
-                    client.Connect(new IPEndPoint(IPAddress.Parse("192.168.1.18"), 5500));
-#endif
-
-#if Test
-                    //  10.237.225.129
-                    //client.Connect(new IPEndPoint(IPAddress.Parse("10.105.46.18"), 5500));
-                    client.Connect(new IPEndPoint(IPAddress.Parse("10.105.9.94"), 5500));
-#endif
-
-#if Release
-                    client.Connect(new IPEndPoint(IPAddress.Parse("10.105.231.248"), 5500));
-#endif
+                         ILog log = LogManager.GetLogger("Sign");
+                    log.Info("host=" + host + ",port" + port);
+               client.Connect(new IPEndPoint(IPAddress.Parse(host), Convert.ToInt32(port)));
 
                     using (NetworkStream stream = client.GetStream())
                     {   

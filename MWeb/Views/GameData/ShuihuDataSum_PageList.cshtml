@@ -1,0 +1,229 @@
+﻿@using Webdiyer.WebControls.Mvc;
+@using GL.Data.Model;
+@using GL.Data.BLL;
+@model PagedList<ShuihuDataSum>
+
+
+
+
+
+
+
+<section id="widget-grid" class="">
+    <div class="row">
+        <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-0" data-widget-editbutton="false" data-widget-colorbutton="false"
+                 data-widget-togglebutton="false"
+                 data-widget-deletebutton="false"
+                 data-widget-fullscreenbutton="false"
+                 data-widget-custombutton="false"
+                 data-widget-collapsed="false"
+                 data-widget-sortable="false">
+                <header>
+                    <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                    <h2>水浒传数据统计</h2>
+                </header>
+                <!-- widget div-->
+                <div>
+                    <!-- widget edit box -->
+                    <div class="jarviswidget-editbox">
+                        <!-- This area used as dropdown edit box -->
+                    </div>
+                    <!-- end widget edit box -->
+                    <!-- widget content -->
+                    <div class="widget-body no-padding">
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <thead>
+
+                                    <tr>
+                                        <th rowspan="2">时间</th>
+                                    
+                                        <th colspan="3">拉霸</th>
+                                        <th colspan="3">比倍</th>
+                                        <th colspan="3">免费拉霸(触发次数)</th>
+                                        <th colspan="4">小玛丽</th>
+                                        <th colspan="11">全盘奖(全盘次数)</th>
+                                        <th colspan="2">奖池</th>
+                                    </tr>
+                                    <tr>
+                                        <th>玩局人数</th>
+                                        <th>玩局数</th>
+                                        <th>人均局数</th>
+                                        <th>玩局人数</th>
+                                        <th>玩局数</th>
+                                        <th>人均局数</th>
+                                        <th>5次</th>
+                                        <th>10次</th>
+                                        <th>15次</th>
+                                        <th>触发总次数</th>
+                                        <th>作弊触发次数</th>
+                                        <th>平均中奖倍数</th>
+                                        <th>最大中奖倍数</th>
+                                        <th>武器</th>
+                                        <th>人物</th>
+                                        <th>铁斧</th>
+                                        <th>银枪</th>
+                                        <th>金刀</th>
+                                        <th>鲁智</th>
+                                        <th>林冲</th>
+                                        <th>宋江</th>
+                                        <th>替天行道</th>
+                                        <th>忠义堂</th>
+                                        <th>全盘龙</th>
+                                        <th>发放次数</th>
+                                        <th>发放总额</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                  @if (Model.Count == 0)
+                               {
+                                    <tr class="gradeX">
+                                        <td class="colspan" align="center" colspan="0">
+                                            没有找到相关记录！
+                                        </td>
+                                    </tr>
+                                  }
+                                @foreach (ShuihuDataSum m in Model)
+                                {
+                                    <tr>
+                                        <td>@m.CreateTime</td>
+                                    
+                                        <td>@m.LCount</td>
+                                        <td>@m.LNum</td>
+                                       
+                                            @if (m.LCount == 0)
+                                            {
+                                                <td>0</td>
+                                            }
+                                            else
+                                            {
+                                                <td>@(m.LNum / m.LCount)</td>
+                                            }
+                                          
+                                       
+                                     
+                                        <td>@m.BCount</td>
+                                        <td>@m.BNum</td>
+                                        @if (m.BCount == 0)
+                                        {
+                                            <td>0</td>
+                                        }
+                                        else
+                                        {
+                                            <td>@(m.BNum / m.BCount)</td>
+                                        }
+
+
+                                     
+
+                                        <td>@m.MLNum5</td>
+                                        <td>@m.MLNum10</td>
+                                        <td>@m.MLNum15</td>
+
+
+                                        <td>@m.MaryNum</td>
+                                        <td>@m.MaryZuobiNum</td>
+                                        <td>@m.MaryAverageNum</td>
+                                        <td>@m.MaryMax</td>
+
+
+                                        <td>@m.QWuqi</td>
+                                        <td>@m.QRenwu</td>
+                                        <td>@m.QTiefu</td>
+                                        <td>@m.QYinQiang</td>
+                                        <td>@m.QJinDao</td>
+                                        <td>@m.QLu</td>
+                                        <td>@m.QLin</td>
+                                        <td>@m.QSong</td>
+                                        <td>@m.QTi</td>
+                                        <td>@m.QZhong</td>
+                                        <td>@m.QQuan</td>
+
+                                        <td>@m.PotNum</td>
+                                        <td>@m.QSum</td>
+                                    </tr>
+                                }
+                                </tbody>
+                            </table>
+                        </div>
+
+
+
+
+
+
+
+
+                        <div class="widget-content">
+
+                            @Ajax.Pager(
+    Model,
+    new PagerOptions()
+    {
+        CssClass = "pager",
+        ShowMorePagerItems = true,
+        PageIndexParameterName = "page",
+        ShowDisabledPagerItems = true,
+        AlwaysShowFirstLastPageNumber = true,
+        //ShowRecordCountItems = true,
+        HorizontalAlign = "right",
+        //SeparatorHtml = "",
+
+        CurrentPagerItemTemplate = "<li class=\"disabled\"><span>{0}</span></li>",
+        DisabledPagerItemTemplate = "<li class=\"disabled\"><span>{0}</span></li>",
+        PagerItemTemplate = "<li>{0}</li>",
+        //CurrentPagerItemWrapperFormatString = "<li class=\"disabled\"><span>{0}</span></li>",
+        //NumericPagerItemWrapperFormatString = "<li>{0}</li>",
+        //PagerItemWrapperFormatString = "<li>{0}</li>",
+        //RecordCountText = string.Format("共{0}条记录, {1}页", Model.TotalItemCount, Model.TotalPageCount),
+        //RecordCountFormatString = "<li><span>{0}</span></li>",
+        //DisabledPagerItemsFormatString = "<li class=\"disabled\"><span>{0}</span></li>",
+        //PageIndexBoxType = Webdiyer.WebControls.Mvc.PageIndexBoxType.TextBox,
+        //GoButtonText = "跳转到",
+        ShowPrevNext = true,
+        FirstPageText = "第一页",
+        LastPageText = "最后一页",
+        ContainerTagName = "ul",
+        PageIndexBoxId = "pageindexcm",
+        WYWPageIndexString = @"<li><input style='width:50px;' type='text' value='' id='{0}' name = '{1}'></li>
+                                 <li><a id='goto' name='goto' style='margin-right:10px' >跳转</a><li>
+                             ",
+        GoToButtonId = "goto"
+    },
+    new MvcAjaxOptions
+    {
+        HttpMethod = "POST",
+        UpdateTargetId = "box",
+        InsertionMode = InsertionMode.Replace,
+        OnFailure = "errFunc",
+        OnSuccess = "successPageFun"
+    })
+                        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    </div>
+                    <!-- end widget content -->
+                </div>
+                <!-- end widget div -->
+            </div>
+            <!-- end widget -->
+
+        </article>
+    </div>
+</section>

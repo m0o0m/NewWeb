@@ -4,6 +4,8 @@
 @model PagedList<Roulette>
 @{
     ViewBag.Format = "yyyy-MM-dd";
+
+    string Coin = MWeb.Controllers.ActiveController.Coin;
 }
 
 <div class="row-fluid">
@@ -35,7 +37,7 @@
                                                 <th>抽奖总消耗游戏币</th>
                                                 <th>抽奖总产出游戏币</th>
                                                 <th>抽奖总产出兑换劵</th>
-                                                <th>抽奖总产出五币</th>
+                                                <th>抽奖总产出@(Coin)</th>
                                             </tr>
                                         </thead>
                                         <tbody>

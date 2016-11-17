@@ -1,0 +1,198 @@
+﻿@using GL.Data.View
+@model UserStock
+@{
+    ViewBag.Title = "修改库存用户";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+
+
+}
+
+<article class="col-sm-12 col-md-12 col-lg-7">
+    <div class="jarviswidget" id="wid-id-4" data-widget-editbutton="false" data-widget-custombutton="false">
+        <header>
+            <span class="widget-icon"> <i class="fa fa-edit"></i> </span>
+            <h2>@ViewBag.AgentLv</h2>
+        </header>
+        <div>
+            <div class="jarviswidget-editbox">
+            </div>
+            <div class="widget-body no-padding">
+                <form id="submitForm" class="smart-form" action="" method="post">
+                    <input id="GroupID" name="GroupID" type="hidden" value="@Model.GroupID" />
+                    <fieldset>
+
+                        <div class="row">
+                            <section class="col col-5">
+                                <label>库组名称 : @Model.GroupName</label>
+                                <label class="label">
+                                    @*<input type="text" class="span4" value="@Model.Value" />*@
+
+                                </label>
+                            </section>
+
+                        </div>
+
+                        <div class="row">
+                            <section class="col col-5">
+                                <label>现有的库存值 : @Model.Value</label>
+                                <label class="label">
+                                    @*<input type="text" class="span4" value="@Model.Value" />*@
+
+                                </label>
+                            </section>
+
+                        </div>
+
+                        <div class="row">
+                            <section class="col col-5">
+                                <label>库组用户(多用户用,隔开 name1,name2...) :</label>
+                             
+                                <label class="textarea">
+                                    <textarea class="textarea" id="UserName" name="UserName">@Model.UserName</textarea>
+                                </label>
+
+                            </section>
+
+                        </div>
+                        @*<div class="row">
+
+                                <section class="col col-5">
+                                    <label>修改原因 :</label>
+                                    <label class="textarea">
+                                        <textarea class="textarea" id="Context" name="Context"></textarea>
+                                    </label>
+                                </section>
+
+                            </div>*@
+
+                    </fieldset>
+
+
+                    <footer>
+                        <input id="btnGoBack" type="button" value="返回列表" class=" btn btn-warning" />
+                        <input id="btnadd" type="button" value="确定" class="btn btn-danger" />
+
+
+                    </footer>
+                </form>
+
+            </div>
+            <!-- end widget content -->
+
+        </div>
+        <!-- end widget div -->
+
+    </div>
+
+</article>
+
+
+
+
+
+
+
+
+
+
+@section scripts{
+
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/select2.min.js"></script>
+    <style type="text/css">
+        .quick-actions1 {
+            display: block;
+            list-style: outside none none;
+            margin: 15px 0;
+            text-align: center;
+        }
+
+            .quick-actions1 li a {
+                color: #fff;
+                display: block;
+                font-size: 14px;
+                font-weight: lighter;
+            }
+
+            .quick-actions1 li a {
+                padding: 10px 30px;
+            }
+
+        .quick-actions_homepage .quick-actions1 .span3 {
+            width: 30%;
+        }
+
+        .quick-actions_homepage .quick-actions1 li {
+            position: relative;
+        }
+
+        .quick-actions1 li {
+            min-height: 70px;
+            min-width: 14%;
+        }
+
+        .quick-actions1 li {
+            float: left;
+            line-height: 18px;
+            margin: 0 10px 10px 0;
+            padding: 0 10px;
+        }
+
+            .quick-actions1 li a i[class^="icon-"], .quick-actions1 li a i[class*=" icon-"] {
+                display: block;
+                font-size: 30px;
+                margin: 0 auto 5px;
+            }
+
+        .quick-actions1 li {
+            padding: 0;
+        }
+    </style>
+
+    <script type="text/javascript">
+
+
+        // resets the menu selection upon entry to this page:
+        function resetMenu() {
+            document.gomenu.selector.selectedIndex = 2;
+        }
+
+        $(function () {
+            $("#btnadd").click(function () {
+                $.ajax({
+                    url: "/SU/SaveStockUser/",
+                    type: "POST",
+                    data: { "GroupID": $("#GroupID").val(), "UserName": $("#UserName").val() },
+                    success: function (data) {
+
+                        switch (data) {
+                            case "1":
+                                alert('操作成功!');
+                                break;
+                            case "2":
+                                alert("用户名包含非法字符',请重新输入 !");
+                                break;
+                            case "3":
+                                alert("输入的用户已在其他库组中，请重新输入!");
+                                break;
+                            case "4":
+                                alert("输入的数据有不存在的用户，请重新输入!");
+                                break;
+                            default:
+                                alert('操作失败，请重新尝试!');
+                                break;
+                        }
+                    }
+                });
+                return false;
+            });
+         
+            $("#btnGoBack").click(function () {
+                location.href = "/SU/EmailStock";
+            });
+        });
+
+
+    </script>
+}

@@ -14,6 +14,10 @@ namespace GL.Data.BLL
 {
     public class RechargeCheckBLL
     {
+        public static readonly string database1 = PubConstant.GetConnectionString("database1");
+        public static readonly string database2 = PubConstant.GetConnectionString("database2");
+        public static readonly string database3 = PubConstant.GetConnectionString("database3");
+
 
         public static int Delete(RechargeCheck model)
         {
@@ -71,7 +75,7 @@ namespace GL.Data.BLL
             pq.CurrentPage = page;
             pq.PageSize = 10;
             pq.RecordCount = DAL.PagedListDAL<UserIpInfo>.GetRecordCount(string.Format(@"
-select count(*) from record.Charge_OrderIPRecord 
+select count(*) from "+database3+@".Charge_OrderIPRecord 
 where  CreateTime BETWEEN '"+model.StartTime + "' and '"+model.EndTime+@"' {0} {1} {2} {3}",
       string.IsNullOrEmpty(model.OrderID)?"": " and OrderID ='"+model.OrderID+"'",
       model.UserID<=0?"": " and  UserID="+model.UserID,
@@ -81,7 +85,7 @@ where  CreateTime BETWEEN '"+model.StartTime + "' and '"+model.EndTime+@"' {0} {
       ));
 
             pq.Sql = string.Format(@"
-select * from record.Charge_OrderIPRecord 
+select * from "+ database3 + @".Charge_OrderIPRecord 
 where  CreateTime BETWEEN '" + model.StartTime + "' and '" + model.EndTime + @"' {0} {1} {2} {3}   limit {4}, {5}",
       string.IsNullOrEmpty(model.OrderID) ? "" : " and OrderID ='" + model.OrderID + "'",
       model.UserID <= 0 ? "" : " and  UserID=" + model.UserID,

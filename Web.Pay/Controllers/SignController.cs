@@ -97,7 +97,7 @@ namespace Web.Pay.Controllers
             }
 
 
-            if (!(response.Receipt.BundleIdentifier == "com.game515.wywdezhou" || response.Receipt.BundleIdentifier == "com.game515.515dezhou"))
+            if (!(response.Receipt.BundleIdentifier == "com.game515.wywdezhou" || response.Receipt.BundleIdentifier == "com.game515.515dezhou" ||  response.Receipt.BundleIdentifier == "com.gamehk.wanrendezhou" || response.Receipt.BundleIdentifier == "com.gamehk.wanrenqlunpan"))
             {
                 log.Error("AppStore ReceiptVerifier Error bid :" + response.Receipt.BundleIdentifier);
                 return Json(new { result = 10006, msg = "AppStore ReceiptVerifier Error bid :" + response.Receipt.BundleIdentifier });
@@ -186,6 +186,8 @@ namespace Web.Pay.Controllers
                 RechargeBLL.Add(new Recharge { BillNo = _transactionid, OpenID = response.Receipt.UniqueIdentifier, UserID = _identityid, Money = (rmb * 100), CreateTime = DateTime.Now, Chip = gold, Diamond = dia, ChipType = ct, IsFirst = iF, NickName = iap.productname, PayItem = iap.product_id, PF = raType.AppStore, UserAccount = user.NickName ,ActualMoney = (rmb * 100), ProductNO = list.Trim(',') });
 
 
+                log.Info(" 开始给服务器发送消息_identityid="+ _identityid+ ",list="+ list+ ",rmb*100="+ rmb * 100+ ",firstGif="+ firstGif+ ",_transactionid="+ _transactionid);
+
 
                 normal ServiceNormalS = normal.CreateBuilder()
                 .SetUserID((uint)_identityid)
@@ -200,6 +202,10 @@ namespace Web.Pay.Controllers
                 switch ((CenterCmd)tbind.header.CommandID)
                 {
                     case CenterCmd.CS_NORMAL:
+
+
+                        log.Info("CenterCmd.CS_NORMAL:");
+
                         normalRep ServiceNormalC = normalRep.ParseFrom(tbind.body.ToBytes());
                         log.Info(" AppStore ServiceResult : " + ServiceNormalC.Suc);
                         if (ServiceNormalC.Suc)
@@ -213,6 +219,11 @@ namespace Web.Pay.Controllers
                         //Response.Redirect("mobilecall://fail?suc=" + ServiceNormalC.Suc);
                         break;
                     case CenterCmd.CS_CONNECT_ERROR:
+
+
+                        log.Info(" CenterCmd.CS_CONNECT_ERROR:");
+
+
                         break;
                 }
               

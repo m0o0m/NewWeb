@@ -2,7 +2,9 @@
 @using GL.Data.Model;
 @model PagedList<Role>
 
-
+@{ 
+    string Coin = MWeb.Controllers.MemberController.Coin;
+}
 
 
 
@@ -44,7 +46,7 @@
                                         <th >昵称</th>
                                         <th >姓名</th>
                                         <th >游戏币</th>
-                                        <th>五币</th>
+                                        <th>@(Coin)</th>
                                         <th >邮箱</th>
                                         <th>电话</th>
                                         <th >所属代理</th>

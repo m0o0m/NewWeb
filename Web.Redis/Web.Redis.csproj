@@ -44,6 +44,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="GL.QcloudApi">
+      <HintPath>..\GL.QcloudApi\bin\Debug\GL.QcloudApi.dll</HintPath>
+    </Reference>
     <Reference Include="log4net, Version=1.2.14.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <HintPath>..\packages\log4net.2.0.4\lib\net45-full\log4net.dll</HintPath>
       <Private>True</Private>
@@ -356,10 +359,6 @@
     <ProjectReference Include="..\GL.Dapper\GL.Dapper.csproj">
       <Project>{6384424e-c4c0-42c8-9b65-6122a5273c2c}</Project>
       <Name>GL.Dapper</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\GL.QcloudApi\GL.QcloudApi.csproj">
-      <Project>{d39eab83-236a-4d42-91f7-abc7186b8a0e}</Project>
-      <Name>GL.QcloudApi</Name>
     </ProjectReference>
     <ProjectReference Include="..\GL.Redis.Data\GL.Redis.Data.csproj">
       <Project>{4c5340a3-f247-414b-9e65-01721c5ee273}</Project>

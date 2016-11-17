@@ -14,6 +14,10 @@ namespace GL.Data.TWeb.DAL
     {
         internal static readonly string sqlconnectionString = PubConstant.GetConnectionString("connectionstring");
 
+        public static readonly string database1 = PubConstant.GetConnectionString("database1");
+        public static readonly string database2 = PubConstant.GetConnectionString("database2");
+        public static readonly string database3 = PubConstant.GetConnectionString("database3");
+
         public static IEnumerable<TMonitorData> GetTimeHasSQL()
         {
             using (var cn = new MySqlConnection(sqlconnectionString))
@@ -25,7 +29,7 @@ namespace GL.Data.TWeb.DAL
               
                   
                     str.AppendFormat(@"
-select * from GServerInfo.MonitorConfig
+select * from "+ database2 + @".MonitorConfig
 where IsOpen=1 and  (ExecSQl is not null and ExecSQl!='')
 ");
         
@@ -49,7 +53,7 @@ where IsOpen=1 and  (ExecSQl is not null and ExecSQl!='')
 
 
                 str.AppendFormat(@"
-select * from GServerInfo.MonitorConfig
+select * from "+ database2 + @".MonitorConfig
 where IsOpen=1 and  (ExecSQl is  null or ExecSQl='')
 ");
 
@@ -74,7 +78,7 @@ where IsOpen=1 and  (ExecSQl is  null or ExecSQl='')
 
 
                 str.AppendFormat(@"
-select * from GServerInfo.MonitorConfig
+select * from "+ database2 + @".MonitorConfig
 where IsOpen=1 and  MonitorID = "+id+@"
 ");
 
@@ -98,7 +102,7 @@ where IsOpen=1 and  MonitorID = "+id+@"
                 cn.Open();
                 StringBuilder str = new StringBuilder();
 
-                str.Append("select * from record.S_Update where UpdateTable = '" + SearchExt + "'");
+                str.Append("select * from "+ database3+ @".S_Update where UpdateTable = '" + SearchExt + "'");
 
                 IEnumerable<SUpdate> i = cn.Query<SUpdate>(str.ToString());
                 cn.Close();
@@ -108,7 +112,7 @@ where IsOpen=1 and  MonitorID = "+id+@"
                    
                     DateTime dtN = GetDataBaseTime();
                     string sql = @"
-insert into record.S_Update(CountDate,UpdateTable,id_date,Description)
+insert into "+ database3 + @".S_Update(CountDate,UpdateTable,id_date,Description)
 VALUES('"+ dtN + "', '" + SearchExt+ "','"+ dtN + "', '');";
 
                     cn.Execute(sql);
@@ -186,7 +190,7 @@ update MonitorLog set IsSend = 1 where id in (
                 StringBuilder str = new StringBuilder();
 
                 str.AppendFormat(@"
-INSERT into GServerInfo.MonitorLog(MonitorID,UserID,IsSend,CreateTime) 
+INSERT into "+ database2+ @".MonitorLog(MonitorID,UserID,IsSend,CreateTime) 
 VALUES(" + monitorID + @"," + 0 + @",0,now());
 ");
                 int i = cn.Execute(str.ToString());
@@ -206,7 +210,7 @@ VALUES(" + monitorID + @"," + 0 + @",0,now());
                 StringBuilder str = new StringBuilder();
 
                 str.AppendFormat(@"
-INSERT into GServerInfo.MonitorLog(MonitorID,UserID,IsSend,CreateTime) 
+INSERT into "+ database2+ @".MonitorLog(MonitorID,UserID,IsSend,CreateTime) 
 VALUES("+ monitorID + @","+ userid + @",0,now());
 ");
                 int i =  cn.Execute(str.ToString());

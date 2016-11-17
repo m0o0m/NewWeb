@@ -22,5 +22,9 @@ namespace GL.Data.BLL
         {
              DAL.SystemPayDAL.PaiJuAfter();
         }
+
+        public static void ShuihuAfter(string startTime,string endTime) {
+            DAL.SystemPayDAL.ShuihuAfter(startTime,endTime);
+        }
     }
 }

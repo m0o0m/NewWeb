@@ -1,0 +1,235 @@
+﻿@using Webdiyer.WebControls.Mvc;
+@using GL.Data.Model;
+@using GL.Data.BLL;
+@model BaseDataView
+
+@{
+    List<S_Desc> modelList = Model.BaseDataList as List<S_Desc>;
+    int no = Convert.ToInt32(Model.SearchExt);
+}
+
+
+
+<div id="content">
+     <label>@no</label>
+     
+
+    <div class="row-fluid">
+        <div class="widget-box" id="box">
+            <section id="widget-grid" class="">
+                <div class="row">
+                    <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-0" data-widget-editbutton="false" data-widget-colorbutton="false"
+                             data-widget-togglebutton="false"
+                             data-widget-deletebutton="false"
+                             data-widget-fullscreenbutton="false"
+                             data-widget-custombutton="false"
+                             data-widget-collapsed="false"
+                             data-widget-sortable="false">
+                            <header>
+                                <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                                <h2>代理商扣库存的流水(每分钟)-关服方可修改</h2>
+                            </header>
+                            <!-- widget div-->
+                            <div>
+                                <!-- widget edit box -->
+                                <div class="jarviswidget-editbox">
+                                    <!-- This area used as dropdown edit box -->
+                                </div>
+                                <!-- end widget edit box -->
+                                <!-- widget content -->
+                                <div class="widget-body no-padding">
+                                    <form id="submitForm" class="smart-form" action="/DaiLi/SetFlowNoIndex" method="post">
+                                        <input type="hidden" value="1" id="isPostBack" name="isPostBack" />
+                                        <input type="hidden" value="@no" id="no" name="no" />
+                                        <div class="table-responsive">
+                                            <table class="table table-bordered">
+
+                                                <tbody>
+                                                    @if (modelList.Count() == 0)
+                                                    {
+                                                        <tr>
+                                                            <td>
+                                                                <span class="user-info"> Date: @DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") </span>
+                                                                <p><a href="#">没有找到相关记录！</a> </p>
+                                                            </td>
+                                                        </tr>
+                                                    }
+                                                    @{
+                                                        for (int i = 0; i < modelList.Count(); i++)
+                                                        {
+                                                            if (i % 6 == 0)
+                                                            {
+                                                                S_Desc item1 = modelList[i];
+                                                                <tr>
+                                                                    <td>
+                                                                        <label class="checkbox state-error">
+                                                                            @if (item1.IsCheck >= 1)
+                                                                            {
+                                                                                <input value="@item1.Type" mark2="1" mark="1" type="checkbox" name="checkbox" checked="checked"><i></i>
+                                                                            }
+                                                                            else
+                                                                            {
+                                                                                <input value="@item1.Type" mark2="1" mark="1" type="checkbox" name="checkbox"><i></i>
+                                                                            }
+                                                                           
+                                                                            @(item1.UserOper + "(" + item1.Type + ")")
+                                                                        </label>
+                                                                    </td>
+
+
+                                                                    @{
+                                                                        if ((i + 1) < modelList.Count())
+                                                                        {
+                                                                            S_Desc item2 = modelList[i + 1];
+                                                                            <td style="background-color:gray"></td>
+                                                                            <td>
+                                                                                <label class="checkbox state-error">
+                                                                                    @if (item2.IsCheck >= 1)
+                                                                                    {
+                                                                                        <input value="@item2.Type" mark2="1" mark="1" type="checkbox" name="checkbox" checked="checked"><i></i>
+                                                                                    }
+                                                                                    else
+                                                                                    {
+                                                                                        <input value="@item2.Type" mark2="1" mark="1" type="checkbox" name="checkbox"><i></i>
+                                                                                    }
+                                                                                    @(item2.UserOper + "(" + item2.Type + ")")
+                                                                                </label>
+                                                                            </td>
+
+                                                                        }
+
+                                                                        if ((i + 2) < modelList.Count())
+                                                                        {
+                                                                            S_Desc item3 = modelList[i + 2];
+                                                                            <td style="background-color:gray"></td>
+                                                                            <td>
+                                                                                <label class="checkbox state-error">
+                                                                                    @if (item3.IsCheck >= 1)
+                                                                                    {
+                                                                                        <input value="@item3.Type" mark2="1" mark="1" type="checkbox" name="checkbox" checked="checked"><i></i>
+                                                                                    }
+                                                                                    else
+                                                                                    {
+                                                                                        <input value="@item3.Type" mark2="1" mark="1" type="checkbox" name="checkbox"><i></i>
+                                                                                    }
+                                                                                    @(item3.UserOper + "(" + item3.Type + ")")
+                                                                                </label>
+                                                                            </td>
+
+                                                                        }
+
+
+                                                                        if ((i + 4) < modelList.Count())
+                                                                        {
+                                                                            S_Desc item4 = modelList[i + 3];
+                                                                            <td style="background-color:gray"></td>
+                                                                            <td>
+                                                                                <label class="checkbox state-error">
+                                                                                    @if (item4.IsCheck >= 1)
+                                                                                    {
+                                                                                        <input value="@item4.Type" mark2="1" mark="1" type="checkbox" name="checkbox" checked="checked"><i></i>
+                                                                                    }
+                                                                                    else
+                                                                                    {
+                                                                                        <input value="@item4.Type" mark2="1" mark="1" type="checkbox" name="checkbox"><i></i>
+                                                                                    }
+                                                                                    @(item4.UserOper + "(" + item4.Type + ")")
+                                                                                </label>
+                                                                            </td>
+
+                                                                        }
+
+
+                                                                        if ((i + 5) < modelList.Count())
+                                                                        {
+                                                                            S_Desc item5 = modelList[i + 4];
+                                                                            <td style="background-color:gray"></td>
+                                                                            <td>
+                                                                                <label class="checkbox state-error">
+                                                                                    @if (item5.IsCheck >= 1)
+                                                                                    {
+                                                                                        <input value="@item5.Type" mark2="1" mark="1" type="checkbox" name="checkbox" checked="checked"><i></i>
+                                                                                    }
+                                                                                    else
+                                                                                    {
+                                                                                        <input value="@item5.Type" mark2="1" mark="1" type="checkbox" name="checkbox"><i></i>
+                                                                                    }
+                                                                                    @(item5.UserOper + "(" + item5.Type + ")")
+                                                                                </label>
+                                                                            </td>
+
+                                                                        }
+
+                                                                        if ((i + 6) < modelList.Count())
+                                                                        {
+                                                                            S_Desc item6 = modelList[i + 5];
+                                                                            <td style="background-color:gray"></td>
+                                                                            <td>
+                                                                                <label class="checkbox state-error">
+                                                                                    @if (item6.IsCheck >= 1)
+                                                                                    {
+                                                                                        <input value="@item6.Type" mark2="1" mark="1" type="checkbox" name="checkbox" checked="checked"><i></i>
+                                                                                    }
+                                                                                    else
+                                                                                    {
+                                                                                        <input value="@item6.Type" mark2="1" mark="1" type="checkbox" name="checkbox"><i></i>
+                                                                                    }
+                                                                                    @(item6.UserOper + "(" + item6.Type + ")")
+                                                                                </label>
+                                                                            </td>
+
+                                                                        }
+
+                                                                    }
+
+                                                                </tr>
+                                                                            }
+                                                                        }
+                                                    }
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <footer>
+<input id="btnGoBack" type="button" value="返回列表" class=" btn btn-warning" />
+<input id="btnKick" type="submit" value="提交" class="btn btn-danger" />
+                                        </footer>
+                                    </form>
+                                   
+
+</div>
+                                <!-- end widget content -->
+                            </div>
+                            <!-- end widget div -->
+                        </div>
+                        <!-- end widget -->
+
+                    </article>
+                </div>
+            </section>
+
+        </div>
+    </div>
+
+   
+</div>
+
+
+
+<script src="~/js/SmartAdmin/js/libs/jquery-1.11.3.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/select2.min.js"></script>
+@Scripts.Render("~/bundles/jqueryval")
+<script type="text/javascript">
+    
+
+    $(function () {
+
+
+        $("#btnGoBack").click(function () {
+            location.href = "/DaiLi/Index";
+        });
+    })
+
+</script>
+

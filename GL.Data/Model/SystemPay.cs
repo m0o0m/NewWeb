@@ -39,29 +39,29 @@ namespace GL.Data.Model
         /// </summary>
         public string ConsumeChip { get; set; }
         /// <summary>
-        /// 系统五币总量
+        /// 系统钻石总量
         /// </summary>
         public string SystemCoin { get; set; }
 
       
         /// <summary>
-        /// 五币涨跌量
+        /// 钻石涨跌量
         /// </summary>
         public string CoinChnage { get; set; }
         /// <summary>
-        /// 五币涨跌比
+        /// 钻石涨跌比
         /// </summary>
         public string CoinRate { get; set; }
         /// <summary>
-        /// 当日活跃五币总量
+        /// 当日活跃钻石总量
         /// </summary>
         public string ActiveCoin { get; set; }
         /// <summary>
-        /// 系统五币赠送
+        /// 系统钻石赠送
         /// </summary>
         public string SendCoin { get; set; }
         /// <summary>
-        /// 系统五币消耗
+        /// 系统钻石消耗
         /// </summary>
         public string ConsumeCoin { get; set; }
     }

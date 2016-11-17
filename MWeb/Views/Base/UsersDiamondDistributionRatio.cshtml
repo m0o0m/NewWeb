@@ -1,7 +1,9 @@
 ﻿@using GL.Data.Model
+
 @model BaseDataInfoForUsersDiamondDistributionRatio
 @{
-    ViewBag.Title = "用户五币分布比";
+    string coin = MWeb.Controllers.BaseController.Coin;
+    ViewBag.Title = "用户"+ coin + "分布比";
 }
 
 <div id="content">
@@ -57,7 +59,7 @@
                      data-widget-sortable="false">
                     <header>
                         <span class="widget-icon"> <i class="fa fa-table"></i> </span>
-                        <h2>用户五币分布比</h2>
+                        <h2> @ViewBag.Title</h2>
                     </header>
                     <!-- widget div-->
                     <div>

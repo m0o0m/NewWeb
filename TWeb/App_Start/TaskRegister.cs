@@ -146,41 +146,41 @@ namespace TWeb.App_Start
         {
 
 
-            IEnumerable<TMonitorData> data = TimerBLL.GetTimeHasSQL();
+            //IEnumerable<TMonitorData> data = TimerBLL.GetTimeHasSQL();
 
-            IEnumerable<IGrouping<int, TMonitorData>> groupData = data.GroupBy(m => m.ExecType);
-            foreach (IGrouping<int, TMonitorData> iteml in groupData)
-            {
-                List<TMonitorData> sList = iteml.ToList<TMonitorData>();
-                TimerParam tp = new TimerParam { TMonitorDatas = sList };
-
-
-                Thread t = new Thread(tp.ThreadProc);
-                t.Start();
+            //IEnumerable<IGrouping<int, TMonitorData>> groupData = data.GroupBy(m => m.ExecType);
+            //foreach (IGrouping<int, TMonitorData> iteml in groupData)
+            //{
+            //    List<TMonitorData> sList = iteml.ToList<TMonitorData>();
+            //    TimerParam tp = new TimerParam { TMonitorDatas = sList };
 
 
-            }
+            //    Thread t = new Thread(tp.ThreadProc);
+            //    t.Start();
 
 
-
-
-
-            //接口协议类报警1   5500端口，后台支付端口    后台端口异常（不同的端口）
-            TMonitorData data5500 = TimerBLL.GetTimeByID(25);
-            TimerParam ports5500 = new TimerParam { TMonitorSingle = data5500 };
-            Thread t5500 = new Thread(ports5500.ThreadPort5500);
-            t5500.Start();
-            //5200端口，后台封号端口
-            TMonitorData data5200 = TimerBLL.GetTimeByID(26);
-            TimerParam ports5200 = new TimerParam { TMonitorSingle = data5200 };
-            Thread t5200 = new Thread(ports5200.ThreadPort5200);
-            t5200.Start();
+            //}
 
 
 
 
-            Thread emailSend = new Thread(SendMailUseGmail);
-            emailSend.Start();
+
+            ////接口协议类报警1   5500端口，后台支付端口    后台端口异常（不同的端口）
+            //TMonitorData data5500 = TimerBLL.GetTimeByID(25);
+            //TimerParam ports5500 = new TimerParam { TMonitorSingle = data5500 };
+            //Thread t5500 = new Thread(ports5500.ThreadPort5500);
+            //t5500.Start();
+            ////5200端口，后台封号端口
+            //TMonitorData data5200 = TimerBLL.GetTimeByID(26);
+            //TimerParam ports5200 = new TimerParam { TMonitorSingle = data5200 };
+            //Thread t5200 = new Thread(ports5200.ThreadPort5200);
+            //t5200.Start();
+
+
+
+
+            //Thread emailSend = new Thread(SendMailUseGmail);
+            //emailSend.Start();
 
 
 
@@ -195,102 +195,102 @@ namespace TWeb.App_Start
         private static void SendMailUseGmail()
         {
 
-            while (true)
-            {
-                //查询需要发送的邮件
-                IEnumerable<TMonitorLog> datas = TimerBLL.GetTMonitorLog();
+            //while (true)
+            //{
+            //    //查询需要发送的邮件
+            //    IEnumerable<TMonitorLog> datas = TimerBLL.GetTMonitorLog();
 
 
-                bool pass = true;
+            //    bool pass = true;
 
-                if (datas == null || datas.Count() <= 0)
-                {
-                    pass = false;
-                }
-
-
-                string ids = "";
-                foreach (var item in datas)
-                {
-                    ids = ids + "," + item.ID;
-                }
-                ids = ids.Trim(',');
+            //    if (datas == null || datas.Count() <= 0)
+            //    {
+            //        pass = false;
+            //    }
 
 
-                if (string.IsNullOrEmpty(ids)) {
-                    pass = false;
-                }
-
-                if (pass)
-                {
-
-                    System.Net.Mail.MailMessage msg = new System.Net.Mail.MailMessage();
+            //    string ids = "";
+            //    foreach (var item in datas)
+            //    {
+            //        ids = ids + "," + item.ID;
+            //    }
+            //    ids = ids.Trim(',');
 
 
-                   string toemail =  PubConstant.GetConnectionString("toemail");
-                    string[] toemails = toemail.Split(',');
-                    for(int i = 0; i < toemails.Length; i++)
-                    {
-                        msg.To.Add(toemails[i]);
-                    }
+            //    if (string.IsNullOrEmpty(ids)) {
+            //        pass = false;
+            //    }
 
-                    string fromemailName = PubConstant.GetConnectionString("fromemailName");
-                    string fromemailPwd = PubConstant.GetConnectionString("fromemailPwd");
-                    string Host = PubConstant.GetConnectionString("Host");
+            //    if (pass)
+            //    {
+
+            //        System.Net.Mail.MailMessage msg = new System.Net.Mail.MailMessage();
 
 
-                    msg.From = new MailAddress(fromemailName, "515游戏", System.Text.Encoding.UTF8);
-                    /* 上面3个参数分别是发件人地址（可以随便写），发件人姓名，编码*/
-                    msg.Subject = "监控系统";//邮件标题   
-                    msg.SubjectEncoding = System.Text.Encoding.UTF8;//邮件标题编码   
+            //       string toemail =  PubConstant.GetConnectionString("toemail");
+            //        string[] toemails = toemail.Split(',');
+            //        for(int i = 0; i < toemails.Length; i++)
+            //        {
+            //            msg.To.Add(toemails[i]);
+            //        }
 
-                    string body = "<table border='1' cellpadding='3' cellspacing ='1' width ='100%' align ='center' style ='background-color: #b9d8f3;' > ";
-                    body += "<tr><td>时间</td><td>监控名称</td><td>用户</td><td>描述</td></tr>";
-                    foreach (var item in datas)
-                    {
-                        if (item.UserID == 0)
-                        {
-                         
-                            body += "<tr><td>" + item.CreateTime + "</ td><td>" + item.MonitorName + "</td><td>" + "" + "</td><td>" + item.ExecDesc + "</td></tr>";
-                        }
-                        else
-                        {
-                            body += "<tr><td>" + item.CreateTime + "</ td><td>" + item.MonitorName + "</td><td>" + item.UserID + "</td><td>" + item.ExecDesc + "</td></tr>";
-                        }
-                       
-                    }
-                    body += "</table>";
-                    msg.Body = body;
-                    msg.BodyEncoding = System.Text.Encoding.UTF8;//邮件内容编码   
-                    msg.IsBodyHtml = true;//是否是HTML邮件   
-                    msg.Priority = MailPriority.High;//邮件优先级   
-                    SmtpClient client = new SmtpClient();
-                    client.Credentials = new System.Net.NetworkCredential(fromemailName, fromemailPwd);
-                    client.Host = Host;
-                
-                    object userState = msg;
-                    try
-                    {
-                        client.Send(msg);
-
-                        TimerBLL.UpdateTMonitorLog(ids);
+            //        string fromemailName = PubConstant.GetConnectionString("fromemailName");
+            //        string fromemailPwd = PubConstant.GetConnectionString("fromemailPwd");
+            //        string Host = PubConstant.GetConnectionString("Host");
 
 
-                    }
-                    catch (System.Net.Mail.SmtpException ex)
-                    {
+            //        msg.From = new MailAddress(fromemailName, "515游戏", System.Text.Encoding.UTF8);
+            //        /* 上面3个参数分别是发件人地址（可以随便写），发件人姓名，编码*/
+            //        msg.Subject = "监控系统";//邮件标题   
+            //        msg.SubjectEncoding = System.Text.Encoding.UTF8;//邮件标题编码   
 
-                    }
+            //        string body = "<table border='1' cellpadding='3' cellspacing ='1' width ='100%' align ='center' style ='background-color: #b9d8f3;' > ";
+            //        body += "<tr><td>时间</td><td>监控名称</td><td>用户</td><td>描述</td></tr>";
+            //        foreach (var item in datas)
+            //        {
+            //            if (item.UserID == 0)
+            //            {
 
-                }
+            //                body += "<tr><td>" + item.CreateTime + "</ td><td>" + item.MonitorName + "</td><td>" + "" + "</td><td>" + item.ExecDesc + "</td></tr>";
+            //            }
+            //            else
+            //            {
+            //                body += "<tr><td>" + item.CreateTime + "</ td><td>" + item.MonitorName + "</td><td>" + item.UserID + "</td><td>" + item.ExecDesc + "</td></tr>";
+            //            }
+
+            //        }
+            //        body += "</table>";
+            //        msg.Body = body;
+            //        msg.BodyEncoding = System.Text.Encoding.UTF8;//邮件内容编码   
+            //        msg.IsBodyHtml = true;//是否是HTML邮件   
+            //        msg.Priority = MailPriority.High;//邮件优先级   
+            //        SmtpClient client = new SmtpClient();
+            //        client.Credentials = new System.Net.NetworkCredential(fromemailName, fromemailPwd);
+            //        client.Host = Host;
+
+            //        object userState = msg;
+            //        try
+            //        {
+            //            client.Send(msg);
+
+            //            TimerBLL.UpdateTMonitorLog(ids);
 
 
-            
-                Thread.Sleep(1 * 60 * 1000);
+            //        }
+            //        catch (System.Net.Mail.SmtpException ex)
+            //        {
 
-            }
+            //        }
 
-        
+            //    }
+
+
+
+            //    Thread.Sleep(1 * 60 * 1000);
+
+            //  }
+
+
         }
 
 

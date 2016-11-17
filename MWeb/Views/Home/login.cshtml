@@ -76,6 +76,20 @@
                                 </section>
 
 
+                                <section>
+                                    <label class="label">验证码</label>
+                                    <label class="input">
+                                        <i class="icon-append fa fa-lock"></i>
+                                        <input type="text" id="yzm" name="yzm" value="">
+                                        <img id="valiCode" style="cursor: pointer;" onclick="refleshYZM()" src="/NoAuth/GetValidateCode" />
+                                        <b class="tooltip tooltip-top-right"><i ></i> 请输入验证码!</b>
+                                    </label>
+
+                                </section>
+
+
+                             
+
                             </fieldset>
                             <footer>
                                 <button onclick="return login.submitlogin();" type="button" class="btn btn-primary" name="btnlogin" id="btnlogin">
@@ -155,6 +169,14 @@
         
 
             <script type="text/javascript">
+                function refleshYZM() {
+                   
+                    var timestamp = Date.parse(new Date());
+
+                    $("#valiCode").attr("src", "/NoAuth/GetValidateCode/?a=" + timestamp);
+                }
+
+
                 $(function () {
                     //获取内核版本
                     var _uat = navigator.userAgent.toString();
@@ -279,6 +301,14 @@
                             _this.stopLoading();
                             return false;
                         }
+
+                        if ($('#yzm').val() == '') {
+                            alert("验证码不能为空");
+                            $('#yzm').focus();
+                            _this.stopLoading();
+                            return false;
+                        }
+
                         if ($('#password').val() == '') {
                             alert("密码不能为空");
                             $('#password').focus();
@@ -286,7 +316,7 @@
                             return false;
                         } else {
                             $.post('/Home/Login', $('#loginform').serialize(), function (data) {
-
+                            
                                 switch (data.result) {
                                     case 0:
                                         window.location.href = '/SU/Management';
@@ -299,6 +329,12 @@
                                         break;
                                     case 202:
                                         alert("密码错误，请重新输入");
+                                        break;
+                                    case 213:
+                                        alert("验证码错误，请重新输入");
+                                        break;
+                                    case 214:
+                                        alert("错误次数太多,不允许登录,请联系管理员");
                                         break;
                                     default:
                                         alert("未知错误");

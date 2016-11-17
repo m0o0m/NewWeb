@@ -16,6 +16,10 @@ namespace GL.Data.BLL
     {
         public static readonly string sqlconnectionString = PubConstant.GetConnectionString("ConnectionStringForGameRecord");
 
+        public static readonly string database1 = PubConstant.GetConnectionString("database1");
+        public static readonly string database2 = PubConstant.GetConnectionString("database2");
+        public static readonly string database3 = PubConstant.GetConnectionString("database3");
+
         public static PagedList<ToolsUseRecord> GetListByPage(GameRecordView grv)
         {
             PagerQuery pq = new PagerQuery();
@@ -24,13 +28,13 @@ namespace GL.Data.BLL
             //(grv.Channels > 0 ? " and find_in_set(Role.Agent, {3})" : "")
             if (!string.IsNullOrEmpty(grv.SearchExt))
             {
-                pq.RecordCount = DAL.PagedListDAL<ToolsUseRecord>.GetRecordCount(string.Format(@"select count(0) from ToolsUseRecord as t,515game.Role as r where  t.PlayerID = r.ID and ( r.ID ='{0}' or r.NickName='{0}' or r.Account='{0}' )  and  t.UseTime between '{1}' and '{2}' "+ (grv.Channels > 0 ? " and find_in_set(r.Agent, {3})" : ""), grv.SearchExt, grv.StartDate, grv.ExpirationDate,grv.UserList), sqlconnectionString);
-                pq.Sql = string.Format(@"select t.id,t.UseTime,t.PlayerID,r.NickName as UserName,t.ToolsID,t.ToolsName,t.Mobile,t.QQ,t.ExchangeStatus from ToolsUseRecord as t,515game.Role as r where t.PlayerID = r.ID and  ( r.ID ='{2}' or r.NickName='{2}' or r.Account='{2}' ) and t.UseTime between '{3}' and '{4}' " + (grv.Channels > 0 ? " and find_in_set(r.Agent, {5})" : "")  + " order by t.UseTime desc limit {0}, {1}", pq.StartRowNumber, pq.PageSize, grv.SearchExt, grv.StartDate, grv.ExpirationDate,grv.UserList);
+                pq.RecordCount = DAL.PagedListDAL<ToolsUseRecord>.GetRecordCount(string.Format(@"select count(0) from ToolsUseRecord as t,"+database1+@".Role as r where  t.PlayerID = r.ID and ( r.ID ='{0}' or r.NickName='{0}' or r.Account='{0}' )  and  t.UseTime between '{1}' and '{2}' "+ (grv.Channels > 0 ? " and find_in_set(r.Agent, {3})" : ""), grv.SearchExt, grv.StartDate, grv.ExpirationDate,grv.UserList), sqlconnectionString);
+                pq.Sql = string.Format(@"select t.id,t.UseTime,t.PlayerID,r.NickName as UserName,t.ToolsID,t.ToolsName,t.Mobile,t.QQ,t.ExchangeStatus from ToolsUseRecord as t,"+ database1 + @".Role as r where t.PlayerID = r.ID and  ( r.ID ='{2}' or r.NickName='{2}' or r.Account='{2}' ) and t.UseTime between '{3}' and '{4}' " + (grv.Channels > 0 ? " and find_in_set(r.Agent, {5})" : "")  + " order by t.UseTime desc limit {0}, {1}", pq.StartRowNumber, pq.PageSize, grv.SearchExt, grv.StartDate, grv.ExpirationDate,grv.UserList);
             }
             else
             {
-                pq.RecordCount = DAL.PagedListDAL<ToolsUseRecord>.GetRecordCount(string.Format(@"select count(0) from ToolsUseRecord as t,515game.Role as r where  t.PlayerID = r.ID and t.UseTime between '{0}' and '{1}' "+ (grv.Channels > 0 ? " and find_in_set(r.Agent, {2})" : ""), grv.StartDate, grv.ExpirationDate,grv.UserList), sqlconnectionString);
-                pq.Sql = string.Format(@"select t.id,t.UseTime,t.PlayerID,r.NickName as UserName,t.ToolsID,t.ToolsName,t.Mobile,t.QQ,t.ExchangeStatus from ToolsUseRecord as t,515game.Role as r where  t.PlayerID = r.ID and t.UseTime between '{3}' and '{4}' " + (grv.Channels > 0 ? " and find_in_set(r.Agent, {5})" : "") + " order by t.UseTime desc limit {0}, {1}", pq.StartRowNumber, pq.PageSize, grv.UserID, grv.StartDate, grv.ExpirationDate,grv.UserList);
+                pq.RecordCount = DAL.PagedListDAL<ToolsUseRecord>.GetRecordCount(string.Format(@"select count(0) from ToolsUseRecord as t,"+ database1 + @".Role as r where  t.PlayerID = r.ID and t.UseTime between '{0}' and '{1}' "+ (grv.Channels > 0 ? " and find_in_set(r.Agent, {2})" : ""), grv.StartDate, grv.ExpirationDate,grv.UserList), sqlconnectionString);
+                pq.Sql = string.Format(@"select t.id,t.UseTime,t.PlayerID,r.NickName as UserName,t.ToolsID,t.ToolsName,t.Mobile,t.QQ,t.ExchangeStatus from ToolsUseRecord as t,"+ database1 + @".Role as r where  t.PlayerID = r.ID and t.UseTime between '{3}' and '{4}' " + (grv.Channels > 0 ? " and find_in_set(r.Agent, {5})" : "") + " order by t.UseTime desc limit {0}, {1}", pq.StartRowNumber, pq.PageSize, grv.UserID, grv.StartDate, grv.ExpirationDate,grv.UserList);
             }
 
             PagedList<ToolsUseRecord> obj = new PagedList<ToolsUseRecord>(DAL.PagedListDAL<ToolsUseRecord>.GetListByPage(pq, sqlconnectionString), pq.CurrentPage, pq.PageSize, pq.RecordCount);

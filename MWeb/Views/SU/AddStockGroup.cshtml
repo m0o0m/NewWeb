@@ -1,0 +1,142 @@
+﻿@model GL.Data.MWeb.Identity.ApplicationUser
+@{
+    ViewBag.Title = "邮件库组 -- 添加";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="content">
+
+    <article class="col-sm-12 col-md-12 col-lg-6">
+        <div class="jarviswidget" id="wid-id-4" data-widget-editbutton="false" data-widget-custombutton="false">
+            <header>
+                <span class="widget-icon"> <i class="fa fa-edit"></i> </span>
+                <h2>添加邮件库组</h2>
+            </header>
+            <div>
+                <div class="jarviswidget-editbox">
+                </div>
+                <div class="widget-body no-padding">
+                    <form id="subfrom" class="smart-form" action="/">
+                        @Html.AntiForgeryToken()
+                        <header>
+                            邮件库组
+                        </header>
+
+                        <fieldset>
+                            <section>
+                                <label>库组名称 :</label>
+                                <label class="input">
+                                    <i class="icon-append fa fa-user"></i>
+                                    <input type="text" id="GroupName" name="GroupName" class="span11" value="" />
+                                    <b class="tooltip tooltip-bottom-right">Needed to enter the GroupName</b>
+                                </label>
+                            </section>
+
+
+
+                            <section>
+                                <label>库存游戏币 :</label>
+                                <label class="input">
+                                    <i class="icon-append fa fa-lock"></i>
+                                    <input type="text" id="Value" name="Value" class="span11" value="" />
+                                    <b class="tooltip tooltip-bottom-right">Needed to verify your Value</b>
+                                </label>
+                            </section>
+
+
+                        </fieldset>
+
+
+                        <footer>
+                            <button type="button" class="btn btn-primary"  onclick="saveData()">
+                                提交
+                            </button>
+                            <input id="btnGoBack" type="button" value="返回列表" class=" btn btn-warning" />
+                        </footer>
+                    </form>
+
+                </div>
+                <!-- end widget content -->
+
+            </div>
+            <!-- end widget div -->
+
+        </div>
+
+    </article>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+@section scripts{
+    @{Html.RegisterMvcPagerScriptResource();}
+
+
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/select2.min.js"></script>
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+
+        // resets the menu selection upon entry to this page:
+        function resetMenu() {
+            document.gomenu.selector.selectedIndex = 2;
+        }
+
+        $(function () {
+
+
+            $("#btnGoBack").click(function () {
+                location.href = "/SU/EmailStock";
+            });
+        })
+
+        function saveData() {
+           
+
+            var _GroupName = $("#GroupName").val();
+            var _Value = $("#Value").val();
+
+
+            if (_GroupName.length == 0) {
+                alert("库组名称不能为空");
+                return false;
+            }
+            if (_Value.length == 0) {
+                alert("库存金币不能为空");
+                return false;
+            }
+
+            $.ajax({
+                url: "/SU/AddStockGroup",
+                type: "POST",
+                data: $('#subfrom').serialize(),
+                success: function (data) {
+                    switch (data) {
+                        case "1":
+                            alert("添加库组成功");
+                         //   location.href = "/SU/EmailStock";
+                            break;
+                     
+                        default:
+                        
+                            break;
+                    }
+                }
+            });
+
+            return false;
+
+        }
+
+    </script>
+}
+
+

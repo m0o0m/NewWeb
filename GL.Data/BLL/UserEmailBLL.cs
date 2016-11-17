@@ -1,4 +1,5 @@
-﻿using GL.Common;
+﻿using GL.Command.DBUtility;
+using GL.Common;
 using GL.Data.DAL;
 using GL.Data.Model;
 using System;
@@ -12,6 +13,10 @@ namespace GL.Data.BLL
 {
     public class UserEmailBLL
     {
+        public static readonly string database1 = PubConstant.GetConnectionString("database1");
+        public static readonly string database2 = PubConstant.GetConnectionString("database2");
+        public static readonly string database3 = PubConstant.GetConnectionString("database3");
+
 
         public static PagedList<UserEmail> GetListByPage(BaseDataView bdv)
         {
@@ -28,7 +33,7 @@ namespace GL.Data.BLL
             else {
 
                 /*
-                select * from UserEmail,515game.Role as r
+                select * from UserEmail,gamedata.Role as r
 where UETime BETWEEN '2016-4-25 00:00:00' and '2016-4-26 00:00:00' 
 and r.Agent = 10010
  order by UEID desc;
@@ -39,8 +44,8 @@ and r.Agent = 10010
 
 
                 string where = " where UETime BETWEEN '" + bdv.StartDate + "' and '" + bdv.ExpirationDate + "' and  FIND_IN_SET(r.ID,UserEmail.UEUserID ) >0 and r.Agent = "+ bdv.Channels;
-                pq.RecordCount = DAL.PagedListDAL<UserEmail>.GetRecordCount(@" select count(*) from UserEmail,515game.Role as r" + where);
-                pq.Sql = string.Format(@"select UserEmail.* from UserEmail,515game.Role as r " + where + " order by UEID desc limit {0}, {1}", pq.StartRowNumber, pq.PageSize);
+                pq.RecordCount = DAL.PagedListDAL<UserEmail>.GetRecordCount(@" select count(*) from UserEmail,"+ database1 + @".Role as r" + where);
+                pq.Sql = string.Format(@"select UserEmail.* from UserEmail,"+ database1 + @".Role as r " + where + " order by UEID desc limit {0}, {1}", pq.StartRowNumber, pq.PageSize);
 
             }
 

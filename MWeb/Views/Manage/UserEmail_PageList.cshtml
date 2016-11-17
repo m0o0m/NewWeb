@@ -9,6 +9,8 @@
     {
         totalCount = ViewData["totalData"].ToString();
     }
+
+    string Coin = MWeb.Controllers.ManageController.Coin;
 }
 
 
@@ -41,7 +43,7 @@
                                 <thead>
                                     <tr>
                                         <th>发送游戏币总额</th>
-                                        <th>发送五币总额</th>
+                                        <th>发送@(Coin)总额</th>
                                         <th>发送积分总额</th>
                                     </tr>
                                 </thead>
@@ -143,7 +145,11 @@
                                                             @{
                                                                 decimal conum = 1;
                                                                 string item = m.UEItemType.ToString();
-                                                                if (m.UEItemType == ueItemType.金币 || m.UEItemType == ueItemType.五币 || m.UEItemType == ueItemType.积分)
+                                                                if ((int)m.UEItemType == 2) {
+                                                                    item = Coin;
+                                                                }
+
+                                                                if (m.UEItemType == ueItemType.金币 || m.UEItemType == ueItemType.币 || m.UEItemType == ueItemType.积分)
                                                                 {
                                                                     conum = m.UEItemValue;
                                                                 }

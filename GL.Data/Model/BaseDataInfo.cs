@@ -184,6 +184,8 @@ namespace GL.Data.Model
         /// </summary>
         public string SearchExt { get; set; }
 
+        public string SearchExt2 { get; set; }
+
     }
 
 

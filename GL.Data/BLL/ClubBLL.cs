@@ -14,6 +14,12 @@ namespace GL.Data.BLL
 {
     public class ClubBLL
     {
+
+        public static readonly string database1 = PubConstant.GetConnectionString("database1");
+        public static readonly string database2 = PubConstant.GetConnectionString("database2");
+        public static readonly string database3 = PubConstant.GetConnectionString("database3");
+
+
         //public static readonly string sqlconnectionString = PubConstant.GetConnectionString("ConnectionStringForGameData");
 
         //public static PagedList<UserClub> GetListByPage(GameRecordView msv)
@@ -49,7 +55,7 @@ namespace GL.Data.BLL
          
 
             pq.RecordCount = DAL.PagedListDAL<ClubDataDetail>.GetRecordCount(string.Format(@"
-select count(*) from  GServerInfo.C_LoginUserClub cc,GServerInfo.C_LoginUser cu
+select count(*) from  "+database2+@".C_LoginUserClub cc,"+database2+@".C_LoginUser cu
  where cc.UserId=cu.UserId and cu.UserAccount='"+model.SearchExt+"' {0}",
  model.SearchExter <= 0 ?"": " and cc.ClubId = "+model.SearchExter));
            
@@ -59,27 +65,27 @@ select a.* from (
 select Club ,sum(ClubCount) ClubCount ,sum(GiveYes) GiveYes ,sum(GiveLast) GiveLast ,sum(Login) Login ,s.Nickname
 from (
     select a.ClubID Club ,count(distinct a.userid) ClubCount ,0 GiveYes ,0 GiveLast ,ifnull(count(distinct b.userid ) ,0) Login
-    from 515game.ClubUser  a
-      left join 515game.ClubGive b on a.userid = b.userid and b.CreateTime >= date_add('"+model.StartDate+@"'  ,interval -1 day) and b.CreateTime < '"+ model.StartDate + @"' 
+    from "+database1+@".ClubUser  a
+      left join "+ database1 + @".ClubGive b on a.userid = b.userid and b.CreateTime >= date_add('"+model.StartDate+@"'  ,interval -1 day) and b.CreateTime < '"+ model.StartDate + @"' 
     group by a.ClubID
 union all
     select ClubID Club ,0 ,0 ,sum(Gold) GiveLast ,0 
-    from 515game.ClubGive 
+    from "+ database1 + @".ClubGive 
     where ClubType = 2 and CreateTime < subdate('"+ model.StartDate + @"' ,weekday('"+ model.StartDate + @"' )) and 
       CreateTime >= date_sub(subdate('"+ model.StartDate + @"' ,weekday('"+ model.StartDate + @"' )) ,interval 7 day)
     group by ClubID
 union all
     select ClubID ,0 ,sum(Gold) GiveYes ,0 ,0 
-    from 515game.ClubGive 
+    from "+ database1 + @".ClubGive 
     where ClubType = 2 and CreateTime < '"+ model.StartDate + @"'  and CreateTime >= date_sub('"+ model.StartDate + @"'  ,interval 1 day) 
     group by ClubID
 union all
     select ID ,0 ,0 ,0 ,0
-    from 515game.ClubInfo
-)t join 515game.Role s on t.Club = s.id group by Club ,s.Nickname order by 4 desc
+    from "+ database1 + @".ClubInfo
+)t join "+ database1 + @".Role s on t.Club = s.id group by Club ,s.Nickname order by 4 desc
 ) as a
 where a.Club  in (
-   select cc.ClubId from   GServerInfo.C_LoginUserClub as cc,GServerInfo.C_LoginUser as cu
+   select cc.ClubId from   "+ database2+ @".C_LoginUserClub as cc,"+ database2 + @".C_LoginUser as cu
    where cc.UserId=cu.UserId and cu.UserAccount ='"+model.SearchExt+@"' 
 ) {0}
 limit {1}, {2}
@@ -139,15 +145,15 @@ limit {1}, {2}
             PagerQuery pq = new PagerQuery();
             pq.CurrentPage = page;
             pq.PageSize = 10;
-            pq.RecordCount = DAL.PagedListDAL<CLoginUser>.GetRecordCount(string.Format(@"select count(0) from GServerInfo.C_LoginUser {0}", string.IsNullOrEmpty(userAccount)==false? "  where UserAccount = '"+ userAccount + "' or UserId= '"+userAccount+"'" : ""));
+            pq.RecordCount = DAL.PagedListDAL<CLoginUser>.GetRecordCount(string.Format(@"select count(0) from "+database2+@".C_LoginUser {0}", string.IsNullOrEmpty(userAccount)==false? "  where UserAccount = '"+ userAccount + "' or UserId= '"+userAccount+"'" : ""));
           //  pq.Sql = string.Format(@"select * from GServerInfo.C_LoginUser  {2}  order by DateTime desc  limit {0}, {1}", pq.StartRowNumber, pq.PageSize, string.IsNullOrEmpty(userAccount) == false  ? "  where UserAccount = '" + userAccount + "' or UserId= '"+ userAccount+"'" : "");
 
             pq.Sql = string.Format(@"select cu.*,(
   
-      select GROUP_CONCAT(ClubId) from GServerInfo.C_LoginUserClub
+      select GROUP_CONCAT(ClubId) from "+database2+@".C_LoginUserClub
       where UserId = cu.UserId 
      
-)as ClubIds from GServerInfo.C_LoginUser as cu 
+)as ClubIds from "+ database2 + @".C_LoginUser as cu 
 {2}  order by cu.DateTime desc limit {0}, {1};
 ", pq.StartRowNumber, pq.PageSize, string.IsNullOrEmpty(userAccount) == false ? "  where cu.UserAccount = '" + userAccount + "' or cu.UserId= '" + userAccount + "'" : "");
 
@@ -207,19 +213,19 @@ limit {1}, {2}
             pq.PageSize = 10;
             if (clubid < 0)
             {//说明没有查询条件，那么就是查询能看到的
-                pq.RecordCount = DAL.PagedListDAL<CLoginUserClub>.GetRecordCount(string.Format(@"select count(0) from GServerInfo.C_LoginUserClub where UserId=" + userId));
-                pq.Sql = string.Format(@"select UserId,ClubId,CreateTime,1 as IsViewClub from GServerInfo.C_LoginUserClub,515game.ClubInfo
+                pq.RecordCount = DAL.PagedListDAL<CLoginUserClub>.GetRecordCount(string.Format(@"select count(0) from "+ database2 + @".C_LoginUserClub where UserId=" + userId));
+                pq.Sql = string.Format(@"select UserId,ClubId,CreateTime,1 as IsViewClub from "+ database2 + @".C_LoginUserClub,gamedata.ClubInfo
 where UserId = " + userId+ " and C_LoginUserClub.ClubId = ClubInfo.ID order by JoinDate desc limit {0}, {1}", pq.StartRowNumber, pq.PageSize);
 
             }
             else {
 
-                pq.RecordCount = DAL.PagedListDAL<CLoginUserClub>.GetRecordCount(string.Format(@"select count(0) from 515game.ClubInfo where ID= "+clubid));
+                pq.RecordCount = DAL.PagedListDAL<CLoginUserClub>.GetRecordCount(string.Format(@"select count(0) from "+ database1+ @".ClubInfo where ID= "+clubid));
                 pq.Sql = string.Format(@"select -1 as UserId,ID as ClubId,CreateTime,(
-   select count(*) from GServerInfo.C_LoginUserClub
+   select count(*) from "+ database2 + @".C_LoginUserClub
    where UserId = " + userId+@" and ClubId = "+ clubid + @"
 ) as IsViewClub 
-from 515game.ClubInfo 
+from "+ database1+ @".ClubInfo 
 where ID = " + clubid + @"
    limit {0}, {1}", pq.StartRowNumber, pq.PageSize);
 

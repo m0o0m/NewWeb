@@ -12,6 +12,8 @@ namespace MWeb.Models
 
         public string Password { get; set; }
 
+        public string YZM { get; set; }
+
 
     }
 }

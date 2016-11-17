@@ -62,6 +62,7 @@ namespace GL.Data.Model
         public string ProductNO { get; set; }
 
         public int Num { get; set; }
+        public int AgentID { get; set; }
     }
 
 

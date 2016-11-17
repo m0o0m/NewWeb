@@ -4,7 +4,7 @@
 @using GL.Data.Model;
 @model PagedList<QQZoneRecharge>
 @{
-
+    string Coin = MWeb.Controllers.BaseController.Coin;
     string typeStr;
     switch ((raType)Convert.ToInt32(ViewData["tab"]))
     {
@@ -105,7 +105,7 @@
                                                 int i = ((m.Num == null || m.Num == 0) ? 1 : Convert.ToInt32(m.Num));
                                                 if (m.PayItem.Contains("5b"))//五币
                                                 {
-                                                    <td> @((m.ActualMoney / i) / 10 + "五币" ) </td>
+                                                    <td> @((m.ActualMoney / i) / 10 + Coin ) </td>
                                                 }
                                                 else if (m.PayItem.Contains("Chip"))
                                                 {//游戏币

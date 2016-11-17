@@ -1,0 +1,95 @@
+#代理商库存表
+代理商  代理商库存值  
+  1        10000         
+
+
+
+#代理商超额通知，超过多少分别采取什么措施,报警多少次
+
+#减库存的流水配置表，添加库存的流水配置表
+
+
+#定时器计算代理商消耗的库存,发邮件的就实时计算
+
+
+
+
+#明珠数据库
+use gserverinfo;
+-- ----------------------------
+-- Table structure for `dailikucun`
+-- ----------------------------
+DROP TABLE IF EXISTS `dailikucun`;
+CREATE TABLE `dailikucun` (
+`id`  int(11) NOT NULL AUTO_INCREMENT  ,
+`No`  BIGINT(11)  NOT NULL COMMENT '代理商编号' ,
+`Gold`  BIGINT(22)  NOT NULL COMMENT '代理商所有的库存金币' ,
+PRIMARY KEY (`id`)
+)
+ENGINE=InnoDB
+DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci
+COMMENT='代理商库存表'
+;
+
+
+use gserverinfo;
+insert into dailikucun(`No`,`Gold`) VALUES(1,100 );
+
+
+
+
+
+DROP TABLE IF EXISTS `dailiKuCunNo`;
+CREATE TABLE `dailiKuCunNo` (
+`id`  int(11) NOT NULL AUTO_INCREMENT  ,
+`No`  BIGINT(11)  NOT NULL COMMENT '流水编号' ,
+`NoName`  VARCHAR(22)  NOT NULL COMMENT '流水名称 ' ,
+PRIMARY KEY (`id`)
+)
+ENGINE=InnoDB
+DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci
+COMMENT='代理商扣钱的流水编号表'
+;
+#515数据库
+use gserverinfo;
+-- ----------------------------
+-- Table structure for `dailiusers`
+-- ----------------------------
+DROP TABLE IF EXISTS `dailiusers`;
+CREATE TABLE `dailiusers` (
+`id`  int(11) NOT NULL AUTO_INCREMENT  ,
+`No`  BIGINT(11)  NOT NULL COMMENT '代理商编号' ,
+`Name`  VARCHAR(22)  NOT NULL COMMENT '代理商的名称' ,
+`GameDataDBConnect`  VARCHAR(48) NOT NULL COMMENT 'GameData代理商的数据库连接' ,
+`GserverinfoDBConnect`  VARCHAR(48) NOT NULL COMMENT 'Gserverinfo代理商的数据库连接' ,
+`RecordDBConnect`  VARCHAR(48) NOT NULL COMMENT 'Record代理商的数据库连接' ,
+`ServerIP`  VARCHAR(48) NOT NULL COMMENT '代理商的服务器地址' ,
+`ServerPort`  int(11) NOT NULL COMMENT '代理商的服务器端口' ,
+`GameUrl`  VARCHAR(48)  COMMENT '代理商游戏地址' ,
+`MWebUrl`  VARCHAR(48) NOT NULL COMMENT '代理商的后台系统地址' , 
+PRIMARY KEY (`id`)
+)
+ENGINE=InnoDB
+DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci
+COMMENT='代理商库存表'
+;
+
+
+use gserverinfo;
+-- ----------------------------
+-- Procedure structure for sys_updateDaiLiKuCun 修改本系统代理的库存值
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `sys_updateDaiLiKuCun`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`%` PROCEDURE `sys_updateDaiLiKuCun`(
+    I_Gold LONG
+)
+begin	
+    SET SESSION TRANSACTION ISOLATION LEVEL  SERIALIZABLE;		
+
+  
+      update dailikucun set Gold= Gold+I_Gold;
+	 SET SESSION TRANSACTION ISOLATION LEVEL REPEATABLE READ;
+end
+;;
+DELIMITER ;

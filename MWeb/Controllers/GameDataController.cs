@@ -11,12 +11,14 @@ using ProtoCmd.Service;
 using GL.Protocol;
 using GL.Common;
 using GL.Data;
+using GL.Command.DBUtility;
 
 namespace MWeb.Controllers
 {
     [Authorize]
     public class GameDataController : Controller
     {
+        public static readonly string Coin = PubConstant.GetConnectionString("coin");
 
         [QueryValues]
         public ActionResult LandGameLog(Dictionary<string, string> queryvalues)
@@ -53,9 +55,12 @@ namespace MWeb.Controllers
             string _SearchExt = queryvalues.ContainsKey("SearchExt") ? queryvalues["SearchExt"] : "";
             string _Gametype = queryvalues.ContainsKey("Gametype") ? queryvalues["Gametype"] : "0";
             object _data = queryvalues.ContainsKey("Data") ? string.IsNullOrWhiteSpace(queryvalues["Data"])?0: Convert.ToInt64(queryvalues["Data"]) : 0;
-      
 
-            GameRecordView grv = new GameRecordView {  Gametype =Convert.ToInt32(_Gametype),  Data = _data ,UserID = _id, SearchExt = _SearchExt, StartDate = _StartDate, ExpirationDate = _ExpirationDate, Page = _page, SeachType = (seachType)_seachtype };
+            int _roundID = queryvalues.ContainsKey("RoundID") ? string.IsNullOrWhiteSpace(queryvalues["RoundID"]) ? 0 : Convert.ToInt32(queryvalues["RoundID"]) : 0;
+            int _roundID2 = queryvalues.ContainsKey("RoundID2") ? string.IsNullOrWhiteSpace(queryvalues["RoundID2"]) ? 0 : Convert.ToInt32(queryvalues["RoundID2"]) : 0;
+
+
+            GameRecordView grv = new GameRecordView {  Gametype =Convert.ToInt32(_Gametype),  Data = _data ,UserID = _id, SearchExt = _SearchExt, StartDate = _StartDate, ExpirationDate = _ExpirationDate, Page = _page, SeachType = (seachType)_seachtype, RoundID= _roundID, RoundID2=_roundID2 };
             string pageList = "";
             switch (_Gametype) {
                 case "0"://斗地主
@@ -86,6 +91,23 @@ namespace MWeb.Controllers
                     grv.DataList = GameDataBLL.GetListByPageForTexPro(grv);
                     pageList = "TexProGameLog_PageList";
                     break;
+                case "7"://水浒传 ShuihuGameRecord
+                    grv.RoundID2 = 0;
+
+                    grv.DataList = GameDataBLL.GetListByPageForShuihu(grv); //修改方法
+                    pageList = "ShuihuGameLog_PageList";
+                    break;
+                case "8"://水果机   FruitGameRecord
+
+                    grv.RoundID = 0;
+
+                    grv.DataList = GameDataBLL.GetListByPageForShuiguo(grv); //修改方法
+                    pageList = "ShuiguoGameLog_PageList";
+                    break;
+                case "9"://百家乐 ShuihuGameRecord
+                 //   grv.DataList = GameDataBLL
+                    pageList = "BaijialeGameLog_PageList";
+                    break;
             }
             grv.PageList = pageList;
             if (Request.IsAjaxRequest())
@@ -102,6 +124,10 @@ namespace MWeb.Controllers
         }
 
 
+
+
+
+        
 
         [QueryValues]
         public ActionResult GameLogDetail(Dictionary<string, string> queryvalues)
@@ -607,6 +633,115 @@ namespace MWeb.Controllers
             }
 
             grv.DataList = GameDataBLL.GetListByPageForDotSum(grv);
+
+            return View(grv);
+        }
+
+
+
+        // ShuihuDataSum
+        /// <summary>
+        /// 水浒传数据统计
+        /// </summary>
+        /// <returns></returns>
+        [QueryValues]
+        public ActionResult ShuihuDataSum(Dictionary<string, string> queryvalues)
+        {
+            //ScalePot
+
+            int _RoundID = queryvalues.ContainsKey("RoundID") ? string.IsNullOrWhiteSpace(queryvalues["RoundID"]) ? 0 : Convert.ToInt32(queryvalues["RoundID"]) : 0;
+            int _page = queryvalues.ContainsKey("page") ? Convert.ToInt32(queryvalues["page"]) : 1;
+           
+            string _StartDate = queryvalues.ContainsKey("StartDate") ? queryvalues["StartDate"] : DateTime.Now.ToString("yyyy-MM-dd 00:00:00");
+            string _ExpirationDate = queryvalues.ContainsKey("ExpirationDate") ? queryvalues["ExpirationDate"] : DateTime.Now.AddDays(1).ToString("yyyy-MM-dd 00:00:00");
+          
+            GameRecordView grv = new GameRecordView { RoundID=_RoundID, StartDate = _StartDate, ExpirationDate = _ExpirationDate, Page = _page };
+            if (Request.IsAjaxRequest()) //ShuihuDataSum
+            {
+                return PartialView("ShuihuDataSum_PageList", GameDataBLL.GetListByPageForShuihuDataSum(grv));
+            }
+
+            grv.DataList = GameDataBLL.GetListByPageForShuihuDataSum(grv);
+
+            return View(grv);
+        }
+
+
+        // 
+        /// <summary>
+        /// 水果机数据统计
+        /// </summary>
+        /// <returns></returns>
+        [QueryValues]
+        public ActionResult FruitDataSum(Dictionary<string, string> queryvalues)
+        {
+            //ScalePot
+
+            int _RoundID = queryvalues.ContainsKey("RoundID") ? string.IsNullOrWhiteSpace(queryvalues["RoundID"]) ? 0 : Convert.ToInt32(queryvalues["RoundID"]) : 0;
+            int _page = queryvalues.ContainsKey("page") ? Convert.ToInt32(queryvalues["page"]) : 1;
+
+            string _StartDate = queryvalues.ContainsKey("StartDate") ? queryvalues["StartDate"] : DateTime.Now.ToString("yyyy-MM-dd 00:00:00");
+            string _ExpirationDate = queryvalues.ContainsKey("ExpirationDate") ? queryvalues["ExpirationDate"] : DateTime.Now.AddDays(1).ToString("yyyy-MM-dd 00:00:00");
+
+            GameRecordView grv = new GameRecordView { RoundID = _RoundID, StartDate = _StartDate, ExpirationDate = _ExpirationDate, Page = _page };
+            if (Request.IsAjaxRequest()) //ShuihuDataSum
+            {
+                //FruitDataSum
+                return PartialView("FruitDataSum_PageList", GameDataBLL.GetListByPageForFruitDataSum(grv));
+            }
+
+            grv.DataList = GameDataBLL.GetListByPageForFruitDataSum(grv);
+
+            return View(grv);
+        }
+
+
+
+
+        [QueryValues]
+        public ActionResult ShuihuChangguiDataSum(Dictionary<string, string> queryvalues)
+        {
+            //ScalePot
+
+            int _RoundID = queryvalues.ContainsKey("RoundID") ? string.IsNullOrWhiteSpace(queryvalues["RoundID"]) ? 0 : Convert.ToInt32(queryvalues["RoundID"]) : 0;
+            int _page = queryvalues.ContainsKey("page") ? Convert.ToInt32(queryvalues["page"]) : 1;
+
+            string _StartDate = queryvalues.ContainsKey("StartDate") ? queryvalues["StartDate"] : DateTime.Now.ToString("yyyy-MM-dd 00:00:00");
+            string _ExpirationDate = queryvalues.ContainsKey("ExpirationDate") ? queryvalues["ExpirationDate"] : DateTime.Now.AddDays(1).ToString("yyyy-MM-dd 00:00:00");
+
+            GameRecordView grv = new GameRecordView { RoundID = _RoundID, StartDate = _StartDate, ExpirationDate = _ExpirationDate, Page = _page };
+            if (Request.IsAjaxRequest()) //  ShuihuChangguiDataSum
+            {
+                return PartialView("ShuihuChangguiDataSum_PageList", GameDataBLL.GetListByPageForShuihuChangguiDataSum(grv));
+            }
+            
+
+            grv.DataList = GameDataBLL.GetListByPageForShuihuChangguiDataSum(grv);
+
+            return View(grv);
+        }
+
+
+
+        [QueryValues]
+        public ActionResult FruitChangguiDataSum(Dictionary<string, string> queryvalues)
+        {
+            //ScalePot
+
+            int _RoundID = queryvalues.ContainsKey("RoundID") ? string.IsNullOrWhiteSpace(queryvalues["RoundID"]) ? 0 : Convert.ToInt32(queryvalues["RoundID"]) : 0;
+            int _page = queryvalues.ContainsKey("page") ? Convert.ToInt32(queryvalues["page"]) : 1;
+
+            string _StartDate = queryvalues.ContainsKey("StartDate") ? queryvalues["StartDate"] : DateTime.Now.ToString("yyyy-MM-dd 00:00:00");
+            string _ExpirationDate = queryvalues.ContainsKey("ExpirationDate") ? queryvalues["ExpirationDate"] : DateTime.Now.AddDays(1).ToString("yyyy-MM-dd 00:00:00");
+
+            GameRecordView grv = new GameRecordView { RoundID = _RoundID, StartDate = _StartDate, ExpirationDate = _ExpirationDate, Page = _page };
+            if (Request.IsAjaxRequest()) //  ShuihuChangguiDataSum
+            {
+                return PartialView("FruitChangguiDataSum_PageList", GameDataBLL.GetListByPageForFruitChangguiDataSum(grv));
+            }
+
+
+            grv.DataList = GameDataBLL.GetListByPageForFruitChangguiDataSum(grv);
 
             return View(grv);
         }

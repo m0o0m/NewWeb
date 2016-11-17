@@ -1,7 +1,9 @@
 ﻿@using Webdiyer.WebControls.Mvc;
 @using GL.Data.Model;
 @model PagedList<LoginRecord>
-
+@{ 
+    string Coin = MWeb.Controllers.MemberController.Coin;
+}
 
 
 <div class="detail">
@@ -66,7 +68,7 @@
                                                         <th>所在地</th>
                                                         <th>IMEI地址</th>
                                                         <th>游戏币</th>
-                                                        <th>五币</th>
+                                                        <th>@(Coin)</th>
                                                         <th></th>
                                                     </tr>
                                                 </thead>

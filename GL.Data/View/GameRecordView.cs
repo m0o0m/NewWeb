@@ -36,6 +36,10 @@ namespace GL.Data.View
 
         public string GametypeS { get; set; }
 
+        public int RoundID { get; set; }
+
+        public int RoundID2 { get; set; }
+
     }
 
 

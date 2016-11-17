@@ -1,0 +1,116 @@
+﻿@using Webdiyer.WebControls.Mvc;
+@using GL.Data.Model;
+@using GL.Data.BLL;
+@model IEnumerable<DaiLiUsers>
+
+@{
+   
+}
+
+<div id="content">
+    
+
+    <div class="row-fluid">
+        <div class="widget-box" id="box">
+
+            <section id="widget-grid" class="">
+                <div class="row">
+                    <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-0" data-widget-editbutton="false" data-widget-colorbutton="false"
+                             data-widget-togglebutton="false"
+                             data-widget-deletebutton="false"
+                             data-widget-fullscreenbutton="false"
+                             data-widget-custombutton="false"
+                             data-widget-collapsed="false"
+                             data-widget-sortable="false">
+                            <header>
+                                <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                                <h2>代理商列表</h2>
+                            </header>
+                            <!-- widget div-->
+                            <div>
+                                <!-- widget edit box -->
+                                <div class="jarviswidget-editbox">
+                                    <!-- This area used as dropdown edit box -->
+                                </div>
+                                <!-- end widget edit box -->
+                                <!-- widget content -->
+                                <div class="widget-body no-padding">
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered">
+                                            <thead>
+
+                                                <tr>
+                                                    <th>代理商编号</th>
+                                                    <th>代理商的名称</th>
+                                                    <th>代理商的服务器地址</th>
+                                                    <th>代理商的服务器端口</th>
+                                                    <th>代理商游戏地址</th>
+                                                    <th>代理商的后台系统地址</th>
+                                                    <th>库存值</th>
+                                                    <th>操作</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @if (Model.Count() == 0)
+                                                {
+                                                    <tr>
+                                                        <td>
+                                                            <span class="user-info"> Date: @DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") </span>
+                                                            <p><a href="#">没有找到相关记录！</a> </p>
+                                                        </td>
+                                                    </tr>
+                                                }
+                                                @foreach (DaiLiUsers m in Model)
+                                                {
+
+                                                    <tr>
+                                                       <td>@m.No</td>
+                                                        <td>@m.Name</td>
+                                                        <td>@m.ServerIP</td>
+                                                        <td>@m.ServerPort</td>
+                                                        <td>@m.GameUrl</td>
+                                                        <td>@m.MWebUrl</td>
+                                                        <td>@{
+                                                            DailiKuCun kucun = DaiLiBLL.GetDaiLiKuCun(m.No);
+                                                        }
+                                                        @kucun.Gold
+                                                        </td>
+                                                        <td style="text-align:center">
+<input id="btnKuCun" type="button" value="修改库存值" class="btn btn-primary btn-mini" onclick="return btnUpdateKuCun(@m.No)" />                   <input id="btnFlowNo" type="button" value="设置扣钱流水号" class="btn btn-primary btn-mini" onclick="return btnSetFlowNo(@m.No)" />                                                     
+                                                        </td>
+                                                    </tr>
+
+                                                }
+
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                </div>
+                                <!-- end widget content -->
+                            </div>
+                            <!-- end widget div -->
+                        </div>
+                        <!-- end widget -->
+
+                    </article>
+                </div>
+            </section>
+
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    function btnUpdateKuCun(no) {
+        location.href = "/DaiLi/KuCunValueIndex?no=" + no ;
+    }
+
+
+    function btnSetFlowNo(no){
+        location.href = "/DaiLi/SetFlowNoIndex?no=" + no ;
+    }
+</script>

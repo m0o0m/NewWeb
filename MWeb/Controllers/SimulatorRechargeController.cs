@@ -20,6 +20,10 @@ namespace MWeb.Controllers
         private const string _key = "515IWOXXXeYiw89y";
         internal static readonly string payUrl = PubConstant.GetConnectionString("payUrl");
         internal static readonly string monicallbackUrl = PubConstant.GetConnectionString("monicallbackUrl");
+
+
+        public static readonly string Coin = PubConstant.GetConnectionString("coin");
+
         // GET: SimulatorRecharge
         public ActionResult Index()
         {

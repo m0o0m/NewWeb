@@ -13,6 +13,12 @@ namespace GL.Data.BLL
 {
     public class BaseDataBLL
     {
+
+        public static readonly string database1 = PubConstant.GetConnectionString("database1");
+        public static readonly string database2 = PubConstant.GetConnectionString("database2");
+        public static readonly string database3 = PubConstant.GetConnectionString("database3");
+
+
         public static IEnumerable<BaseDataInfo> GetGameProfit(BaseDataView bdv)
         {
             return DAL.BaseDataDAL.GetGameProfit(bdv);
@@ -153,6 +159,10 @@ namespace GL.Data.BLL
             return DAL.BaseDataDAL.GetGameOutput2(vbd);
         }
 
+        public static Int64 GetChipSumFromUserMoneyRecord(string types,string startTime,string endTime) {
+            return DAL.BaseDataDAL.GetChipSumFromUserMoneyRecord(types,startTime,endTime);
+        }
+
 
         public static GameOutAccurate GetGameOutAccurate(string btime,string etime) {
             return DAL.BaseDataDAL.GetGameOutAccurate(btime,etime);
@@ -194,7 +204,7 @@ namespace GL.Data.BLL
             pq.RecordCount = 200;
             pq.Sql = string.Format(@"
 select "+ ((page-1)*pq.PageSize+1) + @" as No, ID as playerID, Account as UserName,Zicard as Jifen ,NickName
-from 515game.Role 
+from "+ database1 + @".Role 
 order by Zicard desc limit {0}, {1}
 ", pq.StartRowNumber, pq.PageSize);
 
@@ -209,10 +219,10 @@ order by Zicard desc limit {0}, {1}
             PagerQuery pq = new PagerQuery();
             pq.CurrentPage = bdv.Page;
             pq.PageSize = 10;
-            pq.RecordCount = DAL.PagedListDAL<MonitorLog>.GetRecordCount(string.Format(@"select count(0) from GServerInfo.MonitorLog where MonitorID=28 and CreateTime>='"+bdv.StartDate+"' and CreateTime<'"+bdv.ExpirationDate+"' "));
+            pq.RecordCount = DAL.PagedListDAL<MonitorLog>.GetRecordCount(string.Format(@"select count(0) from "+database2+@".MonitorLog where MonitorID=28 and CreateTime>='"+bdv.StartDate+"' and CreateTime<'"+bdv.ExpirationDate+"' "));
          
             pq.Sql = string.Format(@"
-select * from GServerInfo.MonitorLog where MonitorID=28   and CreateTime>='" + bdv.StartDate + "' and CreateTime<'" + bdv.ExpirationDate + @"' 
+select * from "+database2+".MonitorLog where MonitorID=28   and CreateTime>='" + bdv.StartDate + "' and CreateTime<'" + bdv.ExpirationDate + @"' 
 order by CreateTime desc limit {0}, {1};
 ", pq.StartRowNumber, pq.PageSize);
 

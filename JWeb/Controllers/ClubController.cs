@@ -11,6 +11,7 @@ using System.Net;
 using System.Text;
 using log4net;
 using GL.Command.DBUtility;
+using GL.Common;
 
 namespace JWeb.Controllers
 {
@@ -37,7 +38,7 @@ namespace JWeb.Controllers
             int uid = queryvalues.ContainsKey("uid") ? (string.IsNullOrEmpty(queryvalues["uid"])?-1:Convert.ToInt32(queryvalues["uid"]) ): -1;
           
          
-            //uid = 10701;
+           // uid = 10701;
             string hip = serverIP;
             int hport = Convert.ToInt32(serverPort);
 
@@ -55,8 +56,17 @@ namespace JWeb.Controllers
             }
             string code = resStr;
             resStr = gameUrl + resStr;
-            //发送socket请求
-            IPAddress ip = IPAddress.Parse(hip);
+
+            //生成短网址
+
+            resStr =  BaiDuHelper.TransLongUrlToTinyUrl(resStr);
+
+
+
+
+
+             //发送socket请求
+             IPAddress ip = IPAddress.Parse(hip);
             IPEndPoint ipe = new IPEndPoint(ip, hport);
             Socket clientSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             clientSocket.Connect(ipe);
@@ -198,6 +208,11 @@ namespace JWeb.Controllers
             }
             string code = resStr;
             resStr = gameUrl + resStr;
+
+
+            resStr = BaiDuHelper.TransLongUrlToTinyUrl(resStr);
+
+
             //发送socket请求
             IPAddress ip = IPAddress.Parse(hip);
             IPEndPoint ipe = new IPEndPoint(ip, hport);

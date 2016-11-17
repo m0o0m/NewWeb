@@ -15,13 +15,16 @@ using Webdiyer.WebControls.Mvc;
 using System.Runtime.InteropServices;
 using Microsoft.AspNet.Identity;
 using log4net;
+using GL.Command.DBUtility;
 
 namespace MWeb.Controllers
 {
     [Authorize]
     public class ManageController : Controller
     {
-       
+        public static readonly string Coin = PubConstant.GetConnectionString("coin");
+        public static readonly string SystemType = PubConstant.GetConnectionString("SystemType");
+
         // GET: Manage
         //[QueryValues]
         //public ActionResult Management(Dictionary<string, string> queryvalues)
@@ -160,108 +163,191 @@ namespace MWeb.Controllers
                     return View(model);
                 }
                 else {
-                    int indexData = 4;
-                    byte[] numData = new byte[4];
-                    Array.Copy(model.ExtInfo, indexData, numData, 0, 4);
-                    int num = System.BitConverter.ToInt32(numData, 0);
-                    indexData = indexData + 4;
 
-                    byte[] DataInfo = new byte[num];
-                    Array.Copy(model.ExtInfo, 0, DataInfo, 0, num);
-                    while (indexData < num)
+                    //SystemType
+
+                    if (SystemType == "2")
                     {
-                        //类型ID
-                        int typeid = System.BitConverter.ToInt32(DataInfo, indexData);
+
+                        ////////////////////////////////底层修改///////////////////////////////////
+
+                        BExtInfo BExtInfo = BExtInfo.ParseFrom(model.ExtInfo);
+
+                        model.VipGrade = BExtInfo.VipInfo.Grade;  //VIP等级
+                        model.VipPoint = BExtInfo.VipInfo.Current;  //VIP点数
+                        model.LevelGrade = BExtInfo.LevelInfo.Level; //玩家等级
+                        model.ItemCount = BExtInfo.ToolsInfo.ListToolsList.Count();//道具
+
+
+                        IList<GameInfo> gameInfoList = BExtInfo.UserExData.ListInfoList;
+                        //德州扑克
+                        GameInfo game15 = gameInfoList.Where(m => m.GameID == 15).FirstOrDefault();
+                        gameinfo g15 = new gameinfo();
+                        if (game15 != null)
+                        {
+                            g15.dwWin = Convert.ToInt32(game15.DwWin);
+                            g15.dwTotal = Convert.ToInt32(game15.DwTotal);
+                            g15.maxWinChip = game15.MaxWinChip;
+                        }
+                        else
+                        {
+                            g15.dwWin = 0;
+                            g15.dwTotal = 0;
+                            g15.maxWinChip = 0;
+                        }
+
+                        model.GameInfo15 = g15;
+                        //中发白
+                        GameInfo game13 = gameInfoList.Where(m => m.GameID == 15).FirstOrDefault();
+                        gameinfo g13 = new gameinfo();
+                        if (game13 != null)
+                        {
+                            g13.dwWin = Convert.ToInt32(game13.DwWin);
+                            g13.dwTotal = Convert.ToInt32(game13.DwTotal);
+                            g13.maxWinChip = game13.MaxWinChip;
+                        }
+                        else
+                        {
+                            g13.dwWin = 0;
+                            g13.dwTotal = 0;
+                            g13.maxWinChip = 0;
+                        }
+
+                        model.GameInfo13 = g13;
+                        //十二生肖
+                        GameInfo game14 = gameInfoList.Where(m => m.GameID == 15).FirstOrDefault();
+                        gameinfo g14 = new gameinfo();
+                        if (game14 != null)
+                        {
+                            g14.dwWin = Convert.ToInt32(game14.DwWin);
+                            g14.dwTotal = Convert.ToInt32(game14.DwTotal);
+                            g14.maxWinChip = game14.MaxWinChip;
+                        }
+                        else
+                        {
+                            g14.dwWin = 0;
+                            g14.dwTotal = 0;
+                            g14.maxWinChip = 0;
+                        }
+
+                        model.GameInfo14 = g14;
+
+
+                        model.Friend = (short)BExtInfo.UserExData.WMaxFriend;
+
+                        uint lastLoginTime = BExtInfo.UserExData.LastLoginTime;
+                        DateTime dtStart = TimeZone.CurrentTimeZone.ToLocalTime(new DateTime(1970, 1, 1));
+                        long lTime = long.Parse(lastLoginTime + "0000000");
+                        TimeSpan toNow = new TimeSpan(lTime);
+                        dtStart = dtStart.Add(toNow);
+                        model.LastLoginTime = dtStart;
+
+                        model.lastMoney = BExtInfo.UserExData.LastMoney;
+                    }
+                    else if (SystemType == "1")
+                    {
+                        int indexData = 4;
+                        byte[] numData = new byte[4];
+                        Array.Copy(model.ExtInfo, indexData, numData, 0, 4);
+                        int num = System.BitConverter.ToInt32(numData, 0);
                         indexData = indexData + 4;
-                        //数据长度
-                        //if (indexData > num)
-                        //{
-                        //    continue;
-                        //}
 
-                        int datanum = System.BitConverter.ToInt32(DataInfo, indexData);
-                        indexData = indexData + 4;
-                       
-
-                        //VIP等级
-                        if (typeid == 1)
+                        byte[] DataInfo = new byte[num];
+                        Array.Copy(model.ExtInfo, 0, DataInfo, 0, num);
+                        while (indexData < num)
                         {
-                            model.VipGrade = System.BitConverter.ToInt32(DataInfo, indexData);
-                            model.VipPoint = System.BitConverter.ToInt32(DataInfo, indexData + 4);
-                            indexData = indexData + datanum;
-                        }
-                        //玩家等级
-                        else if (typeid == 2)
-                        {
-                            model.LevelGrade = System.BitConverter.ToInt32(DataInfo, indexData);
-                            indexData = indexData + datanum;
-                        }
-                        //道具
-                        else if (typeid == 4)
-                        {
-                            model.ItemCount = datanum / 24;
-                            indexData = indexData + datanum;
-                        }
-                        //牌局
-                        else if (typeid == 9)
-                        {
-                            int flag = indexData + datanum;
-                            model.Friend = System.BitConverter.ToInt16(DataInfo, indexData);
+                            //类型ID
+                            int typeid = System.BitConverter.ToInt32(DataInfo, indexData);
+                            indexData = indexData + 4;
+                            int datanum = System.BitConverter.ToInt32(DataInfo, indexData);
+                            indexData = indexData + 4;
 
-                            uint lastLoginTime = System.BitConverter.ToUInt32(DataInfo, indexData + 4);
-                            DateTime dtStart = TimeZone.CurrentTimeZone.ToLocalTime(new DateTime(1970, 1, 1));
-                            long lTime = long.Parse(lastLoginTime + "0000000");
-                            TimeSpan toNow = new TimeSpan(lTime);
-                            dtStart = dtStart.Add(toNow);
-                            model.LastLoginTime = dtStart;
 
-                            //long lastMoney = System.BitConverter.ToInt32(DataInfo, indexData + 16);
-                            //model.lastMoney = lastMoney;
-
-                            indexData = indexData + 32;
-                            while (indexData < flag)
+                            //VIP等级
+                            if (typeid == 1)
                             {
-                                short gameid = System.BitConverter.ToInt16(DataInfo, indexData);
-                                indexData = indexData + 4;
-                                switch (gameid)
+                                model.VipGrade = System.BitConverter.ToInt32(DataInfo, indexData);
+                                model.VipPoint = System.BitConverter.ToInt32(DataInfo, indexData + 4);
+                                indexData = indexData + datanum;
+                            }
+                            //玩家等级
+                            else if (typeid == 2)
+                            {
+                                model.LevelGrade = System.BitConverter.ToInt32(DataInfo, indexData);
+                                indexData = indexData + datanum;
+                            }
+                            //道具
+                            else if (typeid == 4)
+                            {
+                                model.ItemCount = datanum / 24;
+                                indexData = indexData + datanum;
+                            }
+                            //牌局
+                            else if (typeid == 9)
+                            {
+                                int flag = indexData + datanum;
+                                model.Friend = System.BitConverter.ToInt16(DataInfo, indexData);
+
+                                uint lastLoginTime = System.BitConverter.ToUInt32(DataInfo, indexData + 4);
+                                DateTime dtStart = TimeZone.CurrentTimeZone.ToLocalTime(new DateTime(1970, 1, 1));
+                                long lTime = long.Parse(lastLoginTime + "0000000");
+                                TimeSpan toNow = new TimeSpan(lTime);
+                                dtStart = dtStart.Add(toNow);
+                                model.LastLoginTime = dtStart;
+
+                                //long lastMoney = System.BitConverter.ToInt32(DataInfo, indexData + 16);
+                                //model.lastMoney = lastMoney;
+
+                                indexData = indexData + 32;
+                                while (indexData < flag)
                                 {
-                                    case 15:  //德州
-                                        gameinfo gameinfo15 = new gameinfo();
-                                        gameinfo15.dwWin = System.BitConverter.ToInt32(DataInfo, indexData);
-                                        gameinfo15.dwTotal = System.BitConverter.ToInt32(DataInfo, indexData + 4);
-                                        gameinfo15.maxWinChip = System.BitConverter.ToInt32(DataInfo, indexData + 8);
-                                        model.GameInfo15 = gameinfo15;
-                                        indexData = indexData + 12;
-                                        break;
-                                    case 13:  //中发白
-                                        gameinfo gameinfo13 = new gameinfo();
-                                        gameinfo13.dwWin = System.BitConverter.ToInt32(DataInfo, indexData);
-                                        gameinfo13.dwTotal = System.BitConverter.ToInt32(DataInfo, indexData + 4);
-                                        gameinfo13.maxWinChip = System.BitConverter.ToInt32(DataInfo, indexData + 8);
-                                        model.GameInfo13 = gameinfo13;
-                                        indexData = indexData + 12;
-                                        break;
-                                    case 14:  //十二生肖  
-                                        gameinfo gameinfo14 = new gameinfo();
-                                        gameinfo14.dwWin = System.BitConverter.ToInt32(DataInfo, indexData);
-                                        gameinfo14.dwTotal = System.BitConverter.ToInt32(DataInfo, indexData + 4);
-                                        gameinfo14.maxWinChip = System.BitConverter.ToInt32(DataInfo, indexData + 8);
-                                        model.GameInfo14 = gameinfo14;
-                                        indexData = indexData + 12;
-                                        break;
-                                    default:
-                                        indexData = flag;
-                                        break;
+                                    short gameid = System.BitConverter.ToInt16(DataInfo, indexData);
+                                    indexData = indexData + 4;
+                                    switch (gameid)
+                                    {
+                                        case 15:  //德州
+                                            gameinfo gameinfo15 = new gameinfo();
+                                            gameinfo15.dwWin = System.BitConverter.ToInt32(DataInfo, indexData);
+                                            gameinfo15.dwTotal = System.BitConverter.ToInt32(DataInfo, indexData + 4);
+                                            gameinfo15.maxWinChip = System.BitConverter.ToInt32(DataInfo, indexData + 8);
+                                            model.GameInfo15 = gameinfo15;
+                                            indexData = indexData + 12;
+                                            break;
+                                        case 13:  //中发白
+                                            gameinfo gameinfo13 = new gameinfo();
+                                            gameinfo13.dwWin = System.BitConverter.ToInt32(DataInfo, indexData);
+                                            gameinfo13.dwTotal = System.BitConverter.ToInt32(DataInfo, indexData + 4);
+                                            gameinfo13.maxWinChip = System.BitConverter.ToInt32(DataInfo, indexData + 8);
+                                            model.GameInfo13 = gameinfo13;
+                                            indexData = indexData + 12;
+                                            break;
+                                        case 14:  //十二生肖  
+                                            gameinfo gameinfo14 = new gameinfo();
+                                            gameinfo14.dwWin = System.BitConverter.ToInt32(DataInfo, indexData);
+                                            gameinfo14.dwTotal = System.BitConverter.ToInt32(DataInfo, indexData + 4);
+                                            gameinfo14.maxWinChip = System.BitConverter.ToInt32(DataInfo, indexData + 8);
+                                            model.GameInfo14 = gameinfo14;
+                                            indexData = indexData + 12;
+                                            break;
+                                        default:
+                                            indexData = flag;
+                                            break;
+                                    }
                                 }
                             }
-                        }
-                        else {
-                            indexData = indexData + datanum;
+                            else
+                            {
+                                indexData = indexData + datanum;
+                            }
                         }
                     }
+                    else {
+
+                    }
+                
                 }
 
-               // 计算在线状态
+                // 计算在线状态
                 UserStateReq UserStateReq;
                 // model.Minu 传一个时间长短给服务器
                 UserStateReq = UserStateReq.CreateBuilder()
@@ -377,26 +463,77 @@ namespace MWeb.Controllers
                 if (model.ExtInfo == null)
                 {
                     return Content("-2");
-                }else { 
-                    byte[] Data = new byte[4];
-                    Array.Copy(model.ExtInfo, 4, Data, 0, 4);
-                    int num = System.BitConverter.ToInt32(Data, 0);
-                    byte[] Grade = System.BitConverter.GetBytes(_level);
-                    byte[] Point = System.BitConverter.GetBytes(_point);
-                    for(int j = 0; j < 4; j++)
+                }else {
+                    /////////////////////////////////////////////////////////////////////////////////
+
+                    if (SystemType == "2")//万人德州
                     {
-                        if(_type == 1)  //修改VIP等级
+
+                        BExtInfo BExtInfo = BExtInfo.ParseFrom(model.ExtInfo);
+                        if (_type == 1)  //修改VIP等级
                         {
-                            model.ExtInfo[16 + j] = Grade[j];
-                            model.ExtInfo[20 + j] = Point[j];
+
+                            VipInfo VipInfo22;
+
+                            VipInfo22 = VipInfo.CreateBuilder(BExtInfo.VipInfo)
+                                   .SetGrade((int)_level)
+                                   .SetCurrent((int)_point)
+                                   .Build();
+
+
+                            BExtInfo = BExtInfo.CreateBuilder(BExtInfo)
+                                   .SetVipInfo(VipInfo22)
+                                   .Build();
+
+
                         }
-                        else if(_type == 2) //修改等级
+                        else if (_type == 2) //修改等级
                         {
-                            model.ExtInfo[36 + j] = Grade[j];
-                            model.ExtInfo[40 + j] = Point[j];
-                        }                    
+
+                            LevelInfo LevelInfo22;
+
+                            LevelInfo22 = LevelInfo.CreateBuilder(BExtInfo.LevelInfo)
+                                   .SetLevel(_level)
+                                   .SetExp(_point)
+                                   .Build();
+
+
+                            BExtInfo = BExtInfo.CreateBuilder(BExtInfo)
+                                   .SetLevelInfo(LevelInfo22)
+                                   .Build();
+
+
+                        }
+                        byte[] bs = BExtInfo.ToByteArray();
+                        model.ExtInfo = bs;
+                        return Content(RoleBLL.UpdateRole(model).ToString());
                     }
-                    return Content(RoleBLL.UpdateRole(model).ToString());
+                    else if (SystemType == "1")
+                    {
+                        byte[] Data = new byte[4];
+                        Array.Copy(model.ExtInfo, 4, Data, 0, 4);
+                        int num = System.BitConverter.ToInt32(Data, 0);
+                        byte[] Grade = System.BitConverter.GetBytes(_level);
+                        byte[] Point = System.BitConverter.GetBytes(_point);
+                        for (int j = 0; j < 4; j++)
+                        {
+                            if (_type == 1)  //修改VIP等级
+                            {
+                                model.ExtInfo[16 + j] = Grade[j];
+                                model.ExtInfo[20 + j] = Point[j];
+                            }
+                            else if (_type == 2) //修改等级
+                            {
+                                model.ExtInfo[36 + j] = Grade[j];
+                                model.ExtInfo[40 + j] = Point[j];
+                            }
+                        }
+                        return Content(RoleBLL.UpdateRole(model).ToString());
+                    }
+                    else {
+
+
+                    }
                 }
             }
             //数据查询操作
@@ -405,42 +542,57 @@ namespace MWeb.Controllers
                 return View(model);
             }
             else {
-                int indexData = 4;
-                byte[] numData = new byte[4];
-                Array.Copy(model.ExtInfo, indexData, numData, 0, 4);
-                int num = System.BitConverter.ToInt32(numData, 0);
-                indexData = indexData + 4;
-
-                byte[] DataInfo = new byte[num];
-                Array.Copy(model.ExtInfo, 0, DataInfo, 0, num);
-                while (indexData < num)
+                if (SystemType == "2")
                 {
-                    //类型ID
-                    int typeid = System.BitConverter.ToInt32(DataInfo, indexData);
-                    indexData = indexData + 4;
-                    //数据长度
-                    int datanum = System.BitConverter.ToInt32(DataInfo, indexData);
-                    indexData = indexData + 4;
-                    //VIP等级
-                    if (typeid == 1)
-                    {
-                        model.VipGrade = System.BitConverter.ToInt32(DataInfo, indexData);
-                        model.VipPoint = System.BitConverter.ToInt32(DataInfo, indexData + 4);
-                        indexData = indexData + datanum;
-                    }
-                    //玩家等级
-                    else if (typeid == 2)
-                    {
-                        model.LevelGrade = System.BitConverter.ToInt32(DataInfo, indexData);
-                        model.LevelPoint = System.BitConverter.ToInt32(DataInfo, indexData + 4);
-                        indexData = indexData + datanum;
-                    }
-                    else
-                    {
-                        indexData = indexData + datanum;
-                    }
+                    BExtInfo BExtInfo = BExtInfo.ParseFrom(model.ExtInfo);
+                    model.VipGrade = BExtInfo.VipInfo.Grade;  //VIP等级
+                    model.VipPoint = BExtInfo.VipInfo.Current;  //VIP等级
+                    model.LevelGrade = BExtInfo.LevelInfo.Level; //玩家等级
+                    model.LevelPoint = BExtInfo.LevelInfo.Exp; //玩家等级
+                    return View(model);
+
                 }
-                return View(model);
+                else {
+                    int indexData = 4;
+                    byte[] numData = new byte[4];
+                    Array.Copy(model.ExtInfo, indexData, numData, 0, 4);
+                    int num = System.BitConverter.ToInt32(numData, 0);
+                    indexData = indexData + 4;
+
+                    byte[] DataInfo = new byte[num];
+                    Array.Copy(model.ExtInfo, 0, DataInfo, 0, num);
+                    while (indexData < num)
+                    {
+                        //类型ID
+                        int typeid = System.BitConverter.ToInt32(DataInfo, indexData);
+                        indexData = indexData + 4;
+                        //数据长度
+                        int datanum = System.BitConverter.ToInt32(DataInfo, indexData);
+                        indexData = indexData + 4;
+                        //VIP等级
+                        if (typeid == 1)
+                        {
+                            model.VipGrade = System.BitConverter.ToInt32(DataInfo, indexData);
+                            model.VipPoint = System.BitConverter.ToInt32(DataInfo, indexData + 4);
+                            indexData = indexData + datanum;
+                        }
+                        //玩家等级
+                        else if (typeid == 2)
+                        {
+                            model.LevelGrade = System.BitConverter.ToInt32(DataInfo, indexData);
+                            model.LevelPoint = System.BitConverter.ToInt32(DataInfo, indexData + 4);
+                            indexData = indexData + datanum;
+                        }
+                        else
+                        {
+                            indexData = indexData + datanum;
+                        }
+                    }
+                    return View(model);
+                }
+              
+
+          
             }
         }
 
@@ -457,7 +609,7 @@ namespace MWeb.Controllers
             int _seachtype = (int)seachType.禁言;
             int _lv = queryvalues.ContainsKey("lv") ? Convert.ToInt32(queryvalues["lv"]) : 0;
 
-            if (queryvalues.ContainsKey("Value") == false)//说明是从左边的菜单点击进来的,所以不会传递查询的值到后台
+            if (queryvalues.ContainsKey("Value") == false && page==1)//说明是从左边的菜单点击进来的,所以不会传递查询的值到后台
             {
                 ViewData["Value"] = "";
                 PagedList<Role> model1 = new PagedList<Role>(new List<Role>(), 1, 1);
@@ -495,7 +647,7 @@ namespace MWeb.Controllers
             int _seachtype = (int)seachType.封号;
             int _lv = queryvalues.ContainsKey("lv") ? Convert.ToInt32(queryvalues["lv"]) : 0;
 
-            if (queryvalues.ContainsKey("Value") == false)//说明是从左边的菜单点击进来的,所以不会传递查询的值到后台
+            if (queryvalues.ContainsKey("Value") == false && page==1)//说明是从左边的菜单点击进来的,所以不会传递查询的值到后台
             {
                 ViewData["Value"] = "";
                 PagedList<Role> model1 = new PagedList<Role>(new List<Role>(), 1, 1);
@@ -1591,7 +1743,7 @@ namespace MWeb.Controllers
                         }
                       
                         decimal conum = 1;
-                        if (ue.UEItemType == ueItemType.金币 || ue.UEItemType == ueItemType.五币 || ue.UEItemType == ueItemType.积分)
+                        if (ue.UEItemType == ueItemType.金币 || ue.UEItemType == ueItemType.币 || ue.UEItemType == ueItemType.积分)
                         {
                             conum = ue.UEItemValue;
                         }

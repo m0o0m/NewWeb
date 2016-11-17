@@ -52,6 +52,9 @@ namespace Web.Pay.Controllers
             int _othertype = queryvalues.ContainsKey("othertype") ? Convert.ToInt32(queryvalues["othertype"]) : 0;
             string _other = queryvalues.ContainsKey("other") ? queryvalues["other"] : string.Empty;
             string _customSign = queryvalues.ContainsKey("customsign") ? queryvalues["customsign"] : string.Empty;
+            int _agentID = queryvalues.ContainsKey("agentid") ?(string.IsNullOrEmpty(queryvalues["agentid"])?0:Convert.ToInt32(queryvalues["agentid"])) : 0;
+
+
 
             string Key = _key;
 
@@ -220,7 +223,7 @@ namespace Web.Pay.Controllers
             log.Info(string.Concat("生成订单Yeepay \n", logsb.ToString()));
 
 
-            RechargeCheckBLL.Add(new RechargeCheck { Money = amount, ProductID = _productid, SerialNo = orderid, UserID = _identityid, CreateTime = (uint)transtimeL });
+            RechargeCheckBLL.Add(new RechargeCheck { Money = amount, ProductID = _productid, SerialNo = orderid, UserID = _identityid, CreateTime = (uint)transtimeL, AgentID = _agentID });
 
             RechargeCheckBLL.AddOrderIP(new UserIpInfo { UserID = _identityid, OrderID = orderid, CreateTime = DateTime.Now, ChargeType = (int)raType.易宝, OrderIP= GetClientIp() });
 
@@ -278,7 +281,8 @@ namespace Web.Pay.Controllers
             int _othertype = queryvalues.ContainsKey("othertype") ? Convert.ToInt32(queryvalues["othertype"]) : 0;
             string _other = queryvalues.ContainsKey("other") ? queryvalues["other"] : string.Empty;
             string _customSign = queryvalues.ContainsKey("customsign") ? queryvalues["customsign"] : string.Empty;
-
+            int _agentID = queryvalues.ContainsKey("agentid") ? (string.IsNullOrEmpty(queryvalues["agentid"]) ? 0 : Convert.ToInt32(queryvalues["agentid"])) : 0;
+            log.Info("_agentID: " + _agentID);
             string Key = _key;
 
          
@@ -316,7 +320,7 @@ namespace Web.Pay.Controllers
 
                 if (recharge == null)//没有首冲过
                 {
-                    RechargeCheckBLL.Add(new RechargeCheck { Money = appPay.total_fee, ProductID = _productid, SerialNo = appPay.out_trade_no, UserID = _identityid, CreateTime = (uint)transtimeL });
+                    RechargeCheckBLL.Add(new RechargeCheck { Money = appPay.total_fee, ProductID = _productid, SerialNo = appPay.out_trade_no, UserID = _identityid, CreateTime = (uint)transtimeL, AgentID=_agentID });
                     RechargeCheckBLL.AddOrderIP(new UserIpInfo { UserID = _identityid, OrderID = appPay.out_trade_no, CreateTime = DateTime.Now, ChargeType = (int)raType.微信, OrderIP = GetClientIp() });
 
 
@@ -337,7 +341,7 @@ namespace Web.Pay.Controllers
               
             }
             else {//不是首冲
-                RechargeCheckBLL.Add(new RechargeCheck { Money = appPay.total_fee, ProductID = _productid, SerialNo = appPay.out_trade_no, UserID = _identityid, CreateTime = (uint)transtimeL });
+                RechargeCheckBLL.Add(new RechargeCheck { Money = appPay.total_fee, ProductID = _productid, SerialNo = appPay.out_trade_no, UserID = _identityid, CreateTime = (uint)transtimeL , AgentID=_agentID});
 
                 unifiedOrderResult.SetValue("ret", 0);
 
@@ -380,8 +384,13 @@ namespace Web.Pay.Controllers
             int _othertype = queryvalues.ContainsKey("othertype") ? Convert.ToInt32(queryvalues["othertype"]) : 0;
             string _other = queryvalues.ContainsKey("other") ? queryvalues["other"] : string.Empty;
             string _customSign = queryvalues.ContainsKey("customsign") ? queryvalues["customsign"] : string.Empty;
-
+            int _agentID = queryvalues.ContainsKey("agentid") ? (string.IsNullOrEmpty(queryvalues["agentid"]) ? 0 : Convert.ToInt32(queryvalues["agentid"])) : 0;
+            log.Info("_agentID: " + _agentID);
             string Key = _key;
+
+
+            /*
+            */
 
             string md5 = Utils.MD5(string.Concat(_transtime, _identityid, _othertype, _other, _productid, Key));
             if (!_customSign.Equals(md5))
@@ -433,7 +442,7 @@ namespace Web.Pay.Controllers
             //appPay.out_trade_no = Utils.GenerateOutTradeNo("WxPay");
             //WxPayData unifiedOrderResult = appPay.GetUnifiedOrderResult();
             //long transtimeL = Utils.GetTimeStampL();
-            RechargeCheckBLL.Add(new RechargeCheck { Money = amount, ProductID = _productid, SerialNo = orderid, UserID = _identityid, CreateTime = (ulong)transtimeL });
+            RechargeCheckBLL.Add(new RechargeCheck { Money = amount, ProductID = _productid, SerialNo = orderid, UserID = _identityid, CreateTime = (ulong)transtimeL, AgentID=_agentID });
             RechargeCheckBLL.AddOrderIP(new UserIpInfo { UserID = _identityid, OrderID = orderid, CreateTime = DateTime.Now, ChargeType = (int)raType.支付宝, OrderIP = GetClientIp() });
 
             return Json(new
@@ -472,6 +481,7 @@ namespace Web.Pay.Controllers
             int _othertype = queryvalues.ContainsKey("othertype") ? Convert.ToInt32(queryvalues["othertype"]) : 0;
             string _other = queryvalues.ContainsKey("other") ? queryvalues["other"] : string.Empty;
             string _customSign = queryvalues.ContainsKey("customsign") ? queryvalues["customsign"] : string.Empty;
+            int _agentID = queryvalues.ContainsKey("agentid") ? (string.IsNullOrEmpty(queryvalues["agentid"]) ? 0 : Convert.ToInt32(queryvalues["agentid"])) : 0;
 
             string Key = _key;
 
@@ -526,7 +536,7 @@ namespace Web.Pay.Controllers
             //appPay.out_trade_no = Utils.GenerateOutTradeNo("WxPay");
             //WxPayData unifiedOrderResult = appPay.GetUnifiedOrderResult();
             //long transtimeL = Utils.GetTimeStampL();
-            RechargeCheckBLL.Add(new RechargeCheck { Money = amount, ProductID = _productid, SerialNo = orderid, UserID = _identityid, CreateTime = (ulong)transtimeL });
+            RechargeCheckBLL.Add(new RechargeCheck { Money = amount, ProductID = _productid, SerialNo = orderid, UserID = _identityid, CreateTime = (ulong)transtimeL, AgentID=_agentID });
             RechargeCheckBLL.AddOrderIP(new UserIpInfo { UserID = _identityid, OrderID = orderid, CreateTime = DateTime.Now, ChargeType = (int)raType.百度, OrderIP = GetClientIp() });
 
 
@@ -602,6 +612,11 @@ namespace Web.Pay.Controllers
             string present = queryvalues.ContainsKey("present") ? queryvalues["present"] : string.Empty;
             string paymode = queryvalues.ContainsKey("paymode") ? queryvalues["paymode"] : string.Empty;
             string cee_extend = queryvalues.ContainsKey("cee_extend") ? queryvalues["cee_extend"] : string.Empty;
+
+            int _agentID = queryvalues.ContainsKey("agentid") ? (string.IsNullOrEmpty(queryvalues["agentid"]) ? 0 : Convert.ToInt32(queryvalues["agentid"])) : 0;
+
+
+            log.Info("QQPay生成订单传递渠道id: " + _agentID);
 
 
             //msg.openid = GameConfig.instance.meInfo.openid;
@@ -716,7 +731,7 @@ namespace Web.Pay.Controllers
 
             RstArray result = sdk.Api(script_name, param, "post", "https");
 
-            RechargeCheckBLL.Add(new RechargeCheck { Money = appPay.total_fee, ProductID = _productid, SerialNo = appPay.out_trade_no, UserID = _identityid, CreateTime = (uint)transtimeL });
+            RechargeCheckBLL.Add(new RechargeCheck { Money = appPay.total_fee, ProductID = _productid, SerialNo = appPay.out_trade_no, UserID = _identityid, CreateTime = (uint)transtimeL, AgentID=_agentID });
             RechargeCheckBLL.AddOrderIP(new UserIpInfo { UserID = _identityid, OrderID = appPay.out_trade_no, CreateTime = DateTime.Now, ChargeType = (int)raType.腾讯, OrderIP = GetClientIp() });
 
             log.Info("QQPay生成订单 result.Ret: " + result.Ret);
@@ -752,8 +767,9 @@ namespace Web.Pay.Controllers
             int _othertype = queryvalues.ContainsKey("othertype") ? Convert.ToInt32(queryvalues["othertype"]) : 0;
             string _other = queryvalues.ContainsKey("other") ? queryvalues["other"] : string.Empty;
             string _customSign = queryvalues.ContainsKey("customsign") ? queryvalues["customsign"] : string.Empty;
+            int _agentID = queryvalues.ContainsKey("agentid") ? (string.IsNullOrEmpty(queryvalues["agentid"]) ? 0 : Convert.ToInt32(queryvalues["agentid"])) : 0;
 
-        
+
             //公共参数
             string Key = _key;
             string md5 = Utils.MD5(string.Concat(_transtime, _identityid, _othertype, _other, _productid, Key));
@@ -813,7 +829,7 @@ namespace Web.Pay.Controllers
             }
             else
             {
-                RechargeCheckBLL.Add(new RechargeCheck { Money = appPay.total_fee, ProductID = _productid, SerialNo = appPay.out_trade_no, UserID = _identityid, CreateTime = (uint)transtimeL });
+                RechargeCheckBLL.Add(new RechargeCheck { Money = appPay.total_fee, ProductID = _productid, SerialNo = appPay.out_trade_no, UserID = _identityid, CreateTime = (uint)transtimeL, AgentID=_agentID });
                 RechargeCheckBLL.AddOrderIP(new UserIpInfo { UserID = _identityid, OrderID = appPay.out_trade_no, CreateTime = DateTime.Now, ChargeType = (int)raType.应用汇, OrderIP = GetClientIp() });
 
            
@@ -865,6 +881,8 @@ namespace Web.Pay.Controllers
             string appversion = queryvalues.ContainsKey("appversion") ? queryvalues["appversion"] : string.Empty;
             string Key = _key;
             string md5 = Utils.MD5(string.Concat(_transtime, _identityid, _othertype, _other, _productid, Key));
+            int _agentID = queryvalues.ContainsKey("agentid") ? (string.IsNullOrEmpty(queryvalues["agentid"]) ? 0 : Convert.ToInt32(queryvalues["agentid"])) : 0;
+
 
             if (!_customSign.Equals(md5))
             {
@@ -915,7 +933,7 @@ namespace Web.Pay.Controllers
             long transtimeI = Utils.GetTimeStampI();
 
 
-            RechargeCheckBLL.Add(new RechargeCheck { Money = appPay.total_fee, ProductID = _productid, SerialNo = appPay.out_trade_no, UserID = _identityid, CreateTime = (uint)transtimeL, CheckInfo = string.Concat(gameaccount, ",", imei, ",", macaddress, ",", ipaddress, ",", appversion) });
+            RechargeCheckBLL.Add(new RechargeCheck { Money = appPay.total_fee, ProductID = _productid, SerialNo = appPay.out_trade_no, UserID = _identityid, CreateTime = (uint)transtimeL, CheckInfo = string.Concat(gameaccount, ",", imei, ",", macaddress, ",", ipaddress, ",", appversion), AgentID=_agentID });
 
             log.Error("UnicomPay 订单 ："+ appPay.out_trade_no);
             RechargeCheckBLL.AddOrderIP(new UserIpInfo { UserID = _identityid, OrderID = appPay.out_trade_no, CreateTime = DateTime.Now, ChargeType = (int)raType.联通, OrderIP = GetClientIp() });
@@ -949,6 +967,7 @@ namespace Web.Pay.Controllers
             int _othertype = queryvalues.ContainsKey("othertype") ? Convert.ToInt32(queryvalues["othertype"]) : 0;
             string _other = queryvalues.ContainsKey("other") ? queryvalues["other"] : string.Empty;
             string _customSign = queryvalues.ContainsKey("customsign") ? queryvalues["customsign"] : string.Empty;
+            int _agentID = queryvalues.ContainsKey("agentid") ? (string.IsNullOrEmpty(queryvalues["agentid"]) ? 0 : Convert.ToInt32(queryvalues["agentid"])) : 0;
 
             //公共参数
             string Key = _key;
@@ -981,7 +1000,7 @@ namespace Web.Pay.Controllers
                 Recharge recharge = RechargeBLL.GetFirstModelListByUserID(new Recharge { UserID = userid });
                 if (recharge == null)
                 {//没有首冲过
-                    RechargeCheckBLL.Add(new RechargeCheck { Money = appPay.total_fee, ProductID = _productid, SerialNo = appPay.out_trade_no, UserID = _identityid, CreateTime = (uint)transtimeL });
+                    RechargeCheckBLL.Add(new RechargeCheck { Money = appPay.total_fee, ProductID = _productid, SerialNo = appPay.out_trade_no, UserID = _identityid, CreateTime = (uint)transtimeL, AgentID=_agentID });
                     RechargeCheckBLL.AddOrderIP(new UserIpInfo { UserID = _identityid, OrderID = appPay.out_trade_no, CreateTime = DateTime.Now, ChargeType = (int)raType.XY助手, OrderIP = GetClientIp() });
 
                     return Json(new
@@ -1005,7 +1024,7 @@ namespace Web.Pay.Controllers
             }
             else
             {//不是首冲
-                RechargeCheckBLL.Add(new RechargeCheck { Money = appPay.total_fee, ProductID = _productid, SerialNo = appPay.out_trade_no, UserID = _identityid, CreateTime = (uint)transtimeL });
+                RechargeCheckBLL.Add(new RechargeCheck { Money = appPay.total_fee, ProductID = _productid, SerialNo = appPay.out_trade_no, UserID = _identityid, CreateTime = (uint)transtimeL , AgentID=_agentID});
                 RechargeCheckBLL.AddOrderIP(new UserIpInfo { UserID = _identityid, OrderID = appPay.out_trade_no, CreateTime = DateTime.Now, ChargeType = (int)raType.XY助手, OrderIP = GetClientIp() });
                 return Json(new
                 {
@@ -1043,6 +1062,7 @@ namespace Web.Pay.Controllers
             int _othertype = queryvalues.ContainsKey("othertype") ? Convert.ToInt32(queryvalues["othertype"]) : 0;
             string _other = queryvalues.ContainsKey("other") ? queryvalues["other"] : string.Empty;
             string _customSign = queryvalues.ContainsKey("customsign") ? queryvalues["customsign"] : string.Empty;
+            int _agentID = queryvalues.ContainsKey("agentid") ? (string.IsNullOrEmpty(queryvalues["agentid"]) ? 0 : Convert.ToInt32(queryvalues["agentid"])) : 0;
 
             //公共参数
             string Key = _key;
@@ -1090,7 +1110,7 @@ namespace Web.Pay.Controllers
             long transtimeI = Utils.GetTimeStampI();
 
 
-            RechargeCheckBLL.Add(new RechargeCheck { Money = appPay.total_fee, ProductID = _productid, SerialNo = appPay.out_trade_no, UserID = _identityid, CreateTime = (uint)transtimeL });
+            RechargeCheckBLL.Add(new RechargeCheck { Money = appPay.total_fee, ProductID = _productid, SerialNo = appPay.out_trade_no, UserID = _identityid, CreateTime = (uint)transtimeL, AgentID=_agentID });
             RechargeCheckBLL.AddOrderIP(new UserIpInfo { UserID = _identityid, OrderID = appPay.out_trade_no, CreateTime = DateTime.Now, ChargeType = (int)raType.应用宝, OrderIP = GetClientIp() });
             log.Info("AppTreasure应用宝生成订单 订单号" + appPay.out_trade_no);
           
@@ -1121,6 +1141,7 @@ namespace Web.Pay.Controllers
             int _othertype = queryvalues.ContainsKey("othertype") ? Convert.ToInt32(queryvalues["othertype"]) : 0;
             string _other = queryvalues.ContainsKey("other") ? queryvalues["other"] : string.Empty;
             string _customSign = queryvalues.ContainsKey("customsign") ? queryvalues["customsign"] : string.Empty;
+            int _agentID = queryvalues.ContainsKey("agentid") ? (string.IsNullOrEmpty(queryvalues["agentid"]) ? 0 : Convert.ToInt32(queryvalues["agentid"])) : 0;
 
             string Key = _key;
 
@@ -1166,7 +1187,7 @@ namespace Web.Pay.Controllers
             log.Info("HippocampiPay海马生成订单 订单号" + appPay.out_trade_no);
 
             long transtimeL = Utils.GetTimeStampL();
-            RechargeCheckBLL.Add(new RechargeCheck { Money = appPay.total_fee, ProductID = _productid, SerialNo = appPay.out_trade_no, UserID = _identityid, CreateTime = (uint)transtimeL });
+            RechargeCheckBLL.Add(new RechargeCheck { Money = appPay.total_fee, ProductID = _productid, SerialNo = appPay.out_trade_no, UserID = _identityid, CreateTime = (uint)transtimeL , AgentID=_agentID});
 
             RechargeCheckBLL.AddOrderIP(new UserIpInfo { UserID = _identityid, OrderID = appPay.out_trade_no, CreateTime = DateTime.Now, ChargeType = (int)raType.海马玩, OrderIP = GetClientIp() });
 
@@ -1209,8 +1230,9 @@ namespace Web.Pay.Controllers
             int _othertype = queryvalues.ContainsKey("othertype") ? Convert.ToInt32(queryvalues["othertype"]) : 0;
             string _other = queryvalues.ContainsKey("other") ? queryvalues["other"] : string.Empty;
             string _customSign = queryvalues.ContainsKey("customsign") ? queryvalues["customsign"] : string.Empty;
+            int _agentID = queryvalues.ContainsKey("agentid") ? (string.IsNullOrEmpty(queryvalues["agentid"]) ? 0 : Convert.ToInt32(queryvalues["agentid"])) : 0;
 
-        
+
             //检测_identityid 是否被封号
             Role role =RoleBLL.GetModelByID(new Role() { ID = _identityid });
             if (role.IsFreeze == isSwitch.关) {//说明被封号了，不允许充钱
@@ -1280,7 +1302,7 @@ namespace Web.Pay.Controllers
             long transtimeI = Utils.GetTimeStampI();
 
 
-            RechargeCheckBLL.Add(new RechargeCheck { Money = appPay.total_fee, ProductID = _productid, SerialNo = appPay.out_trade_no, UserID = _identityid, CreateTime = (uint)transtimeL });
+            RechargeCheckBLL.Add(new RechargeCheck { Money = appPay.total_fee, ProductID = _productid, SerialNo = appPay.out_trade_no, UserID = _identityid, CreateTime = (uint)transtimeL, AgentID=_agentID });
             RechargeCheckBLL.AddOrderIP(new UserIpInfo { UserID = _identityid, OrderID = appPay.out_trade_no, CreateTime = DateTime.Now, ChargeType = (int)raType.移动, OrderIP = GetClientIp() });
 
 
@@ -1310,8 +1332,9 @@ namespace Web.Pay.Controllers
             int _othertype = queryvalues.ContainsKey("othertype") ? Convert.ToInt32(queryvalues["othertype"]) : 0;
             string _other = queryvalues.ContainsKey("other") ? queryvalues["other"] : string.Empty;
             string _customSign = queryvalues.ContainsKey("customsign") ? queryvalues["customsign"] : string.Empty;
+            int _agentID = queryvalues.ContainsKey("agentid") ? (string.IsNullOrEmpty(queryvalues["agentid"]) ? 0 : Convert.ToInt32(queryvalues["agentid"])) : 0;
 
-           
+
             //公共参数
             string Key = _key;
             string md5 = Utils.MD5(string.Concat(_transtime, _identityid, _othertype, _other, _productid, Key));
@@ -1345,7 +1368,7 @@ namespace Web.Pay.Controllers
                 if (recharge == null)//没有首冲过
                 {
                    
-                    RechargeCheckBLL.Add(new RechargeCheck { Money = appPay.total_fee, ProductID = _productid, SerialNo = appPay.out_trade_no, UserID = _identityid, CreateTime = (uint)transtimeL });
+                    RechargeCheckBLL.Add(new RechargeCheck { Money = appPay.total_fee, ProductID = _productid, SerialNo = appPay.out_trade_no, UserID = _identityid, CreateTime = (uint)transtimeL, AgentID=_agentID });
                     RechargeCheckBLL.AddOrderIP(new UserIpInfo { UserID = _identityid, OrderID = appPay.out_trade_no, CreateTime = DateTime.Now, ChargeType = (int)raType.卓悠, OrderIP = GetClientIp() });
 
                  
@@ -1371,7 +1394,7 @@ namespace Web.Pay.Controllers
 
             }
             else {
-                RechargeCheckBLL.Add(new RechargeCheck { Money = appPay.total_fee, ProductID = _productid, SerialNo = appPay.out_trade_no, UserID = _identityid, CreateTime = (uint)transtimeL });
+                RechargeCheckBLL.Add(new RechargeCheck { Money = appPay.total_fee, ProductID = _productid, SerialNo = appPay.out_trade_no, UserID = _identityid, CreateTime = (uint)transtimeL, AgentID=_agentID });
                 RechargeCheckBLL.AddOrderIP(new UserIpInfo { UserID = _identityid, OrderID = appPay.out_trade_no, CreateTime = DateTime.Now, ChargeType = (int)raType.卓悠, OrderIP = GetClientIp() });
              
                 return Json(new
@@ -1404,8 +1427,9 @@ namespace Web.Pay.Controllers
             string _productid = queryvalues.ContainsKey("productid") ? queryvalues["productid"] : string.Empty;
             int _identityid = queryvalues.ContainsKey("identityid") ? Convert.ToInt32(queryvalues["identityid"]) : 0;//魅族的id
             int _uid = queryvalues.ContainsKey("uid") ? Convert.ToInt32(queryvalues["uid"]) : 0;//我们的id
+            int _agentID = queryvalues.ContainsKey("agentid") ? (string.IsNullOrEmpty(queryvalues["agentid"]) ? 0 : Convert.ToInt32(queryvalues["agentid"])) : 0;
 
-         
+
             ////公共参数
             //string md5 = MeiZuSignCheck.MakeSigCreateDD(queryvalues, "Qx2Yhspw5UNJQ7FLa3ieZScYjGl6GO1b");
 
@@ -1454,7 +1478,7 @@ namespace Web.Pay.Controllers
             long transtimeI = Utils.GetTimeStampI();
 
 
-            RechargeCheckBLL.Add(new RechargeCheck { Money = appPay.total_fee, ProductID = _productid, SerialNo = appPay.out_trade_no, UserID = _uid, CreateTime = (uint)transtimeL });
+            RechargeCheckBLL.Add(new RechargeCheck { Money = appPay.total_fee, ProductID = _productid, SerialNo = appPay.out_trade_no, UserID = _uid, CreateTime = (uint)transtimeL ,AgentID=_agentID});
             RechargeCheckBLL.AddOrderIP(new UserIpInfo { UserID = _identityid, OrderID = appPay.out_trade_no, CreateTime = DateTime.Now, ChargeType = (int)raType.魅族, OrderIP = GetClientIp() });
          
             log.Info("MZPay魅族生成订单 订单号" + appPay.out_trade_no);
@@ -1524,8 +1548,9 @@ namespace Web.Pay.Controllers
             int _othertype = queryvalues.ContainsKey("othertype") ? Convert.ToInt32(queryvalues["othertype"]) : 0;
             string _other = queryvalues.ContainsKey("other") ? queryvalues["other"] : string.Empty;
             string _customSign = queryvalues.ContainsKey("customsign") ? queryvalues["customsign"] : string.Empty;
+            int _agentID = queryvalues.ContainsKey("agentid") ? (string.IsNullOrEmpty(queryvalues["agentid"]) ? 0 : Convert.ToInt32(queryvalues["agentid"])) : 0;
 
-          
+
             //公共参数
             string Key = _key;
             string md5 = Utils.MD5(string.Concat(_transtime, _identityid, _othertype, _other, _productid, Key));
@@ -1559,7 +1584,7 @@ namespace Web.Pay.Controllers
                 if (recharge == null)//没有首冲过
                 {
 
-                    RechargeCheckBLL.Add(new RechargeCheck { Money = appPay.total_fee, ProductID = _productid, SerialNo = appPay.out_trade_no, UserID = _identityid, CreateTime = (uint)transtimeL });
+                    RechargeCheckBLL.Add(new RechargeCheck { Money = appPay.total_fee, ProductID = _productid, SerialNo = appPay.out_trade_no, UserID = _identityid, CreateTime = (uint)transtimeL,AgentID=_agentID });
                     RechargeCheckBLL.AddOrderIP(new UserIpInfo { UserID = _identityid, OrderID = appPay.out_trade_no, CreateTime = DateTime.Now, ChargeType = (int)raType.卓悠, OrderIP = GetClientIp() });
 
                  
@@ -1586,7 +1611,7 @@ namespace Web.Pay.Controllers
             }
             else
             {
-                RechargeCheckBLL.Add(new RechargeCheck { Money = appPay.total_fee, ProductID = _productid, SerialNo = appPay.out_trade_no, UserID = _identityid, CreateTime = (uint)transtimeL });
+                RechargeCheckBLL.Add(new RechargeCheck { Money = appPay.total_fee, ProductID = _productid, SerialNo = appPay.out_trade_no, UserID = _identityid, CreateTime = (uint)transtimeL,AgentID=_agentID });
                 RechargeCheckBLL.AddOrderIP(new UserIpInfo { UserID = _identityid, OrderID = appPay.out_trade_no, CreateTime = DateTime.Now, ChargeType = (int)raType.华为, OrderIP = GetClientIp() });
              
                 return Json(new

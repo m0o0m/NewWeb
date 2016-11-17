@@ -16,6 +16,11 @@ namespace GL.Data.DAL
         internal static readonly string sqlconnectionString = PubConstant.GetConnectionString("ConnectionStringForGameData");
 
 
+        public static readonly string database1 = PubConstant.GetConnectionString("database1");
+        public static readonly string database2 = PubConstant.GetConnectionString("database2");
+        public static readonly string database3 = PubConstant.GetConnectionString("database3");
+
+
         internal static UserInfo GetUserInfo(GameRecordView vbd)
         {
             if (!string.IsNullOrEmpty(vbd.SearchExt))
@@ -101,7 +106,7 @@ namespace GL.Data.DAL
 
                 StringBuilder str = new StringBuilder();
 
-                str.Append("select sum(ChipChange) ServiceMoney from record.BG_UserMoneyRecord where CreateTime between @StartDate and @ExpirationDate and UserID = @UserID and Type in (24,25,26,47,65,92,97,106,114,119) ");
+                str.Append("select sum(ChipChange) ServiceMoney from "+ database3+ @".BG_UserMoneyRecord where CreateTime between @StartDate and @ExpirationDate and UserID = @UserID and Type in (24,25,26,47,65,92,97,106,114,119) ");
 
                object iem = cn.ExecuteScalar(str.ToString(), vbd);
                 cn.Close();
@@ -124,7 +129,7 @@ namespace GL.Data.DAL
 
                 StringBuilder str = new StringBuilder();
 
-                str.Append("select sum(Gold) from 515game.ScoreAwardRecord where CreateTime between date_add(@StartDate ,interval -1 day) and @StartDate and UserID = @UserID  ");
+                str.Append("select sum(Gold) from "+ database1 + @".ScoreAwardRecord where CreateTime between date_add(@StartDate ,interval -1 day) and @StartDate and UserID = @UserID  ");
 
 
                 object iem = cn.ExecuteScalar(str.ToString(), vbd);

@@ -14,8 +14,7 @@ using System.Web.Mvc;
 using Webdiyer.WebControls.Mvc;
 using System.Runtime.InteropServices;
 using Microsoft.AspNet.Identity;
-
-
+using GL.Command.DBUtility;
 
 namespace MWeb.Controllers
 {
@@ -23,10 +22,15 @@ namespace MWeb.Controllers
     [Authorize]
     public class BaseController : Controller
     {
+
+
+        public static readonly string Coin = PubConstant.GetConnectionString("coin");
+       
+
         [QueryValues]
         public ActionResult BaseOperationalData(Dictionary<string, string> queryvalues)
         {
-
+            
 
             return View();
 

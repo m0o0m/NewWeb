@@ -15,6 +15,10 @@ namespace GL.Data.DAL
     {
         public static readonly string sqlconnectionString = PubConstant.ConnectionString;
 
+        public static readonly string database1 = PubConstant.GetConnectionString("database1");
+        public static readonly string database2 = PubConstant.GetConnectionString("database2");
+        public static readonly string database3 = PubConstant.GetConnectionString("database3");
+
         internal static AgentInfo GetModelByID(AgentInfo model)
         {
             using (var cn = new MySqlConnection(sqlconnectionString))
@@ -121,7 +125,7 @@ namespace GL.Data.DAL
             {
                 cn.Open();
               
-                IEnumerable<AgentInfoGroup> i = cn.Query<AgentInfoGroup>("GServerInfo.sp_get_allchannel", param: new { }, commandType: CommandType.StoredProcedure);
+                IEnumerable<AgentInfoGroup> i = cn.Query<AgentInfoGroup>(""+ database2+ @".sp_get_allchannel", param: new { }, commandType: CommandType.StoredProcedure);
 
                 cn.Close();
                 return i.ToList();

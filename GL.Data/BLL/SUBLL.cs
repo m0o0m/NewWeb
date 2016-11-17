@@ -1,4 +1,5 @@
-﻿using GL.Common;
+﻿using GL.Command.DBUtility;
+using GL.Common;
 using GL.Data.DAL;
 using GL.Data.Model;
 using GL.Data.MWeb.Identity;
@@ -13,7 +14,11 @@ namespace GL.Data.BLL
 {
     public class SUBLL
     {
-      
+
+        public static readonly string database1 = PubConstant.GetConnectionString("database1");
+        public static readonly string database2 = PubConstant.GetConnectionString("database2");
+        public static readonly string database3 = PubConstant.GetConnectionString("database3");
+
         public static PagedList<ApplicationUser> GetListByPage(int page)
         {
             PagerQuery pq = new PagerQuery();
@@ -163,10 +168,10 @@ namespace GL.Data.BLL
             pq.PageSize = 10;
             if (bdv.SearchExt == "")
             {
-                pq.RecordCount = DAL.PagedListDAL<LogInfo>.GetRecordCount(@"select count(0) from record.Log where CreateTime BETWEEN '" + bdv.StartDate + "' and '" + bdv.ExpirationDate + "' ");
+                pq.RecordCount = DAL.PagedListDAL<LogInfo>.GetRecordCount(@"select count(0) from "+ database3+ @".Log where CreateTime BETWEEN '" + bdv.StartDate + "' and '" + bdv.ExpirationDate + "' ");
                 //pq.Sql = string.Format(@"SELECT * FROM record.Log where CreateTime BETWEEN '{3}' and '{4}'  order by CreateTime desc limit {0}, {1}", pq.StartRowNumber, pq.PageSize, bdv.SearchExt, bdv.StartDate, bdv.ExpirationDate);
 
-                pq.Sql = string.Format(@"  SELECT l.*,u.NickName FROM record.Log as l left join GServerInfo.AspNetUsers as u
+                pq.Sql = string.Format(@"  SELECT l.*,u.NickName FROM "+ database3 + @".Log as l left join "+ database2+ @".AspNetUsers as u
                 on l.UserAccount = u.UserName where
  l.CreateTime BETWEEN '{3}' and '{4}'  order by l.CreateTime desc limit {0}, {1}", pq.StartRowNumber, pq.PageSize, bdv.SearchExt, bdv.StartDate, bdv.ExpirationDate);
 
@@ -176,8 +181,8 @@ namespace GL.Data.BLL
             }
             else
             {
-                pq.RecordCount = DAL.PagedListDAL<LogInfo>.GetRecordCount(@"select count(0) from record.Log where UserAccount='" + bdv.SearchExt + "' and CreateTime BETWEEN '" + bdv.StartDate + "' and '" + bdv.ExpirationDate + "' ");
-                pq.Sql = string.Format(@"  SELECT l.*,u.NickName FROM record.Log as l left join GServerInfo.AspNetUsers as u
+                pq.RecordCount = DAL.PagedListDAL<LogInfo>.GetRecordCount(@"select count(0) from "+ database3+ @".Log where UserAccount='" + bdv.SearchExt + "' and CreateTime BETWEEN '" + bdv.StartDate + "' and '" + bdv.ExpirationDate + "' ");
+                pq.Sql = string.Format(@"  SELECT l.*,u.NickName FROM "+ database3+ @".Log as l left join "+ database2+ @".AspNetUsers as u
                 on l.UserAccount = u.UserName where l.UserAccount = '" + bdv.SearchExt + @"'
 and l.CreateTime BETWEEN '{3}' and '{4}'  order by l.CreateTime desc limit {0}, {1}", pq.StartRowNumber, pq.PageSize, bdv.SearchExt, bdv.StartDate, bdv.ExpirationDate);
 
@@ -200,6 +205,24 @@ and l.CreateTime BETWEEN '{3}' and '{4}'  order by l.CreateTime desc limit {0}, 
         }
 
 
+        public static IEnumerable<AspNetUser> GetAspNetUsersByUserName(string userName)
+        {
+            string[] s = userName.Split(',');
+            string resUserName = "";
+            for (int i = 0; i < s.Length; i++) {
+                if (i == s.Length - 1)
+                {
+                    resUserName += "'" + s[i] + "'";
+                }
+                else {
+                    resUserName += "'" + s[i] + "',";
+                }
 
+            
+            }
+
+
+            return DAL.SUDAL.GetAspNetUsersByUserName(resUserName);
+        }
     }
 }

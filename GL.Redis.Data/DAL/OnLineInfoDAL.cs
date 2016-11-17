@@ -15,12 +15,16 @@ namespace GL.Data.DAL
 
         public static readonly string sqlconnectionString = PubConstant.GetConnectionString("ConnectionStringForGameData");
 
+        public static readonly string database1 = PubConstant.GetConnectionString("database1");
+        public static readonly string database2 = PubConstant.GetConnectionString("database2");
+        public static readonly string database3 = PubConstant.GetConnectionString("database3");
+
         internal static string GetNewJson()
         {
             using (var cn = new MySqlConnection(sqlconnectionString))
             {
                 cn.Open();
-                IEnumerable<OnLineInfo> i = cn.Query<OnLineInfo>(@"select  CreateTime,OnLineInfoJson from 515game.OnLineInfo order by createTime DESC limit 0,1");
+                IEnumerable<OnLineInfo> i = cn.Query<OnLineInfo>(@"select  CreateTime,OnLineInfoJson from "+ database1 + @".OnLineInfo order by createTime DESC limit 0,1");
                 cn.Close();
                 OnLineInfo o = i.FirstOrDefault();
                 if (o == null)
@@ -43,14 +47,14 @@ namespace GL.Data.DAL
                 int i = 0;
                 if (string.IsNullOrEmpty(newjosn))
                 {
-                    i = cn.Execute(@"insert into 515game.OnLineInfo values(@CreateTime,@OnLineInfoJson)", new OnLineInfo { CreateTime = info.CreateTime, OnLineInfoJson = info.OnLineInfoJson });
+                    i = cn.Execute(@"insert into "+ database1 + @".OnLineInfo values(@CreateTime,@OnLineInfoJson)", new OnLineInfo { CreateTime = info.CreateTime, OnLineInfoJson = info.OnLineInfoJson });
                 }
                 else {
 
                     i = cn.Execute(@"
 
-insert into 515game.OnLineInfo values(@CreateTime,@OnLineInfoJson);
-delete from 515game.OnLineInfo where CreateTime!=@CreateTime;                                  
+insert into "+ database1 + @".OnLineInfo values(@CreateTime,@OnLineInfoJson);
+delete from "+ database1 + @".OnLineInfo where CreateTime!=@CreateTime;                                  
 ", new OnLineInfo { CreateTime = info.CreateTime, OnLineInfoJson = info.OnLineInfoJson });
                 }
              

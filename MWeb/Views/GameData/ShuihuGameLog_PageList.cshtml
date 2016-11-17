@@ -1,0 +1,317 @@
+﻿@using Webdiyer.WebControls.Mvc;
+@using GL.Data.Model;
+@using GL.Data.BLL;
+@model PagedList<ShuihuGameRecord>
+@{ 
+    //Coin
+    string Coin = MWeb.Controllers.GameDataController.Coin;
+}
+
+<script type="text/javascript">
+    function detail(id,obj) {
+        
+
+        var jq = eval('$("#' + id + '")');
+        var jqtr = eval('$("#' + obj + '")');
+        if (jq.css("display") == "none") {
+            jq.css("display", "");
+            jqtr.css("background-color", "gray");
+        } else {
+            jq.css("display", "none");
+        
+            jqtr.css("background-color", "");
+        }
+      
+       
+        
+      
+     
+       
+    }
+</script>
+
+
+
+<section id="widget-grid" class="">
+    <div class="row">
+        <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-0" data-widget-editbutton="false" data-widget-colorbutton="false"
+                 data-widget-togglebutton="false"
+                 data-widget-deletebutton="false"
+                 data-widget-fullscreenbutton="false"
+                 data-widget-custombutton="false"
+                 data-widget-collapsed="false"
+                 data-widget-sortable="false">
+                <header>
+                    <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                    <h2>@ViewBag.Title</h2>
+                </header>
+                <!-- widget div-->
+                <div>
+                    <!-- widget edit box -->
+                    <div class="jarviswidget-editbox">
+                        <!-- This area used as dropdown edit box -->
+                    </div>
+                    <!-- end widget edit box -->
+                    <!-- widget content -->
+                    <div class="widget-body no-padding">
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <thead>
+
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>时间</th>
+                                        <th>牌局号</th>
+                                        <th>玩家ID</th>
+                                        <th>场次</th>
+                                        <th>房间ID</th>
+                                        <th>变化前游戏币</th>
+                                        <th>变化后游戏币</th>
+                                        <th>变化前@(Coin)</th>
+                                        <th>变化后@(Coin)</th>
+                                        <th>押注</th>
+                                        <th>赔付</th>
+                                        <th>免费拉霸</th>
+                                        <th>牌型</th>
+                                        @*<th>彩池详细</th>
+                                        <th>比倍详细</th>
+                                        <th>小玛丽详细</th>*@
+                                        <th>操作</th>
+                                        @*<th>数据（待删除）</th>*@
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model.Count == 0)
+            {
+                                        <tr class="gradeX">
+                                            <td class="colspan" align="center" colspan="0">
+                                                没有找到相关记录！
+                                            </td>
+                                        </tr>
+                                    }
+                                    @foreach (ShuihuGameRecord m in Model)
+                                    {
+                                         <tr id="@m.ID">
+                                             <td>@m.ID</td>
+                                             <td>@m.CreateTime</td>
+                                             <td>@m.Board</td>
+                                             <td>@m.UserID</td>
+                                             <td>@(((ShuihuRound)m.RoundID).ToString())</td>
+                                             <td>@m.RoomID</td>
+                                             <td>@m.BeforeGold</td>
+                                             <td>@m.AfterGold</td>
+                                             <td>@m.BeforeDiamond</td>
+                                             <td>@m.AfterDiamond</td>
+                                             <td>@m.Bet</td>
+                                             <td>@m.Pay</td>
+                                            @if (m.IsFree == 1)
+                                            {
+                                                <td>是 </td>
+                                            }
+                                            else {
+                                                <td>否</td>
+                                            }
+
+
+                                             @{
+
+                                                 //ShuihuPatterns
+                                                 string pat = m.Patterns;
+                                                 string[] pats = pat.Split(',');
+                                                 <td>
+                                                    
+                                                     @for (int i = 0; i < pats.Length; i++)
+                                                     {
+                                                         if (i == pats.Length - 1)
+                                                         {
+                                                            @(((ShuihuPatterns)Convert.ToInt32(pats[i])).ToString())
+                                                         }
+                                                         else
+                                                         {
+                                                            @(((ShuihuPatterns)Convert.ToInt32(pats[i])).ToString() + "， " )
+                                                         }
+
+                                                         if (i == 4 || i == 9)
+                                                         {
+                                                            <br>
+                                                         }
+                                                     }
+                                                   
+                                                 </td>
+                                             }
+
+
+                                             <td>
+
+                                                 <section class="col col-1">
+                                                     <label class="label">&nbsp;</label>
+                                                     <input type="button" onclick="detail(@m.Board,@m.ID)" class="btn btn-success btn-sm" value="详细" />
+                                                 </section>
+                                             </td>
+                                             @*<td>@m.MaryDetail</td>*@
+                                             @*<td>@m.PotDetail</td>
+                                             <td>@m.TimesDetail</td>
+                                             <td>@m.MaryDetail</td>*@
+                                         </tr>
+                                        
+                                            <tr style="display:none" id="@m.Board">
+                                              
+                                                <td colspan="14" style="padding-left:100px;padding-right:100px">
+                                                    @if (!string.IsNullOrEmpty(m.PotDetail))
+                                                    {
+                                                        string[] potDetails = m.PotDetail.Split(',');
+                                                        if (potDetails[1] != "0")
+                                                        {
+                                                            <label style="color:black;background-color:white"> 彩池</label>
+                                                            <table border="1" class="table table-bordered ">
+                                                                <tr><td>时间</td><td>变化前金币</td><td>结束后金币</td><td>获得彩池金币</td></tr>
+                                                                <tr><td>@m.CreateTime</td><td>@potDetails[0]</td><td> @( Convert.ToInt64(potDetails[0]) + Convert.ToInt64(potDetails[1]))  </td><td>@potDetails[1]</td></tr>
+
+                                                            </table>
+                                                        }
+
+                                                    }
+                                                @if (!string.IsNullOrEmpty(m.TimesDetail))
+                                                 {
+                                                     string[] timesDetails = m.TimesDetail.Trim('|').Split('|');
+                                                            <label style="color:black;background-color:white"> 比倍</label>
+                                                            <table border="1" class="table table-bordered ">
+                                                        <tr>
+                                                                @*<td>时间</td>*@<td>变化前金币</td><td>变化后金币</td><td>变化前@(Coin)</td>
+<td>变化后@(Coin)</td><td>倍数</td><td>押注</td><td>押注区</td><td>开奖结果</td><td>赔付金币</td><td>局数</td></tr>
+                                                         @for (int j = 0; j < timesDetails.Length; j++)
+                                                         {
+                                                             string[] tim = timesDetails[j].Split(',');
+                                                            <tr>@*<td>@m.CreateTime</td>*@<td>@tim[0]</td><td>@tim[1]</td><td>@tim[2]</td>
+<td>@tim[3]</td><td>@tim[4]</td><td>@tim[5]</td> 
+         @if (tim[6] == "1") {
+             <td>大</td>
+         }
+         else if (tim[6] == "2")
+         {
+          <td>小</td>
+         }
+         else if (tim[6] == "3")
+         {
+            <td>和</td>
+         }
+         else
+         {
+           <td>未知错误，请通知开发人员</td>
+         }
+<td>@tim[7]</td><td>@tim[8]</td><td>@(j+1)</td></tr>
+                                                         }
+                                                     
+                                                     
+                                                    </table>
+                                                }
+
+
+                                                    @if (!string.IsNullOrEmpty(m.MaryDetail) && m.MaryDetail!= "0, 0, 0, 0_" && m.MaryDetail != "0,0,0,0_")
+                                                    {
+                                                        string[] maryDetails = m.MaryDetail.Trim('|').Split('|');
+                                                        <label style="color:black;background-color:white"> 小玛丽</label>
+                                                            <table border="1" class="table table-bordered ">
+                                                                <tr>
+                                                                    @*<td>时间</td>*@
+                                                                    <td>编号</td>
+                                                                    <td>外围灯</td>
+                                                                    <td>中间滚轮</td>
+                                                                    <td>初始得分</td>
+                                                                    <td>押注分</td>
+                                                                    <td>赢分</td>
+                                                                </tr>
+                                                                @for (int z = 1; z < maryDetails.Length; z++)
+                                                                {
+                                                                    string[] mar = maryDetails[z].Split(',');
+<tr>@*<td>@m.CreateTime</td>*@<td>@(mar[4]+"-"+mar[5])</td><td>@mar[0]</td><td>@mar[1]</td><td>@mar[2]</td><td>@m.Bet</td><td>@mar[3]</td></tr>
+                                                                }
+                                                            </table>
+                                                    }
+
+
+                                                
+                                                </td>
+                                               
+                                              </tr>
+                                        
+
+                                    }
+                                 </tbody>
+                            </table>
+                        </div>
+
+
+                        <div class="widget-content">
+
+                            @Ajax.Pager(
+    Model,
+    new PagerOptions()
+    {
+        CssClass = "pager",
+        ShowMorePagerItems = true,
+        PageIndexParameterName = "page",
+        ShowDisabledPagerItems = true,
+        AlwaysShowFirstLastPageNumber = true,
+        //ShowRecordCountItems = true,
+        HorizontalAlign = "right",
+        //SeparatorHtml = "",
+
+        CurrentPagerItemTemplate = "<li class=\"disabled\"><span>{0}</span></li>",
+        DisabledPagerItemTemplate = "<li class=\"disabled\"><span>{0}</span></li>",
+        PagerItemTemplate = "<li>{0}</li>",
+        //CurrentPagerItemWrapperFormatString = "<li class=\"disabled\"><span>{0}</span></li>",
+        //NumericPagerItemWrapperFormatString = "<li>{0}</li>",
+        //PagerItemWrapperFormatString = "<li>{0}</li>",
+        //RecordCountText = string.Format("共{0}条记录, {1}页", Model.TotalItemCount, Model.TotalPageCount),
+        //RecordCountFormatString = "<li><span>{0}</span></li>",
+        //DisabledPagerItemsFormatString = "<li class=\"disabled\"><span>{0}</span></li>",
+        //PageIndexBoxType = Webdiyer.WebControls.Mvc.PageIndexBoxType.TextBox,
+        //GoButtonText = "跳转到",
+        ShowPrevNext = true,
+        FirstPageText = "第一页",
+        LastPageText = "最后一页",
+        ContainerTagName = "ul",
+        PageIndexBoxId = "pageindexcm",
+        WYWPageIndexString = @"<li><input style='width:50px;' type='text' value='' id='{0}' name = '{1}'></li>
+                                 <li><a id='goto' name='goto' style='margin-right:10px' >跳转</a><li>
+                             ",
+        GoToButtonId = "goto"
+    },
+    new MvcAjaxOptions
+    {
+        HttpMethod = "POST",
+        UpdateTargetId = "box",
+        InsertionMode = InsertionMode.Replace,
+        OnFailure = "errFunc",
+        OnSuccess = "successPageFun"
+    })
+                        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    </div>
+                    <!-- end widget content -->
+                </div>
+                <!-- end widget div -->
+            </div>
+            <!-- end widget -->
+
+        </article>
+    </div>
+</section>

@@ -1,0 +1,29 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Insert title here</title>
+    <SCRIPT LANGUAGE="JScript">
+
+var oPopup = window.createPopup();
+function ButtonClick(div)
+{
+//var div = document.getElementById('divId');
+div.contentEditable = 'true';
+var controlRange;
+if (document.body.createControlRange) {
+controlRange = document.body.createControlRange();
+controlRange.addElement(div);
+controlRange.execCommand('Copy');
+}
+div.contentEditable = 'false';
+}
+    </SCRIPT>
+</head>
+<body>
+    <div id="divId1">
+        <img src="~/Upload/20161028111004079.jpg" onclick="ButtonClick(this)">
+    </div>
+</body>
+</body>
+</html>

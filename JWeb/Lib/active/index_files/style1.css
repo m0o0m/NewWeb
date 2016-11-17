@@ -1,0 +1,49 @@
+body,ul,li {
+	margin: 0px;
+	padding: 0px;
+	font: 1em Verdana, Helvetica, Helvetica-Bold, "微软雅黑";
+}
+
+body {
+	-webkit-text-size-adjust: none;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	background: #1e1e1e;
+}
+
+.lists {
+	margin: 0px;
+	padding: 0px;
+	border-bottom: 1px solid #363636;
+}
+
+.lists li {
+	position: relative;
+	min-height: 60px;
+	border-top: 1px solid #363636;
+	border-bottom: 1px solid #131313;
+	background: 10px center no-repeat;
+}
+
+.lists a {
+	display: block;
+	padding: 9px 50px 9px 70px;
+	color: #ffffff;
+	text-decoration: none;
+	background: url(<?php echo $imgurl;?>list/to.png) no-repeat 95% center;
+	background-size: 6px 12px;
+}
+
+.lists img {
+	position: absolute;
+	width: 50px;
+	height: 50px;
+	top: 10px;
+	left: 10px;
+	border: none;
+}
+
+.lists .tit {
+	color: #00BCEE;
+	font-size: 1.2em;
+}

@@ -109,6 +109,15 @@ namespace GL.Data.Model
         /// </summary>
         public static int ParaFormError = 212;
 
+        /// <summary>
+        /// 参数格式错误
+        /// </summary>
+        public static int ParaYZMError = 213;
+
+        /// <summary>
+        /// 参数格式错误
+        /// </summary>
+        public static int ParaErrorCount = 214;
 
         /// <summary>
         /// 找不到页面

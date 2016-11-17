@@ -1,5 +1,6 @@
 ﻿@using Microsoft.AspNet.Identity
 @using GL.Data.BLL
+@using GL.Command.DBUtility
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,7 +23,17 @@
 <body id="allbody">
         <header id="header">
         <div id="logo-group">
-            <span id="logo"> <img src="~/js/SmartAdmin/img/logo.png" alt="SmartAdmin"> </span>
+            <span  id="logo"> @*<img src="~/js/SmartAdmin/img/logo.png" alt="SmartAdmin">*@ 
+            
+                <span style="position:center;font-weight:900;font-size:larger">
+                    @{ 
+                        string systemName = PubConstant.GetConnectionString("systemName");
+                    }
+                  
+                    @systemName
+                </span> 
+            
+            </span>
           
         </div>
         <div class="pull-right">
@@ -800,7 +811,14 @@ htmlString = new MvcHtmlString(html);
 	};
 
     </script>
+    <script type="text/javascript">
+        $(function () {
+            $('#tabs').tabs();
+            $('#tabs2').tabs();
+            //tabs2
+        });
 
+    </script>
 
     @RenderSection("scripts", required: false)
     @RenderSection("scriptsLast", required: false)

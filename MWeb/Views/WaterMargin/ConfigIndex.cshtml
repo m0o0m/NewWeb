@@ -1,0 +1,527 @@
+﻿@using Webdiyer.WebControls.Mvc;
+@using GL.Data.Model;
+@using GL.Data.View;
+@using GL.Data.BLL;
+@model WaterMarginView
+@{
+    IEnumerable<WaterMargin> DataOne =Model.DataOne as List<WaterMargin>;
+
+
+    //MarryConfig
+    MarryConfig DataTwo = Model.DataTwo as MarryConfig;
+
+      IEnumerable<BiBeiConfig> DataTwo2  = Model.DataTwo2 as  IEnumerable<BiBeiConfig>;
+      long one =  DataTwo2.FirstOrDefault(m=>m.GameRound==0).GapWeight;
+       long two =  DataTwo2.FirstOrDefault(m=>m.GameRound==1).GapWeight;
+     long thr =  DataTwo2.FirstOrDefault(m=>m.GameRound==2).GapWeight;
+      long four =  DataTwo2.FirstOrDefault(m=>m.GameRound==3).GapWeight;
+      long five =  DataTwo2.FirstOrDefault(m=>m.GameRound==4).GapWeight;
+      long datan =  DataTwo2.FirstOrDefault(m=>m.GameRound==5).GapWeight;
+
+
+    IEnumerable<SSwitch> DataThree = Model.DataThree as List<SSwitch>;
+
+
+    IEnumerable<ArcadeGameStock> DataFour = Model.DataFour as List<ArcadeGameStock>;
+
+
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>ConfigIndex</title>
+</head>
+<body>
+
+    <div id="content" >
+        <div class="well well-sm well-light" >
+             <div id="tabs">
+                 <ul>
+                     <li><a href="#menu-1">Slot&小玛丽</a></li>
+                  
+                 </ul>
+                 <div id="menu-1">
+
+                     <div style="position:center;color:red"> <h4>Slot</h4> </div>
+                     <div class="well well-sm well-light">
+                         <div id="tabs2">
+                             <ul>
+                                 @for (int k = 1; k <= DataOne.GroupBy(m => m.Type).Count(); k++)
+                                 {
+                                     <li onclick="changeTab(@k)">
+                                         <a href="#tabs-@k">@("配置" + k)</a>
+                                     </li>
+                                 }
+                             </ul>
+
+                             @{
+                                 IEnumerable<IGrouping<int, WaterMargin>> dataoneGroup = DataOne.GroupBy(m => m.Type);
+                                 int index = 0;
+
+
+
+
+                                 foreach (IGrouping<int, WaterMargin> item in dataoneGroup)
+                                 {
+                                     List<WaterMargin> itemWaterMargin = item.ToList<WaterMargin>();
+                                     index++;
+                                     string no = "lbl" + index;
+                                     <div id="tabs-@index">
+                                         <section id="widget-grid" class="">
+                                             <div class="row">
+
+                                                 @for (int i = 1; i <= itemWaterMargin.Count(); i++)
+                                               
+                                                 {
+                                                    <article class="col-xs-12 col-sm-2 col-md-2 col-lg-2">
+                                                        <div class="jarviswidget jarviswidget-color-blueDark"  data-widget-editbutton="false" data-widget-colorbutton="false"
+                                                             data-widget-togglebutton="false"
+                                                             data-widget-deletebutton="false"
+                                                             data-widget-fullscreenbutton="false"
+                                                             data-widget-custombutton="false"
+                                                             data-widget-collapsed="false"
+                                                             data-widget-sortable="false">
+                                                            <!-- widget div-->
+                                                            <div>
+                                                                <!-- widget edit box -->
+                                                                <div class="jarviswidget-editbox">
+                                                                    <!-- This area used as dropdown edit box -->
+                                                                </div>
+                                                                <div class="widget-body no-padding">
+                                                                    <div class="table-responsive">
+                                                                        <table class="table table-bordered">
+                                                                            <thead>
+                                                                                <tr>
+                                                                                    <th>@("第" + i + "列")</th>
+                                                                                    <th>权重</th>
+                                                                                </tr>
+                                                                            </thead>
+                                                                            <tbody>
+                                                                                @{
+                                                                                    WaterMargin WaterMarginItem = itemWaterMargin[i - 1];
+
+                                                                                }
+                                                                                <tr><td>铁斧</td><td no="@no"><input disabled="disabled" readonly="readonly" type="text" value="@WaterMarginItem.Hatchet" /></td></tr>
+                                                                                <tr><td>银枪</td><td no="@no"><input disabled="disabled" readonly="readonly" type="text" value="@WaterMarginItem.Gun" /></td></tr>
+                                                                                <tr><td>金刀</td><td no="@no"><input disabled="disabled" readonly="readonly" type="text" value="@WaterMarginItem.Knife" /></td></tr>
+                                                                                <tr><td>鲁智深</td><td no="@no"><input disabled="disabled" readonly="readonly" type="text" value="@WaterMarginItem.Lu" /></td></tr>
+                                                                                <tr><td>林冲</td><td no="@no"><input disabled="disabled" readonly="readonly" type="text" value="@WaterMarginItem.Lin" /></td></tr>
+                                                                                <tr><td>宋江</td><td no="@no"><input disabled="disabled" readonly="readonly" type="text" value="@WaterMarginItem.Song" /></td></tr>
+                                                                                <tr><td>替天行道</td><td no="@no"><input disabled="disabled" readonly="readonly" type="text" value="@WaterMarginItem.God" /></td></tr>
+                                                                                <tr><td>忠义堂</td><td no="@no"><input disabled="disabled" readonly="readonly" type="text" value="@WaterMarginItem.Hall" /></td></tr>
+                                                                                <tr><td>水浒传</td><td no="@no"><input disabled="disabled" readonly="readonly" type="text" value="@WaterMarginItem.Outlaws" /></td></tr>
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </div>
+                                                                </div>
+                                                                <!-- end widget content -->
+                                                            </div>
+                                                            <!-- end widget div -->
+                                                        </div>
+                                                    </article>
+                                                                                    }
+
+
+
+
+                                                 <article class="col-xs-12 col-sm-2 col-md-2 col-lg-2">
+                                                     <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-0" data-widget-editbutton="false" data-widget-colorbutton="false"
+                                                          data-widget-togglebutton="false"
+                                                          data-widget-deletebutton="false"
+                                                          data-widget-fullscreenbutton="false"
+                                                          data-widget-custombutton="false"
+                                                          data-widget-collapsed="false"
+                                                          data-widget-sortable="false">
+                                                         <!-- widget div-->
+                                                         <div>
+                                                             <!-- widget edit box -->
+                                                             <div class="jarviswidget-editbox">
+                                                                 <!-- This area used as dropdown edit box -->
+                                                             </div>
+                                                             <div class="widget-body no-padding">
+                                                                 <div class="table-responsive">
+                                                                     <table class="table table-bordered">
+                                                                         <thead>
+                                                                             <tr>
+                                                                                 <th>全屏</th>
+                                                                                 <th>概率(数据为小数点概率)</th>
+                                                                             </tr>
+                                                                         </thead>
+                                                                         <tbody>
+
+                                                                             <tr><td>美酒</td><td no="@no"><input disabled="disabled" readonly="readonly" type="text" value="@(itemWaterMargin[0].Wine*1.0/1000)" /></td></tr>
+                                                                         </tbody>
+                                                                     </table>
+                                                                 </div>
+                                                             </div>
+                                                             <!-- end widget content -->
+                                                         </div>
+                                                         <!-- end widget div -->
+                                                     </div>
+                                                 </article>
+
+
+
+
+
+                                                 <section class="col col-1">
+                                                     <label class="label">&nbsp;</label>
+                                                     <input type="button" onclick="save(@index,'@("btnEdit"+index)')" class="btn btn-success btn-sm" value="保存" />
+
+                                                     <input type="button" id="@("btnEdit"+index)" onclick="edit(@index,this)" class="btn btn-success btn-sm" value="编辑" />
+                                                 </section>
+                                             </div>
+                                         </section>
+                                     </div>
+                                  }
+                             }
+                         </div>
+                     </div>
+
+
+                     <div>
+                         <div style="position:center;color:red"><h4>小玛丽&比倍</h4></div>
+                         <div class="well well-sm well-light">
+                             单次小玛丽转灯下限 <input id="maryDownLimit" disabled="disabled" readonly="readonly" type="text" value="@DataTwo.Lowerlimit" />
+                             单次小玛丽转灯上限 <input id="maryUpLimit" disabled="disabled" readonly="readonly" type="text" value="@DataTwo.Uperlimit" />
+                             <br /><br />
+                             比倍第一局胜率差权重 <input id="bibei1" disabled="disabled" readonly="readonly" type="text" value="@one" style="width:100px" />
+                             比倍第二局胜率差权重 <input id="bibei2" disabled="disabled" readonly="readonly" type="text" value="@two" style="width:100px"/>
+                             比倍第三局胜率差权重 <input id="bibei3" disabled="disabled" readonly="readonly" type="text" value="@thr" style="width:100px"/>
+                             比倍第四局胜率差权重 <input id="bibei4" disabled="disabled" readonly="readonly" type="text" value="@four" style="width:100px"/>
+                             比倍第五局胜率差权重 <input id="bibei5" disabled="disabled" readonly="readonly" type="text" value="@five" style="width:100px"/>
+                             比倍第N局胜率差权重 <input id="bibein" disabled="disabled" readonly="readonly" type="text" value="@datan" style="width:100px"/>
+
+                             <input type="button" onclick="saveMary(this)" class="btn btn-success btn-sm" value="保存" />
+                             <input type="button" id="btnEditmary" onclick="editMary(this)" class="btn btn-success btn-sm" value="编辑" />
+                         </div>
+                      
+                     </div>
+
+
+                 </div>
+             
+              </div>
+        </div>
+
+
+
+
+     
+
+
+    </div>
+
+
+    
+  
+</body>
+</html>
+
+
+<script type="text/javascript">
+    function edit(no, obj) {
+
+        if ($(obj).val() == "编辑") {
+            var inputs = eval("$('td[no=lbl" + no + "] input')");
+            inputs.each(function () {
+                $(this).removeAttr("readonly");  //disabled
+                $(this).removeAttr("disabled");
+            });
+            $(obj).val("取消");
+        } else {
+
+            var inputs = eval("$('td[no=lbl" + no + "] input')");
+            inputs.each(function () {
+                $(this).attr("readonly", "readonly");  //disabled
+                $(this).attr("disabled", "disabled");
+            });
+            $(obj).val("编辑");
+        }
+    }
+
+
+    function save(no,obj) {
+        var saveData = '';
+        var j = 0;
+        var inputs = eval("$('td[no=lbl" + no + "] input')");
+        inputs.each(function () {  //每9个是一列
+            var v = $(this).val();
+            if (j ==8|| j==17 ||j==26 ||j==35||j==44) {
+                saveData += v + "|";
+            } else {
+                saveData += v + ",";
+            }
+            j++;
+        });
+      
+      
+
+        $.ajax({
+            url: "/WaterMargin/ConfigIndex/",
+            type: "post",
+            data: { "par": saveData, "type": no, "operType": "1" },
+            success: function (data) {
+                if (data == "1") {
+                    alert("修改成功!");
+                    inputs.each(function () {
+                        $(this).attr("readonly", "readonly");  //disabled
+                        $(this).attr("disabled", "disabled");
+                        eval('$("#' + obj + '").val("编辑")');
+                    });
+                } else {
+                    alert("修改失败,错误编号" + data + "，请重新操作!");
+                }
+            }
+        });
+
+
+
+
+
+    }
+
+
+    function changeTab(tab) {
+
+        $("td input").each(function () {
+            $(this).attr("readonly", "readonly");  //disabled
+            $(this).attr("disabled", "disabled");
+        });
+
+
+    
+
+    }
+
+
+    function saveMary(obj) {
+
+        var uplimit = $("#maryUpLimit").val();
+        var downlimit = $("#maryDownLimit").val();
+       
+
+        var bibei1 = $("#bibei1").val();
+        var bibei2 = $("#bibei2").val();
+        var bibei3 = $("#bibei3").val();
+        var bibei4 = $("#bibei4").val();
+        var bibei5 = $("#bibei5").val();
+        var bibein = $("#bibein").val();
+
+
+        $.ajax({
+            url: "/WaterMargin/ConfigIndex/",
+            type: "post",
+            data: {
+                "uplimit": uplimit, "downlimit": downlimit, "operType": "2",
+                "bibei1": bibei1, "bibei2": bibei2,
+                "bibei3": bibei3, "bibei4": bibei4, "bibei5": bibei5, "bibein": bibein
+            },
+            success: function (data) {
+                if (data == "1") {
+                    alert("修改成功!");
+
+                   
+                        $("#maryUpLimit").attr("readonly", "readonly");  //disabled
+                        $("#maryUpLimit").attr("disabled", "disabled");
+
+                        $("#maryDownLimit").attr("readonly", "readonly");  //disabled
+                        $("#maryDownLimit").attr("disabled", "disabled");
+
+                        $("#bibei1").attr("readonly", "readonly");  //disabled
+                        $("#bibei1").attr("disabled", "disabled");
+                        $("#bibei2").attr("readonly", "readonly");  //disabled
+                        $("#bibei2").attr("disabled", "disabled");
+                        $("#bibei3").attr("readonly", "readonly");  //disabled
+                        $("#bibei3").attr("disabled", "disabled");
+                        $("#bibei4").attr("readonly", "readonly");  //disabled
+                        $("#bibei4").attr("disabled", "disabled");
+                        $("#bibei5").attr("readonly", "readonly");  //disabled
+                        $("#bibei5").attr("disabled", "disabled");
+                        $("#bibein").attr("readonly", "readonly");  //disabled
+                        $("#bibein").attr("disabled", "disabled");
+
+                        $("#btnEditmary").val("编辑");
+                  
+
+                } else {
+                    alert("修改失败,错误编号" + data + "，请重新操作!");
+                }
+
+            }
+        });
+
+    }
+    function editMary(obj) {
+       
+       
+        if ($(obj).val() == "编辑") {
+            $("#maryUpLimit").removeAttr("readonly");
+            $("#maryUpLimit").removeAttr("disabled");
+
+            $("#maryDownLimit").removeAttr("readonly");
+            $("#maryDownLimit").removeAttr("disabled");
+
+            $("#bibei1").removeAttr("readonly");
+            $("#bibei1").removeAttr("disabled");
+            $("#bibei2").removeAttr("readonly");
+            $("#bibei2").removeAttr("disabled");
+            $("#bibei3").removeAttr("readonly");
+            $("#bibei3").removeAttr("disabled");
+            $("#bibei4").removeAttr("readonly");
+            $("#bibei4").removeAttr("disabled");
+            $("#bibei5").removeAttr("readonly");
+            $("#bibei5").removeAttr("disabled");
+            $("#bibein").removeAttr("readonly");
+            $("#bibein").removeAttr("disabled");
+
+
+
+            $(obj).val("取消");
+        } else {
+
+            $("#maryUpLimit").attr("readonly", "readonly");  //disabled
+            $("#maryUpLimit").attr("disabled", "disabled");
+
+            $("#maryDownLimit").attr("readonly", "readonly");  //disabled
+            $("#maryDownLimit").attr("disabled", "disabled");
+
+
+
+            $("#bibei1").attr("readonly", "readonly");  //disabled
+            $("#bibei1").attr("disabled", "disabled");
+            $("#bibei2").attr("readonly", "readonly");  //disabled
+            $("#bibei2").attr("disabled", "disabled");
+            $("#bibei3").attr("readonly", "readonly");  //disabled
+            $("#bibei3").attr("disabled", "disabled");
+            $("#bibei4").attr("readonly", "readonly");  //disabled
+            $("#bibei4").attr("disabled", "disabled");
+            $("#bibei5").attr("readonly", "readonly");  //disabled
+            $("#bibei5").attr("disabled", "disabled");
+            $("#bibein").attr("readonly", "readonly");  //disabled
+            $("#bibein").attr("disabled", "disabled");
+            $(obj).val("编辑");
+
+        }
+    }
+
+    
+    function savePot(obj) {
+
+      
+    
+        var saveData = '';
+        var j = 0;
+        var inputs = eval("$('td[no=nopot] input,td[no=nopot] select')");
+        inputs.each(function () {  //每9个是一列
+            var v = $(this).val();
+            if (j == 4 || j == 9 || j == 14 || j ==19 || j == 24) {
+                saveData += v + "|";
+            } else {
+                saveData += v + ",";
+            }
+            j++;
+        });
+
+
+
+        $.ajax({
+            url: "/WaterMargin/ConfigIndex/",
+            type: "post",
+            data: { "par": saveData, "operType": "3" },
+            success: function (data) {
+                if (data == "1") {
+                    alert("修改成功!");
+                    inputs.each(function () {
+                        $(this).attr("readonly", "readonly");  //disabled
+                        $(this).attr("disabled", "disabled");
+                        eval('$("#' + obj + '").val("编辑")');
+                    });
+                } else {
+                    alert("修改失败,错误编号" + data + "，请重新操作!");
+                }
+            }
+        });
+
+    }
+
+    function editPot(obj) {
+        if ($(obj).val() == "编辑") {
+            var inputs = eval("$('td[no=nopot] input,td[no=nopot] select')");
+            inputs.each(function () {
+                $(this).removeAttr("readonly");  //disabled
+                $(this).removeAttr("disabled");
+            });
+            $(obj).val("取消");
+        } else {
+
+            var inputs = eval("$('td[no=nopot] input,td[no=nopot] select')");
+            inputs.each(function () {
+                $(this).attr("readonly", "readonly");  //disabled
+                $(this).attr("disabled", "disabled");
+            });
+            $(obj).val("编辑");
+
+        }
+    }
+
+
+    function saveZuobi(obj) {
+        var saveData = '';
+        var j = 0;
+        var inputs = eval("$('td[no=noZuobi] input,td[no=noZuobi] select')");
+        inputs.each(function () {  //每9个是一列
+            var v = $(this).val();
+            if (j == 10 || j == 21 || j == 32 || j == 43 || j == 54) {
+                saveData += v + "|";
+            } else {
+                saveData += v + ",";
+            }
+            j++;
+        });
+
+
+
+        $.ajax({
+            url: "/WaterMargin/ConfigIndex/",
+            type: "post",
+            data: { "par": saveData, "operType": "4" },
+            success: function (data) {
+                if (data == "1") {
+                    alert("修改成功!");
+                    inputs.each(function () {
+                        $(this).attr("readonly", "readonly");  //disabled
+                        $(this).attr("disabled", "disabled");
+                        eval('$("#' + obj + '").val("编辑")');
+                    });
+                } else {
+                    alert("修改失败,错误编号" + data + "，请重新操作!");
+                }
+            }
+        });
+    }
+
+    function editZuobi(obj) {
+        if ($(obj).val() == "编辑") {
+            var inputs = eval("$('td[no=noZuobi] input,td[no=noZuobi] select')");
+            inputs.each(function () {
+                $(this).removeAttr("readonly");  //disabled
+                $(this).removeAttr("disabled");
+            });
+            $(obj).val("取消");
+        } else {
+            var inputs = eval("$('td[no=noZuobi] input,td[no=noZuobi] select')");
+            inputs.each(function () {
+                $(this).attr("readonly", "readonly");  //disabled
+                $(this).attr("disabled", "disabled");
+            });
+            $(obj).val("编辑");
+        }
+    }
+
+
+</script>
+

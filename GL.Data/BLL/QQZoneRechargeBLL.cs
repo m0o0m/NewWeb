@@ -14,6 +14,9 @@ namespace GL.Data.BLL
     public class QQZoneRechargeBLL
     {
         public static readonly string sqlconnectionString = PubConstant.GetConnectionString("ConnectionStringForGameData");
+        public static readonly string database1 = PubConstant.GetConnectionString("database1");
+        public static readonly string database2 = PubConstant.GetConnectionString("database2");
+        public static readonly string database3 = PubConstant.GetConnectionString("database3");
 
         public static PagedList<QQZoneRecharge> GetListByPage(int page)
         {
@@ -49,7 +52,7 @@ q.UserID = l.UserID and q.CreateTime BETWEEN '{0}' and '{1}'  ";
                 pq.RecordCount = DAL.PagedListDAL<QQZoneRecharge>.GetRecordCount(string.Format(@"
 select count(*) from QQZoneRecharge as q,(
     select a.* from (
-        select UserID,LoginAgent,AgentName,NickName,UserAccount from 515game.V_LoginRecord where LoginTime BETWEEN '"+ dts + @"' and '{1}'
+        select UserID,LoginAgent,AgentName,NickName,UserAccount from "+database1+@".V_LoginRecord where LoginTime BETWEEN '"+ dts + @"' and '{1}'
         ORDER BY LoginTime desc
 ) as a
 GROUP BY a.UserID) as l
@@ -59,7 +62,7 @@ where " + myWhere + " {3}",
                 pq.Sql = string.Format(@"
 select q.*,l.LoginAgent,l.AgentName,l.NickName,l.UserAccount from QQZoneRecharge as q,(
     select a.* from (
-        select UserID,LoginAgent,AgentName,NickName,UserAccount from 515game.V_LoginRecord where LoginTime BETWEEN '"+ dts + @"' and '{1}'
+        select UserID,LoginAgent,AgentName,NickName,UserAccount from "+ database1 + @".V_LoginRecord where LoginTime BETWEEN '"+ dts + @"' and '{1}'
         ORDER BY LoginTime desc
 ) as a
 GROUP BY a.UserID) as l
@@ -78,7 +81,7 @@ where " + myWhere + "{5} order by q.CreateTime desc limit {3}, {4}",
                 pq.RecordCount = DAL.PagedListDAL<QQZoneRecharge>.GetRecordCount(string.Format(@"
 select count(*) from QQZoneRecharge as q,(
     select a.* from (
-        select UserID,LoginAgent,AgentName,NickName,UserAccount from 515game.V_LoginRecord where LoginTime BETWEEN '"+ dts + @"' and '{1}'
+        select UserID,LoginAgent,AgentName,NickName,UserAccount from "+ database1 + @".V_LoginRecord where LoginTime BETWEEN '"+ dts + @"' and '{1}'
         ORDER BY LoginTime desc
 ) as a
 GROUP BY a.UserID) as l
@@ -88,7 +91,7 @@ where " + myWhere + " {2}",
                 pq.Sql = string.Format(@"
 select q.*,l.LoginAgent,l.AgentName,l.NickName,l.UserAccount from QQZoneRecharge as q,(
     select a.* from (
-        select UserID,LoginAgent,AgentName,NickName,UserAccount from 515game.V_LoginRecord where LoginTime BETWEEN '"+ dts + @"' and '{1}'
+        select UserID,LoginAgent,AgentName,NickName,UserAccount from "+ database1 + @".V_LoginRecord where LoginTime BETWEEN '"+ dts + @"' and '{1}'
         ORDER BY LoginTime desc
 ) as a
 GROUP BY a.UserID) as l

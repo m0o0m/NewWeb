@@ -15,6 +15,10 @@ namespace GL.Data.DAL
 
         public static readonly string sqlconnectionString = PubConstant.GetConnectionString("ConnectionStringForGameData");
 
+        public static readonly string database1 = PubConstant.GetConnectionString("database1");
+        public static readonly string database2 = PubConstant.GetConnectionString("database2");
+        public static readonly string database3 = PubConstant.GetConnectionString("database3");
+
         internal static string GetSumRecharge(Model.BaseDataView model)
         {
             using (var cn = new MySqlConnection(sqlconnectionString))
@@ -24,13 +28,13 @@ namespace GL.Data.DAL
 
                 if (!string.IsNullOrEmpty(model.SearchExt))
                 {
-                    str = @"select IFNULL(sum(Money) /100,0) from QQZoneRecharge a join 515game.Role b on a.userid = b.id and (b.id=@SearchExt or b.account=@SearchExt or b.nickname=@SearchExt)
+                    str = @"select IFNULL(sum(Money) /100,0) from QQZoneRecharge a join "+ database1 + @".Role b on a.userid = b.id and (b.id=@SearchExt or b.account=@SearchExt or b.nickname=@SearchExt)
                             where a.CreateTime between @StartDate and @ExpirationDate and b.agent = case @Channels when 0 then b.agent else @Channels end ";
 
                 }
                 else
                 {
-                    str = @"select IFNULL(sum(Money) /100,0) from QQZoneRecharge a join 515game.Role b on a.userid = b.id 
+                    str = @"select IFNULL(sum(Money) /100,0) from QQZoneRecharge a join "+ database1 + @".Role b on a.userid = b.id 
                             where a.CreateTime between @StartDate and @ExpirationDate and b.agent = case @Channels when 0 then b.agent else @Channels end";
                 }
                 //if (model.RaType != null )
@@ -72,7 +76,7 @@ namespace GL.Data.DAL
                 StringBuilder str = new StringBuilder();
 
                 //str.Append("SELECT DATE_FORMAT(curdate(), '%Y-%m-%d') as date, a.count as count, b.count as activeuser FROM (SELECT count(0) as count FROM Role where Gold > 10) as a, (SELECT count(0) as count FROM Role where Gold <= 10) as b;");
-                str.Append(@" select count(*) as Count,PayItem from 515game.QQZoneRecharge 
+                str.Append(@" select count(*) as Count,PayItem from "+ database1 + @".QQZoneRecharge 
                                   where PayItem in ('firstCharge_1', 'firstCharge_2', 'firstCharge_3', 'firstCharge_4')
                                         and CreateTime between @StartDate and @ExpirationDate
                                   GROUP BY PayItem
@@ -114,7 +118,7 @@ select date(CreateTime) CreateTime
   ,sum(case GiftID when 2 then 1 else 0 end) as Position_118
   ,sum(case GiftID when 3 then 1 else 0 end) as Position_238
   ,sum(case GiftID when 4 then 1 else 0 end) as Position_388  
-from 515game.BG_ActiveRecord
+from "+ database1 + @".BG_ActiveRecord
 where  ActiveID=1
 GROUP BY date(CreateTime)
                            ");
@@ -128,7 +132,7 @@ select date(CreateTime) CreateTime
   ,sum(case GiftID when 2 then 1 else 0 end) as Position_118
   ,sum(case GiftID when 3 then 1 else 0 end) as Position_238
   ,sum(case GiftID when 4 then 1 else 0 end) as Position_388  
-from 515game.BG_ActiveRecord
+from "+ database1 + @".BG_ActiveRecord
 where CreateTime >= @StartDate and  CreateTime< @ExpirationDate and ActiveID=1
 GROUP BY date(CreateTime)
                            ");
@@ -182,7 +186,7 @@ GROUP BY date(CreateTime)
                 StringBuilder str = new StringBuilder();
 
                 //str.Append("SELECT DATE_FORMAT(curdate(), '%Y-%m-%d') as date, a.count as count, b.count as activeuser FROM (SELECT count(0) as count FROM Role where Gold > 10) as a, (SELECT count(0) as count FROM Role where Gold <= 10) as b;");
-                str.Append(@" select count(*) as Count,GiftID as Postion from 515game.BG_ActiveRecord
+                str.Append(@" select count(*) as Count,GiftID as Postion from "+ database1 + @".BG_ActiveRecord
                               where CreateTime >= @StartDate and  CreateTime< @ExpirationDate and ActiveID=2 
                               GROUP BY GiftID;
  
@@ -212,7 +216,7 @@ GROUP BY date(CreateTime)
                 //str.Append("SELECT DATE_FORMAT(curdate(), '%Y-%m-%d') as date, a.count as count, b.count as activeuser FROM (SELECT count(0) as count FROM Role where Gold > 10) as a, (SELECT count(0) as count FROM Role where Gold <= 10) as b;");
                 str.Append(@" 
 select t.*,r.NickName from (
-select UserID , sum(Money)/100 as Money from 515game.QQZoneRecharge 
+select UserID , sum(Money)/100 as Money from "+ database1 + @".QQZoneRecharge 
  where CreateTime >= @StartDate and  CreateTime< @ExpirationDate
 GROUP BY UserID
 order by Money desc 
@@ -243,7 +247,7 @@ where t.UserID = r.ID
                 //str.Append("SELECT DATE_FORMAT(curdate(), '%Y-%m-%d') as date, a.count as count, b.count as activeuser FROM (SELECT count(0) as count FROM Role where Gold > 10) as a, (SELECT count(0) as count FROM Role where Gold <= 10) as b;");
                 str.AppendFormat(@" 
 
-SELECT (select COUNT(DISTINCT UserID) from 515game.BG_LoginRecord
+SELECT (select COUNT(DISTINCT UserID) from "+ database1 + @".BG_LoginRecord
 where LoginTime >= t1.CreateTime and LoginTime<DATE_ADD(t1.CreateTime,INTERVAL 1 DAY)
 and LoginAgent!=10010) as DAU,
 t1.CreateTime as DateTime,
@@ -273,7 +277,7 @@ case SiteID
 when 2 then ClickCount
 else  0
 end as fjnum
-from record.BG_ClickRcord
+from "+ database3+ @".BG_ClickRcord
 where CreateTime BETWEEN @StartTime and @ExpirationDate  {0}
 ) as t
 GROUP BY t.CreateTime,t.UserID
@@ -296,7 +300,7 @@ GROUP BY t1.CreateTime;
                 cn.Open();
 
                 AllFesLogin i ;
-                using (var multi = cn.QueryMultiple("record.sys_get_515", new { },null,null,CommandType.StoredProcedure))
+                using (var multi = cn.QueryMultiple(""+ database3 + @".sys_get_515", new { },null,null,CommandType.StoredProcedure))
                 {
                     var thirdDay = multi.Read<FestivalLogin>().ToList();
                  
@@ -330,7 +334,7 @@ GROUP BY t1.CreateTime;
 
                 StringBuilder str = new StringBuilder();
 
-                IEnumerable<FestivalVIP> i = cn.Query<FestivalVIP>(@"record.sys_get_active_vip
+                IEnumerable<FestivalVIP> i = cn.Query<FestivalVIP>(@""+ database3 + @".sys_get_active_vip
 ", new { },null,true,null,CommandType.StoredProcedure);
 
 

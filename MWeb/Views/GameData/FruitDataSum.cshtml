@@ -1,0 +1,102 @@
+﻿@using GL.Data.Model
+@using GL.Data.View
+@model GameRecordView
+@{
+    ViewBag.Title = "水果机";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    int RoundID = Model.RoundID;
+}
+
+
+
+
+
+<div id="content">
+    <form id="comment-form" class="smart-form" novalidate="novalidate">
+        <div class="row">
+            <div class="widget-body">
+
+                <section class="col col-1" id="secRoundID">
+                    <label class="label"> 场次</label>
+                    <label class="select">
+                        <select id="RoundID" name="RoundID">
+                            <option value="0" @Html.GetOptionsSelectedAttr(RoundID, 0)>全部</option>
+                            <option value="1" @Html.GetOptionsSelectedAttr(RoundID, 1)>澳门金沙城</option>
+                            <option value="2" @Html.GetOptionsSelectedAttr(RoundID, 2)>拉斯维加斯</option>
+                            <option value="3" @Html.GetOptionsSelectedAttr(RoundID, 3)>加勒比游轮</option>
+                            <option value="4" @Html.GetOptionsSelectedAttr(RoundID, 4)>埃菲尔铁塔</option>
+                            <option value="5" @Html.GetOptionsSelectedAttr(RoundID, 5)>巴黎凯旋门</option>
+                            <option value="6" @Html.GetOptionsSelectedAttr(RoundID, 6)>蒙特卡洛</option>
+
+                        </select><i></i>
+
+                    </label>
+                </section>
+
+
+                <section class="col col-1.2">
+                    <label class="label">起始日期</label>
+                    <label class="input">
+                        <i class="icon-append fa fa-calendar"></i>
+                        @Html.TextBoxFor(m => m.StartDate, new Dictionary<string, object>() { { "class", "form-control datepicker" }, { "data-dateformat", "yy-mm-dd 00:00:00" } })
+                    </label>
+                </section>
+                <section class="col col-1.2">
+                    <label class="label"> 截止日期</label>
+                    <label class="input">
+                        <i class="icon-append fa fa-calendar"></i>
+                        @Html.TextBoxFor(m => m.ExpirationDate, new Dictionary<string, object>() {
+                           { "class", "form-control datepicker" },
+                           { "data-dateformat", "yy-mm-dd 00:00:00" }
+                       })
+                    </label>
+                </section>
+                <section class="col col-1">
+                    <label class="label">&nbsp;</label>
+                    <input type="button" onclick="search()" class="btn btn-success btn-sm" value="查询" />
+                </section>
+
+            </div>
+        </div>
+    </form>
+
+    <div class="row-fluid">
+        <div class="widget-box" id="box">
+            @Html.Partial("FruitDataSum_PageList", Model.DataList)
+        </div>
+    </div>
+</div>
+
+
+
+
+
+@section scripts{
+    @{Html.RegisterMvcPagerScriptResource();}
+
+
+    @*<script src="/js/bootstrap.min.js"></script>
+        <script src="/js/select2.min.js"></script>
+        @Styles.Render("~/Style/bootstrap-datetimepicker")
+        @Scripts.Render("~/bundles/bootstrap-datetimepicker")*@
+
+
+    <script type="text/javascript">
+
+        //$(document).ready(function () {
+        //    $('select').select2({
+        //        allowClear: false,
+        //        minimumResultsForSearch: -1
+        //    });
+        //    $('.datepicker').datetimepicker({
+        //        minView: "month", //选择日期后，不会再跳转去选择时分秒
+        //        format: "yyyy-mm-dd hh:ii:ss", //选择日期后，文本框显示的日期格式
+        //        language: 'zh-CN', //汉化
+        //        autoclose: true //选择日期后自动关闭
+        //    });
+
+        //});
+    </script>
+
+}

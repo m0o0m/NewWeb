@@ -15,6 +15,9 @@ namespace GL.Data.BLL
     public class UserMoneyRecordBLL
     {
         public static readonly string sqlconnectionString = PubConstant.GetConnectionString("ConnectionStringForGameData");
+        public static readonly string database1 = PubConstant.GetConnectionString("database1");
+        public static readonly string database2 = PubConstant.GetConnectionString("database2");
+        public static readonly string database3 = PubConstant.GetConnectionString("database3");
 
         public static PagedList<UserMoneyRecord> GetListByPage(GameRecordView grv)
         {
@@ -29,7 +32,7 @@ namespace GL.Data.BLL
 
 
             pq.RecordCount = DAL.PagedListDAL<UserMoneyRecord>.GetRecordCount(string.Format(@"
-            select count(0) from record.BG_UserMoneyRecord where UserID = '{0}' and ScoreChange<>0 and CreateTime between '{1}' and '{2}' ", grv.SearchExt, grv.StartDate, grv.ExpirationDate), sqlconnectionString);
+            select count(0) from "+ database3+ @".BG_UserMoneyRecord where UserID = '{0}' and ScoreChange<>0 and CreateTime between '{1}' and '{2}' ", grv.SearchExt, grv.StartDate, grv.ExpirationDate), sqlconnectionString);
 
 
 
@@ -37,10 +40,10 @@ namespace GL.Data.BLL
             //pq.Sql = string.Format(@"select u.* ,ifnull(s.UserOper ,concat(u.Type,'未定义描述')) UserOper, r.NickName as UserName from (select * from record.BG_UserMoneyRecord where UserID  = (select ID from Role where ID = '{2}' or Account= '{2}' or NickName= '{2}' limit 1) and CreateTime between '{3}' and '{4}' order by CreateTime desc limit {0}, {1}) as u left join record.S_Desc s on u.Type = s.Type left join Role as r on u.UserID = r.ID", pq.StartRowNumber, pq.PageSize, grv.SearchExt, grv.StartDate, grv.ExpirationDate);
             pq.Sql = string.Format(@"select u.* ,ifnull(s.UserOper ,concat(u.Type,'未定义描述')) UserOper
                    from (
-                        select a.* ,b.NickName as UserName from record.BG_UserMoneyRecord a
-                        join (select ID ,Nickname from 515game.Role where ID = '{2}' ) b on a.userid = b.id
+                        select a.* ,b.NickName as UserName from "+ database3 + @".BG_UserMoneyRecord a
+                        join (select ID ,Nickname from "+ database1+ @".Role where ID = '{2}' ) b on a.userid = b.id
                         where CreateTime between '{3}' and '{4}' and ScoreChange<>0 order by CreateTime desc limit {0}, {1}
-                    ) as u left join record.S_Desc s on u.Type = s.Type 
+                    ) as u left join "+ database3+ @".S_Desc s on u.Type = s.Type 
                     ", pq.StartRowNumber, pq.PageSize, grv.SearchExt, grv.StartDate, grv.ExpirationDate);
 
 
@@ -61,7 +64,7 @@ namespace GL.Data.BLL
 
 
             pq.RecordCount = DAL.PagedListDAL<UserMoneyRecord>.GetRecordCount(string.Format(@"SET SESSION TRANSACTION ISOLATION LEVEL READ UNCOMMITTED;
-            select count(0) from record.BG_UserMoneyRecord where UserID = '{0}' and type not in (41,42, 43, 52, 53, 54, 77,100,122,163) and CreateTime between '{1}' and '{2}' ", grv.SearchExt, grv.StartDate, grv.ExpirationDate), sqlconnectionString);
+            select count(0) from "+ database3 + @".BG_UserMoneyRecord where UserID = '{0}' and type not in (41,42, 43, 52, 53, 54, 77,100,122,163) and CreateTime between '{1}' and '{2}' ", grv.SearchExt, grv.StartDate, grv.ExpirationDate), sqlconnectionString);
 
 
 
@@ -70,10 +73,10 @@ namespace GL.Data.BLL
             //pq.Sql = string.Format(@"select u.* ,ifnull(s.UserOper ,concat(u.Type,'未定义描述')) UserOper, r.NickName as UserName from (select * from record.BG_UserMoneyRecord where UserID  = (select ID from Role where ID = '{2}' or Account= '{2}' or NickName= '{2}' limit 1) and CreateTime between '{3}' and '{4}' order by CreateTime desc limit {0}, {1}) as u left join record.S_Desc s on u.Type = s.Type left join Role as r on u.UserID = r.ID", pq.StartRowNumber, pq.PageSize, grv.SearchExt, grv.StartDate, grv.ExpirationDate);
             pq.Sql = string.Format(@"SET SESSION TRANSACTION ISOLATION LEVEL READ UNCOMMITTED;select u.* ,ifnull(u.UserOper ,concat(u.Type,'未定义描述')) UserOper
                     from (
-                      select a.* ,b.NickName as UserName ,s.UserOper from record.BG_UserMoneyRecord a 
-                        join (select ID ,Nickname from 515game.Role where ID = '{2}') b on a.userid = b.id
-                        left join record.S_Desc s on a.Type = s.Type 
-                      where a.CreateTime between '{3}' and '{4}' and a.type not in (41,42, 43, 52, 53, 54, 77,100,122,163)  order by a.CreateTime desc ,s.OrderNo desc limit {0}, {1}
+                      select a.* ,b.NickName as UserName ,s.UserOper from "+ database3 + @".BG_UserMoneyRecord a 
+                        join (select ID ,Nickname from "+ database1+ @".Role where ID = '{2}') b on a.userid = b.id
+                        left join "+ database3 + @".S_Desc s on a.Type = s.Type 
+                      where a.CreateTime between '{3}' and '{4}' and  ChipChange!=0 and  a.type not in (41,42, 43, 52, 53, 54, 77,100,122,163)  order by a.CreateTime desc ,s.OrderNo desc limit {0}, {1}
                     ) u  
                     ", pq.StartRowNumber, pq.PageSize, grv.SearchExt, grv.StartDate, grv.ExpirationDate);
             PagedList<UserMoneyRecord> obj = new PagedList<UserMoneyRecord>(DAL.PagedListDAL<UserMoneyRecord>.GetListByPage(pq, sqlconnectionString), pq.CurrentPage, pq.PageSize, pq.RecordCount);
@@ -94,7 +97,7 @@ namespace GL.Data.BLL
 
 
             pq.RecordCount = DAL.PagedListDAL<UserMoneyRecord>.GetRecordCount(string.Format(@"SET SESSION TRANSACTION ISOLATION LEVEL READ UNCOMMITTED;
-            select count(0) from record.BG_UserMoneyRecord where UserID in (select ID from 515game.Role where  agent = 10010) and CreateTime between '{1}' and '{2}' and Type in (126,138) ", grv.SearchExt, grv.StartDate, grv.ExpirationDate), sqlconnectionString);
+            select count(0) from "+ database3 + @".BG_UserMoneyRecord where UserID in (select ID from "+ database1+ @".Role where  agent = 10010) and CreateTime between '{1}' and '{2}' and Type in (126,138) ", grv.SearchExt, grv.StartDate, grv.ExpirationDate), sqlconnectionString);
 
 
 
@@ -104,10 +107,10 @@ namespace GL.Data.BLL
             pq.Sql = string.Format(@"SET SESSION TRANSACTION ISOLATION LEVEL READ UNCOMMITTED;
 select u.* ,ifnull(s.UserOper ,concat(u.Type,'未定义描述')) UserOper
 from (
-  select a.* ,b.NickName as UserName from record.BG_UserMoneyRecord a
-    join 515game.Role b on a.userid = b.id and b.Agent=10010
+  select a.* ,b.NickName as UserName from "+ database3+ @".BG_UserMoneyRecord a
+    join "+ database1+ @".Role b on a.userid = b.id and b.Agent=10010
   where a.CreateTime between '{3}' and '{4}' and Type in(126 ,138) order by CreateTime desc limit {0}, {1}
-) as u left join record.S_Desc s on u.Type = s.Type 
+) as u left join "+ database3+ @".S_Desc s on u.Type = s.Type 
                     ", pq.StartRowNumber, pq.PageSize, grv.SearchExt, grv.StartDate, grv.ExpirationDate);
             PagedList<UserMoneyRecord> obj = new PagedList<UserMoneyRecord>(DAL.PagedListDAL<UserMoneyRecord>.GetListByPage(pq, sqlconnectionString), pq.CurrentPage, pq.PageSize, pq.RecordCount);
           
@@ -131,10 +134,10 @@ from (
             //pq.Sql = string.Format(@"select u.* ,ifnull(s.UserOper ,concat(u.Type,'未定义描述')) UserOper, r.NickName as UserName from (select * from record.BG_UserMoneyRecord where UserID  = (select ID from Role where ID = '{2}' or Account= '{2}' or NickName= '{2}' limit 1) and CreateTime between '{3}' and '{4}' order by CreateTime desc limit {0}, {1}) as u left join record.S_Desc s on u.Type = s.Type left join Role as r on u.UserID = r.ID", pq.StartRowNumber, pq.PageSize, grv.SearchExt, grv.StartDate, grv.ExpirationDate);
             pq.Sql = string.Format(@"SET SESSION TRANSACTION ISOLATION LEVEL READ UNCOMMITTED;select u.* , ifnull(u.UserOper , concat(u.Type,'未定义描述')) UserOper
                       from(
-                        select a.* , b.NickName as UserName , s.UserOper from record.BG_UserMoneyRecord a 
-                          join (select ID, Nickname from 515game.Role where ID = '{2}') b on a.userid = b.id
-                          left join record.S_Desc s on a.Type = s.Type
-                        where a.CreateTime between '{3}' and '{4}' and a.type not in (41,42, 43, 52, 53, 54, 77,100,122,163)  order by a.CreateTime desc, s.OrderNo desc limit {0}, {1}
+                        select a.* , b.NickName as UserName , s.UserOper from "+ database3+ @".BG_UserMoneyRecord a 
+                          join (select ID, Nickname from "+ database1+ @".Role where ID = '{2}') b on a.userid = b.id
+                          left join "+ database3+ @".S_Desc s on a.Type = s.Type
+                        where a.CreateTime between '{3}' and '{4}' and  ChipChange!=0 and a.type not in (41,42, 43, 52, 53, 54, 77,100,122,163)  order by a.CreateTime desc, s.OrderNo desc limit {0}, {1}
                     ) u
                             ", pq.StartRowNumber, pq.PageSize, grv.SearchExt, grv.StartDate, grv.ExpirationDate);
             PagedList<UserMoneyRecord> obj = new PagedList<UserMoneyRecord>(DAL.PagedListDAL<UserMoneyRecord>.GetListByPage(pq, sqlconnectionString), pq.CurrentPage, pq.PageSize, pq.RecordCount);
@@ -156,10 +159,10 @@ from (
             //pq.Sql = string.Format(@"select u.* ,ifnull(s.UserOper ,concat(u.Type,'未定义描述')) UserOper, r.NickName as UserName from (select * from record.BG_UserMoneyRecord where UserID  = (select ID from Role where ID = '{2}' or Account= '{2}' or NickName= '{2}' limit 1) and CreateTime between '{3}' and '{4}' order by CreateTime desc limit {0}, {1}) as u left join record.S_Desc s on u.Type = s.Type left join Role as r on u.UserID = r.ID", pq.StartRowNumber, pq.PageSize, grv.SearchExt, grv.StartDate, grv.ExpirationDate);
             pq.Sql = string.Format(@"select u.* ,ifnull(s.UserOper ,concat(u.Type,'未定义描述')) UserOper
                             from (
-                              select a.* ,b.NickName as UserName from record.BG_UserMoneyRecord a
-                                join 515game.Role b on b.Agent=10010 and a.userid = b.id
+                              select a.* ,b.NickName as UserName from "+ database3+ @".BG_UserMoneyRecord a
+                                join "+ database1+ @".Role b on b.Agent=10010 and a.userid = b.id
                               where a.CreateTime between '{3}' and '{4}' and Type in(126,138) order by b.CreateTime desc limit {0}, {1}
-                            ) as u left join record.S_Desc s on u.Type = s.Type 
+                            ) as u left join "+ database3 + @".S_Desc s on u.Type = s.Type 
                             ", pq.StartRowNumber, pq.PageSize, grv.SearchExt, grv.StartDate, grv.ExpirationDate);
           
             PagedList<UserMoneyRecord> obj = new PagedList<UserMoneyRecord>(DAL.PagedListDAL<UserMoneyRecord>.GetListByPage(pq, sqlconnectionString), pq.CurrentPage, pq.PageSize, pq.RecordCount);
@@ -178,13 +181,13 @@ from (
             if (!string.IsNullOrEmpty(grv.SearchExt))
             {
                 pq.RecordCount = DAL.PagedListDAL<UserMoneyRecord>.GetRecordCount(string.Format(@"
-            select count(0) from record.BG_UserMoneyRecord where UserID = (select ID from Role where ID = '{0}' or Account= '{0}' or NickName= '{0}' and find_in_set(Agent, '{3}') limit 1) and CreateTime between '{1}' and '{2}' ", grv.SearchExt, grv.StartDate, grv.ExpirationDate, grv.UserList), sqlconnectionString);
+            select count(0) from "+ database3 + @".BG_UserMoneyRecord where UserID = (select ID from Role where ID = '{0}' or Account= '{0}' or NickName= '{0}' and find_in_set(Agent, '{3}') limit 1) and CreateTime between '{1}' and '{2}' ", grv.SearchExt, grv.StartDate, grv.ExpirationDate, grv.UserList), sqlconnectionString);
 
                 pq.Sql = string.Format(@"select u.* ,ifnull(s.UserOper ,concat(u.Type,'未定义描述')) UserOper
-                    from (select a.* ,b.NickName as UserName from record.BG_UserMoneyRecord a
-                        join (select ID ,Nickname from 515game.Role where find_in_set(Agent, '{5}') and (ID = '{2}' or Account= '{2}' or NickName= '{2}') limit 1) b on a.userid = b.id
+                    from (select a.* ,b.NickName as UserName from "+ database3 + @".BG_UserMoneyRecord a
+                        join (select ID ,Nickname from "+ database1+ @".Role where find_in_set(Agent, '{5}') and (ID = '{2}' or Account= '{2}' or NickName= '{2}') limit 1) b on a.userid = b.id
                         where CreateTime between '{3}' and '{4}' order by CreateTime desc limit {0}, {1}
-                    ) as u left join record.S_Desc s on u.Type = s.Type;", pq.StartRowNumber, pq.PageSize, grv.SearchExt, grv.StartDate, grv.ExpirationDate, grv.UserList);
+                    ) as u left join "+ database3+ @".S_Desc s on u.Type = s.Type;", pq.StartRowNumber, pq.PageSize, grv.SearchExt, grv.StartDate, grv.ExpirationDate, grv.UserList);
 
             }
             else

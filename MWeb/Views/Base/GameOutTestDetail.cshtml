@@ -6,6 +6,9 @@
 
     ViewBag.Format = "yyyy-MM-dd";
 
+    string Coin = MWeb.Controllers.BaseController.Coin;
+
+
     switch (Model.Groupby)
     {
         case groupby.按日:
@@ -63,6 +66,11 @@
     List<GameOutputList> bairendezhou = new List<GameOutputList>();
     string bairenstr = ",157,162,";
     decimal bairenTotal = 0;
+
+    List<GameOutputList> shuihuhuishou = new List<GameOutputList>();
+    string shuihustr = ",999,998,";
+    decimal shuihuTotal = 0;
+
 
     int inputmark = 0;
     int outputmark = 0;
@@ -123,7 +131,19 @@
             bairendezhou.Add(bdl.list[i]);
             bairenTotal += bdl.list[i].Chip; outputmark++;
         }
+        else if (shuihustr.Contains("," + t + ","))
+        {
+            shuihuhuishou.Add(bdl.list[i]);
+            if(bdl.list[i].ChipChangeType == chipChangeType.水浒传回收游戏币) {
+                shuihuTotal += bdl.list[i].Chip ;
+            }
+            else {
+                shuihuTotal += bdl.list[i].Chip;
+            }
 
+
+            outputmark++;
+        }
 
     }
 
@@ -373,6 +393,31 @@
                                                         </ul>
                                                     </li>
                                                 }
+                                                @if (shuihuTotal < 0)
+                                                {
+                                                    <li>
+                                                        <span><i class="fa fa-lg fa-plus-circle"></i>回收游戏币   <span style="color:#ee0000">@shuihuTotal.ToString("#,0.") </span> </span>
+                                                        <ul>
+                                                            @for (int i = 0; i < shuihuhuishou.Count; i++)
+                                                            {
+                                                                if (shuihuhuishou[i].ChipChangeType == chipChangeType.水浒传回收游戏币)
+                                                                {
+                                                                   
+                                                                    <li style="display:none">
+                                                                        <span class="label"><i class=""></i>@shuihuhuishou[i].ChipChangeType  <span style="color:#ee0000">@((shuihuhuishou[i].Chip).ToString("#,0."))</span></span>
+                                                                    </li>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <li style="display:none">
+                                                                        <span class="label"><i class=""></i>@shuihuhuishou[i].ChipChangeType  <span style="color:#ee0000">@shuihuhuishou[i].Chip.ToString("#,0.")</span></span>
+                                                                    </li>
+                                                                }
+
+                                                            }
+                                                        </ul>
+                                                    </li>
+                                                }
                                                 @if (hudongTotal < 0)
                                                 {
                                                     <li>
@@ -569,7 +614,7 @@
                      data-widget-sortable="false">
                     <header>
                         <span class="widget-icon"> <i class="fa fa-table"></i> </span>
-                        <h2>查看五币详细</h2>
+                        <h2>查看@(Coin)详细</h2>
                     </header>
                     <!-- widget div-->
                     <div>
@@ -588,7 +633,7 @@
                                             <td class="span3">日期</td>
                                             <td class="span2">@bdl.date.ToString(ViewBag.Format)</td>
                                             <td></td>
-                                            <td class="span3">系统总五币</td>
+                                            <td class="span3">系统总@(Coin)</td>
                                             <td class="span2">@bdl.systemDiamond.ToString("#,0.")</td>
                                             <td></td>
                                         </tr>
@@ -606,7 +651,7 @@
                                                         @Html.Raw("<tr>")
                                                     }
 
-                                                    <td>@bdl.list[i].ChipChangeType</td>
+                                                    <td>@(bdl.list[i].ChipChangeType.ToString().Replace("_Replace_", Coin))</td>
                                                     <td>
                                                         @if (bdl.list[i].Diamond > 0)
                                                         {

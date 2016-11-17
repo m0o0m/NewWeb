@@ -1,7 +1,9 @@
 ﻿@using Webdiyer.WebControls.Mvc;
 @using GL.Data.Model;
 @model PagedList<Role>
-
+@{ 
+    string Coin = MWeb.Controllers.ManageController.Coin;
+}
 
 
 
@@ -70,7 +72,7 @@
             
             </td>
             <td>邮箱:@m.Email<br />电话:@m.Tel<br />姓名:@m.TrueName<br />身份证号码:@m.Identity</td>
-            <td>代理:@m.Agent<br />游戏币:@m.Gold<br />5币:@m.Diamond<br />保险箱:@m.SafeBox<br />保险密码:@m.SafePwd</td>
+            <td>代理:@m.Agent<br />游戏币:@m.Gold<br />@(Coin):@m.Diamond<br />保险箱:@m.SafeBox<br />保险密码:@m.SafePwd</td>
             <td>创建时间:@m.CreateTime.ToString("yyyy-MM-dd HH:mm:ss")<br />创建IP:@m.CreateIP<br />创建IMEI:@m.CreateMac<br />
             禁言:@m.NoSpeak
                 @if (m.NoSpeak == isSwitch.关)

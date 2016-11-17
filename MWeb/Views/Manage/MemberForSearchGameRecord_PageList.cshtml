@@ -2,7 +2,7 @@
 @using GL.Data.Model;
 @model PagedList<UserMoneyRecord>
 @{
-    
+    string Coin = MWeb.Controllers.ManageController.Coin;
 
     UserInfo ui = (UserInfo)ViewData["modeldata"];
 
@@ -141,9 +141,9 @@
                                                 <th>变化后筹码</th>
                                               
 
-                                                <th>变化前五币</th>
-                                                <th>五币变化</th>
-                                                <th>变化后五币</th>
+                                                <th>变化前@(Coin)</th>
+                                                <th>@(Coin)变化</th>
+                                                <th>变化后@(Coin)</th>
                                                 @*<th>积分</th>
                                                 <th>积分变化</th>*@
                                                 <th>玩家操作记录</th>

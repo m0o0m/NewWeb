@@ -8,7 +8,9 @@
 
 
     int type = Model.Gametype;
-
+    //RoundID
+    int RoundID = Model.RoundID;
+    int RoundID2 = Model.RoundID2;
 }
 
 
@@ -19,23 +21,60 @@
     <form id="comment-form" class="smart-form" novalidate="novalidate">
         <div class="row">
             <div class="widget-body">
-               
+
                 <section class="col col-1">
                     <label class="label"> 游戏类型</label>
                     <label class="select">
                         <select id="Gametype" name="Gametype" onchange="changType()">
-                            <option  value="0" @Html.GetOptionsSelectedAttr(type,0)>斗地主</option>
-                            <option value="1"  @Html.GetOptionsSelectedAttr(type,1)>德州扑克</option>
-                            <option value="2"  @Html.GetOptionsSelectedAttr(type,2)>中发白</option>
-                            <option value="3"  @Html.GetOptionsSelectedAttr(type,3)>十二生肖</option>
-                            <option value="4"  @Html.GetOptionsSelectedAttr(type,4)>小马快跑</option>
-                            <option value="5"  @Html.GetOptionsSelectedAttr(type,5)>奔驰宝马</option>
+                            <option value="0" @Html.GetOptionsSelectedAttr(type, 0)>斗地主</option>
+                            <option value="1" @Html.GetOptionsSelectedAttr(type, 1)>德州扑克</option>
+                            <option value="2" @Html.GetOptionsSelectedAttr(type, 2)>中发白</option>
+                            <option value="3" @Html.GetOptionsSelectedAttr(type, 3)>十二生肖</option>
+                            <option value="4" @Html.GetOptionsSelectedAttr(type, 4)>小马快跑</option>
+                            <option value="5" @Html.GetOptionsSelectedAttr(type, 5)>奔驰宝马</option>
                             <option value="6" @Html.GetOptionsSelectedAttr(type, 6)>百人德州</option>
+                            <option value="7" @Html.GetOptionsSelectedAttr(type, 7)>水浒传</option>
+                            <option value="8" @Html.GetOptionsSelectedAttr(type, 8)>水果机</option>
+                            <option value="9" @Html.GetOptionsSelectedAttr(type, 9)>澳门扑克</option>
                         </select><i></i>
-                       
+
                     </label>
                 </section>
-                <section class="col col-1.2" id="sectionUser" style=" @Html.GetMVCstring(type,"2,3,4,5","display:none") ">
+
+                <section class="col col-1" id="secRoundID">
+                    <label class="label"> 场次</label>
+                    <label class="select">
+                        <select id="RoundID" name="RoundID">
+                            <option mark="shuihu" value="0" @Html.GetOptionsSelectedAttr(RoundID, 0)>全部</option>
+                            <option mark="shuihu" value="1" @Html.GetOptionsSelectedAttr(RoundID, 1)>梁山泊</option>
+                            <option mark="shuihu" value="2" @Html.GetOptionsSelectedAttr(RoundID, 2)>五龙台</option>
+                            <option mark="shuihu" value="3" @Html.GetOptionsSelectedAttr(RoundID, 3)>二龙山</option>
+                            <option mark="shuihu" value="4" @Html.GetOptionsSelectedAttr(RoundID, 4)>景阳冈</option>
+                            <option mark="shuihu" value="5" @Html.GetOptionsSelectedAttr(RoundID, 5)>祝家庄</option>
+                            <option mark="shuihu" value="6" @Html.GetOptionsSelectedAttr(RoundID, 6)>乌龙岭</option>
+                        </select><i></i>
+                    </label>
+                </section>
+
+
+
+                <section class="col col-1" id="secRoundID2">
+                    <label class="label"> 场次</label>
+                    <label class="select">
+                        <select id="RoundID2" name="RoundID2">
+                            <option mark="shuihu" value="0" @Html.GetOptionsSelectedAttr(RoundID2, 0)>全部</option>
+                            <option mark="shuihu" value="1" @Html.GetOptionsSelectedAttr(RoundID2, 1)>澳门金沙城</option>
+                            <option mark="shuihu" value="2" @Html.GetOptionsSelectedAttr(RoundID2, 2)>拉斯维加斯</option>
+                            <option mark="shuihu" value="3" @Html.GetOptionsSelectedAttr(RoundID2, 3)>加勒比游轮</option>
+                            <option mark="shuihu" value="4" @Html.GetOptionsSelectedAttr(RoundID2, 4)>埃菲尔铁塔</option>
+                            <option mark="shuihu" value="5" @Html.GetOptionsSelectedAttr(RoundID2, 5)>巴黎凯旋门</option>
+                            <option mark="shuihu" value="6" @Html.GetOptionsSelectedAttr(RoundID2, 6)>蒙特卡洛</option>
+                        </select><i></i>
+                    </label>
+                </section>
+
+
+                <section class="col col-1.2" id="sectionUser" style=" @Html.GetMVCstring(type, "2,3,4,5", "display:none") ">
                     <label class="label">会员ID</label>
                     <label class="input">
                         @Html.TextBoxFor(m => m.SearchExt, new { @class = "span2", style = "border-radius:4px;width:120px" })
@@ -116,8 +155,8 @@
         changType();
         function changType() {
             var Gametype = $("#Gametype option:selected").val();
-       
-            if (Gametype == "0" || Gametype == "1" ) {
+
+            if (Gametype == "0" || Gametype == "1") {
                 $("#sectionUser").css("display", "");
                 $("#sectionNO").css("display", "none");
             }
@@ -125,8 +164,23 @@
                 $("#sectionUser").css("display", "none");
                 $("#sectionNO").css("display", "");
             }
-           
-         
+
+            if (Gametype == "7") {
+                $("#sectionUser").css("display", "");
+                $("#sectionNO").css("display", "");
+                $("#secRoundID").css("display", "");
+                $("#secRoundID2").css("display", "none");
+            } else if (Gametype == "8") {
+                $("#sectionUser").css("display", "");
+                $("#sectionNO").css("display", "");
+                $("#secRoundID").css("display", "none");
+                $("#secRoundID2").css("display", "");
+            } else {
+                $("#secRoundID").css("display", "none");
+                $("#secRoundID2").css("display", "none");
+            }
+
+
 
         }
 

@@ -4,6 +4,8 @@
 @{
     ViewBag.Title = "会员管理 -- 列表";
     Layout = "~/Views/Shared/_Layout.cshtml";
+
+    string Coin = MWeb.Controllers.ManageController.Coin;
 }
 
 <div id="content">
@@ -80,7 +82,7 @@
                             </tr>
                             <tr>
                                 <th>游戏币</th><th>@Model.Gold <input type="button" style="float:right;" value="查询" onclick="return OutputView(@Model.ID);" /></th>
-                                <th>五币</th><th>@Model.Diamond <input type="button" style="float:right;" value="查询" onclick="return UsersDiamondDistributionRatio()" /></th>
+                                <th>@Coin</th><th>@Model.Diamond <input type="button" style="float:right;" value="查询" onclick="return UsersDiamondDistributionRatio()" /></th>
                                 <th>VIP等级</th><th>
                               
                                 @{ 

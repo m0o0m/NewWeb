@@ -5,6 +5,7 @@ using GL.Data.Model;
 using GL.Data.View;
 using GL.Protocol;
 using log4net;
+using MWeb.Models;
 using MWeb.protobuf.SCmd;
 using ProtoCmd.Service;
 using System;
@@ -20,6 +21,7 @@ using System.Threading;
 using System.Web;
 using System.Web.Http;
 using System.Web.Mvc;
+using System.Net.Mail;
 
 namespace MWeb.Controllers
 {
@@ -46,12 +48,13 @@ namespace MWeb.Controllers
             {
                 case CenterCmd.CS_FREEZE_USER:
                     Service_Freeze_S ServiceFreezeS = Service_Freeze_S.ParseFrom(tbind.body.ToBytes());
-                  
+
                     if (ServiceFreezeS.Suc)
                     {
                         return Content("0", "string");
                     }
-                    else {
+                    else
+                    {
                         RoleBLL.UpdateRoleNoFreeze(
                           model.Reason, DateTime.Now.AddMinutes(5256000),
                           model.dwUserID
@@ -70,7 +73,8 @@ namespace MWeb.Controllers
 
 
 
-        public ActionResult GetSerStatus() {
+        public ActionResult GetSerStatus()
+        {
             Bind tbind = Cmd.runClient(new Bind(ServiceCmd.SC_QUERY_SERVERSTATUS, new byte[0] { }));
 
             switch ((CenterCmd)tbind.header.CommandID)
@@ -93,10 +97,30 @@ namespace MWeb.Controllers
 
             return Json(new
             {
-                result =false
+                result = false
             }, JsonRequestBehavior.AllowGet);
 
         }
+
+
+
+        /// <summary>
+        /// 生成验证码的链接
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult GetValidateCode()
+        {
+            ValidateCode vCode = new ValidateCode();
+            string code = vCode.CreateValidateCode(5);
+            Session["ValidateCode"] = code;
+            byte[] bytes = vCode.CreateValidateGraphic(code);
+            return File(bytes, @"image/jpeg");
+
+
+
+        }
+
+
 
 
         [QueryValues]
@@ -105,54 +129,54 @@ namespace MWeb.Controllers
             ILog log = LogManager.GetLogger("Callback");
             log.Info("开始接受参数!");
 
-           
 
-             string UEUserID = queryvalues.ContainsKey("userid") ? queryvalues["userid"] : string.Empty;
+
+            string UEUserID = queryvalues.ContainsKey("userid") ? queryvalues["userid"] : string.Empty;
             string UETitle = queryvalues.ContainsKey("title") ? queryvalues["title"] : string.Empty;
             string UEContent = queryvalues.ContainsKey("content") ? queryvalues["content"] : string.Empty;
             string UEItemValue = queryvalues.ContainsKey("gold") ? queryvalues["gold"] : string.Empty;
             string UEItemType = "1";
             string UEItemNum = "1";
 
-            log.Info(UEUserID+","+ UETitle+","+ UEContent+","+ UEItemValue);
+            log.Info(UEUserID + "," + UETitle + "," + UEContent + "," + UEItemValue);
 
             UserEmail ue = new UserEmail { UEUserID = UEUserID };
 
-                List<uint> UserIDList = UEUserID.Split(',').Select(x => Convert.ToUInt32(x)).ToList();
-
-               
-
-                Service_ItemMail_C ServiceItemMailC;
-
-           
-                    ServiceItemMailC = Service_ItemMail_C.CreateBuilder()
-                        .AddRangeUserID(UserIDList)
-                        .SetTitle(UETitle)
-                        .SetContext(UEContent)
-                        .SetItemType(Convert.ToUInt32(UEItemType))
-                        .SetItemValue(Convert.ToUInt32(UEItemValue))
-                        .SetItemNum(Convert.ToUInt32(UEItemNum))
-                        .Build();
-           
-
-                Bind tbind = Cmd.runClient(new Bind(ServiceCmd.SC_SEND_ITEMMAIL, ServiceItemMailC.ToByteArray()));
-
-                ue = new UserEmail { UEUserID = UEUserID, UETime = DateTime.Now, UETitle = UETitle, UEContent = UEContent, UEAuthor = "admin", UEItemNum = Convert.ToInt32(UEItemNum), UEItemType = (ueItemType)Convert.ToInt32(UEItemType), UEItemValue = Convert.ToInt32(UEItemValue) };
+            List<uint> UserIDList = UEUserID.Split(',').Select(x => Convert.ToUInt32(x)).ToList();
 
 
-                if ((CenterCmd)tbind.header.CommandID == CenterCmd.CS_SEND_ITEMMAIL)
+
+            Service_ItemMail_C ServiceItemMailC;
+
+
+            ServiceItemMailC = Service_ItemMail_C.CreateBuilder()
+                .AddRangeUserID(UserIDList)
+                .SetTitle(UETitle)
+                .SetContext(UEContent)
+                .SetItemType(Convert.ToUInt32(UEItemType))
+                .SetItemValue(Convert.ToUInt32(UEItemValue))
+                .SetItemNum(Convert.ToUInt32(UEItemNum))
+                .Build();
+
+
+            Bind tbind = Cmd.runClient(new Bind(ServiceCmd.SC_SEND_ITEMMAIL, ServiceItemMailC.ToByteArray()));
+
+            ue = new UserEmail { UEUserID = UEUserID, UETime = DateTime.Now, UETitle = UETitle, UEContent = UEContent, UEAuthor = "admin", UEItemNum = Convert.ToInt32(UEItemNum), UEItemType = (ueItemType)Convert.ToInt32(UEItemType), UEItemValue = Convert.ToInt32(UEItemValue) };
+
+
+            if ((CenterCmd)tbind.header.CommandID == CenterCmd.CS_SEND_ITEMMAIL)
+            {
+                Service_ItemMail_S ServiceItemMailS = Service_ItemMail_S.ParseFrom(tbind.body.ToBytes());
+                if (ServiceItemMailS.Suc)
                 {
-                    Service_ItemMail_S ServiceItemMailS = Service_ItemMail_S.ParseFrom(tbind.body.ToBytes());
-                    if (ServiceItemMailS.Suc)
+                    int result = UserEmailBLL.Add(ue);
+                    if (result > 0)
                     {
-                        int result = UserEmailBLL.Add(ue);
-                        if (result > 0)
-                        {
-                             return Content("0", "string");
-                         }
+                        return Content("0", "string");
                     }
-
                 }
+
+            }
 
             return Content("1", "string");
 
@@ -160,19 +184,20 @@ namespace MWeb.Controllers
         }
 
         [QueryValues]
-        public ActionResult SendSMS(Dictionary<string, string> queryvalues) {
+        public ActionResult SendSMS(Dictionary<string, string> queryvalues)
+        {
 
-           
+
 
             string account = "jiekou-clcs-13";
             string password = "Txb123456";
-            int userid = queryvalues.ContainsKey("userid") ? Convert.ToInt32( queryvalues["userid"]) : -1;
+            int userid = queryvalues.ContainsKey("userid") ? Convert.ToInt32(queryvalues["userid"]) : -1;
             string mobile = queryvalues.ContainsKey("mobile") ? queryvalues["mobile"] : string.Empty;
             Random r = new Random();
             int num = r.Next(100000, 999999);
             string sign = num.ToString();
 
-            string content = "亲爱的用户，您的手机验证码是"+ sign + "，此验证码1分钟内有效，请尽快完成验证。";
+            string content = "亲爱的用户，您的手机验证码是" + sign + "，此验证码1分钟内有效，请尽快完成验证。";
             string postStrTpl = "account={0}&pswd={1}&mobile={2}&msg={3}&needstatus=true&product=&extno=";
             UTF8Encoding encoding = new UTF8Encoding();
             byte[] postData = encoding.GetBytes(string.Format(postStrTpl, account, password, mobile, content));
@@ -206,25 +231,104 @@ namespace MWeb.Controllers
 
 
 
-            
+
         }
 
         [QueryValues]
-        public ActionResult ValidateNameNO(Dictionary<string, string> queryvalues) {
+        public ActionResult SendMobile(Dictionary<string, string> queryvalues)
+        {//发送手机短信
+            string mobile = queryvalues.ContainsKey("mobile") ? queryvalues["mobile"] : string.Empty;
+            string yzm = queryvalues.ContainsKey("yzm") ? queryvalues["yzm"] : string.Empty;
+            string postStrTpl = "name={0}&pwd={1}&content={2}&mobile={3}&type=pt";
+
+            string str = string.Format(
+                postStrTpl,
+                "张小勇",
+                "7392E60BF411C7AE2170A4355223",
+                "您正在登录验证，验证码" + yzm + "，请在30分钟内按页面提示提交验证码，切勿将验证码泄漏于他人。",
+                mobile
+               );
+
+            UTF8Encoding encoding = new UTF8Encoding();
+            byte[] postData = encoding.GetBytes(str);
+
+            HttpWebRequest myRequest = (HttpWebRequest)WebRequest.Create("http://web.daiyicloud.com/asmx/smsservice.aspx");
+            myRequest.Method = "POST";
+            myRequest.ContentType = "application/x-www-form-urlencoded";
+            myRequest.ContentLength = postData.Length;
+            Stream newStream = myRequest.GetRequestStream();
+            // Send the data.
+            newStream.Write(postData, 0, postData.Length);
+            newStream.Flush(); 
+            newStream.Close();
+            HttpWebResponse myResponse = (HttpWebResponse)myRequest.GetResponse();
+            if (myResponse.StatusCode == HttpStatusCode.OK)
+            {
+                StreamReader reader = new StreamReader(myResponse.GetResponseStream(), Encoding.UTF8);
+                string msg = reader.ReadToEnd();
+                if (!string.IsNullOrEmpty(msg))
+                {
+                    string[] res = msg.Split(',');
+                    if (res[0] == "0")
+                    {
+                        return Content("1", "string");
+                    }
+                    else
+                    {
+                        return Content("0", "string");
+                    }
+                }
+                //保存数据
+            }
+            return Content("0", "string");
+        }
+
+        [QueryValues]
+        public ActionResult SendEmail(Dictionary<string, string> queryvalues)
+        {
+            string email = queryvalues.ContainsKey("email") ? queryvalues["email"] : string.Empty;
+            string yzm = queryvalues.ContainsKey("yzm") ? queryvalues["yzm"] : string.Empty;
+            MailMessage mailObj = new MailMessage();
+            mailObj.From = new MailAddress("523513655@qq.com"); //发送人邮箱地址
+            mailObj.To.Add(email);   //收件人邮箱地址
+            mailObj.Subject = "515游戏公司验证码";  //主题
+            mailObj.Body = "您的验证码是：" + yzm+ "，请在30分钟内按页面提示提交验证码，切勿将验证码泄漏于他人。";    //正文
+            mailObj.SubjectEncoding = System.Text.Encoding.ASCII;
+            SmtpClient smtp = new SmtpClient();
+            smtp.Host = "smtp.qq.com";         //smtp服务器名称
+            smtp.EnableSsl = true;
+            smtp.UseDefaultCredentials = true;
+            smtp.Credentials = new NetworkCredential("523513655@qq.com", "fzgvpplnblpzcbac");  //发送人的登录名和授权码(腾讯的smtp是要用授权码而不是邮箱密码)
+            try
+            {
+                smtp.Send(mailObj);
+                return Content("发送邮件成功！");
+            }
+            catch (Exception ex)
+            {
+                return Content("发送邮件失败；" + ex.ToString());
+            }
+        }
+
+
+
+        [QueryValues] 
+        public ActionResult ValidateNameNO(Dictionary<string, string> queryvalues)
+        {
 
             string name = queryvalues.ContainsKey("name") ? queryvalues["name"] : string.Empty;
             string no = queryvalues.ContainsKey("no") ? queryvalues["no"] : string.Empty;
 
 
             string lic = @"?v*qU=/S^C5q2Q%F+$+%<*:*H5?c?o;a?k?h7q?[XJ;*C]/F-YZV+WH ?c2jRqd5Wi/f>x:b.3?vJmJvBxFvBd[.a3?x?vGlHuUjdMCaa KfOz?x$r@sJc_wNa?x?m&w?g?s0b?v?jPuUoOmNa?x?vUdDdOmOs?x?m?h=d?/?h?v?jUd`7HxKh?x?v_nGhJv]t?xHXGZ4P7FMB]9:AJJ7x?d?s)p?/>c4uMePrFhb5?x7saXb2EwFqWzDsHyTj?x@g9.?g?g?g?g1f0[Eqa]bX\hXhWrRzd]8m?vOm`ZdI-;?v.xIiEw\tQvRuYeLaUy?x2gHuCmVbOtSyNfa3QrVrIhYw?x?v[o]aa7Vl?x?d?h7c2m6a?jKfOrLn^y.j?v?j_dYicXSnHxJ/HfEdNzEvZq<c6a?j_;CaHsc5AhBkJh(w";
-        
+
 
             string xml = @"<?xml version='1.0' encoding='UTF-8' ?>
 <ROWS><INFO>
 <SBM>深圳市五一五游戏网络有限公司</SBM></INFO><ROW><GMSFHM>
 公民身份号码</GMSFHM>
 <XM>姓名</XM></ROW><ROW FSD='100600' YWLX='个人贷款'><GMSFHM>
-"+ no + @"</GMSFHM><XM>"+ name + @"</XM></ROW>
+" + no + @"</GMSFHM><XM>" + name + @"</XM></ROW>
 </ROWS>";
             TestDemo.NciicServices ser = new TestDemo.NciicServices();
 
@@ -242,9 +346,10 @@ namespace MWeb.Controllers
                     message = "失败"
                 }, JsonRequestBehavior.AllowGet);
 
-             
+
             }
-            else if (res.Contains("<result_xm>一致</result_xm>")) {
+            else if (res.Contains("<result_xm>一致</result_xm>"))
+            {
                 return Json(new
                 {
                     ret = 1,
@@ -278,11 +383,13 @@ namespace MWeb.Controllers
 
 
         [QueryValues]
-        public ActionResult GameLog(Dictionary<string, string> queryvalues) {
+        public ActionResult GameLog(Dictionary<string, string> queryvalues)
+        {
             string stime = queryvalues.ContainsKey("stime") ? queryvalues["stime"] : string.Empty;
             string etime = queryvalues.ContainsKey("etime") ? queryvalues["etime"] : string.Empty;
 
-            while (true) {
+            while (true)
+            {
                 int curm = DateTime.Now.Minute;
                 if (curm != 0 && curm != 30)
                 {
@@ -290,25 +397,26 @@ namespace MWeb.Controllers
                     //暂停i分钟
                     Thread.Sleep(i * 60);
                 }
-              
+
             }
 
-         
-           
-         
+
+
+
             //TexasGameLog(stime, etime);
 
             return Json(new
             {
                 ret = 0,
-               
+
             }, JsonRequestBehavior.AllowGet);
 
         }
 
 
         [QueryValues]
-        public ActionResult RegisterSwitch(Dictionary<string, string> queryvalues) {
+        public ActionResult RegisterSwitch(Dictionary<string, string> queryvalues)
+        {
 
             int res = GameDataBLL.GetSwitchIsOpen(2);
 
@@ -318,16 +426,16 @@ namespace MWeb.Controllers
 
 
 
-        private static void TexasGameLog(string startTime , string endTime)
+        private static void TexasGameLog(string startTime, string endTime)
         {
             //查询开始时间
 
-        
-          
+
+
 
             GameRecordView grv = new GameRecordView { Gametype = 1, Data = 0, UserID = 0, SearchExt = "Analyse_Texas", StartDate = startTime.ToString(), ExpirationDate = endTime.ToString(), Page = 1, SeachType = (seachType)0 };
 
-            
+
 
 
             IEnumerable<TexasGameRecord> data = GameDataBLL.GetListForTexas(grv);
@@ -420,7 +528,8 @@ select * from Clearing_Game where UserID = " + comdata.UserID + @" and CountDate
         private const string _key = "515IWOXYHeYiw34x";
         private ILog log = LogManager.GetLogger("BindClub");
         [QueryValues]
-        public ActionResult BindClub(Dictionary<string, string> queryvalues) {
+        public ActionResult BindClub(Dictionary<string, string> queryvalues)
+        {
 
             log.Info("绑定俱乐部URL: " + Utils.GetUrl());
 
@@ -428,9 +537,10 @@ select * from Clearing_Game where UserID = " + comdata.UserID + @" and CountDate
             string clubid = queryvalues.ContainsKey("clubid") ? queryvalues["clubid"] : string.Empty;
             string sign = queryvalues.ContainsKey("sign") ? queryvalues["sign"] : string.Empty;
 
-         
 
-            if (string.IsNullOrEmpty(id) || string.IsNullOrEmpty(clubid) || string.IsNullOrEmpty(sign)) {
+
+            if (string.IsNullOrEmpty(id) || string.IsNullOrEmpty(clubid) || string.IsNullOrEmpty(sign))
+            {
                 return Content("-2");
             }
 
@@ -438,11 +548,11 @@ select * from Clearing_Game where UserID = " + comdata.UserID + @" and CountDate
 
             string md5 = Utils.MD5(string.Concat(id, clubid, _key)).ToUpper();
 
-        
+
 
             if (!sign.Equals(md5))
             {
-               
+
                 return Content("-1");
             }
 
@@ -481,12 +591,13 @@ select * from Clearing_Game where UserID = " + comdata.UserID + @" and CountDate
 
 
         [QueryValues]
-        public ActionResult DownLoadFile(Dictionary<string, string> queryvalues) {
+        public ActionResult DownLoadFile(Dictionary<string, string> queryvalues)
+        {
 
             return View();
 
         }
-     
+
 
 
 

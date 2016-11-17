@@ -19,6 +19,11 @@ namespace GL.Data.DAL
         internal static readonly string sqlconnectionString = PubConstant.GetConnectionString("ConnectionStringForGameData");
         public static readonly string sqlconnectionString2 = PubConstant.GetConnectionString("ConnectionStringForGameRecord");
 
+        public static readonly string database1 = PubConstant.GetConnectionString("database1");
+        public static readonly string database2 = PubConstant.GetConnectionString("database2");
+        public static readonly string database3 = PubConstant.GetConnectionString("database3");
+
+
         /// <summary>
         /// 
         /// </summary>
@@ -33,7 +38,7 @@ namespace GL.Data.DAL
                 StringBuilder str = new StringBuilder();
 
                 str.AppendFormat(@"
-   select * from record.Pot_Gold                 
+   select * from "+ database3+ @".Pot_Gold                 
 ");
 
                 IEnumerable<PotGold> i = cn.Query<PotGold>(str.ToString());
@@ -62,7 +67,7 @@ namespace GL.Data.DAL
                 cn.Open();
 
                 StringBuilder str = new StringBuilder();
-                str.Append(@" select * from record.Pot_Gold where GameType="+ gameType);
+                str.Append(@" select * from "+ database3 + @".Pot_Gold where GameType="+ gameType);
                 IEnumerable<PotGold> i = cn.Query<PotGold>(str.ToString());
 
                 cn.Close();

@@ -138,5 +138,17 @@ namespace GL.Data.Model
     }
 
 
+    public class ASPNetUserLimit {
+        public string Username { get; set; }
+
+        public int ErrorNum { get; set; }
+
+        public DateTime LimitTime { get; set; }
+
+        public int AllErrorNum { get; set; }
+
+    }
+
+
      
 }

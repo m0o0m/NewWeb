@@ -15,6 +15,10 @@ namespace GL.Data.BLL
     {
         public static readonly string sqlconnectionString = PubConstant.GetConnectionString("ConnectionStringForGameRecord");
 
+        public static readonly string database1 = PubConstant.GetConnectionString("database1");
+        public static readonly string database2 = PubConstant.GetConnectionString("database2");
+        public static readonly string database3 = PubConstant.GetConnectionString("database3");
+
         public static PagedList<ScaleRecord> GetListByPage(int page)
         {
             PagerQuery pq = new PagerQuery();
@@ -40,7 +44,7 @@ namespace GL.Data.BLL
             pq.RecordCount = PagedListDAL<ScaleRecord>.GetRecordCount(string.Format(@"
 select count(*) from (
 select UserID, GameID, Proj,Content,CreateTime 
-from record.BG_ScaleRecord  
+from "+ database3 + @".BG_ScaleRecord  
 where CreateTime>='" + grv.StartDate + @"' and CreateTime<'" + grv.ExpirationDate + @"'  
 ) as a 
 where a.CreateTime>='" + grv.StartDate + @"' and a.CreateTime<'" + grv.ExpirationDate + @"' {2} {3} 
@@ -48,10 +52,10 @@ where a.CreateTime>='" + grv.StartDate + @"' and a.CreateTime<'" + grv.Expiratio
             pq.Sql = string.Format(@"
 select a.*,b.NickName as UserName from (
 select  UserID, GameID, Proj,Content,CreateTime,UpdateValue
-from record.BG_ScaleRecord  
+from "+ database3 + @".BG_ScaleRecord  
 where CreateTime>='" + grv.StartDate+@"' and CreateTime<'"+grv.ExpirationDate+ @"'  
 
-) as a LEFT JOIN 515game.Role as b on a.UserID = b.ID 
+) as a LEFT JOIN "+ database1+ @".Role as b on a.UserID = b.ID 
 where a.CreateTime>='" + grv.StartDate+ @"' and a.CreateTime<'" + grv.ExpirationDate+@"' {2} {3}
 ORDER BY a.CreateTime  DESC
 limit {0}, {1}

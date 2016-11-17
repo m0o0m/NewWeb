@@ -43,7 +43,7 @@ namespace GL.Data.Model
        /// </summary>
        public decimal Gold { get; set; }			
        /// <summary>
-       /// 515币
+       /// 币
        /// </summary>
        public decimal Diamond { get; set; }			
        /// <summary>

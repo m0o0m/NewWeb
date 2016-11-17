@@ -84,14 +84,13 @@
                                             <tr>
                                                 <td>@item.VersionNo</td>
                                                 <td>@item.DayAdd.ToString("#,0.")</td>
-                                                <td>@item.NewBoardRate.ToString("#,0.00%")</td>
-                                                <td>@item.DayActive.ToString("#,0.")</td>
-                                                <td>@item.PayST.ToString("#,0.00%")</td>
+                                                <td>@(item.NewBoardRate.ToString() + "%")</td>
+                                                <td>@(item.DayActive.ToString())</td>
+                                                <td>@(item.PayST + "%")</td>
                                                 <td>@item.PayUserCount.ToString("#,0.")</td>
-                                                <td>@item.Arppu.ToString("#,0.00%")</td>
-                                                <td>@item.Arpu.ToString("#,0.00%")</td>
+                                                <td>@item.Arppu.ToString()</td>
+                                                <td>@item.Arpu.ToString()</td>
                                                 <td>@item.TotalPay.ToString("#,0.00")</td>
-                                             
                                             </tr>
                                         }
                                     </tbody>

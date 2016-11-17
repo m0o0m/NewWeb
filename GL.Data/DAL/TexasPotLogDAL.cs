@@ -15,6 +15,10 @@ namespace GL.Data.DAL
     {
         public static readonly string sqlconnectionString = PubConstant.GetConnectionString("ConnectionStringForGameData");
 
+        public static readonly string database1 = PubConstant.GetConnectionString("database1");
+        public static readonly string database2 = PubConstant.GetConnectionString("database2");
+        public static readonly string database3 = PubConstant.GetConnectionString("database3");
+
         internal static int Add(TexasPotLog model)
         {
            
@@ -23,7 +27,7 @@ namespace GL.Data.DAL
                 cn.Open();
                 StringBuilder str = new StringBuilder();
                 str.Append(@" 
-INSERT into 515game.TexasPotLog(Time,Type,Value,GameType,Content)
+INSERT into "+ database1 + @".TexasPotLog(Time,Type,Value,GameType,Content)
 values(@Time,@Type,@Value,@GameType,@Content);
 ");
                 cn.Query<TexasPotLog>(str.ToString(),

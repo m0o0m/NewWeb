@@ -18,7 +18,7 @@ namespace TWeb
         {
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
-            TaskRegister.TimerTask();
+           // TaskRegister.TimerTask();
         }
 
 

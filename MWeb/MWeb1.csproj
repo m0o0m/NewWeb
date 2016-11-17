@@ -200,6 +200,10 @@
     <Reference Include="System.Web.Optimization">
       <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
     </Reference>
+    <Reference Include="ThoughtWorks.QRCode, Version=1.0.4778.30637, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Lib\ThoughtWorks.QRCode.dll</HintPath>
+    </Reference>
     <Reference Include="WebGrease, Version=1.6.5135.21930, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
       <Private>True</Private>
@@ -223,13 +227,16 @@
     <Compile Include="Controllers\ADController.cs" />
     <Compile Include="Controllers\AgentController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\CaptchaController.cs" />
     <Compile Include="Controllers\CommonProblemsApiController.cs" />
     <Compile Include="Controllers\ConsoleController.cs" />
     <Compile Include="Controllers\CustomerApiController.cs" />
     <Compile Include="Controllers\CustomerServicesApiController.cs" />
+    <Compile Include="Controllers\DaiLiController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\FM2Controller.cs" />
     <Compile Include="Controllers\FMController.cs" />
+    <Compile Include="Controllers\FruitMachinesController.cs" />
     <Compile Include="Controllers\GameDataController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Attribute\QueryStringAttribute.cs" />
@@ -248,14 +255,17 @@
     <Compile Include="Controllers\SUController.cs" />
     <Compile Include="Controllers\SystemController.cs" />
     <Compile Include="Controllers\TestController.cs" />
+    <Compile Include="Controllers\WaterMarginController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\CaptchaRender.cs" />
     <Compile Include="Models\CoverterEnumToSelectListItemExtensions.cs" />
     <Compile Include="Models\GraphCylinder.cs" />
     <Compile Include="Models\MLogin.cs" />
     <Compile Include="Models\OnePoint.cs" />
     <Compile Include="Models\RoleViewModel.cs" />
+    <Compile Include="Models\ValidateCode.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -6906,6 +6916,8 @@
     <Content Include="Lib\Metronic\assets\pages\scripts\widgets.min.js" />
     <Content Include="Lib\Metronic\ext\bootstrap-datepicker-cn.js" />
     <Content Include="Lib\Metronic\ext\table-datatables-editable.js" />
+    <Content Include="Lib\ThoughtWorks.QRCode.dll" />
+    <Content Include="Lib\ThoughtWorks.QRCode.pdb" />
     <Content Include="mobile\images\515.png" />
     <Content Include="mobile\images\btn.png" />
     <Content Include="mobile\images\buttombg.PNG" />
@@ -7348,6 +7360,8 @@
     <Content Include="Lib\Metronic\assets\layouts\layout7\img\Thumbs.db" />
     <Content Include="Lib\Metronic\assets\pages\media\blog\Thumbs.db" />
     <Content Include="Lib\Metronic\assets\pages\media\pages\Thumbs.db" />
+    <None Include="Properties\PublishProfiles\50数据库.pubxml" />
+    <None Include="Properties\PublishProfiles\Debug.pubxml" />
     <None Include="Properties\PublishProfiles\my.pubxml" />
     <None Include="Properties\PublishProfiles\newm515.pubxml" />
     <None Include="Properties\PublishProfiles\T17.pubxml" />
@@ -7414,6 +7428,7 @@
     <Content Include="Scripts\_references.js" />
     <Content Include="Console\OperBack.swf" />
     <Content Include="Console\playerProductInstall.swf" />
+    <Content Include="SQL\明珠棋牌20161115.txt" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -7771,6 +7786,29 @@
     <Content Include="Views\System\OperLog_PageList.cshtml" />
     <Content Include="Views\System\FreezeLog_PageList.cshtml" />
     <Content Include="Views\System\FreezeLog.cshtml" />
+    <Content Include="Views\SU\EmailStock.cshtml" />
+    <Content Include="Views\SU\EmailStock_PageList.cshtml" />
+    <Content Include="Views\SU\EmailStockUUser.cshtml" />
+    <Content Include="Views\SU\EmailUpdateStock.cshtml" />
+    <Content Include="Views\SU\AddStockGroup.cshtml" />
+    <Content Include="Views\WaterMargin\ConfigIndex.cshtml" />
+    <Content Include="Views\WaterMargin\Index.cshtml" />
+    <Content Include="Views\GameData\ShuihuGameLog_PageList.cshtml" />
+    <Content Include="Views\GameData\ShuihuDataSum_PageList.cshtml" />
+    <Content Include="Views\GameData\ShuihuDataSum.cshtml" />
+    <Content Include="Views\GameData\ShuihuChangguiDataSum_PageList.cshtml" />
+    <Content Include="Views\GameData\ShuihuChangguiDataSum.cshtml" />
+    <Content Include="Views\FruitMachines\ConfigIndex.cshtml" />
+    <Content Include="Views\GameData\ShuiguoGameLog_PageList.cshtml" />
+    <Content Include="Views\GameData\FruitDataSum_PageList.cshtml" />
+    <Content Include="Views\GameData\FruitChangguiDataSum.cshtml" />
+    <Content Include="Views\GameData\FruitDataSum.cshtml" />
+    <Content Include="Views\GameData\FruitChangguiDataSum_PageList.cshtml" />
+    <Content Include="Views\SU\OperLog2.cshtml" />
+    <Content Include="Views\SU\OperLog2_PageList.cshtml" />
+    <Content Include="Views\DaiLi\Index.cshtml" />
+    <Content Include="Views\DaiLi\KuCunValueIndex.cshtml" />
+    <Content Include="Views\DaiLi\SetFlowNoIndex.cshtml" />
     <None Include="Web References\cn.org.nciic.ws\NciicServices.wsdl">
       <SubType>Designer</SubType>
     </None>
@@ -7801,6 +7839,8 @@
     <Folder Include="Lib\Metronic\assets\apps\img\" />
     <Folder Include="Lib\Metronic\assets\global\plugins\angularjs\plugins\angular-file-upload\uploads\" />
     <Folder Include="Lib\Metronic\chinese\" />
+    <Folder Include="Upload\" />
+    <Folder Include="Views\Captcha\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

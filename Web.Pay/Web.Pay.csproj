@@ -180,6 +180,7 @@
     <None Include="Properties\PublishProfiles\newp515.pubxml" />
     <None Include="Properties\PublishProfiles\pay515.pubxml" />
     <None Include="Properties\PublishProfiles\tpay515.pubxml" />
+    <None Include="Properties\PublishProfiles\xx.pubxml" />
     <None Include="Properties\PublishProfiles\zhengshi.pubxml" />
     <None Include="Scripts\jquery-2.1.4.intellisense.js" />
     <Content Include="lib\SnsNetwork.php" />

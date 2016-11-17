@@ -14,7 +14,9 @@ namespace GL.Data.DAL
     {
         public static readonly string sqlconnectionString = PubConstant.GetConnectionString("ConnectionString");
 
-
+        public static readonly string database1 = PubConstant.GetConnectionString("database1");
+        public static readonly string database2 = PubConstant.GetConnectionString("database2");
+        public static readonly string database3 = PubConstant.GetConnectionString("database3");
 
         public static IEnumerable<Resource> GetResourceList(string roleId,int level)
         {
@@ -22,7 +24,7 @@ namespace GL.Data.DAL
             {
                
                 cn.Open();
-                IEnumerable<Resource> i = cn.Query<Resource>(@"select * from GServerInfo.AspNetResource where Level = @Level", new Resource {  Level=level});
+                IEnumerable<Resource> i = cn.Query<Resource>(@"select * from "+ database2 + @".AspNetResource where Level = @Level", new Resource {  Level=level});
                 cn.Close();
                 return i;
             }
@@ -150,7 +152,7 @@ order by t.Group asc, t.OrderIndex  desc
             {
 
                 cn.Open();
-                IEnumerable<Resource> i = cn.Query<Resource>(@"select * from GServerInfo.AspNetResource as ar order by ar.Group asc, ar.OrderIndex desc", new Resource {  });
+                IEnumerable<Resource> i = cn.Query<Resource>(@"select * from "+ database2 + @".AspNetResource as ar order by ar.Group asc, ar.OrderIndex desc", new Resource {  });
                 cn.Close();
                 return i;
             }
@@ -163,7 +165,7 @@ order by t.Group asc, t.OrderIndex  desc
             {
 
                 cn.Open();
-                IEnumerable<Resource> i = cn.Query<Resource>(@"select *,1 as Checked from GServerInfo.AspNetResource as ar order by ar.Group asc ,ar.No asc", new Resource { });
+                IEnumerable<Resource> i = cn.Query<Resource>(@"select *,1 as Checked from "+ database2 + @".AspNetResource as ar order by ar.Group asc ,ar.No asc", new Resource { });
                 cn.Close();
                 return i;
             }
@@ -331,7 +333,7 @@ order by t.Group asc,t.No desc
             using (var cn = new MySqlConnection(sqlconnectionString))
             {
 
-                string sql = "insert into record.Log(UserAccount,CreateTime,LoginIP,OperModule,Content,Detail) values";
+                string sql = "insert into "+ database3+ @".Log(UserAccount,CreateTime,LoginIP,OperModule,Content,Detail) values";
 
                 sql += " ('" + log.UserAccount + "','" + log.CreateTime + "','" + log.LoginIP + "','" + log.OperModule + "','" + log.Content + "','" + log.Detail + "')";
 
@@ -354,11 +356,24 @@ order by t.Group asc,t.No desc
 
                 cn.Open();
                 IEnumerable<AspNetUser> i = cn.Query<AspNetUser>(@"
-  select * from GServerInfo.AspNetUsers");
+  select * from "+ database2 + @".AspNetUsers");
                 cn.Close();
                 return i;
             }
         }
 
+        //GetAspNetUsersByUserName
+        public static IEnumerable<AspNetUser> GetAspNetUsersByUserName(string userName)
+        {
+            using (var cn = new MySqlConnection(sqlconnectionString))
+            {
+
+                cn.Open();
+                IEnumerable<AspNetUser> i = cn.Query<AspNetUser>(@"
+  select * from "+ database2 + @".AspNetUsers where UserName in ("+ userName + @")");
+                cn.Close();
+                return i;
+            }
+        }
     }
 }

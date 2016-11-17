@@ -62,6 +62,11 @@ enum ServiceCmd
 	SC_MOBILE_SWITCH_OPERATOR = 62;		//修改移动设备登陆注册开关信息
 	SC_SET_Herocraft_Twice_OPEN = 64;		//翻翻乐开关
 	SC_SET_MIDAUTUMN_FESTIVAL_OPEN = 63;		//中秋返利开关
+	SC_NTF_UPDATE_DBPVPCFG = 65;		//提示更新PVP配置
+	SC_NTF_UPDATE_ARCADEGAMESTOCK = 66;//提示更新PVP库存
+	SC_NTF_UPDATE_SHUIHUPOT = 67;//提示更新PVP彩池
+    SC_FruiteBigPot = 68;			//提示更新水果机彩池
+	
 	SC_TOTAL = 200;
 }
 
@@ -129,7 +134,11 @@ enum CenterCmd
 	CS_MOBILE_SWITCH_OPERATOR = 62;		//修改移动设备登陆注册开关信息
     CS_SET_Herocraft_Twice_OPEN = 64;		//翻翻乐开关
 	CS_SET_MIDAUTUMN_FESTIVAL_OPEN = 63;		//中秋返利开关
-
+    CS_NTF_UPDATE_DBPVPCFG = 65;	//提示更新PVP配置
+	CS_NTF_UPDATE_ARCADEGAMESTOCK = 66;//提示更新PVP库存
+	CS_NTF_UPDATE_SHUIHUPOT = 67;//提示更新PVP彩池
+    CS_FruiteBigPot = 68;						//请求修改水果机彩池
+	
 	CS_TOTAL	 	= 100;
 }
 
@@ -689,9 +698,57 @@ message BGSetMidautumnFestivalOpenRes
 	optional int32 suc = 1;//是否设置成功
 	optional int32 currStatus = 2;
 }
+////////////////////////////////////////////////////////////////水浒传，水果机协议
+//更新PVP配置响应
+message DbPvpCfg_S
+{
+	optional bool suc = 1;
+}
+
+//更新PVP库存响应
+message ArcadeGameStock_C
+{
+	optional int32 mod = 1;
+	optional int32 type = 2;//1为修改库存值
+	optional int32 value = 3;
+}
+
+
+//更新PVP库存响应
+message ArcadeGameStock_S
+{
+	optional bool suc = 1;
+}
+
+message ShuiHuPot_C
+{
+	optional int32 mod = 1;
+	optional int32 type = 2;//1为修改彩池值
+	optional int32 value = 3;
+}
+
+
+//更新PVP水浒彩池响应
+message ShuiHuPot_S
+{
+	optional bool suc = 1;
+}
 
 
 
+//更新修改水果机彩池
+message FruiteBigPot_C
+{
+	optional int32 mod = 1;
+	optional int32 type = 2;	//1为修改彩池值
+	optional int32 value = 3;
+}
+
+//更新水果机彩池
+message FruiteBigPot_S
+{
+	optional bool suc = 1;
+}
 
 
 
@@ -805,3 +862,109 @@ message UserStateRes
 	optional int32 room_id = 3;		// 房间id（0为在大厅）
 	optional int32 room_type = 4;	// 房间类型（13中发白、14十二生肖、15德州、17奔驰宝马）
 }
+
+
+
+
+
+
+
+
+
+
+message UserScoreAward 
+{
+	optional uint32	tLastGetAwardTime = 1;			// 上一次领取的时间
+	optional uint32	tFinalGetScoreTime = 2;			// 最后一次可以获取积分的时间
+	optional uint32	tLastGetScoreTime = 3;			// 上一次可以领取奖励的时间
+	optional int64	dwLastGetScore = 4;				// 上一次可以领取奖励的积分 昨日剩余可领取 + 昨日积分 * 返回比例   昨日剩余可领取
+	optional int64	dwNowGetScore = 5;				// 今天获取积分的
+}
+message UserSign 
+{
+	optional int32	wConti = 1;						// 连续次数 最多7次
+	optional uint32 tlastLoginTime = 2;				// 上次登录时间			给登录7天奖励用
+	optional uint32 tSignLuckTime = 3;				// 上一次签到抽奖时间	给签到抽奖使用
+	optional uint32 tSignAwardTime = 4;				// 上一次签到奖励时间
+	optional int32	byStatus0 = 5;					// 1可领取  2已领取  3未到期  4已过期
+	optional int32	byStatus1 = 6;					// 1可领取  2已领取  3未到期  4已过期
+	optional int32	byStatus2 = 7;					// 1可领取  2已领取  3未到期  4已过期
+}
+
+message UserExData 
+{
+	optional int32	wMaxFriend = 1;					// 最大好友数量
+	optional uint32 lastLoginTime = 2;				// 最后一次登录时间
+	optional uint32 lastMoneyTime = 3;				// 上次打牌获取筹码的时间
+	optional uint32  finalGetScoreTime = 4;			// 最后一次盈利筹码的时间
+	optional int64 lastMoney = 5;					// 昨日最大盈利筹码
+	optional int64 nowMoney = 6;					// 今天获取的多少钱
+	repeated int32 maxCard = 7;						// 最大牌型(德州)
+
+	repeated GameInfo listInfo = 8;					// 最大20个游戏
+}
+
+message GameInfo
+{
+	optional int32 GameID = 1;						// 游戏ID
+	optional int64 dwWin = 2;						// 总赢的
+	optional int32 dwTotal = 3;						// 总玩的局数
+	optional int64 maxWinChip = 4;					// 最高一把赢取筹码
+}
+
+message SpellCardInfo 
+{
+	optional uint32 time = 1;
+	optional uint32 join_times = 2;					// 参与次数
+	optional uint32 win_times = 3;					// 拼中次数
+	optional uint32 rob_times = 4;					// 抢到次数
+	repeated uint32 getBox = 5;						// 已领取的宝箱
+}
+//道具使用数据
+message toolsData           
+{
+	optional uint32 tools_id = 1;					// 道具ID
+	optional uint32 bmark = 2;						// 道具标识 用于同一道具存在多个数量
+	optional uint32 get_time = 3;					// 获得的时间
+	optional uint32 last_time = 4;					// 上次使用时间
+	optional uint32 use_times = 5;					// 上次使用的次数
+	optional uint32 total_times = 6;				// 总使用次数
+};
+message ToolsInfo 
+{
+	repeated toolsData listTools = 1;
+}
+message VipInfo 
+{
+	optional int32 grade = 1;						// 等级
+	optional int32 current = 2;						// 当前点数
+	optional uint32 last_get = 3;					// 上次领取时间
+	optional int32 last_levelup_award_level = 4;	// 上次领取升级奖励的等级
+}
+message LevelInfo 
+{
+	optional int32 level = 1;						// 等级
+	optional int32 exp = 2;
+	repeated int32 reaward_level = 3;				// 最大长度为168
+}
+message VipCard 
+{
+	optional uint32 tEndTime = 1;					// 截止时间
+}
+message BExtInfo 
+{
+	optional UserScoreAward scoreAward = 1;
+	optional UserSign userSign = 2;
+	optional UserExData userExData = 3;
+	optional SpellCardInfo spellCard = 4;
+	optional ToolsInfo toolsInfo = 5;
+	optional VipInfo vipInfo = 6;
+	optional LevelInfo levelInfo = 7;
+	optional VipCard vipCard = 8;
+}
+
+
+
+
+
+

@@ -1,4 +1,5 @@
-﻿using log4net;
+﻿using GL.Command.DBUtility;
+using log4net;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -36,23 +37,26 @@ namespace MWeb
         protected void Application_End()
         {
             Thread.Sleep(1000);
-            string url = "";
-#if Debug
+          
 
 
-#endif
-#if P17
-               url = "http://192.168.1.17:9005/Base/Default";
-#endif
-#if Test
-              url = "http://ttt.515.com/Base/Default";
-#endif
-#if Release
-              url = "http://qqq.515.com/Base/Default";
-#endif
+               string url = PubConstant.GetConnectionString("homeUrl");
+//#if Debug
 
 
-            HttpWebRequest Request = (HttpWebRequest)WebRequest.Create(url);
+//#endif
+//#if P17
+//               url = "http://192.168.1.17:9005/Base/Default";
+//#endif
+//#if Test
+//              url = "http://ttt.515.com/Base/Default";
+//#endif
+//#if Release
+//              url = "http://qqq.515.com/Base/Default";
+//#endif
+
+
+        HttpWebRequest Request = (HttpWebRequest)WebRequest.Create(url);
             HttpWebResponse Response = (HttpWebResponse)Request.GetResponse();
             Stream receiveStream = Response.GetResponseStream();//得到回写的字节流
         }

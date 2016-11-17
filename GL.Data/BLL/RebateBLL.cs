@@ -13,7 +13,9 @@ namespace GL.Data.BLL
     public class RebateBLL
     {
         public static readonly string sqlconnectionString = PubConstant.GetConnectionString("ConnectionStringForGameRecord");
-
+        public static readonly string database1 = PubConstant.GetConnectionString("database1");
+        public static readonly string database2 = PubConstant.GetConnectionString("database2");
+        public static readonly string database3 = PubConstant.GetConnectionString("database3");
         public static PagedList<Rebate> GetListByPage(GameRecordView bdv)
         {
             PagerQuery pq = new PagerQuery();
@@ -25,16 +27,16 @@ namespace GL.Data.BLL
                 bdv.SearchExt = "0";
             }
             pq.RecordCount = PagedListDAL<Rebate>.GetRecordCount(string.Format(@"
-                select count(0) from record.BG_PointRecord where (Type = 1 or Type=2) and CreateTime>='" + bdv.StartDate + "' and CreateTime<'" + bdv.ExpirationDate + "' and  UserID=" + bdv.SearchExt
+                select count(0) from "+ database3 + @".BG_PointRecord where (Type = 1 or Type=2) and CreateTime>='" + bdv.StartDate + "' and CreateTime<'" + bdv.ExpirationDate + "' and  UserID=" + bdv.SearchExt
             ), sqlconnectionString);
-            //pq.Sql = string.Format(@"select * from 515game.SpellCardRecord where Time>='" + bdv.StartDate + "' and Time<'" + bdv.ExpirationDate + "'  {2}  order by Time desc limit {0}, {1}", pq.StartRowNumber, pq.PageSize, string.IsNullOrEmpty(bdv.SearchExt) ? "" : " and PlayerID='" + bdv.SearchExt + "'");
+            //pq.Sql = string.Format(@"select * from gamedata.SpellCardRecord where Time>='" + bdv.StartDate + "' and Time<'" + bdv.ExpirationDate + "'  {2}  order by Time desc limit {0}, {1}", pq.StartRowNumber, pq.PageSize, string.IsNullOrEmpty(bdv.SearchExt) ? "" : " and PlayerID='" + bdv.SearchExt + "'");
 
 
             //pq.RecordCount = 20;
             pq.Sql = string.Format(@"
                 select b.CreateTime ,a.id as UserID ,NickName ,b.PointNum TotalRebate ,b.PointChange ChangeRebate ,case b.Type when 1 then '德州获取' when 2 then '德州消耗' else '' end as Oper
-                from (select id ,nickname from 515game.Role a where a.id = {2}) a
-                    join record.BG_PointRecord b on a.id = b.UserID and b.CreateTime >= '{3}' and b.CreateTime < '{4}' and (b.Type = 1 or b.Type = 2 )
+                from (select id ,nickname from "+ database1+ @".Role a where a.id = {2}) a
+                    join "+ database3 + @".BG_PointRecord b on a.id = b.UserID and b.CreateTime >= '{3}' and b.CreateTime < '{4}' and (b.Type = 1 or b.Type = 2 )
                 order by CreateTime desc limit {0}, {1}"
             , pq.StartRowNumber, pq.PageSize ,bdv.SearchExt ,bdv.StartDate ,bdv.ExpirationDate);
 

@@ -1,0 +1,209 @@
+﻿@using Webdiyer.WebControls.Mvc;
+@using GL.Data.Model;
+@using GL.Data.BLL;
+@model PagedList<FruitDataSum>
+
+
+
+
+
+
+
+<section id="widget-grid" class="">
+    <div class="row">
+        <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-0" data-widget-editbutton="false" data-widget-colorbutton="false"
+                 data-widget-togglebutton="false"
+                 data-widget-deletebutton="false"
+                 data-widget-fullscreenbutton="false"
+                 data-widget-custombutton="false"
+                 data-widget-collapsed="false"
+                 data-widget-sortable="false">
+                <header>
+                    <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                    <h2>水果机数据统计</h2>
+                </header>
+                <!-- widget div-->
+                <div>
+                    <!-- widget edit box -->
+                    <div class="jarviswidget-editbox">
+                        <!-- This area used as dropdown edit box -->
+                    </div>
+                    <!-- end widget edit box -->
+                    <!-- widget content -->
+                    <div class="widget-body no-padding">
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <thead>
+
+                                    <tr>
+                                        <th rowspan="2">时间</th>
+
+                                        <th colspan="2" >奖池</th>
+                                        <th colspan="3" >押注转灯</th>
+                                        <th colspan="3" >比倍</th>
+                                        <th rowspan="2">随机奖励</th>
+                                        <th rowspan="2">幸运奖励</th>
+                                        <th rowspan="2">小三元</th>
+                                        <th rowspan="2">大三元</th>
+                                        <th rowspan="2">大四喜</th>
+                                        <th rowspan="2">开火车</th>
+                                        <th rowspan="2">纵横四海</th>
+                                        <th rowspan="2">天女散花</th>
+                                        <th rowspan="2">天龙八部</th>
+                                        <th rowspan="2">九莲宝灯</th>
+                                        <th rowspan="2">大满贯</th>
+                                    </tr>
+                                    <tr>
+                                        <th>发放次数</th>
+                                        <th>发送总额</th>
+
+                                        <th>玩局人数</th>
+                                        <th>玩局数</th>
+                                        <th>人均局数</th>
+                                    
+                                        <th>玩局人数</th>
+                                        <th>玩局数</th>
+                                        <th>人均局数</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model.Count == 0)
+                                    {
+                                        <tr class="gradeX">
+                                            <td class="colspan" align="center" colspan="0">
+                                                没有找到相关记录！
+                                            </td>
+                                        </tr>
+                                    }
+                                    @foreach (FruitDataSum m in Model)
+                                    {
+                                        <tr>
+                                            <td>@m.CountDate</td>
+                                            
+                                            <td>@m.PotNum</td>
+                                            <td>@m.PotSum</td>
+                                          
+                                              <td>@m.LCount</td>
+                                            <td>@m.LNum</td>
+                                            <td>
+                                            @if (m.LCount == 0)
+                                            {
+                                                @(0)
+                                            }
+                                            else
+                                            {
+                                                @(m.LNum / m.LCount)
+                                            }
+                                          </td>
+                                           
+                                             <td>@m.BCount</td>
+                                            <td>@m.BNum</td>
+                                            <td>
+                                                @if (m.BCount == 0)
+                                                {
+                                                    @(0)
+                                                }
+                                                else
+                                                {
+                                                    @(m.BNum / m.BCount)
+                                                }
+                                          </td>
+
+                                            <td>@m.Random</td>
+                                            <td>@m.Lucky</td>
+                                            <td>@m.SmallThree</td>
+                                            <td>@m.BigThree</td>
+                                            <td>@m.Bigfour</td>
+                                            <td>@m.OpenTrain</td>
+                                            <td>@m.Zong</td>
+                                            <td>@m.TianNv</td>
+                                            <td>@m.TianLong</td>
+                                            <td>@m.JiuBao</td>
+                                            <td>@m.GrandSlam</td>
+
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+
+
+
+
+
+
+
+
+                        <div class="widget-content">
+
+                            @Ajax.Pager(
+    Model,
+    new PagerOptions()
+    {
+        CssClass = "pager",
+        ShowMorePagerItems = true,
+        PageIndexParameterName = "page",
+        ShowDisabledPagerItems = true,
+        AlwaysShowFirstLastPageNumber = true,
+        //ShowRecordCountItems = true,
+        HorizontalAlign = "right",
+        //SeparatorHtml = "",
+
+        CurrentPagerItemTemplate = "<li class=\"disabled\"><span>{0}</span></li>",
+        DisabledPagerItemTemplate = "<li class=\"disabled\"><span>{0}</span></li>",
+        PagerItemTemplate = "<li>{0}</li>",
+        //CurrentPagerItemWrapperFormatString = "<li class=\"disabled\"><span>{0}</span></li>",
+        //NumericPagerItemWrapperFormatString = "<li>{0}</li>",
+        //PagerItemWrapperFormatString = "<li>{0}</li>",
+        //RecordCountText = string.Format("共{0}条记录, {1}页", Model.TotalItemCount, Model.TotalPageCount),
+        //RecordCountFormatString = "<li><span>{0}</span></li>",
+        //DisabledPagerItemsFormatString = "<li class=\"disabled\"><span>{0}</span></li>",
+        //PageIndexBoxType = Webdiyer.WebControls.Mvc.PageIndexBoxType.TextBox,
+        //GoButtonText = "跳转到",
+        ShowPrevNext = true,
+        FirstPageText = "第一页",
+        LastPageText = "最后一页",
+        ContainerTagName = "ul",
+        PageIndexBoxId = "pageindexcm",
+        WYWPageIndexString = @"<li><input style='width:50px;' type='text' value='' id='{0}' name = '{1}'></li>
+                                 <li><a id='goto' name='goto' style='margin-right:10px' >跳转</a><li>
+                             ",
+        GoToButtonId = "goto"
+    },
+    new MvcAjaxOptions
+    {
+        HttpMethod = "POST",
+        UpdateTargetId = "box",
+        InsertionMode = InsertionMode.Replace,
+        OnFailure = "errFunc",
+        OnSuccess = "successPageFun"
+    })
+                        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    </div>
+                    <!-- end widget content -->
+                </div>
+                <!-- end widget div -->
+            </div>
+            <!-- end widget -->
+
+        </article>
+    </div>
+</section>

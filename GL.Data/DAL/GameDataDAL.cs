@@ -177,6 +177,23 @@ limit 100
             }
         }
 
+        internal static IEnumerable<BaccaratGameRecord> GetListForBaiJiaLe(GameRecordView vbd)
+        {
+           
+            using (var cn = new MySqlConnection(sqlconnectionString))
+            {
+                cn.Open();
+                StringBuilder str = new StringBuilder();
+
+                str.Append("select * from BG_BaccaratGameRecord where CreateTime between '" + vbd.StartDate + "' and '" + vbd.ExpirationDate + "' and CreateTime!='" + vbd.ExpirationDate + "' order by CreateTime desc ");
+
+                IEnumerable<BaccaratGameRecord> i = cn.Query<BaccaratGameRecord>(str.ToString());
+                cn.Close();
+                return i;
+            }
+        }
+
+
         //
         internal static IEnumerable<ScaleGameRecord> GetListForTexPro(GameRecordView vbd)
         {

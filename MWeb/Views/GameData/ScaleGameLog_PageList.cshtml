@@ -56,7 +56,7 @@
                                                 没有找到相关记录！
                                             </td>
                                         </tr>
-            }
+                                    }
                                     @foreach (ScaleGameRecord m in Model)
             {
                 var userList = m.UserData.Split('_').ToList();
@@ -65,72 +65,76 @@
                 for (int i = 0; i < j; i++)
                 {
                     var userData = userList[i].Split(',').ToList();
-                                        <tr class="gradeA">
-                                            @if (i == 0)
+                                            <tr class="gradeA">
+                                                @if (i == 0)
                     {
-                                                <td rowspan="@j">@m.CreateTime</td>  //时间
-                                                <td rowspan="@j">@m.RoomID</td>    //房间ID
-                                                <td rowspan="@j">@m.Round</td>    //牌局号
-                                            }
-
-                                           
-                                            <td>@{   //玩家信息
+                                                    <td rowspan="@j">@m.CreateTime</td>  //时间
+                                                                                        <td rowspan="@j">@m.RoomID</td>    //房间ID
+                                                                                                                    <td rowspan="@j">@m.Round</td>    //牌局号
+                                                }
 
 
-                                                int id = 0;
-                                                var wj = "";
-                                                if (int.TryParse(userData[0], out id))
-                                                {
-                                                    Role u = RoleBLL.GetModelByID(new Role { ID = Convert.ToInt64(id) });
+                                                <td>
+                                                    @{   //玩家信息
 
-                                                    if (u != null)
+
+                                                        int id = 0;
+                                                        var wj = "";
+                                                        if (int.TryParse(userData[0], out id))
+                                                        {
+                                                            Role u = RoleBLL.GetModelByID(new Role { ID = Convert.ToInt64(id) });
+
+                                                            if (u != null)
+                                                            {
+                                                                wj = u.NickName + "(" + userData[0] + ")";
+                                                            }
+                                                            else
+                                                            {
+                                                                wj = userData[0];
+                                                            }
+                                                        }
+                                                        else
+                                                        {
+                                                            wj = userData[0];
+                                                        }
+
+                                                    }
+                                                    @if (wj == "0")
                                                     {
-                                                        wj = u.NickName + "(" + userData[0] + ")";
+                                                        wj = "五小姐";
                                                     }
-                                                    else
+                                                    @if (i == 0)
                                                     {
-                                                        wj = userData[0];
-                                                    }
-                                                }
-                                                else
-                                                {
-                                                    wj = userData[0];
-                                                }
+                                                        if (userData[5].Contains(')'))
+                                                        {
+                                                            wj += " 庄家";
+                                                        }
 
-                                                 } 
-                                            @if (wj == "0") {
-                                                wj = "五小姐";
-                                            }
-                                            @if (i == 0) {
-                                                if (userData[5].Contains(')')) {
-                                                    wj += " 庄家";
-                                                }
-
-                                            }
-                                            @wj
-                                            </td>
-                                            <td>@userData[1]</td>   @*总资产*@
-                                            <td> @userData[2] </td>
-                                            <td>@userData[3]</td>
-                                            <td>@userData[4]</td>
-                                            @if (i == 0)
-                        {
-                                                <td rowspan="@j">
-                                                    @{
-                            var aa = System.Text.RegularExpressions.Regex.Matches(@m.ResultCard, @"\w{2}", System.Text.RegularExpressions.RegexOptions.IgnoreCase);
-                            var bb = System.Text.RegularExpressions.Regex.Split(@m.ResultCard, @"\w{2}", System.Text.RegularExpressions.RegexOptions.IgnoreCase);
-                            for (int k = 0; k < aa.Count; k++)
-                            {
-                                                        @bb[k]<i class="majiang majiang-@aa[k]"></i>
-                            }
                                                     }
+                                                    @wj
                                                 </td>
-                        }
-                                            <td>@userData[5].Trim(')')</td>
-                                        </tr>
-                }
+                                                <td>@userData[1]</td>   @*总资产*@
+                                                <td> @userData[2] </td>
+                                                <td>@userData[3]</td>
+                                                <td>@userData[4]</td>
+                                                @if (i == 0)
+                                                {
+                                                    <td rowspan="@j">
+                                                        @{
+                                                            var aa = System.Text.RegularExpressions.Regex.Matches(@m.ResultCard, @"\w{2}", System.Text.RegularExpressions.RegexOptions.IgnoreCase);
+                                                            var bb = System.Text.RegularExpressions.Regex.Split(@m.ResultCard, @"\w{2}", System.Text.RegularExpressions.RegexOptions.IgnoreCase);
+                                                            for (int k = 0; k < aa.Count; k++)
+                                                            {
+                                                                @bb[k]<i class="majiang majiang-@aa[k]"></i>
+                                                            }
+                                                        }
+                                                    </td>
+                                                            }
+                                                <td>@userData[5].Trim(')')</td>
+                                            </tr>
+                                                                }
 
-            }
+                                                            }
                                 </tbody>
                             </table>
                         </div>
@@ -214,5 +218,3 @@
         </article>
     </div>
 </section>
-
-

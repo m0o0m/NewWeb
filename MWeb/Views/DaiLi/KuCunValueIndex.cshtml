@@ -1,6 +1,6 @@
 ﻿
 @{
-    ViewBag.Title = "修改库存";
+    ViewBag.Title = "充值库存";
     Layout = "~/Views/Shared/_Layout.cshtml";
 
     int no = Convert.ToInt32(ViewData["no"]);
@@ -21,10 +21,11 @@
                     <fieldset>
                         <div class="row">
                             <section class="col col-5">
-                                <label>添加/减少库存金额. :</label>
+                                <label>充值金额(RMB) :</label>
                                 <label class="input">
-                                    <input type="text" id="ChipPot" name="ChipPot" class="span4" value="0" />
+                                    <input onblur="jisuan()" type="text" id="ChipPot" name="ChipPot" class="span4" value="0" />
                                 </label>
+                               <label style="color:red">对应的游戏币:<label id="lblKucun">0</label></label>
                             </section>
 
                         </div>
@@ -45,7 +46,7 @@
                     <footer>
                         <input id="btnGoBack" type="button" value="返回列表" class=" btn btn-warning" />
                       
-                        <input id="btnadd" type="button" value="增加" class="btn btn-danger" />
+                        <input id="btnadd" type="button" value="确定" class="btn btn-danger" />
 
 
                     </footer>
@@ -132,6 +133,49 @@
             document.gomenu.selector.selectedIndex = 2;
         }
 
+        function TransGoldToCH(_gold) {
+            var extTip = "";
+
+          
+
+            if (_gold >= 100000000)
+            { //亿级别
+                var yi =parseInt(  _gold / 100000000);
+               
+                var wan = (_gold - yi * 100000000) / 10000;
+                
+                extTip += yi + "亿";
+                if (wan > 0) {
+                    extTip += wan + "万";
+                }
+
+            }
+            else {//万级别
+                extTip += _gold /10000+ "万";
+            }
+            return extTip;
+
+        }
+
+        function jisuan() {
+            //var kucun = $("#lblKucun").html();
+            $.ajax({
+                url: "/DaiLi/GetUpdateGoldByRMB/",
+                type: "POST",
+                dataType: "JSON",
+                data: { "no": $("#no").val(), "gold": $("#ChipPot").val() },
+                success: function (data) {
+                  
+
+                    var ch = TransGoldToCH(data);
+
+                  
+                    $("#lblKucun").html(data + "  智能解析"+ch);
+                }
+            });
+          
+        }
+
         $(function () {
             $("#btnadd").click(function () {
                 $.ajax({
@@ -142,9 +186,10 @@
                     success: function (data) {
                       
                         if (data == "1") {
-                            alert("修改成功!");
+                            alert("充值成功!");
+                            location.href = "/DaiLi/Index";
                         } else {
-                            alert("修改失败!");
+                            alert("充值失败!");
                         }
                       
                     }

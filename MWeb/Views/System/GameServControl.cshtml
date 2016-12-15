@@ -32,19 +32,19 @@
                         <div class="table-responsive">
                             <table class="table table-bordered">
                                 <tbody>
-                                        <tr>
-                                            <td>
-                                                <div class="form-group">
+                                    <tr>
+                                        <td>
+                                            <div class="form-group">
 
-                                                    <div class="col-md-2 control-label" >
-                                                        <div class="user-thumb"> 中发白抢红包 </div>
-                                                    </div>
-                                                    <div class="col-md-10">
-                                                        <input type="button" value="修改" class="btn btn-danger btn-xs" onclick="return btngo(0);" />
-                                                    </div>
+                                                <div class="col-md-2 control-label">
+                                                    <div class="user-thumb"> 中发白抢红包 </div>
                                                 </div>
-                                            </td>
-                                        </tr>
+                                                <div class="col-md-10">
+                                                    <input type="button" value="修改" class="btn btn-danger btn-xs" onclick="return btngo(0);" />
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
 
                                     <tr>
                                         <td>
@@ -74,17 +74,17 @@
                                     </tr>
 
                                     @*<tr>
-                                        <td>
-                                            <div class="form-group">
-                                                <div class="col-md-2 control-label">
-                                                    <div class="user-thumb"> 轮盘抽奖开关 </div>
+                                            <td>
+                                                <div class="form-group">
+                                                    <div class="col-md-2 control-label">
+                                                        <div class="user-thumb"> 轮盘抽奖开关 </div>
+                                                    </div>
+                                                    <div class="col-md-10">
+                                                        <input type="button" value="修改" class="btn btn-danger btn-xs" onclick="return btngo(3);" />
+                                                    </div>
                                                 </div>
-                                                <div class="col-md-10">
-                                                    <input type="button" value="修改" class="btn btn-danger btn-xs" onclick="return btngo(3);" />
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>*@
+                                            </td>
+                                        </tr>*@
                                     <tr>
                                         <td>
                                             <div class="form-group">
@@ -110,17 +110,17 @@
                                         </td>
                                     </tr>
                                     @*<tr>
-                                        <td>
-                                            <div class="form-group">
-                                                <div class="col-md-2 control-label">
-                                                    <div class="user-thumb"> 游客新账号注册 </div>
+                                            <td>
+                                                <div class="form-group">
+                                                    <div class="col-md-2 control-label">
+                                                        <div class="user-thumb"> 游客新账号注册 </div>
+                                                    </div>
+                                                    <div class="col-md-10">
+                                                        <input type="button" value="修改" class="btn btn-danger btn-xs" onclick="return btngo(6);" />
+                                                    </div>
                                                 </div>
-                                                <div class="col-md-10">
-                                                    <input type="button" value="修改" class="btn btn-danger btn-xs" onclick="return btngo(6);" />
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>*@
+                                            </td>
+                                        </tr>*@
                                     <tr>
                                         <td>
                                             <div class="form-group">
@@ -153,6 +153,18 @@
                                                 </div>
                                                 <div class="col-md-10">
                                                     <input type="button" value="修改" class="btn btn-danger btn-xs" onclick="return btngo(9);" />
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="form-group">
+                                                <div class="col-md-2 control-label">
+                                                    <div class="user-thumb"> 澳门扑克开关 </div>
+                                                </div>
+                                                <div class="col-md-10">
+                                                    <input type="button" value="修改" class="btn btn-danger btn-xs" onclick="return btngo(21);" />
                                                 </div>
                                             </div>
                                         </td>
@@ -213,6 +225,9 @@
                 case 9:
                     location.href = "/System/MFestivalGivingControl";
                     break;
+                case 21:
+                    location.href = "/System/BaiJiaLePotControl";
+                    break;
                 default:
 
             }
@@ -221,10 +236,10 @@
 
 
 
-    // resets the menu selection upon entry to this page:
-    function resetMenu() {
-        document.gomenu.selector.selectedIndex = 2;
-    }
+        // resets the menu selection upon entry to this page:
+        function resetMenu() {
+            document.gomenu.selector.selectedIndex = 2;
+        }
 
 
 

@@ -198,6 +198,16 @@ namespace ProtoCmd.Service {
     internal static pb::FieldAccess.FieldAccessorTable<global::ProtoCmd.Service.FruiteBigPot_C, global::ProtoCmd.Service.FruiteBigPot_C.Builder> internal__static_ProtoCmd_Service_FruiteBigPot_C__FieldAccessorTable;
     internal static pbd::MessageDescriptor internal__static_ProtoCmd_Service_FruiteBigPot_S__Descriptor;
     internal static pb::FieldAccess.FieldAccessorTable<global::ProtoCmd.Service.FruiteBigPot_S, global::ProtoCmd.Service.FruiteBigPot_S.Builder> internal__static_ProtoCmd_Service_FruiteBigPot_S__FieldAccessorTable;
+    internal static pbd::MessageDescriptor internal__static_ProtoCmd_Service_BGSetBaccaratPOTOpenReq__Descriptor;
+    internal static pb::FieldAccess.FieldAccessorTable<global::ProtoCmd.Service.BGSetBaccaratPOTOpenReq, global::ProtoCmd.Service.BGSetBaccaratPOTOpenReq.Builder> internal__static_ProtoCmd_Service_BGSetBaccaratPOTOpenReq__FieldAccessorTable;
+    internal static pbd::MessageDescriptor internal__static_ProtoCmd_Service_BGSetBaccaratPOTOpenRes__Descriptor;
+    internal static pb::FieldAccess.FieldAccessorTable<global::ProtoCmd.Service.BGSetBaccaratPOTOpenRes, global::ProtoCmd.Service.BGSetBaccaratPOTOpenRes.Builder> internal__static_ProtoCmd_Service_BGSetBaccaratPOTOpenRes__FieldAccessorTable;
+    internal static pbd::MessageDescriptor internal__static_ProtoCmd_Service_Baccarat_Select_S__Descriptor;
+    internal static pb::FieldAccess.FieldAccessorTable<global::ProtoCmd.Service.Baccarat_Select_S, global::ProtoCmd.Service.Baccarat_Select_S.Builder> internal__static_ProtoCmd_Service_Baccarat_Select_S__FieldAccessorTable;
+    internal static pbd::MessageDescriptor internal__static_ProtoCmd_Service_Baccarat_Operator_C__Descriptor;
+    internal static pb::FieldAccess.FieldAccessorTable<global::ProtoCmd.Service.Baccarat_Operator_C, global::ProtoCmd.Service.Baccarat_Operator_C.Builder> internal__static_ProtoCmd_Service_Baccarat_Operator_C__FieldAccessorTable;
+    internal static pbd::MessageDescriptor internal__static_ProtoCmd_Service_Baccarat_Operator_S__Descriptor;
+    internal static pb::FieldAccess.FieldAccessorTable<global::ProtoCmd.Service.Baccarat_Operator_S, global::ProtoCmd.Service.Baccarat_Operator_S.Builder> internal__static_ProtoCmd_Service_Baccarat_Operator_S__FieldAccessorTable;
     internal static pbd::MessageDescriptor internal__static_ProtoCmd_Service_QueryRobotStatu__Descriptor;
     internal static pb::FieldAccess.FieldAccessorTable<global::ProtoCmd.Service.QueryRobotStatu, global::ProtoCmd.Service.QueryRobotStatu.Builder> internal__static_ProtoCmd_Service_QueryRobotStatu__FieldAccessorTable;
     internal static pbd::MessageDescriptor internal__static_ProtoCmd_Service_ModifyRobotConfig__Descriptor;
@@ -368,123 +378,133 @@ namespace ProtoCmd.Service {
             "ZRgCIAEoBRINCgV2YWx1ZRgDIAEoBSIaCgtTaHVpSHVQb3RfUxILCgNzdWMY", 
             "ASABKAgiOgoORnJ1aXRlQmlnUG90X0MSCwoDbW9kGAEgASgFEgwKBHR5cGUY", 
             "AiABKAUSDQoFdmFsdWUYAyABKAUiHQoORnJ1aXRlQmlnUG90X1MSCwoDc3Vj", 
-            "GAEgASgIIiYKD1F1ZXJ5Um9ib3RTdGF0dRITCgttb2R1bGVfdHlwZRgBIAEo", 
-            "DSJFChFNb2RpZnlSb2JvdENvbmZpZxIRCglnYW1lX3R5cGUYASACKA0SDQoF", 
-            "bGltaXQYAiADKA0SDgoGaXNfYmV0GAMgASgNIqsBCgxMb2dpblJlcXVlc3QS", 
-            "EQoJZ2FtZV90eXBlGAEgAigNEhcKD2xvZ2luX2ZyZXF1ZW5jeRgCIAIoDRIR", 
-            "Cglsb2dpbl9jbnQYAyACKAUSEAoIc3RyYXRlZ3kYBCABKA0iSgoIU3RyYWdl", 
-            "dHkSFQoRVEVYQVNfUkFORE9NX0pPSU4QARIVChFURVhBU19RVUlDS19TVEFS", 
-            "VBACEhAKDFRFWEFTX05PUk1BTBADIlgKCUdhbWVTdGF0dRIRCglnYW1lX3R5", 
-            "cGUYASACKA0SEgoKcGxheWVyX2NudBgCIAIoDRIUCgxwbGF5ZXJfbGltaXQY", 
-            "AyADKA0SDgoGaXNfYmV0GAQgASgNIiIKDEdhbWVPdmVyVmlldxISCgpwbGF5", 
-            "ZXJfY250GAIgAygNIoABCgtTeXN0ZW1TdGF0dRITCgtjcHVfcGVyY2VudBgB", 
-            "IAIoDRIQCghtZW1fdXNlZBgCIAIoBBIRCgltZW1fdG90YWwYAyACKAQSEQoJ", 
-            "Zmxvd19yYXRlGAQgAigEEhAKCGNvbm5fY250GAUgAigNEhIKCmNvbm5fbGlt", 
-            "aXQYBiACKA0ivwEKC1JvYm90U3RhdHVzEhMKC21vZHVsZV90eXBlGAEgASgN", 
-            "Ei8KCmdhbWVfc3RhdHUYAiADKAsyGy5Qcm90b0NtZC5TZXJ2aWNlLkdhbWVT", 
-            "dGF0dRI1Cg1nYW1lX292ZXJ2aWV3GAMgASgLMh4uUHJvdG9DbWQuU2Vydmlj", 
-            "ZS5HYW1lT3ZlclZpZXcSMwoMc3lzdGVtX3N0YXR1GAQgASgLMh0uUHJvdG9D", 
-            "bWQuU2VydmljZS5TeXN0ZW1TdGF0dSIlCgxFcnJvck1lc3NhZ2USFQoNZXJy", 
-            "b3JfbWVzc2FnZRgBIAIoCSIfCgxVc2VyU3RhdGVSZXESDwoHdXNlcl9pZBgB", 
-            "IAEoBSJSCgxVc2VyU3RhdGVSZXMSDwoHdXNlcl9pZBgBIAEoBRINCgVzdGF0", 
-            "ZRgCIAEoBRIPCgdyb29tX2lkGAMgASgFEhEKCXJvb21fdHlwZRgEIAEoBSKR", 
-            "AQoOVXNlclNjb3JlQXdhcmQSGQoRdExhc3RHZXRBd2FyZFRpbWUYASABKA0S", 
-            "GgoSdEZpbmFsR2V0U2NvcmVUaW1lGAIgASgNEhkKEXRMYXN0R2V0U2NvcmVU", 
-            "aW1lGAMgASgNEhYKDmR3TGFzdEdldFNjb3JlGAQgASgDEhUKDWR3Tm93R2V0", 
-            "U2NvcmUYBSABKAMimgEKCFVzZXJTaWduEg4KBndDb250aRgBIAEoBRIWCg50", 
-            "bGFzdExvZ2luVGltZRgCIAEoDRIVCg10U2lnbkx1Y2tUaW1lGAMgASgNEhYK", 
-            "DnRTaWduQXdhcmRUaW1lGAQgASgNEhEKCWJ5U3RhdHVzMBgFIAEoBRIRCgli", 
-            "eVN0YXR1czEYBiABKAUSEQoJYnlTdGF0dXMyGAcgASgFIs0BCgpVc2VyRXhE", 
-            "YXRhEhIKCndNYXhGcmllbmQYASABKAUSFQoNbGFzdExvZ2luVGltZRgCIAEo", 
-            "DRIVCg1sYXN0TW9uZXlUaW1lGAMgASgNEhkKEWZpbmFsR2V0U2NvcmVUaW1l", 
-            "GAQgASgNEhEKCWxhc3RNb25leRgFIAEoAxIQCghub3dNb25leRgGIAEoAxIP", 
-            "CgdtYXhDYXJkGAcgAygFEiwKCGxpc3RJbmZvGAggAygLMhouUHJvdG9DbWQu", 
-            "U2VydmljZS5HYW1lSW5mbyJOCghHYW1lSW5mbxIOCgZHYW1lSUQYASABKAUS", 
-            "DQoFZHdXaW4YAiABKAMSDwoHZHdUb3RhbBgDIAEoBRISCgptYXhXaW5DaGlw", 
-            "GAQgASgDImcKDVNwZWxsQ2FyZEluZm8SDAoEdGltZRgBIAEoDRISCgpqb2lu", 
-            "X3RpbWVzGAIgASgNEhEKCXdpbl90aW1lcxgDIAEoDRIRCglyb2JfdGltZXMY", 
-            "BCABKA0SDgoGZ2V0Qm94GAUgAygNInkKCXRvb2xzRGF0YRIQCgh0b29sc19p", 
-            "ZBgBIAEoDRINCgVibWFyaxgCIAEoDRIQCghnZXRfdGltZRgDIAEoDRIRCgls", 
-            "YXN0X3RpbWUYBCABKA0SEQoJdXNlX3RpbWVzGAUgASgNEhMKC3RvdGFsX3Rp", 
-            "bWVzGAYgASgNIjsKCVRvb2xzSW5mbxIuCglsaXN0VG9vbHMYASADKAsyGy5Q", 
-            "cm90b0NtZC5TZXJ2aWNlLnRvb2xzRGF0YSJdCgdWaXBJbmZvEg0KBWdyYWRl", 
-            "GAEgASgFEg8KB2N1cnJlbnQYAiABKAUSEAoIbGFzdF9nZXQYAyABKA0SIAoY", 
-            "bGFzdF9sZXZlbHVwX2F3YXJkX2xldmVsGAQgASgFIj4KCUxldmVsSW5mbxIN", 
-            "CgVsZXZlbBgBIAEoBRILCgNleHAYAiABKAUSFQoNcmVhd2FyZF9sZXZlbBgD", 
-            "IAMoBSIbCgdWaXBDYXJkEhAKCHRFbmRUaW1lGAEgASgNIowDCghCRXh0SW5m", 
-            "bxI0CgpzY29yZUF3YXJkGAEgASgLMiAuUHJvdG9DbWQuU2VydmljZS5Vc2Vy", 
-            "U2NvcmVBd2FyZBIsCgh1c2VyU2lnbhgCIAEoCzIaLlByb3RvQ21kLlNlcnZp", 
-            "Y2UuVXNlclNpZ24SMAoKdXNlckV4RGF0YRgDIAEoCzIcLlByb3RvQ21kLlNl", 
-            "cnZpY2UuVXNlckV4RGF0YRIyCglzcGVsbENhcmQYBCABKAsyHy5Qcm90b0Nt", 
-            "ZC5TZXJ2aWNlLlNwZWxsQ2FyZEluZm8SLgoJdG9vbHNJbmZvGAUgASgLMhsu", 
-            "UHJvdG9DbWQuU2VydmljZS5Ub29sc0luZm8SKgoHdmlwSW5mbxgGIAEoCzIZ", 
-            "LlByb3RvQ21kLlNlcnZpY2UuVmlwSW5mbxIuCglsZXZlbEluZm8YByABKAsy", 
-            "Gy5Qcm90b0NtZC5TZXJ2aWNlLkxldmVsSW5mbxIqCgd2aXBDYXJkGAggASgL", 
-            "MhkuUHJvdG9DbWQuU2VydmljZS5WaXBDYXJkKssKCgpTZXJ2aWNlQ21kEgwK", 
-            "CFNDX0JFR0lOEAsSEAoMU0NfS0lDS19VU0VSEAwSEQoNU0NfUVVFUllfVVNF", 
-            "UhANEhIKDlNDX0ZSRUVaRV9VU0VSEA4SEwoPU0NfU0VORF9TWVNNQUlMEA8S", 
-            "EgoOU0NfU0VSVkVSX1NUT1AQEBIXChNTQ19RVUVSWV9PTkxJTkVVU0VSEBES", 
-            "GAoUU0NfUVVFUllfVVNFUk9QRVJISVMQEhIZChVTQ19RVUVSWV9TRVJWRVJT", 
-            "VEFUVVMQExIYChRTQ19TRU5EX0FOTk9VTkNFTUVOVBAUEhAKDFNDX0JBTl9T", 
-            "UEVBSxAVEg8KC1NDX0FERF9HT0xEEBYSGgoWU0NfUVVFUllfSU5URVJOQUxM", 
-            "T0dJThAXEhcKE1NDX1NFVF9JTlRFUkFMTE9HSU4QGBIUChBTQ19TRU5EX0lU", 
-            "RU1NQUlMEBkSEQoNU0NfUVVFUllfRklTSBAaEhMKD1NDX0JBTl9MT0dJTl9J", 
-            "UBAbEg0KCVNDX1JFR19JUBAcEhcKE1NDX1NFTEVDVF9URVhBU19QT1QQHRIY", 
-            "ChRTQ19PUEVSVE9SX1RFWEFTX1BPVBAeEhsKF1NDX1NFTEVDVF9SRURFVkVO", 
-            "TE9QRV9REB8SHAoYU0NfT1BFUlRPUl9SRURFVkVOTE9QRV9RECASFAoQU0Nf", 
-            "QkFOX0xPR0lOX01BQxAhEhcKE1NDX1JFU0VUX1NBRkVCT1hQV0QQIhIRCg1T", 
-            "Q19QT1RfU1dJVENIECMSFwoTU0NfU0VMRUNUX1NDQUxFX1BPVBAkEhgKFFND", 
-            "X09QRVJUT1JfU0FDTEVfUE9UECUSFQoRU0NfR0VUX1BPVF9TV0lUQ0gQJhIU", 
-            "ChBTQ19DTFVCX1VTRVJNT0RFECcSGAoUU0NfU0VMRUNUX0lQU1RBVFVTX1EQ", 
-            "KBIZChVTQ19PUEVSVE9SX0lQU1RBVFVTX1EQKRIXChNTQ19TRVRfSVBfV0hJ", 
-            "VEVMSVNUECoSEgoOU0NfQ0FOQ0VMX0NMVUIQKxIUChBTQ19TRVRfUk9CT1Rf", 
-            "UE9UECwSEgoOU0NfQkVMQU5EX0NMVUIQLRISCg5TQ19ST0JPVF9RVUVSWRAu", 
-            "EhMKD1NDX1JPQk9UX01PRElGWRAvEhIKDlNDX1JPQk9UX0xPR0lOEDASFgoS", 
-            "U0NfU0VUX1pGQlBPVF9PUEVOEDISEQoNU0NfVVNFUl9TVEFURRAzEhkKFVND", 
-            "X1NFVF9URVhQUk9QT1RfT1BFThA0EhgKFFNDX1NFTEVDVF9URVhQUk9fUE9U", 
-            "EDUSGQoVU0NfT1BFUlRPUl9URVhQUk9fUE9UEDYSFAoQU0NfTU9EVUxFX1NX", 
-            "SVRDSBA3EhkKFVNDX0NMSUVOVF9HQU1FX1NXSVRDSBA4EiAKHFNDX1NFVF9J", 
-            "TkRFQkFURURfUkVCQVRFX09QRU4QOxIeChpTQ19OVEZfVVBEQVRFX1BPUFVQ", 
-            "Q09OVFJPTBA8EhUKEVNDX01PQklMRV9TV0lUQ0hTED0SHQoZU0NfTU9CSUxF", 
-            "X1NXSVRDSF9PUEVSQVRPUhA+Eh8KG1NDX1NFVF9IZXJvY3JhZnRfVHdpY2Vf", 
-            "T1BFThBAEiIKHlNDX1NFVF9NSURBVVRVTU5fRkVTVElWQUxfT1BFThA/EhoK", 
-            "FlNDX05URl9VUERBVEVfREJQVlBDRkcQQRIhCh1TQ19OVEZfVVBEQVRFX0FS", 
-            "Q0FERUdBTUVTVE9DSxBCEhsKF1NDX05URl9VUERBVEVfU0hVSUhVUE9UEEMS", 
-            "EwoPU0NfRlJVSVRFQklHUE9UEEQSDQoIU0NfVE9UQUwQyAEq3QoKCUNlbnRl", 
-            "ckNtZBIMCghDU19CRUdJThALEhQKEENTX0NPTk5FQ1RfRVJST1IQDBIUChBD", 
-            "U19BQ0NPVU5UX0VSUk9SEA0SEQoNQ1NfUVVFUllfVUVTUhAOEhIKDkNTX1NF", 
-            "UlZFUl9TVE9QEA8SEAoMQ1NfS0lDS19VU0VSEBASEgoOQ1NfRlJFRVpFX1VT", 
-            "RVIQERIXChNDU19RVUVSWV9PTkxJTkVVU0VSEBISGAoUQ1NfUVVFUllfVVNF", 
-            "Uk9QRVJISVMQExITCg9DU19TRU5EX1NZU01BSUwQFBIZChVDU19RVUVSWV9T", 
-            "RVJWRVJTVEFUVVMQFRIYChRDU19TRU5EX0FOTk9VTkNFTUVOVBAWEhoKFkNT", 
-            "X1FVRVJZX0lOVEVSTkFMTE9HSU4QFxIXChNDU19TRVRfSU5URVJBTExPR0lO", 
-            "EBgSFAoQQ1NfU0VORF9JVEVNTUFJTBAZEhEKDUNTX1FVRVJZX0ZJU0gQGhIQ", 
-            "CgxDU19CQU5fU1BFQUsQGxITCg9DU19CQU5fTE9HSU5fSVAQHBINCglDU19S", 
-            "RUdfSVAQHRIXChNDU19TRUxFQ1RfVEVYQVNfUE9UEB4SGAoUQ1NfT1BFUlRP", 
-            "Ul9URVhBU19QT1QQHxIbChdDU19TRUxFQ1RfUkVERVZFTkxPUEVfUBAgEhwK", 
-            "GENTX09QRVJUT1JfUkVERVZFTkxPUEVfUBAhEhQKEENTX0JBTl9MT0dJTl9N", 
-            "QUMQIhIXChNDU19SRVNFVF9TQUZFQk9YUFdEECMSFwoTQ1NfU0VMRUNUX1ND", 
-            "QUxFX1BPVBAkEhgKFENTX09QRVJUT1JfU0NBTEVfUE9UECUSFgoSQ1NfUE9U", 
-            "X1NXSVRDSF9SRVNQECYSGgoWQ1NfR0VUX1BPVF9TV0lUQ0hfUkVTUBAnEhQK", 
-            "EENTX0NMVUJfVVNFUk1PREUQKBIWChJDU19TRUxFQ1RfSVBTVEFUVVMQKRIX", 
-            "ChNDU19PUEVSVE9SX0lQU1RBVFVTECoSFwoTQ1NfU0VUX0lQX1dISVRFTElT", 
-            "VBArEhIKDkNTX0NBTkNFTF9DTFVCECwSFAoQQ1NfU0VUX1JPQk9UX1BPVBAt", 
-            "EhIKDkNTX0JFTEFORF9DTFVCEC4SEgoOQ1NfUk9CT1RfU1RBVFUQLxIUChBD", 
-            "MlNfUk9CT1RfRVJSTVNHEDASFgoSQ1NfU0VUX1pGQlBPVF9PUEVOEDISEQoN", 
-            "Q1NfVVNFUl9TVEFURRAzEhkKFUNTX1NFVF9URVhQUk9QT1RfT1BFThA0EhsK", 
-            "F0NTX1NFTEVDVF9URVhQUk9QT1RfUE9UEDUSHAoYQ1NfT1BFUlRPUl9URVhQ", 
-            "Uk9QT1RfUE9UEDYSFAoQQ1NfTU9EVUxFX1NXSVRDSBA3EhkKFUNTX0NMSUVO", 
-            "VF9HQU1FX1NXSVRDSBA4EiAKHENTX1NFVF9JTkRFQkFURURfUkVCQVRFX09Q", 
-            "RU4QOxIeChpDU19OVEZfVVBEQVRFX1BPUFVQQ09OVFJPTBA8EhUKEUNTX01P", 
-            "QklMRV9TV0lUQ0hTED0SHQoZQ1NfTU9CSUxFX1NXSVRDSF9PUEVSQVRPUhA+", 
-            "Eh8KG0NTX1NFVF9IZXJvY3JhZnRfVHdpY2VfT1BFThBAEiIKHkNTX1NFVF9N", 
-            "SURBVVRVTU5fRkVTVElWQUxfT1BFThA/EhoKFkNTX05URl9VUERBVEVfREJQ", 
-            "VlBDRkcQQRIhCh1DU19OVEZfVVBEQVRFX0FSQ0FERUdBTUVTVE9DSxBCEhsK", 
-            "F0NTX05URl9VUERBVEVfU0hVSUhVUE9UEEMSEwoPQ1NfRlJVSVRFQklHUE9U", 
-            "EEQSDAoIQ1NfVE9UQUwQZCqgAQoKTW9kdWxlVHlwZRIHCgNBTEwQABIKCgZT", 
-            "WVNURU0QARIMCghPVkVSVklFVxACEg4KCk1PRFVMRV9NQVgQAhIUChBHQU1F", 
-            "X1RZVFBFX0JFR0lOEGQSCQoFVEVYQVMQZBIHCgNaRkIQZRIICgRDQVJTEGYS", 
-          "CgoGWk9ESUFDEGcSDAoIVEVYQVNfRVgQaBIRCg1HQU1FX1RZUEVfTUFYEGg="));
+            "GAEgASgIIikKF0JHU2V0QmFjY2FyYXRQT1RPcGVuUmVxEg4KBmlzT3BlbhgB", 
+            "IAEoBSI6ChdCR1NldEJhY2NhcmF0UE9UT3BlblJlcxILCgNzdWMYASABKAUS", 
+            "EgoKY3VyclN0YXR1cxgCIAEoBSIkChFCYWNjYXJhdF9TZWxlY3RfUxIPCgdD", 
+            "aGlwTnVtGAEgAigEIkoKE0JhY2NhcmF0X09wZXJhdG9yX0MSDgoGb3BUeXBl", 
+            "GAEgASgNEg8KB29wVmFsdWUYAiABKAQSEgoKc3RyQ29udGVudBgDIAEoCSIy", 
+            "ChNCYWNjYXJhdF9PcGVyYXRvcl9TEg4KBm9wVHlwZRgBIAEoDRILCgNzdWMY", 
+            "AiABKAgiJgoPUXVlcnlSb2JvdFN0YXR1EhMKC21vZHVsZV90eXBlGAEgASgN", 
+            "IkUKEU1vZGlmeVJvYm90Q29uZmlnEhEKCWdhbWVfdHlwZRgBIAIoDRINCgVs", 
+            "aW1pdBgCIAMoDRIOCgZpc19iZXQYAyABKA0iqwEKDExvZ2luUmVxdWVzdBIR", 
+            "CglnYW1lX3R5cGUYASACKA0SFwoPbG9naW5fZnJlcXVlbmN5GAIgAigNEhEK", 
+            "CWxvZ2luX2NudBgDIAIoBRIQCghzdHJhdGVneRgEIAEoDSJKCghTdHJhZ2V0", 
+            "eRIVChFURVhBU19SQU5ET01fSk9JThABEhUKEVRFWEFTX1FVSUNLX1NUQVJU", 
+            "EAISEAoMVEVYQVNfTk9STUFMEAMiWAoJR2FtZVN0YXR1EhEKCWdhbWVfdHlw", 
+            "ZRgBIAIoDRISCgpwbGF5ZXJfY250GAIgAigNEhQKDHBsYXllcl9saW1pdBgD", 
+            "IAMoDRIOCgZpc19iZXQYBCABKA0iIgoMR2FtZU92ZXJWaWV3EhIKCnBsYXll", 
+            "cl9jbnQYAiADKA0igAEKC1N5c3RlbVN0YXR1EhMKC2NwdV9wZXJjZW50GAEg", 
+            "AigNEhAKCG1lbV91c2VkGAIgAigEEhEKCW1lbV90b3RhbBgDIAIoBBIRCglm", 
+            "bG93X3JhdGUYBCACKAQSEAoIY29ubl9jbnQYBSACKA0SEgoKY29ubl9saW1p", 
+            "dBgGIAIoDSK/AQoLUm9ib3RTdGF0dXMSEwoLbW9kdWxlX3R5cGUYASABKA0S", 
+            "LwoKZ2FtZV9zdGF0dRgCIAMoCzIbLlByb3RvQ21kLlNlcnZpY2UuR2FtZVN0", 
+            "YXR1EjUKDWdhbWVfb3ZlcnZpZXcYAyABKAsyHi5Qcm90b0NtZC5TZXJ2aWNl", 
+            "LkdhbWVPdmVyVmlldxIzCgxzeXN0ZW1fc3RhdHUYBCABKAsyHS5Qcm90b0Nt", 
+            "ZC5TZXJ2aWNlLlN5c3RlbVN0YXR1IiUKDEVycm9yTWVzc2FnZRIVCg1lcnJv", 
+            "cl9tZXNzYWdlGAEgAigJIh8KDFVzZXJTdGF0ZVJlcRIPCgd1c2VyX2lkGAEg", 
+            "ASgFIlIKDFVzZXJTdGF0ZVJlcxIPCgd1c2VyX2lkGAEgASgFEg0KBXN0YXRl", 
+            "GAIgASgFEg8KB3Jvb21faWQYAyABKAUSEQoJcm9vbV90eXBlGAQgASgFIpEB", 
+            "Cg5Vc2VyU2NvcmVBd2FyZBIZChF0TGFzdEdldEF3YXJkVGltZRgBIAEoDRIa", 
+            "ChJ0RmluYWxHZXRTY29yZVRpbWUYAiABKA0SGQoRdExhc3RHZXRTY29yZVRp", 
+            "bWUYAyABKA0SFgoOZHdMYXN0R2V0U2NvcmUYBCABKAMSFQoNZHdOb3dHZXRT", 
+            "Y29yZRgFIAEoAyKaAQoIVXNlclNpZ24SDgoGd0NvbnRpGAEgASgFEhYKDnRs", 
+            "YXN0TG9naW5UaW1lGAIgASgNEhUKDXRTaWduTHVja1RpbWUYAyABKA0SFgoO", 
+            "dFNpZ25Bd2FyZFRpbWUYBCABKA0SEQoJYnlTdGF0dXMwGAUgASgFEhEKCWJ5", 
+            "U3RhdHVzMRgGIAEoBRIRCglieVN0YXR1czIYByABKAUizQEKClVzZXJFeERh", 
+            "dGESEgoKd01heEZyaWVuZBgBIAEoBRIVCg1sYXN0TG9naW5UaW1lGAIgASgN", 
+            "EhUKDWxhc3RNb25leVRpbWUYAyABKA0SGQoRZmluYWxHZXRTY29yZVRpbWUY", 
+            "BCABKA0SEQoJbGFzdE1vbmV5GAUgASgDEhAKCG5vd01vbmV5GAYgASgDEg8K", 
+            "B21heENhcmQYByADKAUSLAoIbGlzdEluZm8YCCADKAsyGi5Qcm90b0NtZC5T", 
+            "ZXJ2aWNlLkdhbWVJbmZvIk4KCEdhbWVJbmZvEg4KBkdhbWVJRBgBIAEoBRIN", 
+            "CgVkd1dpbhgCIAEoAxIPCgdkd1RvdGFsGAMgASgFEhIKCm1heFdpbkNoaXAY", 
+            "BCABKAMiZwoNU3BlbGxDYXJkSW5mbxIMCgR0aW1lGAEgASgNEhIKCmpvaW5f", 
+            "dGltZXMYAiABKA0SEQoJd2luX3RpbWVzGAMgASgNEhEKCXJvYl90aW1lcxgE", 
+            "IAEoDRIOCgZnZXRCb3gYBSADKA0ieQoJdG9vbHNEYXRhEhAKCHRvb2xzX2lk", 
+            "GAEgASgNEg0KBWJtYXJrGAIgASgNEhAKCGdldF90aW1lGAMgASgNEhEKCWxh", 
+            "c3RfdGltZRgEIAEoDRIRCgl1c2VfdGltZXMYBSABKA0SEwoLdG90YWxfdGlt", 
+            "ZXMYBiABKA0iOwoJVG9vbHNJbmZvEi4KCWxpc3RUb29scxgBIAMoCzIbLlBy", 
+            "b3RvQ21kLlNlcnZpY2UudG9vbHNEYXRhIl0KB1ZpcEluZm8SDQoFZ3JhZGUY", 
+            "ASABKAUSDwoHY3VycmVudBgCIAEoBRIQCghsYXN0X2dldBgDIAEoDRIgChhs", 
+            "YXN0X2xldmVsdXBfYXdhcmRfbGV2ZWwYBCABKAUiPgoJTGV2ZWxJbmZvEg0K", 
+            "BWxldmVsGAEgASgFEgsKA2V4cBgCIAEoBRIVCg1yZWF3YXJkX2xldmVsGAMg", 
+            "AygFIhsKB1ZpcENhcmQSEAoIdEVuZFRpbWUYASABKA0ijAMKCEJFeHRJbmZv", 
+            "EjQKCnNjb3JlQXdhcmQYASABKAsyIC5Qcm90b0NtZC5TZXJ2aWNlLlVzZXJT", 
+            "Y29yZUF3YXJkEiwKCHVzZXJTaWduGAIgASgLMhouUHJvdG9DbWQuU2Vydmlj", 
+            "ZS5Vc2VyU2lnbhIwCgp1c2VyRXhEYXRhGAMgASgLMhwuUHJvdG9DbWQuU2Vy", 
+            "dmljZS5Vc2VyRXhEYXRhEjIKCXNwZWxsQ2FyZBgEIAEoCzIfLlByb3RvQ21k", 
+            "LlNlcnZpY2UuU3BlbGxDYXJkSW5mbxIuCgl0b29sc0luZm8YBSABKAsyGy5Q", 
+            "cm90b0NtZC5TZXJ2aWNlLlRvb2xzSW5mbxIqCgd2aXBJbmZvGAYgASgLMhku", 
+            "UHJvdG9DbWQuU2VydmljZS5WaXBJbmZvEi4KCWxldmVsSW5mbxgHIAEoCzIb", 
+            "LlByb3RvQ21kLlNlcnZpY2UuTGV2ZWxJbmZvEioKB3ZpcENhcmQYCCABKAsy", 
+            "GS5Qcm90b0NtZC5TZXJ2aWNlLlZpcENhcmQqoQsKClNlcnZpY2VDbWQSDAoI", 
+            "U0NfQkVHSU4QCxIQCgxTQ19LSUNLX1VTRVIQDBIRCg1TQ19RVUVSWV9VU0VS", 
+            "EA0SEgoOU0NfRlJFRVpFX1VTRVIQDhITCg9TQ19TRU5EX1NZU01BSUwQDxIS", 
+            "Cg5TQ19TRVJWRVJfU1RPUBAQEhcKE1NDX1FVRVJZX09OTElORVVTRVIQERIY", 
+            "ChRTQ19RVUVSWV9VU0VST1BFUkhJUxASEhkKFVNDX1FVRVJZX1NFUlZFUlNU", 
+            "QVRVUxATEhgKFFNDX1NFTkRfQU5OT1VOQ0VNRU5UEBQSEAoMU0NfQkFOX1NQ", 
+            "RUFLEBUSDwoLU0NfQUREX0dPTEQQFhIaChZTQ19RVUVSWV9JTlRFUk5BTExP", 
+            "R0lOEBcSFwoTU0NfU0VUX0lOVEVSQUxMT0dJThAYEhQKEFNDX1NFTkRfSVRF", 
+            "TU1BSUwQGRIRCg1TQ19RVUVSWV9GSVNIEBoSEwoPU0NfQkFOX0xPR0lOX0lQ", 
+            "EBsSDQoJU0NfUkVHX0lQEBwSFwoTU0NfU0VMRUNUX1RFWEFTX1BPVBAdEhgK", 
+            "FFNDX09QRVJUT1JfVEVYQVNfUE9UEB4SGwoXU0NfU0VMRUNUX1JFREVWRU5M", 
+            "T1BFX1EQHxIcChhTQ19PUEVSVE9SX1JFREVWRU5MT1BFX1EQIBIUChBTQ19C", 
+            "QU5fTE9HSU5fTUFDECESFwoTU0NfUkVTRVRfU0FGRUJPWFBXRBAiEhEKDVND", 
+            "X1BPVF9TV0lUQ0gQIxIXChNTQ19TRUxFQ1RfU0NBTEVfUE9UECQSGAoUU0Nf", 
+            "T1BFUlRPUl9TQUNMRV9QT1QQJRIVChFTQ19HRVRfUE9UX1NXSVRDSBAmEhQK", 
+            "EFNDX0NMVUJfVVNFUk1PREUQJxIYChRTQ19TRUxFQ1RfSVBTVEFUVVNfURAo", 
+            "EhkKFVNDX09QRVJUT1JfSVBTVEFUVVNfURApEhcKE1NDX1NFVF9JUF9XSElU", 
+            "RUxJU1QQKhISCg5TQ19DQU5DRUxfQ0xVQhArEhQKEFNDX1NFVF9ST0JPVF9Q", 
+            "T1QQLBISCg5TQ19CRUxBTkRfQ0xVQhAtEhIKDlNDX1JPQk9UX1FVRVJZEC4S", 
+            "EwoPU0NfUk9CT1RfTU9ESUZZEC8SEgoOU0NfUk9CT1RfTE9HSU4QMBIWChJT", 
+            "Q19TRVRfWkZCUE9UX09QRU4QMhIRCg1TQ19VU0VSX1NUQVRFEDMSGQoVU0Nf", 
+            "U0VUX1RFWFBST1BPVF9PUEVOEDQSGAoUU0NfU0VMRUNUX1RFWFBST19QT1QQ", 
+            "NRIZChVTQ19PUEVSVE9SX1RFWFBST19QT1QQNhIUChBTQ19NT0RVTEVfU1dJ", 
+            "VENIEDcSGQoVU0NfQ0xJRU5UX0dBTUVfU1dJVENIEDgSIAocU0NfU0VUX0lO", 
+            "REVCQVRFRF9SRUJBVEVfT1BFThA7Eh4KGlNDX05URl9VUERBVEVfUE9QVVBD", 
+            "T05UUk9MEDwSFQoRU0NfTU9CSUxFX1NXSVRDSFMQPRIdChlTQ19NT0JJTEVf", 
+            "U1dJVENIX09QRVJBVE9SED4SHwobU0NfU0VUX0hlcm9jcmFmdF9Ud2ljZV9P", 
+            "UEVOEEASIgoeU0NfU0VUX01JREFVVFVNTl9GRVNUSVZBTF9PUEVOED8SGgoW", 
+            "U0NfTlRGX1VQREFURV9EQlBWUENGRxBBEiEKHVNDX05URl9VUERBVEVfQVJD", 
+            "QURFR0FNRVNUT0NLEEISGwoXU0NfTlRGX1VQREFURV9TSFVJSFVQT1QQQxIT", 
+            "Cg9TQ19GcnVpdGVCaWdQb3QQRBIbChdTQ19TRVRfQkFDQ0FSQVRQT1RfT1BF", 
+            "ThBFEhoKFlNDX1NFTEVDVF9CQUNDQVJBVF9QT1QQRhIbChdTQ19PUEVSVE9S", 
+            "X0JBQ0NBUkFUX1BPVBBHEg0KCFNDX1RPVEFMEMgBKrELCglDZW50ZXJDbWQS", 
+            "DAoIQ1NfQkVHSU4QCxIUChBDU19DT05ORUNUX0VSUk9SEAwSFAoQQ1NfQUND", 
+            "T1VOVF9FUlJPUhANEhEKDUNTX1FVRVJZX1VFU1IQDhISCg5DU19TRVJWRVJf", 
+            "U1RPUBAPEhAKDENTX0tJQ0tfVVNFUhAQEhIKDkNTX0ZSRUVaRV9VU0VSEBES", 
+            "FwoTQ1NfUVVFUllfT05MSU5FVVNFUhASEhgKFENTX1FVRVJZX1VTRVJPUEVS", 
+            "SElTEBMSEwoPQ1NfU0VORF9TWVNNQUlMEBQSGQoVQ1NfUVVFUllfU0VSVkVS", 
+            "U1RBVFVTEBUSGAoUQ1NfU0VORF9BTk5PVU5DRU1FTlQQFhIaChZDU19RVUVS", 
+            "WV9JTlRFUk5BTExPR0lOEBcSFwoTQ1NfU0VUX0lOVEVSQUxMT0dJThAYEhQK", 
+            "EENTX1NFTkRfSVRFTU1BSUwQGRIRCg1DU19RVUVSWV9GSVNIEBoSEAoMQ1Nf", 
+            "QkFOX1NQRUFLEBsSEwoPQ1NfQkFOX0xPR0lOX0lQEBwSDQoJQ1NfUkVHX0lQ", 
+            "EB0SFwoTQ1NfU0VMRUNUX1RFWEFTX1BPVBAeEhgKFENTX09QRVJUT1JfVEVY", 
+            "QVNfUE9UEB8SGwoXQ1NfU0VMRUNUX1JFREVWRU5MT1BFX1AQIBIcChhDU19P", 
+            "UEVSVE9SX1JFREVWRU5MT1BFX1AQIRIUChBDU19CQU5fTE9HSU5fTUFDECIS", 
+            "FwoTQ1NfUkVTRVRfU0FGRUJPWFBXRBAjEhcKE0NTX1NFTEVDVF9TQ0FMRV9Q", 
+            "T1QQJBIYChRDU19PUEVSVE9SX1NDQUxFX1BPVBAlEhYKEkNTX1BPVF9TV0lU", 
+            "Q0hfUkVTUBAmEhoKFkNTX0dFVF9QT1RfU1dJVENIX1JFU1AQJxIUChBDU19D", 
+            "TFVCX1VTRVJNT0RFECgSFgoSQ1NfU0VMRUNUX0lQU1RBVFVTECkSFwoTQ1Nf", 
+            "T1BFUlRPUl9JUFNUQVRVUxAqEhcKE0NTX1NFVF9JUF9XSElURUxJU1QQKxIS", 
+            "Cg5DU19DQU5DRUxfQ0xVQhAsEhQKEENTX1NFVF9ST0JPVF9QT1QQLRISCg5D", 
+            "U19CRUxBTkRfQ0xVQhAuEhIKDkNTX1JPQk9UX1NUQVRVEC8SFAoQQzJTX1JP", 
+            "Qk9UX0VSUk1TRxAwEhYKEkNTX1NFVF9aRkJQT1RfT1BFThAyEhEKDUNTX1VT", 
+            "RVJfU1RBVEUQMxIZChVDU19TRVRfVEVYUFJPUE9UX09QRU4QNBIbChdDU19T", 
+            "RUxFQ1RfVEVYUFJPUE9UX1BPVBA1EhwKGENTX09QRVJUT1JfVEVYUFJPUE9U", 
+            "X1BPVBA2EhQKEENTX01PRFVMRV9TV0lUQ0gQNxIZChVDU19DTElFTlRfR0FN", 
+            "RV9TV0lUQ0gQOBIgChxDU19TRVRfSU5ERUJBVEVEX1JFQkFURV9PUEVOEDsS", 
+            "HgoaQ1NfTlRGX1VQREFURV9QT1BVUENPTlRST0wQPBIVChFDU19NT0JJTEVf", 
+            "U1dJVENIUxA9Eh0KGUNTX01PQklMRV9TV0lUQ0hfT1BFUkFUT1IQPhIfChtD", 
+            "U19TRVRfSGVyb2NyYWZ0X1R3aWNlX09QRU4QQBIiCh5DU19TRVRfTUlEQVVU", 
+            "VU1OX0ZFU1RJVkFMX09QRU4QPxIaChZDU19OVEZfVVBEQVRFX0RCUFZQQ0ZH", 
+            "EEESIQodQ1NfTlRGX1VQREFURV9BUkNBREVHQU1FU1RPQ0sQQhIbChdDU19O", 
+            "VEZfVVBEQVRFX1NIVUlIVVBPVBBDEhMKD0NTX0ZydWl0ZUJpZ1BvdBBEEhkK", 
+            "FUNTX1NFVF9CQUNDQVJBUlRfT1BFThBFEhoKFkNTX1NFTEVDVF9CQUNDQVJB", 
+            "VF9QT1QQRhIbChdDU19PUEVSVE9SX0JBQ0NBUkFUX1BPVBBHEgwKCENTX1RP", 
+            "VEFMEGQqoAEKCk1vZHVsZVR5cGUSBwoDQUxMEAASCgoGU1lTVEVNEAESDAoI", 
+            "T1ZFUlZJRVcQAhIOCgpNT0RVTEVfTUFYEAISFAoQR0FNRV9UWVRQRV9CRUdJ", 
+            "ThBkEgkKBVRFWEFTEGQSBwoDWkZCEGUSCAoEQ0FSUxBmEgoKBlpPRElBQxBn", 
+          "EgwKCFRFWEFTX0VYEGgSEQoNR0FNRV9UWVBFX01BWBBo"));
       pbd::FileDescriptor.InternalDescriptorAssigner assigner = delegate(pbd::FileDescriptor root) {
         descriptor = root;
         internal__static_ProtoCmd_Service_BGSetZfbPotOpenReq__Descriptor = Descriptor.MessageTypes[0];
@@ -851,87 +871,107 @@ namespace ProtoCmd.Service {
         internal__static_ProtoCmd_Service_FruiteBigPot_S__FieldAccessorTable = 
             new pb::FieldAccess.FieldAccessorTable<global::ProtoCmd.Service.FruiteBigPot_S, global::ProtoCmd.Service.FruiteBigPot_S.Builder>(internal__static_ProtoCmd_Service_FruiteBigPot_S__Descriptor,
                 new string[] { "Suc", });
-        internal__static_ProtoCmd_Service_QueryRobotStatu__Descriptor = Descriptor.MessageTypes[91];
+        internal__static_ProtoCmd_Service_BGSetBaccaratPOTOpenReq__Descriptor = Descriptor.MessageTypes[91];
+        internal__static_ProtoCmd_Service_BGSetBaccaratPOTOpenReq__FieldAccessorTable = 
+            new pb::FieldAccess.FieldAccessorTable<global::ProtoCmd.Service.BGSetBaccaratPOTOpenReq, global::ProtoCmd.Service.BGSetBaccaratPOTOpenReq.Builder>(internal__static_ProtoCmd_Service_BGSetBaccaratPOTOpenReq__Descriptor,
+                new string[] { "IsOpen", });
+        internal__static_ProtoCmd_Service_BGSetBaccaratPOTOpenRes__Descriptor = Descriptor.MessageTypes[92];
+        internal__static_ProtoCmd_Service_BGSetBaccaratPOTOpenRes__FieldAccessorTable = 
+            new pb::FieldAccess.FieldAccessorTable<global::ProtoCmd.Service.BGSetBaccaratPOTOpenRes, global::ProtoCmd.Service.BGSetBaccaratPOTOpenRes.Builder>(internal__static_ProtoCmd_Service_BGSetBaccaratPOTOpenRes__Descriptor,
+                new string[] { "Suc", "CurrStatus", });
+        internal__static_ProtoCmd_Service_Baccarat_Select_S__Descriptor = Descriptor.MessageTypes[93];
+        internal__static_ProtoCmd_Service_Baccarat_Select_S__FieldAccessorTable = 
+            new pb::FieldAccess.FieldAccessorTable<global::ProtoCmd.Service.Baccarat_Select_S, global::ProtoCmd.Service.Baccarat_Select_S.Builder>(internal__static_ProtoCmd_Service_Baccarat_Select_S__Descriptor,
+                new string[] { "ChipNum", });
+        internal__static_ProtoCmd_Service_Baccarat_Operator_C__Descriptor = Descriptor.MessageTypes[94];
+        internal__static_ProtoCmd_Service_Baccarat_Operator_C__FieldAccessorTable = 
+            new pb::FieldAccess.FieldAccessorTable<global::ProtoCmd.Service.Baccarat_Operator_C, global::ProtoCmd.Service.Baccarat_Operator_C.Builder>(internal__static_ProtoCmd_Service_Baccarat_Operator_C__Descriptor,
+                new string[] { "OpType", "OpValue", "StrContent", });
+        internal__static_ProtoCmd_Service_Baccarat_Operator_S__Descriptor = Descriptor.MessageTypes[95];
+        internal__static_ProtoCmd_Service_Baccarat_Operator_S__FieldAccessorTable = 
+            new pb::FieldAccess.FieldAccessorTable<global::ProtoCmd.Service.Baccarat_Operator_S, global::ProtoCmd.Service.Baccarat_Operator_S.Builder>(internal__static_ProtoCmd_Service_Baccarat_Operator_S__Descriptor,
+                new string[] { "OpType", "Suc", });
+        internal__static_ProtoCmd_Service_QueryRobotStatu__Descriptor = Descriptor.MessageTypes[96];
         internal__static_ProtoCmd_Service_QueryRobotStatu__FieldAccessorTable = 
             new pb::FieldAccess.FieldAccessorTable<global::ProtoCmd.Service.QueryRobotStatu, global::ProtoCmd.Service.QueryRobotStatu.Builder>(internal__static_ProtoCmd_Service_QueryRobotStatu__Descriptor,
                 new string[] { "ModuleType", });
-        internal__static_ProtoCmd_Service_ModifyRobotConfig__Descriptor = Descriptor.MessageTypes[92];
+        internal__static_ProtoCmd_Service_ModifyRobotConfig__Descriptor = Descriptor.MessageTypes[97];
         internal__static_ProtoCmd_Service_ModifyRobotConfig__FieldAccessorTable = 
             new pb::FieldAccess.FieldAccessorTable<global::ProtoCmd.Service.ModifyRobotConfig, global::ProtoCmd.Service.ModifyRobotConfig.Builder>(internal__static_ProtoCmd_Service_ModifyRobotConfig__Descriptor,
                 new string[] { "GameType", "Limit", "IsBet", });
-        internal__static_ProtoCmd_Service_LoginRequest__Descriptor = Descriptor.MessageTypes[93];
+        internal__static_ProtoCmd_Service_LoginRequest__Descriptor = Descriptor.MessageTypes[98];
         internal__static_ProtoCmd_Service_LoginRequest__FieldAccessorTable = 
             new pb::FieldAccess.FieldAccessorTable<global::ProtoCmd.Service.LoginRequest, global::ProtoCmd.Service.LoginRequest.Builder>(internal__static_ProtoCmd_Service_LoginRequest__Descriptor,
                 new string[] { "GameType", "LoginFrequency", "LoginCnt", "Strategy", });
-        internal__static_ProtoCmd_Service_GameStatu__Descriptor = Descriptor.MessageTypes[94];
+        internal__static_ProtoCmd_Service_GameStatu__Descriptor = Descriptor.MessageTypes[99];
         internal__static_ProtoCmd_Service_GameStatu__FieldAccessorTable = 
             new pb::FieldAccess.FieldAccessorTable<global::ProtoCmd.Service.GameStatu, global::ProtoCmd.Service.GameStatu.Builder>(internal__static_ProtoCmd_Service_GameStatu__Descriptor,
                 new string[] { "GameType", "PlayerCnt", "PlayerLimit", "IsBet", });
-        internal__static_ProtoCmd_Service_GameOverView__Descriptor = Descriptor.MessageTypes[95];
+        internal__static_ProtoCmd_Service_GameOverView__Descriptor = Descriptor.MessageTypes[100];
         internal__static_ProtoCmd_Service_GameOverView__FieldAccessorTable = 
             new pb::FieldAccess.FieldAccessorTable<global::ProtoCmd.Service.GameOverView, global::ProtoCmd.Service.GameOverView.Builder>(internal__static_ProtoCmd_Service_GameOverView__Descriptor,
                 new string[] { "PlayerCnt", });
-        internal__static_ProtoCmd_Service_SystemStatu__Descriptor = Descriptor.MessageTypes[96];
+        internal__static_ProtoCmd_Service_SystemStatu__Descriptor = Descriptor.MessageTypes[101];
         internal__static_ProtoCmd_Service_SystemStatu__FieldAccessorTable = 
             new pb::FieldAccess.FieldAccessorTable<global::ProtoCmd.Service.SystemStatu, global::ProtoCmd.Service.SystemStatu.Builder>(internal__static_ProtoCmd_Service_SystemStatu__Descriptor,
                 new string[] { "CpuPercent", "MemUsed", "MemTotal", "FlowRate", "ConnCnt", "ConnLimit", });
-        internal__static_ProtoCmd_Service_RobotStatus__Descriptor = Descriptor.MessageTypes[97];
+        internal__static_ProtoCmd_Service_RobotStatus__Descriptor = Descriptor.MessageTypes[102];
         internal__static_ProtoCmd_Service_RobotStatus__FieldAccessorTable = 
             new pb::FieldAccess.FieldAccessorTable<global::ProtoCmd.Service.RobotStatus, global::ProtoCmd.Service.RobotStatus.Builder>(internal__static_ProtoCmd_Service_RobotStatus__Descriptor,
                 new string[] { "ModuleType", "GameStatu", "GameOverview", "SystemStatu", });
-        internal__static_ProtoCmd_Service_ErrorMessage__Descriptor = Descriptor.MessageTypes[98];
+        internal__static_ProtoCmd_Service_ErrorMessage__Descriptor = Descriptor.MessageTypes[103];
         internal__static_ProtoCmd_Service_ErrorMessage__FieldAccessorTable = 
             new pb::FieldAccess.FieldAccessorTable<global::ProtoCmd.Service.ErrorMessage, global::ProtoCmd.Service.ErrorMessage.Builder>(internal__static_ProtoCmd_Service_ErrorMessage__Descriptor,
                 new string[] { "ErrorMessage_", });
-        internal__static_ProtoCmd_Service_UserStateReq__Descriptor = Descriptor.MessageTypes[99];
+        internal__static_ProtoCmd_Service_UserStateReq__Descriptor = Descriptor.MessageTypes[104];
         internal__static_ProtoCmd_Service_UserStateReq__FieldAccessorTable = 
             new pb::FieldAccess.FieldAccessorTable<global::ProtoCmd.Service.UserStateReq, global::ProtoCmd.Service.UserStateReq.Builder>(internal__static_ProtoCmd_Service_UserStateReq__Descriptor,
                 new string[] { "UserId", });
-        internal__static_ProtoCmd_Service_UserStateRes__Descriptor = Descriptor.MessageTypes[100];
+        internal__static_ProtoCmd_Service_UserStateRes__Descriptor = Descriptor.MessageTypes[105];
         internal__static_ProtoCmd_Service_UserStateRes__FieldAccessorTable = 
             new pb::FieldAccess.FieldAccessorTable<global::ProtoCmd.Service.UserStateRes, global::ProtoCmd.Service.UserStateRes.Builder>(internal__static_ProtoCmd_Service_UserStateRes__Descriptor,
                 new string[] { "UserId", "State", "RoomId", "RoomType", });
-        internal__static_ProtoCmd_Service_UserScoreAward__Descriptor = Descriptor.MessageTypes[101];
+        internal__static_ProtoCmd_Service_UserScoreAward__Descriptor = Descriptor.MessageTypes[106];
         internal__static_ProtoCmd_Service_UserScoreAward__FieldAccessorTable = 
             new pb::FieldAccess.FieldAccessorTable<global::ProtoCmd.Service.UserScoreAward, global::ProtoCmd.Service.UserScoreAward.Builder>(internal__static_ProtoCmd_Service_UserScoreAward__Descriptor,
                 new string[] { "TLastGetAwardTime", "TFinalGetScoreTime", "TLastGetScoreTime", "DwLastGetScore", "DwNowGetScore", });
-        internal__static_ProtoCmd_Service_UserSign__Descriptor = Descriptor.MessageTypes[102];
+        internal__static_ProtoCmd_Service_UserSign__Descriptor = Descriptor.MessageTypes[107];
         internal__static_ProtoCmd_Service_UserSign__FieldAccessorTable = 
             new pb::FieldAccess.FieldAccessorTable<global::ProtoCmd.Service.UserSign, global::ProtoCmd.Service.UserSign.Builder>(internal__static_ProtoCmd_Service_UserSign__Descriptor,
                 new string[] { "WConti", "TlastLoginTime", "TSignLuckTime", "TSignAwardTime", "ByStatus0", "ByStatus1", "ByStatus2", });
-        internal__static_ProtoCmd_Service_UserExData__Descriptor = Descriptor.MessageTypes[103];
+        internal__static_ProtoCmd_Service_UserExData__Descriptor = Descriptor.MessageTypes[108];
         internal__static_ProtoCmd_Service_UserExData__FieldAccessorTable = 
             new pb::FieldAccess.FieldAccessorTable<global::ProtoCmd.Service.UserExData, global::ProtoCmd.Service.UserExData.Builder>(internal__static_ProtoCmd_Service_UserExData__Descriptor,
                 new string[] { "WMaxFriend", "LastLoginTime", "LastMoneyTime", "FinalGetScoreTime", "LastMoney", "NowMoney", "MaxCard", "ListInfo", });
-        internal__static_ProtoCmd_Service_GameInfo__Descriptor = Descriptor.MessageTypes[104];
+        internal__static_ProtoCmd_Service_GameInfo__Descriptor = Descriptor.MessageTypes[109];
         internal__static_ProtoCmd_Service_GameInfo__FieldAccessorTable = 
             new pb::FieldAccess.FieldAccessorTable<global::ProtoCmd.Service.GameInfo, global::ProtoCmd.Service.GameInfo.Builder>(internal__static_ProtoCmd_Service_GameInfo__Descriptor,
                 new string[] { "GameID", "DwWin", "DwTotal", "MaxWinChip", });
-        internal__static_ProtoCmd_Service_SpellCardInfo__Descriptor = Descriptor.MessageTypes[105];
+        internal__static_ProtoCmd_Service_SpellCardInfo__Descriptor = Descriptor.MessageTypes[110];
         internal__static_ProtoCmd_Service_SpellCardInfo__FieldAccessorTable = 
             new pb::FieldAccess.FieldAccessorTable<global::ProtoCmd.Service.SpellCardInfo, global::ProtoCmd.Service.SpellCardInfo.Builder>(internal__static_ProtoCmd_Service_SpellCardInfo__Descriptor,
                 new string[] { "Time", "JoinTimes", "WinTimes", "RobTimes", "GetBox", });
-        internal__static_ProtoCmd_Service_toolsData__Descriptor = Descriptor.MessageTypes[106];
+        internal__static_ProtoCmd_Service_toolsData__Descriptor = Descriptor.MessageTypes[111];
         internal__static_ProtoCmd_Service_toolsData__FieldAccessorTable = 
             new pb::FieldAccess.FieldAccessorTable<global::ProtoCmd.Service.toolsData, global::ProtoCmd.Service.toolsData.Builder>(internal__static_ProtoCmd_Service_toolsData__Descriptor,
                 new string[] { "ToolsId", "Bmark", "GetTime", "LastTime", "UseTimes", "TotalTimes", });
-        internal__static_ProtoCmd_Service_ToolsInfo__Descriptor = Descriptor.MessageTypes[107];
+        internal__static_ProtoCmd_Service_ToolsInfo__Descriptor = Descriptor.MessageTypes[112];
         internal__static_ProtoCmd_Service_ToolsInfo__FieldAccessorTable = 
             new pb::FieldAccess.FieldAccessorTable<global::ProtoCmd.Service.ToolsInfo, global::ProtoCmd.Service.ToolsInfo.Builder>(internal__static_ProtoCmd_Service_ToolsInfo__Descriptor,
                 new string[] { "ListTools", });
-        internal__static_ProtoCmd_Service_VipInfo__Descriptor = Descriptor.MessageTypes[108];
+        internal__static_ProtoCmd_Service_VipInfo__Descriptor = Descriptor.MessageTypes[113];
         internal__static_ProtoCmd_Service_VipInfo__FieldAccessorTable = 
             new pb::FieldAccess.FieldAccessorTable<global::ProtoCmd.Service.VipInfo, global::ProtoCmd.Service.VipInfo.Builder>(internal__static_ProtoCmd_Service_VipInfo__Descriptor,
                 new string[] { "Grade", "Current", "LastGet", "LastLevelupAwardLevel", });
-        internal__static_ProtoCmd_Service_LevelInfo__Descriptor = Descriptor.MessageTypes[109];
+        internal__static_ProtoCmd_Service_LevelInfo__Descriptor = Descriptor.MessageTypes[114];
         internal__static_ProtoCmd_Service_LevelInfo__FieldAccessorTable = 
             new pb::FieldAccess.FieldAccessorTable<global::ProtoCmd.Service.LevelInfo, global::ProtoCmd.Service.LevelInfo.Builder>(internal__static_ProtoCmd_Service_LevelInfo__Descriptor,
                 new string[] { "Level", "Exp", "ReawardLevel", });
-        internal__static_ProtoCmd_Service_VipCard__Descriptor = Descriptor.MessageTypes[110];
+        internal__static_ProtoCmd_Service_VipCard__Descriptor = Descriptor.MessageTypes[115];
         internal__static_ProtoCmd_Service_VipCard__FieldAccessorTable = 
             new pb::FieldAccess.FieldAccessorTable<global::ProtoCmd.Service.VipCard, global::ProtoCmd.Service.VipCard.Builder>(internal__static_ProtoCmd_Service_VipCard__Descriptor,
                 new string[] { "TEndTime", });
-        internal__static_ProtoCmd_Service_BExtInfo__Descriptor = Descriptor.MessageTypes[111];
+        internal__static_ProtoCmd_Service_BExtInfo__Descriptor = Descriptor.MessageTypes[116];
         internal__static_ProtoCmd_Service_BExtInfo__FieldAccessorTable = 
             new pb::FieldAccess.FieldAccessorTable<global::ProtoCmd.Service.BExtInfo, global::ProtoCmd.Service.BExtInfo.Builder>(internal__static_ProtoCmd_Service_BExtInfo__Descriptor,
                 new string[] { "ScoreAward", "UserSign", "UserExData", "SpellCard", "ToolsInfo", "VipInfo", "LevelInfo", "VipCard", });
@@ -1001,6 +1041,9 @@ namespace ProtoCmd.Service {
     SC_NTF_UPDATE_ARCADEGAMESTOCK = 66,
     SC_NTF_UPDATE_SHUIHUPOT = 67,
     SC_FruiteBigPot = 68,
+    SC_SET_BACCARATPOT_OPEN = 69,
+    SC_SELECT_BACCARAT_POT = 70,
+    SC_OPERTOR_BACCARAT_POT = 71,
     SC_TOTAL = 200,
   }
   
@@ -1060,6 +1103,9 @@ namespace ProtoCmd.Service {
     CS_NTF_UPDATE_ARCADEGAMESTOCK = 66,
     CS_NTF_UPDATE_SHUIHUPOT = 67,
     CS_FruiteBigPot = 68,
+    CS_SET_BACCARART_OPEN = 69,
+    CS_SELECT_BACCARAT_POT = 70,
+    CS_OPERTOR_BACCARAT_POT = 71,
     CS_TOTAL = 100,
   }
   
@@ -30168,8 +30214,8 @@ namespace ProtoCmd.Service {
   public sealed partial class FruiteBigPot_C : pb::GeneratedMessage<FruiteBigPot_C, FruiteBigPot_C.Builder> {
     private FruiteBigPot_C() { }
     private static readonly FruiteBigPot_C defaultInstance = new FruiteBigPot_C().MakeReadOnly();
-    private static readonly string[] _FruiteBigPotCFieldNames = new string[] { "mod", "type", "value" };
-    private static readonly uint[] _FruiteBigPotCFieldTags = new uint[] { 8, 16, 24 };
+    private static readonly string[] _fruiteBigPotCFieldNames = new string[] { "mod", "type", "value" };
+    private static readonly uint[] _fruiteBigPotCFieldTags = new uint[] { 8, 16, 24 };
     public static FruiteBigPot_C DefaultInstance {
       get { return defaultInstance; }
     }
@@ -30228,7 +30274,7 @@ namespace ProtoCmd.Service {
     
     public override void WriteTo(pb::ICodedOutputStream output) {
       CalcSerializedSize();
-      string[] field_names = _FruiteBigPotCFieldNames;
+      string[] field_names = _fruiteBigPotCFieldNames;
       if (hasMod) {
         output.WriteInt32(1, field_names[0], Mod);
       }
@@ -30410,9 +30456,9 @@ namespace ProtoCmd.Service {
         string field_name;
         while (input.ReadTag(out tag, out field_name)) {
           if(tag == 0 && field_name != null) {
-            int field_ordinal = global::System.Array.BinarySearch(_FruiteBigPotCFieldNames, field_name, global::System.StringComparer.Ordinal);
+            int field_ordinal = global::System.Array.BinarySearch(_fruiteBigPotCFieldNames, field_name, global::System.StringComparer.Ordinal);
             if(field_ordinal >= 0)
-              tag = _FruiteBigPotCFieldTags[field_ordinal];
+              tag = _fruiteBigPotCFieldTags[field_ordinal];
             else {
               if (unknownFields == null) {
                 unknownFields = pb::UnknownFieldSet.CreateBuilder(this.UnknownFields);
@@ -30529,8 +30575,8 @@ namespace ProtoCmd.Service {
   public sealed partial class FruiteBigPot_S : pb::GeneratedMessage<FruiteBigPot_S, FruiteBigPot_S.Builder> {
     private FruiteBigPot_S() { }
     private static readonly FruiteBigPot_S defaultInstance = new FruiteBigPot_S().MakeReadOnly();
-    private static readonly string[] _FruiteBigPotSFieldNames = new string[] { "suc" };
-    private static readonly uint[] _FruiteBigPotSFieldTags = new uint[] { 8 };
+    private static readonly string[] _fruiteBigPotSFieldNames = new string[] { "suc" };
+    private static readonly uint[] _fruiteBigPotSFieldTags = new uint[] { 8 };
     public static FruiteBigPot_S DefaultInstance {
       get { return defaultInstance; }
     }
@@ -30569,7 +30615,7 @@ namespace ProtoCmd.Service {
     
     public override void WriteTo(pb::ICodedOutputStream output) {
       CalcSerializedSize();
-      string[] field_names = _FruiteBigPotSFieldNames;
+      string[] field_names = _fruiteBigPotSFieldNames;
       if (hasSuc) {
         output.WriteBool(1, field_names[0], Suc);
       }
@@ -30733,9 +30779,9 @@ namespace ProtoCmd.Service {
         string field_name;
         while (input.ReadTag(out tag, out field_name)) {
           if(tag == 0 && field_name != null) {
-            int field_ordinal = global::System.Array.BinarySearch(_FruiteBigPotSFieldNames, field_name, global::System.StringComparer.Ordinal);
+            int field_ordinal = global::System.Array.BinarySearch(_fruiteBigPotSFieldNames, field_name, global::System.StringComparer.Ordinal);
             if(field_ordinal >= 0)
-              tag = _FruiteBigPotSFieldTags[field_ordinal];
+              tag = _fruiteBigPotSFieldTags[field_ordinal];
             else {
               if (unknownFields == null) {
                 unknownFields = pb::UnknownFieldSet.CreateBuilder(this.UnknownFields);
@@ -30796,6 +30842,1567 @@ namespace ProtoCmd.Service {
       }
     }
     static FruiteBigPot_S() {
+      object.ReferenceEquals(global::ProtoCmd.Service.Service.Descriptor, null);
+    }
+  }
+  
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+  public sealed partial class BGSetBaccaratPOTOpenReq : pb::GeneratedMessage<BGSetBaccaratPOTOpenReq, BGSetBaccaratPOTOpenReq.Builder> {
+    private BGSetBaccaratPOTOpenReq() { }
+    private static readonly BGSetBaccaratPOTOpenReq defaultInstance = new BGSetBaccaratPOTOpenReq().MakeReadOnly();
+    private static readonly string[] _bGSetBaccaratPOTOpenReqFieldNames = new string[] { "isOpen" };
+    private static readonly uint[] _bGSetBaccaratPOTOpenReqFieldTags = new uint[] { 8 };
+    public static BGSetBaccaratPOTOpenReq DefaultInstance {
+      get { return defaultInstance; }
+    }
+    
+    public override BGSetBaccaratPOTOpenReq DefaultInstanceForType {
+      get { return DefaultInstance; }
+    }
+    
+    protected override BGSetBaccaratPOTOpenReq ThisMessage {
+      get { return this; }
+    }
+    
+    public static pbd::MessageDescriptor Descriptor {
+      get { return global::ProtoCmd.Service.Service.internal__static_ProtoCmd_Service_BGSetBaccaratPOTOpenReq__Descriptor; }
+    }
+    
+    protected override pb::FieldAccess.FieldAccessorTable<BGSetBaccaratPOTOpenReq, BGSetBaccaratPOTOpenReq.Builder> InternalFieldAccessors {
+      get { return global::ProtoCmd.Service.Service.internal__static_ProtoCmd_Service_BGSetBaccaratPOTOpenReq__FieldAccessorTable; }
+    }
+    
+    public const int IsOpenFieldNumber = 1;
+    private bool hasIsOpen;
+    private int isOpen_;
+    public bool HasIsOpen {
+      get { return hasIsOpen; }
+    }
+    public int IsOpen {
+      get { return isOpen_; }
+    }
+    
+    public override bool IsInitialized {
+      get {
+        return true;
+      }
+    }
+    
+    public override void WriteTo(pb::ICodedOutputStream output) {
+      CalcSerializedSize();
+      string[] field_names = _bGSetBaccaratPOTOpenReqFieldNames;
+      if (hasIsOpen) {
+        output.WriteInt32(1, field_names[0], IsOpen);
+      }
+      UnknownFields.WriteTo(output);
+    }
+    
+    private int memoizedSerializedSize = -1;
+    public override int SerializedSize {
+      get {
+        int size = memoizedSerializedSize;
+        if (size != -1) return size;
+        return CalcSerializedSize();
+      }
+    }
+    
+    private int CalcSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+      
+      size = 0;
+      if (hasIsOpen) {
+        size += pb::CodedOutputStream.ComputeInt32Size(1, IsOpen);
+      }
+      size += UnknownFields.SerializedSize;
+      memoizedSerializedSize = size;
+      return size;
+    }
+    public static BGSetBaccaratPOTOpenReq ParseFrom(pb::ByteString data) {
+      return ((Builder) CreateBuilder().MergeFrom(data)).BuildParsed();
+    }
+    public static BGSetBaccaratPOTOpenReq ParseFrom(pb::ByteString data, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(data, extensionRegistry)).BuildParsed();
+    }
+    public static BGSetBaccaratPOTOpenReq ParseFrom(byte[] data) {
+      return ((Builder) CreateBuilder().MergeFrom(data)).BuildParsed();
+    }
+    public static BGSetBaccaratPOTOpenReq ParseFrom(byte[] data, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(data, extensionRegistry)).BuildParsed();
+    }
+    public static BGSetBaccaratPOTOpenReq ParseFrom(global::System.IO.Stream input) {
+      return ((Builder) CreateBuilder().MergeFrom(input)).BuildParsed();
+    }
+    public static BGSetBaccaratPOTOpenReq ParseFrom(global::System.IO.Stream input, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(input, extensionRegistry)).BuildParsed();
+    }
+    public static BGSetBaccaratPOTOpenReq ParseDelimitedFrom(global::System.IO.Stream input) {
+      return CreateBuilder().MergeDelimitedFrom(input).BuildParsed();
+    }
+    public static BGSetBaccaratPOTOpenReq ParseDelimitedFrom(global::System.IO.Stream input, pb::ExtensionRegistry extensionRegistry) {
+      return CreateBuilder().MergeDelimitedFrom(input, extensionRegistry).BuildParsed();
+    }
+    public static BGSetBaccaratPOTOpenReq ParseFrom(pb::ICodedInputStream input) {
+      return ((Builder) CreateBuilder().MergeFrom(input)).BuildParsed();
+    }
+    public static BGSetBaccaratPOTOpenReq ParseFrom(pb::ICodedInputStream input, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(input, extensionRegistry)).BuildParsed();
+    }
+    private BGSetBaccaratPOTOpenReq MakeReadOnly() {
+      return this;
+    }
+    
+    public static Builder CreateBuilder() { return new Builder(); }
+    public override Builder ToBuilder() { return CreateBuilder(this); }
+    public override Builder CreateBuilderForType() { return new Builder(); }
+    public static Builder CreateBuilder(BGSetBaccaratPOTOpenReq prototype) {
+      return new Builder(prototype);
+    }
+    
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+    public sealed partial class Builder : pb::GeneratedBuilder<BGSetBaccaratPOTOpenReq, Builder> {
+      protected override Builder ThisBuilder {
+        get { return this; }
+      }
+      public Builder() {
+        result = DefaultInstance;
+        resultIsReadOnly = true;
+      }
+      internal Builder(BGSetBaccaratPOTOpenReq cloneFrom) {
+        result = cloneFrom;
+        resultIsReadOnly = true;
+      }
+      
+      private bool resultIsReadOnly;
+      private BGSetBaccaratPOTOpenReq result;
+      
+      private BGSetBaccaratPOTOpenReq PrepareBuilder() {
+        if (resultIsReadOnly) {
+          BGSetBaccaratPOTOpenReq original = result;
+          result = new BGSetBaccaratPOTOpenReq();
+          resultIsReadOnly = false;
+          MergeFrom(original);
+        }
+        return result;
+      }
+      
+      public override bool IsInitialized {
+        get { return result.IsInitialized; }
+      }
+      
+      protected override BGSetBaccaratPOTOpenReq MessageBeingBuilt {
+        get { return PrepareBuilder(); }
+      }
+      
+      public override Builder Clear() {
+        result = DefaultInstance;
+        resultIsReadOnly = true;
+        return this;
+      }
+      
+      public override Builder Clone() {
+        if (resultIsReadOnly) {
+          return new Builder(result);
+        } else {
+          return new Builder().MergeFrom(result);
+        }
+      }
+      
+      public override pbd::MessageDescriptor DescriptorForType {
+        get { return global::ProtoCmd.Service.BGSetBaccaratPOTOpenReq.Descriptor; }
+      }
+      
+      public override BGSetBaccaratPOTOpenReq DefaultInstanceForType {
+        get { return global::ProtoCmd.Service.BGSetBaccaratPOTOpenReq.DefaultInstance; }
+      }
+      
+      public override BGSetBaccaratPOTOpenReq BuildPartial() {
+        if (resultIsReadOnly) {
+          return result;
+        }
+        resultIsReadOnly = true;
+        return result.MakeReadOnly();
+      }
+      
+      public override Builder MergeFrom(pb::IMessage other) {
+        if (other is BGSetBaccaratPOTOpenReq) {
+          return MergeFrom((BGSetBaccaratPOTOpenReq) other);
+        } else {
+          base.MergeFrom(other);
+          return this;
+        }
+      }
+      
+      public override Builder MergeFrom(BGSetBaccaratPOTOpenReq other) {
+        if (other == global::ProtoCmd.Service.BGSetBaccaratPOTOpenReq.DefaultInstance) return this;
+        PrepareBuilder();
+        if (other.HasIsOpen) {
+          IsOpen = other.IsOpen;
+        }
+        this.MergeUnknownFields(other.UnknownFields);
+        return this;
+      }
+      
+      public override Builder MergeFrom(pb::ICodedInputStream input) {
+        return MergeFrom(input, pb::ExtensionRegistry.Empty);
+      }
+      
+      public override Builder MergeFrom(pb::ICodedInputStream input, pb::ExtensionRegistry extensionRegistry) {
+        PrepareBuilder();
+        pb::UnknownFieldSet.Builder unknownFields = null;
+        uint tag;
+        string field_name;
+        while (input.ReadTag(out tag, out field_name)) {
+          if(tag == 0 && field_name != null) {
+            int field_ordinal = global::System.Array.BinarySearch(_bGSetBaccaratPOTOpenReqFieldNames, field_name, global::System.StringComparer.Ordinal);
+            if(field_ordinal >= 0)
+              tag = _bGSetBaccaratPOTOpenReqFieldTags[field_ordinal];
+            else {
+              if (unknownFields == null) {
+                unknownFields = pb::UnknownFieldSet.CreateBuilder(this.UnknownFields);
+              }
+              ParseUnknownField(input, unknownFields, extensionRegistry, tag, field_name);
+              continue;
+            }
+          }
+          switch (tag) {
+            case 0: {
+              throw pb::InvalidProtocolBufferException.InvalidTag();
+            }
+            default: {
+              if (pb::WireFormat.IsEndGroupTag(tag)) {
+                if (unknownFields != null) {
+                  this.UnknownFields = unknownFields.Build();
+                }
+                return this;
+              }
+              if (unknownFields == null) {
+                unknownFields = pb::UnknownFieldSet.CreateBuilder(this.UnknownFields);
+              }
+              ParseUnknownField(input, unknownFields, extensionRegistry, tag, field_name);
+              break;
+            }
+            case 8: {
+              result.hasIsOpen = input.ReadInt32(ref result.isOpen_);
+              break;
+            }
+          }
+        }
+        
+        if (unknownFields != null) {
+          this.UnknownFields = unknownFields.Build();
+        }
+        return this;
+      }
+      
+      
+      public bool HasIsOpen {
+        get { return result.hasIsOpen; }
+      }
+      public int IsOpen {
+        get { return result.IsOpen; }
+        set { SetIsOpen(value); }
+      }
+      public Builder SetIsOpen(int value) {
+        PrepareBuilder();
+        result.hasIsOpen = true;
+        result.isOpen_ = value;
+        return this;
+      }
+      public Builder ClearIsOpen() {
+        PrepareBuilder();
+        result.hasIsOpen = false;
+        result.isOpen_ = 0;
+        return this;
+      }
+    }
+    static BGSetBaccaratPOTOpenReq() {
+      object.ReferenceEquals(global::ProtoCmd.Service.Service.Descriptor, null);
+    }
+  }
+  
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+  public sealed partial class BGSetBaccaratPOTOpenRes : pb::GeneratedMessage<BGSetBaccaratPOTOpenRes, BGSetBaccaratPOTOpenRes.Builder> {
+    private BGSetBaccaratPOTOpenRes() { }
+    private static readonly BGSetBaccaratPOTOpenRes defaultInstance = new BGSetBaccaratPOTOpenRes().MakeReadOnly();
+    private static readonly string[] _bGSetBaccaratPOTOpenResFieldNames = new string[] { "currStatus", "suc" };
+    private static readonly uint[] _bGSetBaccaratPOTOpenResFieldTags = new uint[] { 16, 8 };
+    public static BGSetBaccaratPOTOpenRes DefaultInstance {
+      get { return defaultInstance; }
+    }
+    
+    public override BGSetBaccaratPOTOpenRes DefaultInstanceForType {
+      get { return DefaultInstance; }
+    }
+    
+    protected override BGSetBaccaratPOTOpenRes ThisMessage {
+      get { return this; }
+    }
+    
+    public static pbd::MessageDescriptor Descriptor {
+      get { return global::ProtoCmd.Service.Service.internal__static_ProtoCmd_Service_BGSetBaccaratPOTOpenRes__Descriptor; }
+    }
+    
+    protected override pb::FieldAccess.FieldAccessorTable<BGSetBaccaratPOTOpenRes, BGSetBaccaratPOTOpenRes.Builder> InternalFieldAccessors {
+      get { return global::ProtoCmd.Service.Service.internal__static_ProtoCmd_Service_BGSetBaccaratPOTOpenRes__FieldAccessorTable; }
+    }
+    
+    public const int SucFieldNumber = 1;
+    private bool hasSuc;
+    private int suc_;
+    public bool HasSuc {
+      get { return hasSuc; }
+    }
+    public int Suc {
+      get { return suc_; }
+    }
+    
+    public const int CurrStatusFieldNumber = 2;
+    private bool hasCurrStatus;
+    private int currStatus_;
+    public bool HasCurrStatus {
+      get { return hasCurrStatus; }
+    }
+    public int CurrStatus {
+      get { return currStatus_; }
+    }
+    
+    public override bool IsInitialized {
+      get {
+        return true;
+      }
+    }
+    
+    public override void WriteTo(pb::ICodedOutputStream output) {
+      CalcSerializedSize();
+      string[] field_names = _bGSetBaccaratPOTOpenResFieldNames;
+      if (hasSuc) {
+        output.WriteInt32(1, field_names[1], Suc);
+      }
+      if (hasCurrStatus) {
+        output.WriteInt32(2, field_names[0], CurrStatus);
+      }
+      UnknownFields.WriteTo(output);
+    }
+    
+    private int memoizedSerializedSize = -1;
+    public override int SerializedSize {
+      get {
+        int size = memoizedSerializedSize;
+        if (size != -1) return size;
+        return CalcSerializedSize();
+      }
+    }
+    
+    private int CalcSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+      
+      size = 0;
+      if (hasSuc) {
+        size += pb::CodedOutputStream.ComputeInt32Size(1, Suc);
+      }
+      if (hasCurrStatus) {
+        size += pb::CodedOutputStream.ComputeInt32Size(2, CurrStatus);
+      }
+      size += UnknownFields.SerializedSize;
+      memoizedSerializedSize = size;
+      return size;
+    }
+    public static BGSetBaccaratPOTOpenRes ParseFrom(pb::ByteString data) {
+      return ((Builder) CreateBuilder().MergeFrom(data)).BuildParsed();
+    }
+    public static BGSetBaccaratPOTOpenRes ParseFrom(pb::ByteString data, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(data, extensionRegistry)).BuildParsed();
+    }
+    public static BGSetBaccaratPOTOpenRes ParseFrom(byte[] data) {
+      return ((Builder) CreateBuilder().MergeFrom(data)).BuildParsed();
+    }
+    public static BGSetBaccaratPOTOpenRes ParseFrom(byte[] data, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(data, extensionRegistry)).BuildParsed();
+    }
+    public static BGSetBaccaratPOTOpenRes ParseFrom(global::System.IO.Stream input) {
+      return ((Builder) CreateBuilder().MergeFrom(input)).BuildParsed();
+    }
+    public static BGSetBaccaratPOTOpenRes ParseFrom(global::System.IO.Stream input, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(input, extensionRegistry)).BuildParsed();
+    }
+    public static BGSetBaccaratPOTOpenRes ParseDelimitedFrom(global::System.IO.Stream input) {
+      return CreateBuilder().MergeDelimitedFrom(input).BuildParsed();
+    }
+    public static BGSetBaccaratPOTOpenRes ParseDelimitedFrom(global::System.IO.Stream input, pb::ExtensionRegistry extensionRegistry) {
+      return CreateBuilder().MergeDelimitedFrom(input, extensionRegistry).BuildParsed();
+    }
+    public static BGSetBaccaratPOTOpenRes ParseFrom(pb::ICodedInputStream input) {
+      return ((Builder) CreateBuilder().MergeFrom(input)).BuildParsed();
+    }
+    public static BGSetBaccaratPOTOpenRes ParseFrom(pb::ICodedInputStream input, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(input, extensionRegistry)).BuildParsed();
+    }
+    private BGSetBaccaratPOTOpenRes MakeReadOnly() {
+      return this;
+    }
+    
+    public static Builder CreateBuilder() { return new Builder(); }
+    public override Builder ToBuilder() { return CreateBuilder(this); }
+    public override Builder CreateBuilderForType() { return new Builder(); }
+    public static Builder CreateBuilder(BGSetBaccaratPOTOpenRes prototype) {
+      return new Builder(prototype);
+    }
+    
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+    public sealed partial class Builder : pb::GeneratedBuilder<BGSetBaccaratPOTOpenRes, Builder> {
+      protected override Builder ThisBuilder {
+        get { return this; }
+      }
+      public Builder() {
+        result = DefaultInstance;
+        resultIsReadOnly = true;
+      }
+      internal Builder(BGSetBaccaratPOTOpenRes cloneFrom) {
+        result = cloneFrom;
+        resultIsReadOnly = true;
+      }
+      
+      private bool resultIsReadOnly;
+      private BGSetBaccaratPOTOpenRes result;
+      
+      private BGSetBaccaratPOTOpenRes PrepareBuilder() {
+        if (resultIsReadOnly) {
+          BGSetBaccaratPOTOpenRes original = result;
+          result = new BGSetBaccaratPOTOpenRes();
+          resultIsReadOnly = false;
+          MergeFrom(original);
+        }
+        return result;
+      }
+      
+      public override bool IsInitialized {
+        get { return result.IsInitialized; }
+      }
+      
+      protected override BGSetBaccaratPOTOpenRes MessageBeingBuilt {
+        get { return PrepareBuilder(); }
+      }
+      
+      public override Builder Clear() {
+        result = DefaultInstance;
+        resultIsReadOnly = true;
+        return this;
+      }
+      
+      public override Builder Clone() {
+        if (resultIsReadOnly) {
+          return new Builder(result);
+        } else {
+          return new Builder().MergeFrom(result);
+        }
+      }
+      
+      public override pbd::MessageDescriptor DescriptorForType {
+        get { return global::ProtoCmd.Service.BGSetBaccaratPOTOpenRes.Descriptor; }
+      }
+      
+      public override BGSetBaccaratPOTOpenRes DefaultInstanceForType {
+        get { return global::ProtoCmd.Service.BGSetBaccaratPOTOpenRes.DefaultInstance; }
+      }
+      
+      public override BGSetBaccaratPOTOpenRes BuildPartial() {
+        if (resultIsReadOnly) {
+          return result;
+        }
+        resultIsReadOnly = true;
+        return result.MakeReadOnly();
+      }
+      
+      public override Builder MergeFrom(pb::IMessage other) {
+        if (other is BGSetBaccaratPOTOpenRes) {
+          return MergeFrom((BGSetBaccaratPOTOpenRes) other);
+        } else {
+          base.MergeFrom(other);
+          return this;
+        }
+      }
+      
+      public override Builder MergeFrom(BGSetBaccaratPOTOpenRes other) {
+        if (other == global::ProtoCmd.Service.BGSetBaccaratPOTOpenRes.DefaultInstance) return this;
+        PrepareBuilder();
+        if (other.HasSuc) {
+          Suc = other.Suc;
+        }
+        if (other.HasCurrStatus) {
+          CurrStatus = other.CurrStatus;
+        }
+        this.MergeUnknownFields(other.UnknownFields);
+        return this;
+      }
+      
+      public override Builder MergeFrom(pb::ICodedInputStream input) {
+        return MergeFrom(input, pb::ExtensionRegistry.Empty);
+      }
+      
+      public override Builder MergeFrom(pb::ICodedInputStream input, pb::ExtensionRegistry extensionRegistry) {
+        PrepareBuilder();
+        pb::UnknownFieldSet.Builder unknownFields = null;
+        uint tag;
+        string field_name;
+        while (input.ReadTag(out tag, out field_name)) {
+          if(tag == 0 && field_name != null) {
+            int field_ordinal = global::System.Array.BinarySearch(_bGSetBaccaratPOTOpenResFieldNames, field_name, global::System.StringComparer.Ordinal);
+            if(field_ordinal >= 0)
+              tag = _bGSetBaccaratPOTOpenResFieldTags[field_ordinal];
+            else {
+              if (unknownFields == null) {
+                unknownFields = pb::UnknownFieldSet.CreateBuilder(this.UnknownFields);
+              }
+              ParseUnknownField(input, unknownFields, extensionRegistry, tag, field_name);
+              continue;
+            }
+          }
+          switch (tag) {
+            case 0: {
+              throw pb::InvalidProtocolBufferException.InvalidTag();
+            }
+            default: {
+              if (pb::WireFormat.IsEndGroupTag(tag)) {
+                if (unknownFields != null) {
+                  this.UnknownFields = unknownFields.Build();
+                }
+                return this;
+              }
+              if (unknownFields == null) {
+                unknownFields = pb::UnknownFieldSet.CreateBuilder(this.UnknownFields);
+              }
+              ParseUnknownField(input, unknownFields, extensionRegistry, tag, field_name);
+              break;
+            }
+            case 8: {
+              result.hasSuc = input.ReadInt32(ref result.suc_);
+              break;
+            }
+            case 16: {
+              result.hasCurrStatus = input.ReadInt32(ref result.currStatus_);
+              break;
+            }
+          }
+        }
+        
+        if (unknownFields != null) {
+          this.UnknownFields = unknownFields.Build();
+        }
+        return this;
+      }
+      
+      
+      public bool HasSuc {
+        get { return result.hasSuc; }
+      }
+      public int Suc {
+        get { return result.Suc; }
+        set { SetSuc(value); }
+      }
+      public Builder SetSuc(int value) {
+        PrepareBuilder();
+        result.hasSuc = true;
+        result.suc_ = value;
+        return this;
+      }
+      public Builder ClearSuc() {
+        PrepareBuilder();
+        result.hasSuc = false;
+        result.suc_ = 0;
+        return this;
+      }
+      
+      public bool HasCurrStatus {
+        get { return result.hasCurrStatus; }
+      }
+      public int CurrStatus {
+        get { return result.CurrStatus; }
+        set { SetCurrStatus(value); }
+      }
+      public Builder SetCurrStatus(int value) {
+        PrepareBuilder();
+        result.hasCurrStatus = true;
+        result.currStatus_ = value;
+        return this;
+      }
+      public Builder ClearCurrStatus() {
+        PrepareBuilder();
+        result.hasCurrStatus = false;
+        result.currStatus_ = 0;
+        return this;
+      }
+    }
+    static BGSetBaccaratPOTOpenRes() {
+      object.ReferenceEquals(global::ProtoCmd.Service.Service.Descriptor, null);
+    }
+  }
+  
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+  public sealed partial class Baccarat_Select_S : pb::GeneratedMessage<Baccarat_Select_S, Baccarat_Select_S.Builder> {
+    private Baccarat_Select_S() { }
+    private static readonly Baccarat_Select_S defaultInstance = new Baccarat_Select_S().MakeReadOnly();
+    private static readonly string[] _baccaratSelectSFieldNames = new string[] { "ChipNum" };
+    private static readonly uint[] _baccaratSelectSFieldTags = new uint[] { 8 };
+    public static Baccarat_Select_S DefaultInstance {
+      get { return defaultInstance; }
+    }
+    
+    public override Baccarat_Select_S DefaultInstanceForType {
+      get { return DefaultInstance; }
+    }
+    
+    protected override Baccarat_Select_S ThisMessage {
+      get { return this; }
+    }
+    
+    public static pbd::MessageDescriptor Descriptor {
+      get { return global::ProtoCmd.Service.Service.internal__static_ProtoCmd_Service_Baccarat_Select_S__Descriptor; }
+    }
+    
+    protected override pb::FieldAccess.FieldAccessorTable<Baccarat_Select_S, Baccarat_Select_S.Builder> InternalFieldAccessors {
+      get { return global::ProtoCmd.Service.Service.internal__static_ProtoCmd_Service_Baccarat_Select_S__FieldAccessorTable; }
+    }
+    
+    public const int ChipNumFieldNumber = 1;
+    private bool hasChipNum;
+    private ulong chipNum_;
+    public bool HasChipNum {
+      get { return hasChipNum; }
+    }
+    [global::System.CLSCompliant(false)]
+    public ulong ChipNum {
+      get { return chipNum_; }
+    }
+    
+    public override bool IsInitialized {
+      get {
+        if (!hasChipNum) return false;
+        return true;
+      }
+    }
+    
+    public override void WriteTo(pb::ICodedOutputStream output) {
+      CalcSerializedSize();
+      string[] field_names = _baccaratSelectSFieldNames;
+      if (hasChipNum) {
+        output.WriteUInt64(1, field_names[0], ChipNum);
+      }
+      UnknownFields.WriteTo(output);
+    }
+    
+    private int memoizedSerializedSize = -1;
+    public override int SerializedSize {
+      get {
+        int size = memoizedSerializedSize;
+        if (size != -1) return size;
+        return CalcSerializedSize();
+      }
+    }
+    
+    private int CalcSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+      
+      size = 0;
+      if (hasChipNum) {
+        size += pb::CodedOutputStream.ComputeUInt64Size(1, ChipNum);
+      }
+      size += UnknownFields.SerializedSize;
+      memoizedSerializedSize = size;
+      return size;
+    }
+    public static Baccarat_Select_S ParseFrom(pb::ByteString data) {
+      return ((Builder) CreateBuilder().MergeFrom(data)).BuildParsed();
+    }
+    public static Baccarat_Select_S ParseFrom(pb::ByteString data, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(data, extensionRegistry)).BuildParsed();
+    }
+    public static Baccarat_Select_S ParseFrom(byte[] data) {
+      return ((Builder) CreateBuilder().MergeFrom(data)).BuildParsed();
+    }
+    public static Baccarat_Select_S ParseFrom(byte[] data, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(data, extensionRegistry)).BuildParsed();
+    }
+    public static Baccarat_Select_S ParseFrom(global::System.IO.Stream input) {
+      return ((Builder) CreateBuilder().MergeFrom(input)).BuildParsed();
+    }
+    public static Baccarat_Select_S ParseFrom(global::System.IO.Stream input, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(input, extensionRegistry)).BuildParsed();
+    }
+    public static Baccarat_Select_S ParseDelimitedFrom(global::System.IO.Stream input) {
+      return CreateBuilder().MergeDelimitedFrom(input).BuildParsed();
+    }
+    public static Baccarat_Select_S ParseDelimitedFrom(global::System.IO.Stream input, pb::ExtensionRegistry extensionRegistry) {
+      return CreateBuilder().MergeDelimitedFrom(input, extensionRegistry).BuildParsed();
+    }
+    public static Baccarat_Select_S ParseFrom(pb::ICodedInputStream input) {
+      return ((Builder) CreateBuilder().MergeFrom(input)).BuildParsed();
+    }
+    public static Baccarat_Select_S ParseFrom(pb::ICodedInputStream input, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(input, extensionRegistry)).BuildParsed();
+    }
+    private Baccarat_Select_S MakeReadOnly() {
+      return this;
+    }
+    
+    public static Builder CreateBuilder() { return new Builder(); }
+    public override Builder ToBuilder() { return CreateBuilder(this); }
+    public override Builder CreateBuilderForType() { return new Builder(); }
+    public static Builder CreateBuilder(Baccarat_Select_S prototype) {
+      return new Builder(prototype);
+    }
+    
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+    public sealed partial class Builder : pb::GeneratedBuilder<Baccarat_Select_S, Builder> {
+      protected override Builder ThisBuilder {
+        get { return this; }
+      }
+      public Builder() {
+        result = DefaultInstance;
+        resultIsReadOnly = true;
+      }
+      internal Builder(Baccarat_Select_S cloneFrom) {
+        result = cloneFrom;
+        resultIsReadOnly = true;
+      }
+      
+      private bool resultIsReadOnly;
+      private Baccarat_Select_S result;
+      
+      private Baccarat_Select_S PrepareBuilder() {
+        if (resultIsReadOnly) {
+          Baccarat_Select_S original = result;
+          result = new Baccarat_Select_S();
+          resultIsReadOnly = false;
+          MergeFrom(original);
+        }
+        return result;
+      }
+      
+      public override bool IsInitialized {
+        get { return result.IsInitialized; }
+      }
+      
+      protected override Baccarat_Select_S MessageBeingBuilt {
+        get { return PrepareBuilder(); }
+      }
+      
+      public override Builder Clear() {
+        result = DefaultInstance;
+        resultIsReadOnly = true;
+        return this;
+      }
+      
+      public override Builder Clone() {
+        if (resultIsReadOnly) {
+          return new Builder(result);
+        } else {
+          return new Builder().MergeFrom(result);
+        }
+      }
+      
+      public override pbd::MessageDescriptor DescriptorForType {
+        get { return global::ProtoCmd.Service.Baccarat_Select_S.Descriptor; }
+      }
+      
+      public override Baccarat_Select_S DefaultInstanceForType {
+        get { return global::ProtoCmd.Service.Baccarat_Select_S.DefaultInstance; }
+      }
+      
+      public override Baccarat_Select_S BuildPartial() {
+        if (resultIsReadOnly) {
+          return result;
+        }
+        resultIsReadOnly = true;
+        return result.MakeReadOnly();
+      }
+      
+      public override Builder MergeFrom(pb::IMessage other) {
+        if (other is Baccarat_Select_S) {
+          return MergeFrom((Baccarat_Select_S) other);
+        } else {
+          base.MergeFrom(other);
+          return this;
+        }
+      }
+      
+      public override Builder MergeFrom(Baccarat_Select_S other) {
+        if (other == global::ProtoCmd.Service.Baccarat_Select_S.DefaultInstance) return this;
+        PrepareBuilder();
+        if (other.HasChipNum) {
+          ChipNum = other.ChipNum;
+        }
+        this.MergeUnknownFields(other.UnknownFields);
+        return this;
+      }
+      
+      public override Builder MergeFrom(pb::ICodedInputStream input) {
+        return MergeFrom(input, pb::ExtensionRegistry.Empty);
+      }
+      
+      public override Builder MergeFrom(pb::ICodedInputStream input, pb::ExtensionRegistry extensionRegistry) {
+        PrepareBuilder();
+        pb::UnknownFieldSet.Builder unknownFields = null;
+        uint tag;
+        string field_name;
+        while (input.ReadTag(out tag, out field_name)) {
+          if(tag == 0 && field_name != null) {
+            int field_ordinal = global::System.Array.BinarySearch(_baccaratSelectSFieldNames, field_name, global::System.StringComparer.Ordinal);
+            if(field_ordinal >= 0)
+              tag = _baccaratSelectSFieldTags[field_ordinal];
+            else {
+              if (unknownFields == null) {
+                unknownFields = pb::UnknownFieldSet.CreateBuilder(this.UnknownFields);
+              }
+              ParseUnknownField(input, unknownFields, extensionRegistry, tag, field_name);
+              continue;
+            }
+          }
+          switch (tag) {
+            case 0: {
+              throw pb::InvalidProtocolBufferException.InvalidTag();
+            }
+            default: {
+              if (pb::WireFormat.IsEndGroupTag(tag)) {
+                if (unknownFields != null) {
+                  this.UnknownFields = unknownFields.Build();
+                }
+                return this;
+              }
+              if (unknownFields == null) {
+                unknownFields = pb::UnknownFieldSet.CreateBuilder(this.UnknownFields);
+              }
+              ParseUnknownField(input, unknownFields, extensionRegistry, tag, field_name);
+              break;
+            }
+            case 8: {
+              result.hasChipNum = input.ReadUInt64(ref result.chipNum_);
+              break;
+            }
+          }
+        }
+        
+        if (unknownFields != null) {
+          this.UnknownFields = unknownFields.Build();
+        }
+        return this;
+      }
+      
+      
+      public bool HasChipNum {
+        get { return result.hasChipNum; }
+      }
+      [global::System.CLSCompliant(false)]
+      public ulong ChipNum {
+        get { return result.ChipNum; }
+        set { SetChipNum(value); }
+      }
+      [global::System.CLSCompliant(false)]
+      public Builder SetChipNum(ulong value) {
+        PrepareBuilder();
+        result.hasChipNum = true;
+        result.chipNum_ = value;
+        return this;
+      }
+      public Builder ClearChipNum() {
+        PrepareBuilder();
+        result.hasChipNum = false;
+        result.chipNum_ = 0UL;
+        return this;
+      }
+    }
+    static Baccarat_Select_S() {
+      object.ReferenceEquals(global::ProtoCmd.Service.Service.Descriptor, null);
+    }
+  }
+  
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+  public sealed partial class Baccarat_Operator_C : pb::GeneratedMessage<Baccarat_Operator_C, Baccarat_Operator_C.Builder> {
+    private Baccarat_Operator_C() { }
+    private static readonly Baccarat_Operator_C defaultInstance = new Baccarat_Operator_C().MakeReadOnly();
+    private static readonly string[] _baccaratOperatorCFieldNames = new string[] { "opType", "opValue", "strContent" };
+    private static readonly uint[] _baccaratOperatorCFieldTags = new uint[] { 8, 16, 26 };
+    public static Baccarat_Operator_C DefaultInstance {
+      get { return defaultInstance; }
+    }
+    
+    public override Baccarat_Operator_C DefaultInstanceForType {
+      get { return DefaultInstance; }
+    }
+    
+    protected override Baccarat_Operator_C ThisMessage {
+      get { return this; }
+    }
+    
+    public static pbd::MessageDescriptor Descriptor {
+      get { return global::ProtoCmd.Service.Service.internal__static_ProtoCmd_Service_Baccarat_Operator_C__Descriptor; }
+    }
+    
+    protected override pb::FieldAccess.FieldAccessorTable<Baccarat_Operator_C, Baccarat_Operator_C.Builder> InternalFieldAccessors {
+      get { return global::ProtoCmd.Service.Service.internal__static_ProtoCmd_Service_Baccarat_Operator_C__FieldAccessorTable; }
+    }
+    
+    public const int OpTypeFieldNumber = 1;
+    private bool hasOpType;
+    private uint opType_;
+    public bool HasOpType {
+      get { return hasOpType; }
+    }
+    [global::System.CLSCompliant(false)]
+    public uint OpType {
+      get { return opType_; }
+    }
+    
+    public const int OpValueFieldNumber = 2;
+    private bool hasOpValue;
+    private ulong opValue_;
+    public bool HasOpValue {
+      get { return hasOpValue; }
+    }
+    [global::System.CLSCompliant(false)]
+    public ulong OpValue {
+      get { return opValue_; }
+    }
+    
+    public const int StrContentFieldNumber = 3;
+    private bool hasStrContent;
+    private string strContent_ = "";
+    public bool HasStrContent {
+      get { return hasStrContent; }
+    }
+    public string StrContent {
+      get { return strContent_; }
+    }
+    
+    public override bool IsInitialized {
+      get {
+        return true;
+      }
+    }
+    
+    public override void WriteTo(pb::ICodedOutputStream output) {
+      CalcSerializedSize();
+      string[] field_names = _baccaratOperatorCFieldNames;
+      if (hasOpType) {
+        output.WriteUInt32(1, field_names[0], OpType);
+      }
+      if (hasOpValue) {
+        output.WriteUInt64(2, field_names[1], OpValue);
+      }
+      if (hasStrContent) {
+        output.WriteString(3, field_names[2], StrContent);
+      }
+      UnknownFields.WriteTo(output);
+    }
+    
+    private int memoizedSerializedSize = -1;
+    public override int SerializedSize {
+      get {
+        int size = memoizedSerializedSize;
+        if (size != -1) return size;
+        return CalcSerializedSize();
+      }
+    }
+    
+    private int CalcSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+      
+      size = 0;
+      if (hasOpType) {
+        size += pb::CodedOutputStream.ComputeUInt32Size(1, OpType);
+      }
+      if (hasOpValue) {
+        size += pb::CodedOutputStream.ComputeUInt64Size(2, OpValue);
+      }
+      if (hasStrContent) {
+        size += pb::CodedOutputStream.ComputeStringSize(3, StrContent);
+      }
+      size += UnknownFields.SerializedSize;
+      memoizedSerializedSize = size;
+      return size;
+    }
+    public static Baccarat_Operator_C ParseFrom(pb::ByteString data) {
+      return ((Builder) CreateBuilder().MergeFrom(data)).BuildParsed();
+    }
+    public static Baccarat_Operator_C ParseFrom(pb::ByteString data, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(data, extensionRegistry)).BuildParsed();
+    }
+    public static Baccarat_Operator_C ParseFrom(byte[] data) {
+      return ((Builder) CreateBuilder().MergeFrom(data)).BuildParsed();
+    }
+    public static Baccarat_Operator_C ParseFrom(byte[] data, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(data, extensionRegistry)).BuildParsed();
+    }
+    public static Baccarat_Operator_C ParseFrom(global::System.IO.Stream input) {
+      return ((Builder) CreateBuilder().MergeFrom(input)).BuildParsed();
+    }
+    public static Baccarat_Operator_C ParseFrom(global::System.IO.Stream input, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(input, extensionRegistry)).BuildParsed();
+    }
+    public static Baccarat_Operator_C ParseDelimitedFrom(global::System.IO.Stream input) {
+      return CreateBuilder().MergeDelimitedFrom(input).BuildParsed();
+    }
+    public static Baccarat_Operator_C ParseDelimitedFrom(global::System.IO.Stream input, pb::ExtensionRegistry extensionRegistry) {
+      return CreateBuilder().MergeDelimitedFrom(input, extensionRegistry).BuildParsed();
+    }
+    public static Baccarat_Operator_C ParseFrom(pb::ICodedInputStream input) {
+      return ((Builder) CreateBuilder().MergeFrom(input)).BuildParsed();
+    }
+    public static Baccarat_Operator_C ParseFrom(pb::ICodedInputStream input, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(input, extensionRegistry)).BuildParsed();
+    }
+    private Baccarat_Operator_C MakeReadOnly() {
+      return this;
+    }
+    
+    public static Builder CreateBuilder() { return new Builder(); }
+    public override Builder ToBuilder() { return CreateBuilder(this); }
+    public override Builder CreateBuilderForType() { return new Builder(); }
+    public static Builder CreateBuilder(Baccarat_Operator_C prototype) {
+      return new Builder(prototype);
+    }
+    
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+    public sealed partial class Builder : pb::GeneratedBuilder<Baccarat_Operator_C, Builder> {
+      protected override Builder ThisBuilder {
+        get { return this; }
+      }
+      public Builder() {
+        result = DefaultInstance;
+        resultIsReadOnly = true;
+      }
+      internal Builder(Baccarat_Operator_C cloneFrom) {
+        result = cloneFrom;
+        resultIsReadOnly = true;
+      }
+      
+      private bool resultIsReadOnly;
+      private Baccarat_Operator_C result;
+      
+      private Baccarat_Operator_C PrepareBuilder() {
+        if (resultIsReadOnly) {
+          Baccarat_Operator_C original = result;
+          result = new Baccarat_Operator_C();
+          resultIsReadOnly = false;
+          MergeFrom(original);
+        }
+        return result;
+      }
+      
+      public override bool IsInitialized {
+        get { return result.IsInitialized; }
+      }
+      
+      protected override Baccarat_Operator_C MessageBeingBuilt {
+        get { return PrepareBuilder(); }
+      }
+      
+      public override Builder Clear() {
+        result = DefaultInstance;
+        resultIsReadOnly = true;
+        return this;
+      }
+      
+      public override Builder Clone() {
+        if (resultIsReadOnly) {
+          return new Builder(result);
+        } else {
+          return new Builder().MergeFrom(result);
+        }
+      }
+      
+      public override pbd::MessageDescriptor DescriptorForType {
+        get { return global::ProtoCmd.Service.Baccarat_Operator_C.Descriptor; }
+      }
+      
+      public override Baccarat_Operator_C DefaultInstanceForType {
+        get { return global::ProtoCmd.Service.Baccarat_Operator_C.DefaultInstance; }
+      }
+      
+      public override Baccarat_Operator_C BuildPartial() {
+        if (resultIsReadOnly) {
+          return result;
+        }
+        resultIsReadOnly = true;
+        return result.MakeReadOnly();
+      }
+      
+      public override Builder MergeFrom(pb::IMessage other) {
+        if (other is Baccarat_Operator_C) {
+          return MergeFrom((Baccarat_Operator_C) other);
+        } else {
+          base.MergeFrom(other);
+          return this;
+        }
+      }
+      
+      public override Builder MergeFrom(Baccarat_Operator_C other) {
+        if (other == global::ProtoCmd.Service.Baccarat_Operator_C.DefaultInstance) return this;
+        PrepareBuilder();
+        if (other.HasOpType) {
+          OpType = other.OpType;
+        }
+        if (other.HasOpValue) {
+          OpValue = other.OpValue;
+        }
+        if (other.HasStrContent) {
+          StrContent = other.StrContent;
+        }
+        this.MergeUnknownFields(other.UnknownFields);
+        return this;
+      }
+      
+      public override Builder MergeFrom(pb::ICodedInputStream input) {
+        return MergeFrom(input, pb::ExtensionRegistry.Empty);
+      }
+      
+      public override Builder MergeFrom(pb::ICodedInputStream input, pb::ExtensionRegistry extensionRegistry) {
+        PrepareBuilder();
+        pb::UnknownFieldSet.Builder unknownFields = null;
+        uint tag;
+        string field_name;
+        while (input.ReadTag(out tag, out field_name)) {
+          if(tag == 0 && field_name != null) {
+            int field_ordinal = global::System.Array.BinarySearch(_baccaratOperatorCFieldNames, field_name, global::System.StringComparer.Ordinal);
+            if(field_ordinal >= 0)
+              tag = _baccaratOperatorCFieldTags[field_ordinal];
+            else {
+              if (unknownFields == null) {
+                unknownFields = pb::UnknownFieldSet.CreateBuilder(this.UnknownFields);
+              }
+              ParseUnknownField(input, unknownFields, extensionRegistry, tag, field_name);
+              continue;
+            }
+          }
+          switch (tag) {
+            case 0: {
+              throw pb::InvalidProtocolBufferException.InvalidTag();
+            }
+            default: {
+              if (pb::WireFormat.IsEndGroupTag(tag)) {
+                if (unknownFields != null) {
+                  this.UnknownFields = unknownFields.Build();
+                }
+                return this;
+              }
+              if (unknownFields == null) {
+                unknownFields = pb::UnknownFieldSet.CreateBuilder(this.UnknownFields);
+              }
+              ParseUnknownField(input, unknownFields, extensionRegistry, tag, field_name);
+              break;
+            }
+            case 8: {
+              result.hasOpType = input.ReadUInt32(ref result.opType_);
+              break;
+            }
+            case 16: {
+              result.hasOpValue = input.ReadUInt64(ref result.opValue_);
+              break;
+            }
+            case 26: {
+              result.hasStrContent = input.ReadString(ref result.strContent_);
+              break;
+            }
+          }
+        }
+        
+        if (unknownFields != null) {
+          this.UnknownFields = unknownFields.Build();
+        }
+        return this;
+      }
+      
+      
+      public bool HasOpType {
+        get { return result.hasOpType; }
+      }
+      [global::System.CLSCompliant(false)]
+      public uint OpType {
+        get { return result.OpType; }
+        set { SetOpType(value); }
+      }
+      [global::System.CLSCompliant(false)]
+      public Builder SetOpType(uint value) {
+        PrepareBuilder();
+        result.hasOpType = true;
+        result.opType_ = value;
+        return this;
+      }
+      public Builder ClearOpType() {
+        PrepareBuilder();
+        result.hasOpType = false;
+        result.opType_ = 0;
+        return this;
+      }
+      
+      public bool HasOpValue {
+        get { return result.hasOpValue; }
+      }
+      [global::System.CLSCompliant(false)]
+      public ulong OpValue {
+        get { return result.OpValue; }
+        set { SetOpValue(value); }
+      }
+      [global::System.CLSCompliant(false)]
+      public Builder SetOpValue(ulong value) {
+        PrepareBuilder();
+        result.hasOpValue = true;
+        result.opValue_ = value;
+        return this;
+      }
+      public Builder ClearOpValue() {
+        PrepareBuilder();
+        result.hasOpValue = false;
+        result.opValue_ = 0UL;
+        return this;
+      }
+      
+      public bool HasStrContent {
+        get { return result.hasStrContent; }
+      }
+      public string StrContent {
+        get { return result.StrContent; }
+        set { SetStrContent(value); }
+      }
+      public Builder SetStrContent(string value) {
+        pb::ThrowHelper.ThrowIfNull(value, "value");
+        PrepareBuilder();
+        result.hasStrContent = true;
+        result.strContent_ = value;
+        return this;
+      }
+      public Builder ClearStrContent() {
+        PrepareBuilder();
+        result.hasStrContent = false;
+        result.strContent_ = "";
+        return this;
+      }
+    }
+    static Baccarat_Operator_C() {
+      object.ReferenceEquals(global::ProtoCmd.Service.Service.Descriptor, null);
+    }
+  }
+  
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+  public sealed partial class Baccarat_Operator_S : pb::GeneratedMessage<Baccarat_Operator_S, Baccarat_Operator_S.Builder> {
+    private Baccarat_Operator_S() { }
+    private static readonly Baccarat_Operator_S defaultInstance = new Baccarat_Operator_S().MakeReadOnly();
+    private static readonly string[] _baccaratOperatorSFieldNames = new string[] { "opType", "suc" };
+    private static readonly uint[] _baccaratOperatorSFieldTags = new uint[] { 8, 16 };
+    public static Baccarat_Operator_S DefaultInstance {
+      get { return defaultInstance; }
+    }
+    
+    public override Baccarat_Operator_S DefaultInstanceForType {
+      get { return DefaultInstance; }
+    }
+    
+    protected override Baccarat_Operator_S ThisMessage {
+      get { return this; }
+    }
+    
+    public static pbd::MessageDescriptor Descriptor {
+      get { return global::ProtoCmd.Service.Service.internal__static_ProtoCmd_Service_Baccarat_Operator_S__Descriptor; }
+    }
+    
+    protected override pb::FieldAccess.FieldAccessorTable<Baccarat_Operator_S, Baccarat_Operator_S.Builder> InternalFieldAccessors {
+      get { return global::ProtoCmd.Service.Service.internal__static_ProtoCmd_Service_Baccarat_Operator_S__FieldAccessorTable; }
+    }
+    
+    public const int OpTypeFieldNumber = 1;
+    private bool hasOpType;
+    private uint opType_;
+    public bool HasOpType {
+      get { return hasOpType; }
+    }
+    [global::System.CLSCompliant(false)]
+    public uint OpType {
+      get { return opType_; }
+    }
+    
+    public const int SucFieldNumber = 2;
+    private bool hasSuc;
+    private bool suc_;
+    public bool HasSuc {
+      get { return hasSuc; }
+    }
+    public bool Suc {
+      get { return suc_; }
+    }
+    
+    public override bool IsInitialized {
+      get {
+        return true;
+      }
+    }
+    
+    public override void WriteTo(pb::ICodedOutputStream output) {
+      CalcSerializedSize();
+      string[] field_names = _baccaratOperatorSFieldNames;
+      if (hasOpType) {
+        output.WriteUInt32(1, field_names[0], OpType);
+      }
+      if (hasSuc) {
+        output.WriteBool(2, field_names[1], Suc);
+      }
+      UnknownFields.WriteTo(output);
+    }
+    
+    private int memoizedSerializedSize = -1;
+    public override int SerializedSize {
+      get {
+        int size = memoizedSerializedSize;
+        if (size != -1) return size;
+        return CalcSerializedSize();
+      }
+    }
+    
+    private int CalcSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+      
+      size = 0;
+      if (hasOpType) {
+        size += pb::CodedOutputStream.ComputeUInt32Size(1, OpType);
+      }
+      if (hasSuc) {
+        size += pb::CodedOutputStream.ComputeBoolSize(2, Suc);
+      }
+      size += UnknownFields.SerializedSize;
+      memoizedSerializedSize = size;
+      return size;
+    }
+    public static Baccarat_Operator_S ParseFrom(pb::ByteString data) {
+      return ((Builder) CreateBuilder().MergeFrom(data)).BuildParsed();
+    }
+    public static Baccarat_Operator_S ParseFrom(pb::ByteString data, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(data, extensionRegistry)).BuildParsed();
+    }
+    public static Baccarat_Operator_S ParseFrom(byte[] data) {
+      return ((Builder) CreateBuilder().MergeFrom(data)).BuildParsed();
+    }
+    public static Baccarat_Operator_S ParseFrom(byte[] data, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(data, extensionRegistry)).BuildParsed();
+    }
+    public static Baccarat_Operator_S ParseFrom(global::System.IO.Stream input) {
+      return ((Builder) CreateBuilder().MergeFrom(input)).BuildParsed();
+    }
+    public static Baccarat_Operator_S ParseFrom(global::System.IO.Stream input, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(input, extensionRegistry)).BuildParsed();
+    }
+    public static Baccarat_Operator_S ParseDelimitedFrom(global::System.IO.Stream input) {
+      return CreateBuilder().MergeDelimitedFrom(input).BuildParsed();
+    }
+    public static Baccarat_Operator_S ParseDelimitedFrom(global::System.IO.Stream input, pb::ExtensionRegistry extensionRegistry) {
+      return CreateBuilder().MergeDelimitedFrom(input, extensionRegistry).BuildParsed();
+    }
+    public static Baccarat_Operator_S ParseFrom(pb::ICodedInputStream input) {
+      return ((Builder) CreateBuilder().MergeFrom(input)).BuildParsed();
+    }
+    public static Baccarat_Operator_S ParseFrom(pb::ICodedInputStream input, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(input, extensionRegistry)).BuildParsed();
+    }
+    private Baccarat_Operator_S MakeReadOnly() {
+      return this;
+    }
+    
+    public static Builder CreateBuilder() { return new Builder(); }
+    public override Builder ToBuilder() { return CreateBuilder(this); }
+    public override Builder CreateBuilderForType() { return new Builder(); }
+    public static Builder CreateBuilder(Baccarat_Operator_S prototype) {
+      return new Builder(prototype);
+    }
+    
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+    public sealed partial class Builder : pb::GeneratedBuilder<Baccarat_Operator_S, Builder> {
+      protected override Builder ThisBuilder {
+        get { return this; }
+      }
+      public Builder() {
+        result = DefaultInstance;
+        resultIsReadOnly = true;
+      }
+      internal Builder(Baccarat_Operator_S cloneFrom) {
+        result = cloneFrom;
+        resultIsReadOnly = true;
+      }
+      
+      private bool resultIsReadOnly;
+      private Baccarat_Operator_S result;
+      
+      private Baccarat_Operator_S PrepareBuilder() {
+        if (resultIsReadOnly) {
+          Baccarat_Operator_S original = result;
+          result = new Baccarat_Operator_S();
+          resultIsReadOnly = false;
+          MergeFrom(original);
+        }
+        return result;
+      }
+      
+      public override bool IsInitialized {
+        get { return result.IsInitialized; }
+      }
+      
+      protected override Baccarat_Operator_S MessageBeingBuilt {
+        get { return PrepareBuilder(); }
+      }
+      
+      public override Builder Clear() {
+        result = DefaultInstance;
+        resultIsReadOnly = true;
+        return this;
+      }
+      
+      public override Builder Clone() {
+        if (resultIsReadOnly) {
+          return new Builder(result);
+        } else {
+          return new Builder().MergeFrom(result);
+        }
+      }
+      
+      public override pbd::MessageDescriptor DescriptorForType {
+        get { return global::ProtoCmd.Service.Baccarat_Operator_S.Descriptor; }
+      }
+      
+      public override Baccarat_Operator_S DefaultInstanceForType {
+        get { return global::ProtoCmd.Service.Baccarat_Operator_S.DefaultInstance; }
+      }
+      
+      public override Baccarat_Operator_S BuildPartial() {
+        if (resultIsReadOnly) {
+          return result;
+        }
+        resultIsReadOnly = true;
+        return result.MakeReadOnly();
+      }
+      
+      public override Builder MergeFrom(pb::IMessage other) {
+        if (other is Baccarat_Operator_S) {
+          return MergeFrom((Baccarat_Operator_S) other);
+        } else {
+          base.MergeFrom(other);
+          return this;
+        }
+      }
+      
+      public override Builder MergeFrom(Baccarat_Operator_S other) {
+        if (other == global::ProtoCmd.Service.Baccarat_Operator_S.DefaultInstance) return this;
+        PrepareBuilder();
+        if (other.HasOpType) {
+          OpType = other.OpType;
+        }
+        if (other.HasSuc) {
+          Suc = other.Suc;
+        }
+        this.MergeUnknownFields(other.UnknownFields);
+        return this;
+      }
+      
+      public override Builder MergeFrom(pb::ICodedInputStream input) {
+        return MergeFrom(input, pb::ExtensionRegistry.Empty);
+      }
+      
+      public override Builder MergeFrom(pb::ICodedInputStream input, pb::ExtensionRegistry extensionRegistry) {
+        PrepareBuilder();
+        pb::UnknownFieldSet.Builder unknownFields = null;
+        uint tag;
+        string field_name;
+        while (input.ReadTag(out tag, out field_name)) {
+          if(tag == 0 && field_name != null) {
+            int field_ordinal = global::System.Array.BinarySearch(_baccaratOperatorSFieldNames, field_name, global::System.StringComparer.Ordinal);
+            if(field_ordinal >= 0)
+              tag = _baccaratOperatorSFieldTags[field_ordinal];
+            else {
+              if (unknownFields == null) {
+                unknownFields = pb::UnknownFieldSet.CreateBuilder(this.UnknownFields);
+              }
+              ParseUnknownField(input, unknownFields, extensionRegistry, tag, field_name);
+              continue;
+            }
+          }
+          switch (tag) {
+            case 0: {
+              throw pb::InvalidProtocolBufferException.InvalidTag();
+            }
+            default: {
+              if (pb::WireFormat.IsEndGroupTag(tag)) {
+                if (unknownFields != null) {
+                  this.UnknownFields = unknownFields.Build();
+                }
+                return this;
+              }
+              if (unknownFields == null) {
+                unknownFields = pb::UnknownFieldSet.CreateBuilder(this.UnknownFields);
+              }
+              ParseUnknownField(input, unknownFields, extensionRegistry, tag, field_name);
+              break;
+            }
+            case 8: {
+              result.hasOpType = input.ReadUInt32(ref result.opType_);
+              break;
+            }
+            case 16: {
+              result.hasSuc = input.ReadBool(ref result.suc_);
+              break;
+            }
+          }
+        }
+        
+        if (unknownFields != null) {
+          this.UnknownFields = unknownFields.Build();
+        }
+        return this;
+      }
+      
+      
+      public bool HasOpType {
+        get { return result.hasOpType; }
+      }
+      [global::System.CLSCompliant(false)]
+      public uint OpType {
+        get { return result.OpType; }
+        set { SetOpType(value); }
+      }
+      [global::System.CLSCompliant(false)]
+      public Builder SetOpType(uint value) {
+        PrepareBuilder();
+        result.hasOpType = true;
+        result.opType_ = value;
+        return this;
+      }
+      public Builder ClearOpType() {
+        PrepareBuilder();
+        result.hasOpType = false;
+        result.opType_ = 0;
+        return this;
+      }
+      
+      public bool HasSuc {
+        get { return result.hasSuc; }
+      }
+      public bool Suc {
+        get { return result.Suc; }
+        set { SetSuc(value); }
+      }
+      public Builder SetSuc(bool value) {
+        PrepareBuilder();
+        result.hasSuc = true;
+        result.suc_ = value;
+        return this;
+      }
+      public Builder ClearSuc() {
+        PrepareBuilder();
+        result.hasSuc = false;
+        result.suc_ = false;
+        return this;
+      }
+    }
+    static Baccarat_Operator_S() {
       object.ReferenceEquals(global::ProtoCmd.Service.Service.Descriptor, null);
     }
   }

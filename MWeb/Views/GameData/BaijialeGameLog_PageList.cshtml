@@ -1,17 +1,310 @@
 ﻿
-@{
-    Layout = null;
-}
 
-<!DOCTYPE html>
+@using Webdiyer.WebControls.Mvc;
+@using GL.Data.Model;
+@using GL.Data.BLL;
+@using System.Text;
+@model PagedList<BaccaratGameRecord>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>BaijialeGameLog_PageList</title>
-</head>
-<body>
-    <div> 
+
+<section id="widget-grid" class="">
+    <div class="row">
+        <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-0" data-widget-editbutton="false" data-widget-colorbutton="false"
+                 data-widget-togglebutton="false"
+                 data-widget-deletebutton="false"
+                 data-widget-fullscreenbutton="false"
+                 data-widget-custombutton="false"
+                 data-widget-collapsed="false"
+                 data-widget-sortable="false">
+                <header>
+                    <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                    <h2>@ViewBag.Title</h2>
+                </header>
+                <!-- widget div-->
+                <div>
+                    <!-- widget edit box -->
+                    <div class="jarviswidget-editbox">
+                        <!-- This area used as dropdown edit box -->
+                    </div>
+                    <!-- end widget edit box -->
+                    <!-- widget content -->
+                    <div class="widget-body no-padding">
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>时间</th>
+                                        <th>房间ID</th>
+                                        <th>牌局号</th>
+                                        <th>玩家信息</th>
+                                        <th>下注(闲对)</th>
+                                        <th>下注(闲)</th>
+                                        <th>下注(和)</th>
+                                        <th>下注(庄)</th>
+                                        <th>下注(庄对)</th>
+                                        <th>牌局结果</th>
+                                        <th>输赢游戏币</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    @if (Model.Count == 0)
+            {
+                                        <tr class="gradeX">
+                                            <td class="colspan" align="center" colspan="0">
+                                                没有找到相关记录！
+                                            </td>
+                                        </tr>
+                                    }
+
+                                    @foreach (BaccaratGameRecord m in Model)
+                                    {
+                                        //     List<string> fullData = m.UserData.Replace("(", "").Split('_').ToList();  //拿到的是整个UserData字段的数据
+                                        List<string> fullData = m.UserData.Split('_').ToList();
+                                        fullData.RemoveAt(fullData.Count - 1);//去除最后一个元素
+                                        string zID = fullData[0].Split(',').ToList()[0];//庄家的ID
+                                        string zShuyin = fullData[0].Split(',').ToList()[2];//庄家输赢
+                                        string zName;                                         //庄家名称
+                                        Role u = RoleBLL.GetModelByID(new Role { ID = Convert.ToInt64(zID) });
+                                        if (u == null)
+                                        {
+                                            zName = "五小姐";
+                                        }
+                                        else
+                                        {
+                                            zName = u.NickName;
+                                        }
+                                        //牌局结果：
+                                        string[] Result = m.ResultCard.Split(' ');  //带有  庄  闲  这两个字
+                                        string zResult = Result[0].Replace("庄", "");   //得到庄 的牌
+                                        string xResult = Result[1].Replace("闲", "");   //得到闲 的牌
+                                        string[] zCard = new string[3];   //庄 的每一张牌
+                                        string[] zScore = new string[3];
+                                        string[] xScore = new string[3];
+                                        zCard[0] = zResult.Substring(0, 2);
+                                        zCard[1] = zResult.Substring(2, 2);
+                                        zScore[0] = zCard[0].Substring(1, 1);
+                                        zScore[1] = zCard[1].Substring(1, 1);
+                                        if (zResult.Length > 4)
+                                        {
+                                            zCard[2] = zResult.Substring(4, 2);
+                                            zScore[2] = zCard[2].Substring(1, 1);
+                                        }
+                                        //庄的分数计算
+                                        int zA = 0;
+                                        int zB = 0;
+                                        int zC = 0;
+                                        int.TryParse(zScore[0], out zA);
+                                        int.TryParse(zScore[1], out zB);
+                                        int.TryParse(zScore[2], out zC);
+                                        int zSum = (zA + zB + zC) % 10;
+
+                                        string[] xCard = new string[3];  //闲 的每一张牌
+                                        xCard[0] = xResult.Substring(0, 2);
+                                        xCard[1] = xResult.Substring(2, 2);
+                                        xScore[0] = xCard[0].Substring(1, 1);
+                                        xScore[1] = xCard[1].Substring(1, 1);
+                                        if (xResult.Length > 4)
+                                        {
+                                            xCard[2] = xResult.Substring(4, 2);
+                                            xScore[2] = xCard[2].Substring(1, 1);
+                                        }
+                                        int xA = 0;
+                                        int xB = 0;
+                                        int xC = 0;
+                                        int.TryParse(xScore[0], out xA);
+                                        int.TryParse(xScore[1], out xB);
+                                        int.TryParse(xScore[2], out xC);
+                                        int xSum = (xA + xB + xC) % 10;
+                                        string zShow = "";//庄要显示的详细内容(文字显示结果)
+                                        string xShow = "";  //闲要显示的详细内容(文字显示结果)
+                                        if (xSum==zSum)
+                                        {
+                                            zShow = zScore[0] == zScore[1] ? "<font size='3' color='green'>庄：" + zSum.ToString() + "点 / 对子</font>" : "<font size='3' color='green'>庄：" + zSum.ToString() + "点 </font>"; 
+                                            xShow = xScore[0] == xScore[1] ? "<font size='3' bold  color='green'>闲：" + xSum.ToString() + "点 / 对子</font>" : "<font size='3' color='green'>闲：" + xSum.ToString() + "点 </font>";  
+                                        }
+                                        else
+                                        {
+                                            zShow = zScore[0] == zScore[1] ? "<font size='3' >庄：" + zSum.ToString() + "点 / 对子</font>" : "<font size='3'>庄：" + zSum.ToString() + "点 </font>";
+                                            xShow = xScore[0] == xScore[1] ? "<font size='3' bold >闲：" + xSum.ToString() + "点 / 对子</font>" : "<font size='3'>闲：" + xSum.ToString() + "点 </font>";
+                                        }
+
+                                        <tr>
+                                            <td rowspan="@fullData.Count">@m.CreateTime</td>
+                                            <td rowspan="@fullData.Count">@m.RoomID</td>
+                                            <td rowspan="@fullData.Count">@m.Round</td>
+                                            <td>@zName <font color="blue">【庄】</font></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td rowspan="@fullData.Count">
+                                             
+                                                @{
+                                                    if (xResult.Length > 4)
+                                                    {
+                                                        <i class="game game-@xCard[0]"></i>
+                                                        <i class="game game-@xCard[1]"></i>
+                                                            <i class="game game-@xCard[2]"></i>
+                                                            <font>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font>
+                                                    }
+                                                    else
+                                                    {
+                                                        <i class="game game-@xCard[0]"></i>
+                                                        <i class="game game-@xCard[1]"></i>
+                                                        <font>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </font>
+                                                    }
+                                                }
+                                                @{
+                                                    if (zResult.Length > 4)
+                                                    {
+                                                        <i class="game game-@zCard[0]"></i>
+                                                        <i class="game game-@zCard[1]"></i>
+                                                        <i class="game game-@zCard[2]"></i><br />
+
+                                                    }
+                                                    else
+                                                    {
+                                                        <i class="game game-@zCard[0]"></i>
+                                                        <i class="game game-@zCard[1]"></i><br />
+
+                                                    }
+                                                }
+                                                @Html.Raw(xShow) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  @Html.Raw(zShow)
+                                            </td>
+                                            <td>@zShuyin</td>
+                                        </tr>
+                                                    //38,0,0,(   _57,0,152000,(1:20000,   _60,0,38000,(2:20000,   _10005,0,0,(0:20000,_          到这一步的数据结果  (第一个是庄家)
+                                                    fullData.RemoveAt(0);//去除庄家的   那么得到的就是玩家的数据
+                                                    for (int j = 0; j < fullData.Count; j++)
+                                                    {
+                                                        List<string> pBuy = fullData[j].Split('(').ToList();        //pBuy[1]  就是玩家的下注
+                                                        List<string> Buy = pBuy[1].Split(',').ToList();
+                                                        Buy.RemoveAt(Buy.Count - 1);   //去除最后一个  因为最后一个是""
+                                                        string xd0 = "";   //闲对
+                                                        string h1 = "";      //和
+                                                        string zd2 = "";    //庄对
+                                                        string x3 = "";      //闲
+                                                        string z4 = "";     //庄
+                                                        for (int c = 0; c < Buy.Count; c++)
+                                                        {//准备玩家下注的资料
+                                                            List<string> type = Buy[c].Split(':').ToList();
+                                                            switch (type[0])
+                                                            {
+                                                                case "0":
+                                                                    xd0 = type[1];
+                                                                    break;
+                                                                case "1":
+                                                                    h1 = type[1];
+                                                                    break;
+                                                                case "2":
+                                                                    zd2 = type[1];
+                                                                    break;
+                                                                case "3":
+                                                                    x3 = type[1];
+                                                                    break;
+                                                                case "4":
+                                                                    z4 = type[1];
+                                                                    break;
+                                                            }
+                                                        }
+                                                        string wID = fullData[j].Split(',').ToList()[0];    //玩家ID
+                                                        string wShuyin = fullData[j].Split(',').ToList()[2];
+                                                        string wName = "";     //玩家姓名
+                                                        u = RoleBLL.GetModelByID(new Role { ID = Convert.ToInt64(wID) });
+                                                        if (u != null)
+                                                        {
+                                                            wName = u.NickName;
+                                                        }
+                                                        <tr>
+                                                            <td>@wName</td>
+                                                            <td>@xd0</td>      @*下注(闲对)*@
+                                                            <td>@x3</td>      @*下注(闲)*@
+                                                            <td>@h1</td>      @*下注(和)*@
+                                                            <td>@z4</td>      @*下注(庄)*@
+                                                            <td>@zd2</td>      @*下注(庄对)*@
+                                                            <td>@wShuyin</td>     @*输赢结果*@
+                                                        </tr>
+                                                        }
+                                                    }
+
+                                </tbody>
+                            </table>
+                        </div>
+
+
+
+                        <div class="widget-content">
+
+                            @Ajax.Pager(
+    Model,
+    new PagerOptions()
+    {
+        CssClass = "pager",
+        ShowMorePagerItems = true,
+        PageIndexParameterName = "page",
+        ShowDisabledPagerItems = true,
+        AlwaysShowFirstLastPageNumber = true,
+        //ShowRecordCountItems = true,
+        HorizontalAlign = "right",
+        //SeparatorHtml = "",
+
+        CurrentPagerItemTemplate = "<li class=\"disabled\"><span>{0}</span></li>",
+        DisabledPagerItemTemplate = "<li class=\"disabled\"><span>{0}</span></li>",
+        PagerItemTemplate = "<li>{0}</li>",
+        //CurrentPagerItemWrapperFormatString = "<li class=\"disabled\"><span>{0}</span></li>",
+        //NumericPagerItemWrapperFormatString = "<li>{0}</li>",
+        //PagerItemWrapperFormatString = "<li>{0}</li>",
+        //RecordCountText = string.Format("共{0}条记录, {1}页", Model.TotalItemCount, Model.TotalPageCount),
+        //RecordCountFormatString = "<li><span>{0}</span></li>",
+        //DisabledPagerItemsFormatString = "<li class=\"disabled\"><span>{0}</span></li>",
+        //PageIndexBoxType = Webdiyer.WebControls.Mvc.PageIndexBoxType.TextBox,
+        //GoButtonText = "跳转到",
+        ShowPrevNext = true,
+        FirstPageText = "第一页",
+        LastPageText = "最后一页",
+        ContainerTagName = "ul",
+        PageIndexBoxId = "pageindexcm",
+        WYWPageIndexString = @"<li><input style='width:50px;' type='text' value='' id='{0}' name = '{1}'></li>
+                                 <li><a id='goto' name='goto' style='margin-right:10px' >跳转</a><li>
+                             ",
+        GoToButtonId = "goto"
+    },
+    new MvcAjaxOptions
+    {
+        HttpMethod = "POST",
+        UpdateTargetId = "box",
+        InsertionMode = InsertionMode.Replace,
+        OnFailure = "errFunc",
+        OnSuccess = "successPageFun"
+    })
+                        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    </div>
+                    <!-- end widget content -->
+                </div>
+                <!-- end widget div -->
+            </div>
+            <!-- end widget -->
+
+        </article>
     </div>
-</body>
-</html>
+</section>

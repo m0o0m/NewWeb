@@ -10,304 +10,304 @@
   </PropertyGroup>
   <ItemGroup>
     <File Include="App_Data/IAPProduct.xml">
-      <publishTime>04/29/2016 11:01:33</publishTime>
+      <publishTime>09/19/2016 14:15:33</publishTime>
     </File>
     <File Include="App_Data/IAPProduct_ios.xml">
-      <publishTime>04/28/2016 18:34:34</publishTime>
+      <publishTime>09/19/2016 14:15:34</publishTime>
     </File>
     <File Include="App_Data/log4net.xml">
-      <publishTime>11/12/2015 22:10:00</publishTime>
+      <publishTime>09/19/2016 14:15:34</publishTime>
     </File>
     <File Include="bin/Antlr3.Runtime.dll">
-      <publishTime>12/04/2015 09:41:15</publishTime>
+      <publishTime>09/19/2016 14:18:25</publishTime>
     </File>
     <File Include="bin/Antlr3.Runtime.pdb">
-      <publishTime>12/04/2015 09:41:15</publishTime>
+      <publishTime>09/19/2016 14:18:25</publishTime>
     </File>
     <File Include="bin/App_Data/IAPProduct.xml">
-      <publishTime>04/29/2016 11:01:33</publishTime>
+      <publishTime>09/19/2016 14:15:33</publishTime>
     </File>
     <File Include="bin/App_Data/log4net.xml">
-      <publishTime>11/12/2015 22:10:00</publishTime>
+      <publishTime>09/19/2016 14:15:34</publishTime>
     </File>
     <File Include="bin/BouncyCastle.Crypto.dll">
-      <publishTime>04/12/2016 18:09:24</publishTime>
+      <publishTime>09/19/2016 14:20:18</publishTime>
     </File>
     <File Include="bin/GL.Common.dll">
-      <publishTime>05/09/2016 20:53:16</publishTime>
+      <publishTime>11/15/2016 11:58:38</publishTime>
     </File>
     <File Include="bin/GL.Common.pdb">
-      <publishTime>05/09/2016 20:53:16</publishTime>
+      <publishTime>11/09/2016 15:10:50</publishTime>
     </File>
     <File Include="bin/GL.Dapper.dll">
-      <publishTime>05/09/2016 20:53:16</publishTime>
+      <publishTime>11/15/2016 11:58:39</publishTime>
     </File>
     <File Include="bin/GL.Dapper.pdb">
-      <publishTime>05/09/2016 20:53:16</publishTime>
+      <publishTime>11/15/2016 10:27:42</publishTime>
     </File>
     <File Include="bin/GL.Pay.Data.dll">
-      <publishTime>05/09/2016 20:53:19</publishTime>
+      <publishTime>11/30/2016 12:37:37</publishTime>
     </File>
     <File Include="bin/GL.Pay.Data.pdb">
-      <publishTime>05/09/2016 20:53:19</publishTime>
+      <publishTime>11/18/2016 18:11:36</publishTime>
     </File>
     <File Include="bin/GL.Pay.dll">
-      <publishTime>05/09/2016 20:53:18</publishTime>
+      <publishTime>11/30/2016 12:37:37</publishTime>
     </File>
     <File Include="bin/GL.Pay.pdb">
-      <publishTime>05/09/2016 20:53:18</publishTime>
+      <publishTime>11/09/2016 15:10:52</publishTime>
     </File>
     <File Include="bin/Google.ProtocolBuffers.dll">
-      <publishTime>12/04/2015 09:41:33</publishTime>
+      <publishTime>09/19/2016 14:18:50</publishTime>
     </File>
     <File Include="bin/Google.ProtocolBuffers.Serialization.dll">
-      <publishTime>12/04/2015 09:41:33</publishTime>
+      <publishTime>09/19/2016 14:18:50</publishTime>
     </File>
     <File Include="bin/LitJson.dll">
-      <publishTime>12/04/2015 09:41:34</publishTime>
+      <publishTime>09/19/2016 14:18:51</publishTime>
     </File>
     <File Include="bin/log4net.dll">
-      <publishTime>12/04/2015 09:41:11</publishTime>
+      <publishTime>09/19/2016 14:20:15</publishTime>
     </File>
     <File Include="bin/Microsoft.Web.Infrastructure.dll">
-      <publishTime>12/04/2015 09:42:46</publishTime>
+      <publishTime>09/19/2016 14:19:53</publishTime>
     </File>
     <File Include="bin/MySql.Data.dll">
-      <publishTime>12/04/2015 09:42:50</publishTime>
+      <publishTime>09/19/2016 14:19:56</publishTime>
     </File>
     <File Include="bin/Newtonsoft.Json.dll">
-      <publishTime>12/04/2015 09:42:54</publishTime>
+      <publishTime>09/19/2016 14:20:01</publishTime>
     </File>
     <File Include="bin/System.Web.Helpers.dll">
-      <publishTime>12/04/2015 09:41:51</publishTime>
+      <publishTime>09/19/2016 14:19:10</publishTime>
     </File>
     <File Include="bin/System.Web.Mvc.dll">
-      <publishTime>12/04/2015 09:41:39</publishTime>
+      <publishTime>09/19/2016 14:18:55</publishTime>
     </File>
     <File Include="bin/System.Web.Optimization.dll">
-      <publishTime>12/04/2015 09:41:41</publishTime>
+      <publishTime>09/19/2016 14:18:56</publishTime>
     </File>
     <File Include="bin/System.Web.Razor.dll">
-      <publishTime>12/04/2015 09:41:40</publishTime>
+      <publishTime>09/19/2016 14:18:56</publishTime>
     </File>
     <File Include="bin/System.Web.WebPages.Deployment.dll">
-      <publishTime>12/04/2015 09:41:51</publishTime>
+      <publishTime>09/19/2016 14:19:10</publishTime>
     </File>
     <File Include="bin/System.Web.WebPages.dll">
-      <publishTime>12/04/2015 09:41:52</publishTime>
+      <publishTime>09/19/2016 14:19:10</publishTime>
     </File>
     <File Include="bin/System.Web.WebPages.Razor.dll">
-      <publishTime>12/04/2015 09:41:52</publishTime>
+      <publishTime>09/19/2016 14:19:10</publishTime>
     </File>
     <File Include="bin/Web.Pay.dll">
-      <publishTime>05/10/2016 11:14:03</publishTime>
+      <publishTime>11/30/2016 12:37:38</publishTime>
     </File>
     <File Include="bin/Web.Pay.pdb">
-      <publishTime>05/10/2016 11:14:03</publishTime>
+      <publishTime>11/18/2016 18:11:38</publishTime>
     </File>
     <File Include="bin/Webdiyer.MvcPager.dll">
-      <publishTime>05/09/2016 20:53:17</publishTime>
+      <publishTime>11/15/2016 11:58:39</publishTime>
     </File>
     <File Include="bin/Webdiyer.MvcPager.pdb">
-      <publishTime>05/09/2016 20:53:17</publishTime>
+      <publishTime>11/10/2016 15:46:09</publishTime>
     </File>
     <File Include="bin/WebGrease.dll">
-      <publishTime>12/04/2015 09:43:05</publishTime>
+      <publishTime>09/19/2016 14:20:11</publishTime>
     </File>
     <File Include="bin/zh-CHS/Webdiyer.MvcPager.resources.dll">
-      <publishTime>05/09/2016 20:53:18</publishTime>
+      <publishTime>11/15/2016 11:58:40</publishTime>
     </File>
     <File Include="bin/zh-CHT/Webdiyer.MvcPager.resources.dll">
-      <publishTime>05/09/2016 20:53:18</publishTime>
+      <publishTime>11/15/2016 11:58:40</publishTime>
     </File>
     <File Include="bin/zh-Hans/System.Web.Helpers.resources.dll">
-      <publishTime>12/04/2015 09:41:52</publishTime>
+      <publishTime>09/19/2016 14:19:10</publishTime>
     </File>
     <File Include="bin/zh-Hans/System.Web.Mvc.resources.dll">
-      <publishTime>12/04/2015 09:41:39</publishTime>
+      <publishTime>09/19/2016 14:18:55</publishTime>
     </File>
     <File Include="bin/zh-Hans/System.Web.Optimization.resources.dll">
-      <publishTime>12/04/2015 09:41:41</publishTime>
+      <publishTime>09/19/2016 14:18:56</publishTime>
     </File>
     <File Include="bin/zh-Hans/System.Web.Razor.resources.dll">
-      <publishTime>12/04/2015 09:41:40</publishTime>
+      <publishTime>09/19/2016 14:18:56</publishTime>
     </File>
     <File Include="bin/zh-Hans/System.Web.WebPages.Deployment.resources.dll">
-      <publishTime>12/04/2015 09:41:52</publishTime>
+      <publishTime>09/19/2016 14:19:10</publishTime>
     </File>
     <File Include="bin/zh-Hans/System.Web.WebPages.Razor.resources.dll">
-      <publishTime>12/04/2015 09:41:52</publishTime>
+      <publishTime>09/19/2016 14:19:10</publishTime>
     </File>
     <File Include="bin/zh-Hans/System.Web.WebPages.resources.dll">
-      <publishTime>12/04/2015 09:41:52</publishTime>
+      <publishTime>09/19/2016 14:19:10</publishTime>
     </File>
     <File Include="Content/bootstrap-theme.css">
-      <publishTime>11/10/2015 14:32:15</publishTime>
+      <publishTime>09/19/2016 14:15:35</publishTime>
     </File>
     <File Include="Content/bootstrap-theme.css.map">
-      <publishTime>11/10/2015 14:32:15</publishTime>
+      <publishTime>09/19/2016 14:15:35</publishTime>
     </File>
     <File Include="Content/bootstrap-theme.min.css">
-      <publishTime>11/10/2015 14:32:15</publishTime>
+      <publishTime>09/19/2016 14:15:35</publishTime>
     </File>
     <File Include="Content/bootstrap.css">
-      <publishTime>11/10/2015 14:32:15</publishTime>
+      <publishTime>09/19/2016 14:15:35</publishTime>
     </File>
     <File Include="Content/bootstrap.css.map">
-      <publishTime>11/10/2015 14:32:15</publishTime>
+      <publishTime>09/19/2016 14:15:35</publishTime>
     </File>
     <File Include="Content/bootstrap.min.css">
-      <publishTime>11/10/2015 14:32:15</publishTime>
+      <publishTime>09/19/2016 14:15:35</publishTime>
     </File>
     <File Include="Content/Site.css">
-      <publishTime>11/10/2015 14:32:15</publishTime>
+      <publishTime>09/19/2016 14:15:35</publishTime>
     </File>
     <File Include="crossdomain.xml">
-      <publishTime>04/28/2016 18:34:34</publishTime>
+      <publishTime>09/19/2016 14:15:38</publishTime>
     </File>
     <File Include="favicon.ico">
-      <publishTime>11/10/2015 14:32:15</publishTime>
+      <publishTime>09/19/2016 14:15:38</publishTime>
     </File>
     <File Include="fonts/glyphicons-halflings-regular.eot">
-      <publishTime>11/10/2015 14:32:15</publishTime>
+      <publishTime>09/19/2016 14:15:38</publishTime>
     </File>
     <File Include="fonts/glyphicons-halflings-regular.svg">
-      <publishTime>11/10/2015 14:32:15</publishTime>
+      <publishTime>09/19/2016 14:15:38</publishTime>
     </File>
     <File Include="fonts/glyphicons-halflings-regular.ttf">
-      <publishTime>11/10/2015 14:32:15</publishTime>
+      <publishTime>09/19/2016 14:15:38</publishTime>
     </File>
     <File Include="fonts/glyphicons-halflings-regular.woff">
-      <publishTime>11/10/2015 14:32:15</publishTime>
+      <publishTime>09/19/2016 14:15:38</publishTime>
     </File>
     <File Include="fonts/glyphicons-halflings-regular.woff2">
-      <publishTime>11/10/2015 14:32:15</publishTime>
+      <publishTime>09/19/2016 14:15:38</publishTime>
     </File>
     <File Include="Global.asax">
-      <publishTime>11/10/2015 14:32:15</publishTime>
+      <publishTime>09/19/2016 14:15:35</publishTime>
     </File>
     <File Include="lib/SnsNetwork.php">
-      <publishTime>11/14/2015 16:05:46</publishTime>
+      <publishTime>09/19/2016 14:15:38</publishTime>
     </File>
     <File Include="lib/SnsNetwork2.php">
-      <publishTime>11/14/2015 16:05:46</publishTime>
+      <publishTime>09/19/2016 14:15:38</publishTime>
     </File>
     <File Include="lib/SnsSigCheck.php">
-      <publishTime>11/14/2015 16:05:46</publishTime>
+      <publishTime>09/19/2016 14:15:38</publishTime>
     </File>
     <File Include="lib/SnsStat.php">
-      <publishTime>11/14/2015 16:05:46</publishTime>
+      <publishTime>09/19/2016 14:15:38</publishTime>
     </File>
     <File Include="packages.config">
-      <publishTime>11/12/2015 22:10:00</publishTime>
+      <publishTime>09/19/2016 14:15:38</publishTime>
     </File>
     <File Include="Scripts/bootstrap.js">
-      <publishTime>11/10/2015 14:32:15</publishTime>
+      <publishTime>09/19/2016 14:15:35</publishTime>
     </File>
     <File Include="Scripts/bootstrap.min.js">
-      <publishTime>11/10/2015 14:32:15</publishTime>
+      <publishTime>09/19/2016 14:15:35</publishTime>
     </File>
     <File Include="Scripts/jquery-2.1.4.js">
-      <publishTime>11/10/2015 14:32:15</publishTime>
+      <publishTime>09/19/2016 14:15:35</publishTime>
     </File>
     <File Include="Scripts/jquery-2.1.4.min.js">
-      <publishTime>11/10/2015 14:32:15</publishTime>
+      <publishTime>09/19/2016 14:15:35</publishTime>
     </File>
     <File Include="Scripts/jquery-2.1.4.min.map">
-      <publishTime>11/10/2015 14:32:15</publishTime>
+      <publishTime>09/19/2016 14:15:35</publishTime>
     </File>
     <File Include="Scripts/jquery.validate.js">
-      <publishTime>11/10/2015 14:32:15</publishTime>
+      <publishTime>09/19/2016 14:15:35</publishTime>
     </File>
     <File Include="Scripts/jquery.validate.min.js">
-      <publishTime>11/10/2015 14:32:15</publishTime>
+      <publishTime>09/19/2016 14:15:35</publishTime>
     </File>
     <File Include="Scripts/jquery.validate.unobtrusive.js">
-      <publishTime>11/10/2015 14:32:15</publishTime>
+      <publishTime>09/19/2016 14:15:35</publishTime>
     </File>
     <File Include="Scripts/jquery.validate.unobtrusive.min.js">
-      <publishTime>11/10/2015 14:32:15</publishTime>
+      <publishTime>09/19/2016 14:15:35</publishTime>
     </File>
     <File Include="Scripts/modernizr-2.8.3.js">
-      <publishTime>11/10/2015 14:32:15</publishTime>
+      <publishTime>09/19/2016 14:15:35</publishTime>
     </File>
     <File Include="Scripts/respond.js">
-      <publishTime>11/10/2015 14:32:15</publishTime>
+      <publishTime>09/19/2016 14:15:35</publishTime>
     </File>
     <File Include="Scripts/respond.matchmedia.addListener.js">
-      <publishTime>11/10/2015 14:32:15</publishTime>
+      <publishTime>09/19/2016 14:15:35</publishTime>
     </File>
     <File Include="Scripts/respond.matchmedia.addListener.min.js">
-      <publishTime>11/10/2015 14:32:15</publishTime>
+      <publishTime>09/19/2016 14:15:35</publishTime>
     </File>
     <File Include="Scripts/respond.min.js">
-      <publishTime>11/10/2015 14:32:15</publishTime>
+      <publishTime>09/19/2016 14:15:35</publishTime>
     </File>
     <File Include="Scripts/_references.js">
-      <publishTime>11/10/2015 14:32:15</publishTime>
+      <publishTime>09/19/2016 14:15:35</publishTime>
     </File>
     <File Include="Views/Callback/BaiduPay.cshtml">
-      <publishTime>04/28/2016 18:34:34</publishTime>
+      <publishTime>09/19/2016 14:15:35</publishTime>
     </File>
     <File Include="Views/Callback/fYeePay.cshtml">
-      <publishTime>11/10/2015 14:32:15</publishTime>
+      <publishTime>09/19/2016 14:15:35</publishTime>
     </File>
     <File Include="Views/Callback/ResultNotifyPageForAliPay.cshtml">
-      <publishTime>11/14/2015 16:05:46</publishTime>
+      <publishTime>09/19/2016 14:15:35</publishTime>
     </File>
     <File Include="Views/Callback/ResultNotifyPageForQQ.cshtml">
-      <publishTime>11/14/2015 16:05:46</publishTime>
+      <publishTime>09/19/2016 14:15:35</publishTime>
     </File>
     <File Include="Views/Callback/ResultNotifyPageForWxPay.cshtml">
-      <publishTime>11/11/2015 11:01:43</publishTime>
+      <publishTime>09/19/2016 14:15:35</publishTime>
     </File>
     <File Include="Views/Callback/YeePay.cshtml">
-      <publishTime>11/10/2015 14:32:15</publishTime>
+      <publishTime>09/19/2016 14:15:35</publishTime>
     </File>
     <File Include="Views/Home/fail.cshtml">
-      <publishTime>11/10/2015 14:32:15</publishTime>
+      <publishTime>09/19/2016 14:15:35</publishTime>
     </File>
     <File Include="Views/Home/index.cshtml">
-      <publishTime>11/10/2015 14:32:15</publishTime>
+      <publishTime>09/19/2016 14:15:35</publishTime>
     </File>
     <File Include="Views/Home/success.cshtml">
-      <publishTime>11/10/2015 14:32:15</publishTime>
+      <publishTime>09/19/2016 14:15:35</publishTime>
     </File>
     <File Include="Views/Pay/AliPay.cshtml">
-      <publishTime>11/14/2015 16:05:46</publishTime>
+      <publishTime>09/19/2016 14:15:35</publishTime>
     </File>
     <File Include="Views/Pay/BaiduPay.cshtml">
-      <publishTime>04/28/2016 18:34:34</publishTime>
+      <publishTime>09/19/2016 14:15:35</publishTime>
     </File>
     <File Include="Views/Pay/QQPay.cshtml">
-      <publishTime>04/28/2016 18:34:34</publishTime>
+      <publishTime>09/19/2016 14:15:35</publishTime>
     </File>
     <File Include="Views/Pay/UnicomPay.cshtml">
-      <publishTime>04/28/2016 18:34:34</publishTime>
+      <publishTime>09/19/2016 14:15:36</publishTime>
     </File>
     <File Include="Views/Pay/WxPay.cshtml">
-      <publishTime>11/10/2015 14:32:15</publishTime>
+      <publishTime>09/19/2016 14:15:36</publishTime>
     </File>
     <File Include="Views/Pay/YeePay.cshtml">
-      <publishTime>11/10/2015 14:32:15</publishTime>
+      <publishTime>09/19/2016 14:15:36</publishTime>
     </File>
     <File Include="Views/Shared/Error.cshtml">
-      <publishTime>11/12/2015 22:10:00</publishTime>
+      <publishTime>09/19/2016 14:15:36</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
-      <publishTime>11/10/2015 14:32:15</publishTime>
+      <publishTime>09/19/2016 14:15:36</publishTime>
     </File>
     <File Include="Views/Sign/AppStore.cshtml">
-      <publishTime>04/28/2016 18:34:34</publishTime>
+      <publishTime>09/19/2016 14:15:36</publishTime>
     </File>
     <File Include="Views/Web.config">
-      <publishTime>11/10/2015 14:32:15</publishTime>
+      <publishTime>09/19/2016 14:15:36</publishTime>
     </File>
     <File Include="Views/_ViewStart.cshtml">
-      <publishTime>11/10/2015 14:32:15</publishTime>
+      <publishTime>09/19/2016 14:15:36</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>05/10/2016 11:14:03</publishTime>
+      <publishTime>11/30/2016 12:37:39</publishTime>
     </File>
   </ItemGroup>
 </Project>

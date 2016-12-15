@@ -30,9 +30,9 @@ public static class TaskAction
 
         string timerTask = PubConstant.GetConnectionString("timerTask");
 
-
+        // TaskAction.SetContent();
         if (timerTask == "1")
-        {//定时器开关
+        {
             Thread t = new Thread(new ThreadStart(TaskAction.SetContent));
             t.Start();
 
@@ -69,21 +69,22 @@ public static class TaskAction
             try
             {
                 DateTime endTime = GetDataBaseTime();
-                //德州扑克数据解析
-               TexasGameLog(endTime);
-                //中发白数据解析
-               ScaleGameLog(endTime);
+                // //德州扑克数据解析
+                TexasGameLog(endTime);
+               // 中发白数据解析
+                ScaleGameLog(endTime);
                 //十二生肖数据解析
-               ZodiacGameLog(endTime);
+                ZodiacGameLog(endTime);
                 //小马快跑数据解析
-              HorseGameLog(endTime);
+                HorseGameLog(endTime);
                 //奔驰宝马数据解析
-             CarGameLog(endTime);
+                CarGameLog(endTime);
                 //百人德州扑克数据解析
-               TexProGameLog(endTime);
+                TexProGameLog(endTime);
                 //水浒传数据解析
-                ShuihuGameLog(endTime);
-
+              //  ShuihuGameLog(endTime);
+                //百家乐数据解析
+             //   BaiJiaLeGameLog(endTime);
             }
             catch
             {
@@ -408,7 +409,8 @@ Scale_Count,Scale_Banker,Scale_Award_L,Scale_Award_W,
 Zodiac_Count,Zodiac_Banker,Zodiac_Award_L,Zodiac_Award_W,
 Horse_Count,Horse_Banker,Horse_Award_L,Horse_Award_W,
 Car_Count,Car_Banker,Car_Award_L,Car_Award_W,
-Hundred_Count,Hundred_Banker,Hundred_Award_L,Hundred_Award_W
+Hundred_Count,Hundred_Banker,Hundred_Award_L,Hundred_Award_W,
+BaiJiaLe_Count,BaiJiaLe_Banker,BaiJiaLe_Award_L,BaiJiaLe_Award_W
 )
 select " + comdata.UserID + @" ,'" + comdata.CountDate + @"' ,
 ifnull(b.Texas_LCount,0) + " + comdata.InitialCount + @" ,ifnull(b.Texas_LAward_L,0)+ " + comdata.InitialL + @",ifnull(b.Texas_LAward_W,0)+ " + comdata.InitialW + @" ,
@@ -418,7 +420,8 @@ ifnull(b.Scale_Count,0) ,ifnull(b.Scale_Banker,0),ifnull(b.Scale_Award_L,0) ,ifn
 ifnull(b.Zodiac_Count,0) ,ifnull(b.Zodiac_Banker,0),ifnull(b.Zodiac_Award_L,0)  ,ifnull(b.Zodiac_Award_W,0)  ,
 ifnull(b.Horse_Count,0)   ,ifnull(b.Horse_Banker,0),ifnull(b.Horse_Award_L,0)  ,ifnull(b.Horse_Award_W,0) ,
 ifnull(b.Car_Count,0)  ,ifnull(b.Car_Banker,0),ifnull(b.Car_Award_L,0),ifnull(b.Car_Award_W,0) ,
-ifnull(b.Hundred_Count,0)  ,ifnull(b.Hundred_Banker,0),ifnull(b.Hundred_Award_L,0),ifnull(b.Hundred_Award_W,0) 
+ifnull(b.Hundred_Count,0)  ,ifnull(b.Hundred_Banker,0),ifnull(b.Hundred_Award_L,0),ifnull(b.Hundred_Award_W,0),
+ifnull(b.BaiJiaLe_Count,0)  ,ifnull(b.BaiJiaLe_Banker,0),ifnull(b.BaiJiaLe_Award_L,0),ifnull(b.BaiJiaLe_Award_W,0)  
 from (select " + comdata.UserID + @" userid ) a left join (
 select * from "+ database3 + @".Clearing_Game where UserID = " + comdata.UserID + @" and CountDate = '" + comdata.CountDate + @"') b on 1 = 1;
 ";
@@ -507,7 +510,7 @@ from (select "+comdata.UserID+ @" UserID)a
 
         foreach (ScaleGameRecord m in data)
         {
-
+          //  0,989380,0,0,0,0)          10006,0,3000,4610,3010,10088
             var userList = m.UserData.Split('_').ToList();
             userList.RemoveAt(userList.Count - 1);
             var j = userList.Count;
@@ -540,7 +543,8 @@ from (select "+comdata.UserID+ @" UserID)a
                 }
 
 
-                com.Initial = d; com.InitialCount = 1;
+                com.Initial = d;
+                com.InitialCount = 1;
                 com.Key = com.UserID + com.CountDate.ToString();
                 com.Key2 = com.UserID + com.CountDate.ToString() + com.DownType;
 
@@ -582,7 +586,9 @@ Scale_Count,Scale_Banker,Scale_Award_L,Scale_Award_W,
 Zodiac_Count,Zodiac_Banker,Zodiac_Award_L,Zodiac_Award_W,
 Horse_Count,Horse_Banker,Horse_Award_L,Horse_Award_W,
 Car_Count,Car_Banker,Car_Award_L,Car_Award_W,
-Hundred_Count,Hundred_Banker,Hundred_Award_L,Hundred_Award_W)
+Hundred_Count,Hundred_Banker,Hundred_Award_L,Hundred_Award_W,
+BaiJiaLe_Count,BaiJiaLe_Banker,BaiJiaLe_Award_L,BaiJiaLe_Award_W)
+
 select " + comdata.UserID + @" ,'" + comdata.CountDate + @"' ,
 ifnull(b.Texas_LCount,0),ifnull(b.Texas_LAward_L,0),ifnull(b.Texas_LAward_W,0),
 ifnull(b.Texas_MCount,0),ifnull(b.Texas_MAward_L,0),ifnull(b.Texas_MAward_W,0),
@@ -591,7 +597,8 @@ ifnull(b.Scale_Count,0) + " + comdata.InitialCount + @" ,ifnull(b.Scale_Banker,0
 ifnull(b.Zodiac_Count,0) ,ifnull(b.Zodiac_Banker,0),ifnull(b.Zodiac_Award_L,0) ,ifnull(b.Zodiac_Award_W,0) ,
 ifnull(b.Horse_Count,0)  ,ifnull(b.Horse_Banker,0),ifnull(b.Horse_Award_L,0)  ,ifnull(b.Horse_Award_W,0)  ,
 ifnull(b.Car_Count,0)  ,ifnull(b.Car_Banker,0),ifnull(b.Car_Award_L,0) ,ifnull(b.Car_Award_W,0) ,
-ifnull(b.Hundred_Count,0)  ,ifnull(b.Hundred_Banker,0),ifnull(b.Hundred_Award_L,0),ifnull(b.Hundred_Award_W,0) 
+ifnull(b.Hundred_Count,0)  ,ifnull(b.Hundred_Banker,0),ifnull(b.Hundred_Award_L,0),ifnull(b.Hundred_Award_W,0) ,
+ifnull(b.BaiJiaLe_Count,0)  ,ifnull(b.BaiJiaLe_Banker,0),ifnull(b.BaiJiaLe_Award_L,0),ifnull(b.BaiJiaLe_Award_W,0) 
 from (select " + comdata.UserID + @" userid ) a left join (
 select * from "+ database3 + @".Clearing_Game where UserID = " + comdata.UserID + @" and CountDate = '" + comdata.CountDate + @"') b on 1 = 1;
 ";
@@ -643,6 +650,141 @@ from (select " + comdata.UserID + @" UserID)a
 
 
     }
+
+    private static void BaiJiaLeGameLog(DateTime endTime)
+    {
+        //查询开始时间
+        //   ILog log = LogManager.GetLogger("TaskAction");
+        //  log.Info("开始百家乐牌局分析#################");
+        GameRecordView grv = new GameRecordView { Gametype = 1, Data = 0, UserID = 0, SearchExt = "Analyse_BaiJiaLe", StartDate = DateTime.Now.ToString("yyyy-MM-dd 00:00:00"), ExpirationDate = endTime.ToString(), Page = 1, SeachType = (seachType)0 };
+        grv.StartDate = GameDataBLL.GetBeginTimeForGame(grv);
+        //   log.Info("开始时间:" + grv.StartDate);
+        //    log.Info("结束时间:" + grv.ExpirationDate);
+        IEnumerable<BaccaratGameRecord> data = GameDataBLL.GetListForBaiJiaLe(grv);
+        //   log.Info("数据查询结果集数量:" + data == null ? 0 : data.Count());
+        List<CommonGameData> resdata = new List<CommonGameData>();
+        foreach (BaccaratGameRecord m in data)
+        {
+
+            List<string> userList = m.UserData.Trim('_').Split('_').ToList();
+            userList.Remove(userList[0]);
+            var j = userList.Count;
+            for (int i = 0; i < j; i++)
+            {
+                CommonGameData com = new CommonGameData();
+                var userData = userList[i].Split(',').ToList();
+                int tem = 0;
+
+                DateTime t = m.CreateTime;
+                com.CountDate = new DateTime(t.Year, t.Month, t.Day);
+                //int 房间ID = m.RoomID;
+                //decimal 牌局号 = m.Round;
+                //int 服务费 = m.Service;
+                var wj = userData[0];
+                com.UserID = int.Parse(wj);
+                decimal d = 0;
+                decimal.TryParse(userData[2].Trim('('),out d);
+                com.Initial = d;
+                com.InitialCount = 1;
+                com.Key = com.UserID + com.CountDate.ToString();
+                com.Key2 = com.UserID + com.CountDate.ToString() + com.DownType;
+
+                com.TotalTime = m.BoardTime;
+                resdata.Add(com);
+            }
+        }
+        IEnumerable<IGrouping<string, CommonGameData>> query = resdata.GroupBy(m => m.Key);
+        List<CommonGameData> sumData = new List<CommonGameData>();
+        foreach (IGrouping<string, CommonGameData> info in query)
+        {
+            List<CommonGameData> sl = info.ToList<CommonGameData>();//分组后的集合
+            CommonGameData co = new CommonGameData();
+            co.UserID = sl[0].UserID;
+            co.CountDate = sl[0].CountDate;
+            co.InitialL = sl.Where(m => m.Initial < 0).Sum(m => m.Initial);
+            co.InitialW = sl.Where(m => m.Initial > 0).Sum(m => m.Initial);
+            co.InitialCount = sl.Sum(m => m.InitialCount);
+
+            sumData.Add(co);
+        }
+        string sql = "";
+        foreach (CommonGameData comdata in sumData)
+        {
+           
+
+            sql = sql + @"replace into " + database3 + @".Clearing_Game(
+UserID ,CountDate ,
+ Texas_LCount, Texas_LAward_L ,Texas_LAward_W,
+Texas_MCount,Texas_MAward_L ,Texas_MAward_W,
+Texas_HCount,Texas_HAward_L,Texas_HAward_W,
+Scale_Count,Scale_Banker,Scale_Award_L,Scale_Award_W,
+Zodiac_Count,Zodiac_Banker,Zodiac_Award_L,Zodiac_Award_W,
+Horse_Count,Horse_Banker,Horse_Award_L,Horse_Award_W,
+Car_Count,Car_Banker,Car_Award_L,Car_Award_W,
+Hundred_Count,Hundred_Banker,Hundred_Award_L,Hundred_Award_W,
+BaiJiaLe_Count,BaiJiaLe_Banker,BaiJiaLe_Award_L,BaiJiaLe_Award_W)
+select " + comdata.UserID + @" ,'" + comdata.CountDate + @"' ,
+ifnull(b.Texas_LCount,0),ifnull(b.Texas_LAward_L,0),ifnull(b.Texas_LAward_W,0),
+ifnull(b.Texas_MCount,0),ifnull(b.Texas_MAward_L,0),ifnull(b.Texas_MAward_W,0),
+ifnull(b.Texas_HCount,0),ifnull(b.Texas_HAward_L,0),ifnull(b.Texas_HAward_W,0),
+ifnull(b.Scale_Count,0) ,ifnull(b.Scale_Banker,0),ifnull(b.Scale_Award_L,0),ifnull(b.Scale_Award_W,0) ,
+ifnull(b.Zodiac_Count,0) ,ifnull(b.Zodiac_Banker,0),ifnull(b.Zodiac_Award_L,0) ,ifnull(b.Zodiac_Award_W,0) ,
+ifnull(b.Horse_Count,0)  ,ifnull(b.Horse_Banker,0),ifnull(b.Horse_Award_L,0)  ,ifnull(b.Horse_Award_W,0)  ,
+ifnull(b.Car_Count,0)  ,ifnull(b.Car_Banker,0),ifnull(b.Car_Award_L,0) ,ifnull(b.Car_Award_W,0) ,
+ifnull(b.Hundred_Count,0)  ,ifnull(b.Hundred_Banker,0),ifnull(b.Hundred_Award_L,0),ifnull(b.Hundred_Award_W,0) ,
+ifnull(b.BaiJiaLe_Count,0) + " + comdata.InitialCount + @" ,ifnull(b.BaiJiaLe_Banker,0),ifnull(b.BaiJiaLe_Award_L,0) + " + comdata.InitialL + @" ,ifnull(b.BaiJiaLe_Award_W,0) + " + comdata.InitialW + @" 
+from (select " + comdata.UserID + @" userid ) a left join (
+select * from " + database3 + @".Clearing_Game where UserID = " + comdata.UserID + @" and CountDate = '" + comdata.CountDate + @"') b on 1 = 1;
+";
+        }
+
+
+
+
+        IEnumerable<IGrouping<string, CommonGameData>> query2 = resdata.GroupBy(m => m.Key2);
+        List<CommonGameData> sumData2 = new List<CommonGameData>();
+        foreach (IGrouping<string, CommonGameData> info in query2)
+        {
+            List<CommonGameData> sl = info.ToList<CommonGameData>();//分组后的集合
+            CommonGameData co = new CommonGameData();
+            co.UserID = sl[0].UserID;
+            co.CountDate = sl[0].CountDate;
+            //co.InitialL = sl.Where(m => m.Initial < 0).Sum(m => m.Initial);
+            //co.InitialW = sl.Where(m => m.Initial > 0).Sum(m => m.Initial);
+            co.InitialCount = sl.Sum(m => m.InitialCount);
+            co.DownType = "21";
+            co.TotalTime = sl.Sum(m => m.TotalTime);
+            sumData2.Add(co);
+        }
+        foreach (CommonGameData comdata in sumData2)
+        {
+            sql = sql + @"
+replace into Clearing_GameDesc(UserID ,CountDate ,GameType ,BetType ,GameCount ,GameTime)
+select a.UserID ,date('" + comdata.CountDate + @"') ,13 ," + comdata.DownType + @" ," + comdata.InitialCount + @" + ifnull(b.GameCount ,0) ," + comdata.TotalTime + @" + ifnull(b.GameTime ,0)
+from (select " + comdata.UserID + @" UserID)a 
+  left join (
+    select UserID ,CountDate ,GameType ,BetType ,GameCount ,GameTime from Clearing_GameDesc 
+    where UserID = " + comdata.UserID + @" and CountDate = date('" + comdata.CountDate + @"') and GameType = 13 and BetType = '" + comdata.DownType + @"'
+  )b on a.UserID = b.UserID ;
+
+";
+        }
+
+
+
+
+        if (sql != "")
+        {
+            bool res = GameDataBLL.Add(sql);
+
+        }
+
+        GameDataBLL.UpdateBeginTimeForGame(grv);
+        //修改时间
+
+
+    }
+
 
     private static void ZodiacGameLog(DateTime endTime)
     {
@@ -743,7 +885,7 @@ from (select " + comdata.UserID + @" UserID)a
             //from (select " + comdata.UserID + @" userid ) a left join (
             //select * from record.Clearing_Game where UserID = " + comdata.UserID + @" and CountDate = '" + comdata.CountDate + @"') b on 1 = 1;
             //";
-
+                                 
             sql = sql + @"replace into "+ database3 + @".Clearing_Game(
 UserID ,CountDate ,
  Texas_LCount, Texas_LAward_L ,Texas_LAward_W,
@@ -753,7 +895,8 @@ Scale_Count,Scale_Banker,Scale_Award_L,Scale_Award_W,
 Zodiac_Count,Zodiac_Banker,Zodiac_Award_L,Zodiac_Award_W,
 Horse_Count,Horse_Banker,Horse_Award_L,Horse_Award_W,
 Car_Count,Car_Banker,Car_Award_L,Car_Award_W,
-Hundred_Count,Hundred_Banker,Hundred_Award_L,Hundred_Award_W)
+Hundred_Count,Hundred_Banker,Hundred_Award_L,Hundred_Award_W,
+BaiJiaLe_Count,BaiJiaLe_Banker,BaiJiaLe_Award_L,BaiJiaLe_Award_W)
 select " + comdata.UserID + @" ,'" + comdata.CountDate + @"' ,
 ifnull(b.Texas_LCount,0),ifnull(b.Texas_LAward_L,0),ifnull(b.Texas_LAward_W,0),
 ifnull(b.Texas_MCount,0),ifnull(b.Texas_MAward_L,0),ifnull(b.Texas_MAward_W,0),
@@ -762,7 +905,8 @@ ifnull(b.Scale_Count,0) ,ifnull(b.Scale_Banker,0),ifnull(b.Scale_Award_L,0) ,ifn
 ifnull(b.Zodiac_Count,0)+ " + comdata.InitialCount + @"  ,ifnull(b.Zodiac_Banker,0),ifnull(b.Zodiac_Award_L,0)+ " + comdata.InitialL + @"  ,ifnull(b.Zodiac_Award_W,0) + " + comdata.InitialW + @" ,
 ifnull(b.Horse_Count,0)  ,ifnull(b.Horse_Banker,0),ifnull(b.Horse_Award_L,0)  ,ifnull(b.Horse_Award_W,0)  ,
 ifnull(b.Car_Count,0)  ,ifnull(b.Car_Banker,0),ifnull(b.Car_Award_L,0) ,ifnull(b.Car_Award_W,0) ,
-ifnull(b.Hundred_Count,0)  ,ifnull(b.Hundred_Banker,0),ifnull(b.Hundred_Award_L,0),ifnull(b.Hundred_Award_W,0) 
+ifnull(b.Hundred_Count,0)  ,ifnull(b.Hundred_Banker,0),ifnull(b.Hundred_Award_L,0),ifnull(b.Hundred_Award_W,0) ,
+ifnull(b.BaiJiaLe_Count, 0)  ,ifnull(b.BaiJiaLe_Banker, 0),ifnull(b.BaiJiaLe_Award_L, 0),ifnull(b.BaiJiaLe_Award_W, 0)
 from (select " + comdata.UserID + @" userid ) a left join (
 select * from "+ database3 + @".Clearing_Game where UserID = " + comdata.UserID + @" and CountDate = '" + comdata.CountDate + @"') b on 1 = 1;
 ";
@@ -922,7 +1066,8 @@ Scale_Count,Scale_Banker,Scale_Award_L,Scale_Award_W,
 Zodiac_Count,Zodiac_Banker,Zodiac_Award_L,Zodiac_Award_W,
 Horse_Count,Horse_Banker,Horse_Award_L,Horse_Award_W,
 Car_Count,Car_Banker,Car_Award_L,Car_Award_W,
-Hundred_Count,Hundred_Banker,Hundred_Award_L,Hundred_Award_W)
+Hundred_Count,Hundred_Banker,Hundred_Award_L,Hundred_Award_W,
+BaiJiaLe_Count,BaiJiaLe_Banker,BaiJiaLe_Award_L,BaiJiaLe_Award_W)
 select " + comdata.UserID + @" ,'" + comdata.CountDate + @"' ,
 ifnull(b.Texas_LCount,0),ifnull(b.Texas_LAward_L,0),ifnull(b.Texas_LAward_W,0),
 ifnull(b.Texas_MCount,0),ifnull(b.Texas_MAward_L,0),ifnull(b.Texas_MAward_W,0),
@@ -931,7 +1076,8 @@ ifnull(b.Scale_Count,0) ,ifnull(b.Scale_Banker,0),ifnull(b.Scale_Award_L,0) ,ifn
 ifnull(b.Zodiac_Count,0) ,ifnull(b.Zodiac_Banker,0),ifnull(b.Zodiac_Award_L,0)  ,ifnull(b.Zodiac_Award_W,0)  ,
 ifnull(b.Horse_Count,0) + " + comdata.InitialCount + @"  ,ifnull(b.Horse_Banker,0),ifnull(b.Horse_Award_L,0) + " + comdata.InitialL + @" ,ifnull(b.Horse_Award_W,0)+ " + comdata.InitialW + @"  ,
 ifnull(b.Car_Count,0)  ,ifnull(b.Car_Banker,0),ifnull(b.Car_Award_L,0) ,ifnull(b.Car_Award_W,0) ,
-ifnull(b.Hundred_Count,0)  ,ifnull(b.Hundred_Banker,0),ifnull(b.Hundred_Award_L,0),ifnull(b.Hundred_Award_W,0)
+ifnull(b.Hundred_Count,0)  ,ifnull(b.Hundred_Banker,0),ifnull(b.Hundred_Award_L,0),ifnull(b.Hundred_Award_W,0),
+ifnull(b.BaiJiaLe_Count, 0)  ,ifnull(b.BaiJiaLe_Banker, 0),ifnull(b.BaiJiaLe_Award_L, 0),ifnull(b.BaiJiaLe_Award_W, 0)
 from (select " + comdata.UserID + @" userid ) a left join (
 select * from "+ database3 + @".Clearing_Game where UserID = " + comdata.UserID + @" and CountDate = '" + comdata.CountDate + @"') b on 1 = 1;
 ";
@@ -1057,7 +1203,8 @@ Scale_Count,Scale_Banker,Scale_Award_L,Scale_Award_W,
 Zodiac_Count,Zodiac_Banker,Zodiac_Award_L,Zodiac_Award_W,
 Horse_Count,Horse_Banker,Horse_Award_L,Horse_Award_W,
 Car_Count,Car_Banker,Car_Award_L,Car_Award_W,
-Hundred_Count,Hundred_Banker,Hundred_Award_L,Hundred_Award_W)
+Hundred_Count,Hundred_Banker,Hundred_Award_L,Hundred_Award_W,
+BaiJiaLe_Count,BaiJiaLe_Banker,BaiJiaLe_Award_L,BaiJiaLe_Award_W)
 select " + comdata.UserID + @" ,'" + comdata.CountDate + @"' ,
 ifnull(b.Texas_LCount,0),ifnull(b.Texas_LAward_L,0),ifnull(b.Texas_LAward_W,0),
 ifnull(b.Texas_MCount,0),ifnull(b.Texas_MAward_L,0),ifnull(b.Texas_MAward_W,0),
@@ -1066,7 +1213,8 @@ ifnull(b.Scale_Count,0) ,ifnull(b.Scale_Banker,0),ifnull(b.Scale_Award_L,0) ,ifn
 ifnull(b.Zodiac_Count,0) ,ifnull(b.Zodiac_Banker,0),ifnull(b.Zodiac_Award_L,0)  ,ifnull(b.Zodiac_Award_W,0)  ,
 ifnull(b.Horse_Count,0)   ,ifnull(b.Horse_Banker,0),ifnull(b.Horse_Award_L,0)  ,ifnull(b.Horse_Award_W,0) ,
 ifnull(b.Car_Count,0) + " + comdata.InitialCount + @" ,ifnull(b.Car_Banker,0),ifnull(b.Car_Award_L,0)+ " + comdata.InitialL + @" ,ifnull(b.Car_Award_W,0) + " + comdata.InitialW + @", 
-ifnull(b.Hundred_Count,0)  ,ifnull(b.Hundred_Banker,0),ifnull(b.Hundred_Award_L,0),ifnull(b.Hundred_Award_W,0)
+ifnull(b.Hundred_Count,0)  ,ifnull(b.Hundred_Banker,0),ifnull(b.Hundred_Award_L,0),ifnull(b.Hundred_Award_W,0),
+ifnull(b.BaiJiaLe_Count, 0)  ,ifnull(b.BaiJiaLe_Banker, 0),ifnull(b.BaiJiaLe_Award_L, 0),ifnull(b.BaiJiaLe_Award_W, 0)
 from (select " + comdata.UserID + @" userid ) a left join (
 select * from "+ database3 + @".Clearing_Game where UserID = " + comdata.UserID + @" and CountDate = '" + comdata.CountDate + @"') b on 1 = 1;
 ";
@@ -1213,7 +1361,8 @@ Scale_Count,Scale_Banker,Scale_Award_L,Scale_Award_W,
 Zodiac_Count,Zodiac_Banker,Zodiac_Award_L,Zodiac_Award_W,
 Horse_Count,Horse_Banker,Horse_Award_L,Horse_Award_W,
 Car_Count,Car_Banker,Car_Award_L,Car_Award_W,
-Hundred_Count,Hundred_Banker,Hundred_Award_L,Hundred_Award_W)
+Hundred_Count,Hundred_Banker,Hundred_Award_L,Hundred_Award_W,
+BaiJiaLe_Count,BaiJiaLe_Banker,BaiJiaLe_Award_L,BaiJiaLe_Award_W)
 select " + comdata.UserID + @" ,'" + comdata.CountDate + @"' ,
 ifnull(b.Texas_LCount,0),ifnull(b.Texas_LAward_L,0),ifnull(b.Texas_LAward_W,0),
 ifnull(b.Texas_MCount,0),ifnull(b.Texas_MAward_L,0),ifnull(b.Texas_MAward_W,0),
@@ -1222,6 +1371,7 @@ ifnull(b.Scale_Count,0) ,ifnull(b.Scale_Banker,0),ifnull(b.Scale_Award_L,0) ,ifn
 ifnull(b.Zodiac_Count,0) ,ifnull(b.Zodiac_Banker,0),ifnull(b.Zodiac_Award_L,0) ,ifnull(b.Zodiac_Award_W,0) ,
 ifnull(b.Horse_Count,0)  ,ifnull(b.Horse_Banker,0),ifnull(b.Horse_Award_L,0)  ,ifnull(b.Horse_Award_W,0)  ,
 ifnull(b.Car_Count,0)  ,ifnull(b.Car_Banker,0),ifnull(b.Car_Award_L,0) ,ifnull(b.Car_Award_W,0) ,
+,ifnull(b.BaiJiaLe_Count, 0)  ,ifnull(b.BaiJiaLe_Banker, 0),ifnull(b.BaiJiaLe_Award_L, 0),ifnull(b.BaiJiaLe_Award_W, 0)
 ifnull(b.Hundred_Count,0) + " + comdata.InitialCount + @" ,ifnull(b.Hundred_Banker,0),ifnull(b.Hundred_Award_L,0)+ " + comdata.InitialL + @" ,ifnull(b.Hundred_Award_W,0) + " + comdata.InitialW+@" 
 from (select " + comdata.UserID + @" userid ) a left join (
 select * from "+ database3 + @".Clearing_Game where UserID = " + comdata.UserID + @" and CountDate = '" + comdata.CountDate + @"') b on 1 = 1;

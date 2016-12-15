@@ -12,8 +12,6 @@
 #定时器计算代理商消耗的库存,发邮件的就实时计算
 
 
-
-
 #明珠数据库
 use gserverinfo;
 -- ----------------------------
@@ -60,19 +58,34 @@ CREATE TABLE `dailiusers` (
 `id`  int(11) NOT NULL AUTO_INCREMENT  ,
 `No`  BIGINT(11)  NOT NULL COMMENT '代理商编号' ,
 `Name`  VARCHAR(22)  NOT NULL COMMENT '代理商的名称' ,
-`GameDataDBConnect`  VARCHAR(48) NOT NULL COMMENT 'GameData代理商的数据库连接' ,
-`GserverinfoDBConnect`  VARCHAR(48) NOT NULL COMMENT 'Gserverinfo代理商的数据库连接' ,
-`RecordDBConnect`  VARCHAR(48) NOT NULL COMMENT 'Record代理商的数据库连接' ,
+`GameDataDBConnect`  VARCHAR(200) NOT NULL COMMENT 'GameData代理商的数据库连接' ,
+`GserverinfoDBConnect`  VARCHAR(200) NOT NULL COMMENT 'Gserverinfo代理商的数据库连接' ,
+`RecordDBConnect`  VARCHAR(200) NOT NULL COMMENT 'Record代理商的数据库连接' ,
 `ServerIP`  VARCHAR(48) NOT NULL COMMENT '代理商的服务器地址' ,
 `ServerPort`  int(11) NOT NULL COMMENT '代理商的服务器端口' ,
 `GameUrl`  VARCHAR(48)  COMMENT '代理商游戏地址' ,
-`MWebUrl`  VARCHAR(48) NOT NULL COMMENT '代理商的后台系统地址' , 
+`MWebUrl`  VARCHAR(48) NOT NULL COMMENT '代理商的后台系统地址' ,
+`Psw`  VARCHAR(48)  COMMENT '密码，预留字段，暂时没用到' ,
+`FenChenRate`  VARCHAR(48)  COMMENT '分成比例' ,
+`GoldRate`  VARCHAR(48)  COMMENT '兑换游戏币比例' ,
 PRIMARY KEY (`id`)
 )
 ENGINE=InnoDB
 DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci
 COMMENT='代理商库存表'
 ;
+
+
+
+INSERT INTO `dailiusers` VALUES (
+1, '1', '明珠棋牌', 
+'server=192.168.1.50;uid=root;charset=utf8;pwd=hhy1331;database=gamedata;', 
+'server=192.168.1.50;charset=utf8;uid=root;pwd=hhy1331;database=gserverInfo;', 
+'server=192.168.1.50;uid=root;charset=utf8;pwd=hhy1331;database=record;', 
+'192.168.1.50', 5200, 'www.515.com', 'qqq.515.com', 
+'','2:8','1:21500'
+);
+
 
 
 use gserverinfo;
@@ -82,14 +95,92 @@ use gserverinfo;
 DROP PROCEDURE IF EXISTS `sys_updateDaiLiKuCun`;
 DELIMITER ;;
 CREATE DEFINER=`root`@`%` PROCEDURE `sys_updateDaiLiKuCun`(
-    I_Gold LONG
+    I_Gold LONG,
+    I_OperType LONG
 )
 begin	
-    SET SESSION TRANSACTION ISOLATION LEVEL  SERIALIZABLE;		
+     declare beforeGold int;
+     SET SESSION TRANSACTION ISOLATION LEVEL  SERIALIZABLE;		
+      select Gold into beforeGold from dailikucun ;
+      IF I_OperType=1
+      THEN    
+  insert into dailiFlowRecord(
+CreateTime,BeforeKucun,Gold,AfterKucun,OperName,Pid)
+values(NOW(),beforeGold,I_Gold,0,'充值库存',-1);
+      ELSEIF  I_OperType=2
+      THEN  
+  insert into dailiFlowRecord(
+CreateTime,BeforeKucun,Gold,AfterKucun,OperName,Pid)
+values(NOW(),beforeGold,I_Gold,0,'发送邮件',-1);  
+      ELSEIF  I_OperType=3
+      THEN  
+  insert into dailiFlowRecord(
+CreateTime,BeforeKucun,Gold,AfterKucun,OperName,Pid)
+values(NOW(),beforeGold,I_Gold,0,'玩家充值',-1);  
+     
 
-  
+      END IF;  
       update dailikucun set Gold= Gold+I_Gold;
 	 SET SESSION TRANSACTION ISOLATION LEVEL REPEATABLE READ;
 end
 ;;
 DELIMITER ;
+
+
+
+
+insert into gserverinfo.aspnetresource (`id`,`no`,`Name`,`pno`,`action`,`level`,`group`,`orderindex`)
+select 600,'010','代理商管理','','',1,10,527;
+insert into gserverinfo.aspnetresource (`id`,`no`,`Name`,`pno`,`action`,`level`,`group`,`orderindex`)
+select 601,'010001','代理商列表','010','/DaiLi/Index,/DaiLi/KuCunValueIndex,/DaiLi/SetFlowNoIndex,/DaiLi/UpdateKuCun',2,10,527.2;
+
+
+insert into gserverinfo.aspnetresource (`id`,`no`,`Name`,`pno`,`action`,`level`,`group`,`orderindex`)
+select 602,'010002','库存修改记录','010','/DaiLi/KuCunFlow',2,10,527.3;
+
+
+
+
+
+use gserverinfo;
+-- ----------------------------
+-- Table structure for `dailirecord`
+-- ----------------------------
+DROP TABLE IF EXISTS `dailirecord`;
+CREATE TABLE `dailirecord` (
+`id`  int(11) NOT NULL AUTO_INCREMENT  ,
+`DaiLiNo`  BIGINT(11)  NOT NULL COMMENT '代理商编号' ,
+`CreateTime`  datetime COMMENT '操作时间' ,
+`OperUserName`  VARCHAR(48) NOT NULL COMMENT '操作人' ,
+`Rmb`  DECIMAL(48) NOT NULL COMMENT '充值金额' ,
+`FenChenRate`  VARCHAR(48) NOT NULL COMMENT '分成比例' ,
+`GoldRate`  VARCHAR(48) NOT NULL COMMENT '兑换比例' ,
+`OperGold`  BIGINT(48) NOT NULL COMMENT '操作金额' ,
+PRIMARY KEY (`id`)
+)
+ENGINE=InnoDB
+DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci
+COMMENT='代理商库存记录表'
+;
+
+
+use gserverinfo;
+-- ----------------------------
+-- Table structure for `dailiFlowRecord`
+-- ----------------------------
+DROP TABLE IF EXISTS `dailiFlowRecord`;
+CREATE TABLE `dailiFlowRecord` (
+`id`  int(11) NOT NULL AUTO_INCREMENT  ,
+`CreateTime`  datetime COMMENT '操作时间' ,
+`BeforeKucun`  DECIMAL(48)  COMMENT '变化前的库存' ,
+`Gold`  DECIMAL(48) NOT NULL COMMENT '操作金额' ,
+`AfterKucun`  DECIMAL(48)  COMMENT '变化后的库存' ,
+`OperName`  VARCHAR(48)  COMMENT '操作' ,
+`Pid` int(11)  COMMENT '标记' ,
+`Ext`  VARCHAR(1000)  COMMENT '扩展' ,
+PRIMARY KEY (`id`)
+)
+ENGINE=InnoDB
+DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci
+COMMENT='代理商库存流水表'
+;

@@ -27,7 +27,7 @@
 
 
     List<GameOutputList>   youxiwanfa = new    List<GameOutputList>();
-    string youxiwanfastr= ",18,46,48,51,67,79,80,81,83,84,85,86,88,90,111,124,166,200,";
+    string youxiwanfastr= ",18,46,48,51,67,79,80,81,83,84,85,86,88,90,111,124,166,200,236,";
     decimal youxiwanfaTotal = 0;
 
     List<GameOutputList>   yunyinhuodong = new    List<GameOutputList>();
@@ -66,6 +66,13 @@
     List<GameOutputList> bairendezhou = new List<GameOutputList>();
     string bairenstr = ",157,162,";
     decimal bairenTotal = 0;
+
+
+
+    List<GameOutputList> baijiale = new List<GameOutputList>();
+    string baijialestr = ",228,233,";
+    decimal baijialeTotal = 0;
+
 
     List<GameOutputList> shuihuhuishou = new List<GameOutputList>();
     string shuihustr = ",999,998,";
@@ -130,6 +137,11 @@
         {
             bairendezhou.Add(bdl.list[i]);
             bairenTotal += bdl.list[i].Chip; outputmark++;
+        }
+        else if (baijialestr.Contains("," + t + ","))
+        {
+            baijiale.Add(bdl.list[i]);
+            baijialeTotal += bdl.list[i].Chip; outputmark++;
         }
         else if (shuihustr.Contains("," + t + ","))
         {
@@ -388,6 +400,21 @@
 
                                                                 <li style="display:none">
                                                                     <span class="label"><i class=""></i>@bairendezhou[i].ChipChangeType  <span style="color:#ee0000">@bairendezhou[i].Chip.ToString("#,0.")</span></span>
+                                                                </li>
+                                                            }
+                                                        </ul>
+                                                    </li>
+                                                }
+                                                @if (baijialeTotal < 0)
+                                                {
+                                                    <li>
+                                                        <span><i class="fa fa-lg fa-plus-circle"></i>百家乐服务费   <span style="color:#ee0000">@baijialeTotal</span> </span>
+                                                        <ul>
+                                                            @for (int i = 0; i < baijiale.Count; i++)
+                                                            {
+
+                                                                <li style="display:none">
+                                                                    <span class="label"><i class=""></i>@baijiale[i].ChipChangeType  <span style="color:#ee0000">@baijiale[i].Chip.ToString("#,0.")</span></span>
                                                                 </li>
                                                             }
                                                         </ul>

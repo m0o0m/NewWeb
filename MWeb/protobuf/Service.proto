@@ -65,8 +65,10 @@ enum ServiceCmd
 	SC_NTF_UPDATE_DBPVPCFG = 65;		//提示更新PVP配置
 	SC_NTF_UPDATE_ARCADEGAMESTOCK = 66;//提示更新PVP库存
 	SC_NTF_UPDATE_SHUIHUPOT = 67;//提示更新PVP彩池
-    SC_FruiteBigPot = 68;			//提示更新水果机彩池
-	
+        SC_FruiteBigPot = 68;			//提示更新水果机彩池
+	SC_SET_BACCARATPOT_OPEN = 69;		    //百人百家乐大彩池开关
+	SC_SELECT_BACCARAT_POT	= 70;		//查询百人百家乐大彩池金币数
+	SC_OPERTOR_BACCARAT_POT	= 71;		//增加或者减少百人百家乐大彩池金币数
 	SC_TOTAL = 200;
 }
 
@@ -138,6 +140,11 @@ enum CenterCmd
 	CS_NTF_UPDATE_ARCADEGAMESTOCK = 66;//提示更新PVP库存
 	CS_NTF_UPDATE_SHUIHUPOT = 67;//提示更新PVP彩池
     CS_FruiteBigPot = 68;						//请求修改水果机彩池
+
+	
+	CS_SET_BACCARART_OPEN = 69;					//百人百家乐大彩池开关
+	CS_SELECT_BACCARAT_POT = 70;				//返回百人百家乐大彩池金币数
+	CS_OPERTOR_BACCARAT_POT  = 71;				//返回增加或者减少百人百家乐大彩池金币数
 	
 	CS_TOTAL	 	= 100;
 }
@@ -750,7 +757,36 @@ message FruiteBigPot_S
 	optional bool suc = 1;
 }
 
+//////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////百家乐大彩池
+message BGSetBaccaratPOTOpenReq
+{
+	optional int32 isOpen = 1;//是否开启
+}
 
+message BGSetBaccaratPOTOpenRes
+{
+	optional int32 suc = 1;//是否设置成功
+	optional int32 currStatus = 2; //1是开，0是关
+}
+
+message Baccarat_Select_S
+{
+	required uint64 ChipNum = 1; //彩池金币数量
+}
+
+message Baccarat_Operator_C
+{
+	optional uint32 opType	   =1;	//操作类型 1增加  2减少
+	optional uint64 opValue	   =2;	//要操作 增加或者减少的数
+	optional string	strContent =3;	//修改原因
+}
+
+message Baccarat_Operator_S
+{
+	optional uint32 opType	=1;	//操作类型 1增加  2减少
+	optional bool 	suc	=2;		//是否成功 true为成功
+}
 
 ///////////////////////////////////////  机器人协议 ///////////////////////////
 enum ModuleType {

@@ -159,6 +159,7 @@
     <Compile Include="Model\ADInfo.cs" />
     <Compile Include="Model\AppTreasure.cs" />
     <Compile Include="Model\BaccaratGameRecord.cs" />
+    <Compile Include="Model\BaccaratPot.cs" />
     <Compile Include="Model\BoardDetail.cs" />
     <Compile Include="Model\BoardDist.cs" />
     <Compile Include="Model\CallBackRechargeIP.cs" />

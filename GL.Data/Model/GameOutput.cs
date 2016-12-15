@@ -51,7 +51,8 @@ namespace GL.Data.Model
     }
 
 
-    public class GameOutAccurate {
+    public class GameOutAccurate
+    {
         public long TotoalGold { get; set; }//系统总游戏
 
         public long Gold1 { get; set; } //身上+保险箱
@@ -101,7 +102,8 @@ namespace GL.Data.Model
         奔驰宝马 = 17,
         百人德州 = 18,
         水浒传 = 19,
-        水果机 = 20
+        水果机 = 20,
+        澳门扑克 = 21
     }
 
     public enum itemName
@@ -282,7 +284,7 @@ namespace GL.Data.Model
         /// 充值获得积分 + UCR_RECHAREG_SCORE
         /// </summary>
         充值获得积分 = 42,
-       /// <summary>
+        /// <summary>
         /// 开福袋给积分 + UCR_LUCKEYBAG_SCORE
         /// </summary>
         开福袋给积分 = 43,
@@ -321,11 +323,11 @@ namespace GL.Data.Model
         /// <summary>
         /// 德州获得积分 -UCR_TEXAS_JIFEN
         /// </summary>
-        德州获得积分 = 52,               
+        德州获得积分 = 52,
         /// <summary>
         /// 斗地主获得积分 UCR_LAND_JIFEN
         /// </summary>
-        斗地主获得积分 = 53,               
+        斗地主获得积分 = 53,
         /// <summary>
         ///  中发白获得积分 UCR_SCALE_JIFEN
         /// </summary>
@@ -337,11 +339,11 @@ namespace GL.Data.Model
         /// <summary>
         /// 斗地主游戏领经验 UCR_LAND_EXP
         /// </summary>
-        斗地主游戏领经验 = 57,                
+        斗地主游戏领经验 = 57,
         /// <summary>
         /// 中发白游戏领经验 UCR_SCALE_EXP
         /// </summary>
-        中发白游戏领经验 = 58,              
+        中发白游戏领经验 = 58,
         /// <summary>
         /// 经验升级领金币 UCR_EXPUPLEVEL
         /// </summary>
@@ -353,7 +355,7 @@ namespace GL.Data.Model
         /// <summary>
         /// 每日任务领金币  UCR_DAYTASK_COIN
         /// </summary>
-        每日任务领金币 = 61,              
+        每日任务领金币 = 61,
         /// <summary>
         /// 每周任务领金币 UCR_WEEKTASK_COIN
         /// </summary>
@@ -365,7 +367,7 @@ namespace GL.Data.Model
         /// <summary>
         /// 五币买宝石 UCR_BUYGEM_BYDIA
         /// </summary>
-        _Replace_买宝石 = 64	,
+        _Replace_买宝石 = 64,
         /// <summary>
         /// 十二生肖服务费 UCR_ZODIAC_SERVICEFEE
         /// </summary>
@@ -413,7 +415,7 @@ namespace GL.Data.Model
         /// <summary>
         /// 十二生肖系统服务费- UCR_ZODIAC_SYSBANK_SERVICEFEE
         /// </summary>
-        十二生肖庄家服务费 = 76,	
+        十二生肖庄家服务费 = 76,
         /// <summary>
         /// 十二生肖获得积分 UCR_ZODIAC_GET_JIFEN
         /// </summary>
@@ -429,7 +431,7 @@ namespace GL.Data.Model
         /// <summary>
         /// 宝盆功能获得金币+ UCR_GOLD_POT_COIN
         /// </summary>
-        金宝盆功能获得金币 = 80,          
+        金宝盆功能获得金币 = 80,
         /// <summary>
         /// 中发白抢红包获得金币+  UCR_ROBEVENLOPE_COIN
         /// </summary>
@@ -510,12 +512,12 @@ namespace GL.Data.Model
         /// <summary>
         /// UCR_ACHIEVE_COIN = 107,		
         /// </summary>
-        成就奖励=107,
+        成就奖励 = 107,
 
         /// <summary>
         /// UCR_TEXAW_COIN = 108,		
         /// </summary>
-        德州玩牌赢大礼 = 108 ,
+        德州玩牌赢大礼 = 108,
 
         /// <summary>
         /// UCR_CHARGE_REBATE_COIN = 109,	
@@ -527,7 +529,7 @@ namespace GL.Data.Model
         /// </summary>
         充值排名奖励 = 110,
 
-        小马快跑之王 = 111 ,
+        小马快跑之王 = 111,
 
         小马快跑领大奖获得宝石 = 112,
 
@@ -636,7 +638,7 @@ namespace GL.Data.Model
         数据回滚 = 153,
 
         德州大返利 = 155,
-     
+
         德州百人结算 = 156,
         德州百人服务费 = 157,
         德州百人下庄 = 158,
@@ -690,10 +692,10 @@ namespace GL.Data.Model
         中秋节领取月饼 = 202,
 
 
-        水浒传获得游戏币  = 203,
+        水浒传获得游戏币 = 203,
         水浒传拉霸消耗游戏币 = 204,
         水浒传比倍消耗游戏币 = 205,
-        水浒传彩池奖励游戏币  = 206,
+        水浒传彩池奖励游戏币 = 206,
 
         水浒传获得经验 = 207,
         水浒传获得积分 = 208,
@@ -708,6 +710,18 @@ namespace GL.Data.Model
         水果机加积分 = 225,
         水果机大彩池 = 226,
         水果机回收游戏币 = 998,
+
+        百家乐结算=227,
+        百家乐服务费=228,
+        百家乐下庄=229,
+        百家乐上庄= 230,
+        百家乐补庄=231,
+        百家乐下注=232,
+        百家乐系统庄家服务费=233,
+        百家乐获得积分=234,
+        百家乐游戏领经验=235,
+        百家乐大彩池=236,
+
 
         转盘使用金钥匙 = 10001,
         签到得到金钥匙 = 10002,

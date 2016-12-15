@@ -35,6 +35,10 @@ namespace GL.Data.Model
         public long ProfitDel5 { get; set; }
         public long ProfitAdd6 { get; set; }
         public long ProfitDel6 { get; set; }
+        public long ProfitAdd7 { get; set; }
+        public long ProfitDel7 { get; set; }
+
+
         public long FishType0 { get; set; }
         public long FishType1 { get; set; }
         public long FishType2 { get; set; }
@@ -46,6 +50,8 @@ namespace GL.Data.Model
         public long ProfitZodiac { get; set; }
         public long ProfitCar { get; set; }
         public long ProfitHundred { get; set; }
+
+        public long ProfitBaiJiaLe { get; set; }
     }
 
 

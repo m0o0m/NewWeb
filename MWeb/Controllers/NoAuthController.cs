@@ -235,6 +235,55 @@ namespace MWeb.Controllers
         }
 
         [QueryValues]
+        public ActionResult SendKuCunMobile(Dictionary<string, string> queryvalues) {
+            string mobile = queryvalues.ContainsKey("mobile") ? queryvalues["mobile"] : string.Empty;
+            string yzm = queryvalues.ContainsKey("yzm") ? queryvalues["yzm"] : string.Empty;
+            string postStrTpl = "name={0}&pwd={1}&content={2}&mobile={3}&type=pt";
+            //SMS_30295116
+            string str = string.Format(
+                postStrTpl,
+                "张小勇",
+                "7392E60BF411C7AE2170A4355223",
+                "您正在登录验证，验证码" + yzm + "，请在30分钟内按页面提示提交验证码，切勿将验证码泄漏于他人。",
+                mobile
+               );
+
+            UTF8Encoding encoding = new UTF8Encoding();
+            byte[] postData = encoding.GetBytes(str);
+
+            HttpWebRequest myRequest = (HttpWebRequest)WebRequest.Create("http://web.daiyicloud.com/asmx/smsservice.aspx");
+            myRequest.Method = "POST";
+            myRequest.ContentType = "application/x-www-form-urlencoded";
+            myRequest.ContentLength = postData.Length;
+            Stream newStream = myRequest.GetRequestStream();
+            // Send the data.
+            newStream.Write(postData, 0, postData.Length);
+            newStream.Flush();
+            newStream.Close();
+            HttpWebResponse myResponse = (HttpWebResponse)myRequest.GetResponse();
+            if (myResponse.StatusCode == HttpStatusCode.OK)
+            {
+                StreamReader reader = new StreamReader(myResponse.GetResponseStream(), Encoding.UTF8);
+                string msg = reader.ReadToEnd();
+                if (!string.IsNullOrEmpty(msg))
+                {
+                    string[] res = msg.Split(',');
+                    if (res[0] == "0")
+                    {
+                        return Content("1", "string");
+                    }
+                    else
+                    {
+                        return Content("0", "string");
+                    }
+                }
+                //保存数据
+            }
+            return Content("0", "string");
+        }
+
+
+        [QueryValues]
         public ActionResult SendMobile(Dictionary<string, string> queryvalues)
         {//发送手机短信
             string mobile = queryvalues.ContainsKey("mobile") ? queryvalues["mobile"] : string.Empty;
@@ -245,7 +294,7 @@ namespace MWeb.Controllers
                 postStrTpl,
                 "张小勇",
                 "7392E60BF411C7AE2170A4355223",
-                "您正在登录验证，验证码" + yzm + "，请在30分钟内按页面提示提交验证码，切勿将验证码泄漏于他人。",
+                "您正在登录验证，验证码" + yzm + "，请在30分钟内按页面提示提交验证码，切勿将验证码泄漏于他人。【万人德州】",
                 mobile
                );
 

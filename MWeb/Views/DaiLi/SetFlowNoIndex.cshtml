@@ -28,7 +28,7 @@
                              data-widget-sortable="false">
                             <header>
                                 <span class="widget-icon"> <i class="fa fa-table"></i> </span>
-                                <h2>代理商扣库存的流水(每分钟)-关服方可修改</h2>
+                                <h2>代理商扣库存的流水(每分钟)</h2>
                             </header>
                             <!-- widget div-->
                             <div>
@@ -58,7 +58,7 @@
                                                     @{
                                                         for (int i = 0; i < modelList.Count(); i++)
                                                         {
-                                                            if (i % 6 == 0)
+                                                            if (i % 3 == 0)
                                                             {
                                                                 S_Desc item1 = modelList[i];
                                                                 <tr>
@@ -120,66 +120,8 @@
                                                                         }
 
 
-                                                                        if ((i + 4) < modelList.Count())
-                                                                        {
-                                                                            S_Desc item4 = modelList[i + 3];
-                                                                            <td style="background-color:gray"></td>
-                                                                            <td>
-                                                                                <label class="checkbox state-error">
-                                                                                    @if (item4.IsCheck >= 1)
-                                                                                    {
-                                                                                        <input value="@item4.Type" mark2="1" mark="1" type="checkbox" name="checkbox" checked="checked"><i></i>
-                                                                                    }
-                                                                                    else
-                                                                                    {
-                                                                                        <input value="@item4.Type" mark2="1" mark="1" type="checkbox" name="checkbox"><i></i>
-                                                                                    }
-                                                                                    @(item4.UserOper + "(" + item4.Type + ")")
-                                                                                </label>
-                                                                            </td>
-
-                                                                        }
-
-
-                                                                        if ((i + 5) < modelList.Count())
-                                                                        {
-                                                                            S_Desc item5 = modelList[i + 4];
-                                                                            <td style="background-color:gray"></td>
-                                                                            <td>
-                                                                                <label class="checkbox state-error">
-                                                                                    @if (item5.IsCheck >= 1)
-                                                                                    {
-                                                                                        <input value="@item5.Type" mark2="1" mark="1" type="checkbox" name="checkbox" checked="checked"><i></i>
-                                                                                    }
-                                                                                    else
-                                                                                    {
-                                                                                        <input value="@item5.Type" mark2="1" mark="1" type="checkbox" name="checkbox"><i></i>
-                                                                                    }
-                                                                                    @(item5.UserOper + "(" + item5.Type + ")")
-                                                                                </label>
-                                                                            </td>
-
-                                                                        }
-
-                                                                        if ((i + 6) < modelList.Count())
-                                                                        {
-                                                                            S_Desc item6 = modelList[i + 5];
-                                                                            <td style="background-color:gray"></td>
-                                                                            <td>
-                                                                                <label class="checkbox state-error">
-                                                                                    @if (item6.IsCheck >= 1)
-                                                                                    {
-                                                                                        <input value="@item6.Type" mark2="1" mark="1" type="checkbox" name="checkbox" checked="checked"><i></i>
-                                                                                    }
-                                                                                    else
-                                                                                    {
-                                                                                        <input value="@item6.Type" mark2="1" mark="1" type="checkbox" name="checkbox"><i></i>
-                                                                                    }
-                                                                                    @(item6.UserOper + "(" + item6.Type + ")")
-                                                                                </label>
-                                                                            </td>
-
-                                                                        }
+                                                                  
+                                                                      
 
                                                                     }
 
@@ -192,7 +134,7 @@
                                         </div>
                                         <footer>
 <input id="btnGoBack" type="button" value="返回列表" class=" btn btn-warning" />
-<input id="btnKick" type="submit" value="提交" class="btn btn-danger" />
+<input id="btnKick" type="button" onclick="submitData()" value="提交" class="btn btn-danger" />
                                         </footer>
                                     </form>
                                    
@@ -230,6 +172,35 @@
             location.href = "/DaiLi/Index";
         });
     })
+
+    function submitData() {
+        //checkbox
+        var cks = $('input:checkbox[name=checkbox]:checked');
+        var s = "";
+        for (var i = 0; i < cks.length; i++) {
+          s+=$(cks[i]).val()+",";
+        }
+
+      
+
+        $.ajax({
+            url: "/DaiLi/SetFlowNoIndex/",
+            type: "POST",
+            dataType: "html",
+            data: { "no": $("#no").val(), "checkbox": s, "isPostBack": "1" },
+            success: function (data) {
+             
+                if (data == "0") {
+                    alert("修改失败!");
+                } else {
+                    alert("修改成功!");
+                    window.location.href = "/DaiLi/index";
+                }
+
+            }
+        });
+     
+    }
 
 </script>
 

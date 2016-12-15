@@ -734,7 +734,7 @@ namespace MWeb.Controllers
             string _StartDate = queryvalues.ContainsKey("StartDate") ? queryvalues["StartDate"] : DateTime.Now.ToString("yyyy-MM-dd 00:00:00");
 
             string _ExpirationDate = queryvalues.ContainsKey("ExpirationDate") ? queryvalues["ExpirationDate"] : DateTime.Now.AddDays(1).ToString("yyyy-MM-dd 00:00:00");
-            groupby _Groupby = (groupby)(queryvalues.ContainsKey("groupby") ? Convert.ToInt32(queryvalues["groupby"]) : 1);
+            groupby _Groupby = (groupby)(queryvalues.ContainsKey("groupby") ? Convert.ToInt32(queryvalues["groupby"]) : 1);        
 
             BaseDataView vbd = new BaseDataView {  StartDate = _StartDate, ExpirationDate = _ExpirationDate, Groupby = _Groupby };
 
@@ -759,12 +759,10 @@ namespace MWeb.Controllers
         [QueryValues]
         public ActionResult VIPDistributionRatio(Dictionary<string, string> queryvalues)
         {
-
-            int _Channels = queryvalues.ContainsKey("Channels") ? Convert.ToInt32(queryvalues["Channels"]) : 0;
+          int _Channels = queryvalues.ContainsKey("Channels") ? Convert.ToInt32(queryvalues["Channels"]) : 0;
             int _TypeID = queryvalues.ContainsKey("UserType") ? Convert.ToInt32(queryvalues["UserType"]) : 1;
             BaseDataView vbd = new BaseDataView { Channels = _Channels, TypeID = _TypeID };
             //ViewData["Channels"] = _Channels;
-
             BaseDataInfoForVIPDistributionRatio model = BaseDataBLL.GetVIPDistributionRatio(vbd);
             model.Channels = _Channels;
             model.UserType = _TypeID;
@@ -776,8 +774,6 @@ namespace MWeb.Controllers
 
         [QueryValues]
         public ActionResult OnLineList(Dictionary<string, string> queryvalues) {
-
-           
             //var onlineUseralle = ServiceStackManage.Redis.GetDatabase().HashGetAll("UserInfo",StackExchange.Redis.CommandFlags.None);
             int page = queryvalues.ContainsKey("page") ? Convert.ToInt32(queryvalues["page"]) : 1;
             string SearchExt = queryvalues.ContainsKey("SearchExt") ? queryvalues["SearchExt"].Trim() : "";
@@ -810,7 +806,6 @@ namespace MWeb.Controllers
 
                     return View(mode);
                 }
-               
             }
             else {
                 //IEnumerable<HashEntry> onlineUseralle = ServiceStackManage.Redis.GetDatabase().HashScan("UserInfo", "", 1,0,2, CommandFlags.None);
@@ -844,12 +839,8 @@ namespace MWeb.Controllers
                         return PartialView("OnLineList_PageList", pageRole);
                     }
                 }
-             
-
                 return View(mode);
-            }
-
-           
+            }    
         }
 
 
@@ -862,11 +853,6 @@ namespace MWeb.Controllers
             string SearchExt = queryvalues.ContainsKey("SearchExt") ? queryvalues["SearchExt"] : "";
             int gametype = queryvalues.ContainsKey("Gametype") ? Convert.ToInt32( queryvalues["Gametype"]) : 0;
             //IEnumerable<HashEntry> onlineUseralle = ServiceStackManage.Redis.GetDatabase().HashScan("UserInfo", "", 1,0,2, CommandFlags.None);
-
-         
-
-
-
             GameRecordView mode = new GameRecordView();
             mode.Gametype = gametype;
          
@@ -1017,7 +1003,7 @@ namespace MWeb.Controllers
         [QueryValues]
         public ActionResult UserProfit(Dictionary<string, string> queryvalues)
         {
-            int _page = queryvalues.ContainsKey("page") ? Convert.ToInt32(queryvalues["page"]) : 1;
+             int _page = queryvalues.ContainsKey("page") ? Convert.ToInt32(queryvalues["page"]) : 1;
             int _Channels = queryvalues.ContainsKey("Channels") ? Convert.ToInt32(queryvalues["Channels"]) : 0;
             string _SearchExt = queryvalues.ContainsKey("SearchExt") ? queryvalues["SearchExt"].ToString() : "";
             string _StartDate = queryvalues.ContainsKey("StartDate") ? queryvalues["StartDate"] : DateTime.Now.ToString("yyyy-MM-dd 00:00:00");

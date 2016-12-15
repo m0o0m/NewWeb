@@ -59,7 +59,7 @@ namespace JWeb.Controllers
 
             //生成短网址
 
-            resStr =  BaiDuHelper.TransLongUrlToTinyUrl(resStr);
+           // resStr =  BaiDuHelper.TransLongUrlToTinyUrl(resStr);
 
 
 
@@ -210,7 +210,7 @@ namespace JWeb.Controllers
             resStr = gameUrl + resStr;
 
 
-            resStr = BaiDuHelper.TransLongUrlToTinyUrl(resStr);
+            //resStr = BaiDuHelper.TransLongUrlToTinyUrl(resStr);
 
 
             //发送socket请求

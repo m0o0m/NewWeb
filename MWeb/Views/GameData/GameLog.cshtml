@@ -11,6 +11,7 @@
     //RoundID
     int RoundID = Model.RoundID;
     int RoundID2 = Model.RoundID2;
+    int RoundID3 = Model.RoundID3;
 }
 
 
@@ -36,6 +37,7 @@
                             <option value="7" @Html.GetOptionsSelectedAttr(type, 7)>水浒传</option>
                             <option value="8" @Html.GetOptionsSelectedAttr(type, 8)>水果机</option>
                             <option value="9" @Html.GetOptionsSelectedAttr(type, 9)>澳门扑克</option>
+                            <option value="10" @Html.GetOptionsSelectedAttr(type, 10)>连环夺宝</option>
                         </select><i></i>
 
                     </label>
@@ -45,13 +47,13 @@
                     <label class="label"> 场次</label>
                     <label class="select">
                         <select id="RoundID" name="RoundID">
-                            <option mark="shuihu" value="0" @Html.GetOptionsSelectedAttr(RoundID, 0)>全部</option>
-                            <option mark="shuihu" value="1" @Html.GetOptionsSelectedAttr(RoundID, 1)>梁山泊</option>
-                            <option mark="shuihu" value="2" @Html.GetOptionsSelectedAttr(RoundID, 2)>五龙台</option>
-                            <option mark="shuihu" value="3" @Html.GetOptionsSelectedAttr(RoundID, 3)>二龙山</option>
-                            <option mark="shuihu" value="4" @Html.GetOptionsSelectedAttr(RoundID, 4)>景阳冈</option>
-                            <option mark="shuihu" value="5" @Html.GetOptionsSelectedAttr(RoundID, 5)>祝家庄</option>
-                            <option mark="shuihu" value="6" @Html.GetOptionsSelectedAttr(RoundID, 6)>乌龙岭</option>
+                            <option value="0" @Html.GetOptionsSelectedAttr(RoundID, 0)>全部</option>
+                            <option value="1" @Html.GetOptionsSelectedAttr(RoundID, 1)>梁山泊</option>
+                            <option value="2" @Html.GetOptionsSelectedAttr(RoundID, 2)>五龙台</option>
+                            <option value="3" @Html.GetOptionsSelectedAttr(RoundID, 3)>二龙山</option>
+                            <option value="4" @Html.GetOptionsSelectedAttr(RoundID, 4)>景阳冈</option>
+                            <option value="5" @Html.GetOptionsSelectedAttr(RoundID, 5)>祝家庄</option>
+                            <option value="6" @Html.GetOptionsSelectedAttr(RoundID, 6)>乌龙岭</option>
                         </select><i></i>
                     </label>
                 </section>
@@ -73,8 +75,23 @@
                     </label>
                 </section>
 
+                <section class="col col-1" id="secRoundID3" style="display:none">
+                    <label class="label"> 场次</label>
+                    <label class="select">
+                        <select id="RoundID3" name="RoundID3">
+                            <option mark="shuihu" value="0" @Html.GetOptionsSelectedAttr(RoundID3, 0)>全部</option>
+                            <option mark="shuihu" value="1" @Html.GetOptionsSelectedAttr(RoundID3, 1)>加勒比游轮</option>
+                            <option mark="shuihu" value="2" @Html.GetOptionsSelectedAttr(RoundID3, 2)>迪拜塔</option>
+                            <option mark="shuihu" value="3" @Html.GetOptionsSelectedAttr(RoundID3, 3)>巴黎凯旋门</option>
+                            <option mark="shuihu" value="4" @Html.GetOptionsSelectedAttr(RoundID3, 4)>蒙特卡洛夜色</option>
+                            <option mark="shuihu" value="5" @Html.GetOptionsSelectedAttr(RoundID3, 5)>拉斯维加斯</option>
+                            <option mark="shuihu" value="6" @Html.GetOptionsSelectedAttr(RoundID3, 6)>澳门金沙城</option>
+                        </select><i></i>
+                    </label>
+                </section>
 
-                <section class="col col-1.2" id="sectionUser" style=" @Html.GetMVCstring(type, "2,3,4,5", "display:none") ">
+
+                <section class="col col-1.2" id="sectionUser" style="@Html.GetMVCstring(type, "2,3,4,5", "display:none") ">
                     <label class="label">会员ID</label>
                     <label class="input">
                         @Html.TextBoxFor(m => m.SearchExt, new { @class = "span2", style = "border-radius:4px;width:120px" })
@@ -164,7 +181,6 @@
                 $("#sectionUser").css("display", "none");
                 $("#sectionNO").css("display", "");
             }
-
             if (Gametype == "7") {
                 $("#sectionUser").css("display", "");
                 $("#sectionNO").css("display", "");
@@ -175,10 +191,19 @@
                 $("#sectionNO").css("display", "");
                 $("#secRoundID").css("display", "none");
                 $("#secRoundID2").css("display", "");
-            } else {
+            }
+            else if (Gametype == "10") {
+                $("#sectionUser").css("display", "");
+                $("#sectionNO").css("display", "");
+                $("#secRoundID").css("display", "none");
+                $("#secRoundID2").css("display", "none");
+                $("#secRoundID3").css("display", "");
+            }
+            else {
                 $("#secRoundID").css("display", "none");
                 $("#secRoundID2").css("display", "none");
             }
+
 
 
 

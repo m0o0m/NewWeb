@@ -47,6 +47,8 @@
                                                     <th>代理商的服务器端口</th>
                                                     <th>代理商游戏地址</th>
                                                     <th>代理商的后台系统地址</th>
+                                                    <th>分成比例</th>
+                                                    <th>兑换游戏币比例</th>
                                                     <th>库存值</th>
                                                     <th>操作</th>
                                                 </tr>
@@ -71,13 +73,15 @@
                                                         <td>@m.ServerPort</td>
                                                         <td>@m.GameUrl</td>
                                                         <td>@m.MWebUrl</td>
+                                                        <td>@m.FenChenRate</td>
+                                                        <td>@m.GoldRate</td>
                                                         <td>@{
                                                             DailiKuCun kucun = DaiLiBLL.GetDaiLiKuCun(m.No);
                                                         }
                                                         @kucun.Gold
                                                         </td>
                                                         <td style="text-align:center">
-<input id="btnKuCun" type="button" value="修改库存值" class="btn btn-primary btn-mini" onclick="return btnUpdateKuCun(@m.No)" />                   <input id="btnFlowNo" type="button" value="设置扣钱流水号" class="btn btn-primary btn-mini" onclick="return btnSetFlowNo(@m.No)" />                                                     
+<input id="btnKuCun" type="button" value="充值库存" class="btn btn-primary btn-mini" onclick="return btnUpdateKuCun(@m.No)" />                   <input id="btnFlowNo" type="button" value="设置扣钱流水号" class="btn btn-primary btn-mini" onclick="return btnSetFlowNo(@m.No)" />                                                     
                                                         </td>
                                                     </tr>
 

@@ -704,7 +704,7 @@ namespace MWeb.Controllers
             return View(model);
         }
 
-
+                                                                  
 
         [QueryValues] //个人积分流水
         public ActionResult MemberForSearchGameScore(Dictionary<string, string> queryvalues)
@@ -729,7 +729,7 @@ namespace MWeb.Controllers
           
             return View(grv);
         }
-
+            
         private GameRecordView GetGameRecordView(GameRecordView grv) {
             UserInfo u=null;
             if (string.IsNullOrEmpty(grv.SearchExt))
@@ -975,6 +975,14 @@ namespace MWeb.Controllers
 
 
                     pageList = "HappyFanFan_PageList";
+                    break;
+                case "10"://百家乐大彩池
+
+                    grv.DataList = GameDataBLL.GetListByPageForBaiJiaLePot(grv);
+
+
+                    pageList = "BaiJiaLePot_PageList";
+
                     break;
             }
 

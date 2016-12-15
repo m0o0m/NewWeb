@@ -427,6 +427,66 @@ namespace MWeb.Controllers
 
             return View(new SCModel() { Static = false, ServerIsNotResponding = true });
         }
+
+
+        [QueryValues]
+        public ActionResult BaiJiaLePotControl()   //本方法是仿照上面中发白的
+        {
+            Bind tbind = Cmd.runClient(new Bind(ServiceCmd.SC_SET_BACCARATPOT_OPEN, new byte[0] { }));    //这里不知道对不对
+
+            switch ((CenterCmd)tbind.header.CommandID)
+            {
+                case CenterCmd.CS_SET_BACCARART_OPEN:       
+                    {
+                        BGSetBaccaratPOTOpenRes BGSetBaccaratPOTOpenRes = BGSetBaccaratPOTOpenRes.ParseFrom(tbind.body.ToBytes());  //这里没弄好
+
+                        return View(new SCModel() { Static = BGSetBaccaratPOTOpenRes.CurrStatus == 1 ? true : false, ServerIsNotResponding = false });
+
+                    }
+                case CenterCmd.CS_CONNECT_ERROR:
+
+                    break;
+            }
+
+            return View(new SCModel() { Static = false, ServerIsNotResponding = true });
+        }
+
+        [HttpPost]
+        [QueryValues]
+        public ActionResult BaiJiaLePotControl(SCModel model, Dictionary<string, string> queryvalues)
+        {
+
+            BGSetBaccaratPOTOpenReq BGSetBaccaratPOTOpenReq = BGSetBaccaratPOTOpenReq.CreateBuilder()
+               .SetIsOpen((model.Static ? 1 : 0))
+               .Build();
+
+            Bind tbind = Cmd.runClient(new Bind(ServiceCmd.SC_SET_BACCARATPOT_OPEN, BGSetBaccaratPOTOpenReq.ToByteArray()));
+
+            switch ((CenterCmd)tbind.header.CommandID)
+            {
+                case CenterCmd.CS_SET_BACCARART_OPEN:
+                    {
+                        BGSetBaccaratPOTOpenRes BGSetBaccaratPOTOpenRes = BGSetBaccaratPOTOpenRes.ParseFrom(tbind.body.ToBytes());
+
+                        //return View(new SCModel() { Static = REDEVENLOPEOPERATORS.State, ServerIsNotResponding = false });
+
+                        if (BGSetBaccaratPOTOpenRes.CurrStatus == 1)
+                        {
+                            return Json(new { result = 1 });
+                        }
+                        return Json(new { result = 0 });
+                    }
+
+                case CenterCmd.CS_CONNECT_ERROR:
+                    return Json(new { result = 2 });
+            }
+
+            return Json(new { result = 0 });
+
+
+        }
+
+
         [HttpPost]
         [QueryValues]
         public ActionResult ZFBPotControl(SCModel model, Dictionary<string, string> queryvalues)
@@ -461,6 +521,8 @@ namespace MWeb.Controllers
 
 
         }
+
+
 
 
 

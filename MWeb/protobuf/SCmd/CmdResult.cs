@@ -28,6 +28,10 @@ namespace MWeb.protobuf.SCmd
                     return TexPro_Select_S.ParseFrom(tbind.body.ToBytes());
                 case CenterCmd.CS_OPERTOR_TEXPROPOT_POT:
                     return TexPro_Operator_S.ParseFrom(tbind.body.ToBytes());
+                case CenterCmd.CS_OPERTOR_BACCARAT_POT:
+                    return Baccarat_Operator_S.ParseFrom(tbind.body.ToBytes());
+                case CenterCmd.CS_SELECT_BACCARAT_POT:
+                    return Baccarat_Select_S.ParseFrom(tbind.body.ToBytes());
                 case CenterCmd.CS_CONNECT_ERROR:
                     return null;
             }

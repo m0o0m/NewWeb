@@ -222,7 +222,9 @@
                                                 <td>@GameProfit.ProfitDel1</td>
                                                 <td>0</td>
                                                 <td>@{var _profit1 = GameProfit.ProfitAdd1 + @GameProfit.ProfitDel1;}@_profit1</td>
-                                                <td rowspan="5">@{var _profitAll = GameProfit.ProfitCar + GameProfit.ProfitHorse + GameProfit.ProfitZodiac + GameProfit.ProfitScale + GameProfit.ProfitHundred+ GameProfit.ProfitAdd1 + GameProfit.ProfitDel1 + GameProfit.ProfitAdd2 + GameProfit.ProfitDel2 + GameProfit.ProfitAdd3 + GameProfit.ProfitDel3 + GameProfit.ProfitAdd4 + GameProfit.ProfitDel4 + GameProfit.ProfitAdd5 + GameProfit.ProfitDel5 + GameProfit.ProfitAdd6 + GameProfit.ProfitDel6;}@_profitAll</td>
+                                                <td rowspan="6">@{var _profitAll = GameProfit.ProfitCar + GameProfit.ProfitHorse + GameProfit.ProfitZodiac + GameProfit.ProfitScale + GameProfit.ProfitHundred+ GameProfit.ProfitBaiJiaLe+ GameProfit.ProfitAdd1 + GameProfit.ProfitDel1 + GameProfit.ProfitAdd2 + GameProfit.ProfitDel2 + GameProfit.ProfitAdd3 + GameProfit.ProfitDel3 + GameProfit.ProfitAdd4 + GameProfit.ProfitDel4 + GameProfit.ProfitAdd5 + GameProfit.ProfitDel5 + GameProfit.ProfitAdd6 +  GameProfit.ProfitDel6+
+                                          GameProfit.ProfitAdd7 + GameProfit.ProfitDel7
+                                          ;}@_profitAll</td>
                                             </tr>
                                             <tr>
                                                 <td>中发白</td>
@@ -258,6 +260,13 @@
                                                 <td>@GameProfit.ProfitDel6</td>
                                                 <td>@GameProfit.ProfitHundred</td>
                                                 <td>@{var _profit6 = GameProfit.ProfitHundred + GameProfit.ProfitAdd6 + GameProfit.ProfitDel6;}@_profit6</td>
+                                            </tr>
+                                            <tr>
+                                                <td>百家乐</td>
+                                                <td>@GameProfit.ProfitAdd7</td>
+                                                <td>@GameProfit.ProfitDel7</td>
+                                                <td>@GameProfit.ProfitBaiJiaLe</td>
+                                                <td>@{var _profit7 = GameProfit.ProfitBaiJiaLe + GameProfit.ProfitAdd7 + GameProfit.ProfitDel7;}@_profit7</td>
                                             </tr>
                                                     }
                                     </tbody>

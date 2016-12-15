@@ -74,6 +74,18 @@ namespace GL.Data.Model
         /// 代理商的后台系统地址
         /// </summary>
         public string MWebUrl { get; set; }
+        /// <summary>
+        /// 密码,预留字段
+        /// </summary>
+        public string Psw { get; set; }
+        /// <summary>
+        /// 分成比例
+        /// </summary>
+        public string FenChenRate { get; set; }
+        /// <summary>
+        /// 兑换游戏币比例
+        /// </summary>
+        public string GoldRate { get; set; }
     }
 
     public class S_Desc {
@@ -90,5 +102,64 @@ namespace GL.Data.Model
         public int IsCheck { get; set; }
 
     }
+
+    public enum DaiLiType {
+         充值库存 = 1,
+         发送邮件 = 2,
+         玩家充值 = 3
+    }
+    public class KuCunFlow {
+        /// <summary>
+        /// 添加或者减少
+        /// </summary>
+        public string Operation { get; set; }
+        /// <summary>
+        /// 操作人名称
+        /// </summary>
+        public string OperUserName { get; set; }
+        /// <summary>
+        /// 操作修改的金额
+        /// </summary>
+        public decimal OperGold { get; set; }
+        /// <summary>
+        /// 当前时间
+        /// </summary>
+        public string CreateTime { get; set; }
+        /// <summary>
+        /// 代理商编号
+        /// </summary>
+        public int DaiLiNo { get; set; }
+        /// <summary>
+        /// 充值rmb
+        /// </summary>
+        public decimal Rmb { get; set; }
+        /// <summary>
+        /// 分成比例
+        /// </summary>
+        public string FenChenRate { get; set; }
+        /// <summary>
+        /// 兑换比例
+        /// </summary>
+        public string GoldRate { get; set; }
+
+    }
+
+
+    public class DailiFlowRecord {
+        public string CreateTime { get; set; }
+        public decimal BeforeKucun { get; set; }
+
+        public decimal Gold { get; set; }
+
+        public decimal AfterKucun { get; set; }
+
+
+        public string OperName { get; set; }
+
+        public int DaiLiNo { get; set; }
+
+        public string Ext { get; set; }
+    }
+
 
 }

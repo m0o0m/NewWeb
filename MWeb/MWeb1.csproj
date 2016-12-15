@@ -7809,6 +7809,16 @@
     <Content Include="Views\DaiLi\Index.cshtml" />
     <Content Include="Views\DaiLi\KuCunValueIndex.cshtml" />
     <Content Include="Views\DaiLi\SetFlowNoIndex.cshtml" />
+    <Content Include="Views\GameData\BaijialeGameLog_PageList.cshtml" />
+    <Content Include="Views\GameData\BaijialeGameLog.cshtml" />
+    <Content Include="Views\GameData\BaiJiaLePotDataSum.cshtml" />
+    <Content Include="Views\GameData\BaiJiaLePotDotSum.cshtml" />
+    <Content Include="Views\GameData\BaiJiaLePotDotSum_PageList.cshtml" />
+    <Content Include="Views\Manage\BaiJiaLePot_PageList.cshtml" />
+    <Content Include="Views\DaiLi\KuCunFlow.cshtml" />
+    <Content Include="Views\DaiLi\KuCunFlow_PageList.cshtml" />
+    <Content Include="Views\GameData\BaiJiaLePotDataSum_PageList.cshtml" />
+    <Content Include="Views\System\BaiJiaLePotControl.cshtml" />
     <None Include="Web References\cn.org.nciic.ws\NciicServices.wsdl">
       <SubType>Designer</SubType>
     </None>

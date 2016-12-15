@@ -72,8 +72,11 @@ namespace GL.Data.DAL
         /// </summary>
         /// <param name="Gold">在原有基础上的增减值,比如Gold=-100，则在原有库存上减去100</param>
         /// <returns></returns>
-        internal static int UpdateDaiLiKuCun(int no ,Int64 Gold) {
+        internal static int UpdateDaiLiKuCun(int no ,Int64 Gold, DaiLiType type) {
             string otherDBSqlCon = GetDaiLiConnection(no, 2);
+
+           
+
 
             using (var cn = new MySqlConnection(otherDBSqlCon))
             {
@@ -84,7 +87,7 @@ namespace GL.Data.DAL
                 str.AppendFormat(@"sys_updateDaiLiKuCun");
 
                 int i = cn.Execute(str.ToString(), param: new {
-                    I_Gold = Gold
+                    I_Gold = Gold,I_OperType = Convert.ToInt32( type)
                 }, commandType: CommandType.StoredProcedure);
 
                 cn.Close();
@@ -109,6 +112,26 @@ namespace GL.Data.DAL
                 IEnumerable<DaiLiUsers> i = cn.Query<DaiLiUsers>(str.ToString());
                 cn.Close();
                 return i;
+            }
+        }
+
+        internal static DaiLiUsers GetDaiLiUsers(int no)
+        {
+            using (var cn = new MySqlConnection(sqlconnectionString))
+            {
+                cn.Open();
+
+                StringBuilder str = new StringBuilder();
+
+                str.AppendFormat(@"
+                       select * from dailiusers where No = @No;
+                 ");
+
+                IEnumerable<DaiLiUsers> i = cn.Query<DaiLiUsers>(str.ToString(), new {
+                    No = no
+                } );
+                cn.Close();
+                return i.FirstOrDefault();
             }
         }
 
@@ -150,6 +173,73 @@ namespace GL.Data.DAL
 
            
         }
+        public static int InsertKuCunFlowDaiLiDB(KuCunFlow model)
+        {
+
+            string otherDBSqlCon = GetDaiLiConnection(model.DaiLiNo, 2);
+
+
+            using (var cn = new MySqlConnection(otherDBSqlCon))
+            {
+                cn.Open();
+
+                StringBuilder str = new StringBuilder();
+
+                str.AppendFormat(@"
+                     insert into dailirecord(DaiLiNo,CreateTime,Operation,OperUserName,OperGold)
+values(@DaiLiNo,@CreateTime,@Operation,@OperUserName,@OperGold)
+                 ");
+
+                int i = cn.Execute(str.ToString(), model);
+                cn.Close();
+                return i;
+            }
+        }
+
+
+        public static int InsertdailiFlowRecord(DailiFlowRecord model)
+        {
+            string otherDBSqlCon = GetDaiLiConnection(model.DaiLiNo, 2);
+
+            using (var cn = new MySqlConnection(sqlconnectionString))
+            {
+                cn.Open();
+
+                StringBuilder str = new StringBuilder();
+
+                str.AppendFormat(@"
+                     insert into dailiFlowRecord(
+CreateTime,BeforeKucun,Gold,AfterKucun,OperName)
+values(@CreateTime,@BeforeKucun,@Gold,@AfterKucun,@OperName)
+                 ");
+
+                int i = cn.Execute(str.ToString(), model);
+                cn.Close();
+                return i;
+            }
+        }
+
+
+        public static int InsertKuCunFlow(KuCunFlow model)
+        {
+            using (var cn = new MySqlConnection(sqlconnectionString))
+            {
+                cn.Open();
+
+                StringBuilder str = new StringBuilder();
+
+                str.AppendFormat(@"
+                     insert into dailirecord(
+DaiLiNo,CreateTime,OperUserName,Rmb,FenChenRate,GoldRate,OperGold)
+values(@DaiLiNo,@CreateTime,@OperUserName,@Rmb,@FenChenRate,@GoldRate,@OperGold)
+                 ");
+              
+                int  i = cn.Execute(str.ToString(), model);
+                cn.Close();
+                return i;
+            }
+        }
+
         internal static int UpdateFlowDesc(int no,string flowNos) {
 
             IEnumerable<S_Desc> dbFlows = GetFlowDesc(no);
@@ -249,8 +339,10 @@ when b.`No` is NULL then 0
 else 1
 END as IsCheck
  from "+database3+@".S_Desc as a
-LEFT JOIN "+database2+@".dailikucunno as b on  a.Type=b.`No`) as b
-where b.Type_Id=1 and  b.UserOper not like '%数据回滚%'
+LEFT JOIN "+database2+ @".dailikucunno as b on  a.Type=b.`No`) as b
+where b.Type  in (
+ 2,9,37,39,45,46,51,61,62,63,67,81,84,85,86,109,110,126,127,138,142,144,145,146,147,148,154,155,166,167,168,200,201,202,10013,10014
+)
 ;
 ");
                 IEnumerable<S_Desc> i = cn.Query<S_Desc>(str.ToString());

@@ -45,7 +45,7 @@ namespace MWeb.Controllers
         [QueryValues]
         public ActionResult GameLog(Dictionary<string, string> queryvalues)
         {
-            
+
 
             int _id = queryvalues.ContainsKey("UserID") ? string.IsNullOrWhiteSpace(queryvalues["UserID"]) ? 0 : Convert.ToInt32(queryvalues["UserID"]) : 0;
             int _page = queryvalues.ContainsKey("page") ? Convert.ToInt32(queryvalues["page"]) : 1;
@@ -54,15 +54,16 @@ namespace MWeb.Controllers
             string _ExpirationDate = queryvalues.ContainsKey("ExpirationDate") ? queryvalues["ExpirationDate"] : DateTime.Now.AddDays(1).ToString("yyyy-MM-dd 00:00:00");
             string _SearchExt = queryvalues.ContainsKey("SearchExt") ? queryvalues["SearchExt"] : "";
             string _Gametype = queryvalues.ContainsKey("Gametype") ? queryvalues["Gametype"] : "0";
-            object _data = queryvalues.ContainsKey("Data") ? string.IsNullOrWhiteSpace(queryvalues["Data"])?0: Convert.ToInt64(queryvalues["Data"]) : 0;
+            object _data = queryvalues.ContainsKey("Data") ? string.IsNullOrWhiteSpace(queryvalues["Data"]) ? 0 : Convert.ToInt64(queryvalues["Data"]) : 0;
 
             int _roundID = queryvalues.ContainsKey("RoundID") ? string.IsNullOrWhiteSpace(queryvalues["RoundID"]) ? 0 : Convert.ToInt32(queryvalues["RoundID"]) : 0;
             int _roundID2 = queryvalues.ContainsKey("RoundID2") ? string.IsNullOrWhiteSpace(queryvalues["RoundID2"]) ? 0 : Convert.ToInt32(queryvalues["RoundID2"]) : 0;
+            int _RoundID3 = queryvalues.ContainsKey("RoundID3") ? string.IsNullOrWhiteSpace(queryvalues["RoundID3"]) ? 0 : Convert.ToInt32(queryvalues["RoundID3"]) : 0;
 
-
-            GameRecordView grv = new GameRecordView {  Gametype =Convert.ToInt32(_Gametype),  Data = _data ,UserID = _id, SearchExt = _SearchExt, StartDate = _StartDate, ExpirationDate = _ExpirationDate, Page = _page, SeachType = (seachType)_seachtype, RoundID= _roundID, RoundID2=_roundID2 };
+            GameRecordView grv = new GameRecordView { Gametype = Convert.ToInt32(_Gametype), Data = _data, UserID = _id, SearchExt = _SearchExt, StartDate = _StartDate, ExpirationDate = _ExpirationDate, Page = _page, SeachType = (seachType)_seachtype, RoundID = _roundID, RoundID2 = _roundID2 ,RoundID3= _RoundID3 };
             string pageList = "";
-            switch (_Gametype) {
+            switch (_Gametype)
+            {
                 case "0"://斗地主
                     grv.DataList = GameDataBLL.GetListByPageForLand(grv);
                     pageList = "LandGameLog_PageList";
@@ -104,9 +105,13 @@ namespace MWeb.Controllers
                     grv.DataList = GameDataBLL.GetListByPageForShuiguo(grv); //修改方法
                     pageList = "ShuiguoGameLog_PageList";
                     break;
-                case "9"://百家乐 ShuihuGameRecord
-                 //   grv.DataList = GameDataBLL
+                case "9"://百家乐 ShuihuGameRecord  BaccaratGameRecord
+                    grv.DataList = GameDataBLL.GetListByRoundForBaiJiaLe(grv);
                     pageList = "BaijialeGameLog_PageList";
+                    break;
+                case "10"://连环夺宝
+                    grv.DataList = GameDataBLL.GetListByRoundForSerial(grv);
+                    pageList = "SerialGameLog_PageList";
                     break;
             }
             grv.PageList = pageList;
@@ -115,10 +120,9 @@ namespace MWeb.Controllers
                 return PartialView(pageList, grv.DataList);
             }
 
-       
+            string[] str = new string[3];
 
-        
-           
+
 
             return View(grv);
         }
@@ -127,14 +131,14 @@ namespace MWeb.Controllers
 
 
 
-        
+
 
         [QueryValues]
         public ActionResult GameLogDetail(Dictionary<string, string> queryvalues)
         {
 
 
-          
+
             string roundNo = queryvalues.ContainsKey("roundNo") ? queryvalues["roundNo"] : "0";
 
             TexasGameRecord re = new TexasGameRecord();
@@ -162,7 +166,7 @@ namespace MWeb.Controllers
             string _StartDate = queryvalues.ContainsKey("StartDate") ? queryvalues["StartDate"] : DateTime.Now.ToString("yyyy-MM-dd 00:00:00");
             string _ExpirationDate = queryvalues.ContainsKey("ExpirationDate") ? queryvalues["ExpirationDate"] : DateTime.Now.AddDays(1).ToString("yyyy-MM-dd 00:00:00");
             string _SearchExt = queryvalues.ContainsKey("SearchExt") ? queryvalues["SearchExt"] : "";
-          
+
             GameRecordView grv = new GameRecordView { SearchExt = _SearchExt, StartDate = _StartDate, ExpirationDate = _ExpirationDate, Page = _page, SeachType = (seachType)_seachtype };
             if (Request.IsAjaxRequest())
             {
@@ -180,7 +184,7 @@ namespace MWeb.Controllers
             int _id = queryvalues.ContainsKey("UserID") ? string.IsNullOrWhiteSpace(queryvalues["UserID"]) ? 0 : Convert.ToInt32(queryvalues["UserID"]) : 0;
             object _data = queryvalues.ContainsKey("Data") ? Convert.ToInt64(queryvalues["Data"]) : 0;
 
-            
+
             int _page = queryvalues.ContainsKey("page") ? Convert.ToInt32(queryvalues["page"]) : 1;
             int _seachtype = queryvalues.ContainsKey("seachtype") ? Convert.ToInt32(queryvalues["seachtype"]) : 0;
             string _StartDate = queryvalues.ContainsKey("StartDate") ? queryvalues["StartDate"] : DateTime.Now.ToString("yyyy-MM-dd 00:00:00");
@@ -217,13 +221,14 @@ namespace MWeb.Controllers
             }
 
             grv.DataList = GameDataBLL.GetListByPageForZodiac(grv);
-           
+
 
             return View(grv);
         }
 
         [QueryValues]
-        public ActionResult PonyGameLog(Dictionary<string, string> queryvalues) {
+        public ActionResult PonyGameLog(Dictionary<string, string> queryvalues)
+        {
             object _data = queryvalues.ContainsKey("Data") ? Convert.ToInt64(queryvalues["Data"]) : 0;
 
 
@@ -320,15 +325,12 @@ namespace MWeb.Controllers
             }
 
             model.DataList = TexasPotLogBLL.GetListByPage(model);
-            List <PotRecord> pr = new List<PotRecord>();
-
-
-
+            List<PotRecord> pr = new List<PotRecord>();
 
             var res1 = (TexasPot_Select_S)CmdResult.Result(ServiceCmd.SC_SELECT_TEXAS_POT, new byte[0]);
             if (res1 != null)
             {
-                pr.Add( new PotRecord { ChipPot = res1.ChipNum, GameID = (int)gameID.德州扑克, TableID = 0 } );
+                pr.Add(new PotRecord { ChipPot = res1.ChipNum, GameID = (int)gameID.德州扑克, TableID = 0 });
             }
             var res2 = (Scale_Select_S)CmdResult.Result(ServiceCmd.SC_SELECT_SCALE_POT, new byte[0]);
             if (res2 != null)
@@ -341,11 +343,15 @@ namespace MWeb.Controllers
             {
                 pr.Add(new PotRecord { ChipPot = res3.ChipNum, GameID = (int)gameID.百人德州, TableID = 0 });
             }
+            var res4 = (Baccarat_Select_S)CmdResult.Result(ServiceCmd.SC_SELECT_BACCARAT_POT, new byte[0]);
+            if (res4 != null)
+            {
+                pr.Add(new PotRecord { ChipPot = res4.ChipNum, GameID = (int)gameID.澳门扑克, TableID = 0 });
+            }
+
 
 
             model.Data = pr;
-
-
             return View(model);
 
         }
@@ -355,9 +361,7 @@ namespace MWeb.Controllers
         {
             PotRecordView model = new PotRecordView();
             int gameid = queryvalues.ContainsKey("gameid") ? Convert.ToInt32(queryvalues["gameid"]) : 0;
-
             object res;
-
             switch ((gameID)gameid)
             {
                 case gameID.斗地主:
@@ -375,7 +379,7 @@ namespace MWeb.Controllers
                     break;
                 case gameID.德州扑克:
                     res = CmdResult.Result(ServiceCmd.SC_SELECT_TEXAS_POT, new byte[0]);
-                    if (res==null)
+                    if (res == null)
                     {
                         return RedirectToAction("PotList");
                     }
@@ -388,6 +392,15 @@ namespace MWeb.Controllers
                         return RedirectToAction("PotList");
                     }
                     model = new PotRecordView { ChipPot = ((TexPro_Select_S)res).ChipNum, GameID = gameID.百人德州 };
+
+                    break;
+                case gameID.澳门扑克:
+                    res = CmdResult.Result(ServiceCmd.SC_SELECT_BACCARAT_POT, new byte[0]);
+                    if (res == null)
+                    {
+                        return RedirectToAction("PotList");
+                    }
+                    model = new PotRecordView { ChipPot = ((Baccarat_Select_S)res).ChipNum, GameID = gameID.澳门扑克 };
 
                     break;
                 default:
@@ -408,7 +421,7 @@ namespace MWeb.Controllers
         public ActionResult PotListUpdate(PotRecordView model, Dictionary<string, string> queryvalues)
         {
 
-            if (model.ChipPot<=0)
+            if (model.ChipPot <= 0)
             {
                 return Json(new { result = -900 });
             }
@@ -438,11 +451,11 @@ namespace MWeb.Controllers
                     .Build();
 
                     object ScaleOperatorS = CmdResult.Result(ServiceCmd.SC_OPERTOR_SACLE_POT, ScaleOperatorC.ToByteArray());
-              
+
                     if (ScaleOperatorS != null)
                     {
                         bool res = ((Scale_Operator_S)ScaleOperatorS).Suc;
-                      
+
                         if (res)
                         {
                             if (model.Flag == 1)
@@ -492,7 +505,8 @@ namespace MWeb.Controllers
                     if (TexasPotOperatorS != null)
                     {
                         bool res = ((TexasPot_Operator_S)TexasPotOperatorS).Suc;
-                        if (res) {
+                        if (res)
+                        {
                             if (model.Flag == 1)
                             {//增加
                                 TexasPotLog log = new TexasPotLog
@@ -507,7 +521,8 @@ namespace MWeb.Controllers
 
                                 TexasPotLogBLL.Add(log);
                             }
-                            else {//减少
+                            else
+                            {//减少
                                 TexasPotLog log = new TexasPotLog
                                 {
                                     Content = model.Context,
@@ -570,14 +585,58 @@ namespace MWeb.Controllers
                         }
                         return Json(new { result = res ? 0 : 1 });
                     }
+                    break;
+                case gameID.澳门扑克:
+                    Baccarat_Operator_C BaiJiaLeOperatorC = Baccarat_Operator_C.CreateBuilder()
+                    .SetOpType((uint)model.Flag)
+                    .SetOpValue((uint)model.ChipPot)
+                    .SetStrContent(model.Context)
+                    .Build();
+
+                    object BaiJiaLeOperatorS = CmdResult.Result(ServiceCmd.SC_OPERTOR_BACCARAT_POT, BaiJiaLeOperatorC.ToByteArray());
+
+                    if (BaiJiaLeOperatorS != null)
+                    {
+                        bool res = ((Baccarat_Operator_S)BaiJiaLeOperatorS).Suc;
+
+                        if (res)
+                        {
+                            if (model.Flag == 1)
+                            {//增加
+                                TexasPotLog log = new TexasPotLog
+                                {
+                                    Content = model.Context,
+                                    Time = DateTime.Now,
+                                    GameType = gameID.澳门扑克,
+                                    Type = ctrlType.增加,
+                                    Value = model.ChipPot
+
+                                };
+
+                                TexasPotLogBLL.Add(log);
+                            }
+                            else
+                            {//减少
+                                TexasPotLog log = new TexasPotLog
+                                {
+                                    Content = model.Context,
+                                    Time = DateTime.Now,
+                                    GameType = gameID.澳门扑克,
+                                    Type = ctrlType.减少,
+                                    Value = model.ChipPot
+
+                                };
+
+                                TexasPotLogBLL.Add(log);
+                            }
+                        }
+                        return Json(new { result = res ? 0 : 1 });
+                    }
 
                     break;
                 default:
                     break;
             }
-
-
-
 
             return Json(new { result = 2 });
 
@@ -588,7 +647,8 @@ namespace MWeb.Controllers
         /// </summary>
         /// <returns></returns>
         [QueryValues]
-        public ActionResult ZFBPotDataSum(Dictionary<string, string> queryvalues) {
+        public ActionResult ZFBPotDataSum(Dictionary<string, string> queryvalues)
+        {
             //ScalePot
 
             int _id = queryvalues.ContainsKey("UserID") ? string.IsNullOrWhiteSpace(queryvalues["UserID"]) ? 0 : Convert.ToInt32(queryvalues["UserID"]) : 0;
@@ -609,6 +669,38 @@ namespace MWeb.Controllers
             return View(grv);
         }
 
+
+        /// <summary>
+        ///  百家乐大彩池数据统计
+        /// </summary>
+        /// <param name="queryvalues"></param>
+        /// <returns></returns>
+              [QueryValues]
+        public ActionResult BaiJiaLePotDataSum(Dictionary<string, string> queryvalues)
+        {
+            //ScalePot
+
+            int _id = queryvalues.ContainsKey("UserID") ? string.IsNullOrWhiteSpace(queryvalues["UserID"]) ? 0 : Convert.ToInt32(queryvalues["UserID"]) : 0;
+            int _page = queryvalues.ContainsKey("page") ? Convert.ToInt32(queryvalues["page"]) : 1;
+            int _seachtype = queryvalues.ContainsKey("seachtype") ? Convert.ToInt32(queryvalues["seachtype"]) : 0;
+            string _StartDate = queryvalues.ContainsKey("StartDate") ? queryvalues["StartDate"] : DateTime.Now.ToString("yyyy-MM-dd 00:00:00");
+            string _ExpirationDate = queryvalues.ContainsKey("ExpirationDate") ? queryvalues["ExpirationDate"] : DateTime.Now.AddDays(1).ToString("yyyy-MM-dd 00:00:00");
+            string _SearchExt = queryvalues.ContainsKey("SearchExt") ? queryvalues["SearchExt"] : "";
+
+            GameRecordView grv = new GameRecordView { SearchExt = _SearchExt, StartDate = _StartDate, ExpirationDate = _ExpirationDate, Page = _page, SeachType = (seachType)_seachtype };
+            if (Request.IsAjaxRequest())
+            {
+                return PartialView("BaiJiaLePotDataSum_PageList", GameDataBLL.GetListByPageForBaiJiaLePot(grv));
+            }
+
+            grv.DataList = GameDataBLL.GetListByPageForBaiJiaLePot(grv);
+
+            return View(grv);
+        }
+
+
+
+
         /// <summary>
         /// 中发白大彩池打点统计
         /// </summary>
@@ -626,13 +718,42 @@ namespace MWeb.Controllers
 
             int Channels = queryvalues.ContainsKey("Channels") ? string.IsNullOrWhiteSpace(queryvalues["Channels"]) ? 0 : Convert.ToInt32(queryvalues["Channels"]) : 0;
             //Channels
-            GameRecordView grv = new GameRecordView { Channels=Channels, SearchExt = _SearchExt, StartDate = _StartDate, ExpirationDate = _ExpirationDate, Page = _page, SeachType = (seachType)_seachtype };
+            GameRecordView grv = new GameRecordView { Channels = Channels, SearchExt = _SearchExt, StartDate = _StartDate, ExpirationDate = _ExpirationDate, Page = _page, SeachType = (seachType)_seachtype };
             if (Request.IsAjaxRequest())
             {
                 return PartialView("ZFBPotDotSum_PageList", GameDataBLL.GetListByPageForDotSum(grv));
             }
 
             grv.DataList = GameDataBLL.GetListByPageForDotSum(grv);
+
+            return View(grv);
+        }
+
+
+
+        /// <summary>
+        /// 百家乐大彩池打点统计
+        /// </summary>
+        /// <param name="queryvalues"></param>
+        /// <returns></returns>
+        [QueryValues]
+        public ActionResult BaiJiaLePotDotSum(Dictionary<string, string> queryvalues)
+        {  int _id = queryvalues.ContainsKey("UserID") ? string.IsNullOrWhiteSpace(queryvalues["UserID"]) ? 0 : Convert.ToInt32(queryvalues["UserID"]) : 0;
+            int _page = queryvalues.ContainsKey("page") ? Convert.ToInt32(queryvalues["page"]) : 1;
+            int _seachtype = queryvalues.ContainsKey("seachtype") ? Convert.ToInt32(queryvalues["seachtype"]) : 0;
+            string _StartDate = queryvalues.ContainsKey("StartDate") ? queryvalues["StartDate"] : DateTime.Now.ToString("yyyy-MM-dd 00:00:00");
+            string _ExpirationDate = queryvalues.ContainsKey("ExpirationDate") ? queryvalues["ExpirationDate"] : DateTime.Now.AddDays(1).ToString("yyyy-MM-dd 00:00:00");
+            string _SearchExt = queryvalues.ContainsKey("SearchExt") ? queryvalues["SearchExt"] : "";
+
+            int Channels = queryvalues.ContainsKey("Channels") ? string.IsNullOrWhiteSpace(queryvalues["Channels"]) ? 0 : Convert.ToInt32(queryvalues["Channels"]) : 0;
+            //Channels
+            GameRecordView grv = new GameRecordView { Channels = Channels, SearchExt = _SearchExt, StartDate = _StartDate, ExpirationDate = _ExpirationDate, Page = _page, SeachType = (seachType)_seachtype };
+            if (Request.IsAjaxRequest())
+            {
+                return PartialView("BaiJiaLePotDotSum_PageList", GameDataBLL.GetListByPageForDotSumForBaiJiaLe(grv));
+            }
+
+            grv.DataList = GameDataBLL.GetListByPageForDotSumForBaiJiaLe(grv);
 
             return View(grv);
         }
@@ -651,11 +772,11 @@ namespace MWeb.Controllers
 
             int _RoundID = queryvalues.ContainsKey("RoundID") ? string.IsNullOrWhiteSpace(queryvalues["RoundID"]) ? 0 : Convert.ToInt32(queryvalues["RoundID"]) : 0;
             int _page = queryvalues.ContainsKey("page") ? Convert.ToInt32(queryvalues["page"]) : 1;
-           
+
             string _StartDate = queryvalues.ContainsKey("StartDate") ? queryvalues["StartDate"] : DateTime.Now.ToString("yyyy-MM-dd 00:00:00");
             string _ExpirationDate = queryvalues.ContainsKey("ExpirationDate") ? queryvalues["ExpirationDate"] : DateTime.Now.AddDays(1).ToString("yyyy-MM-dd 00:00:00");
-          
-            GameRecordView grv = new GameRecordView { RoundID=_RoundID, StartDate = _StartDate, ExpirationDate = _ExpirationDate, Page = _page };
+
+            GameRecordView grv = new GameRecordView { RoundID = _RoundID, StartDate = _StartDate, ExpirationDate = _ExpirationDate, Page = _page };
             if (Request.IsAjaxRequest()) //ShuihuDataSum
             {
                 return PartialView("ShuihuDataSum_PageList", GameDataBLL.GetListByPageForShuihuDataSum(grv));
@@ -714,7 +835,7 @@ namespace MWeb.Controllers
             {
                 return PartialView("ShuihuChangguiDataSum_PageList", GameDataBLL.GetListByPageForShuihuChangguiDataSum(grv));
             }
-            
+
 
             grv.DataList = GameDataBLL.GetListByPageForShuihuChangguiDataSum(grv);
 
@@ -795,10 +916,10 @@ namespace MWeb.Controllers
             GameRecordView grv = new GameRecordView { Channels = Channels, SearchExt = _SearchExt, StartDate = _StartDate, ExpirationDate = _ExpirationDate, Page = _page, SeachType = (seachType)_seachtype };
             if (Request.IsAjaxRequest())
             {
-                return PartialView("TexProPotDotSum_PageList", GameDataBLL.GetListByPageForDotSum(grv,2));
+                return PartialView("TexProPotDotSum_PageList", GameDataBLL.GetListByPageForDotSum(grv, 2));
             }
 
-            grv.DataList = GameDataBLL.GetListByPageForDotSum(grv,2);
+            grv.DataList = GameDataBLL.GetListByPageForDotSum(grv, 2);
 
             return View(grv);
         }
@@ -832,7 +953,8 @@ namespace MWeb.Controllers
 
                 grv.DataList = GameDataBLL.GetListByPageForDotSumByModuleID(grv, 24);
             }
-            else {
+            else
+            {
                 if (Request.IsAjaxRequest())
                 {
                     return PartialView("TexMiniDotSum2_PageList", GameDataBLL.GetMiniGameSum(grv));
@@ -904,7 +1026,7 @@ namespace MWeb.Controllers
             ieList.Insert(0, new SelectListItem { Text = "所有渠道", Value = "0", Selected = 0 == _Channels });
             ViewData["Channels"] = ieList;
 
-            GameRecordView grv = new GameRecordView { Channels=_Channels, SearchExt = _SearchExt, StartDate = _StartDate, ExpirationDate = _ExpirationDate, Page = _page, SeachType = (seachType)_seachtype };
+            GameRecordView grv = new GameRecordView { Channels = _Channels, SearchExt = _SearchExt, StartDate = _StartDate, ExpirationDate = _ExpirationDate, Page = _page, SeachType = (seachType)_seachtype };
             if (Request.IsAjaxRequest())
             {
                 return PartialView("ThanksGivingDataSum_PageList", GameDataBLL.GetListByPageForThanksGiving(grv));
@@ -951,7 +1073,8 @@ namespace MWeb.Controllers
         }
 
         [QueryValues]
-        public ActionResult ThanksRank(Dictionary<string, string> queryvalues) {
+        public ActionResult ThanksRank(Dictionary<string, string> queryvalues)
+        {
             int _Channels = queryvalues.ContainsKey("Channels") ? Convert.ToInt32(queryvalues["Channels"]) : 0;
             int _id = queryvalues.ContainsKey("UserID") ? string.IsNullOrWhiteSpace(queryvalues["UserID"]) ? 0 : Convert.ToInt32(queryvalues["UserID"]) : 0;
             int _page = queryvalues.ContainsKey("page") ? Convert.ToInt32(queryvalues["page"]) : 1;

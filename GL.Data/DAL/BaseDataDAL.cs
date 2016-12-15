@@ -36,8 +36,10 @@ select sum(ProfitAdd1) ProfitAdd1 ,sum(ProfitDel1) ProfitDel1 ,sum(ProfitAdd2) P
   sum(ProfitDel5) ProfitDel5 
 ,sum(ProfitAdd6) ProfitAdd6 ,
   sum(ProfitDel6) ProfitDel6 
+,sum(ProfitAdd7) ProfitAdd7 ,
+  sum(ProfitDel7) ProfitDel7 
 ,sum(ProfitScale) ProfitScale ,sum(ProfitHorse) ProfitHorse ,sum(ProfitZodiac) ProfitZodiac ,sum(ProfitCar) ProfitCar 
-  ,sum(ProfitHundred) ProfitHundred
+  ,sum(ProfitHundred) ProfitHundred  ,sum(ProfitBaiJiaLe) ProfitBaiJiaLe
 from (
 select ifnull(sum(Texas_LAward_W + Texas_MAward_W + Texas_HAward_W) ,0) ProfitAdd1 
     ,ifnull(sum(Texas_LAward_L + Texas_MAward_L + Texas_HAward_L) ,0) ProfitDel1
@@ -46,20 +48,31 @@ select ifnull(sum(Texas_LAward_W + Texas_MAward_W + Texas_HAward_W) ,0) ProfitAd
     ,ifnull(sum(Horse_Award_W) ,0) ProfitAdd4 ,ifnull(sum(Horse_Award_L) ,0) ProfitDel4
     ,ifnull(sum(Car_Award_W) ,0) ProfitAdd5 ,ifnull(sum(Car_Award_L) ,0) ProfitDel5
     ,ifnull(sum(Hundred_Award_W) ,0) ProfitAdd6 ,ifnull(sum(Hundred_Award_L) ,0) ProfitDel6 
-    ,0 ProfitScale ,0 ProfitHorse ,0 ProfitZodiac ,0 ProfitCar ,0 ProfitHundred
-from "+ database3+ @".Clearing_Game a
+    ,ifnull(sum(BaiJiaLe_Award_W) ,0) ProfitAdd7 ,ifnull(sum(BaiJiaLe_Award_L) ,0) ProfitDel7 
+    ,0 ProfitScale ,0 ProfitHorse ,0 ProfitZodiac ,0 ProfitCar ,0 ProfitHundred ,0 ProfitBaiJiaLe
+from " + database3 + @".Clearing_Game a
 where a.CountDate >= @StartDate and a.CountDate < @ExpirationDate and a.userid = @SearchExt
 union all
-select 0,0,0,0,0,0,0,0,0,0,0,0,ifnull(sum(case when a.type in (31,32,33) then ChipChange else 0 end),0) ProfitScale 
+select 0,
+       0,
+   0,0,
+   0,0,
+   0,0,
+   0,0,
+   0,0,
+   0,0
+  ,ifnull(sum(case when a.type in (31,32,33) then ChipChange else 0 end),0) ProfitScale 
   ,ifnull(sum(case when a.type in (93,94,95) then ChipChange else 0 end),0) ProfitHorse
   ,ifnull(sum(case when a.type in (103,104,105) then ChipChange else 0 end),0) ProfitZodiac 
   ,ifnull(sum(case when a.type in (115,116,117) then ChipChange else 0 end),0) ProfitCar
   ,ifnull(sum(case when a.type in (158,159,160) then ChipChange else 0 end),0) ProfitHundred 
-from "+ database3 + @".BG_UserMoneyRecord a
+  ,ifnull(sum(case when a.type in (229,230,231) then ChipChange else 0 end),0) ProfitBaiJiaLe 
+from " + database3 + @".BG_UserMoneyRecord a
 where a.CreateTime >= @StartDate and a.CreateTime < @ExpirationDate and a.userid = @SearchExt 
-  and a.type in (31,32,33,93,94,95,103,104,105,115,116,117,158,159,160)
+  and a.type in (31,32,33,93,94,95,103,104,105,115,116,117,158,159,160,229,230,231)
 )t
                 ;");
+
 
                 IEnumerable<BaseDataInfo> i = cn.Query<BaseDataInfo>(str.ToString(), bdv);
                 cn.Close();

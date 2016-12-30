@@ -31,6 +31,8 @@ namespace GL.Data.Model
         public string FishName { get; set; }
         public DateTime CreateTime { get; set; }
         public ntype Type { get; set; }
+
+        public string ajax { get; set; }
     }
     public class FishCount
     {

@@ -72,7 +72,7 @@
                                                         <td>@m.ServerIP</td>
                                                         <td>@m.ServerPort</td>
                                                         <td>@m.GameUrl</td>
-                                                        <td>@m.MWebUrl</td>
+                                                        <td> <a href="javascript:void()" onclick="transTo('@m.MWebUrl')">@m.MWebUrl</a> </td>
                                                         <td>@m.FenChenRate</td>
                                                         <td>@m.GoldRate</td>
                                                         <td>@{
@@ -81,7 +81,7 @@
                                                         @kucun.Gold
                                                         </td>
                                                         <td style="text-align:center">
-<input id="btnKuCun" type="button" value="充值库存" class="btn btn-primary btn-mini" onclick="return btnUpdateKuCun(@m.No)" />                   <input id="btnFlowNo" type="button" value="设置扣钱流水号" class="btn btn-primary btn-mini" onclick="return btnSetFlowNo(@m.No)" />                                                     
+<input id="btnKuCun" type="button" value="充值库存" class="btn btn-primary btn-mini" onclick="return btnUpdateKuCun(@m.No)" />                   <input id="btnFlowNo" type="button" value="设置扣钱流水号" class="btn btn-primary btn-mini" onclick="return btnSetFlowNo(@m.No)" />                                                
                                                         </td>
                                                     </tr>
 
@@ -117,4 +117,50 @@
     function btnSetFlowNo(no){
         location.href = "/DaiLi/SetFlowNoIndex?no=" + no ;
     }
+
+    function transTo(url) {
+
+
+        ShowReport_Click();
+    }
+
+
+    function ShowReport_Click() {
+           
+           //window.open("http://139.224.192.197:8010/");
+
+
+
+            var parames = new Array();
+            parames.push({ name: "UserName", value: "admin" });
+            parames.push({ name: "Password", value: "123456" });
+
+            Post("http://localhost:24277/Home/login", parames);
+
+            //return false;
+        }
+
+        /*
+        *功能： 模拟form表单的提交：
+        */
+        function Post(URL, PARAMTERS) {
+            //创建form表单
+            var temp_form = document.createElement("form");
+            temp_form.action = URL;
+            //如需打开新窗口，form的target属性要设置为'_blank'
+            temp_form.target = "_blank";
+            temp_form.method = "post";
+            temp_form.style.display = "none";
+            //添加参数
+            for (var item in PARAMTERS) {
+                var opt = document.createElement("textarea");
+                opt.name = PARAMTERS[item].name;
+                opt.value = PARAMTERS[item].value;
+                temp_form.appendChild(opt);
+            }
+            document.body.appendChild(temp_form);
+            //提交数据
+            temp_form.submit();
+        }
+
 </script>

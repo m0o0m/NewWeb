@@ -60,7 +60,11 @@ namespace MWeb.Controllers
             int _roundID2 = queryvalues.ContainsKey("RoundID2") ? string.IsNullOrWhiteSpace(queryvalues["RoundID2"]) ? 0 : Convert.ToInt32(queryvalues["RoundID2"]) : 0;
             int _RoundID3 = queryvalues.ContainsKey("RoundID3") ? string.IsNullOrWhiteSpace(queryvalues["RoundID3"]) ? 0 : Convert.ToInt32(queryvalues["RoundID3"]) : 0;
 
-            GameRecordView grv = new GameRecordView { Gametype = Convert.ToInt32(_Gametype), Data = _data, UserID = _id, SearchExt = _SearchExt, StartDate = _StartDate, ExpirationDate = _ExpirationDate, Page = _page, SeachType = (seachType)_seachtype, RoundID = _roundID, RoundID2 = _roundID2 ,RoundID3= _RoundID3 };
+            //更新后报错的代码，2016-12-19 屏蔽,RoundID3= _RoundID3
+            //GameRecordView grv = new GameRecordView { Gametype = Convert.ToInt32(_Gametype), Data = _data, UserID = _id, SearchExt = _SearchExt, StartDate = _StartDate, ExpirationDate = _ExpirationDate, Page = _page, SeachType = (seachType)_seachtype, RoundID = _roundID, RoundID2 = _roundID2 ,RoundID3= _RoundID3 };
+
+            GameRecordView grv = new GameRecordView { Gametype = Convert.ToInt32(_Gametype), Data = _data, UserID = _id, SearchExt = _SearchExt, StartDate = _StartDate, ExpirationDate = _ExpirationDate, Page = _page, SeachType = (seachType)_seachtype, RoundID = _roundID, RoundID2 = _roundID2 };
+
             string pageList = "";
             switch (_Gametype)
             {
@@ -119,9 +123,6 @@ namespace MWeb.Controllers
             {
                 return PartialView(pageList, grv.DataList);
             }
-
-            string[] str = new string[3];
-
 
 
             return View(grv);
@@ -867,6 +868,29 @@ namespace MWeb.Controllers
             return View(grv);
         }
 
+
+        [QueryValues]
+        public ActionResult SerialChangguiDataSum(Dictionary<string, string> queryvalues)
+        {
+            //ScalePot
+
+            int _RoundID = queryvalues.ContainsKey("RoundID") ? string.IsNullOrWhiteSpace(queryvalues["RoundID"]) ? 0 : Convert.ToInt32(queryvalues["RoundID"]) : 0;
+            int _page = queryvalues.ContainsKey("page") ? Convert.ToInt32(queryvalues["page"]) : 1;
+
+            string _StartDate = queryvalues.ContainsKey("StartDate") ? queryvalues["StartDate"] : DateTime.Now.ToString("yyyy-MM-dd 00:00:00");
+            string _ExpirationDate = queryvalues.ContainsKey("ExpirationDate") ? queryvalues["ExpirationDate"] : DateTime.Now.AddDays(1).ToString("yyyy-MM-dd 00:00:00");
+
+            GameRecordView grv = new GameRecordView { RoundID = _RoundID, StartDate = _StartDate, ExpirationDate = _ExpirationDate, Page = _page };
+            if (Request.IsAjaxRequest()) //  ShuihuChangguiDataSum
+            {
+                return PartialView("SerialChangguiDataSum_PageList", GameDataBLL.GetListByPageForSerialChangguiDataSum(grv));
+            }
+
+
+            grv.DataList = GameDataBLL.GetListByPageForSerialChangguiDataSum(grv);
+
+            return View(grv);
+        }
 
 
         /// <summary>

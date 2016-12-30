@@ -747,11 +747,20 @@
                         <p>1.返利每周一零点更新。</p>
                         <br>
                         <p>2.俱乐部返利：</p>
-                        <p class="p2">上周贡献服务费小于5亿，返利额为20%。</p>
+
+                        <p class="p2">上周贡献服务费小于5亿，返利额为25%。</p>
+                        <p class="p2">上周贡献服务费达到5亿，返利额为30%。</p>
+                        <p class="p2">上周贡献服务费达到10亿，返利额为35%。</p>
+                        <p class="p2">上周贡献服务费达到15亿，返利额为40%。</p>
+                        <p class="p2">上周贡献服务费达到20亿，返利额为45%。</p>
+                        <p class="p2">上周贡献服务费达到30亿，返利额为50%。</p>
+
+
+                        @*<p class="p2">上周贡献服务费小于5亿，返利额为20%。</p>
                         <p class="p2">上周贡献服务费达到5亿，返利额为25%。</p>
                         <p class="p2">上周贡献服务费达到10亿，返利额为30%。</p>
                         <p class="p2">上周贡献服务费达到30亿，返利额为40%。</p>
-                        <p class="p2">上周贡献服务费达到50亿，返利额为50%。</p>
+                        <p class="p2">上周贡献服务费达到50亿，返利额为50%。</p>*@
                         <br>
                         <p>3.必须通过本俱乐部链接邀请注册，才能成为本俱乐部旗下会员!</p>
 
@@ -855,11 +864,11 @@
                         html += '<div class="rankc">';
                         var nextContent = "";
                         if(ret.NextFanLi!=""){
-                            nextContent = ",贡献总额达到"+ret.NextTotal+"亿返利额为"+ret.NextFanLi+"%";
+                            nextContent = ",总额达到"+ret.NextTotal+"亿返利"+ret.NextFanLi+"%";
                         }
 
 
-                        html += '<div><h1>当前返利额为' + ret.FanLi + '%  '+nextContent+'</h1></div>';
+                        html += '<div><h1>当前返利' + ret.FanLi + '%  '+nextContent+'</h1></div>';
 
                         html += '<div class="clear"></div>';
                         html += '</div>';

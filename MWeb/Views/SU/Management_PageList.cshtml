@@ -1,5 +1,7 @@
 ﻿@using Webdiyer.WebControls.Mvc;
 @using GL.Data.MWeb.Identity;
+@using  GL.Data.BLL;
+@using GL.Data.Model;
 @model PagedList<ApplicationUser>
 
 
@@ -40,6 +42,7 @@
                                         <th>昵称</th>
                                         <th>Email</th>
                                         <th>手机</th>
+                                        <th>角色</th>
                                         <th>基本操作</th>
                                     </tr>
                                 </thead>
@@ -60,15 +63,20 @@
                                             <td>@m.NickName</td>
                                             <td>@m.Email</td>
                                             <td>@m.PhoneNumber</td>
+                                            <td>@{
+                                                string name = SUBLL.GetRoleString(m.Id);
+                                            }
+                                            @name
+                                            </td>
                                             <td style="text-align:center">
                                                 <input id="btnDel" type="button" value="删除" class="btn btn-danger btn-mini" onclick="return ConfirmDelUser(this);" />
                                                 <input id="btnUpdate" type="button" value="编辑" class="btn btn-inverse btn-mini" onclick="return UpdateUser(this);" />
                                                 <input id="btnRole" type="button" value="绑定角色" class="btn btn-inverse btn-mini" onclick="return RoleUser(this);" />
-                                                <input id="btnRole" type="button" value="用户授权" class="btn btn-inverse btn-mini" onclick="return UserResource(this);" />
+                                          
                                             </td>
                                         </tr>
 
-            }
+                                                }
                                 </tbody>
                             </table>
                         </div>

@@ -35,7 +35,7 @@ namespace JWeb.Controllers
           
 
 
-            int uid = queryvalues.ContainsKey("uid") ? (string.IsNullOrEmpty(queryvalues["uid"])?-1:Convert.ToInt32(queryvalues["uid"]) ): -1;
+            int uid = queryvalues.ContainsKey("uid") ? (string.IsNullOrEmpty(queryvalues["uid"])?-1:Convert.ToInt32(queryvalues["uid"])): -1;
           
          
            // uid = 10701;
@@ -137,34 +137,70 @@ namespace JWeb.Controllers
                 string fanli = "20";
                 string nextTotal = "";
                 string nextFanLi = "";
+
                 if (weekTotal < 500000000)
                 {
-                    fanli = "20";
-                    nextTotal = "5";
-                    nextFanLi = "25";
+                    fanli = "25"; //当前返利
+                    nextTotal = "5";//下个返利服务费
+                    nextFanLi = "30";//下个返利比例
                 }
-                else if(weekTotal < 1000000000)
+                else if (weekTotal < 1000000000)
                 {
-                    fanli = "25";
+                    fanli = "30";
                     nextTotal = "10";
-                    nextFanLi = "30";
+                    nextFanLi = "35";
+                }
+                else if (weekTotal < 1500000000)
+                {
+                    fanli = "35";
+                    nextTotal = "15";
+                    nextFanLi = "40";
+                }
+                else if (weekTotal < 2000000000)
+                {
+                    fanli = "40";
+                    nextTotal = "20";
+                    nextFanLi = "45";
                 }
                 else if (weekTotal < 3000000000)
                 {
-                    fanli = "30";
+                    fanli = "45";
                     nextTotal = "30";
-                    nextFanLi = "40";
-                }
-                else if (weekTotal < 5000000000)
-                {
-                    fanli = "40";
-                    nextTotal = "50";
                     nextFanLi = "50";
                 }
                 else
                 {
                     fanli = "50";
                 }
+
+                //if (weekTotal < 500000000)
+                //{
+                //    fanli = "20";
+                //    nextTotal = "5";
+                //    nextFanLi = "25";
+                //}
+                //else if(weekTotal < 1000000000)
+                //{
+                //    fanli = "25";
+                //    nextTotal = "10";
+                //    nextFanLi = "30";
+                //}
+                //else if (weekTotal < 3000000000)
+                //{
+                //    fanli = "30";
+                //    nextTotal = "30";
+                //    nextFanLi = "40";
+                //}
+                //else if (weekTotal < 5000000000)
+                //{
+                //    fanli = "40";
+                //    nextTotal = "50";
+                //    nextFanLi = "50";
+                //}
+                //else
+                //{
+                //    fanli = "50";
+                //}
                 model.WeekTotal = weekTotal;
                 model.FanLi = fanli;
                 model.NextTotal = nextTotal;
@@ -286,34 +322,70 @@ namespace JWeb.Controllers
                 string fanli = "20";
                 string nextTotal = "";
                 string nextFanLi = "";
+
                 if (weekTotal < 500000000)
                 {
-                    fanli = "20";
-                    nextTotal = "5";
-                    nextFanLi = "25";
+                    fanli = "25"; //当前返利
+                    nextTotal = "5";//下个返利服务费
+                    nextFanLi = "30";//下个返利比例
                 }
                 else if (weekTotal < 1000000000)
                 {
-                    fanli = "25";
+                    fanli = "30";
                     nextTotal = "10";
-                    nextFanLi = "30";
+                    nextFanLi = "35";
+                }
+                else if (weekTotal < 1500000000)
+                {
+                    fanli = "35";
+                    nextTotal = "15";
+                    nextFanLi = "40";
+                }
+                else if (weekTotal < 2000000000)
+                {
+                    fanli = "40";
+                    nextTotal = "20";
+                    nextFanLi = "45";
                 }
                 else if (weekTotal < 3000000000)
                 {
-                    fanli = "30";
+                    fanli = "45";
                     nextTotal = "30";
-                    nextFanLi = "40";
-                }
-                else if (weekTotal < 5000000000)
-                {
-                    fanli = "40";
-                    nextTotal = "50";
                     nextFanLi = "50";
                 }
                 else
                 {
                     fanli = "50";
                 }
+
+                //if (weekTotal < 500000000)
+                //{
+                //    fanli = "20";
+                //    nextTotal = "5";
+                //    nextFanLi = "25";
+                //}
+                //else if (weekTotal < 1000000000)
+                //{
+                //    fanli = "25";
+                //    nextTotal = "10";
+                //    nextFanLi = "30";
+                //}
+                //else if (weekTotal < 3000000000)
+                //{
+                //    fanli = "30";
+                //    nextTotal = "30";
+                //    nextFanLi = "40";
+                //}
+                //else if (weekTotal < 5000000000)
+                //{
+                //    fanli = "40";
+                //    nextTotal = "50";
+                //    nextFanLi = "50";
+                //}
+                //else
+                //{
+                //    fanli = "50";
+                //}
                 model.WeekTotal = weekTotal;
                 model.FanLi = fanli;
                 model.NextTotal = nextTotal;
@@ -362,34 +434,70 @@ namespace JWeb.Controllers
             string fanli = "20";
             string nextTotal = "";
             string nextFanLi = "";
+
             if (weekTotal < 500000000)
             {
-                fanli = "20";
-                nextTotal = "5";
-                nextFanLi = "25";
+                fanli = "25"; //当前返利
+                nextTotal = "5";//下个返利服务费
+                nextFanLi = "30";//下个返利比例
             }
             else if (weekTotal < 1000000000)
             {
-                fanli = "25";
+                fanli = "30";
                 nextTotal = "10";
-                nextFanLi = "30";
+                nextFanLi = "35";
+            }
+            else if (weekTotal < 1500000000)
+            {
+                fanli = "35";
+                nextTotal = "15";
+                nextFanLi = "40";
+            }
+            else if (weekTotal < 2000000000)
+            {
+                fanli = "40";
+                nextTotal = "20";
+                nextFanLi = "45";
             }
             else if (weekTotal < 3000000000)
             {
-                fanli = "30";
+                fanli = "45";
                 nextTotal = "30";
-                nextFanLi = "40";
-            }
-            else if (weekTotal < 5000000000)
-            {
-                fanli = "40";
-                nextTotal = "50";
                 nextFanLi = "50";
             }
             else
             {
                 fanli = "50";
             }
+
+            //if (weekTotal < 500000000)
+            //{
+            //    fanli = "20";
+            //    nextTotal = "5";
+            //    nextFanLi = "25";
+            //}
+            //else if (weekTotal < 1000000000)
+            //{
+            //    fanli = "25";
+            //    nextTotal = "10";
+            //    nextFanLi = "30";
+            //}
+            //else if (weekTotal < 3000000000)
+            //{
+            //    fanli = "30";
+            //    nextTotal = "30";
+            //    nextFanLi = "40";
+            //}
+            //else if (weekTotal < 5000000000)
+            //{
+            //    fanli = "40";
+            //    nextTotal = "50";
+            //    nextFanLi = "50";
+            //}
+            //else
+            //{
+            //    fanli = "50";
+            //}
 
 
 

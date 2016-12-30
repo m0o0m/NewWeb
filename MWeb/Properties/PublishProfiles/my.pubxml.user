@@ -25,16 +25,16 @@
       <publishTime>09/19/2016 14:18:46</publishTime>
     </File>
     <File Include="bin/GL.Common.dll">
-      <publishTime>11/15/2016 11:58:38</publishTime>
+      <publishTime>12/19/2016 16:20:36</publishTime>
     </File>
     <File Include="bin/GL.Common.pdb">
       <publishTime>11/09/2016 15:10:50</publishTime>
     </File>
     <File Include="bin/GL.Dapper.dll">
-      <publishTime>11/15/2016 11:58:39</publishTime>
+      <publishTime>12/19/2016 16:20:37</publishTime>
     </File>
     <File Include="bin/GL.Dapper.Extensions.dll">
-      <publishTime>11/15/2016 11:58:40</publishTime>
+      <publishTime>12/20/2016 14:14:19</publishTime>
     </File>
     <File Include="bin/GL.Dapper.Extensions.pdb">
       <publishTime>11/15/2016 10:27:43</publishTime>
@@ -43,7 +43,7 @@
       <publishTime>11/15/2016 10:27:42</publishTime>
     </File>
     <File Include="bin/GL.Data.dll">
-      <publishTime>12/12/2016 17:14:26</publishTime>
+      <publishTime>12/21/2016 15:05:25</publishTime>
     </File>
     <File Include="bin/GL.Data.pdb">
       <publishTime>11/21/2016 15:26:18</publishTime>
@@ -100,13 +100,13 @@
       <publishTime>09/19/2016 14:19:53</publishTime>
     </File>
     <File Include="bin/MWeb.dll">
-      <publishTime>12/12/2016 17:14:29</publishTime>
+      <publishTime>12/21/2016 15:05:28</publishTime>
     </File>
     <File Include="bin/MWeb.pdb">
       <publishTime>11/21/2016 15:26:21</publishTime>
     </File>
     <File Include="bin/MWeb.XmlSerializers.dll">
-      <publishTime>12/12/2016 17:14:29</publishTime>
+      <publishTime>12/21/2016 15:05:28</publishTime>
     </File>
     <File Include="bin/MySql.Data.dll">
       <publishTime>09/19/2016 14:19:56</publishTime>
@@ -163,7 +163,7 @@
       <publishTime>01/30/2013 17:01:15</publishTime>
     </File>
     <File Include="bin/Webdiyer.MvcPager.dll">
-      <publishTime>11/15/2016 11:58:39</publishTime>
+      <publishTime>12/20/2016 14:14:19</publishTime>
     </File>
     <File Include="bin/Webdiyer.MvcPager.pdb">
       <publishTime>11/10/2016 15:46:09</publishTime>
@@ -172,10 +172,10 @@
       <publishTime>09/19/2016 14:20:11</publishTime>
     </File>
     <File Include="bin/zh-CHS/Webdiyer.MvcPager.resources.dll">
-      <publishTime>11/15/2016 11:58:40</publishTime>
+      <publishTime>12/20/2016 14:14:19</publishTime>
     </File>
     <File Include="bin/zh-CHT/Webdiyer.MvcPager.resources.dll">
-      <publishTime>11/15/2016 11:58:40</publishTime>
+      <publishTime>12/20/2016 14:14:19</publishTime>
     </File>
     <File Include="bin/zh-Hans/EntityFramework.resources.dll">
       <publishTime>09/19/2016 14:18:46</publishTime>
@@ -21487,7 +21487,7 @@
       <publishTime>09/19/2016 14:14:55</publishTime>
     </File>
     <File Include="protobuf/Service.proto">
-      <publishTime>12/07/2016 12:19:25</publishTime>
+      <publishTime>12/19/2016 10:20:58</publishTime>
     </File>
     <File Include="protobuf/TexRecord/Service.proto">
       <publishTime>09/19/2016 14:11:24</publishTime>
@@ -21697,7 +21697,7 @@
       <publishTime>11/03/2016 11:37:44</publishTime>
     </File>
     <File Include="Views/Base/GameOutTestDetail.cshtml">
-      <publishTime>12/07/2016 16:54:55</publishTime>
+      <publishTime>12/19/2016 11:07:30</publishTime>
     </File>
     <File Include="Views/Base/GameRetentionRates.cshtml">
       <publishTime>09/19/2016 14:11:22</publishTime>
@@ -21778,7 +21778,7 @@
       <publishTime>09/19/2016 14:11:22</publishTime>
     </File>
     <File Include="Views/Base/UserProfit_PageList.cshtml">
-      <publishTime>12/07/2016 16:58:07</publishTime>
+      <publishTime>12/19/2016 10:51:20</publishTime>
     </File>
     <File Include="Views/Base/UserRetentionRates.cshtml">
       <publishTime>09/19/2016 14:11:22</publishTime>
@@ -21823,7 +21823,7 @@
       <publishTime>09/19/2016 14:11:22</publishTime>
     </File>
     <File Include="Views/DaiLi/Index.cshtml">
-      <publishTime>12/12/2016 11:41:27</publishTime>
+      <publishTime>12/15/2016 17:55:41</publishTime>
     </File>
     <File Include="Views/DaiLi/KuCunFlow.cshtml">
       <publishTime>12/05/2016 10:50:25</publishTime>
@@ -21847,7 +21847,7 @@
       <publishTime>11/29/2016 19:28:07</publishTime>
     </File>
     <File Include="Views/GameData/BaijialeGameLog_PageList.cshtml">
-      <publishTime>12/07/2016 12:19:24</publishTime>
+      <publishTime>12/19/2016 10:20:57</publishTime>
     </File>
     <File Include="Views/GameData/BaiJiaLePotDataSum.cshtml">
       <publishTime>11/29/2016 19:28:07</publishTime>
@@ -21859,7 +21859,7 @@
       <publishTime>11/29/2016 19:28:07</publishTime>
     </File>
     <File Include="Views/GameData/BaiJiaLePotDotSum_PageList.cshtml">
-      <publishTime>12/05/2016 11:01:43</publishTime>
+      <publishTime>12/19/2016 10:20:57</publishTime>
     </File>
     <File Include="Views/GameData/CarGameGameLog.cshtml">
       <publishTime>09/19/2016 14:11:22</publishTime>
@@ -21880,7 +21880,7 @@
       <publishTime>10/26/2016 10:02:43</publishTime>
     </File>
     <File Include="Views/GameData/GameLog.cshtml">
-      <publishTime>11/17/2016 16:36:42</publishTime>
+      <publishTime>12/19/2016 11:55:03</publishTime>
     </File>
     <File Include="Views/GameData/GameLogDetail.cshtml">
       <publishTime>09/19/2016 14:11:22</publishTime>
@@ -21930,6 +21930,12 @@
     <File Include="Views/GameData/ScaleGameLog_PageList.cshtml">
       <publishTime>11/29/2016 19:28:07</publishTime>
     </File>
+    <File Include="Views/GameData/SerialGameLog.cshtml">
+      <publishTime>12/19/2016 10:20:57</publishTime>
+    </File>
+    <File Include="Views/GameData/SerialGameLog_PageList.cshtml">
+      <publishTime>12/19/2016 14:48:01</publishTime>
+    </File>
     <File Include="Views/GameData/ShuiguoGameLog_PageList.cshtml">
       <publishTime>11/14/2016 16:47:50</publishTime>
     </File>
@@ -21943,7 +21949,7 @@
       <publishTime>10/09/2016 19:09:53</publishTime>
     </File>
     <File Include="Views/GameData/ShuihuDataSum_PageList.cshtml">
-      <publishTime>10/18/2016 16:25:54</publishTime>
+      <publishTime>12/21/2016 10:04:16</publishTime>
     </File>
     <File Include="Views/GameData/ShuihuGameLog_PageList.cshtml">
       <publishTime>11/04/2016 10:42:07</publishTime>
@@ -22021,7 +22027,7 @@
       <publishTime>09/19/2016 14:11:22</publishTime>
     </File>
     <File Include="Views/Home/login.cshtml">
-      <publishTime>11/02/2016 18:18:50</publishTime>
+      <publishTime>12/19/2016 11:50:41</publishTime>
     </File>
     <File Include="Views/Home/LogOff.cshtml">
       <publishTime>09/19/2016 14:11:23</publishTime>
@@ -22057,7 +22063,7 @@
       <publishTime>09/19/2016 14:11:23</publishTime>
     </File>
     <File Include="Views/Manage/FishDaybook.cshtml">
-      <publishTime>09/19/2016 14:11:23</publishTime>
+      <publishTime>12/15/2016 15:06:27</publishTime>
     </File>
     <File Include="Views/Manage/FishDaybook_PageList.cshtml">
       <publishTime>09/19/2016 14:11:23</publishTime>
@@ -22096,7 +22102,7 @@
       <publishTime>09/19/2016 14:11:23</publishTime>
     </File>
     <File Include="Views/Manage/MemberForRecord.cshtml">
-      <publishTime>12/07/2016 12:19:24</publishTime>
+      <publishTime>12/19/2016 10:20:57</publishTime>
     </File>
     <File Include="Views/Manage/MemberForSearchGameRecord.cshtml">
       <publishTime>09/19/2016 14:11:23</publishTime>
@@ -22135,7 +22141,7 @@
       <publishTime>09/19/2016 14:11:23</publishTime>
     </File>
     <File Include="Views/Manage/Member_PageList.cshtml">
-      <publishTime>11/03/2016 14:48:01</publishTime>
+      <publishTime>12/15/2016 16:29:12</publishTime>
     </File>
     <File Include="Views/Manage/OnlineMember.cshtml">
       <publishTime>09/19/2016 14:11:23</publishTime>
@@ -22510,7 +22516,7 @@
       <publishTime>09/19/2016 14:11:23</publishTime>
     </File>
     <File Include="Views/SU/Management_PageList.cshtml">
-      <publishTime>09/19/2016 14:11:23</publishTime>
+      <publishTime>12/21/2016 15:01:00</publishTime>
     </File>
     <File Include="Views/SU/OperLog.cshtml">
       <publishTime>09/19/2016 14:11:23</publishTime>
@@ -22546,7 +22552,7 @@
       <publishTime>09/19/2016 14:11:23</publishTime>
     </File>
     <File Include="Views/SU/SetSysEmailLimitForUpdate.cshtml">
-      <publishTime>11/03/2016 14:51:33</publishTime>
+      <publishTime>12/21/2016 11:21:43</publishTime>
     </File>
     <File Include="Views/SU/SetSysEmailLimit_PageList.cshtml">
       <publishTime>09/19/2016 14:11:23</publishTime>
@@ -22564,7 +22570,7 @@
       <publishTime>12/07/2016 12:19:24</publishTime>
     </File>
     <File Include="Views/System/ClientGameControl.cshtml">
-      <publishTime>11/29/2016 19:28:08</publishTime>
+      <publishTime>12/19/2016 10:20:58</publishTime>
     </File>
     <File Include="Views/System/FreezeLog.cshtml">
       <publishTime>09/19/2016 14:11:23</publishTime>
@@ -22576,10 +22582,10 @@
       <publishTime>09/19/2016 14:11:23</publishTime>
     </File>
     <File Include="Views/System/GameControl.cshtml">
-      <publishTime>11/29/2016 19:28:08</publishTime>
+      <publishTime>12/19/2016 10:20:58</publishTime>
     </File>
     <File Include="Views/System/GameServControl.cshtml">
-      <publishTime>12/07/2016 12:19:24</publishTime>
+      <publishTime>12/19/2016 10:20:58</publishTime>
     </File>
     <File Include="Views/System/HerocraftTwiceControl.cshtml">
       <publishTime>09/19/2016 14:11:23</publishTime>
@@ -22648,7 +22654,7 @@
       <publishTime>09/19/2016 14:11:23</publishTime>
     </File>
     <File Include="Views/System/SetClientGameSwitch.cshtml">
-      <publishTime>09/19/2016 14:11:23</publishTime>
+      <publishTime>12/19/2016 10:20:58</publishTime>
     </File>
     <File Include="Views/System/SetGameSwitch.cshtml">
       <publishTime>09/19/2016 14:11:23</publishTime>

@@ -191,6 +191,8 @@
     <Compile Include="Model\RobotControl.cs" />
     <Compile Include="Model\RobotOutPut.cs" />
     <Compile Include="Model\ScalePot.cs" />
+    <Compile Include="Model\SerialChangguiDataSum.cs" />
+    <Compile Include="Model\SerialGameRecord.cs" />
     <Compile Include="Model\ShuihuGameRecord.cs" />
     <Compile Include="Model\SignDraw.cs" />
     <Compile Include="Model\SimulatorRecharge.cs" />

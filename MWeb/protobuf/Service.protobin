@@ -1,5 +1,5 @@
 
-ÎR
+…V
 Service.protoProtoCmd.Service"$
 BGSetZfbPotOpenReq
 isOpen ("5
@@ -300,7 +300,23 @@ DbPvpCfg_S
 type (
 value ("
 FruiteBigPot_S
-suc ("&
+suc (")
+BGSetBaccaratPOTOpenReq
+isOpen (":
+BGSetBaccaratPOTOpenRes
+suc (
+
+currStatus ("$
+Baccarat_Select_S
+ChipNum ("J
+Baccarat_Operator_C
+opType (
+opValue (
+
+strContent (	"2
+Baccarat_Operator_S
+opType (
+suc ("&
 QueryRobotStatu
 module_type ("E
 ModifyRobotConfig
@@ -416,8 +432,7 @@ userExData (2.ProtoCmd.Service.UserExData2
 	toolsInfo (2.ProtoCmd.Service.ToolsInfo*
 vipInfo (2.ProtoCmd.Service.VipInfo.
 	levelInfo (2.ProtoCmd.Service.LevelInfo*
-vipCard (2.ProtoCmd.Service.VipCard*Ë
-
+vipCard (2.ProtoCmd.Service.VipCard*¡
 
 ServiceCmd
 SC_BEGIN
@@ -474,9 +489,11 @@ ServiceCmd
 SC_NTF_UPDATE_DBPVPCFGA!
 SC_NTF_UPDATE_ARCADEGAMESTOCKB
 SC_NTF_UPDATE_SHUIHUPOTC
-SC_FRUITEBIGPOTD
-SC_TOTALÈ*Ý
-
+SC_FruiteBigPotD
+SC_SET_BACCARATPOT_OPENE
+SC_SELECT_BACCARAT_POTF
+SC_OPERTOR_BACCARAT_POTG
+SC_TOTALÈ*±
 	CenterCmd
 CS_BEGIN
 CS_CONNECT_ERROR
@@ -532,7 +549,10 @@ ServiceCmd
 CS_NTF_UPDATE_DBPVPCFGA!
 CS_NTF_UPDATE_ARCADEGAMESTOCKB
 CS_NTF_UPDATE_SHUIHUPOTC
-CS_FRUITEBIGPOTD
+CS_FruiteBigPotD
+CS_SET_BACCARART_OPENE
+CS_SELECT_BACCARAT_POTF
+CS_OPERTOR_BACCARAT_POTG
 CS_TOTALd* 
 
 ModuleType

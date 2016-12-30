@@ -69,6 +69,7 @@ enum ServiceCmd
 	SC_SET_BACCARATPOT_OPEN = 69;		    //百人百家乐大彩池开关
 	SC_SELECT_BACCARAT_POT	= 70;		//查询百人百家乐大彩池金币数
 	SC_OPERTOR_BACCARAT_POT	= 71;		//增加或者减少百人百家乐大彩池金币数
+
 	SC_TOTAL = 200;
 }
 
@@ -145,6 +146,7 @@ enum CenterCmd
 	CS_SET_BACCARART_OPEN = 69;					//百人百家乐大彩池开关
 	CS_SELECT_BACCARAT_POT = 70;				//返回百人百家乐大彩池金币数
 	CS_OPERTOR_BACCARAT_POT  = 71;				//返回增加或者减少百人百家乐大彩池金币数
+
 	
 	CS_TOTAL	 	= 100;
 }

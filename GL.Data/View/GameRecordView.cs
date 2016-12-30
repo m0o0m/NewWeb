@@ -40,6 +40,10 @@ namespace GL.Data.View
 
         public int RoundID2 { get; set; }
 
+        public int RoundID3 { get; set; }
+
+        public string ajax { get; set; }
+
     }
 
 

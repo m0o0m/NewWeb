@@ -417,6 +417,22 @@
     <Content Include="img\select2-spinner.gif" />
     <Content Include="img\select2.png" />
     <Content Include="img\select2x2.png" />
+    <Content Include="img\Serial_img\0红宝石.png" />
+    <Content Include="img\Serial_img\10祖马红.png" />
+    <Content Include="img\Serial_img\11猫眼石.png" />
+    <Content Include="img\Serial_img\12紫宝石.png" />
+    <Content Include="img\Serial_img\13翡翠.png" />
+    <Content Include="img\Serial_img\14珍珠.png" />
+    <Content Include="img\Serial_img\15砖头.png" />
+    <Content Include="img\Serial_img\1绿宝石.png" />
+    <Content Include="img\Serial_img\2黄宝石.png" />
+    <Content Include="img\Serial_img\3蓝宝石.png" />
+    <Content Include="img\Serial_img\4钻石.png" />
+    <Content Include="img\Serial_img\5白玉.png" />
+    <Content Include="img\Serial_img\6碧玉.png" />
+    <Content Include="img\Serial_img\7墨玉.png" />
+    <Content Include="img\Serial_img\8玛瑙.png" />
+    <Content Include="img\Serial_img\9琥珀.png" />
     <Content Include="img\spinner.gif" />
     <Content Include="img\sprite.png" />
     <Content Include="js\ad\681422.png" />
@@ -7819,6 +7835,10 @@
     <Content Include="Views\DaiLi\KuCunFlow_PageList.cshtml" />
     <Content Include="Views\GameData\BaiJiaLePotDataSum_PageList.cshtml" />
     <Content Include="Views\System\BaiJiaLePotControl.cshtml" />
+    <Content Include="Views\GameData\SerialGameLog.cshtml" />
+    <Content Include="Views\GameData\SerialGameLog_PageList.cshtml" />
+    <Content Include="Views\GameData\SerialChangguiDataSum.cshtml" />
+    <Content Include="Views\GameData\SerialChangguiDataSum_PageList.cshtml" />
     <None Include="Web References\cn.org.nciic.ws\NciicServices.wsdl">
       <SubType>Designer</SubType>
     </None>

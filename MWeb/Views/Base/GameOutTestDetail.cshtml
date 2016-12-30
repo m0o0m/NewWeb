@@ -75,9 +75,16 @@
 
 
     List<GameOutputList> shuihuhuishou = new List<GameOutputList>();
-    string shuihustr = ",999,998,";
+    string shuihustr = ",999,";
     decimal shuihuTotal = 0;
 
+    List<GameOutputList> shuiguoji = new List<GameOutputList>();
+    string shuiguojistr = ",998,";
+    decimal shuiguojiTotal = 0;
+
+    List<GameOutputList> lianhuan = new List<GameOutputList>();
+    string lianhuanstr = ",997,";
+    decimal lianhuanTotal = 0;
 
     int inputmark = 0;
     int outputmark = 0;
@@ -146,7 +153,7 @@
         else if (shuihustr.Contains("," + t + ","))
         {
             shuihuhuishou.Add(bdl.list[i]);
-            if(bdl.list[i].ChipChangeType == chipChangeType.水浒传回收游戏币) {
+            if(bdl.list[i].ChipChangeType == chipChangeType.水浒传服务费) {
                 shuihuTotal += bdl.list[i].Chip ;
             }
             else {
@@ -155,6 +162,15 @@
 
 
             outputmark++;
+        }    else if (shuiguojistr.Contains("," + t + ","))
+        {
+            shuiguoji.Add(bdl.list[i]);
+            shuiguojiTotal += bdl.list[i].Chip; outputmark++;
+        }
+        else if (lianhuanstr.Contains("," + t + ","))
+        {
+            lianhuan.Add(bdl.list[i]);
+            lianhuanTotal += bdl.list[i].Chip; outputmark++;
         }
 
     }
@@ -408,7 +424,7 @@
                                                 @if (baijialeTotal < 0)
                                                 {
                                                     <li>
-                                                        <span><i class="fa fa-lg fa-plus-circle"></i>百家乐服务费   <span style="color:#ee0000">@baijialeTotal</span> </span>
+                                                        <span><i class="fa fa-lg fa-plus-circle"></i>澳门扑克服务费   <span style="color:#ee0000">@baijialeTotal</span> </span>
                                                         <ul>
                                                             @for (int i = 0; i < baijiale.Count; i++)
                                                             {
@@ -423,11 +439,11 @@
                                                 @if (shuihuTotal < 0)
                                                 {
                                                     <li>
-                                                        <span><i class="fa fa-lg fa-plus-circle"></i>回收游戏币   <span style="color:#ee0000">@shuihuTotal.ToString("#,0.") </span> </span>
+                                                        <span><i class="fa fa-lg fa-plus-circle"></i>水浒传服务费   <span style="color:#ee0000">@shuihuTotal.ToString("#,0.") </span> </span>
                                                         <ul>
                                                             @for (int i = 0; i < shuihuhuishou.Count; i++)
                                                             {
-                                                                if (shuihuhuishou[i].ChipChangeType == chipChangeType.水浒传回收游戏币)
+                                                                if (shuihuhuishou[i].ChipChangeType == chipChangeType.水浒传服务费)
                                                                 {
                                                                    
                                                                     <li style="display:none">
@@ -441,6 +457,36 @@
                                                                     </li>
                                                                 }
 
+                                                            }
+                                                        </ul>
+                                                    </li>
+                                                }
+                                                @if (shuiguojiTotal < 0)
+                                                {
+                                                    <li>
+                                                        <span><i class="fa fa-lg fa-plus-circle"></i>水果机服务费   <span style="color:#ee0000">@shuiguojiTotal</span> </span>
+                                                        <ul>
+                                                            @for (int i = 0; i < shuiguoji.Count; i++)
+                                                            {
+
+                                                                <li style="display:none">
+                                                                    <span class="label"><i class=""></i>@shuiguoji[i].ChipChangeType  <span style="color:#ee0000">@shuiguoji[i].Chip.ToString("#,0.")</span></span>
+                                                                </li>
+                                                            }
+                                                        </ul>
+                                                    </li>
+                                                }
+                                                @if (lianhuanTotal < 0)
+                                                {
+                                                    <li>
+                                                        <span><i class="fa fa-lg fa-plus-circle"></i>连环夺宝服务费   <span style="color:#ee0000">@lianhuanTotal</span> </span>
+                                                        <ul>
+                                                            @for (int i = 0; i < lianhuan.Count; i++)
+                                                            {
+
+                                                                <li style="display:none">
+                                                                    <span class="label"><i class=""></i>@lianhuan[i].ChipChangeType  <span style="color:#ee0000">@lianhuan[i].Chip.ToString("#,0.")</span></span>
+                                                                </li>
                                                             }
                                                         </ul>
                                                     </li>

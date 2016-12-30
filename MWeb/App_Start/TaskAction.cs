@@ -30,7 +30,6 @@ public static class TaskAction
 
         string timerTask = PubConstant.GetConnectionString("timerTask");
 
-        // TaskAction.SetContent();
         if (timerTask == "1")
         {
             Thread t = new Thread(new ThreadStart(TaskAction.SetContent));
@@ -46,7 +45,7 @@ public static class TaskAction
 
     }
 
-  
+
 
 
     /// <summary>
@@ -56,22 +55,22 @@ public static class TaskAction
     /// <param name="e"></param>
     public static void SetContent()
     {
-     //   ILog log = LogManager.GetLogger("TaskAction");
-     // log.Info("牌局解析:进入SetContent方法" + DateTime.Now.ToString());
+        //   ILog log = LogManager.GetLogger("TaskAction");
+        // log.Info("牌局解析:进入SetContent方法" + DateTime.Now.ToString());
 
-       
-       
+
+
 
         while (true)
         {
-           // log.Info("牌局解析:执行 while (true)" + DateTime.Now.ToString());
+            // log.Info("牌局解析:执行 while (true)" + DateTime.Now.ToString());
 
             try
             {
                 DateTime endTime = GetDataBaseTime();
                 // //德州扑克数据解析
                 TexasGameLog(endTime);
-               // 中发白数据解析
+                // 中发白数据解析
                 ScaleGameLog(endTime);
                 //十二生肖数据解析
                 ZodiacGameLog(endTime);
@@ -82,13 +81,17 @@ public static class TaskAction
                 //百人德州扑克数据解析
                 TexProGameLog(endTime);
                 //水浒传数据解析
-              //  ShuihuGameLog(endTime);
+                ShuihuGameLog(endTime);
                 //百家乐数据解析
-             //   BaiJiaLeGameLog(endTime);
+                BaiJiaLeGameLog(endTime);
+                //水果机数据解析
+                ShuiguojiGameLog(endTime);
+                //连环夺宝
+                SerialGameLog(endTime);
             }
             catch
             {
-              //  log.Info("牌局解析:异常" + DateTime.Now.ToString());
+                //  log.Info("牌局解析:异常" + DateTime.Now.ToString());
             }
 
 
@@ -106,20 +109,21 @@ public static class TaskAction
             ////暂停j分钟
             //Thread.Sleep(j * 60 * 1000);
 
-          //  log.Info("牌局解析:PaiJuAfter" + DateTime.Now.ToString());
+            //  log.Info("牌局解析:PaiJuAfter" + DateTime.Now.ToString());
             SystemPayBLL.PaiJuAfter();
-          //  log.Info("牌局解析:PaiJuAfter" + DateTime.Now.ToString());
+            //  log.Info("牌局解析:PaiJuAfter" + DateTime.Now.ToString());
 
-            Thread.Sleep(10 * 60 * 1000);
+            Thread.Sleep(5 * 60 * 1000);
 
         }
 
     }
 
 
-    public static void SetContentShuihu() {
+    public static void SetContentShuihu()
+    {
 
-      
+
 
 
 
@@ -149,7 +153,7 @@ public static class TaskAction
         DateTime bCheckTime = TransStringToDateTime(grv.StartDate);
         DateTime eCheckTime = endTime;
 
-        
+
         if (DateTime.Compare(bCheckTime, eCheckTime) >= 0)
         {
             //开始时间比结束时间大
@@ -157,23 +161,26 @@ public static class TaskAction
         }
 
         DateTime chEnd = bCheckTime.AddHours(2);
-        if (endTime >= chEnd) {
+        if (endTime >= chEnd)
+        {
             endTime = chEnd;
         }
 
         //开始时间StartDate   结束时间endTime
         //判断开始时间和结束时间是不是跨天了，如果跨天了，那么就吧结束时间修改成零点
 
-        if (bCheckTime.Year != eCheckTime.Year || bCheckTime.Month != eCheckTime.Month || bCheckTime.Day != eCheckTime.Day) {
+        if (bCheckTime.Year != eCheckTime.Year || bCheckTime.Month != eCheckTime.Month || bCheckTime.Day != eCheckTime.Day)
+        {
             //说明不是同一天,修改时间为开始时间的第二天的零点
-            endTime = TransStringToDate( bCheckTime.AddDays(1).ToString());
+            endTime = TransStringToDate(bCheckTime.AddDays(1).ToString());
             grv.ExpirationDate = endTime.ToString();
         }
-        
+
         //查询数据
         IEnumerable<ShuihuGameRecord> data = GameDataBLL.GetListForShuihu(grv);
 
-        if (data.Count() >= 1000) {
+        if (data.Count() >= 1000)
+        {
 
         }
 
@@ -186,7 +193,8 @@ public static class TaskAction
             //彩池解析
             ShuihuPot shuihuPot = new ShuihuPot();
             string potDetail = item.PotDetail;
-            if (!string.IsNullOrEmpty(potDetail)) {
+            if (!string.IsNullOrEmpty(potDetail))
+            {
                 string[] potDetails = potDetail.Split(',');
                 shuihuPot.BeforeGold = Convert.ToInt64(potDetails[0]);
                 shuihuPot.Board = item.Board;
@@ -196,15 +204,17 @@ public static class TaskAction
                 shuihuPot.UserID = item.UserID;
                 ShuihuPotList.Add(shuihuPot);
             }
-           
 
 
-        
+
+
             string maryDetail = item.MaryDetail;
-         
-            if (!string.IsNullOrEmpty(maryDetail)) {
+
+            if (!string.IsNullOrEmpty(maryDetail))
+            {
                 string[] maryTemp = maryDetail.Split('|');
-                for (int j = 1; j < maryTemp.Length; j++) {
+                for (int j = 1; j < maryTemp.Length; j++)
+                {
                     string maryLun = maryTemp[j];
                     string[] marys = maryLun.Split(',');
                     ShuihuMary shuihuMary = new ShuihuMary();
@@ -212,23 +222,23 @@ public static class TaskAction
                     shuihuMary.Board = item.Board;
                     shuihuMary.UserID = item.UserID;
                     shuihuMary.RoundID = item.RoundID;
-                    shuihuMary.InitGold = Convert.ToInt64( marys[2]);
+                    shuihuMary.InitGold = Convert.ToInt64(marys[2]);
                     shuihuMary.WinGold = Convert.ToInt64(marys[3]);
                     shuihuMary.PayGold = item.Bet;
                     ShuihuMaryList.Add(shuihuMary);
                 }
             }
-           
+
         }
 
-       
+
 
 
         string sql = "";
         if (ShuihuPotList.Count() > 0)
         {
             string potSql = @"
-insert into "+ database3 + ".Clearing_Shuihupot(CreateTime,Board,UserID,RoundID,BeforeGold,GetGold) ";
+insert into " + database3 + ".Clearing_Shuihupot(CreateTime,Board,UserID,RoundID,BeforeGold,GetGold) ";
             for (var i = 0; i < ShuihuPotList.Count(); i++)
             {
                 ShuihuPot itemPot = ShuihuPotList[i];
@@ -249,24 +259,24 @@ insert into "+ database3 + ".Clearing_Shuihupot(CreateTime,Board,UserID,RoundID,
         if (ShuihuMaryList.Count() > 0)
         {
             string marySql = @"
-insert into "+ database3 + ".Clearing_Shuihumary(CreateTime,Board,UserID,RoundID,InitGold,WinGold,PayGold) ";
+insert into " + database3 + ".Clearing_Shuihumary(CreateTime,Board,UserID,RoundID,InitGold,WinGold,PayGold) ";
             for (var i = 0; i < ShuihuMaryList.Count(); i++)
             {
                 ShuihuMary itemMary = ShuihuMaryList[i];
                 if (i == ShuihuMaryList.Count() - 1)
                 {
- marySql += "select '" + itemMary.CreateTime + "'," + itemMary.Board + "," + itemMary.UserID + "," +
-                        itemMary.RoundID + "," + itemMary.InitGold + "," + itemMary.WinGold + ","+itemMary.PayGold+  "; ";
+                    marySql += "select '" + itemMary.CreateTime + "'," + itemMary.Board + "," + itemMary.UserID + "," +
+                                           itemMary.RoundID + "," + itemMary.InitGold + "," + itemMary.WinGold + "," + itemMary.PayGold + "; ";
                 }
                 else
                 {
-marySql += "select '" + itemMary.CreateTime + "'," + itemMary.Board + "," + itemMary.UserID + "," +
-                                            itemMary.RoundID + "," + itemMary.InitGold + "," + itemMary.WinGold + "," + itemMary.PayGold + " union all ";
+                    marySql += "select '" + itemMary.CreateTime + "'," + itemMary.Board + "," + itemMary.UserID + "," +
+                                                                itemMary.RoundID + "," + itemMary.InitGold + "," + itemMary.WinGold + "," + itemMary.PayGold + " union all ";
                 }
             }
 
             sql += marySql;
-        } 
+        }
 
 
 
@@ -276,7 +286,7 @@ marySql += "select '" + itemMary.CreateTime + "'," + itemMary.Board + "," + item
 
             GameDataBLL.Add(sql);
 
-            SystemPayBLL.ShuihuAfter(grv.StartDate,grv.ExpirationDate);
+            SystemPayBLL.ShuihuAfter(grv.StartDate, grv.ExpirationDate);
             //ShuihuAfter
         }
 
@@ -291,21 +301,23 @@ marySql += "select '" + itemMary.CreateTime + "'," + itemMary.Board + "," + item
     }
 
 
-    private static DateTime GetDataBaseTime() {
+    private static DateTime GetDataBaseTime()
+    {
         DateTime dt = GameDataBLL.GetDataBaseTime();
         return dt.AddSeconds(-1);
     }
 
-    private static DateTime TransStringToDate(string time) {
-        string[] s = time.Replace("/","-").Split(' ');
+    private static DateTime TransStringToDate(string time)
+    {
+        string[] s = time.Replace("/", "-").Split(' ');
         string[] s1s = s[0].Split('-');
         string[] s2s = s[1].Split(':');
-        return new DateTime( Convert.ToInt32(s1s[0]), Convert.ToInt32(s1s[1]), Convert.ToInt32(s1s[2]),
-           0,0,0);
+        return new DateTime(Convert.ToInt32(s1s[0]), Convert.ToInt32(s1s[1]), Convert.ToInt32(s1s[2]),
+           0, 0, 0);
     }
     private static DateTime TransStringToDateTime(string time)
     {
-        string[] s = time.Replace("/","-").Split(' ');
+        string[] s = time.Replace("/", "-").Split(' ');
         string[] s1s = s[0].Split('-');
         string[] s2s = s[1].Split(':');
         return new DateTime(Convert.ToInt32(s1s[0]), Convert.ToInt32(s1s[1]), Convert.ToInt32(s1s[2]),
@@ -316,19 +328,22 @@ marySql += "select '" + itemMary.CreateTime + "'," + itemMary.Board + "," + item
     {
         //查询开始时间
 
-      //  ILog log = LogManager.GetLogger("TaskAction");
-      //  log.Info("开始德州扑克牌局分析#################");
+        //  ILog log = LogManager.GetLogger("TaskAction");
+        //  log.Info("开始德州扑克牌局分析#################");
+
+
+
 
         GameRecordView grv = new GameRecordView { Gametype = 1, Data = 0, UserID = 0, SearchExt = "Analyse_Texas", StartDate = DateTime.Now.ToString("yyyy-MM-dd 00:00:00"), ExpirationDate = endTime.ToString(), Page = 1, SeachType = (seachType)0 };
 
         grv.StartDate = GameDataBLL.GetBeginTimeForGame(grv);
 
-     //   log.Info("开始时间:" + grv.StartDate);
-      //  log.Info("结束时间:" + grv.ExpirationDate);
+        //   log.Info("开始时间:" + grv.StartDate);
+        //  log.Info("结束时间:" + grv.ExpirationDate);
 
         IEnumerable<TexasGameRecord> data = GameDataBLL.GetListForTexas(grv);
 
-     //   log.Info("数据查询结果集数量:" + data == null ? 0 : data.Count());
+        //   log.Info("数据查询结果集数量:" + data == null ? 0 : data.Count());
 
 
         List<CommonGameData> resdata = new List<CommonGameData>();
@@ -370,7 +385,7 @@ marySql += "select '" + itemMary.CreateTime + "'," + itemMary.Board + "," + item
 
                 com.Key = com.UserID + com.CountDate.ToString();
 
-                com.Key2 = com.UserID + com.CountDate.ToString()+com.DownType;
+                com.Key2 = com.UserID + com.CountDate.ToString() + com.DownType;
 
                 resdata.Add(com);
             }
@@ -400,7 +415,7 @@ marySql += "select '" + itemMary.CreateTime + "'," + itemMary.Board + "," + item
         {
 
 
-            sql = sql + @"replace into "+ database3 + @".Clearing_Game(
+            sql = sql + @"replace into " + database3 + @".Clearing_Game(
 UserID ,CountDate ,
  Texas_LCount, Texas_LAward_L ,Texas_LAward_W,
 Texas_MCount,Texas_MAward_L ,Texas_MAward_W,
@@ -410,7 +425,8 @@ Zodiac_Count,Zodiac_Banker,Zodiac_Award_L,Zodiac_Award_W,
 Horse_Count,Horse_Banker,Horse_Award_L,Horse_Award_W,
 Car_Count,Car_Banker,Car_Award_L,Car_Award_W,
 Hundred_Count,Hundred_Banker,Hundred_Award_L,Hundred_Award_W,
-BaiJiaLe_Count,BaiJiaLe_Banker,BaiJiaLe_Award_L,BaiJiaLe_Award_W
+BaiJiaLe_Count,BaiJiaLe_Banker,BaiJiaLe_Award_L,BaiJiaLe_Award_W,
+Serial_Count,Serial_Banker,Serial_Award_L,Serial_Award_W)
 )
 select " + comdata.UserID + @" ,'" + comdata.CountDate + @"' ,
 ifnull(b.Texas_LCount,0) + " + comdata.InitialCount + @" ,ifnull(b.Texas_LAward_L,0)+ " + comdata.InitialL + @",ifnull(b.Texas_LAward_W,0)+ " + comdata.InitialW + @" ,
@@ -421,9 +437,10 @@ ifnull(b.Zodiac_Count,0) ,ifnull(b.Zodiac_Banker,0),ifnull(b.Zodiac_Award_L,0)  
 ifnull(b.Horse_Count,0)   ,ifnull(b.Horse_Banker,0),ifnull(b.Horse_Award_L,0)  ,ifnull(b.Horse_Award_W,0) ,
 ifnull(b.Car_Count,0)  ,ifnull(b.Car_Banker,0),ifnull(b.Car_Award_L,0),ifnull(b.Car_Award_W,0) ,
 ifnull(b.Hundred_Count,0)  ,ifnull(b.Hundred_Banker,0),ifnull(b.Hundred_Award_L,0),ifnull(b.Hundred_Award_W,0),
-ifnull(b.BaiJiaLe_Count,0)  ,ifnull(b.BaiJiaLe_Banker,0),ifnull(b.BaiJiaLe_Award_L,0),ifnull(b.BaiJiaLe_Award_W,0)  
+ifnull(b.BaiJiaLe_Count,0)  ,ifnull(b.BaiJiaLe_Banker,0),ifnull(b.BaiJiaLe_Award_L,0),ifnull(b.BaiJiaLe_Award_W,0),  
+ifnull(b.Serial_Count,0)  ,ifnull(b.Serial_Banker,0),ifnull(b.Serial_Award_L,0),ifnull(b.Serial_Award_W,0)  
 from (select " + comdata.UserID + @" userid ) a left join (
-select * from "+ database3 + @".Clearing_Game where UserID = " + comdata.UserID + @" and CountDate = '" + comdata.CountDate + @"') b on 1 = 1;
+select * from " + database3 + @".Clearing_Game where UserID = " + comdata.UserID + @" and CountDate = '" + comdata.CountDate + @"') b on 1 = 1;
 ";
         }
 
@@ -450,17 +467,17 @@ select * from "+ database3 + @".Clearing_Game where UserID = " + comdata.UserID 
 
             sumData2.Add(co);
         }
-     
+
         foreach (CommonGameData comdata in sumData2)
         {
             sql = sql + @"
 
 replace into Clearing_GameDesc(UserID ,CountDate ,GameType ,BetType ,GameCount ,GameTime)
-select a.UserID ,date('"+comdata.CountDate+@"') ,15 ,'"+comdata.DownType+@"' ,"+comdata.InitialCount+@" + ifnull(b.GameCount ,0) ,"+comdata.TotalTime+@" + ifnull(b.GameTime ,0)
-from (select "+comdata.UserID+ @" UserID)a 
+select a.UserID ,date('" + comdata.CountDate + @"') ,15 ,'" + comdata.DownType + @"' ," + comdata.InitialCount + @" + ifnull(b.GameCount ,0) ," + comdata.TotalTime + @" + ifnull(b.GameTime ,0)
+from (select " + comdata.UserID + @" UserID)a 
   left join (
     select UserID ,CountDate ,GameType ,BetType ,GameCount ,GameTime from Clearing_GameDesc 
-    where UserID = " + comdata.UserID+@" and CountDate = date('"+comdata.CountDate+@"') and GameType = 15 and BetType = '"+comdata.DownType+@"'
+    where UserID = " + comdata.UserID + @" and CountDate = date('" + comdata.CountDate + @"') and GameType = 15 and BetType = '" + comdata.DownType + @"'
   )b on a.UserID = b.UserID ;
 
 ";
@@ -489,19 +506,19 @@ from (select "+comdata.UserID+ @" UserID)a
     {
         //查询开始时间
 
-     //   ILog log = LogManager.GetLogger("TaskAction");
-      //  log.Info("开始中发白牌局分析#################");
+        //   ILog log = LogManager.GetLogger("TaskAction");
+        //  log.Info("开始中发白牌局分析#################");
 
         GameRecordView grv = new GameRecordView { Gametype = 1, Data = 0, UserID = 0, SearchExt = "Analyse_Scale", StartDate = DateTime.Now.ToString("yyyy-MM-dd 00:00:00"), ExpirationDate = endTime.ToString(), Page = 1, SeachType = (seachType)0 };
 
         grv.StartDate = GameDataBLL.GetBeginTimeForGame(grv);
 
-     //   log.Info("开始时间:" + grv.StartDate);
-    //    log.Info("结束时间:" + grv.ExpirationDate);
+        //   log.Info("开始时间:" + grv.StartDate);
+        //    log.Info("结束时间:" + grv.ExpirationDate);
 
         IEnumerable<ScaleGameRecord> data = GameDataBLL.GetListForScale(grv);
 
-     //   log.Info("数据查询结果集数量:" + data == null ? 0 : data.Count());
+        //   log.Info("数据查询结果集数量:" + data == null ? 0 : data.Count());
 
 
         List<CommonGameData> resdata = new List<CommonGameData>();
@@ -510,7 +527,7 @@ from (select "+comdata.UserID+ @" UserID)a
 
         foreach (ScaleGameRecord m in data)
         {
-          //  0,989380,0,0,0,0)          10006,0,3000,4610,3010,10088
+            //  0,989380,0,0,0,0)          10006,0,3000,4610,3010,10088
             var userList = m.UserData.Split('_').ToList();
             userList.RemoveAt(userList.Count - 1);
             var j = userList.Count;
@@ -577,7 +594,7 @@ from (select "+comdata.UserID+ @" UserID)a
             //";
 
 
-            sql = sql + @"replace into "+ database3 + @".Clearing_Game(
+            sql = sql + @"replace into " + database3 + @".Clearing_Game(
 UserID ,CountDate ,
  Texas_LCount, Texas_LAward_L ,Texas_LAward_W,
 Texas_MCount,Texas_MAward_L ,Texas_MAward_W,
@@ -587,8 +604,8 @@ Zodiac_Count,Zodiac_Banker,Zodiac_Award_L,Zodiac_Award_W,
 Horse_Count,Horse_Banker,Horse_Award_L,Horse_Award_W,
 Car_Count,Car_Banker,Car_Award_L,Car_Award_W,
 Hundred_Count,Hundred_Banker,Hundred_Award_L,Hundred_Award_W,
-BaiJiaLe_Count,BaiJiaLe_Banker,BaiJiaLe_Award_L,BaiJiaLe_Award_W)
-
+BaiJiaLe_Count,BaiJiaLe_Banker,BaiJiaLe_Award_L,BaiJiaLe_Award_W),
+Serial_Count,Serial_Banker,Serial_Award_L,Serial_Award_W)
 select " + comdata.UserID + @" ,'" + comdata.CountDate + @"' ,
 ifnull(b.Texas_LCount,0),ifnull(b.Texas_LAward_L,0),ifnull(b.Texas_LAward_W,0),
 ifnull(b.Texas_MCount,0),ifnull(b.Texas_MAward_L,0),ifnull(b.Texas_MAward_W,0),
@@ -598,9 +615,10 @@ ifnull(b.Zodiac_Count,0) ,ifnull(b.Zodiac_Banker,0),ifnull(b.Zodiac_Award_L,0) ,
 ifnull(b.Horse_Count,0)  ,ifnull(b.Horse_Banker,0),ifnull(b.Horse_Award_L,0)  ,ifnull(b.Horse_Award_W,0)  ,
 ifnull(b.Car_Count,0)  ,ifnull(b.Car_Banker,0),ifnull(b.Car_Award_L,0) ,ifnull(b.Car_Award_W,0) ,
 ifnull(b.Hundred_Count,0)  ,ifnull(b.Hundred_Banker,0),ifnull(b.Hundred_Award_L,0),ifnull(b.Hundred_Award_W,0) ,
-ifnull(b.BaiJiaLe_Count,0)  ,ifnull(b.BaiJiaLe_Banker,0),ifnull(b.BaiJiaLe_Award_L,0),ifnull(b.BaiJiaLe_Award_W,0) 
+ifnull(b.BaiJiaLe_Count,0)  ,ifnull(b.BaiJiaLe_Banker,0),ifnull(b.BaiJiaLe_Award_L,0),ifnull(b.BaiJiaLe_Award_W,0),
+ifnull(b.Serial_Count,0)  ,ifnull(b.Serial_Banker,0),ifnull(b.Serial_Award_L,0),ifnull(b.Serial_Award_W,0)  
 from (select " + comdata.UserID + @" userid ) a left join (
-select * from "+ database3 + @".Clearing_Game where UserID = " + comdata.UserID + @" and CountDate = '" + comdata.CountDate + @"') b on 1 = 1;
+select * from " + database3 + @".Clearing_Game where UserID = " + comdata.UserID + @" and CountDate = '" + comdata.CountDate + @"') b on 1 = 1;
 ";
         }
 
@@ -640,7 +658,7 @@ from (select " + comdata.UserID + @" UserID)a
 
 
         if (sql != "")
-        { 
+        {
             bool res = GameDataBLL.Add(sql);
 
         }
@@ -650,6 +668,137 @@ from (select " + comdata.UserID + @" UserID)a
 
 
     }
+
+
+    private static void SerialGameLog(DateTime endTime)
+    {
+        GameRecordView grv = new GameRecordView { Gametype = 1, Data = 0, UserID = 0, SearchExt = "Analyse_BaiJiaLe", StartDate = DateTime.Now.ToString("yyyy-MM-dd 00:00:00"), ExpirationDate = endTime.ToString(), Page = 1, SeachType = (seachType)0 };
+        grv.StartDate = GameDataBLL.GetBeginTimeForGame(grv);
+        IEnumerable<SerialGameRecord> data = GameDataBLL.GetListForSerial(grv);
+        List<CommonGameData> resdata = new List<CommonGameData>();
+        foreach (SerialGameRecord m in data)
+        {
+            CommonGameData com = new CommonGameData();
+            com.CountDate = new DateTime(m.CreateTime.Year, m.CreateTime.Month, m.CreateTime.Day);
+            com.UserID = m.UserID;
+            decimal yinkui = 0;
+            if (!string.IsNullOrEmpty(m.Xiaochu))
+            {
+                List<string> listBS = m.Xiaochu.Split('|').ToList();   //宝石
+                listBS.RemoveAt(0);     //消除第一个  因为第一个是空的  
+                for (int i = 0; i < listBS.Count; i++)
+                {
+                    string[] arrBS = new string[3];
+                    decimal result = 0;
+                    decimal.TryParse(arrBS[2], out result);
+                    yinkui = yinkui + (result - m.CountLine * m.Goal);
+                    com.Initial = result;
+                }
+            }
+            if (!string.IsNullOrEmpty(m.Longzhu) && m.Longzhu.Trim() != "0,0,0")
+            {
+                string[] arrLongzhu = new string[3];
+                arrLongzhu = m.Longzhu.Split(',');
+                decimal result = 0;
+                decimal xiazhu = 0;
+                decimal.TryParse(arrLongzhu[2], out result);
+                decimal.TryParse(arrLongzhu[1], out xiazhu);
+                yinkui = yinkui + result - xiazhu;
+                com.Initial = result;
+            }
+            com.InitialCount = 1;
+            com.Key = com.UserID + com.CountDate.ToString();
+            com.Key2 = com.UserID + com.CountDate.ToString() + com.DownType;
+            //  com.TotalTime = m.BoardTime;  // 牌局时常
+            resdata.Add(com);
+        }
+        IEnumerable<IGrouping<string, CommonGameData>> query = resdata.GroupBy(m => m.Key);
+        List<CommonGameData> sumData = new List<CommonGameData>();
+        foreach (IGrouping<string, CommonGameData> info in query)
+        {
+            List<CommonGameData> sl = info.ToList<CommonGameData>();//分组后的集合
+            CommonGameData co = new CommonGameData();
+            co.UserID = sl[0].UserID;
+            co.CountDate = sl[0].CountDate;
+            co.InitialL = sl.Where(m => m.Initial < 0).Sum(m => m.Initial);
+            co.InitialW = sl.Where(m => m.Initial > 0).Sum(m => m.Initial);
+            co.InitialCount = sl.Sum(m => m.InitialCount);
+            sumData.Add(co);
+        }
+
+        string sql = "";
+        foreach (CommonGameData comdata in sumData)
+        {
+            sql = sql + @"replace into " + database3 + @".Clearing_Game(
+UserID ,CountDate ,
+ Texas_LCount, Texas_LAward_L ,Texas_LAward_W,
+Texas_MCount,Texas_MAward_L ,Texas_MAward_W,
+Texas_HCount,Texas_HAward_L,Texas_HAward_W,
+Scale_Count,Scale_Banker,Scale_Award_L,Scale_Award_W,
+Zodiac_Count,Zodiac_Banker,Zodiac_Award_L,Zodiac_Award_W,
+Horse_Count,Horse_Banker,Horse_Award_L,Horse_Award_W,
+Car_Count,Car_Banker,Car_Award_L,Car_Award_W,
+Hundred_Count,Hundred_Banker,Hundred_Award_L,Hundred_Award_W,
+BaiJiaLe_Count,BaiJiaLe_Banker,BaiJiaLe_Award_L,BaiJiaLe_Award_W),
+Serial_Count,Serial_Banker,Serial_Award_L,Serial_Award_W)
+select " + comdata.UserID + @" ,'" + comdata.CountDate + @"' ,
+ifnull(b.Texas_LCount,0),ifnull(b.Texas_LAward_L,0),ifnull(b.Texas_LAward_W,0),
+ifnull(b.Texas_MCount,0),ifnull(b.Texas_MAward_L,0),ifnull(b.Texas_MAward_W,0),
+ifnull(b.Texas_HCount,0),ifnull(b.Texas_HAward_L,0),ifnull(b.Texas_HAward_W,0),
+ifnull(b.Scale_Count,0) ,ifnull(b.Scale_Banker,0),ifnull(b.Scale_Award_L,0),ifnull(b.Scale_Award_W,0) ,
+ifnull(b.Zodiac_Count,0) ,ifnull(b.Zodiac_Banker,0),ifnull(b.Zodiac_Award_L,0) ,ifnull(b.Zodiac_Award_W,0) ,
+ifnull(b.Horse_Count,0)  ,ifnull(b.Horse_Banker,0),ifnull(b.Horse_Award_L,0)  ,ifnull(b.Horse_Award_W,0)  ,
+ifnull(b.Car_Count,0)  ,ifnull(b.Car_Banker,0),ifnull(b.Car_Award_L,0) ,ifnull(b.Car_Award_W,0) ,
+ifnull(b.Hundred_Count,0)  ,ifnull(b.Hundred_Banker,0),ifnull(b.Hundred_Award_L,0),ifnull(b.Hundred_Award_W,0) ,
+ifnull(b.BaiJiaLe_Count, 0)  ,ifnull(b.BaiJiaLe_Banker, 0),ifnull(b.BaiJiaLe_Award_L, 0),ifnull(b.BaiJiaLe_Award_W, 0),
+ifnull(b.Serial_Count,0) + " + comdata.InitialCount + @" ,ifnull(b.Serial_Banker,0),ifnull(b.Serial_Award_L,0) + " + comdata.InitialL + @" ,ifnull(b.Serial_Award_W,0) + " + comdata.InitialW + @" 
+from (select " + comdata.UserID + @" userid ) a left join (
+select * from " + database3 + @".Clearing_Game where UserID = " + comdata.UserID + @" and CountDate = '" + comdata.CountDate + @"') b on 1 = 1;
+";
+        }
+        IEnumerable<IGrouping<string, CommonGameData>> query2 = resdata.GroupBy(m => m.Key2);
+        List<CommonGameData> sumData2 = new List<CommonGameData>();
+        foreach (IGrouping<string, CommonGameData> info in query2)
+        {
+            List<CommonGameData> sl = info.ToList<CommonGameData>();//分组后的集合
+            CommonGameData co = new CommonGameData();
+            co.UserID = sl[0].UserID;
+            co.CountDate = sl[0].CountDate;
+            //co.InitialL = sl.Where(m => m.Initial < 0).Sum(m => m.Initial);
+            //co.InitialW = sl.Where(m => m.Initial > 0).Sum(m => m.Initial);
+            co.InitialCount = sl.Sum(m => m.InitialCount);
+            co.DownType = "21";
+            co.TotalTime = sl.Sum(m => m.TotalTime);
+            sumData2.Add(co);
+        }
+        foreach (CommonGameData comdata in sumData2)
+        {
+            sql = sql + @"
+replace into Clearing_GameDesc(UserID ,CountDate ,GameType ,BetType ,GameCount ,GameTime)
+select a.UserID ,date('" + comdata.CountDate + @"') ,13 ," + comdata.DownType + @" ," + comdata.InitialCount + @" + ifnull(b.GameCount ,0) ," + comdata.TotalTime + @" + ifnull(b.GameTime ,0)
+from (select " + comdata.UserID + @" UserID)a 
+  left join (
+    select UserID ,CountDate ,GameType ,BetType ,GameCount ,GameTime from Clearing_GameDesc 
+    where UserID = " + comdata.UserID + @" and CountDate = date('" + comdata.CountDate + @"') and GameType = 13 and BetType = '" + comdata.DownType + @"'
+  )b on a.UserID = b.UserID ;
+
+";
+        }
+
+
+
+
+        if (sql != "")
+        {
+            bool res = GameDataBLL.Add(sql);
+
+        }
+
+        GameDataBLL.UpdateBeginTimeForGame(grv);
+        //修改时间
+
+    }
+
 
     private static void BaiJiaLeGameLog(DateTime endTime)
     {
@@ -665,7 +814,7 @@ from (select " + comdata.UserID + @" UserID)a
         List<CommonGameData> resdata = new List<CommonGameData>();
         foreach (BaccaratGameRecord m in data)
         {
-
+            //0,88782000,0,(_37,0,0,(0:500,2:500,3:500,4:500,_10009,0,95000,(4:100000,_
             List<string> userList = m.UserData.Trim('_').Split('_').ToList();
             userList.Remove(userList[0]);
             var j = userList.Count;
@@ -683,7 +832,7 @@ from (select " + comdata.UserID + @" UserID)a
                 var wj = userData[0];
                 com.UserID = int.Parse(wj);
                 decimal d = 0;
-                decimal.TryParse(userData[2].Trim('('),out d);
+                decimal.TryParse(userData[2].Trim('('), out d);
                 com.Initial = d;
                 com.InitialCount = 1;
                 com.Key = com.UserID + com.CountDate.ToString();
@@ -710,7 +859,7 @@ from (select " + comdata.UserID + @" UserID)a
         string sql = "";
         foreach (CommonGameData comdata in sumData)
         {
-           
+
 
             sql = sql + @"replace into " + database3 + @".Clearing_Game(
 UserID ,CountDate ,
@@ -722,6 +871,7 @@ Zodiac_Count,Zodiac_Banker,Zodiac_Award_L,Zodiac_Award_W,
 Horse_Count,Horse_Banker,Horse_Award_L,Horse_Award_W,
 Car_Count,Car_Banker,Car_Award_L,Car_Award_W,
 Hundred_Count,Hundred_Banker,Hundred_Award_L,Hundred_Award_W,
+Serial_Count,Serial_Banker,Serial_Award_L,Serial_Award_W),
 BaiJiaLe_Count,BaiJiaLe_Banker,BaiJiaLe_Award_L,BaiJiaLe_Award_W)
 select " + comdata.UserID + @" ,'" + comdata.CountDate + @"' ,
 ifnull(b.Texas_LCount,0),ifnull(b.Texas_LAward_L,0),ifnull(b.Texas_LAward_W,0),
@@ -732,6 +882,7 @@ ifnull(b.Zodiac_Count,0) ,ifnull(b.Zodiac_Banker,0),ifnull(b.Zodiac_Award_L,0) ,
 ifnull(b.Horse_Count,0)  ,ifnull(b.Horse_Banker,0),ifnull(b.Horse_Award_L,0)  ,ifnull(b.Horse_Award_W,0)  ,
 ifnull(b.Car_Count,0)  ,ifnull(b.Car_Banker,0),ifnull(b.Car_Award_L,0) ,ifnull(b.Car_Award_W,0) ,
 ifnull(b.Hundred_Count,0)  ,ifnull(b.Hundred_Banker,0),ifnull(b.Hundred_Award_L,0),ifnull(b.Hundred_Award_W,0) ,
+ifnull(b.Serial_Count,0)  ,ifnull(b.Serial_Banker,0),ifnull(b.Serial_Award_L,0),ifnull(b.Serial_Award_W,0),
 ifnull(b.BaiJiaLe_Count,0) + " + comdata.InitialCount + @" ,ifnull(b.BaiJiaLe_Banker,0),ifnull(b.BaiJiaLe_Award_L,0) + " + comdata.InitialL + @" ,ifnull(b.BaiJiaLe_Award_W,0) + " + comdata.InitialW + @" 
 from (select " + comdata.UserID + @" userid ) a left join (
 select * from " + database3 + @".Clearing_Game where UserID = " + comdata.UserID + @" and CountDate = '" + comdata.CountDate + @"') b on 1 = 1;
@@ -790,19 +941,19 @@ from (select " + comdata.UserID + @" UserID)a
     {
         //查询开始时间
 
-     //   ILog log = LogManager.GetLogger("TaskAction");
-     //   log.Info("开始十二生肖牌局分析#################");
+        //   ILog log = LogManager.GetLogger("TaskAction");
+        //   log.Info("开始十二生肖牌局分析#################");
 
         GameRecordView grv = new GameRecordView { Gametype = 1, Data = 0, UserID = 0, SearchExt = "Analyse_Zodiac", StartDate = DateTime.Now.ToString("yyyy-MM-dd 00:00:00"), ExpirationDate = endTime.ToString(), Page = 1, SeachType = (seachType)0 };
 
         grv.StartDate = GameDataBLL.GetBeginTimeForGame(grv);
 
-     //   log.Info("开始时间:" + grv.StartDate);
-      //  log.Info("结束时间:" + grv.ExpirationDate);
+        //   log.Info("开始时间:" + grv.StartDate);
+        //  log.Info("结束时间:" + grv.ExpirationDate);
 
         IEnumerable<ZodiacGameRecord> data = GameDataBLL.GetListForZodiac(grv);
 
-      //  log.Info("数据查询结果集数量:" + data == null ? 0 : data.Count());
+        //  log.Info("数据查询结果集数量:" + data == null ? 0 : data.Count());
 
 
         List<CommonGameData> resdata = new List<CommonGameData>();
@@ -885,8 +1036,8 @@ from (select " + comdata.UserID + @" UserID)a
             //from (select " + comdata.UserID + @" userid ) a left join (
             //select * from record.Clearing_Game where UserID = " + comdata.UserID + @" and CountDate = '" + comdata.CountDate + @"') b on 1 = 1;
             //";
-                                 
-            sql = sql + @"replace into "+ database3 + @".Clearing_Game(
+
+            sql = sql + @"replace into " + database3 + @".Clearing_Game(
 UserID ,CountDate ,
  Texas_LCount, Texas_LAward_L ,Texas_LAward_W,
 Texas_MCount,Texas_MAward_L ,Texas_MAward_W,
@@ -896,7 +1047,8 @@ Zodiac_Count,Zodiac_Banker,Zodiac_Award_L,Zodiac_Award_W,
 Horse_Count,Horse_Banker,Horse_Award_L,Horse_Award_W,
 Car_Count,Car_Banker,Car_Award_L,Car_Award_W,
 Hundred_Count,Hundred_Banker,Hundred_Award_L,Hundred_Award_W,
-BaiJiaLe_Count,BaiJiaLe_Banker,BaiJiaLe_Award_L,BaiJiaLe_Award_W)
+BaiJiaLe_Count,BaiJiaLe_Banker,BaiJiaLe_Award_L,BaiJiaLe_Award_W),
+Serial_Count,Serial_Banker,Serial_Award_L,Serial_Award_W)
 select " + comdata.UserID + @" ,'" + comdata.CountDate + @"' ,
 ifnull(b.Texas_LCount,0),ifnull(b.Texas_LAward_L,0),ifnull(b.Texas_LAward_W,0),
 ifnull(b.Texas_MCount,0),ifnull(b.Texas_MAward_L,0),ifnull(b.Texas_MAward_W,0),
@@ -906,9 +1058,10 @@ ifnull(b.Zodiac_Count,0)+ " + comdata.InitialCount + @"  ,ifnull(b.Zodiac_Banker
 ifnull(b.Horse_Count,0)  ,ifnull(b.Horse_Banker,0),ifnull(b.Horse_Award_L,0)  ,ifnull(b.Horse_Award_W,0)  ,
 ifnull(b.Car_Count,0)  ,ifnull(b.Car_Banker,0),ifnull(b.Car_Award_L,0) ,ifnull(b.Car_Award_W,0) ,
 ifnull(b.Hundred_Count,0)  ,ifnull(b.Hundred_Banker,0),ifnull(b.Hundred_Award_L,0),ifnull(b.Hundred_Award_W,0) ,
-ifnull(b.BaiJiaLe_Count, 0)  ,ifnull(b.BaiJiaLe_Banker, 0),ifnull(b.BaiJiaLe_Award_L, 0),ifnull(b.BaiJiaLe_Award_W, 0)
+ifnull(b.BaiJiaLe_Count, 0)  ,ifnull(b.BaiJiaLe_Banker, 0),ifnull(b.BaiJiaLe_Award_L, 0),ifnull(b.BaiJiaLe_Award_W, 0),
+ifnull(b.Serial_Count,0)  ,ifnull(b.Serial_Banker,0),ifnull(b.Serial_Award_L,0),ifnull(b.Serial_Award_W,0)
 from (select " + comdata.UserID + @" userid ) a left join (
-select * from "+ database3 + @".Clearing_Game where UserID = " + comdata.UserID + @" and CountDate = '" + comdata.CountDate + @"') b on 1 = 1;
+select * from " + database3 + @".Clearing_Game where UserID = " + comdata.UserID + @" and CountDate = '" + comdata.CountDate + @"') b on 1 = 1;
 ";
 
         }
@@ -925,7 +1078,7 @@ select * from "+ database3 + @".Clearing_Game where UserID = " + comdata.UserID 
             CommonGameData co = new CommonGameData();
             co.UserID = sl[0].UserID;
             co.CountDate = sl[0].CountDate;
-      
+
             co.InitialCount = sl.Sum(m => m.InitialCount);
             co.DownType = "14";
             co.TotalTime = sl.Sum(m => m.TotalTime);
@@ -963,19 +1116,19 @@ from (select " + comdata.UserID + @" UserID)a
     {
         //查询开始时间
 
-     //   ILog log = LogManager.GetLogger("TaskAction");
-     //   log.Info("开始小马快跑牌局分析#################");
+        //   ILog log = LogManager.GetLogger("TaskAction");
+        //   log.Info("开始小马快跑牌局分析#################");
 
         GameRecordView grv = new GameRecordView { Gametype = 1, Data = 0, UserID = 0, SearchExt = "Analyse_Horse", StartDate = DateTime.Now.ToString("yyyy-MM-dd 00:00:00"), ExpirationDate = endTime.ToString(), Page = 1, SeachType = (seachType)0 };
 
         grv.StartDate = GameDataBLL.GetBeginTimeForGame(grv);
 
-       // log.Info("开始时间:" + grv.StartDate);
-      //  log.Info("结束时间:" + grv.ExpirationDate);
+        // log.Info("开始时间:" + grv.StartDate);
+        //  log.Info("结束时间:" + grv.ExpirationDate);
 
         IEnumerable<HorseGameRecord> data = GameDataBLL.GetListForHorse(grv);
 
-       // log.Info("数据查询结果集数量:" + data == null ? 0 : data.Count());
+        // log.Info("数据查询结果集数量:" + data == null ? 0 : data.Count());
 
 
         List<CommonGameData> resdata = new List<CommonGameData>();
@@ -1057,7 +1210,7 @@ from (select " + comdata.UserID + @" UserID)a
             //select * from record.Clearing_Game where UserID = " + comdata.UserID + @" and CountDate = '" + comdata.CountDate + @"') b on 1 = 1;
             //";
 
-            sql = sql + @"replace into "+ database3 + @".Clearing_Game(
+            sql = sql + @"replace into " + database3 + @".Clearing_Game(
 UserID ,CountDate ,
  Texas_LCount, Texas_LAward_L ,Texas_LAward_W,
 Texas_MCount,Texas_MAward_L ,Texas_MAward_W,
@@ -1067,7 +1220,8 @@ Zodiac_Count,Zodiac_Banker,Zodiac_Award_L,Zodiac_Award_W,
 Horse_Count,Horse_Banker,Horse_Award_L,Horse_Award_W,
 Car_Count,Car_Banker,Car_Award_L,Car_Award_W,
 Hundred_Count,Hundred_Banker,Hundred_Award_L,Hundred_Award_W,
-BaiJiaLe_Count,BaiJiaLe_Banker,BaiJiaLe_Award_L,BaiJiaLe_Award_W)
+BaiJiaLe_Count,BaiJiaLe_Banker,BaiJiaLe_Award_L,BaiJiaLe_Award_W),
+Serial_Count,Serial_Banker,Serial_Award_L,Serial_Award_W)
 select " + comdata.UserID + @" ,'" + comdata.CountDate + @"' ,
 ifnull(b.Texas_LCount,0),ifnull(b.Texas_LAward_L,0),ifnull(b.Texas_LAward_W,0),
 ifnull(b.Texas_MCount,0),ifnull(b.Texas_MAward_L,0),ifnull(b.Texas_MAward_W,0),
@@ -1077,9 +1231,10 @@ ifnull(b.Zodiac_Count,0) ,ifnull(b.Zodiac_Banker,0),ifnull(b.Zodiac_Award_L,0)  
 ifnull(b.Horse_Count,0) + " + comdata.InitialCount + @"  ,ifnull(b.Horse_Banker,0),ifnull(b.Horse_Award_L,0) + " + comdata.InitialL + @" ,ifnull(b.Horse_Award_W,0)+ " + comdata.InitialW + @"  ,
 ifnull(b.Car_Count,0)  ,ifnull(b.Car_Banker,0),ifnull(b.Car_Award_L,0) ,ifnull(b.Car_Award_W,0) ,
 ifnull(b.Hundred_Count,0)  ,ifnull(b.Hundred_Banker,0),ifnull(b.Hundred_Award_L,0),ifnull(b.Hundred_Award_W,0),
-ifnull(b.BaiJiaLe_Count, 0)  ,ifnull(b.BaiJiaLe_Banker, 0),ifnull(b.BaiJiaLe_Award_L, 0),ifnull(b.BaiJiaLe_Award_W, 0)
+ifnull(b.BaiJiaLe_Count, 0)  ,ifnull(b.BaiJiaLe_Banker, 0),ifnull(b.BaiJiaLe_Award_L, 0),ifnull(b.BaiJiaLe_Award_W, 0),
+ifnull(b.Serial_Count,0)  ,ifnull(b.Serial_Banker,0),ifnull(b.Serial_Award_L,0),ifnull(b.Serial_Award_W,0)
 from (select " + comdata.UserID + @" userid ) a left join (
-select * from "+ database3 + @".Clearing_Game where UserID = " + comdata.UserID + @" and CountDate = '" + comdata.CountDate + @"') b on 1 = 1;
+select * from " + database3 + @".Clearing_Game where UserID = " + comdata.UserID + @" and CountDate = '" + comdata.CountDate + @"') b on 1 = 1;
 ";
 
         }
@@ -1097,15 +1252,15 @@ select * from "+ database3 + @".Clearing_Game where UserID = " + comdata.UserID 
 
         //查询开始时间
 
-       // ILog log = LogManager.GetLogger("TaskAction");
-       // log.Info("开始奔驰宝马牌局分析#################");
+        // ILog log = LogManager.GetLogger("TaskAction");
+        // log.Info("开始奔驰宝马牌局分析#################");
 
         GameRecordView grv = new GameRecordView { Gametype = 1, Data = 0, UserID = 0, SearchExt = "Analyse_Car", StartDate = DateTime.Now.ToString("yyyy-MM-dd 00:00:00"), ExpirationDate = endTime.ToString(), Page = 1, SeachType = (seachType)0 };
 
         grv.StartDate = GameDataBLL.GetBeginTimeForGame(grv);
 
-       // log.Info("开始时间:" + grv.StartDate);
-       // log.Info("结束时间:" + grv.ExpirationDate);
+        // log.Info("开始时间:" + grv.StartDate);
+        // log.Info("结束时间:" + grv.ExpirationDate);
 
         IEnumerable<CarGameRecord> data = GameDataBLL.GetListForCar(grv);
 
@@ -1194,7 +1349,7 @@ select * from "+ database3 + @".Clearing_Game where UserID = " + comdata.UserID 
             //select * from record.Clearing_Game where UserID = " + comdata.UserID + @" and CountDate = '" + comdata.CountDate + @"') b on 1 = 1;
             //";
 
-            sql = sql + @"replace into "+ database3 + @".Clearing_Game(
+            sql = sql + @"replace into " + database3 + @".Clearing_Game(
 UserID ,CountDate ,
  Texas_LCount, Texas_LAward_L ,Texas_LAward_W,
 Texas_MCount,Texas_MAward_L ,Texas_MAward_W,
@@ -1204,7 +1359,8 @@ Zodiac_Count,Zodiac_Banker,Zodiac_Award_L,Zodiac_Award_W,
 Horse_Count,Horse_Banker,Horse_Award_L,Horse_Award_W,
 Car_Count,Car_Banker,Car_Award_L,Car_Award_W,
 Hundred_Count,Hundred_Banker,Hundred_Award_L,Hundred_Award_W,
-BaiJiaLe_Count,BaiJiaLe_Banker,BaiJiaLe_Award_L,BaiJiaLe_Award_W)
+BaiJiaLe_Count,BaiJiaLe_Banker,BaiJiaLe_Award_L,BaiJiaLe_Award_W),
+Serial_Count,Serial_Banker,Serial_Award_L,Serial_Award_W)
 select " + comdata.UserID + @" ,'" + comdata.CountDate + @"' ,
 ifnull(b.Texas_LCount,0),ifnull(b.Texas_LAward_L,0),ifnull(b.Texas_LAward_W,0),
 ifnull(b.Texas_MCount,0),ifnull(b.Texas_MAward_L,0),ifnull(b.Texas_MAward_W,0),
@@ -1214,9 +1370,10 @@ ifnull(b.Zodiac_Count,0) ,ifnull(b.Zodiac_Banker,0),ifnull(b.Zodiac_Award_L,0)  
 ifnull(b.Horse_Count,0)   ,ifnull(b.Horse_Banker,0),ifnull(b.Horse_Award_L,0)  ,ifnull(b.Horse_Award_W,0) ,
 ifnull(b.Car_Count,0) + " + comdata.InitialCount + @" ,ifnull(b.Car_Banker,0),ifnull(b.Car_Award_L,0)+ " + comdata.InitialL + @" ,ifnull(b.Car_Award_W,0) + " + comdata.InitialW + @", 
 ifnull(b.Hundred_Count,0)  ,ifnull(b.Hundred_Banker,0),ifnull(b.Hundred_Award_L,0),ifnull(b.Hundred_Award_W,0),
-ifnull(b.BaiJiaLe_Count, 0)  ,ifnull(b.BaiJiaLe_Banker, 0),ifnull(b.BaiJiaLe_Award_L, 0),ifnull(b.BaiJiaLe_Award_W, 0)
+ifnull(b.BaiJiaLe_Count, 0)  ,ifnull(b.BaiJiaLe_Banker, 0),ifnull(b.BaiJiaLe_Award_L, 0),ifnull(b.BaiJiaLe_Award_W, 0),
+ifnull(b.Serial_Count,0)  ,ifnull(b.Serial_Banker,0),ifnull(b.Serial_Award_L,0),ifnull(b.Serial_Award_W,0)
 from (select " + comdata.UserID + @" userid ) a left join (
-select * from "+ database3 + @".Clearing_Game where UserID = " + comdata.UserID + @" and CountDate = '" + comdata.CountDate + @"') b on 1 = 1;
+select * from " + database3 + @".Clearing_Game where UserID = " + comdata.UserID + @" and CountDate = '" + comdata.CountDate + @"') b on 1 = 1;
 ";
 
 
@@ -1234,12 +1391,12 @@ select * from "+ database3 + @".Clearing_Game where UserID = " + comdata.UserID 
             CommonGameData co = new CommonGameData();
             co.UserID = sl[0].UserID;
             co.CountDate = sl[0].CountDate;
-          
+
             co.InitialCount = sl.Sum(m => m.InitialCount);
             co.DownType = "17";
             co.TotalTime = sl.Sum(m => m.TotalTime);
             sumData2.Add(co);
-           
+
         }
         foreach (CommonGameData comdata in sumData2)
         {
@@ -1257,7 +1414,7 @@ from (select " + comdata.UserID + @" UserID)a
 
         if (sql != "")
         {
-          //  log.Info(sql);
+            //  log.Info(sql);
             GameDataBLL.Add(sql);
         }
         GameDataBLL.UpdateBeginTimeForGame(grv);
@@ -1271,19 +1428,19 @@ from (select " + comdata.UserID + @" UserID)a
 
         //查询开始时间
 
-    //    ILog log = LogManager.GetLogger("TaskAction");
-    //    log.Info("开始百人德州牌局分析#################");
+        //    ILog log = LogManager.GetLogger("TaskAction");
+        //    log.Info("开始百人德州牌局分析#################");
 
         GameRecordView grv = new GameRecordView { Gametype = 1, Data = 0, UserID = 0, SearchExt = "Analyse_TexPro", StartDate = DateTime.Now.ToString("yyyy-MM-dd 00:00:00"), ExpirationDate = endTime.ToString(), Page = 1, SeachType = (seachType)0 };
-     //   log.Info("结束时间:" + grv.ExpirationDate);
+        //   log.Info("结束时间:" + grv.ExpirationDate);
         grv.StartDate = GameDataBLL.GetBeginTimeForGame(grv);
 
-      //  log.Info("开始时间:" + grv.StartDate);
-      //  log.Info("结束时间:" + grv.ExpirationDate);
+        //  log.Info("开始时间:" + grv.StartDate);
+        //  log.Info("结束时间:" + grv.ExpirationDate);
 
         IEnumerable<ScaleGameRecord> data = GameDataBLL.GetListForTexPro(grv);
 
-      //  log.Info("数据查询结果集数量:" + data == null ? 0 : data.Count());
+        //  log.Info("数据查询结果集数量:" + data == null ? 0 : data.Count());
 
 
         List<CommonGameData> resdata = new List<CommonGameData>();
@@ -1313,10 +1470,10 @@ from (select " + comdata.UserID + @" UserID)a
                 var wj = userData[0];
                 com.UserID = int.Parse(wj);
 
-              
-                decimal  d = Convert.ToDecimal(userData[2].Trim(')'));
 
-             
+                decimal d = Convert.ToDecimal(userData[2].Trim(')'));
+
+
 
 
 
@@ -1352,7 +1509,7 @@ from (select " + comdata.UserID + @" UserID)a
             //";
 
 
-            sql = sql + @"replace into "+ database3 + @".Clearing_Game(
+            sql = sql + @"replace into " + database3 + @".Clearing_Game(
 UserID ,CountDate ,
  Texas_LCount, Texas_LAward_L ,Texas_LAward_W,
 Texas_MCount,Texas_MAward_L ,Texas_MAward_W,
@@ -1362,7 +1519,8 @@ Zodiac_Count,Zodiac_Banker,Zodiac_Award_L,Zodiac_Award_W,
 Horse_Count,Horse_Banker,Horse_Award_L,Horse_Award_W,
 Car_Count,Car_Banker,Car_Award_L,Car_Award_W,
 Hundred_Count,Hundred_Banker,Hundred_Award_L,Hundred_Award_W,
-BaiJiaLe_Count,BaiJiaLe_Banker,BaiJiaLe_Award_L,BaiJiaLe_Award_W)
+BaiJiaLe_Count,BaiJiaLe_Banker,BaiJiaLe_Award_L,BaiJiaLe_Award_W),
+Serial_Count,Serial_Banker,Serial_Award_L,Serial_Award_W)
 select " + comdata.UserID + @" ,'" + comdata.CountDate + @"' ,
 ifnull(b.Texas_LCount,0),ifnull(b.Texas_LAward_L,0),ifnull(b.Texas_LAward_W,0),
 ifnull(b.Texas_MCount,0),ifnull(b.Texas_MAward_L,0),ifnull(b.Texas_MAward_W,0),
@@ -1371,10 +1529,11 @@ ifnull(b.Scale_Count,0) ,ifnull(b.Scale_Banker,0),ifnull(b.Scale_Award_L,0) ,ifn
 ifnull(b.Zodiac_Count,0) ,ifnull(b.Zodiac_Banker,0),ifnull(b.Zodiac_Award_L,0) ,ifnull(b.Zodiac_Award_W,0) ,
 ifnull(b.Horse_Count,0)  ,ifnull(b.Horse_Banker,0),ifnull(b.Horse_Award_L,0)  ,ifnull(b.Horse_Award_W,0)  ,
 ifnull(b.Car_Count,0)  ,ifnull(b.Car_Banker,0),ifnull(b.Car_Award_L,0) ,ifnull(b.Car_Award_W,0) ,
-,ifnull(b.BaiJiaLe_Count, 0)  ,ifnull(b.BaiJiaLe_Banker, 0),ifnull(b.BaiJiaLe_Award_L, 0),ifnull(b.BaiJiaLe_Award_W, 0)
-ifnull(b.Hundred_Count,0) + " + comdata.InitialCount + @" ,ifnull(b.Hundred_Banker,0),ifnull(b.Hundred_Award_L,0)+ " + comdata.InitialL + @" ,ifnull(b.Hundred_Award_W,0) + " + comdata.InitialW+@" 
+ifnull(b.Hundred_Count,0) + " + comdata.InitialCount + @" ,ifnull(b.Hundred_Banker,0),ifnull(b.Hundred_Award_L,0)+ " + comdata.InitialL + @" ,ifnull(b.Hundred_Award_W,0) + " + comdata.InitialW + @" ,
+ifnull(b.BaiJiaLe_Count, 0)  ,ifnull(b.BaiJiaLe_Banker, 0),ifnull(b.BaiJiaLe_Award_L, 0),ifnull(b.BaiJiaLe_Award_W, 0),
+ifnull(b.Serial_Count,0)  ,ifnull(b.Serial_Banker,0),ifnull(b.Serial_Award_L,0),ifnull(b.Serial_Award_W,0)
 from (select " + comdata.UserID + @" userid ) a left join (
-select * from "+ database3 + @".Clearing_Game where UserID = " + comdata.UserID + @" and CountDate = '" + comdata.CountDate + @"') b on 1 = 1;
+select * from " + database3 + @".Clearing_Game where UserID = " + comdata.UserID + @" and CountDate = '" + comdata.CountDate + @"') b on 1 = 1;
 ";
         }
 
@@ -1387,7 +1546,7 @@ select * from "+ database3 + @".Clearing_Game where UserID = " + comdata.UserID 
             CommonGameData co = new CommonGameData();
             co.UserID = sl[0].UserID;
             co.CountDate = sl[0].CountDate;
-       
+
             co.InitialCount = sl.Sum(m => m.InitialCount);
             co.DownType = "18";
             co.TotalTime = sl.Sum(m => m.TotalTime);
@@ -1413,7 +1572,7 @@ from (select " + comdata.UserID + @" UserID)a
 
 
 
-       // log.Info("百人德州sql:" + sql);
+        // log.Info("百人德州sql:" + sql);
         if (sql != "")
         {
             bool res = GameDataBLL.Add(sql);
@@ -1425,8 +1584,335 @@ from (select " + comdata.UserID + @" UserID)a
 
     }
 
-    private static void ShuihuGameLog(DateTime endTime) {
+    private static void ShuihuGameLog(DateTime endTime)
+    {
+        //查询开始时间
 
+        //    ILog log = LogManager.GetLogger("TaskAction");
+        //    log.Info("开始水浒传牌局分析#################");
+
+        GameRecordView grv = new GameRecordView { Gametype = 1, Data = 0, UserID = 0, SearchExt = "Analyse_Shuihuzhuan", StartDate = DateTime.Now.ToString("yyyy-MM-dd 00:00:00"), ExpirationDate = endTime.ToString(), Page = 1, SeachType = (seachType)0 };
+
+        grv.StartDate = GameDataBLL.GetBeginTimeForGame(grv);
+
+
+
+        IEnumerable<ShuihuGameRecord> data = GameDataBLL.GetListForShuihu(grv);
+
+        //  log.Info("数据查询结果集数量:" + data == null ? 0 : data.Count());
+
+
+        List<CommonGameData> resdata = new List<CommonGameData>();
+
+
+
+        foreach (ShuihuGameRecord m in data)
+        {
+            CommonGameData com = new CommonGameData();
+            string time = m.CreateTime.Replace("/", "-");
+            string[] times = time.Split(new char[] { '-', ' ' });
+
+            com.CountDate = new DateTime(
+                Convert.ToInt32(times[0]),
+                Convert.ToInt32(times[1]),
+                Convert.ToInt32(times[2])
+            );
+            com.UserID = m.UserID;
+
+            if (m.Pay != 0)
+            {//赔付-押注
+                com.Initial = m.Pay - m.Bet;
+            }
+            else
+            {
+                string bibeis = m.TimesDetail;
+                if (string.IsNullOrEmpty(bibeis))//比倍是空值
+                {
+                    com.Initial = m.Pay - m.Bet;
+                }
+                else
+                {
+                    string[] timesDetails = m.TimesDetail.Trim('|').Split('|');
+                    long before = Convert.ToInt64(timesDetails[0].Split(',')[0]);
+                    long after = Convert.ToInt64(timesDetails[timesDetails.Length - 1].Split(',')[1]);
+                    com.Initial = after - before - m.Bet;
+                }
+            }
+
+
+            com.InitialCount = 1;
+            com.Key = com.UserID + com.CountDate.ToString();
+            com.Key2 = com.UserID + com.CountDate.ToString() + com.DownType;
+            com.TotalTime = 0;
+            resdata.Add(com);
+        }
+        IEnumerable<IGrouping<string, CommonGameData>> query = resdata.GroupBy(m => m.Key);
+        List<CommonGameData> sumData = new List<CommonGameData>();
+        foreach (IGrouping<string, CommonGameData> info in query)
+        {
+            List<CommonGameData> sl = info.ToList<CommonGameData>();//分组后的集合
+            CommonGameData co = new CommonGameData();
+            co.UserID = sl[0].UserID;
+            co.CountDate = sl[0].CountDate;
+            co.InitialL = sl.Where(m => m.Initial < 0).Sum(m => m.Initial);
+            co.InitialW = sl.Where(m => m.Initial > 0).Sum(m => m.Initial);
+            co.InitialCount = sl.Sum(m => m.InitialCount);
+
+            sumData.Add(co);
+        }
+        string sql = "";
+        foreach (CommonGameData comdata in sumData)
+        {
+            //             sql = sql+ @"
+            //replace into record.Clearing_Game(UserID ,CountDate ,Scale_Count ,Scale_Award_L ,Scale_Award_W )
+            //select " + comdata.UserID + " ,'" + comdata.CountDate + "' ,ifnull(b.Scale_Count,0) + " + comdata.InitialCount + " ,ifnull(b.Scale_Award_L,0) + " + comdata.InitialL + " ,ifnull(b.Scale_Award_W,0) + " + comdata.InitialW + @" 
+            //from (select " + comdata.UserID + @" userid ) a left join (
+            //select * from record.Clearing_Game where UserID = " + comdata.UserID + @" and CountDate = '" + comdata.CountDate + @"') b on 1 = 1;
+            //";
+
+
+            sql = sql + @"replace into " + database3 + @".Clearing_Game(
+UserID ,CountDate ,
+ Texas_LCount, Texas_LAward_L ,Texas_LAward_W,
+Texas_MCount,Texas_MAward_L ,Texas_MAward_W,
+Texas_HCount,Texas_HAward_L,Texas_HAward_W,
+Scale_Count,Scale_Banker,Scale_Award_L,Scale_Award_W,
+Zodiac_Count,Zodiac_Banker,Zodiac_Award_L,Zodiac_Award_W,
+Horse_Count,Horse_Banker,Horse_Award_L,Horse_Award_W,
+Car_Count,Car_Banker,Car_Award_L,Car_Award_W,
+Hundred_Count,Hundred_Banker,Hundred_Award_L,Hundred_Award_W,
+BaiJiaLe_Count,BaiJiaLe_Banker,BaiJiaLe_Award_L,BaiJiaLe_Award_W,
+Serial_Count,Serial_Banker,Serial_Award_L,Serial_Award_W),
+Shuihu_Count,Shuihu_Award_L,Shuihu_Award_W,
+Shuiguoji_Count,Shuiguoji_Award_L,Shuiguoji_Award_W
+)
+select " + comdata.UserID + @" ,'" + comdata.CountDate + @"' ,
+ifnull(b.Texas_LCount,0),ifnull(b.Texas_LAward_L,0),ifnull(b.Texas_LAward_W,0),
+ifnull(b.Texas_MCount,0),ifnull(b.Texas_MAward_L,0),ifnull(b.Texas_MAward_W,0),
+ifnull(b.Texas_HCount,0),ifnull(b.Texas_HAward_L,0),ifnull(b.Texas_HAward_W,0),
+ifnull(b.Scale_Count,0) ,ifnull(b.Scale_Banker,0),ifnull(b.Scale_Award_L,0) ,ifnull(b.Scale_Award_W,0) ,
+ifnull(b.Zodiac_Count,0) ,ifnull(b.Zodiac_Banker,0),ifnull(b.Zodiac_Award_L,0) ,ifnull(b.Zodiac_Award_W,0) ,
+ifnull(b.Horse_Count,0)  ,ifnull(b.Horse_Banker,0),ifnull(b.Horse_Award_L,0)  ,ifnull(b.Horse_Award_W,0)  ,
+ifnull(b.Car_Count,0)  ,ifnull(b.Car_Banker,0),ifnull(b.Car_Award_L,0) ,ifnull(b.Car_Award_W,0) ,
+ifnull(b.Hundred_Count, 0)  ,ifnull(b.Hundred_Banker, 0),ifnull(b.Hundred_Award_L, 0),ifnull(b.Hundred_Award_W, 0),
+ifnull(b.BaiJiaLe_Count, 0)  ,ifnull(b.BaiJiaLe_Banker, 0),ifnull(b.BaiJiaLe_Award_L, 0),ifnull(b.BaiJiaLe_Award_W, 0),
+ifnull(b.Serial_Count,0)  ,ifnull(b.Serial_Banker,0),ifnull(b.Serial_Award_L,0),ifnull(b.Serial_Award_W,0),
+ifnull(b.Shuihu_Count,0) + " + comdata.InitialCount + @" ,ifnull(b.Shuihu_Award_L,0)+ " + comdata.InitialL + @" ,ifnull(b.Shuihu_Award_W,0) + " + comdata.InitialW + @" ,
+ifnull(b.Shuiguoji_Count, 0) ,ifnull(b.Shuiguoji_Award_L, 0),ifnull(b.Shuiguoji_Award_W, 0)
+from (select " + comdata.UserID + @" userid ) a left join (
+select * from " + database3 + @".Clearing_Game where UserID = " + comdata.UserID + @" and CountDate = '" + comdata.CountDate + @"') b on 1 = 1;
+";
+        }
+
+
+        IEnumerable<IGrouping<string, CommonGameData>> query2 = resdata.GroupBy(m => m.Key2);
+        List<CommonGameData> sumData2 = new List<CommonGameData>();
+        foreach (IGrouping<string, CommonGameData> info in query2)
+        {
+            List<CommonGameData> sl = info.ToList<CommonGameData>();//分组后的集合
+            CommonGameData co = new CommonGameData();
+            co.UserID = sl[0].UserID;
+            co.CountDate = sl[0].CountDate;
+
+            co.InitialCount = sl.Sum(m => m.InitialCount);
+            co.DownType = "19";
+            co.TotalTime = sl.Sum(m => m.TotalTime);
+            sumData2.Add(co);
+        }
+        foreach (CommonGameData comdata in sumData2)
+        {
+            sql = sql + @"
+replace into Clearing_GameDesc(UserID ,CountDate ,GameType ,BetType ,GameCount ,GameTime)
+select a.UserID ,date('" + comdata.CountDate + @"') ,19 ," + comdata.DownType + @" ," + comdata.InitialCount + @" + ifnull(b.GameCount ,0) ," + comdata.TotalTime + @" + ifnull(b.GameTime ,0)
+from (select " + comdata.UserID + @" UserID)a 
+  left join (
+    select UserID ,CountDate ,GameType ,BetType ,GameCount ,GameTime from Clearing_GameDesc 
+    where UserID = " + comdata.UserID + @" and CountDate = date('" + comdata.CountDate + @"') and GameType = 19 and BetType = '" + comdata.DownType + @"'
+  )b on a.UserID = b.UserID ;
+
+";
+        }
+        // log.Info("百人德州sql:" + sql);
+        if (sql != "")
+        {
+            bool res = GameDataBLL.Add(sql);
+        }
+        GameDataBLL.UpdateBeginTimeForGame(grv);
+        //修改时间
+    }
+
+
+
+    private static void ShuiguojiGameLog(DateTime endTime)
+    {
+        //查询开始时间
+
+        ILog log = LogManager.GetLogger("TaskAction");
+        log.Info("开始水果机牌局分析#################");
+
+        GameRecordView grv = new GameRecordView { Gametype = 1, Data = 0, UserID = 0, SearchExt = "Analyse_Shuiguo", StartDate = DateTime.Now.ToString("yyyy-MM-dd 00:00:00"), ExpirationDate = endTime.ToString(), Page = 1, SeachType = (seachType)0 };
+
+        grv.StartDate = GameDataBLL.GetBeginTimeForGame(grv);
+        log.Info("开始水果机牌局分析grv.StartDate=" + grv.StartDate);
+        grv.SearchExt = "";
+
+        IEnumerable<FruitGameRecord> data = GameDataBLL.GetListByPageForShuiguo(grv);
+        grv.SearchExt = "Analyse_Shuiguo";
+        log.Info("开始水果机牌局分析data.Count()=" + data.Count());
+        //  log.Info("数据查询结果集数量:" + data == null ? 0 : data.Count());
+
+
+        List<CommonGameData> resdata = new List<CommonGameData>();
+
+
+
+        foreach (FruitGameRecord m in data)
+        {
+            CommonGameData com = new CommonGameData();
+            string time = m.CreateTime.Replace("/", "-");
+            string[] times = time.Split(new char[] { '-', ' ' });
+
+            com.CountDate = new DateTime(
+                Convert.ToInt32(times[0]),
+                Convert.ToInt32(times[1]),
+                Convert.ToInt32(times[2])
+            );
+            com.UserID = m.UserID;
+            com.Initial = m.WinGold;
+
+            decimal wingold = m.WinGold;
+            decimal betgold = m.BetGold;
+
+            string bibeis = m.SbInfo;
+            if (!string.IsNullOrEmpty(bibeis))
+            {
+                string[] sbinfos = bibeis.Trim('_').Split('_');
+                decimal inDecimal = m.BetGold;
+                decimal outDecimal = m.WinGold;
+                for (int z = 0; z < sbinfos.Length; z++)
+                {
+                    string[] tempSbs = sbinfos[z].Split(',');
+                    string yazhu = tempSbs[0];
+                    string yazhuquyu = tempSbs[1];
+                    int kaijiangjieguo = Convert.ToInt32(tempSbs[2]);
+                    inDecimal += Convert.ToInt64(yazhu);
+
+                    if (yazhuquyu == "1" && kaijiangjieguo <= 7)
+                    {
+                        outDecimal += Convert.ToInt64(yazhu) * 2;
+                    }
+                    else if (yazhuquyu == "2" && kaijiangjieguo > 7)
+                    {
+                        outDecimal += Convert.ToInt64(yazhu) * 2;
+                    }
+                    else
+                    {
+                        outDecimal += 0;
+                    }
+
+                }
+                com.Initial = outDecimal - inDecimal;
+            }
+            else
+            {//没有比倍
+                com.Initial = m.WinGold - m.BetGold;
+            }
+
+
+
+            com.InitialCount = 1;
+            com.Key = com.UserID + com.CountDate.ToString();
+            com.Key2 = com.UserID + com.CountDate.ToString() + com.DownType;
+            com.TotalTime = 0;
+            resdata.Add(com);
+        }
+        IEnumerable<IGrouping<string, CommonGameData>> query = resdata.GroupBy(m => m.Key);
+        List<CommonGameData> sumData = new List<CommonGameData>();
+        foreach (IGrouping<string, CommonGameData> info in query)
+        {
+            List<CommonGameData> sl = info.ToList<CommonGameData>();//分组后的集合
+            CommonGameData co = new CommonGameData();
+            co.UserID = sl[0].UserID;
+            co.CountDate = sl[0].CountDate;
+            co.InitialL = sl.Where(m => m.Initial < 0).Sum(m => m.Initial);
+            co.InitialW = sl.Where(m => m.Initial > 0).Sum(m => m.Initial);
+            co.InitialCount = sl.Sum(m => m.InitialCount);
+
+            sumData.Add(co);
+        }
+        string sql = "";
+        foreach (CommonGameData comdata in sumData)
+        {
+            sql = sql + @"replace into " + database3 + @".Clearing_Game(
+UserID ,CountDate ,
+ Texas_LCount, Texas_LAward_L ,Texas_LAward_W,
+Texas_MCount,Texas_MAward_L ,Texas_MAward_W,
+Texas_HCount,Texas_HAward_L,Texas_HAward_W,
+Scale_Count,Scale_Banker,Scale_Award_L,Scale_Award_W,
+Zodiac_Count,Zodiac_Banker,Zodiac_Award_L,Zodiac_Award_W,
+Horse_Count,Horse_Banker,Horse_Award_L,Horse_Award_W,
+Car_Count,Car_Banker,Car_Award_L,Car_Award_W,
+Hundred_Count,Hundred_Banker,Hundred_Award_L,Hundred_Award_W,
+BaiJiaLe_Count,BaiJiaLe_Banker,BaiJiaLe_Award_L,BaiJiaLe_Award_W,
+Serial_Count,Serial_Banker,Serial_Award_L,Serial_Award_W),
+Shuihu_Count,Shuihu_Award_L,Shuihu_Award_W,
+Shuiguoji_Count,Shuiguoji_Award_L,Shuiguoji_Award_W
+)
+select " + comdata.UserID + @" ,'" + comdata.CountDate + @"' ,
+ifnull(b.Texas_LCount,0),ifnull(b.Texas_LAward_L,0),ifnull(b.Texas_LAward_W,0),
+ifnull(b.Texas_MCount,0),ifnull(b.Texas_MAward_L,0),ifnull(b.Texas_MAward_W,0),
+ifnull(b.Texas_HCount,0),ifnull(b.Texas_HAward_L,0),ifnull(b.Texas_HAward_W,0),
+ifnull(b.Scale_Count,0) ,ifnull(b.Scale_Banker,0),ifnull(b.Scale_Award_L,0) ,ifnull(b.Scale_Award_W,0) ,
+ifnull(b.Zodiac_Count,0) ,ifnull(b.Zodiac_Banker,0),ifnull(b.Zodiac_Award_L,0) ,ifnull(b.Zodiac_Award_W,0) ,
+ifnull(b.Horse_Count,0)  ,ifnull(b.Horse_Banker,0),ifnull(b.Horse_Award_L,0)  ,ifnull(b.Horse_Award_W,0)  ,
+ifnull(b.Car_Count,0)  ,ifnull(b.Car_Banker,0),ifnull(b.Car_Award_L,0) ,ifnull(b.Car_Award_W,0) ,
+ifnull(b.Hundred_Count, 0)  ,ifnull(b.Hundred_Banker, 0),ifnull(b.Hundred_Award_L, 0),ifnull(b.Hundred_Award_W, 0),
+ifnull(b.BaiJiaLe_Count, 0)  ,ifnull(b.BaiJiaLe_Banker, 0),ifnull(b.BaiJiaLe_Award_L, 0),ifnull(b.BaiJiaLe_Award_W, 0),
+ifnull(b.Serial_Count,0)  ,ifnull(b.Serial_Banker,0),ifnull(b.Serial_Award_L,0),ifnull(b.Serial_Award_W,0),
+ifnull(b.Shuihu_Count, 0) ,ifnull(b.Shuihu_Award_L, 0),ifnull(b.Shuihu_Award_W, 0),
+ifnull(b.Shuiguoji_Count,0) + " + comdata.InitialCount + @" ,ifnull(b.Shuiguoji_Award_L,0)+ " + comdata.InitialL + @" ,ifnull(b.Shuiguoji_Award_W,0) + " + comdata.InitialW + @" 
+from (select " + comdata.UserID + @" userid ) a left join (
+select * from " + database3 + @".Clearing_Game where UserID = " + comdata.UserID + @" and CountDate = '" + comdata.CountDate + @"') b on 1 = 1;
+";
+        }
+
+
+        IEnumerable<IGrouping<string, CommonGameData>> query2 = resdata.GroupBy(m => m.Key2);
+        List<CommonGameData> sumData2 = new List<CommonGameData>();
+        foreach (IGrouping<string, CommonGameData> info in query2)
+        {
+            List<CommonGameData> sl = info.ToList<CommonGameData>();//分组后的集合
+            CommonGameData co = new CommonGameData();
+            co.UserID = sl[0].UserID;
+            co.CountDate = sl[0].CountDate;
+
+            co.InitialCount = sl.Sum(m => m.InitialCount);
+            co.DownType = "20";
+            co.TotalTime = sl.Sum(m => m.TotalTime);
+            sumData2.Add(co);
+        }
+        foreach (CommonGameData comdata in sumData2)
+        {
+            sql = sql + @"
+replace into Clearing_GameDesc(UserID ,CountDate ,GameType ,BetType ,GameCount ,GameTime)
+select a.UserID ,date('" + comdata.CountDate + @"') ,20 ," + comdata.DownType + @" ," + comdata.InitialCount + @" + ifnull(b.GameCount ,0) ," + comdata.TotalTime + @" + ifnull(b.GameTime ,0)
+from (select " + comdata.UserID + @" UserID)a 
+  left join (
+    select UserID ,CountDate ,GameType ,BetType ,GameCount ,GameTime from Clearing_GameDesc 
+    where UserID = " + comdata.UserID + @" and CountDate = date('" + comdata.CountDate + @"') and GameType = 20 and BetType = '" + comdata.DownType + @"'
+  )b on a.UserID = b.UserID ;
+
+";
+        }
+
+        if (sql != "")
+        {
+            log.Info("开始水果机牌局分析sql=" + sql);
+
+            bool res = GameDataBLL.Add(sql);
+        }
+        GameDataBLL.UpdateBeginTimeForGame(grv);
+        //修改时间
     }
 
 }

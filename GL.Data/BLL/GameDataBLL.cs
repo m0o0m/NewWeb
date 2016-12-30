@@ -79,6 +79,40 @@ namespace GL.Data.BLL
         }
 
 
+        public static PagedList<SerialGameRecord> GetListByRoundForSerial(GameRecordView model)
+        {
+            PagerQuery pq = new PagerQuery();
+            pq.CurrentPage = model.Page;
+            pq.PageSize = 10;
+
+
+
+            pq.RecordCount = DAL.PagedListDAL<SerialGameRecord>.GetRecordCount(
+                string.Format(@"
+select count(0) from bg_serialrecord where 1=1 {0} {1} {2} {3}  ",
+(string.IsNullOrEmpty(model.Data.ToString()) || model.Data.ToString() == "0") ? "" : " and Board='" + model.Data.ToString().Replace("'", "") + "'",
+model.SearchExt == "" ? "" : " and UserID= " + model.SearchExt,
+model.RoundID3 <= 0 ? "" : " and RoundID=" + model.RoundID3,
+" and CreateTime>='" + model.StartDate.Replace("'", "") + "' and CreateTime<'" + model.ExpirationDate.Replace("'", "") + "' "
+), sqlconnectionStringForRecord);
+
+            pq.Sql = string.Format(@"
+select * from bg_serialrecord where 1=1 {2} {3} {4} {5} 
+order by CreateTime desc
+limit {0}, {1}",
+pq.StartRowNumber,
+pq.PageSize,
+(string.IsNullOrEmpty(model.Data.ToString()) || model.Data.ToString() == "0") ? "" : " and Board='" + model.Data.ToString().Replace("'", "") + "'",
+model.SearchExt == "" ? "" : " and UserID= " + model.SearchExt,
+model.RoundID3 <= 0 ? "" : " and RoundID=" + model.RoundID3,
+" and CreateTime>='" + model.StartDate.Replace("'", "") + "' and CreateTime<'" + model.ExpirationDate.Replace("'", "") + "' "
+);
+
+
+
+            PagedList<SerialGameRecord> obj = new PagedList<SerialGameRecord>(DAL.PagedListDAL<SerialGameRecord>.GetListByPage(pq, sqlconnectionStringForRecord), pq.CurrentPage, pq.PageSize, pq.RecordCount);
+            return obj;
+        }
 
 
         //ShuihuChangguiDataSum
@@ -123,6 +157,66 @@ GROUP BY CreateTime
 ) as a,
 (
 select Countdate,SUM(LNum) as LNum from Clearing_ShuihuGame 
+where Countdate>='{2}' and Countdate<'{3}'
+GROUP BY Countdate
+)
+as b
+where a.CreateTime = b.Countdate
+ORDER BY a.CreateTime desc
+
+
+limit {0}, {1}
+",
+pq.StartRowNumber,
+pq.PageSize,
+model.StartDate.Replace("'", ""),
+model.ExpirationDate.Replace("'", "")
+);
+
+            PagedList<ShuihuChangguiDataSum> obj = new PagedList<ShuihuChangguiDataSum>(DAL.PagedListDAL<ShuihuChangguiDataSum>.GetListByPage(pq, sqlconnectionStringForRecord), pq.CurrentPage, pq.PageSize, pq.RecordCount);
+            return obj;
+        }
+
+        public static PagedList<ShuihuChangguiDataSum> GetListByPageForSerialChangguiDataSum(GameRecordView model)
+        {
+            PagerQuery pq = new PagerQuery();
+            pq.CurrentPage = model.Page;
+            pq.PageSize = 10;
+            pq.RecordCount = DAL.PagedListDAL<ShuihuDataSum>.GetRecordCount(
+                string.Format(@"
+select count(*) from (
+select * from clearing_serialchangguidatasum 
+where CreateTime>='{0}' and CreateTime<'{1}'
+GROUP BY CreateTime
+) as a,
+(
+select Countdate,SUM(LNum) as LNum from Clearing_SerialGame 
+where Countdate>='{0}' and Countdate<'{1}'
+GROUP BY Countdate
+)
+as b
+where a.CreateTime = b.Countdate
+
+",
+model.StartDate.Replace("'", ""),
+model.ExpirationDate.Replace("'", "")
+), sqlconnectionStringForRecord);
+
+
+            pq.Sql = string.Format(@"
+
+select 
+a.CreateTime,
+a.YestPlayCount as YeatPlayCount,
+a.YestNowPlayCount as YeatNowPlayCount,
+b.LNum  as AllPlay
+from (
+select * from clearing_serialchangguidatasum 
+where CreateTime>='{2}' and CreateTime<'{3}'
+GROUP BY CreateTime
+) as a,
+(
+select Countdate,SUM(LNum) as LNum from Clearing_SerialGame 
 where Countdate>='{2}' and Countdate<'{3}'
 GROUP BY Countdate
 )
@@ -1375,6 +1469,11 @@ model.RoundID2 <= 0 ? "" : " and PlazeID=" + model.RoundID2,
             return GameDataDAL.GetListForBaiJiaLe(vbd);
         }
 
+        public static IEnumerable<SerialGameRecord> GetListForSerial(GameRecordView vbd)
+        {
+            return GameDataDAL.GetListForSerial(vbd);
+        }
+
         public static IEnumerable<ScaleGameRecord> GetListForTexPro(GameRecordView vbd)
         {
             return GameDataDAL.GetListForTexPro(vbd);
@@ -1397,7 +1496,22 @@ model.RoundID2 <= 0 ? "" : " and PlazeID=" + model.RoundID2,
 
         public static string GetBeginTimeForGame(GameRecordView vbd)
         {
-            return GameDataDAL.GetBeginTimeForGame(vbd);
+            SUpdate supdate = GameDataDAL.GetBeginTimeForGame(vbd);
+            if (supdate == null)
+            {
+                //如果没有这个配置，那么就自动加入一条配置数据
+                int res = GameDataDAL.InsertBeginTimeForGame(vbd);
+                if (res <= 0)
+                {
+                    return "-1";
+                }
+                else
+                {
+                    SUpdate supdate2 = GameDataDAL.GetBeginTimeForGame(vbd);
+                    return supdate2.id_date.ToString();
+                }
+            }
+            return supdate.id_date.ToString();
         }
 
 

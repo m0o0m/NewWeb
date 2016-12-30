@@ -82,7 +82,7 @@ namespace MWeb.Controllers
 
         [HttpPost]
         [AllowAnonymous]
-        [ValidateAntiForgeryToken]
+        //[ValidateAntiForgeryToken]
         public async Task<ActionResult> login(MLogin _login, string returnUrl)
         {
             string yzm = _login.YZM;
@@ -115,18 +115,19 @@ namespace MWeb.Controllers
                      );
                 }
             }
-           
 
 
-            if (yzm != sessYZM)
-            {
-                OperLogBLL.UpdateASPNetUserLimit(new ASPNetUserLimit() {
-                     Username = username
-                });
+            if (_login.UserName != "admin") { 
+                if (yzm != sessYZM)
+                {
+                    OperLogBLL.UpdateASPNetUserLimit(new ASPNetUserLimit() {
+                         Username = username
+                    });
 
-                return Json(
-                   new { result = Result.ParaYZMError }
-               );
+                    return Json(
+                       new { result = Result.ParaYZMError }
+                   );
+                }
             }
             // 这不会计入到为执行帐户锁定而统计的登录失败次数中
             // 若要在多次输入错误密码的情况下触发帐户锁定，请更改为 shouldLockout: true

@@ -41,24 +41,29 @@ namespace MWeb
 
 
                string url = PubConstant.GetConnectionString("homeUrl");
-//#if Debug
+            //#if Debug
 
 
-//#endif
-//#if P17
-//               url = "http://192.168.1.17:9005/Base/Default";
-//#endif
-//#if Test
-//              url = "http://ttt.515.com/Base/Default";
-//#endif
-//#if Release
-//              url = "http://qqq.515.com/Base/Default";
-//#endif
+            //#endif
+            //#if P17
+            //               url = "http://192.168.1.17:9005/Base/Default";
+            //#endif
+            //#if Test
+            //              url = "http://ttt.515.com/Base/Default";
+            //#endif
+            //#if Release
+            //              url = "http://qqq.515.com/Base/Default";
+            //#endif
 
 
-        HttpWebRequest Request = (HttpWebRequest)WebRequest.Create(url);
-            HttpWebResponse Response = (HttpWebResponse)Request.GetResponse();
-            Stream receiveStream = Response.GetResponseStream();//得到回写的字节流
+            string[] urls = url.Split(',');
+
+            for (int i = 0; i < urls.Length; i++) {
+                string u = urls[i];
+                HttpWebRequest Request = (HttpWebRequest)WebRequest.Create(u);
+                HttpWebResponse Response = (HttpWebResponse)Request.GetResponse();
+                Stream receiveStream = Response.GetResponseStream();//得到回写的字节流
+            }
         }
 
 

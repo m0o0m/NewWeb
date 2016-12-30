@@ -74,7 +74,7 @@
             url: "/Manage/FishDaybook",
             type: "get",
             dataType: "html",
-            data: { "fishID": fishID, "commandID": commandID, "StartDate": _StartDate, "ExpirationDate": _ExpirationDate, "SearchExt": _SearchExt },
+            data: { "fishID": fishID, "commandID": commandID, "StartDate": _StartDate, "ExpirationDate": _ExpirationDate, "SearchExt": _SearchExt,ajax:"ajax" },
             success: function (data) {
                 $(".detail").remove();
                 $("#content").append(data);

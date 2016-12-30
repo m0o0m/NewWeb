@@ -6,19 +6,37 @@
     Layout = null;
 }
 
+
+<script src="~/Scripts/jquery-2.1.4.min.js"></script>
 <script type="text/javascript">
-    function detail(id, obj) {
+    $(function () {
+        $(".gameSerial-31").attr('src', "/img/Serial_img/0红宝石.png");
+        $(".gameSerial-32").attr('src', "/img/Serial_img/1绿宝石.png");
+        $(".gameSerial-33").attr('src', "/img/Serial_img/2黄宝石.png");
+        $(".gameSerial-34").attr('src', "/img/Serial_img/3蓝宝石.png");
+        $(".gameSerial-35").attr('src', "/img/Serial_img/4钻石.png");
+        $(".gameSerial-11").attr('src', "/img/Serial_img/5白玉.png");
+        $(".gameSerial-12").attr('src', "/img/Serial_img/6碧玉.png");
+        $(".gameSerial-13").attr('src', "/img/Serial_img/7墨玉.png");
+        $(".gameSerial-14").attr('src', "/img/Serial_img/8玛瑙.png");
+        $(".gameSerial-15").attr('src', "/img/Serial_img/9琥珀.png");
+        $(".gameSerial-21").attr('src', "/img/Serial_img/10祖马红.png");
+        $(".gameSerial-22").attr('src', "/img/Serial_img/11猫眼石.png");
+        $(".gameSerial-23").attr('src', "/img/Serial_img/12紫宝石.png");
+        $(".gameSerial-24").attr('src', "/img/Serial_img/13翡翠.png");
+        $(".gameSerial-25").attr('src', "/img/Serial_img/14珍珠.png");
+        $(".gameSerial-16").attr('src', "/img/Serial_img/15砖头.png");
+        $(".gameSerial-26").attr('src', "/img/Serial_img/15砖头.png");
+        $(".gameSerial-36").attr('src', "/img/Serial_img/15砖头.png");
+    })
 
 
-        var jq = eval('$("#' + id + '")');
-        var jqtr = eval('$("#' + obj + '")');
+    function detail(id) {
+        var jq = eval('$(".' + id + '")');
         if (jq.css("display") == "none") {
             jq.css("display", "");
-            jqtr.css("background-color", "gray");
         } else {
             jq.css("display", "none");
-
-            jqtr.css("background-color", "");
         }
     }
 </script>
@@ -51,9 +69,7 @@
                         <div class="table-responsive">
                             <table class="table table-bordered">
                                 <thead>
-
                                     <tr>
-
                                         <th>时间</th>
                                         <th>牌局号</th>
                                         <th>场次</th>
@@ -78,89 +94,134 @@
                                     }
                                     @foreach (SerialGameRecord m in Model)
                                     {
+                                        Role u = RoleBLL.GetModelByID(new Role { ID = Convert.ToInt64(m.UserID) });
+                                        string Name = "";
+                                        if (u != null)
+                                        {
+                                            Name = u.NickName;
+                                        }
                                         @*<tr id="@("tr"+m.RoundID)">*@
                                         <tr>
                                             <td>@m.CreateTime</td>
-                                            <td>@m.RoundID</td>
-                                            <td>@(((FruitPlatze)m.RoomID).ToString())</td>
-                                            <td>@m.RoomID</td>
-
-                                            <td>@m.UserID</td>
-                                            <td>@m.BeforeGold</td>
-                                            <td>@m.AfterGold</td>
-
+                                            <td>@m.Board</td>                   @*牌局号*@
+                                            <td>@(((SerialRoundID)m.RoundID).ToString())</td>              @*场次*@
+                                            <td>@m.RoomID</td>                 @*房间ID*@
+                                            <td>@Name</td>                   @*玩家昵称*@
+                                            <td>@m.UserID</td>                      @*玩家ID*@
+                                            <td>@m.BeforeGold</td>                    @*变化前金币*@
+                                            <td>@m.AfterGold</td>                   @*结束后金币*@
+                                            <td>@m.BeforeDiamond</td>               @*变化前五币*@
+                                            <td>@m.AfterDiamond</td>               @*结束后五币*@
                                             <td>
-
                                                 <section class="col col-1">
                                                     <label class="label">&nbsp;</label>
-                                                    <input type="button" onclick="detail(@m.RoundID,'@("tr"+m.RoundID)' )" class="btn btn-success btn-sm" value="详细" />
+                                                    <input type="button" onclick="detail('@m.Id' )" class="btn btn-success btn-sm" value="详细" />
                                                 </section>
                                             </td>
-
                                         </tr>
-                                        if (!string.IsNullOrEmpty(m.Longzhu))
+                                        if (!string.IsNullOrEmpty(m.Xiaochu))
                                         {
-                                            <tr style="display:none" id="@m.RoundID">
-                                                <td colspan="14" style="padding-left:100px;padding-right:100px">
-                                                    <label style="color:black;background-color:white"> 爆灯</label>
+                                            <tr style="display:none" class="@m.Id">
+                                                <td colspan="11" style="padding-left:100px;padding-right:100px">
+                                                    <label style="color:black;background-color:white"> 消除宝石</label>
                                                     <table border="1" class="table table-bordered ">
                                                         <tr>
-                                                            <td rowspan="2">时间</td>
-                                                            <td rowspan="2">变化前金币</td>
-                                                            <td colspan="8">结束后金币</td>
-                                                            <td rowspan="2">变化前五币</td>
-                                                            <td rowspan="2">结束后五币</td>
-                                                            <td rowspan="2">第几关</td>
-                                                            <td rowspan="2">有钻头</td>
-                                                            <td rowspan="2">有钻头</td>
-                                                            <td rowspan="2">线条</td>
-                                                            <td rowspan="2">分数</td>
-                                                            <td rowspan="2">宝石</td>
-                                                            <td rowspan="2">得分</td>
+                                                            <td>时间</td>
+                                                            <td>变化前金币</td>
+                                                            <td>结束后金币</td>
+                                                            <td>变化前五币</td>
+                                                            <td>结束后五币</td>
+                                                            <td>第几关</td>
+                                                            <td>有钻头</td>
+                                                            <td>线条</td>
+                                                            <td>分数</td>
+                                                            <td>宝石</td>
+                                                            <td>得分</td>
                                                         </tr>
-                                                        <tr>
 
-
-                                                            </tr>
+                                                        @{
+                                                            List<string> list = m.Xiaochu.Split('|').ToList();
+                                                            list.RemoveAt(0);     //消除第一个  因为第一个是空的
+                                                                                  //计算得分
+                                                            int Score = 0;
+                                                            for(int i=0;i<list.Count;i++)
+                                                            {
+                                                                string[] arr = new string[3];
+                                                                arr = list[i].Split(',');
+                                                                Score = int.Parse(arr[2]) + Score;
+                                                            }
+                                                            for (int i = 0; i < list.Count; i++)
+                                                            {
+                                                                string[] arr = new string[3];
+                                                                arr = list[i].Split(',');
+                                                                if (i == 0)
+                                                                {
+                                                                    <tr>
+                                                                        <td rowspan="@list.Count">@m.CreateTime</td>
+                                                                        <td rowspan="@list.Count">@m.BeforeGold</td>
+                                                                        <td rowspan="@list.Count">@m.AfterGold</td>
+                                                                        <td rowspan="@list.Count">@m.BeforeDiamond</td>
+                                                                        <td rowspan="@list.Count">@m.AfterDiamond</td>
+                                                                        <td rowspan="@list.Count">@m.Tollgate</td>
+                                                                        <td rowspan="@list.Count">@m.ZuantouCount</td>
+                                                                        <td rowspan="@list.Count">@m.CountLine</td>
+                                                                        <td rowspan="@list.Count">@m.Goal</td>    @*分数*@
+                                                                        <td><img class="game gameSerial-@arr[0]" /> X @arr[1]</td>                                            @*宝石*@
+                                                                        <td rowspan="@list.Count">@Score</td>                                            @*得分*@
+                                                                    </tr>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <tr>
+                                                                        <td><img class="game gameSerial-@arr[0]" /> X @arr[1]</td>
+                                                                    </tr>
+                                                                }
+                                                            }
+                                                        }
                                                     </table>
-                                                    }
-                                                    @if (!string.IsNullOrEmpty(m.Longzhu))
-                                                    {
-                                                        <label style="color:black;background-color:white"> 比倍</label>
-                                                        <table border="1" class="table table-bordered ">
-                                                            <tr>
-                                                                <td>时间</td>
-                                                                <td>变化前金币</td>
-                                                                <td>结束后金币</td>
-                                                                <td>变化前五币</td>
-                                                                <td>结束后五币</td>
-                                                                <td>游戏中分数</td>
-                                                                <td>聚宝盆</td>
-                                                            </tr>
-
-
-
-
-                                                        </table>
-                                                    }
-
-
-
-
-                                                </td>
-
                                             </tr>
+                                                            }
+                                                            if (!string.IsNullOrEmpty(m.Longzhu) && m.Longzhu.Trim() != "0,0,0")
+                                                            {
+                                                                <tr style="display:none" class="@m.Id">
+                                                                    <td colspan="11" style="padding-left:100px;padding-right:100px">
+                                                                        <label style="color:black;background-color:white"> 龙珠探宝</label>
+                                                                        <table border="1" class="table table-bordered ">
+                                                                            @{
+                                                                                string[] arrLongzhu = new string[3];
+                                                                                arrLongzhu = m.Longzhu.Split(',');
+                                                                            }
+                                                                            <tr>
+                                                                                <td>时间</td>
+                                                                                <td>变化前金币</td>
+                                                                                <td>结束后金币</td>
+                                                                                <td>变化前五币</td>
+                                                                                <td>结束后五币</td>
+                                                                                <td>探宝下注</td>
+                                                                                <td>聚宝盆(@arrLongzhu[0])</td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td>@m.CreateTime</td>
+                                                                                <td>@m.BeforeGold</td>
+                                                                                <td>@m.AfterGold</td>
+                                                                                <td>@m.BeforeDiamond</td>
+                                                                                <td>@m.AfterDiamond</td>
+                                                                                <td>@arrLongzhu[1]</td>
+                                                                                <td>@arrLongzhu[2]</td>  @*聚宝盒0*@
+                                                                            </tr>
+                                                                        </table>
+                                                                    </td>
+                                                                </tr>
+                                                                                    }
+                                                                                }
+                                </tbody>
+                            </table>
+                        </div>
 
 
-                                        }
-                            </tbody>
-                        </table>
-                    </div>
+                        <div class="widget-content">
 
-
-                            <div class="widget-content">
-
-                                @Ajax.Pager(
+                            @Ajax.Pager(
     Model,
     new PagerOptions()
     {
@@ -202,37 +263,15 @@
         OnFailure = "errFunc",
         OnSuccess = "successPageFun"
     })
-                            </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                         </div>
-                    <!-- end widget content -->
+
                     </div>
-                <!-- end widget div -->
+                    <!-- end widget content -->
                 </div>
+                <!-- end widget div -->
+            </div>
             <!-- end widget -->
 
-            </article>
-        </div>
-    </section>
-
-
-
-
-
-
+        </article>
+    </div>
+</section>

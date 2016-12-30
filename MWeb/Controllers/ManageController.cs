@@ -104,7 +104,7 @@ namespace MWeb.Controllers
             int _seachtype = queryvalues.ContainsKey("seachtype") ? Convert.ToInt32(queryvalues["seachtype"]) : 0;
             int _lv = queryvalues.ContainsKey("lv") ? Convert.ToInt32(queryvalues["lv"]) : 0;
             BaseDataView bdv = new BaseDataView();
-            ViewData["AllUser"] = BaseDataBLL.GetAllUser(bdv); ;
+            ViewData["AllUser"] = BaseDataBLL.GetAllUser(bdv); 
             if (_Value.ToString() == "")
             {
                 if (page == 1)
@@ -1571,7 +1571,7 @@ namespace MWeb.Controllers
                 //{
                 //    return Json(new { result = Result.ValueIsNotNumber });
                 //}
-                if (!Utils.IsNumeric(UEItemValue))
+                if (!Utils.IsDouble(UEItemValue))
                 {
                     return Json(new { result = Result.ValueIsNotNumber });
                 }
@@ -1889,11 +1889,14 @@ namespace MWeb.Controllers
                 }
                 else
                 {
+                    grv.ajax = "ajax";
                     return PartialView("FishDaybook_PageList", FishInfoBLL.GetListByFish(grv));
+                  
                 }
             }
             if (ajax == "ajax")
             {
+               
                 grv.DataList = FishInfoBLL.GetListByFish(grv);
                 return View(grv);
             }

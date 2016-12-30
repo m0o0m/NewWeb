@@ -193,6 +193,21 @@ limit 100
             }
         }
 
+        internal static IEnumerable<SerialGameRecord> GetListForSerial(GameRecordView vbd)
+        {
+
+            using (var cn = new MySqlConnection(sqlconnectionString))
+            {
+                cn.Open();
+                StringBuilder str = new StringBuilder();
+
+                str.Append("select * from bg_serialrecord where CreateTime between '" + vbd.StartDate + "' and '" + vbd.ExpirationDate + "' and CreateTime!='" + vbd.ExpirationDate + "' order by CreateTime desc ");
+
+                IEnumerable<SerialGameRecord> i = cn.Query<SerialGameRecord>(str.ToString());
+                cn.Close();
+                return i;
+            }
+        }
 
         //
         internal static IEnumerable<ScaleGameRecord> GetListForTexPro(GameRecordView vbd)
@@ -277,7 +292,7 @@ limit 100
         }
 
 
-        internal static string GetBeginTimeForGame(GameRecordView vbd)
+        internal static SUpdate GetBeginTimeForGame(GameRecordView vbd)
         {
             using (var cn = new MySqlConnection(sqlconnectionString))
             {
@@ -289,14 +304,27 @@ limit 100
                 IEnumerable<SUpdate> i = cn.Query<SUpdate>(str.ToString());
                 cn.Close();
                 SUpdate mode = i.FirstOrDefault();
-                if (mode == null) {
-                    return vbd.ExpirationDate;
-                }
-                return mode.id_date.ToString();
+                //if (mode == null) {
+                //    return vbd.ExpirationDate;
+                //}
+                //return mode.id_date.ToString();
+                return mode;
             }
         }
 
-     
+        internal static int InsertBeginTimeForGame(GameRecordView vbd)
+        {
+            using (var cn = new MySqlConnection(sqlconnectionString))
+            {
+                cn.Open();
+                int i = cn.Execute(@"
+insert into s_update(CountDate,UpdateTable,id_date,Description)
+values(CURDATE(),'"+vbd.SearchExt+@"',now(),'')
+");
+                cn.Close();
+                return i;
+            }
+        }
 
         internal static int UpdateBeginTimeForGame(GameRecordView vbd)
         {

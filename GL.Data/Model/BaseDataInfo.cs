@@ -37,7 +37,15 @@ namespace GL.Data.Model
         public long ProfitDel6 { get; set; }
         public long ProfitAdd7 { get; set; }
         public long ProfitDel7 { get; set; }
+        //水浒传
+        public long ProfitAdd8 { get; set; }
+        public long ProfitDel8 { get; set; }
+        //水果机
+        public long ProfitAdd9 { get; set; }
+        public long ProfitDel9 { get; set; }
 
+        public long ProfitAdd10 { get; set; }
+        public long ProfitDel10 { get; set; }
 
         public long FishType0 { get; set; }
         public long FishType1 { get; set; }
@@ -52,6 +60,13 @@ namespace GL.Data.Model
         public long ProfitHundred { get; set; }
 
         public long ProfitBaiJiaLe { get; set; }
+
+        public long ProfitShuihuZhuan { get; set; }
+
+        public long ProfitShuiguoji { get; set; }
+
+        public long ProfitSerial { get; set; }
+
     }
 
 

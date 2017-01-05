@@ -25,6 +25,10 @@ namespace GL.Data.Model
         public int Group { get; set; }
 
         public string LiId { get; set; }
+
+        public int Type { get; set; }
+
+        public string Mark { get; set; }
     }
 
     public class AspNetUser {
@@ -37,5 +41,11 @@ namespace GL.Data.Model
 
     public class AspNetRole {
         public string Id { get; set; }
+    }
+
+
+    public class AspNetUserRoles {
+        public string RoleName { get; set; }
+
     }
 }

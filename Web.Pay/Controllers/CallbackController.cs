@@ -1618,7 +1618,7 @@ System.Collections.Generic.KeyNotFoundException: 给定关键字不在字典中�
         [QueryValues]
         public ActionResult ApplicationTreasureGetBalance(Dictionary<string, string> queryvalues)
         {
-            log.Info("##################" + DateTime.Now.ToString() + "应用宝ApplicationTreasureGetBalance登录查询余额############## ");
+            log.Info("##################开始" + DateTime.Now.ToString() + "应用宝ApplicationTreasureGetBalance登录查询余额############## ");
             log.Info("Url: " + Utils.GetUrl());
             log.Info("queryvalues: " + JsonConvert.SerializeObject(queryvalues));
 
@@ -1638,12 +1638,12 @@ System.Collections.Generic.KeyNotFoundException: 给定关键字不在字典中�
             GL.Pay.AppTreasure.RstArray result = xx.GetBalanceLogin();
 
 
-            log.Info("应用宝回调接口查询余额结果:" + JsonConvert.SerializeObject(result));
+            log.Info("ApplicationTreasureGetBalance result:" + JsonConvert.SerializeObject(result));
             string msg = result.Msg;
             GL.Pay.AppTreasure.BalanceReciveMsg brec = JsonConvert.DeserializeObject<GL.Pay.AppTreasure.BalanceReciveMsg>(msg);
+            //如果这个人有余额，那么保存起来,======》先全部添加
             if (brec.balance > 0)
             {
-                //如果这个人有余额，那么保存起来
                 AppTreasure appModel = new AppTreasure()
                 {
                     Openid = openid,
@@ -1661,33 +1661,18 @@ System.Collections.Generic.KeyNotFoundException: 给定关键字不在字典中�
 
                 RechargeCheckBLL.AddAppTreInfo(appModel);
 
-                #region
-
-                //IEnumerable<RechargeCheck> checks = RechargeCheckBLL.GetModelByUserID(new RechargeCheck() { UserID = Convert.ToInt32(userid) });
-                //foreach (var item in checks)
-                //{
-                //    xx.amt = item.Money / 10;
-                //    GL.Pay.AppTreasure.RstArray payRes = xx.InPayLogin();
-                //    log.Info("应用宝回调接口支付返回结果:" + JsonConvert.SerializeObject(payRes));
-                //    GL.Pay.AppTreasure.InPayReciveMsg rec = JsonConvert.DeserializeObject<GL.Pay.AppTreasure.InPayReciveMsg>(payRes.Msg);
-                    
-                //}
-
-                #endregion
-
-
             }
+           
 
-
+            log.Info("##################结束" + DateTime.Now.ToString() + "应用宝ApplicationTreasureGetBalance登录查询余额############## ");
             return null;
         }
 
         [QueryValues]
         public ActionResult AppTrePay(Dictionary<string, string> queryvalues)
         {
-            /*
-            http://pay.515.com:80/Callback/AppTrePay?userid=408931&productID=firstCharge_2
-            */
+            log.Info("##################开始" + DateTime.Now.ToString() + "应用宝AppTrePay手动后台充值############# ");
+
             string userid = queryvalues.ContainsKey("userid") ? queryvalues["userid"] : string.Empty;
            
             string productID = queryvalues.ContainsKey("productID") ? queryvalues["productID"] : string.Empty;
@@ -1704,9 +1689,11 @@ System.Collections.Generic.KeyNotFoundException: 给定关键字不在字典中�
             string session_type = model.Session_type;
             GL.Pay.AppTreasure.OpenApiHelper xx = new GL.Pay.AppTreasure.OpenApiHelper(Convert.ToInt32(appid), openid, openkey, pay_token, pf, pfkey, session_id, session_type);
             xx.amt = iap.price*100 / 10;
-            GL.Pay.AppTreasure.RstArray payRes = xx.InPayLogin();
-            log.Info("应用宝回调接口支付返回结果:" + JsonConvert.SerializeObject(payRes));
+            GL.Pay.AppTreasure.RstArray payRes = xx.InPayLogin(); 
+            log.Info("应用宝回调接口支付返回结果payRes:" + JsonConvert.SerializeObject(payRes));
             GL.Pay.AppTreasure.InPayReciveMsg rec = JsonConvert.DeserializeObject<GL.Pay.AppTreasure.InPayReciveMsg>(payRes.Msg);
+
+            log.Info("应用宝回调接口支付返回结果rec:" + JsonConvert.SerializeObject(rec));
             string res = "";
             if (rec.ret == 0)
             {
@@ -1745,7 +1732,7 @@ System.Collections.Generic.KeyNotFoundException: 给定关键字不在字典中�
               
                 log.Error("测试分：" + rmb * 100);
                
-                RechargeBLL.Add(new Recharge { BillNo = serialNo, OpenID = openid, UserID = Convert.ToInt64(userid), Money = (long)rmb * 100, CreateTime = DateTime.Now, Chip = gold, Diamond = dia, ChipType = ct, IsFirst = iF, NickName = iap.productname, PayItem = iap.product_id, PF = raType.应用宝, UserAccount = "", ActualMoney = Convert.ToInt64(iap.price * 100), ProductNO = list.Trim(','), AgentID= recharge.AgentID});
+                RechargeBLL.Add(new Recharge { BillNo = serialNo, OpenID = rec.billno, UserID = Convert.ToInt64(userid), Money = (long)rmb * 100, CreateTime = DateTime.Now, Chip = gold, Diamond = dia, ChipType = ct, IsFirst = iF, NickName = iap.productname, PayItem = iap.product_id, PF = raType.应用宝, UserAccount = "", ActualMoney = Convert.ToInt64(iap.price * 100), ProductNO = list.Trim(','), AgentID= recharge.AgentID});
 
                 normal ServiceNormalS = normal.CreateBuilder()
                          .SetUserID((uint)Convert.ToInt64(userid))
@@ -1810,6 +1797,10 @@ System.Collections.Generic.KeyNotFoundException: 给定关键字不在字典中�
 
             Response.Clear();
 
+
+            log.Info("##################结束" + DateTime.Now.ToString() + "应用宝AppTrePay手动后台充值############# ");
+
+
             return Content(res);
         }
 
@@ -1863,7 +1854,7 @@ System.Collections.Generic.KeyNotFoundException: 给定关键字不在字典中�
         public ActionResult ApplicationTreasure(Dictionary<string, string> queryvalues)
         {
 
-            log.Info("##################" + DateTime.Now.ToString() + "ApplicationTreasure应用宝回调接口############## ");
+            log.Info("##################开始" + DateTime.Now.ToString() + "ApplicationTreasure应用宝回调接口############## ");
             log.Info("ApplicationTreasure应用宝回调接口 Url: " + Utils.GetUrl());
             log.Info("ApplicationTreasure应用宝回调接口 queryvalues: " + JsonConvert.SerializeObject(queryvalues));
 
@@ -1897,6 +1888,14 @@ System.Collections.Generic.KeyNotFoundException: 给定关键字不在字典中�
                             log.Error(" ApplicationTreasure应用宝回调接口 订单[" + billno + "]不存在");
                             return Content("fail");
                         }
+                        if (rc.UserID== 578867) {
+                            Response.Clear();
+                            return Json(new
+                            {
+                                ret = 0,
+                                msg = "ok"
+                            }, JsonRequestBehavior.AllowGet);
+                        }
                         Role user = RoleBLL.GetModelByID(new Role { ID = rc.UserID });
                         if (user == null)
                         {
@@ -1908,6 +1907,7 @@ System.Collections.Generic.KeyNotFoundException: 给定关键字不在字典中�
                                 msg = "用户不存在"
                             }, JsonRequestBehavior.AllowGet);
                         }
+                        
                         IAPProduct iap = IAPProductBLL.GetModelByID(rc.ProductID);
                         if (iap == null)
                         {
@@ -2027,7 +2027,7 @@ System.Collections.Generic.KeyNotFoundException: 给定关键字不在字典中�
                                 //string ver = RechargeDAL.GetVersion(new Recharge { BillNo = billno, OpenID = rc.SerialNo, UserID = user.ID, Money = (long)rmb * 100, CreateTime = DateTime.Now, Chip = gold, Diamond = dia, ChipType = ct, IsFirst = iF, NickName = iap.productname, PayItem = iap.product_id, PF = raType.应用宝, UserAccount = user.NickName });
                                 //log.Info("版本号:"+ver);
 
-                                RechargeBLL.Add(new Recharge { BillNo = billno, OpenID = rc.SerialNo, UserID = user.ID, Money = (long)rmb * 100, CreateTime = DateTime.Now, Chip = gold, Diamond = dia, ChipType = ct, IsFirst = iF, NickName = iap.productname, PayItem = iap.product_id, PF = raType.应用宝, UserAccount = user.NickName, ActualMoney = Convert.ToInt64(iap.price * 100), ProductNO = list.Trim(','),AgentID=rc.AgentID });
+                                RechargeBLL.Add(new Recharge { BillNo = billno, OpenID = rec.billno, UserID = user.ID, Money = (long)rmb * 100, CreateTime = DateTime.Now, Chip = gold, Diamond = dia, ChipType = ct, IsFirst = iF, NickName = iap.productname, PayItem = iap.product_id, PF = raType.应用宝, UserAccount = user.NickName, ActualMoney = Convert.ToInt64(iap.price * 100), ProductNO = list.Trim(','),AgentID=rc.AgentID });
                                 //20000|300,
                                 log.Info("list:" + list);
 

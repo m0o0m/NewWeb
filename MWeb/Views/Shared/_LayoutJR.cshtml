@@ -1,6 +1,8 @@
 ﻿@using Microsoft.AspNet.Identity
 @using GL.Data.BLL
 @using GL.Command.DBUtility
+@using System.Collections.Generic
+@using System.Linq
 <!DOCTYPE html>
 <html>
 <head>
@@ -85,10 +87,12 @@
                     if (User.Identity.GetUserName() == "admin")
                     {//系统默认管理员
                         resList = SUBLL.GetAllResourceList();
+                        resList = resList.Where(m => m.Type == 0).ToList();
                     }
                     else
                     {
                         resList = SUBLL.GetAllResourceListByUserId(User.Identity.GetUserId());
+                        resList = resList.Where(m => m.Type == 0).ToList();
                     }
 
 

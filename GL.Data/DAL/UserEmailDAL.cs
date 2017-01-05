@@ -58,9 +58,9 @@ namespace GL.Data.DAL
                 StringBuilder str = new StringBuilder();
 
                 str.AppendFormat(@"
-select ifnull(sum(case UEItemType when 1 then UEItemValue else 0 end) ,0) MailGold 
-  ,ifnull(sum(case UEItemType when 2 then UEItemValue else 0 end) ,0) MailDimoad 
-  ,ifnull(sum(case UEItemType when 3 then UEItemValue else 0 end) ,0) MailJifen 
+select ifnull(sum(case UEItemType when 1 then UEItemValue*ifnull(PeopleNum,1) else 0 end) ,0) MailGold 
+  ,ifnull(sum(case UEItemType when 2 then UEItemValue*ifnull(PeopleNum,1) else 0 end) ,0) MailDimoad 
+  ,ifnull(sum(case UEItemType when 3 then UEItemValue*ifnull(PeopleNum,1) else 0 end) ,0) MailJifen 
 from UserEmail 
 where UEItemType in (1 ,2 ,3) and UEAuthor = case '{0}' when '' then UEAuthor else '{0}' end 
   and UETime >= '{1}' and UETime < '{2}' ;
@@ -88,7 +88,7 @@ where UEItemType in (1 ,2 ,3) and UEAuthor = case '{0}' when '' then UEAuthor el
             using (var cn = new MySqlConnection(sqlconnectionString))
             {
                 cn.Open();
-                int i = cn.Execute(@"insert into UserEmail(UEUserID,UETitle,UEContent,UEAuthor,UETime,UEItemType,UEItemValue,UEItemNum,IsGlobal) values (@UEUserID,@UETitle,@UEContent,@UEAuthor,@UETime,@UEItemType,@UEItemValue,@UEItemNum,@IsGlobal);", model);
+                int i = cn.Execute(@"insert into UserEmail(UEUserID,UETitle,UEContent,UEAuthor,UETime,UEItemType,UEItemValue,UEItemNum,IsGlobal,PeopleNum) values (@UEUserID,@UETitle,@UEContent,@UEAuthor,@UETime,@UEItemType,@UEItemValue,@UEItemNum,@IsGlobal,@PeopleNum);", model);
                 cn.Close();
                 return i;
             }

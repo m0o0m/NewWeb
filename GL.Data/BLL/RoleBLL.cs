@@ -308,8 +308,17 @@ select FreezeTime,SpeakTime,ID, Account, Email, Tel, TrueName, Identity, Agent, 
 
         public static int GetRecordCount(int id)
         {
-            return DAL.PagedListDAL<GameUserInfo>.GetRecordCount(string.Format(@"select count(0) from gamedata.Role where Agent = {0}", id));
+            return DAL.PagedListDAL<GameUserInfo>.GetRecordCount(string.Format(@"select count(0) from "+ database1 + @".Role where Agent = {0}", id));
         }
+
+
+        public static int GetRecordCountNotFreeze()
+        {
+            return DAL.PagedListDAL<GameUserInfo>.GetRecordCount(string.Format(@"
+select count(0) from "+database1+@".Role where IsFreeze = 0
+"));
+        }
+
 
         public static PagedList<Role> GetListByPage(int page, int id)
         {

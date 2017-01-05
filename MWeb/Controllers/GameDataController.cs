@@ -1208,5 +1208,159 @@ namespace MWeb.Controllers
 
 
 
+
+        [QueryValues]
+        public ActionResult KuCunList(Dictionary<string, string> queryvalues)
+        {
+            int _page = queryvalues.ContainsKey("page") ? Convert.ToInt32(queryvalues["page"]) : 1;
+            int _seachtype = queryvalues.ContainsKey("seachtype") ? Convert.ToInt32(queryvalues["seachtype"]) : 0;
+            string _StartDate = queryvalues.ContainsKey("StartDate") ? queryvalues["StartDate"] : DateTime.Now.ToString("yyyy-MM-dd 00:00:00");
+            string _ExpirationDate = queryvalues.ContainsKey("ExpirationDate") ? queryvalues["ExpirationDate"] : DateTime.Now.AddDays(1).ToString("yyyy-MM-dd 00:00:00");
+
+
+            GameRecordView model = new GameRecordView { StartDate = _StartDate, ExpirationDate = _ExpirationDate, Page = _page, SeachType = (seachType)_seachtype };
+
+            if (Request.IsAjaxRequest())
+            {
+                return PartialView("KuCunList_PageList", TexasPotLogBLL.GetKuCunListByPage(model));
+            }
+
+            model.DataList = TexasPotLogBLL.GetKuCunListByPage(model);
+            List<PotRecord> pr = new List<PotRecord>();
+
+
+          
+
+
+
+            var res1 = (MiniGamePot_Select_S)CmdResult.Result(ServiceCmd.SC_SELECT_MINI_POT, new byte[0]);
+            if (res1 != null)
+            {
+                pr.Add(new PotRecord { ChipPot = res1.ChipNum, GameID = (int)gameID.翻翻乐, TableID = 0 });
+            }
+
+            model.Data = pr;
+            return View(model);
+
+        }
+
+        //KucunListUpdate
+        [QueryValues]
+        public ActionResult KucunListUpdate(Dictionary<string, string> queryvalues)
+        {
+            PotRecordView model = new PotRecordView();
+            int gameid = queryvalues.ContainsKey("gameid") ? Convert.ToInt32(queryvalues["gameid"]) : 0;
+            object res;
+            switch ((gameID)gameid)
+            {
+               
+                case gameID.翻翻乐:
+                    res = CmdResult.Result(ServiceCmd.SC_SELECT_MINI_POT, new byte[0]);
+                    if (res == null)
+                    {
+                        return RedirectToAction("KuCunList");
+                    }
+                    model = new PotRecordView { ChipPot = ((MiniGamePot_Select_S)res).ChipNum, GameID = gameID.翻翻乐 };
+
+                    break;
+                default:
+                    break;
+            }
+
+
+
+
+
+            return View(model);
+
+        }
+
+
+        [HttpPost]
+        [QueryValues]
+        public ActionResult KucunListUpdate(PotRecordView model, Dictionary<string, string> queryvalues)
+        {
+
+            if (model.ChipPot <= 0)
+            {
+                return Json(new { result = -900 });
+            }
+
+            if (string.IsNullOrWhiteSpace(model.Context))
+            {
+                return Json(new { result = -1000 });
+            }
+            if (model.Context.Length > 45)
+            {
+                return Json(new { result = Result.ValueCanNotBeNull });
+            }
+            if (!(model.ChipPot > 0 && model.ChipPot <= 1000000000))
+            {
+                return Json(new { result = -2000 });
+            }
+
+            switch (model.GameID)
+            {
+              
+                case gameID.翻翻乐:
+                    MiniGamePot_Operator_C MiniGamePot_Operator_C = MiniGamePot_Operator_C.CreateBuilder()
+                    .SetOpType((uint)model.Flag)
+                    .SetOpValue((uint)model.ChipPot)
+                    .SetStrContent(model.Context)
+                    .Build();
+
+                    object MiniGamePot_Operator_S = CmdResult.Result(ServiceCmd.SC_OPERTOR_MINI_POT, MiniGamePot_Operator_C.ToByteArray());
+
+                    if (MiniGamePot_Operator_S != null)
+                    {
+                        bool res = ((MiniGamePot_Operator_S)MiniGamePot_Operator_S).Suc;
+
+                        if (res)
+                        {
+                            if (model.Flag == 1)
+                            {//增加
+                                TexasPotLog log = new TexasPotLog
+                                {
+                                    Content = model.Context,
+                                    Time = DateTime.Now,
+                                    GameType = gameID.中发白,
+                                    Type = ctrlType.增加,
+                                    Value = model.ChipPot
+
+                                };
+
+                                TexasPotLogBLL.AddKuCun(log);
+                            }
+                            else
+                            {//减少
+                                TexasPotLog log = new TexasPotLog
+                                {
+                                    Content = model.Context,
+                                    Time = DateTime.Now,
+                                    GameType = gameID.中发白,
+                                    Type = ctrlType.减少,
+                                    Value = model.ChipPot
+
+                                };
+
+                                TexasPotLogBLL.AddKuCun(log);
+                            }
+                        }
+                        return Json(new { result = res ? 0 : 1 });
+                    }
+
+                
+                    break;
+                default:
+                    break;
+            }
+
+            return Json(new { result = 2 });
+
+        }
+
+
+
+
     }
 }

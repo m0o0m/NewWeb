@@ -19,7 +19,23 @@ namespace GL.Data.DAL
         public static readonly string database1 = PubConstant.GetConnectionString("database1");
         public static readonly string database2 = PubConstant.GetConnectionString("database2");
         public static readonly string database3 = PubConstant.GetConnectionString("database3");
+        internal static DailiKuCun Test(string where,object model)
+        {
+            using (var cn = new MySqlConnection(sqlconnectionString))
+            {
+                cn.Open();
 
+                StringBuilder str = new StringBuilder();
+
+                str.AppendFormat(@"
+                       select * from dailikucun where "+ where+@";
+                 ");
+
+                IEnumerable<DailiKuCun> i = cn.Query<DailiKuCun>(str.ToString(), model);
+                cn.Close();
+                return i.FirstOrDefault();
+            }
+        }
 
         /// <summary>
         /// 得到当前系统代理还剩下多少库存

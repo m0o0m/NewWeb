@@ -1,6 +1,9 @@
 ﻿
 @using GL.Data.Model
 @using GL.Data.View
+@using System.Collections.Generic
+@using System.Linq
+
 @model ResourceView
 @{
     ViewBag.Title = "给角色分配权限";
@@ -44,27 +47,20 @@
                                     <div class="widget-body">
                                         <form id="subfrom" class="smart-form" action="/SU/SaveRoleResource" method="post">
                                               <input type="hidden" id="roleid" name="roleid" value="@Model.RoleID" />
-                                            @*<fieldset>
-                                                <section class="col col-1">
-                                                    <button type="button" class="btn btn-success btn-sm" onclick="allSel()">全 选</button>
-                                                </section>
-
-                                                <section class="col col-1">
-                                                    <button type="button" class="btn btn-success btn-sm" onclick="allNoSel()">全不选</button>
-                                                </section>
-                                            </fieldset>*@
+                                         
                                                 <fieldset>
                                                     <div class="tree smart-form">
                                                         <ul>
                                                             @{
-                                                    IEnumerable<Resource> datalist = (IEnumerable<Resource>)Model.DataList;
-                                                    IEnumerable<Resource> datalistL1 = datalist.Where(m => m.Level == 1);
-                                                    foreach (Resource item1 in datalistL1)
-                                                    {
+                                                                IEnumerable<Resource> datalist = (IEnumerable<Resource>)Model.DataList;
+                                                                IEnumerable<Resource> datalistL1 = datalist.Where(m => m.Level == 1&&m.Type==0);
+                                                                IEnumerable<Resource> datalistLButton = datalist.Where(m=> m.Type == 1);
+                                                                foreach (Resource item1 in datalistL1)
+                                                                {
                                                         <li>
                                                             <span><i class="fa fa-lg fa-plus-circle"></i> @item1.Name</span>
                                                             @{
-                                                                IEnumerable<Resource> datalistL2 = datalist.Where(m => m.PNo == item1.No);
+                                                                IEnumerable<Resource> datalistL2 = datalist.Where(m => m.PNo == item1.No && m.Type == 0);
                                                                 if (datalistL2.Count() != 0)
                                                                 {
                                                         <ul>
@@ -84,7 +80,7 @@
                                                                                     if (datalistL4.Count() != 0)
                                                                                     {
                                                                                         <li style="display:none">
-                                                                                            <span><i class="fa fa-lg fa-plus-circle"></i> @item3.Name</span>
+                      <span><i class="fa fa-lg fa-plus-circle"></i> @item3.Name</span>
                                                                                             <ul>
                                                                                                @{
                                                                                                    foreach (Resource item4 in datalistL4)
@@ -95,13 +91,53 @@
                                                                                                                 @{
                                                                                                                     if (item4.Checked)
                                                                                                                     {
-                                                                                                                        <input type="checkbox" checked="checked" value="@item4.No" name="checkbox-inline" /><i></i>@item4.Name
+            <input type="checkbox" checked="checked" value="@item4.No" name="checkbox-inline" /><i></i>@item4.Name
+           
 
-                                                                                                                    }
-                                                                                                                    else
-                                                                                                                    {
-                                                                                                                        
-                                                                                                                        <input type="checkbox" value="@item4.No" name="checkbox-inline" /><i></i>@item4.Name
+                IEnumerable<Resource> myButton = datalistLButton.Where(m => m.PNo == item4.No);
+                if (myButton.Count() != 0)
+                {
+                    <ul>
+                        @foreach (var item in myButton)
+                        {
+                            <li>
+                                <span>
+                                    <label class="checkbox">
+                                         @if (item.Checked)
+                                         {
+                                            <input type="checkbox" checked="checked" value="@item.No" name="checkbox-inline" /><i></i>@item.Name
+                                         }
+                                         else
+                                         {
+                                            <input type="checkbox" value="@item.No" name="checkbox-inline" /><i></i>@item.Name
+                                         }
+
+                                    </label>
+                                </span>
+                            </li>
+                        }
+
+                    </ul>
+                }
+          
+
+
+                }
+                else
+                {
+
+<input type="checkbox" value="@item4.No" name="checkbox-inline" /><i></i>@item4.Name
+                                                                                                                        <ul>
+                                                                                                                            <li>
+                                                                                                                                <span>
+                                                                                                                                    <label class="checkbox">
+                                                                                                                                        <input type="checkbox" checked="checked" value="123" name="checkbox-inline" /><i></i>3333
+                                                                                                                                    </label>
+                                                                                                                                </span>
+                                                                                                                            </li>
+                                                                                                                            <li>详细333</li>
+                                                                                                                        </ul>
+
                                                                                                                     }
                                                                                                                 }
                                                                                                             </label>

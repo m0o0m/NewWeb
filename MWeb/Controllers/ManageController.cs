@@ -1715,10 +1715,19 @@ namespace MWeb.Controllers
                     UEItemNum = Convert.ToInt32(UEItemNum),
                     UEItemType = (ueItemType)Convert.ToInt32(UEItemType),
                     UEItemValue = Convert.ToInt32(UEItemValue),
-                    IsGlobal = isGlobal
-                };
-
+                    IsGlobal = isGlobal,
+                   
+               };
+                if (isGlobal == true)
+                {
+                    Int64 roleCount =  RoleBLL.GetRecordCountNotFreeze();
+                    ue.PeopleNum = roleCount;
+                }
+                else {
+                    ue.PeopleNum = ue.UEUserID.Split(',').Length;
+                }
               
+
                 if ((CenterCmd)tbind.header.CommandID == CenterCmd.CS_SEND_ITEMMAIL)
                 {
                     Service_ItemMail_S ServiceItemMailS = Service_ItemMail_S.ParseFrom(tbind.body.ToBytes());

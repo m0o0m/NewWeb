@@ -20,7 +20,10 @@ namespace GL.Data.BLL
         public static readonly string database1 = PubConstant.GetConnectionString("database1");
         public static readonly string database2 = PubConstant.GetConnectionString("database2");
         public static readonly string database3 = PubConstant.GetConnectionString("database3");
-
+        public static DailiKuCun Test()
+        {
+            return DaiLiDAL.Test(" id = @id", new { id=1 });
+        }
 
         public static DailiKuCun GetDaiLiKuCun() {
             return DaiLiDAL.GetDaiLiKuCun();

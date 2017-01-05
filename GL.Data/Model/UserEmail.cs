@@ -23,6 +23,8 @@ namespace GL.Data.Model
 
         public bool IsGlobal { get; set; }
 
+        public Int64 PeopleNum { get; set; }
+
     }
 
 

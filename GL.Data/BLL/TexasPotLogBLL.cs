@@ -38,5 +38,29 @@ namespace GL.Data.BLL
             TexasPotLogDAL.Add(model);
         }
 
+        public static void AddKuCun(TexasPotLog model)
+        {
+            TexasPotLogDAL.AddKuCun(model);
+        }
+
+
+        public static PagedList<TexasPotLog> GetKuCunListByPage(GameRecordView model)
+        {
+            PagerQuery pq = new PagerQuery();
+            pq.CurrentPage = model.Page;
+            pq.PageSize = 10;
+
+
+
+            pq.RecordCount = PagedListDAL<TexasPotLog>.GetRecordCount(@"select count(0) from KuCunUpdateLog ", sqlconnectionString);
+            pq.Sql = string.Format(@"select * from KuCunUpdateLog order by Time desc limit {0}, {1}", pq.StartRowNumber, pq.PageSize, model.StartDate, model.ExpirationDate);
+
+
+
+            PagedList<TexasPotLog> obj = new PagedList<TexasPotLog>(PagedListDAL<TexasPotLog>.GetListByPage(pq, sqlconnectionString), pq.CurrentPage, pq.PageSize, pq.RecordCount);
+            return obj;
+
+        }
+
     }
 }

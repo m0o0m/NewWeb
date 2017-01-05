@@ -69,7 +69,8 @@ enum ServiceCmd
 	SC_SET_BACCARATPOT_OPEN = 69;		    //百人百家乐大彩池开关
 	SC_SELECT_BACCARAT_POT	= 70;		//查询百人百家乐大彩池金币数
 	SC_OPERTOR_BACCARAT_POT	= 71;		//增加或者减少百人百家乐大彩池金币数
-
+        SC_OPERTOR_MINI_POT = 72;			//增加或者减少翻翻乐彩池金币数
+	SC_SELECT_MINI_POT = 73;			//查询翻翻乐彩池金币数
 	SC_TOTAL = 200;
 }
 
@@ -147,7 +148,8 @@ enum CenterCmd
 	CS_SELECT_BACCARAT_POT = 70;				//返回百人百家乐大彩池金币数
 	CS_OPERTOR_BACCARAT_POT  = 71;				//返回增加或者减少百人百家乐大彩池金币数
 
-	
+	CS_OPERTOR_MINI_POT = 72;					//
+	CS_SELECT_MINI_POT = 73;					//
 	CS_TOTAL	 	= 100;
 }
 
@@ -681,6 +683,40 @@ message MobileSwitchOperator_S
 	optional MobileSwitch mobile_switch = 2;	 
 	optional bool suc = 3;	
 } 
+
+
+message MiniGameOpenReq_S
+{
+	optional int32 isOpen = 1;
+}
+
+message MiniGameOpenReq_C
+{
+	optional int32 suc = 1;
+	optional int32 isOpen = 2;
+}
+
+message MiniGamePot_Operator_C
+{
+	optional uint32 opType	   =1;	//操作类型 1增加  2减少
+	optional uint64 opValue	   =2;	//要操作 增加或者减少的数
+	optional string	strContent =3;	//修改原因
+}
+
+message MiniGamePot_Operator_S
+{
+	optional uint32 opType	=1;	// 操作类型 1增加  2减少
+	optional bool 	suc	=2;		// 是否成功 true为成功
+}
+
+message MiniGamePot_Select_S
+{
+	required uint64 ChipNum = 1; // 彩池金币数量
+}
+
+
+
+
 
 
 /////////////////////////////////////////////////////////////////////////////翻翻乐开关

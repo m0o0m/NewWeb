@@ -1,6 +1,9 @@
-﻿@using Microsoft.AspNet.Identity
+﻿@using System.Linq
+@using Microsoft.AspNet.Identity
 @using GL.Data.BLL
 @using GL.Command.DBUtility
+@using System.Collections.Generic
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -86,13 +89,20 @@
      
         <nav>
             <ul id="nav">
-                                                                                @{
+                                                                                                                                                                @{
 
 List<Resource> resList =new List<Resource> ();
+
 if(User.Identity.GetUserName()=="admin"){//系统默认管理员
-         resList =SUBLL.GetAllResourceList();     
+         resList =SUBLL.GetAllResourceList();
+
+ 
+   resList = resList.Where(m => m.Type == 0).ToList();
 }else{
-    resList = SUBLL.GetAllResourceListByUserId(User.Identity.GetUserId());           
+    resList = SUBLL.GetAllResourceListByUserId(User.Identity.GetUserId());
+
+
+   resList = resList.Where(m => m.Type == 0).ToList();
 }
 
 
@@ -169,7 +179,7 @@ htmlString = new MvcHtmlString(html);
                         <li><a href="/Base/UsersDiamondDistributionRatio">用户五币分布比</a></li>
                         <li><a href="/Base/VIPDistributionRatio">用户VIP分布表</a></li>
                         <li><a href="/Base/UserRetentionRates">留存率</a></li>
-                        @*<li><a href="/Base/GameOutput">游戏总产出消耗</a></li>*@
+                
                         <li><a href="/Base/GameOutput2">游戏总产出消耗</a></li>
                         <li class="submenu">
                             <a href="#">财务数据</a>
@@ -234,10 +244,7 @@ htmlString = new MvcHtmlString(html);
 
                         <li><a href="/Recharge/TexasGameGetAward">德州玩牌领大奖</a></li>
                         
-                        <li><a href="/Recharge/NewYearCharge">新年充值活动</a></li>
-
-
-                        @*<li><a href="/Recharge/RedeemCode">兑换码生成</a></li>*@
+                       
                     </ul>
                 </li>
                 <li class="submenu">
@@ -306,7 +313,7 @@ htmlString = new MvcHtmlString(html);
 
                             </ul>
                         </li>
-                        @*<li><a href="/Manage/Member">会员信息查询</a></li>*@
+                      
                         
                         <li><a href="/Manage/MemberNoSpeak">禁言</a> </li>
                         <li>
@@ -351,7 +358,7 @@ htmlString = new MvcHtmlString(html);
 
                         <li><a href="/SU/Management">用户信息</a></li>
                         <li><a href="/SU/ManagementForAdd">添加用户</a></li>
-                        @*<li><a href="/SU/ManagementForUpdate">修改管理员</a></li>*@
+                     
                         <li><a href="/SU/Role">角色管理</a></li>
                         <li><a href="/SU/RoleForCreate">添加角色</a></li>
                       
@@ -398,13 +405,6 @@ htmlString = new MvcHtmlString(html);
                             <a href="#"><i class="fa fa-lg fa-fw fa-bar-chart-o"></i> <span class="menu-item-parent">基础运营数据(待删除)</span></a>
                             <ul>
 
-                                <li class="@Html.RouteIf("NumberOfBoard", "active")"><a href="/Base/NumberOfBoard">牌局统计</a></li>
-
-                <li class="@Html.RouteIf("BankruptcyRate", "active")"><a href="/Base/BankruptcyRate">破产率</a></li>
-
-
-
-                <li class="@Html.RouteIf("PotRakeback", "active")"><a href="/Base/PotRakeback">彩池反奖记录</a></li>
 
                             </ul>
                         </li>
@@ -415,19 +415,16 @@ htmlString = new MvcHtmlString(html);
                             <a href="#"><i class="fa fa-lg fa-fw fa-bar-chart-o"></i> <span class="menu-item-parent">系统设置(待删除)</span></a>
                             <ul>
 
-                                <li class="@Html.RouteIf("SendServEmail", "active")"><a href="/System/SendServEmail">发送系统邮件</a></li>
-                            </ul>
+                           
 
                         </li>
                         <li>
                             <a href="#"><i class="fa fa-lg fa-fw fa-bar-chart-o"></i> <span class="menu-item-parent">会员管理(待删除)</span></a>
                             <ul>
-                                <li class="@Html.RouteIf("Member", "active")"><a href="/Manage/Member">会员信息</a></li>
-                <li class="@Html.RouteIf("OnlineMember", "active")"><a href="/Manage/OnlineMember">在线玩家列表</a></li>
-                <li class="@Html.RouteIf("SearchMember", "active")"><a href="/Manage/SearchMember">个人信息查询</a></li>
+                            
+                <li class="Html.RouteIf("OnlineMember", "active")"><a href="/Manage/OnlineMember">在线玩家列表</a></li>
+                <li class="
 
-                <li class="@Html.RouteIf("OperationRecord", "active")"><a href="/Manage/OperationRecord">玩家操作记录</a></li>
-                <li class="@Html.RouteIf("UserEmail", "active")"><a href="/Manage/UserEmail">会员邮件列表</a></li>
 
 
             
@@ -441,7 +438,7 @@ htmlString = new MvcHtmlString(html);
                         <li>
                             <a href="#"><i class="fa fa-lg fa-fw fa-bar-chart-o"></i> <span class="menu-item-parent">财务管理(待删除)</span></a>
                             <ul>
-                                <li class="@Html.RouteIf("QQZoneRecharge", "active")"><a href="/Recharge/QQZoneRecharge">多平台充值列表</a></li>
+                                <li class="Html.RouteIf("QQZoneRecharge", "active")"><a href="/Recharge/QQZoneRecharge">多平台充值列表</a></li>
                             </ul>
                         </li>
 
@@ -526,7 +523,7 @@ htmlString = new MvcHtmlString(html);
 
                
             //}
-           
+         
         });
 
         function IsPC() {
@@ -763,7 +760,10 @@ htmlString = new MvcHtmlString(html);
             //hidden-menu
 
             //$("#allbody").removeClass("hidden-menu");
+            //屏蔽按钮
 
+
+          
         })
 
 

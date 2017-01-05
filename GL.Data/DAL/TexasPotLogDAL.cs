@@ -39,5 +39,28 @@ values(@Time,@Type,@Value,@GameType,@Content);
 
 
         }
+
+
+        internal static int AddKuCun(TexasPotLog model)
+        {
+
+            using (var cn = new MySqlConnection(sqlconnectionString))
+            {
+                cn.Open();
+                StringBuilder str = new StringBuilder();
+                str.Append(@" 
+INSERT into " + database1 + @".KuCunUpdateLog(Time,Type,Value,GameType,Content)
+values(@Time,@Type,@Value,@GameType,@Content);
+");
+                cn.Query<TexasPotLog>(str.ToString(),
+                 model);
+
+                return 1;
+            }
+
+
+
+        }
+
     }
 }

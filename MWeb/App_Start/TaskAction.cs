@@ -426,7 +426,9 @@ Horse_Count,Horse_Banker,Horse_Award_L,Horse_Award_W,
 Car_Count,Car_Banker,Car_Award_L,Car_Award_W,
 Hundred_Count,Hundred_Banker,Hundred_Award_L,Hundred_Award_W,
 BaiJiaLe_Count,BaiJiaLe_Banker,BaiJiaLe_Award_L,BaiJiaLe_Award_W,
-Serial_Count,Serial_Banker,Serial_Award_L,Serial_Award_W)
+Serial_Count,Serial_Banker,Serial_Award_L,Serial_Award_W,
+Shuihu_Count,Shuihu_Award_L,Shuihu_Award_W,
+Shuiguoji_Count,Shuiguoji_Award_L,Shuiguoji_Award_W
 )
 select " + comdata.UserID + @" ,'" + comdata.CountDate + @"' ,
 ifnull(b.Texas_LCount,0) + " + comdata.InitialCount + @" ,ifnull(b.Texas_LAward_L,0)+ " + comdata.InitialL + @",ifnull(b.Texas_LAward_W,0)+ " + comdata.InitialW + @" ,
@@ -438,9 +440,25 @@ ifnull(b.Horse_Count,0)   ,ifnull(b.Horse_Banker,0),ifnull(b.Horse_Award_L,0)  ,
 ifnull(b.Car_Count,0)  ,ifnull(b.Car_Banker,0),ifnull(b.Car_Award_L,0),ifnull(b.Car_Award_W,0) ,
 ifnull(b.Hundred_Count,0)  ,ifnull(b.Hundred_Banker,0),ifnull(b.Hundred_Award_L,0),ifnull(b.Hundred_Award_W,0),
 ifnull(b.BaiJiaLe_Count,0)  ,ifnull(b.BaiJiaLe_Banker,0),ifnull(b.BaiJiaLe_Award_L,0),ifnull(b.BaiJiaLe_Award_W,0),  
-ifnull(b.Serial_Count,0)  ,ifnull(b.Serial_Banker,0),ifnull(b.Serial_Award_L,0),ifnull(b.Serial_Award_W,0)  
+ifnull(b.Serial_Count,0)  ,ifnull(b.Serial_Banker,0),ifnull(b.Serial_Award_L,0),ifnull(b.Serial_Award_W,0),
+ifnull(b.Shuihu_Count, 0) ,ifnull(b.Shuihu_Award_L, 0),ifnull(b.Shuihu_Award_W, 0),
+ifnull(b.Shuiguoji_Count, 0) ,ifnull(b.Shuiguoji_Award_L, 0),ifnull(b.Shuiguoji_Award_W, 0)
 from (select " + comdata.UserID + @" userid ) a left join (
-select * from " + database3 + @".Clearing_Game where UserID = " + comdata.UserID + @" and CountDate = '" + comdata.CountDate + @"') b on 1 = 1;
+select 
+UserID ,CountDate ,
+ Texas_LCount, Texas_LAward_L ,Texas_LAward_W,
+Texas_MCount,Texas_MAward_L ,Texas_MAward_W,
+Texas_HCount,Texas_HAward_L,Texas_HAward_W,
+Scale_Count,Scale_Banker,Scale_Award_L,Scale_Award_W,
+Zodiac_Count,Zodiac_Banker,Zodiac_Award_L,Zodiac_Award_W,
+Horse_Count,Horse_Banker,Horse_Award_L,Horse_Award_W,
+Car_Count,Car_Banker,Car_Award_L,Car_Award_W,
+Hundred_Count,Hundred_Banker,Hundred_Award_L,Hundred_Award_W,
+BaiJiaLe_Count,BaiJiaLe_Banker,BaiJiaLe_Award_L,BaiJiaLe_Award_W,
+Serial_Count,Serial_Banker,Serial_Award_L,Serial_Award_W,
+Shuihu_Count,Shuihu_Award_L,Shuihu_Award_W,
+Shuiguoji_Count,Shuiguoji_Award_L,Shuiguoji_Award_W
+from " + database3 + @".Clearing_Game where UserID = " + comdata.UserID + @" and CountDate = '" + comdata.CountDate + @"') b on 1 = 1;
 ";
         }
 
@@ -604,8 +622,11 @@ Zodiac_Count,Zodiac_Banker,Zodiac_Award_L,Zodiac_Award_W,
 Horse_Count,Horse_Banker,Horse_Award_L,Horse_Award_W,
 Car_Count,Car_Banker,Car_Award_L,Car_Award_W,
 Hundred_Count,Hundred_Banker,Hundred_Award_L,Hundred_Award_W,
-BaiJiaLe_Count,BaiJiaLe_Banker,BaiJiaLe_Award_L,BaiJiaLe_Award_W),
-Serial_Count,Serial_Banker,Serial_Award_L,Serial_Award_W)
+BaiJiaLe_Count,BaiJiaLe_Banker,BaiJiaLe_Award_L,BaiJiaLe_Award_W,
+Serial_Count,Serial_Banker,Serial_Award_L,Serial_Award_W,
+Shuihu_Count,Shuihu_Award_L,Shuihu_Award_W,
+Shuiguoji_Count,Shuiguoji_Award_L,Shuiguoji_Award_W
+)
 select " + comdata.UserID + @" ,'" + comdata.CountDate + @"' ,
 ifnull(b.Texas_LCount,0),ifnull(b.Texas_LAward_L,0),ifnull(b.Texas_LAward_W,0),
 ifnull(b.Texas_MCount,0),ifnull(b.Texas_MAward_L,0),ifnull(b.Texas_MAward_W,0),
@@ -616,9 +637,26 @@ ifnull(b.Horse_Count,0)  ,ifnull(b.Horse_Banker,0),ifnull(b.Horse_Award_L,0)  ,i
 ifnull(b.Car_Count,0)  ,ifnull(b.Car_Banker,0),ifnull(b.Car_Award_L,0) ,ifnull(b.Car_Award_W,0) ,
 ifnull(b.Hundred_Count,0)  ,ifnull(b.Hundred_Banker,0),ifnull(b.Hundred_Award_L,0),ifnull(b.Hundred_Award_W,0) ,
 ifnull(b.BaiJiaLe_Count,0)  ,ifnull(b.BaiJiaLe_Banker,0),ifnull(b.BaiJiaLe_Award_L,0),ifnull(b.BaiJiaLe_Award_W,0),
-ifnull(b.Serial_Count,0)  ,ifnull(b.Serial_Banker,0),ifnull(b.Serial_Award_L,0),ifnull(b.Serial_Award_W,0)  
+ifnull(b.Serial_Count,0)  ,ifnull(b.Serial_Banker,0),ifnull(b.Serial_Award_L,0),ifnull(b.Serial_Award_W,0),
+ifnull(b.Shuihu_Count, 0) ,ifnull(b.Shuihu_Award_L, 0),ifnull(b.Shuihu_Award_W, 0),
+ifnull(b.Shuiguoji_Count, 0) ,ifnull(b.Shuiguoji_Award_L, 0),ifnull(b.Shuiguoji_Award_W, 0)
 from (select " + comdata.UserID + @" userid ) a left join (
-select * from " + database3 + @".Clearing_Game where UserID = " + comdata.UserID + @" and CountDate = '" + comdata.CountDate + @"') b on 1 = 1;
+select 
+UserID ,CountDate ,
+ Texas_LCount, Texas_LAward_L ,Texas_LAward_W,
+Texas_MCount,Texas_MAward_L ,Texas_MAward_W,
+Texas_HCount,Texas_HAward_L,Texas_HAward_W,
+Scale_Count,Scale_Banker,Scale_Award_L,Scale_Award_W,
+Zodiac_Count,Zodiac_Banker,Zodiac_Award_L,Zodiac_Award_W,
+Horse_Count,Horse_Banker,Horse_Award_L,Horse_Award_W,
+Car_Count,Car_Banker,Car_Award_L,Car_Award_W,
+Hundred_Count,Hundred_Banker,Hundred_Award_L,Hundred_Award_W,
+BaiJiaLe_Count,BaiJiaLe_Banker,BaiJiaLe_Award_L,BaiJiaLe_Award_W,
+Serial_Count,Serial_Banker,Serial_Award_L,Serial_Award_W,
+Shuihu_Count,Shuihu_Award_L,Shuihu_Award_W,
+Shuiguoji_Count,Shuiguoji_Award_L,Shuiguoji_Award_W
+
+from " + database3 + @".Clearing_Game where UserID = " + comdata.UserID + @" and CountDate = '" + comdata.CountDate + @"') b on 1 = 1;
 ";
         }
 
@@ -739,8 +777,11 @@ Zodiac_Count,Zodiac_Banker,Zodiac_Award_L,Zodiac_Award_W,
 Horse_Count,Horse_Banker,Horse_Award_L,Horse_Award_W,
 Car_Count,Car_Banker,Car_Award_L,Car_Award_W,
 Hundred_Count,Hundred_Banker,Hundred_Award_L,Hundred_Award_W,
-BaiJiaLe_Count,BaiJiaLe_Banker,BaiJiaLe_Award_L,BaiJiaLe_Award_W),
-Serial_Count,Serial_Banker,Serial_Award_L,Serial_Award_W)
+BaiJiaLe_Count,BaiJiaLe_Banker,BaiJiaLe_Award_L,BaiJiaLe_Award_W,
+Serial_Count,Serial_Banker,Serial_Award_L,Serial_Award_W,
+Shuihu_Count,Shuihu_Award_L,Shuihu_Award_W,
+Shuiguoji_Count,Shuiguoji_Award_L,Shuiguoji_Award_W
+)
 select " + comdata.UserID + @" ,'" + comdata.CountDate + @"' ,
 ifnull(b.Texas_LCount,0),ifnull(b.Texas_LAward_L,0),ifnull(b.Texas_LAward_W,0),
 ifnull(b.Texas_MCount,0),ifnull(b.Texas_MAward_L,0),ifnull(b.Texas_MAward_W,0),
@@ -751,9 +792,25 @@ ifnull(b.Horse_Count,0)  ,ifnull(b.Horse_Banker,0),ifnull(b.Horse_Award_L,0)  ,i
 ifnull(b.Car_Count,0)  ,ifnull(b.Car_Banker,0),ifnull(b.Car_Award_L,0) ,ifnull(b.Car_Award_W,0) ,
 ifnull(b.Hundred_Count,0)  ,ifnull(b.Hundred_Banker,0),ifnull(b.Hundred_Award_L,0),ifnull(b.Hundred_Award_W,0) ,
 ifnull(b.BaiJiaLe_Count, 0)  ,ifnull(b.BaiJiaLe_Banker, 0),ifnull(b.BaiJiaLe_Award_L, 0),ifnull(b.BaiJiaLe_Award_W, 0),
-ifnull(b.Serial_Count,0) + " + comdata.InitialCount + @" ,ifnull(b.Serial_Banker,0),ifnull(b.Serial_Award_L,0) + " + comdata.InitialL + @" ,ifnull(b.Serial_Award_W,0) + " + comdata.InitialW + @" 
+ifnull(b.Serial_Count,0) + " + comdata.InitialCount + @" ,ifnull(b.Serial_Banker,0),ifnull(b.Serial_Award_L,0) + " + comdata.InitialL + @" ,ifnull(b.Serial_Award_W,0) + " + comdata.InitialW + @",
+ifnull(b.Shuihu_Count, 0) ,ifnull(b.Shuihu_Award_L, 0),ifnull(b.Shuihu_Award_W, 0),
+ifnull(b.Shuiguoji_Count, 0) ,ifnull(b.Shuiguoji_Award_L, 0),ifnull(b.Shuiguoji_Award_W, 0) 
 from (select " + comdata.UserID + @" userid ) a left join (
-select * from " + database3 + @".Clearing_Game where UserID = " + comdata.UserID + @" and CountDate = '" + comdata.CountDate + @"') b on 1 = 1;
+select 
+UserID ,CountDate ,
+ Texas_LCount, Texas_LAward_L ,Texas_LAward_W,
+Texas_MCount,Texas_MAward_L ,Texas_MAward_W,
+Texas_HCount,Texas_HAward_L,Texas_HAward_W,
+Scale_Count,Scale_Banker,Scale_Award_L,Scale_Award_W,
+Zodiac_Count,Zodiac_Banker,Zodiac_Award_L,Zodiac_Award_W,
+Horse_Count,Horse_Banker,Horse_Award_L,Horse_Award_W,
+Car_Count,Car_Banker,Car_Award_L,Car_Award_W,
+Hundred_Count,Hundred_Banker,Hundred_Award_L,Hundred_Award_W,
+BaiJiaLe_Count,BaiJiaLe_Banker,BaiJiaLe_Award_L,BaiJiaLe_Award_W,
+Serial_Count,Serial_Banker,Serial_Award_L,Serial_Award_W,
+Shuihu_Count,Shuihu_Award_L,Shuihu_Award_W,
+Shuiguoji_Count,Shuiguoji_Award_L,Shuiguoji_Award_W
+from " + database3 + @".Clearing_Game where UserID = " + comdata.UserID + @" and CountDate = '" + comdata.CountDate + @"') b on 1 = 1;
 ";
         }
         IEnumerable<IGrouping<string, CommonGameData>> query2 = resdata.GroupBy(m => m.Key2);
@@ -871,8 +928,12 @@ Zodiac_Count,Zodiac_Banker,Zodiac_Award_L,Zodiac_Award_W,
 Horse_Count,Horse_Banker,Horse_Award_L,Horse_Award_W,
 Car_Count,Car_Banker,Car_Award_L,Car_Award_W,
 Hundred_Count,Hundred_Banker,Hundred_Award_L,Hundred_Award_W,
-Serial_Count,Serial_Banker,Serial_Award_L,Serial_Award_W),
-BaiJiaLe_Count,BaiJiaLe_Banker,BaiJiaLe_Award_L,BaiJiaLe_Award_W)
+BaiJiaLe_Count,BaiJiaLe_Banker,BaiJiaLe_Award_L,BaiJiaLe_Award_W,
+Serial_Count,Serial_Banker,Serial_Award_L,Serial_Award_W,
+Shuihu_Count,Shuihu_Award_L,Shuihu_Award_W,
+Shuiguoji_Count,Shuiguoji_Award_L,Shuiguoji_Award_W
+
+)
 select " + comdata.UserID + @" ,'" + comdata.CountDate + @"' ,
 ifnull(b.Texas_LCount,0),ifnull(b.Texas_LAward_L,0),ifnull(b.Texas_LAward_W,0),
 ifnull(b.Texas_MCount,0),ifnull(b.Texas_MAward_L,0),ifnull(b.Texas_MAward_W,0),
@@ -882,10 +943,26 @@ ifnull(b.Zodiac_Count,0) ,ifnull(b.Zodiac_Banker,0),ifnull(b.Zodiac_Award_L,0) ,
 ifnull(b.Horse_Count,0)  ,ifnull(b.Horse_Banker,0),ifnull(b.Horse_Award_L,0)  ,ifnull(b.Horse_Award_W,0)  ,
 ifnull(b.Car_Count,0)  ,ifnull(b.Car_Banker,0),ifnull(b.Car_Award_L,0) ,ifnull(b.Car_Award_W,0) ,
 ifnull(b.Hundred_Count,0)  ,ifnull(b.Hundred_Banker,0),ifnull(b.Hundred_Award_L,0),ifnull(b.Hundred_Award_W,0) ,
+ifnull(b.BaiJiaLe_Count,0) + " + comdata.InitialCount + @" ,ifnull(b.BaiJiaLe_Banker,0),ifnull(b.BaiJiaLe_Award_L,0) + " + comdata.InitialL + @" ,ifnull(b.BaiJiaLe_Award_W,0) + " + comdata.InitialW + @",
 ifnull(b.Serial_Count,0)  ,ifnull(b.Serial_Banker,0),ifnull(b.Serial_Award_L,0),ifnull(b.Serial_Award_W,0),
-ifnull(b.BaiJiaLe_Count,0) + " + comdata.InitialCount + @" ,ifnull(b.BaiJiaLe_Banker,0),ifnull(b.BaiJiaLe_Award_L,0) + " + comdata.InitialL + @" ,ifnull(b.BaiJiaLe_Award_W,0) + " + comdata.InitialW + @" 
+ifnull(b.Shuihu_Count, 0) ,ifnull(b.Shuihu_Award_L, 0),ifnull(b.Shuihu_Award_W, 0),
+ifnull(b.Shuiguoji_Count, 0) ,ifnull(b.Shuiguoji_Award_L, 0),ifnull(b.Shuiguoji_Award_W, 0)
 from (select " + comdata.UserID + @" userid ) a left join (
-select * from " + database3 + @".Clearing_Game where UserID = " + comdata.UserID + @" and CountDate = '" + comdata.CountDate + @"') b on 1 = 1;
+select 
+UserID ,CountDate ,
+ Texas_LCount, Texas_LAward_L ,Texas_LAward_W,
+Texas_MCount,Texas_MAward_L ,Texas_MAward_W,
+Texas_HCount,Texas_HAward_L,Texas_HAward_W,
+Scale_Count,Scale_Banker,Scale_Award_L,Scale_Award_W,
+Zodiac_Count,Zodiac_Banker,Zodiac_Award_L,Zodiac_Award_W,
+Horse_Count,Horse_Banker,Horse_Award_L,Horse_Award_W,
+Car_Count,Car_Banker,Car_Award_L,Car_Award_W,
+Hundred_Count,Hundred_Banker,Hundred_Award_L,Hundred_Award_W,
+BaiJiaLe_Count,BaiJiaLe_Banker,BaiJiaLe_Award_L,BaiJiaLe_Award_W,
+Serial_Count,Serial_Banker,Serial_Award_L,Serial_Award_W,
+Shuihu_Count,Shuihu_Award_L,Shuihu_Award_W,
+Shuiguoji_Count,Shuiguoji_Award_L,Shuiguoji_Award_W
+from " + database3 + @".Clearing_Game where UserID = " + comdata.UserID + @" and CountDate = '" + comdata.CountDate + @"') b on 1 = 1;
 ";
         }
 
@@ -1047,8 +1124,12 @@ Zodiac_Count,Zodiac_Banker,Zodiac_Award_L,Zodiac_Award_W,
 Horse_Count,Horse_Banker,Horse_Award_L,Horse_Award_W,
 Car_Count,Car_Banker,Car_Award_L,Car_Award_W,
 Hundred_Count,Hundred_Banker,Hundred_Award_L,Hundred_Award_W,
-BaiJiaLe_Count,BaiJiaLe_Banker,BaiJiaLe_Award_L,BaiJiaLe_Award_W),
-Serial_Count,Serial_Banker,Serial_Award_L,Serial_Award_W)
+BaiJiaLe_Count,BaiJiaLe_Banker,BaiJiaLe_Award_L,BaiJiaLe_Award_W,
+Serial_Count,Serial_Banker,Serial_Award_L,Serial_Award_W,
+Shuihu_Count,Shuihu_Award_L,Shuihu_Award_W,
+Shuiguoji_Count,Shuiguoji_Award_L,Shuiguoji_Award_W
+
+)
 select " + comdata.UserID + @" ,'" + comdata.CountDate + @"' ,
 ifnull(b.Texas_LCount,0),ifnull(b.Texas_LAward_L,0),ifnull(b.Texas_LAward_W,0),
 ifnull(b.Texas_MCount,0),ifnull(b.Texas_MAward_L,0),ifnull(b.Texas_MAward_W,0),
@@ -1059,9 +1140,25 @@ ifnull(b.Horse_Count,0)  ,ifnull(b.Horse_Banker,0),ifnull(b.Horse_Award_L,0)  ,i
 ifnull(b.Car_Count,0)  ,ifnull(b.Car_Banker,0),ifnull(b.Car_Award_L,0) ,ifnull(b.Car_Award_W,0) ,
 ifnull(b.Hundred_Count,0)  ,ifnull(b.Hundred_Banker,0),ifnull(b.Hundred_Award_L,0),ifnull(b.Hundred_Award_W,0) ,
 ifnull(b.BaiJiaLe_Count, 0)  ,ifnull(b.BaiJiaLe_Banker, 0),ifnull(b.BaiJiaLe_Award_L, 0),ifnull(b.BaiJiaLe_Award_W, 0),
-ifnull(b.Serial_Count,0)  ,ifnull(b.Serial_Banker,0),ifnull(b.Serial_Award_L,0),ifnull(b.Serial_Award_W,0)
+ifnull(b.Serial_Count,0)  ,ifnull(b.Serial_Banker,0),ifnull(b.Serial_Award_L,0),ifnull(b.Serial_Award_W,0),
+ifnull(b.Shuihu_Count, 0) ,ifnull(b.Shuihu_Award_L, 0),ifnull(b.Shuihu_Award_W, 0),
+ifnull(b.Shuiguoji_Count, 0) ,ifnull(b.Shuiguoji_Award_L, 0),ifnull(b.Shuiguoji_Award_W, 0)
 from (select " + comdata.UserID + @" userid ) a left join (
-select * from " + database3 + @".Clearing_Game where UserID = " + comdata.UserID + @" and CountDate = '" + comdata.CountDate + @"') b on 1 = 1;
+select 
+UserID ,CountDate ,
+ Texas_LCount, Texas_LAward_L ,Texas_LAward_W,
+Texas_MCount,Texas_MAward_L ,Texas_MAward_W,
+Texas_HCount,Texas_HAward_L,Texas_HAward_W,
+Scale_Count,Scale_Banker,Scale_Award_L,Scale_Award_W,
+Zodiac_Count,Zodiac_Banker,Zodiac_Award_L,Zodiac_Award_W,
+Horse_Count,Horse_Banker,Horse_Award_L,Horse_Award_W,
+Car_Count,Car_Banker,Car_Award_L,Car_Award_W,
+Hundred_Count,Hundred_Banker,Hundred_Award_L,Hundred_Award_W,
+BaiJiaLe_Count,BaiJiaLe_Banker,BaiJiaLe_Award_L,BaiJiaLe_Award_W,
+Serial_Count,Serial_Banker,Serial_Award_L,Serial_Award_W,
+Shuihu_Count,Shuihu_Award_L,Shuihu_Award_W,
+Shuiguoji_Count,Shuiguoji_Award_L,Shuiguoji_Award_W
+from " + database3 + @".Clearing_Game where UserID = " + comdata.UserID + @" and CountDate = '" + comdata.CountDate + @"') b on 1 = 1;
 ";
 
         }
@@ -1220,8 +1317,11 @@ Zodiac_Count,Zodiac_Banker,Zodiac_Award_L,Zodiac_Award_W,
 Horse_Count,Horse_Banker,Horse_Award_L,Horse_Award_W,
 Car_Count,Car_Banker,Car_Award_L,Car_Award_W,
 Hundred_Count,Hundred_Banker,Hundred_Award_L,Hundred_Award_W,
-BaiJiaLe_Count,BaiJiaLe_Banker,BaiJiaLe_Award_L,BaiJiaLe_Award_W),
-Serial_Count,Serial_Banker,Serial_Award_L,Serial_Award_W)
+BaiJiaLe_Count,BaiJiaLe_Banker,BaiJiaLe_Award_L,BaiJiaLe_Award_W,
+Serial_Count,Serial_Banker,Serial_Award_L,Serial_Award_W,
+Shuihu_Count,Shuihu_Award_L,Shuihu_Award_W,
+Shuiguoji_Count,Shuiguoji_Award_L,Shuiguoji_Award_W
+)
 select " + comdata.UserID + @" ,'" + comdata.CountDate + @"' ,
 ifnull(b.Texas_LCount,0),ifnull(b.Texas_LAward_L,0),ifnull(b.Texas_LAward_W,0),
 ifnull(b.Texas_MCount,0),ifnull(b.Texas_MAward_L,0),ifnull(b.Texas_MAward_W,0),
@@ -1232,9 +1332,25 @@ ifnull(b.Horse_Count,0) + " + comdata.InitialCount + @"  ,ifnull(b.Horse_Banker,
 ifnull(b.Car_Count,0)  ,ifnull(b.Car_Banker,0),ifnull(b.Car_Award_L,0) ,ifnull(b.Car_Award_W,0) ,
 ifnull(b.Hundred_Count,0)  ,ifnull(b.Hundred_Banker,0),ifnull(b.Hundred_Award_L,0),ifnull(b.Hundred_Award_W,0),
 ifnull(b.BaiJiaLe_Count, 0)  ,ifnull(b.BaiJiaLe_Banker, 0),ifnull(b.BaiJiaLe_Award_L, 0),ifnull(b.BaiJiaLe_Award_W, 0),
-ifnull(b.Serial_Count,0)  ,ifnull(b.Serial_Banker,0),ifnull(b.Serial_Award_L,0),ifnull(b.Serial_Award_W,0)
+ifnull(b.Serial_Count,0)  ,ifnull(b.Serial_Banker,0),ifnull(b.Serial_Award_L,0),ifnull(b.Serial_Award_W,0),
+ifnull(b.Shuihu_Count, 0) ,ifnull(b.Shuihu_Award_L, 0),ifnull(b.Shuihu_Award_W, 0),
+ifnull(b.Shuiguoji_Count, 0) ,ifnull(b.Shuiguoji_Award_L, 0),ifnull(b.Shuiguoji_Award_W, 0)
 from (select " + comdata.UserID + @" userid ) a left join (
-select * from " + database3 + @".Clearing_Game where UserID = " + comdata.UserID + @" and CountDate = '" + comdata.CountDate + @"') b on 1 = 1;
+select 
+UserID ,CountDate ,
+ Texas_LCount, Texas_LAward_L ,Texas_LAward_W,
+Texas_MCount,Texas_MAward_L ,Texas_MAward_W,
+Texas_HCount,Texas_HAward_L,Texas_HAward_W,
+Scale_Count,Scale_Banker,Scale_Award_L,Scale_Award_W,
+Zodiac_Count,Zodiac_Banker,Zodiac_Award_L,Zodiac_Award_W,
+Horse_Count,Horse_Banker,Horse_Award_L,Horse_Award_W,
+Car_Count,Car_Banker,Car_Award_L,Car_Award_W,
+Hundred_Count,Hundred_Banker,Hundred_Award_L,Hundred_Award_W,
+BaiJiaLe_Count,BaiJiaLe_Banker,BaiJiaLe_Award_L,BaiJiaLe_Award_W,
+Serial_Count,Serial_Banker,Serial_Award_L,Serial_Award_W,
+Shuihu_Count,Shuihu_Award_L,Shuihu_Award_W,
+Shuiguoji_Count,Shuiguoji_Award_L,Shuiguoji_Award_W
+from " + database3 + @".Clearing_Game where UserID = " + comdata.UserID + @" and CountDate = '" + comdata.CountDate + @"') b on 1 = 1;
 ";
 
         }
@@ -1359,8 +1475,11 @@ Zodiac_Count,Zodiac_Banker,Zodiac_Award_L,Zodiac_Award_W,
 Horse_Count,Horse_Banker,Horse_Award_L,Horse_Award_W,
 Car_Count,Car_Banker,Car_Award_L,Car_Award_W,
 Hundred_Count,Hundred_Banker,Hundred_Award_L,Hundred_Award_W,
-BaiJiaLe_Count,BaiJiaLe_Banker,BaiJiaLe_Award_L,BaiJiaLe_Award_W),
-Serial_Count,Serial_Banker,Serial_Award_L,Serial_Award_W)
+BaiJiaLe_Count,BaiJiaLe_Banker,BaiJiaLe_Award_L,BaiJiaLe_Award_W,
+Serial_Count,Serial_Banker,Serial_Award_L,Serial_Award_W,
+Shuihu_Count,Shuihu_Award_L,Shuihu_Award_W,
+Shuiguoji_Count,Shuiguoji_Award_L,Shuiguoji_Award_W
+)
 select " + comdata.UserID + @" ,'" + comdata.CountDate + @"' ,
 ifnull(b.Texas_LCount,0),ifnull(b.Texas_LAward_L,0),ifnull(b.Texas_LAward_W,0),
 ifnull(b.Texas_MCount,0),ifnull(b.Texas_MAward_L,0),ifnull(b.Texas_MAward_W,0),
@@ -1371,9 +1490,25 @@ ifnull(b.Horse_Count,0)   ,ifnull(b.Horse_Banker,0),ifnull(b.Horse_Award_L,0)  ,
 ifnull(b.Car_Count,0) + " + comdata.InitialCount + @" ,ifnull(b.Car_Banker,0),ifnull(b.Car_Award_L,0)+ " + comdata.InitialL + @" ,ifnull(b.Car_Award_W,0) + " + comdata.InitialW + @", 
 ifnull(b.Hundred_Count,0)  ,ifnull(b.Hundred_Banker,0),ifnull(b.Hundred_Award_L,0),ifnull(b.Hundred_Award_W,0),
 ifnull(b.BaiJiaLe_Count, 0)  ,ifnull(b.BaiJiaLe_Banker, 0),ifnull(b.BaiJiaLe_Award_L, 0),ifnull(b.BaiJiaLe_Award_W, 0),
-ifnull(b.Serial_Count,0)  ,ifnull(b.Serial_Banker,0),ifnull(b.Serial_Award_L,0),ifnull(b.Serial_Award_W,0)
+ifnull(b.Serial_Count,0)  ,ifnull(b.Serial_Banker,0),ifnull(b.Serial_Award_L,0),ifnull(b.Serial_Award_W,0),
+ifnull(b.Shuihu_Count, 0) ,ifnull(b.Shuihu_Award_L, 0),ifnull(b.Shuihu_Award_W, 0),
+ifnull(b.Shuiguoji_Count, 0) ,ifnull(b.Shuiguoji_Award_L, 0),ifnull(b.Shuiguoji_Award_W, 0)
 from (select " + comdata.UserID + @" userid ) a left join (
-select * from " + database3 + @".Clearing_Game where UserID = " + comdata.UserID + @" and CountDate = '" + comdata.CountDate + @"') b on 1 = 1;
+select 
+UserID ,CountDate ,
+ Texas_LCount, Texas_LAward_L ,Texas_LAward_W,
+Texas_MCount,Texas_MAward_L ,Texas_MAward_W,
+Texas_HCount,Texas_HAward_L,Texas_HAward_W,
+Scale_Count,Scale_Banker,Scale_Award_L,Scale_Award_W,
+Zodiac_Count,Zodiac_Banker,Zodiac_Award_L,Zodiac_Award_W,
+Horse_Count,Horse_Banker,Horse_Award_L,Horse_Award_W,
+Car_Count,Car_Banker,Car_Award_L,Car_Award_W,
+Hundred_Count,Hundred_Banker,Hundred_Award_L,Hundred_Award_W,
+BaiJiaLe_Count,BaiJiaLe_Banker,BaiJiaLe_Award_L,BaiJiaLe_Award_W,
+Serial_Count,Serial_Banker,Serial_Award_L,Serial_Award_W,
+Shuihu_Count,Shuihu_Award_L,Shuihu_Award_W,
+Shuiguoji_Count,Shuiguoji_Award_L,Shuiguoji_Award_W
+from " + database3 + @".Clearing_Game where UserID = " + comdata.UserID + @" and CountDate = '" + comdata.CountDate + @"') b on 1 = 1;
 ";
 
 
@@ -1519,8 +1654,12 @@ Zodiac_Count,Zodiac_Banker,Zodiac_Award_L,Zodiac_Award_W,
 Horse_Count,Horse_Banker,Horse_Award_L,Horse_Award_W,
 Car_Count,Car_Banker,Car_Award_L,Car_Award_W,
 Hundred_Count,Hundred_Banker,Hundred_Award_L,Hundred_Award_W,
-BaiJiaLe_Count,BaiJiaLe_Banker,BaiJiaLe_Award_L,BaiJiaLe_Award_W),
-Serial_Count,Serial_Banker,Serial_Award_L,Serial_Award_W)
+BaiJiaLe_Count,BaiJiaLe_Banker,BaiJiaLe_Award_L,BaiJiaLe_Award_W,
+Serial_Count,Serial_Banker,Serial_Award_L,Serial_Award_W,
+Shuihu_Count,Shuihu_Award_L,Shuihu_Award_W,
+Shuiguoji_Count,Shuiguoji_Award_L,Shuiguoji_Award_W
+
+)
 select " + comdata.UserID + @" ,'" + comdata.CountDate + @"' ,
 ifnull(b.Texas_LCount,0),ifnull(b.Texas_LAward_L,0),ifnull(b.Texas_LAward_W,0),
 ifnull(b.Texas_MCount,0),ifnull(b.Texas_MAward_L,0),ifnull(b.Texas_MAward_W,0),
@@ -1531,9 +1670,25 @@ ifnull(b.Horse_Count,0)  ,ifnull(b.Horse_Banker,0),ifnull(b.Horse_Award_L,0)  ,i
 ifnull(b.Car_Count,0)  ,ifnull(b.Car_Banker,0),ifnull(b.Car_Award_L,0) ,ifnull(b.Car_Award_W,0) ,
 ifnull(b.Hundred_Count,0) + " + comdata.InitialCount + @" ,ifnull(b.Hundred_Banker,0),ifnull(b.Hundred_Award_L,0)+ " + comdata.InitialL + @" ,ifnull(b.Hundred_Award_W,0) + " + comdata.InitialW + @" ,
 ifnull(b.BaiJiaLe_Count, 0)  ,ifnull(b.BaiJiaLe_Banker, 0),ifnull(b.BaiJiaLe_Award_L, 0),ifnull(b.BaiJiaLe_Award_W, 0),
-ifnull(b.Serial_Count,0)  ,ifnull(b.Serial_Banker,0),ifnull(b.Serial_Award_L,0),ifnull(b.Serial_Award_W,0)
+ifnull(b.Serial_Count,0)  ,ifnull(b.Serial_Banker,0),ifnull(b.Serial_Award_L,0),ifnull(b.Serial_Award_W,0),
+ifnull(b.Shuihu_Count, 0) ,ifnull(b.Shuihu_Award_L, 0),ifnull(b.Shuihu_Award_W, 0),
+ifnull(b.Shuiguoji_Count, 0) ,ifnull(b.Shuiguoji_Award_L, 0),ifnull(b.Shuiguoji_Award_W, 0)
 from (select " + comdata.UserID + @" userid ) a left join (
-select * from " + database3 + @".Clearing_Game where UserID = " + comdata.UserID + @" and CountDate = '" + comdata.CountDate + @"') b on 1 = 1;
+select 
+UserID ,CountDate ,
+ Texas_LCount, Texas_LAward_L ,Texas_LAward_W,
+Texas_MCount,Texas_MAward_L ,Texas_MAward_W,
+Texas_HCount,Texas_HAward_L,Texas_HAward_W,
+Scale_Count,Scale_Banker,Scale_Award_L,Scale_Award_W,
+Zodiac_Count,Zodiac_Banker,Zodiac_Award_L,Zodiac_Award_W,
+Horse_Count,Horse_Banker,Horse_Award_L,Horse_Award_W,
+Car_Count,Car_Banker,Car_Award_L,Car_Award_W,
+Hundred_Count,Hundred_Banker,Hundred_Award_L,Hundred_Award_W,
+BaiJiaLe_Count,BaiJiaLe_Banker,BaiJiaLe_Award_L,BaiJiaLe_Award_W,
+Serial_Count,Serial_Banker,Serial_Award_L,Serial_Award_W,
+Shuihu_Count,Shuihu_Award_L,Shuihu_Award_W,
+Shuiguoji_Count,Shuiguoji_Award_L,Shuiguoji_Award_W
+from " + database3 + @".Clearing_Game where UserID = " + comdata.UserID + @" and CountDate = '" + comdata.CountDate + @"') b on 1 = 1;
 ";
         }
 
@@ -1682,7 +1837,7 @@ Horse_Count,Horse_Banker,Horse_Award_L,Horse_Award_W,
 Car_Count,Car_Banker,Car_Award_L,Car_Award_W,
 Hundred_Count,Hundred_Banker,Hundred_Award_L,Hundred_Award_W,
 BaiJiaLe_Count,BaiJiaLe_Banker,BaiJiaLe_Award_L,BaiJiaLe_Award_W,
-Serial_Count,Serial_Banker,Serial_Award_L,Serial_Award_W),
+Serial_Count,Serial_Banker,Serial_Award_L,Serial_Award_W,
 Shuihu_Count,Shuihu_Award_L,Shuihu_Award_W,
 Shuiguoji_Count,Shuiguoji_Award_L,Shuiguoji_Award_W
 )
@@ -1700,7 +1855,21 @@ ifnull(b.Serial_Count,0)  ,ifnull(b.Serial_Banker,0),ifnull(b.Serial_Award_L,0),
 ifnull(b.Shuihu_Count,0) + " + comdata.InitialCount + @" ,ifnull(b.Shuihu_Award_L,0)+ " + comdata.InitialL + @" ,ifnull(b.Shuihu_Award_W,0) + " + comdata.InitialW + @" ,
 ifnull(b.Shuiguoji_Count, 0) ,ifnull(b.Shuiguoji_Award_L, 0),ifnull(b.Shuiguoji_Award_W, 0)
 from (select " + comdata.UserID + @" userid ) a left join (
-select * from " + database3 + @".Clearing_Game where UserID = " + comdata.UserID + @" and CountDate = '" + comdata.CountDate + @"') b on 1 = 1;
+select 
+UserID ,CountDate ,
+ Texas_LCount, Texas_LAward_L ,Texas_LAward_W,
+Texas_MCount,Texas_MAward_L ,Texas_MAward_W,
+Texas_HCount,Texas_HAward_L,Texas_HAward_W,
+Scale_Count,Scale_Banker,Scale_Award_L,Scale_Award_W,
+Zodiac_Count,Zodiac_Banker,Zodiac_Award_L,Zodiac_Award_W,
+Horse_Count,Horse_Banker,Horse_Award_L,Horse_Award_W,
+Car_Count,Car_Banker,Car_Award_L,Car_Award_W,
+Hundred_Count,Hundred_Banker,Hundred_Award_L,Hundred_Award_W,
+BaiJiaLe_Count,BaiJiaLe_Banker,BaiJiaLe_Award_L,BaiJiaLe_Award_W,
+Serial_Count,Serial_Banker,Serial_Award_L,Serial_Award_W,
+Shuihu_Count,Shuihu_Award_L,Shuihu_Award_W,
+Shuiguoji_Count,Shuiguoji_Award_L,Shuiguoji_Award_W
+from " + database3 + @".Clearing_Game where UserID = " + comdata.UserID + @" and CountDate = '" + comdata.CountDate + @"') b on 1 = 1;
 ";
         }
 
@@ -1709,7 +1878,8 @@ select * from " + database3 + @".Clearing_Game where UserID = " + comdata.UserID
         List<CommonGameData> sumData2 = new List<CommonGameData>();
         foreach (IGrouping<string, CommonGameData> info in query2)
         {
-            List<CommonGameData> sl = info.ToList<CommonGameData>();//分组后的集合
+            List<CommonGameData> sl = info.ToList<CommonGameData>();//分组后的集合sl
+           
             CommonGameData co = new CommonGameData();
             co.UserID = sl[0].UserID;
             co.CountDate = sl[0].CountDate;
@@ -1854,7 +2024,7 @@ Horse_Count,Horse_Banker,Horse_Award_L,Horse_Award_W,
 Car_Count,Car_Banker,Car_Award_L,Car_Award_W,
 Hundred_Count,Hundred_Banker,Hundred_Award_L,Hundred_Award_W,
 BaiJiaLe_Count,BaiJiaLe_Banker,BaiJiaLe_Award_L,BaiJiaLe_Award_W,
-Serial_Count,Serial_Banker,Serial_Award_L,Serial_Award_W),
+Serial_Count,Serial_Banker,Serial_Award_L,Serial_Award_W,
 Shuihu_Count,Shuihu_Award_L,Shuihu_Award_W,
 Shuiguoji_Count,Shuiguoji_Award_L,Shuiguoji_Award_W
 )
@@ -1872,7 +2042,21 @@ ifnull(b.Serial_Count,0)  ,ifnull(b.Serial_Banker,0),ifnull(b.Serial_Award_L,0),
 ifnull(b.Shuihu_Count, 0) ,ifnull(b.Shuihu_Award_L, 0),ifnull(b.Shuihu_Award_W, 0),
 ifnull(b.Shuiguoji_Count,0) + " + comdata.InitialCount + @" ,ifnull(b.Shuiguoji_Award_L,0)+ " + comdata.InitialL + @" ,ifnull(b.Shuiguoji_Award_W,0) + " + comdata.InitialW + @" 
 from (select " + comdata.UserID + @" userid ) a left join (
-select * from " + database3 + @".Clearing_Game where UserID = " + comdata.UserID + @" and CountDate = '" + comdata.CountDate + @"') b on 1 = 1;
+select 
+UserID ,CountDate ,
+ Texas_LCount, Texas_LAward_L ,Texas_LAward_W,
+Texas_MCount,Texas_MAward_L ,Texas_MAward_W,
+Texas_HCount,Texas_HAward_L,Texas_HAward_W,
+Scale_Count,Scale_Banker,Scale_Award_L,Scale_Award_W,
+Zodiac_Count,Zodiac_Banker,Zodiac_Award_L,Zodiac_Award_W,
+Horse_Count,Horse_Banker,Horse_Award_L,Horse_Award_W,
+Car_Count,Car_Banker,Car_Award_L,Car_Award_W,
+Hundred_Count,Hundred_Banker,Hundred_Award_L,Hundred_Award_W,
+BaiJiaLe_Count,BaiJiaLe_Banker,BaiJiaLe_Award_L,BaiJiaLe_Award_W,
+Serial_Count,Serial_Banker,Serial_Award_L,Serial_Award_W,
+Shuihu_Count,Shuihu_Award_L,Shuihu_Award_W,
+Shuiguoji_Count,Shuiguoji_Award_L,Shuiguoji_Award_W
+from " + database3 + @".Clearing_Game where UserID = " + comdata.UserID + @" and CountDate = '" + comdata.CountDate + @"') b on 1 = 1;
 ";
         }
 

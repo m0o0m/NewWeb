@@ -1,5 +1,5 @@
 
-ÖV
+ÌX
 Service.protoProtoCmd.Service"$
 BGSetZfbPotOpenReq
 isOpen ("5
@@ -267,7 +267,22 @@ currStatus ("
 MobileSwitchOperator_S
 operator_type (5
 mobile_switch (2.ProtoCmd.Service.MobileSwitch
-suc (",
+suc ("#
+MiniGameOpenReq_S
+isOpen ("0
+MiniGameOpenReq_C
+suc (
+isOpen ("M
+MiniGamePot_Operator_C
+opType (
+opValue (
+
+strContent (	"5
+MiniGamePot_Operator_S
+opType (
+suc ("'
+MiniGamePot_Select_S
+ChipNum (",
 BGSetHerocraftTwiceOpenReq
 isOpen ("=
 BGSetHerocraftTwiceOpenRes
@@ -432,7 +447,7 @@ userExData (2.ProtoCmd.Service.UserExData2
 	toolsInfo (2.ProtoCmd.Service.ToolsInfo*
 vipInfo (2.ProtoCmd.Service.VipInfo.
 	levelInfo (2.ProtoCmd.Service.LevelInfo*
-vipCard (2.ProtoCmd.Service.VipCard*°
+vipCard (2.ProtoCmd.Service.VipCard*“
 
 ServiceCmd
 SC_BEGIN
@@ -492,8 +507,10 @@ ServiceCmd
 SC_FruiteBigPotD
 SC_SET_BACCARATPOT_OPENE
 SC_SELECT_BACCARAT_POTF
-SC_OPERTOR_BACCARAT_POTG
-SC_TOTAL»*±
+SC_OPERTOR_BACCARAT_POTG
+SC_OPERTOR_MINI_POTH
+SC_SELECT_MINI_POTI
+SC_TOTAL»*‚
 	CenterCmd
 CS_BEGIN
 CS_CONNECT_ERROR
@@ -552,7 +569,9 @@ ServiceCmd
 CS_FruiteBigPotD
 CS_SET_BACCARART_OPENE
 CS_SELECT_BACCARAT_POTF
-CS_OPERTOR_BACCARAT_POTG
+CS_OPERTOR_BACCARAT_POTG
+CS_OPERTOR_MINI_POTH
+CS_SELECT_MINI_POTI
 CS_TOTALd*†
 
 ModuleType

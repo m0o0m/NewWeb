@@ -1056,6 +1056,11 @@ namespace Web.Pay.Controllers
             log.Info("#############AppTreasure : 进入应用宝支付接口#########  ");
             log.Info("AppTreasure应用宝生成订单" + Utils.GetUrl());
 
+
+
+
+        
+
             string _transtime = queryvalues.ContainsKey("transtime") ? queryvalues["transtime"] : string.Empty;
             string _productid = queryvalues.ContainsKey("productid") ? queryvalues["productid"] : string.Empty;
             int _identityid = queryvalues.ContainsKey("identityid") ? Convert.ToInt32(queryvalues["identityid"]) : 0;

@@ -29,6 +29,26 @@ namespace GL.Data.DAL
                 return i;
             }
         }
+
+
+        public static IEnumerable<AspNetUserRoles> GetRoleString(string userid)
+        {
+            using (var cn = new MySqlConnection(sqlconnectionString))
+            {
+
+                cn.Open();
+                IEnumerable<AspNetUserRoles> i = cn.Query<AspNetUserRoles>(
+@"
+select  b.`Name` as RoleName from GServerInfo.AspNetUserRoles as a,
+GServerInfo.AspNetRoles as b
+where a.RoleId = b.Id and a.UserId = @userid;
+",new { userid = userid });
+                cn.Close();
+                return i;
+            }
+        }
+
+
         public static IEnumerable<Resource> GetResourceListByUserId(string userid)
         {
             
@@ -120,14 +140,14 @@ on rr.Id in (
                 cn.Open();
                 IEnumerable<Resource> i = cn.Query<Resource>(@"
 select DISTINCT * from (
-select OrderIndex,`No`,`Name`,PNo,Action,`Level`,`Group`,LiId from AspNetAuthority ,AspNetResource  where AspNetAuthority.id IN
+select OrderIndex,`No`,`Name`,PNo,Action,`Level`,`Group`,LiId,AspNetResource.Type from AspNetAuthority ,AspNetResource  where AspNetAuthority.id IN
 (
 select RoleId from AspNetUserRoles where UserId = @Id
 union ALL
 select @Id
 ) and AspNetAuthority.ResourceNo = AspNetResource.`No`
 union all
-SELECT DISTINCT OrderIndex,`No`,`Name`,PNo,Action,`Level`,`Group`,LiId from AspNetResource,(
+SELECT DISTINCT OrderIndex,`No`,`Name`,PNo,Action,`Level`,`Group`,LiId,AspNetResource.Type from AspNetResource,(
   SELECT CONCAT(',',ResourceNo) as ResourceNo  from AspNetAuthority where AspNetAuthority.id IN
 	(
 	select RoleId from AspNetUserRoles where UserId = @Id
@@ -144,6 +164,31 @@ order by t.Group asc, t.OrderIndex  desc
             }
         }
 
+        /// <summary>
+        /// 获取没有的按钮
+        /// </summary>
+        /// <param name="userid"></param>
+        /// <returns></returns>
+        public static List<Resource> GetNotButton(string userid)
+        {
+            using (var cn = new MySqlConnection(sqlconnectionString))
+            {
+
+                cn.Open();
+                IEnumerable<Resource> i = cn.Query<Resource>(@"
+select Name from aspnetresource where Type=1 and mark not in (
+select c.mark from AspNetUserRoles as a ,aspnetauthority as b,aspnetresource as c
+where a.UserId = @userid and a.RoleId = b.Id and b.ResourceNo = c.`No` and c.mark !=''
+)
+
+
+
+", new  { userid = userid });
+                cn.Close();
+                return i.ToList();
+            }
+        }
+
 
         public static IEnumerable<Resource> GetAllResourceList()
         {
@@ -152,7 +197,7 @@ order by t.Group asc, t.OrderIndex  desc
             {
 
                 cn.Open();
-                IEnumerable<Resource> i = cn.Query<Resource>(@"select * from "+ database2 + @".AspNetResource as ar order by ar.Group asc, ar.OrderIndex desc", new Resource {  });
+                IEnumerable<Resource> i = cn.Query<Resource>(@"select * from "+ database2 + @".AspNetResource  as ar  order by ar.Group asc, ar.OrderIndex desc", new Resource {  });
                 cn.Close();
                 return i;
             }

@@ -29,8 +29,23 @@ namespace MWeb.Controllers
     public class NoAuthController : Controller
     {
         public static string PostUrl = ConfigurationManager.AppSettings["WebReference.Service.PostUrl"];
+
+        public void Test() {
+            DaiLiBLL.Test();
+        }
+
+
+
         public object FreezeNo([FromBody]OMModel model)
         {
+            ILog log = LogManager.GetLogger("封号");
+          
+            log.Info("model.dwUserID=" + model.dwUserID);
+            log.Info("model.Reason=" + model.Reason);
+            log.Info("url=" + Request.Url.ToString());
+           
+
+
             Service_Freeze_C ServiceFreezeC;
 
             ServiceFreezeC = Service_Freeze_C.CreateBuilder()
@@ -51,10 +66,14 @@ namespace MWeb.Controllers
 
                     if (ServiceFreezeS.Suc)
                     {
+                        log.Info("服务器返回封号结果：成功" );
+
                         return Content("0", "string");
                     }
                     else
                     {
+                        log.Info("服务器返回封号结果：失败");
+
                         RoleBLL.UpdateRoleNoFreeze(
                           model.Reason, DateTime.Now.AddMinutes(5256000),
                           model.dwUserID

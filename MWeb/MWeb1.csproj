@@ -7839,6 +7839,11 @@
     <Content Include="Views\GameData\SerialGameLog_PageList.cshtml" />
     <Content Include="Views\GameData\SerialChangguiDataSum.cshtml" />
     <Content Include="Views\GameData\SerialChangguiDataSum_PageList.cshtml" />
+    <Content Include="Views\System\UpdateStringPushAd.cshtml" />
+    <Content Include="Views\System\UpdateStringPushAd_PageList.cshtml" />
+    <Content Include="Views\GameData\KuCunList.cshtml" />
+    <Content Include="Views\GameData\KuCunList_PageList.cshtml" />
+    <Content Include="Views\GameData\KucunListUpdate.cshtml" />
     <None Include="Web References\cn.org.nciic.ws\NciicServices.wsdl">
       <SubType>Designer</SubType>
     </None>

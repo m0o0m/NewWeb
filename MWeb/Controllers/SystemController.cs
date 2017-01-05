@@ -1834,6 +1834,28 @@ namespace MWeb.Controllers
 
 
 
+        [QueryValues]
+        public ActionResult UpdateStringPushAd(Dictionary<string, string> queryvalues) {
+
+
+            int Platform = queryvalues.ContainsKey("Platform") ? Convert.ToInt32(queryvalues["Platform"]) : 1;//设备
+            int Channels = queryvalues.ContainsKey("Channels") ? Convert.ToInt32(queryvalues["Channels"]) : 0;//设备
+            int page = queryvalues.ContainsKey("page") ? Convert.ToInt32(queryvalues["page"]) : 1;//第几页
+
+
+            LoginRegisterDataView model = new LoginRegisterDataView();
+            model.Channels = 0;
+            model.Platform = 1;
+            model.Page = page;
+
+            PagedList<StrongPushADRecord> record = StrongPushADBLL.GetStrongPushADRecord( model);
+
+          
+            model.Data = record;
+            return View(model);
+        }
+
+
     }
 
 }

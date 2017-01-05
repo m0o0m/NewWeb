@@ -14,6 +14,8 @@ namespace GL.Data.MWeb.Identity
     {
         public string NickName { get; set; }
 
+      
+
         public ApplicationUser()
         {
             this.Id = Guid.NewGuid().ToString();

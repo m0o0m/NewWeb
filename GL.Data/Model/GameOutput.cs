@@ -104,7 +104,10 @@ namespace GL.Data.Model
         水浒传 = 19,
         水果机 = 20,
         澳门扑克 = 21,
-        连环夺宝 = 22
+        连环夺宝 = 22,
+
+
+        翻翻乐 = 104  //库存使用
     }
 
     public enum itemName

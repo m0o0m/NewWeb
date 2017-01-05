@@ -1,4 +1,9 @@
-﻿@model object
+﻿@using System.Linq
+@using Microsoft.AspNet.Identity
+@using GL.Data.BLL
+@using GL.Command.DBUtility
+@using System.Collections.Generic
+@model object
 @{
     ViewBag.Title = "管理员管理 -- 列表";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -86,6 +91,29 @@
         function successPageFun() {
 
         }
+
+
+        $(function () {
+
+
+
+
+            @{
+                  if (User.Identity.GetUserName() != "admin") {
+                      List<Resource> resListType1 = new List<Resource>();
+                      resListType1 = SUBLL.GetNotButton(User.Identity.GetUserId());
+                      foreach (var item in resListType1)
+                      {
+                           @Html.Raw(@"  
+                          $('input[value="+item.Name+@"]').each(function () {
+                         $(this).css('display', 'none');
+                         });
+");
+                      }
+                  }
+
+              }
+        })
 
     </script>
 }

@@ -32,6 +32,10 @@ namespace MWeb.protobuf.SCmd
                     return Baccarat_Operator_S.ParseFrom(tbind.body.ToBytes());
                 case CenterCmd.CS_SELECT_BACCARAT_POT:
                     return Baccarat_Select_S.ParseFrom(tbind.body.ToBytes());
+                case CenterCmd.CS_SELECT_MINI_POT:
+                    return MiniGamePot_Select_S.ParseFrom(tbind.body.ToBytes());
+                case CenterCmd.CS_OPERTOR_MINI_POT:
+                    return MiniGamePot_Operator_S.ParseFrom(tbind.body.ToBytes());
                 case CenterCmd.CS_CONNECT_ERROR:
                     return null;
             }

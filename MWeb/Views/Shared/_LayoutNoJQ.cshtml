@@ -80,8 +80,10 @@
 List<Resource> resList =new List<Resource> ();
 if(User.Identity.GetUserName()=="admin"){//系统默认管理员
          resList =SUBLL.GetAllResourceList();     
+       resList = resList.Where(m => m.Type == 0).ToList();  
 }else{
-    resList = SUBLL.GetAllResourceListByUserId(User.Identity.GetUserId());           
+    resList = SUBLL.GetAllResourceListByUserId(User.Identity.GetUserId()); 
+     resList = resList.Where(m => m.Type == 0).ToList();            
 }
 
 

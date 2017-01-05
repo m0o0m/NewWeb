@@ -1,5 +1,6 @@
 ﻿@using Webdiyer.WebControls.Mvc;
 @using GL.Data.Model;
+@using GL.Data.BLL;
 @model Role
 @{
     ViewBag.Title = "会员管理 -- 列表";
@@ -238,7 +239,13 @@
                                     }
                                 }
                                <th>@onlineInfo </th>
-                                <th>最后登录渠道</th><th>@Model.LoginAgent</th>
+                                <th>最后登录渠道</th><th>
+                                @{ 
+                                   
+
+                                }
+                                
+                                @Model.LoginAgent</th>
                             </tr>
                     </table>
                 </div>

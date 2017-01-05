@@ -30,7 +30,7 @@ namespace MWeb.Controllers
 
             IEnumerable<DaiLiUsers> modelList = DaiLiBLL.GetDaiLiUsers();
 
-            
+       
 
             return View(modelList);
         }

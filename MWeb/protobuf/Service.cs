@@ -176,6 +176,16 @@ namespace ProtoCmd.Service {
     internal static pb::FieldAccess.FieldAccessorTable<global::ProtoCmd.Service.MobileSwitchOperator_C, global::ProtoCmd.Service.MobileSwitchOperator_C.Builder> internal__static_ProtoCmd_Service_MobileSwitchOperator_C__FieldAccessorTable;
     internal static pbd::MessageDescriptor internal__static_ProtoCmd_Service_MobileSwitchOperator_S__Descriptor;
     internal static pb::FieldAccess.FieldAccessorTable<global::ProtoCmd.Service.MobileSwitchOperator_S, global::ProtoCmd.Service.MobileSwitchOperator_S.Builder> internal__static_ProtoCmd_Service_MobileSwitchOperator_S__FieldAccessorTable;
+    internal static pbd::MessageDescriptor internal__static_ProtoCmd_Service_MiniGameOpenReq_S__Descriptor;
+    internal static pb::FieldAccess.FieldAccessorTable<global::ProtoCmd.Service.MiniGameOpenReq_S, global::ProtoCmd.Service.MiniGameOpenReq_S.Builder> internal__static_ProtoCmd_Service_MiniGameOpenReq_S__FieldAccessorTable;
+    internal static pbd::MessageDescriptor internal__static_ProtoCmd_Service_MiniGameOpenReq_C__Descriptor;
+    internal static pb::FieldAccess.FieldAccessorTable<global::ProtoCmd.Service.MiniGameOpenReq_C, global::ProtoCmd.Service.MiniGameOpenReq_C.Builder> internal__static_ProtoCmd_Service_MiniGameOpenReq_C__FieldAccessorTable;
+    internal static pbd::MessageDescriptor internal__static_ProtoCmd_Service_MiniGamePot_Operator_C__Descriptor;
+    internal static pb::FieldAccess.FieldAccessorTable<global::ProtoCmd.Service.MiniGamePot_Operator_C, global::ProtoCmd.Service.MiniGamePot_Operator_C.Builder> internal__static_ProtoCmd_Service_MiniGamePot_Operator_C__FieldAccessorTable;
+    internal static pbd::MessageDescriptor internal__static_ProtoCmd_Service_MiniGamePot_Operator_S__Descriptor;
+    internal static pb::FieldAccess.FieldAccessorTable<global::ProtoCmd.Service.MiniGamePot_Operator_S, global::ProtoCmd.Service.MiniGamePot_Operator_S.Builder> internal__static_ProtoCmd_Service_MiniGamePot_Operator_S__FieldAccessorTable;
+    internal static pbd::MessageDescriptor internal__static_ProtoCmd_Service_MiniGamePot_Select_S__Descriptor;
+    internal static pb::FieldAccess.FieldAccessorTable<global::ProtoCmd.Service.MiniGamePot_Select_S, global::ProtoCmd.Service.MiniGamePot_Select_S.Builder> internal__static_ProtoCmd_Service_MiniGamePot_Select_S__FieldAccessorTable;
     internal static pbd::MessageDescriptor internal__static_ProtoCmd_Service_BGSetHerocraftTwiceOpenReq__Descriptor;
     internal static pb::FieldAccess.FieldAccessorTable<global::ProtoCmd.Service.BGSetHerocraftTwiceOpenReq, global::ProtoCmd.Service.BGSetHerocraftTwiceOpenReq.Builder> internal__static_ProtoCmd_Service_BGSetHerocraftTwiceOpenReq__FieldAccessorTable;
     internal static pbd::MessageDescriptor internal__static_ProtoCmd_Service_BGSetHerocraftTwiceOpenRes__Descriptor;
@@ -366,141 +376,149 @@ namespace ProtoCmd.Service {
             "Y2gYAiABKAsyHi5Qcm90b0NtZC5TZXJ2aWNlLk1vYmlsZVN3aXRjaCJzChZN", 
             "b2JpbGVTd2l0Y2hPcGVyYXRvcl9TEhUKDW9wZXJhdG9yX3R5cGUYASABKAUS", 
             "NQoNbW9iaWxlX3N3aXRjaBgCIAEoCzIeLlByb3RvQ21kLlNlcnZpY2UuTW9i", 
-            "aWxlU3dpdGNoEgsKA3N1YxgDIAEoCCIsChpCR1NldEhlcm9jcmFmdFR3aWNl", 
-            "T3BlblJlcRIOCgZpc09wZW4YASABKAUiPQoaQkdTZXRIZXJvY3JhZnRUd2lj", 
-            "ZU9wZW5SZXMSCwoDc3VjGAEgASgFEhIKCmN1cnJTdGF0dXMYAiABKAUiLwod", 
-            "QkdTZXRNaWRhdXR1bW5GZXN0aXZhbE9wZW5SZXESDgoGaXNPcGVuGAEgASgF", 
-            "IkAKHUJHU2V0TWlkYXV0dW1uRmVzdGl2YWxPcGVuUmVzEgsKA3N1YxgBIAEo", 
-            "BRISCgpjdXJyU3RhdHVzGAIgASgFIhkKCkRiUHZwQ2ZnX1MSCwoDc3VjGAEg", 
-            "ASgIIj0KEUFyY2FkZUdhbWVTdG9ja19DEgsKA21vZBgBIAEoBRIMCgR0eXBl", 
-            "GAIgASgFEg0KBXZhbHVlGAMgASgFIiAKEUFyY2FkZUdhbWVTdG9ja19TEgsK", 
-            "A3N1YxgBIAEoCCI3CgtTaHVpSHVQb3RfQxILCgNtb2QYASABKAUSDAoEdHlw", 
-            "ZRgCIAEoBRINCgV2YWx1ZRgDIAEoBSIaCgtTaHVpSHVQb3RfUxILCgNzdWMY", 
-            "ASABKAgiOgoORnJ1aXRlQmlnUG90X0MSCwoDbW9kGAEgASgFEgwKBHR5cGUY", 
-            "AiABKAUSDQoFdmFsdWUYAyABKAUiHQoORnJ1aXRlQmlnUG90X1MSCwoDc3Vj", 
-            "GAEgASgIIikKF0JHU2V0QmFjY2FyYXRQT1RPcGVuUmVxEg4KBmlzT3BlbhgB", 
-            "IAEoBSI6ChdCR1NldEJhY2NhcmF0UE9UT3BlblJlcxILCgNzdWMYASABKAUS", 
-            "EgoKY3VyclN0YXR1cxgCIAEoBSIkChFCYWNjYXJhdF9TZWxlY3RfUxIPCgdD", 
-            "aGlwTnVtGAEgAigEIkoKE0JhY2NhcmF0X09wZXJhdG9yX0MSDgoGb3BUeXBl", 
-            "GAEgASgNEg8KB29wVmFsdWUYAiABKAQSEgoKc3RyQ29udGVudBgDIAEoCSIy", 
-            "ChNCYWNjYXJhdF9PcGVyYXRvcl9TEg4KBm9wVHlwZRgBIAEoDRILCgNzdWMY", 
-            "AiABKAgiJgoPUXVlcnlSb2JvdFN0YXR1EhMKC21vZHVsZV90eXBlGAEgASgN", 
-            "IkUKEU1vZGlmeVJvYm90Q29uZmlnEhEKCWdhbWVfdHlwZRgBIAIoDRINCgVs", 
-            "aW1pdBgCIAMoDRIOCgZpc19iZXQYAyABKA0iqwEKDExvZ2luUmVxdWVzdBIR", 
-            "CglnYW1lX3R5cGUYASACKA0SFwoPbG9naW5fZnJlcXVlbmN5GAIgAigNEhEK", 
-            "CWxvZ2luX2NudBgDIAIoBRIQCghzdHJhdGVneRgEIAEoDSJKCghTdHJhZ2V0", 
-            "eRIVChFURVhBU19SQU5ET01fSk9JThABEhUKEVRFWEFTX1FVSUNLX1NUQVJU", 
-            "EAISEAoMVEVYQVNfTk9STUFMEAMiWAoJR2FtZVN0YXR1EhEKCWdhbWVfdHlw", 
-            "ZRgBIAIoDRISCgpwbGF5ZXJfY250GAIgAigNEhQKDHBsYXllcl9saW1pdBgD", 
-            "IAMoDRIOCgZpc19iZXQYBCABKA0iIgoMR2FtZU92ZXJWaWV3EhIKCnBsYXll", 
-            "cl9jbnQYAiADKA0igAEKC1N5c3RlbVN0YXR1EhMKC2NwdV9wZXJjZW50GAEg", 
-            "AigNEhAKCG1lbV91c2VkGAIgAigEEhEKCW1lbV90b3RhbBgDIAIoBBIRCglm", 
-            "bG93X3JhdGUYBCACKAQSEAoIY29ubl9jbnQYBSACKA0SEgoKY29ubl9saW1p", 
-            "dBgGIAIoDSK/AQoLUm9ib3RTdGF0dXMSEwoLbW9kdWxlX3R5cGUYASABKA0S", 
-            "LwoKZ2FtZV9zdGF0dRgCIAMoCzIbLlByb3RvQ21kLlNlcnZpY2UuR2FtZVN0", 
-            "YXR1EjUKDWdhbWVfb3ZlcnZpZXcYAyABKAsyHi5Qcm90b0NtZC5TZXJ2aWNl", 
-            "LkdhbWVPdmVyVmlldxIzCgxzeXN0ZW1fc3RhdHUYBCABKAsyHS5Qcm90b0Nt", 
-            "ZC5TZXJ2aWNlLlN5c3RlbVN0YXR1IiUKDEVycm9yTWVzc2FnZRIVCg1lcnJv", 
-            "cl9tZXNzYWdlGAEgAigJIh8KDFVzZXJTdGF0ZVJlcRIPCgd1c2VyX2lkGAEg", 
-            "ASgFIlIKDFVzZXJTdGF0ZVJlcxIPCgd1c2VyX2lkGAEgASgFEg0KBXN0YXRl", 
-            "GAIgASgFEg8KB3Jvb21faWQYAyABKAUSEQoJcm9vbV90eXBlGAQgASgFIpEB", 
-            "Cg5Vc2VyU2NvcmVBd2FyZBIZChF0TGFzdEdldEF3YXJkVGltZRgBIAEoDRIa", 
-            "ChJ0RmluYWxHZXRTY29yZVRpbWUYAiABKA0SGQoRdExhc3RHZXRTY29yZVRp", 
-            "bWUYAyABKA0SFgoOZHdMYXN0R2V0U2NvcmUYBCABKAMSFQoNZHdOb3dHZXRT", 
-            "Y29yZRgFIAEoAyKaAQoIVXNlclNpZ24SDgoGd0NvbnRpGAEgASgFEhYKDnRs", 
-            "YXN0TG9naW5UaW1lGAIgASgNEhUKDXRTaWduTHVja1RpbWUYAyABKA0SFgoO", 
-            "dFNpZ25Bd2FyZFRpbWUYBCABKA0SEQoJYnlTdGF0dXMwGAUgASgFEhEKCWJ5", 
-            "U3RhdHVzMRgGIAEoBRIRCglieVN0YXR1czIYByABKAUizQEKClVzZXJFeERh", 
-            "dGESEgoKd01heEZyaWVuZBgBIAEoBRIVCg1sYXN0TG9naW5UaW1lGAIgASgN", 
-            "EhUKDWxhc3RNb25leVRpbWUYAyABKA0SGQoRZmluYWxHZXRTY29yZVRpbWUY", 
-            "BCABKA0SEQoJbGFzdE1vbmV5GAUgASgDEhAKCG5vd01vbmV5GAYgASgDEg8K", 
-            "B21heENhcmQYByADKAUSLAoIbGlzdEluZm8YCCADKAsyGi5Qcm90b0NtZC5T", 
-            "ZXJ2aWNlLkdhbWVJbmZvIk4KCEdhbWVJbmZvEg4KBkdhbWVJRBgBIAEoBRIN", 
-            "CgVkd1dpbhgCIAEoAxIPCgdkd1RvdGFsGAMgASgFEhIKCm1heFdpbkNoaXAY", 
-            "BCABKAMiZwoNU3BlbGxDYXJkSW5mbxIMCgR0aW1lGAEgASgNEhIKCmpvaW5f", 
-            "dGltZXMYAiABKA0SEQoJd2luX3RpbWVzGAMgASgNEhEKCXJvYl90aW1lcxgE", 
-            "IAEoDRIOCgZnZXRCb3gYBSADKA0ieQoJdG9vbHNEYXRhEhAKCHRvb2xzX2lk", 
-            "GAEgASgNEg0KBWJtYXJrGAIgASgNEhAKCGdldF90aW1lGAMgASgNEhEKCWxh", 
-            "c3RfdGltZRgEIAEoDRIRCgl1c2VfdGltZXMYBSABKA0SEwoLdG90YWxfdGlt", 
-            "ZXMYBiABKA0iOwoJVG9vbHNJbmZvEi4KCWxpc3RUb29scxgBIAMoCzIbLlBy", 
-            "b3RvQ21kLlNlcnZpY2UudG9vbHNEYXRhIl0KB1ZpcEluZm8SDQoFZ3JhZGUY", 
-            "ASABKAUSDwoHY3VycmVudBgCIAEoBRIQCghsYXN0X2dldBgDIAEoDRIgChhs", 
-            "YXN0X2xldmVsdXBfYXdhcmRfbGV2ZWwYBCABKAUiPgoJTGV2ZWxJbmZvEg0K", 
-            "BWxldmVsGAEgASgFEgsKA2V4cBgCIAEoBRIVCg1yZWF3YXJkX2xldmVsGAMg", 
-            "AygFIhsKB1ZpcENhcmQSEAoIdEVuZFRpbWUYASABKA0ijAMKCEJFeHRJbmZv", 
-            "EjQKCnNjb3JlQXdhcmQYASABKAsyIC5Qcm90b0NtZC5TZXJ2aWNlLlVzZXJT", 
-            "Y29yZUF3YXJkEiwKCHVzZXJTaWduGAIgASgLMhouUHJvdG9DbWQuU2Vydmlj", 
-            "ZS5Vc2VyU2lnbhIwCgp1c2VyRXhEYXRhGAMgASgLMhwuUHJvdG9DbWQuU2Vy", 
-            "dmljZS5Vc2VyRXhEYXRhEjIKCXNwZWxsQ2FyZBgEIAEoCzIfLlByb3RvQ21k", 
-            "LlNlcnZpY2UuU3BlbGxDYXJkSW5mbxIuCgl0b29sc0luZm8YBSABKAsyGy5Q", 
-            "cm90b0NtZC5TZXJ2aWNlLlRvb2xzSW5mbxIqCgd2aXBJbmZvGAYgASgLMhku", 
-            "UHJvdG9DbWQuU2VydmljZS5WaXBJbmZvEi4KCWxldmVsSW5mbxgHIAEoCzIb", 
-            "LlByb3RvQ21kLlNlcnZpY2UuTGV2ZWxJbmZvEioKB3ZpcENhcmQYCCABKAsy", 
-            "GS5Qcm90b0NtZC5TZXJ2aWNlLlZpcENhcmQqoQsKClNlcnZpY2VDbWQSDAoI", 
-            "U0NfQkVHSU4QCxIQCgxTQ19LSUNLX1VTRVIQDBIRCg1TQ19RVUVSWV9VU0VS", 
-            "EA0SEgoOU0NfRlJFRVpFX1VTRVIQDhITCg9TQ19TRU5EX1NZU01BSUwQDxIS", 
-            "Cg5TQ19TRVJWRVJfU1RPUBAQEhcKE1NDX1FVRVJZX09OTElORVVTRVIQERIY", 
-            "ChRTQ19RVUVSWV9VU0VST1BFUkhJUxASEhkKFVNDX1FVRVJZX1NFUlZFUlNU", 
-            "QVRVUxATEhgKFFNDX1NFTkRfQU5OT1VOQ0VNRU5UEBQSEAoMU0NfQkFOX1NQ", 
-            "RUFLEBUSDwoLU0NfQUREX0dPTEQQFhIaChZTQ19RVUVSWV9JTlRFUk5BTExP", 
-            "R0lOEBcSFwoTU0NfU0VUX0lOVEVSQUxMT0dJThAYEhQKEFNDX1NFTkRfSVRF", 
-            "TU1BSUwQGRIRCg1TQ19RVUVSWV9GSVNIEBoSEwoPU0NfQkFOX0xPR0lOX0lQ", 
-            "EBsSDQoJU0NfUkVHX0lQEBwSFwoTU0NfU0VMRUNUX1RFWEFTX1BPVBAdEhgK", 
-            "FFNDX09QRVJUT1JfVEVYQVNfUE9UEB4SGwoXU0NfU0VMRUNUX1JFREVWRU5M", 
-            "T1BFX1EQHxIcChhTQ19PUEVSVE9SX1JFREVWRU5MT1BFX1EQIBIUChBTQ19C", 
-            "QU5fTE9HSU5fTUFDECESFwoTU0NfUkVTRVRfU0FGRUJPWFBXRBAiEhEKDVND", 
-            "X1BPVF9TV0lUQ0gQIxIXChNTQ19TRUxFQ1RfU0NBTEVfUE9UECQSGAoUU0Nf", 
-            "T1BFUlRPUl9TQUNMRV9QT1QQJRIVChFTQ19HRVRfUE9UX1NXSVRDSBAmEhQK", 
-            "EFNDX0NMVUJfVVNFUk1PREUQJxIYChRTQ19TRUxFQ1RfSVBTVEFUVVNfURAo", 
-            "EhkKFVNDX09QRVJUT1JfSVBTVEFUVVNfURApEhcKE1NDX1NFVF9JUF9XSElU", 
-            "RUxJU1QQKhISCg5TQ19DQU5DRUxfQ0xVQhArEhQKEFNDX1NFVF9ST0JPVF9Q", 
-            "T1QQLBISCg5TQ19CRUxBTkRfQ0xVQhAtEhIKDlNDX1JPQk9UX1FVRVJZEC4S", 
-            "EwoPU0NfUk9CT1RfTU9ESUZZEC8SEgoOU0NfUk9CT1RfTE9HSU4QMBIWChJT", 
-            "Q19TRVRfWkZCUE9UX09QRU4QMhIRCg1TQ19VU0VSX1NUQVRFEDMSGQoVU0Nf", 
-            "U0VUX1RFWFBST1BPVF9PUEVOEDQSGAoUU0NfU0VMRUNUX1RFWFBST19QT1QQ", 
-            "NRIZChVTQ19PUEVSVE9SX1RFWFBST19QT1QQNhIUChBTQ19NT0RVTEVfU1dJ", 
-            "VENIEDcSGQoVU0NfQ0xJRU5UX0dBTUVfU1dJVENIEDgSIAocU0NfU0VUX0lO", 
-            "REVCQVRFRF9SRUJBVEVfT1BFThA7Eh4KGlNDX05URl9VUERBVEVfUE9QVVBD", 
-            "T05UUk9MEDwSFQoRU0NfTU9CSUxFX1NXSVRDSFMQPRIdChlTQ19NT0JJTEVf", 
-            "U1dJVENIX09QRVJBVE9SED4SHwobU0NfU0VUX0hlcm9jcmFmdF9Ud2ljZV9P", 
-            "UEVOEEASIgoeU0NfU0VUX01JREFVVFVNTl9GRVNUSVZBTF9PUEVOED8SGgoW", 
-            "U0NfTlRGX1VQREFURV9EQlBWUENGRxBBEiEKHVNDX05URl9VUERBVEVfQVJD", 
-            "QURFR0FNRVNUT0NLEEISGwoXU0NfTlRGX1VQREFURV9TSFVJSFVQT1QQQxIT", 
-            "Cg9TQ19GcnVpdGVCaWdQb3QQRBIbChdTQ19TRVRfQkFDQ0FSQVRQT1RfT1BF", 
-            "ThBFEhoKFlNDX1NFTEVDVF9CQUNDQVJBVF9QT1QQRhIbChdTQ19PUEVSVE9S", 
-            "X0JBQ0NBUkFUX1BPVBBHEg0KCFNDX1RPVEFMEMgBKrELCglDZW50ZXJDbWQS", 
-            "DAoIQ1NfQkVHSU4QCxIUChBDU19DT05ORUNUX0VSUk9SEAwSFAoQQ1NfQUND", 
-            "T1VOVF9FUlJPUhANEhEKDUNTX1FVRVJZX1VFU1IQDhISCg5DU19TRVJWRVJf", 
-            "U1RPUBAPEhAKDENTX0tJQ0tfVVNFUhAQEhIKDkNTX0ZSRUVaRV9VU0VSEBES", 
-            "FwoTQ1NfUVVFUllfT05MSU5FVVNFUhASEhgKFENTX1FVRVJZX1VTRVJPUEVS", 
-            "SElTEBMSEwoPQ1NfU0VORF9TWVNNQUlMEBQSGQoVQ1NfUVVFUllfU0VSVkVS", 
-            "U1RBVFVTEBUSGAoUQ1NfU0VORF9BTk5PVU5DRU1FTlQQFhIaChZDU19RVUVS", 
-            "WV9JTlRFUk5BTExPR0lOEBcSFwoTQ1NfU0VUX0lOVEVSQUxMT0dJThAYEhQK", 
-            "EENTX1NFTkRfSVRFTU1BSUwQGRIRCg1DU19RVUVSWV9GSVNIEBoSEAoMQ1Nf", 
-            "QkFOX1NQRUFLEBsSEwoPQ1NfQkFOX0xPR0lOX0lQEBwSDQoJQ1NfUkVHX0lQ", 
-            "EB0SFwoTQ1NfU0VMRUNUX1RFWEFTX1BPVBAeEhgKFENTX09QRVJUT1JfVEVY", 
-            "QVNfUE9UEB8SGwoXQ1NfU0VMRUNUX1JFREVWRU5MT1BFX1AQIBIcChhDU19P", 
-            "UEVSVE9SX1JFREVWRU5MT1BFX1AQIRIUChBDU19CQU5fTE9HSU5fTUFDECIS", 
-            "FwoTQ1NfUkVTRVRfU0FGRUJPWFBXRBAjEhcKE0NTX1NFTEVDVF9TQ0FMRV9Q", 
-            "T1QQJBIYChRDU19PUEVSVE9SX1NDQUxFX1BPVBAlEhYKEkNTX1BPVF9TV0lU", 
-            "Q0hfUkVTUBAmEhoKFkNTX0dFVF9QT1RfU1dJVENIX1JFU1AQJxIUChBDU19D", 
-            "TFVCX1VTRVJNT0RFECgSFgoSQ1NfU0VMRUNUX0lQU1RBVFVTECkSFwoTQ1Nf", 
-            "T1BFUlRPUl9JUFNUQVRVUxAqEhcKE0NTX1NFVF9JUF9XSElURUxJU1QQKxIS", 
-            "Cg5DU19DQU5DRUxfQ0xVQhAsEhQKEENTX1NFVF9ST0JPVF9QT1QQLRISCg5D", 
-            "U19CRUxBTkRfQ0xVQhAuEhIKDkNTX1JPQk9UX1NUQVRVEC8SFAoQQzJTX1JP", 
-            "Qk9UX0VSUk1TRxAwEhYKEkNTX1NFVF9aRkJQT1RfT1BFThAyEhEKDUNTX1VT", 
-            "RVJfU1RBVEUQMxIZChVDU19TRVRfVEVYUFJPUE9UX09QRU4QNBIbChdDU19T", 
-            "RUxFQ1RfVEVYUFJPUE9UX1BPVBA1EhwKGENTX09QRVJUT1JfVEVYUFJPUE9U", 
-            "X1BPVBA2EhQKEENTX01PRFVMRV9TV0lUQ0gQNxIZChVDU19DTElFTlRfR0FN", 
-            "RV9TV0lUQ0gQOBIgChxDU19TRVRfSU5ERUJBVEVEX1JFQkFURV9PUEVOEDsS", 
-            "HgoaQ1NfTlRGX1VQREFURV9QT1BVUENPTlRST0wQPBIVChFDU19NT0JJTEVf", 
-            "U1dJVENIUxA9Eh0KGUNTX01PQklMRV9TV0lUQ0hfT1BFUkFUT1IQPhIfChtD", 
-            "U19TRVRfSGVyb2NyYWZ0X1R3aWNlX09QRU4QQBIiCh5DU19TRVRfTUlEQVVU", 
-            "VU1OX0ZFU1RJVkFMX09QRU4QPxIaChZDU19OVEZfVVBEQVRFX0RCUFZQQ0ZH", 
-            "EEESIQodQ1NfTlRGX1VQREFURV9BUkNBREVHQU1FU1RPQ0sQQhIbChdDU19O", 
-            "VEZfVVBEQVRFX1NIVUlIVVBPVBBDEhMKD0NTX0ZydWl0ZUJpZ1BvdBBEEhkK", 
-            "FUNTX1NFVF9CQUNDQVJBUlRfT1BFThBFEhoKFkNTX1NFTEVDVF9CQUNDQVJB", 
-            "VF9QT1QQRhIbChdDU19PUEVSVE9SX0JBQ0NBUkFUX1BPVBBHEgwKCENTX1RP", 
+            "aWxlU3dpdGNoEgsKA3N1YxgDIAEoCCIjChFNaW5pR2FtZU9wZW5SZXFfUxIO", 
+            "CgZpc09wZW4YASABKAUiMAoRTWluaUdhbWVPcGVuUmVxX0MSCwoDc3VjGAEg", 
+            "ASgFEg4KBmlzT3BlbhgCIAEoBSJNChZNaW5pR2FtZVBvdF9PcGVyYXRvcl9D", 
+            "Eg4KBm9wVHlwZRgBIAEoDRIPCgdvcFZhbHVlGAIgASgEEhIKCnN0ckNvbnRl", 
+            "bnQYAyABKAkiNQoWTWluaUdhbWVQb3RfT3BlcmF0b3JfUxIOCgZvcFR5cGUY", 
+            "ASABKA0SCwoDc3VjGAIgASgIIicKFE1pbmlHYW1lUG90X1NlbGVjdF9TEg8K", 
+            "B0NoaXBOdW0YASACKAQiLAoaQkdTZXRIZXJvY3JhZnRUd2ljZU9wZW5SZXES", 
+            "DgoGaXNPcGVuGAEgASgFIj0KGkJHU2V0SGVyb2NyYWZ0VHdpY2VPcGVuUmVz", 
+            "EgsKA3N1YxgBIAEoBRISCgpjdXJyU3RhdHVzGAIgASgFIi8KHUJHU2V0TWlk", 
+            "YXV0dW1uRmVzdGl2YWxPcGVuUmVxEg4KBmlzT3BlbhgBIAEoBSJACh1CR1Nl", 
+            "dE1pZGF1dHVtbkZlc3RpdmFsT3BlblJlcxILCgNzdWMYASABKAUSEgoKY3Vy", 
+            "clN0YXR1cxgCIAEoBSIZCgpEYlB2cENmZ19TEgsKA3N1YxgBIAEoCCI9ChFB", 
+            "cmNhZGVHYW1lU3RvY2tfQxILCgNtb2QYASABKAUSDAoEdHlwZRgCIAEoBRIN", 
+            "CgV2YWx1ZRgDIAEoBSIgChFBcmNhZGVHYW1lU3RvY2tfUxILCgNzdWMYASAB", 
+            "KAgiNwoLU2h1aUh1UG90X0MSCwoDbW9kGAEgASgFEgwKBHR5cGUYAiABKAUS", 
+            "DQoFdmFsdWUYAyABKAUiGgoLU2h1aUh1UG90X1MSCwoDc3VjGAEgASgIIjoK", 
+            "DkZydWl0ZUJpZ1BvdF9DEgsKA21vZBgBIAEoBRIMCgR0eXBlGAIgASgFEg0K", 
+            "BXZhbHVlGAMgASgFIh0KDkZydWl0ZUJpZ1BvdF9TEgsKA3N1YxgBIAEoCCIp", 
+            "ChdCR1NldEJhY2NhcmF0UE9UT3BlblJlcRIOCgZpc09wZW4YASABKAUiOgoX", 
+            "QkdTZXRCYWNjYXJhdFBPVE9wZW5SZXMSCwoDc3VjGAEgASgFEhIKCmN1cnJT", 
+            "dGF0dXMYAiABKAUiJAoRQmFjY2FyYXRfU2VsZWN0X1MSDwoHQ2hpcE51bRgB", 
+            "IAIoBCJKChNCYWNjYXJhdF9PcGVyYXRvcl9DEg4KBm9wVHlwZRgBIAEoDRIP", 
+            "CgdvcFZhbHVlGAIgASgEEhIKCnN0ckNvbnRlbnQYAyABKAkiMgoTQmFjY2Fy", 
+            "YXRfT3BlcmF0b3JfUxIOCgZvcFR5cGUYASABKA0SCwoDc3VjGAIgASgIIiYK", 
+            "D1F1ZXJ5Um9ib3RTdGF0dRITCgttb2R1bGVfdHlwZRgBIAEoDSJFChFNb2Rp", 
+            "ZnlSb2JvdENvbmZpZxIRCglnYW1lX3R5cGUYASACKA0SDQoFbGltaXQYAiAD", 
+            "KA0SDgoGaXNfYmV0GAMgASgNIqsBCgxMb2dpblJlcXVlc3QSEQoJZ2FtZV90", 
+            "eXBlGAEgAigNEhcKD2xvZ2luX2ZyZXF1ZW5jeRgCIAIoDRIRCglsb2dpbl9j", 
+            "bnQYAyACKAUSEAoIc3RyYXRlZ3kYBCABKA0iSgoIU3RyYWdldHkSFQoRVEVY", 
+            "QVNfUkFORE9NX0pPSU4QARIVChFURVhBU19RVUlDS19TVEFSVBACEhAKDFRF", 
+            "WEFTX05PUk1BTBADIlgKCUdhbWVTdGF0dRIRCglnYW1lX3R5cGUYASACKA0S", 
+            "EgoKcGxheWVyX2NudBgCIAIoDRIUCgxwbGF5ZXJfbGltaXQYAyADKA0SDgoG", 
+            "aXNfYmV0GAQgASgNIiIKDEdhbWVPdmVyVmlldxISCgpwbGF5ZXJfY250GAIg", 
+            "AygNIoABCgtTeXN0ZW1TdGF0dRITCgtjcHVfcGVyY2VudBgBIAIoDRIQCght", 
+            "ZW1fdXNlZBgCIAIoBBIRCgltZW1fdG90YWwYAyACKAQSEQoJZmxvd19yYXRl", 
+            "GAQgAigEEhAKCGNvbm5fY250GAUgAigNEhIKCmNvbm5fbGltaXQYBiACKA0i", 
+            "vwEKC1JvYm90U3RhdHVzEhMKC21vZHVsZV90eXBlGAEgASgNEi8KCmdhbWVf", 
+            "c3RhdHUYAiADKAsyGy5Qcm90b0NtZC5TZXJ2aWNlLkdhbWVTdGF0dRI1Cg1n", 
+            "YW1lX292ZXJ2aWV3GAMgASgLMh4uUHJvdG9DbWQuU2VydmljZS5HYW1lT3Zl", 
+            "clZpZXcSMwoMc3lzdGVtX3N0YXR1GAQgASgLMh0uUHJvdG9DbWQuU2Vydmlj", 
+            "ZS5TeXN0ZW1TdGF0dSIlCgxFcnJvck1lc3NhZ2USFQoNZXJyb3JfbWVzc2Fn", 
+            "ZRgBIAIoCSIfCgxVc2VyU3RhdGVSZXESDwoHdXNlcl9pZBgBIAEoBSJSCgxV", 
+            "c2VyU3RhdGVSZXMSDwoHdXNlcl9pZBgBIAEoBRINCgVzdGF0ZRgCIAEoBRIP", 
+            "Cgdyb29tX2lkGAMgASgFEhEKCXJvb21fdHlwZRgEIAEoBSKRAQoOVXNlclNj", 
+            "b3JlQXdhcmQSGQoRdExhc3RHZXRBd2FyZFRpbWUYASABKA0SGgoSdEZpbmFs", 
+            "R2V0U2NvcmVUaW1lGAIgASgNEhkKEXRMYXN0R2V0U2NvcmVUaW1lGAMgASgN", 
+            "EhYKDmR3TGFzdEdldFNjb3JlGAQgASgDEhUKDWR3Tm93R2V0U2NvcmUYBSAB", 
+            "KAMimgEKCFVzZXJTaWduEg4KBndDb250aRgBIAEoBRIWCg50bGFzdExvZ2lu", 
+            "VGltZRgCIAEoDRIVCg10U2lnbkx1Y2tUaW1lGAMgASgNEhYKDnRTaWduQXdh", 
+            "cmRUaW1lGAQgASgNEhEKCWJ5U3RhdHVzMBgFIAEoBRIRCglieVN0YXR1czEY", 
+            "BiABKAUSEQoJYnlTdGF0dXMyGAcgASgFIs0BCgpVc2VyRXhEYXRhEhIKCndN", 
+            "YXhGcmllbmQYASABKAUSFQoNbGFzdExvZ2luVGltZRgCIAEoDRIVCg1sYXN0", 
+            "TW9uZXlUaW1lGAMgASgNEhkKEWZpbmFsR2V0U2NvcmVUaW1lGAQgASgNEhEK", 
+            "CWxhc3RNb25leRgFIAEoAxIQCghub3dNb25leRgGIAEoAxIPCgdtYXhDYXJk", 
+            "GAcgAygFEiwKCGxpc3RJbmZvGAggAygLMhouUHJvdG9DbWQuU2VydmljZS5H", 
+            "YW1lSW5mbyJOCghHYW1lSW5mbxIOCgZHYW1lSUQYASABKAUSDQoFZHdXaW4Y", 
+            "AiABKAMSDwoHZHdUb3RhbBgDIAEoBRISCgptYXhXaW5DaGlwGAQgASgDImcK", 
+            "DVNwZWxsQ2FyZEluZm8SDAoEdGltZRgBIAEoDRISCgpqb2luX3RpbWVzGAIg", 
+            "ASgNEhEKCXdpbl90aW1lcxgDIAEoDRIRCglyb2JfdGltZXMYBCABKA0SDgoG", 
+            "Z2V0Qm94GAUgAygNInkKCXRvb2xzRGF0YRIQCgh0b29sc19pZBgBIAEoDRIN", 
+            "CgVibWFyaxgCIAEoDRIQCghnZXRfdGltZRgDIAEoDRIRCglsYXN0X3RpbWUY", 
+            "BCABKA0SEQoJdXNlX3RpbWVzGAUgASgNEhMKC3RvdGFsX3RpbWVzGAYgASgN", 
+            "IjsKCVRvb2xzSW5mbxIuCglsaXN0VG9vbHMYASADKAsyGy5Qcm90b0NtZC5T", 
+            "ZXJ2aWNlLnRvb2xzRGF0YSJdCgdWaXBJbmZvEg0KBWdyYWRlGAEgASgFEg8K", 
+            "B2N1cnJlbnQYAiABKAUSEAoIbGFzdF9nZXQYAyABKA0SIAoYbGFzdF9sZXZl", 
+            "bHVwX2F3YXJkX2xldmVsGAQgASgFIj4KCUxldmVsSW5mbxINCgVsZXZlbBgB", 
+            "IAEoBRILCgNleHAYAiABKAUSFQoNcmVhd2FyZF9sZXZlbBgDIAMoBSIbCgdW", 
+            "aXBDYXJkEhAKCHRFbmRUaW1lGAEgASgNIowDCghCRXh0SW5mbxI0CgpzY29y", 
+            "ZUF3YXJkGAEgASgLMiAuUHJvdG9DbWQuU2VydmljZS5Vc2VyU2NvcmVBd2Fy", 
+            "ZBIsCgh1c2VyU2lnbhgCIAEoCzIaLlByb3RvQ21kLlNlcnZpY2UuVXNlclNp", 
+            "Z24SMAoKdXNlckV4RGF0YRgDIAEoCzIcLlByb3RvQ21kLlNlcnZpY2UuVXNl", 
+            "ckV4RGF0YRIyCglzcGVsbENhcmQYBCABKAsyHy5Qcm90b0NtZC5TZXJ2aWNl", 
+            "LlNwZWxsQ2FyZEluZm8SLgoJdG9vbHNJbmZvGAUgASgLMhsuUHJvdG9DbWQu", 
+            "U2VydmljZS5Ub29sc0luZm8SKgoHdmlwSW5mbxgGIAEoCzIZLlByb3RvQ21k", 
+            "LlNlcnZpY2UuVmlwSW5mbxIuCglsZXZlbEluZm8YByABKAsyGy5Qcm90b0Nt", 
+            "ZC5TZXJ2aWNlLkxldmVsSW5mbxIqCgd2aXBDYXJkGAggASgLMhkuUHJvdG9D", 
+            "bWQuU2VydmljZS5WaXBDYXJkKtILCgpTZXJ2aWNlQ21kEgwKCFNDX0JFR0lO", 
+            "EAsSEAoMU0NfS0lDS19VU0VSEAwSEQoNU0NfUVVFUllfVVNFUhANEhIKDlND", 
+            "X0ZSRUVaRV9VU0VSEA4SEwoPU0NfU0VORF9TWVNNQUlMEA8SEgoOU0NfU0VS", 
+            "VkVSX1NUT1AQEBIXChNTQ19RVUVSWV9PTkxJTkVVU0VSEBESGAoUU0NfUVVF", 
+            "UllfVVNFUk9QRVJISVMQEhIZChVTQ19RVUVSWV9TRVJWRVJTVEFUVVMQExIY", 
+            "ChRTQ19TRU5EX0FOTk9VTkNFTUVOVBAUEhAKDFNDX0JBTl9TUEVBSxAVEg8K", 
+            "C1NDX0FERF9HT0xEEBYSGgoWU0NfUVVFUllfSU5URVJOQUxMT0dJThAXEhcK", 
+            "E1NDX1NFVF9JTlRFUkFMTE9HSU4QGBIUChBTQ19TRU5EX0lURU1NQUlMEBkS", 
+            "EQoNU0NfUVVFUllfRklTSBAaEhMKD1NDX0JBTl9MT0dJTl9JUBAbEg0KCVND", 
+            "X1JFR19JUBAcEhcKE1NDX1NFTEVDVF9URVhBU19QT1QQHRIYChRTQ19PUEVS", 
+            "VE9SX1RFWEFTX1BPVBAeEhsKF1NDX1NFTEVDVF9SRURFVkVOTE9QRV9REB8S", 
+            "HAoYU0NfT1BFUlRPUl9SRURFVkVOTE9QRV9RECASFAoQU0NfQkFOX0xPR0lO", 
+            "X01BQxAhEhcKE1NDX1JFU0VUX1NBRkVCT1hQV0QQIhIRCg1TQ19QT1RfU1dJ", 
+            "VENIECMSFwoTU0NfU0VMRUNUX1NDQUxFX1BPVBAkEhgKFFNDX09QRVJUT1Jf", 
+            "U0FDTEVfUE9UECUSFQoRU0NfR0VUX1BPVF9TV0lUQ0gQJhIUChBTQ19DTFVC", 
+            "X1VTRVJNT0RFECcSGAoUU0NfU0VMRUNUX0lQU1RBVFVTX1EQKBIZChVTQ19P", 
+            "UEVSVE9SX0lQU1RBVFVTX1EQKRIXChNTQ19TRVRfSVBfV0hJVEVMSVNUECoS", 
+            "EgoOU0NfQ0FOQ0VMX0NMVUIQKxIUChBTQ19TRVRfUk9CT1RfUE9UECwSEgoO", 
+            "U0NfQkVMQU5EX0NMVUIQLRISCg5TQ19ST0JPVF9RVUVSWRAuEhMKD1NDX1JP", 
+            "Qk9UX01PRElGWRAvEhIKDlNDX1JPQk9UX0xPR0lOEDASFgoSU0NfU0VUX1pG", 
+            "QlBPVF9PUEVOEDISEQoNU0NfVVNFUl9TVEFURRAzEhkKFVNDX1NFVF9URVhQ", 
+            "Uk9QT1RfT1BFThA0EhgKFFNDX1NFTEVDVF9URVhQUk9fUE9UEDUSGQoVU0Nf", 
+            "T1BFUlRPUl9URVhQUk9fUE9UEDYSFAoQU0NfTU9EVUxFX1NXSVRDSBA3EhkK", 
+            "FVNDX0NMSUVOVF9HQU1FX1NXSVRDSBA4EiAKHFNDX1NFVF9JTkRFQkFURURf", 
+            "UkVCQVRFX09QRU4QOxIeChpTQ19OVEZfVVBEQVRFX1BPUFVQQ09OVFJPTBA8", 
+            "EhUKEVNDX01PQklMRV9TV0lUQ0hTED0SHQoZU0NfTU9CSUxFX1NXSVRDSF9P", 
+            "UEVSQVRPUhA+Eh8KG1NDX1NFVF9IZXJvY3JhZnRfVHdpY2VfT1BFThBAEiIK", 
+            "HlNDX1NFVF9NSURBVVRVTU5fRkVTVElWQUxfT1BFThA/EhoKFlNDX05URl9V", 
+            "UERBVEVfREJQVlBDRkcQQRIhCh1TQ19OVEZfVVBEQVRFX0FSQ0FERUdBTUVT", 
+            "VE9DSxBCEhsKF1NDX05URl9VUERBVEVfU0hVSUhVUE9UEEMSEwoPU0NfRnJ1", 
+            "aXRlQmlnUG90EEQSGwoXU0NfU0VUX0JBQ0NBUkFUUE9UX09QRU4QRRIaChZT", 
+            "Q19TRUxFQ1RfQkFDQ0FSQVRfUE9UEEYSGwoXU0NfT1BFUlRPUl9CQUNDQVJB", 
+            "VF9QT1QQRxIXChNTQ19PUEVSVE9SX01JTklfUE9UEEgSFgoSU0NfU0VMRUNU", 
+            "X01JTklfUE9UEEkSDQoIU0NfVE9UQUwQyAEq4gsKCUNlbnRlckNtZBIMCghD", 
+            "U19CRUdJThALEhQKEENTX0NPTk5FQ1RfRVJST1IQDBIUChBDU19BQ0NPVU5U", 
+            "X0VSUk9SEA0SEQoNQ1NfUVVFUllfVUVTUhAOEhIKDkNTX1NFUlZFUl9TVE9Q", 
+            "EA8SEAoMQ1NfS0lDS19VU0VSEBASEgoOQ1NfRlJFRVpFX1VTRVIQERIXChND", 
+            "U19RVUVSWV9PTkxJTkVVU0VSEBISGAoUQ1NfUVVFUllfVVNFUk9QRVJISVMQ", 
+            "ExITCg9DU19TRU5EX1NZU01BSUwQFBIZChVDU19RVUVSWV9TRVJWRVJTVEFU", 
+            "VVMQFRIYChRDU19TRU5EX0FOTk9VTkNFTUVOVBAWEhoKFkNTX1FVRVJZX0lO", 
+            "VEVSTkFMTE9HSU4QFxIXChNDU19TRVRfSU5URVJBTExPR0lOEBgSFAoQQ1Nf", 
+            "U0VORF9JVEVNTUFJTBAZEhEKDUNTX1FVRVJZX0ZJU0gQGhIQCgxDU19CQU5f", 
+            "U1BFQUsQGxITCg9DU19CQU5fTE9HSU5fSVAQHBINCglDU19SRUdfSVAQHRIX", 
+            "ChNDU19TRUxFQ1RfVEVYQVNfUE9UEB4SGAoUQ1NfT1BFUlRPUl9URVhBU19Q", 
+            "T1QQHxIbChdDU19TRUxFQ1RfUkVERVZFTkxPUEVfUBAgEhwKGENTX09QRVJU", 
+            "T1JfUkVERVZFTkxPUEVfUBAhEhQKEENTX0JBTl9MT0dJTl9NQUMQIhIXChND", 
+            "U19SRVNFVF9TQUZFQk9YUFdEECMSFwoTQ1NfU0VMRUNUX1NDQUxFX1BPVBAk", 
+            "EhgKFENTX09QRVJUT1JfU0NBTEVfUE9UECUSFgoSQ1NfUE9UX1NXSVRDSF9S", 
+            "RVNQECYSGgoWQ1NfR0VUX1BPVF9TV0lUQ0hfUkVTUBAnEhQKEENTX0NMVUJf", 
+            "VVNFUk1PREUQKBIWChJDU19TRUxFQ1RfSVBTVEFUVVMQKRIXChNDU19PUEVS", 
+            "VE9SX0lQU1RBVFVTECoSFwoTQ1NfU0VUX0lQX1dISVRFTElTVBArEhIKDkNT", 
+            "X0NBTkNFTF9DTFVCECwSFAoQQ1NfU0VUX1JPQk9UX1BPVBAtEhIKDkNTX0JF", 
+            "TEFORF9DTFVCEC4SEgoOQ1NfUk9CT1RfU1RBVFUQLxIUChBDMlNfUk9CT1Rf", 
+            "RVJSTVNHEDASFgoSQ1NfU0VUX1pGQlBPVF9PUEVOEDISEQoNQ1NfVVNFUl9T", 
+            "VEFURRAzEhkKFUNTX1NFVF9URVhQUk9QT1RfT1BFThA0EhsKF0NTX1NFTEVD", 
+            "VF9URVhQUk9QT1RfUE9UEDUSHAoYQ1NfT1BFUlRPUl9URVhQUk9QT1RfUE9U", 
+            "EDYSFAoQQ1NfTU9EVUxFX1NXSVRDSBA3EhkKFUNTX0NMSUVOVF9HQU1FX1NX", 
+            "SVRDSBA4EiAKHENTX1NFVF9JTkRFQkFURURfUkVCQVRFX09QRU4QOxIeChpD", 
+            "U19OVEZfVVBEQVRFX1BPUFVQQ09OVFJPTBA8EhUKEUNTX01PQklMRV9TV0lU", 
+            "Q0hTED0SHQoZQ1NfTU9CSUxFX1NXSVRDSF9PUEVSQVRPUhA+Eh8KG0NTX1NF", 
+            "VF9IZXJvY3JhZnRfVHdpY2VfT1BFThBAEiIKHkNTX1NFVF9NSURBVVRVTU5f", 
+            "RkVTVElWQUxfT1BFThA/EhoKFkNTX05URl9VUERBVEVfREJQVlBDRkcQQRIh", 
+            "Ch1DU19OVEZfVVBEQVRFX0FSQ0FERUdBTUVTVE9DSxBCEhsKF0NTX05URl9V", 
+            "UERBVEVfU0hVSUhVUE9UEEMSEwoPQ1NfRnJ1aXRlQmlnUG90EEQSGQoVQ1Nf", 
+            "U0VUX0JBQ0NBUkFSVF9PUEVOEEUSGgoWQ1NfU0VMRUNUX0JBQ0NBUkFUX1BP", 
+            "VBBGEhsKF0NTX09QRVJUT1JfQkFDQ0FSQVRfUE9UEEcSFwoTQ1NfT1BFUlRP", 
+            "Ul9NSU5JX1BPVBBIEhYKEkNTX1NFTEVDVF9NSU5JX1BPVBBJEgwKCENTX1RP", 
             "VEFMEGQqoAEKCk1vZHVsZVR5cGUSBwoDQUxMEAASCgoGU1lTVEVNEAESDAoI", 
             "T1ZFUlZJRVcQAhIOCgpNT0RVTEVfTUFYEAISFAoQR0FNRV9UWVRQRV9CRUdJ", 
             "ThBkEgkKBVRFWEFTEGQSBwoDWkZCEGUSCAoEQ0FSUxBmEgoKBlpPRElBQxBn", 
@@ -827,151 +845,171 @@ namespace ProtoCmd.Service {
         internal__static_ProtoCmd_Service_MobileSwitchOperator_S__FieldAccessorTable = 
             new pb::FieldAccess.FieldAccessorTable<global::ProtoCmd.Service.MobileSwitchOperator_S, global::ProtoCmd.Service.MobileSwitchOperator_S.Builder>(internal__static_ProtoCmd_Service_MobileSwitchOperator_S__Descriptor,
                 new string[] { "OperatorType", "MobileSwitch", "Suc", });
-        internal__static_ProtoCmd_Service_BGSetHerocraftTwiceOpenReq__Descriptor = Descriptor.MessageTypes[80];
+        internal__static_ProtoCmd_Service_MiniGameOpenReq_S__Descriptor = Descriptor.MessageTypes[80];
+        internal__static_ProtoCmd_Service_MiniGameOpenReq_S__FieldAccessorTable = 
+            new pb::FieldAccess.FieldAccessorTable<global::ProtoCmd.Service.MiniGameOpenReq_S, global::ProtoCmd.Service.MiniGameOpenReq_S.Builder>(internal__static_ProtoCmd_Service_MiniGameOpenReq_S__Descriptor,
+                new string[] { "IsOpen", });
+        internal__static_ProtoCmd_Service_MiniGameOpenReq_C__Descriptor = Descriptor.MessageTypes[81];
+        internal__static_ProtoCmd_Service_MiniGameOpenReq_C__FieldAccessorTable = 
+            new pb::FieldAccess.FieldAccessorTable<global::ProtoCmd.Service.MiniGameOpenReq_C, global::ProtoCmd.Service.MiniGameOpenReq_C.Builder>(internal__static_ProtoCmd_Service_MiniGameOpenReq_C__Descriptor,
+                new string[] { "Suc", "IsOpen", });
+        internal__static_ProtoCmd_Service_MiniGamePot_Operator_C__Descriptor = Descriptor.MessageTypes[82];
+        internal__static_ProtoCmd_Service_MiniGamePot_Operator_C__FieldAccessorTable = 
+            new pb::FieldAccess.FieldAccessorTable<global::ProtoCmd.Service.MiniGamePot_Operator_C, global::ProtoCmd.Service.MiniGamePot_Operator_C.Builder>(internal__static_ProtoCmd_Service_MiniGamePot_Operator_C__Descriptor,
+                new string[] { "OpType", "OpValue", "StrContent", });
+        internal__static_ProtoCmd_Service_MiniGamePot_Operator_S__Descriptor = Descriptor.MessageTypes[83];
+        internal__static_ProtoCmd_Service_MiniGamePot_Operator_S__FieldAccessorTable = 
+            new pb::FieldAccess.FieldAccessorTable<global::ProtoCmd.Service.MiniGamePot_Operator_S, global::ProtoCmd.Service.MiniGamePot_Operator_S.Builder>(internal__static_ProtoCmd_Service_MiniGamePot_Operator_S__Descriptor,
+                new string[] { "OpType", "Suc", });
+        internal__static_ProtoCmd_Service_MiniGamePot_Select_S__Descriptor = Descriptor.MessageTypes[84];
+        internal__static_ProtoCmd_Service_MiniGamePot_Select_S__FieldAccessorTable = 
+            new pb::FieldAccess.FieldAccessorTable<global::ProtoCmd.Service.MiniGamePot_Select_S, global::ProtoCmd.Service.MiniGamePot_Select_S.Builder>(internal__static_ProtoCmd_Service_MiniGamePot_Select_S__Descriptor,
+                new string[] { "ChipNum", });
+        internal__static_ProtoCmd_Service_BGSetHerocraftTwiceOpenReq__Descriptor = Descriptor.MessageTypes[85];
         internal__static_ProtoCmd_Service_BGSetHerocraftTwiceOpenReq__FieldAccessorTable = 
             new pb::FieldAccess.FieldAccessorTable<global::ProtoCmd.Service.BGSetHerocraftTwiceOpenReq, global::ProtoCmd.Service.BGSetHerocraftTwiceOpenReq.Builder>(internal__static_ProtoCmd_Service_BGSetHerocraftTwiceOpenReq__Descriptor,
                 new string[] { "IsOpen", });
-        internal__static_ProtoCmd_Service_BGSetHerocraftTwiceOpenRes__Descriptor = Descriptor.MessageTypes[81];
+        internal__static_ProtoCmd_Service_BGSetHerocraftTwiceOpenRes__Descriptor = Descriptor.MessageTypes[86];
         internal__static_ProtoCmd_Service_BGSetHerocraftTwiceOpenRes__FieldAccessorTable = 
             new pb::FieldAccess.FieldAccessorTable<global::ProtoCmd.Service.BGSetHerocraftTwiceOpenRes, global::ProtoCmd.Service.BGSetHerocraftTwiceOpenRes.Builder>(internal__static_ProtoCmd_Service_BGSetHerocraftTwiceOpenRes__Descriptor,
                 new string[] { "Suc", "CurrStatus", });
-        internal__static_ProtoCmd_Service_BGSetMidautumnFestivalOpenReq__Descriptor = Descriptor.MessageTypes[82];
+        internal__static_ProtoCmd_Service_BGSetMidautumnFestivalOpenReq__Descriptor = Descriptor.MessageTypes[87];
         internal__static_ProtoCmd_Service_BGSetMidautumnFestivalOpenReq__FieldAccessorTable = 
             new pb::FieldAccess.FieldAccessorTable<global::ProtoCmd.Service.BGSetMidautumnFestivalOpenReq, global::ProtoCmd.Service.BGSetMidautumnFestivalOpenReq.Builder>(internal__static_ProtoCmd_Service_BGSetMidautumnFestivalOpenReq__Descriptor,
                 new string[] { "IsOpen", });
-        internal__static_ProtoCmd_Service_BGSetMidautumnFestivalOpenRes__Descriptor = Descriptor.MessageTypes[83];
+        internal__static_ProtoCmd_Service_BGSetMidautumnFestivalOpenRes__Descriptor = Descriptor.MessageTypes[88];
         internal__static_ProtoCmd_Service_BGSetMidautumnFestivalOpenRes__FieldAccessorTable = 
             new pb::FieldAccess.FieldAccessorTable<global::ProtoCmd.Service.BGSetMidautumnFestivalOpenRes, global::ProtoCmd.Service.BGSetMidautumnFestivalOpenRes.Builder>(internal__static_ProtoCmd_Service_BGSetMidautumnFestivalOpenRes__Descriptor,
                 new string[] { "Suc", "CurrStatus", });
-        internal__static_ProtoCmd_Service_DbPvpCfg_S__Descriptor = Descriptor.MessageTypes[84];
+        internal__static_ProtoCmd_Service_DbPvpCfg_S__Descriptor = Descriptor.MessageTypes[89];
         internal__static_ProtoCmd_Service_DbPvpCfg_S__FieldAccessorTable = 
             new pb::FieldAccess.FieldAccessorTable<global::ProtoCmd.Service.DbPvpCfg_S, global::ProtoCmd.Service.DbPvpCfg_S.Builder>(internal__static_ProtoCmd_Service_DbPvpCfg_S__Descriptor,
                 new string[] { "Suc", });
-        internal__static_ProtoCmd_Service_ArcadeGameStock_C__Descriptor = Descriptor.MessageTypes[85];
+        internal__static_ProtoCmd_Service_ArcadeGameStock_C__Descriptor = Descriptor.MessageTypes[90];
         internal__static_ProtoCmd_Service_ArcadeGameStock_C__FieldAccessorTable = 
             new pb::FieldAccess.FieldAccessorTable<global::ProtoCmd.Service.ArcadeGameStock_C, global::ProtoCmd.Service.ArcadeGameStock_C.Builder>(internal__static_ProtoCmd_Service_ArcadeGameStock_C__Descriptor,
                 new string[] { "Mod", "Type", "Value", });
-        internal__static_ProtoCmd_Service_ArcadeGameStock_S__Descriptor = Descriptor.MessageTypes[86];
+        internal__static_ProtoCmd_Service_ArcadeGameStock_S__Descriptor = Descriptor.MessageTypes[91];
         internal__static_ProtoCmd_Service_ArcadeGameStock_S__FieldAccessorTable = 
             new pb::FieldAccess.FieldAccessorTable<global::ProtoCmd.Service.ArcadeGameStock_S, global::ProtoCmd.Service.ArcadeGameStock_S.Builder>(internal__static_ProtoCmd_Service_ArcadeGameStock_S__Descriptor,
                 new string[] { "Suc", });
-        internal__static_ProtoCmd_Service_ShuiHuPot_C__Descriptor = Descriptor.MessageTypes[87];
+        internal__static_ProtoCmd_Service_ShuiHuPot_C__Descriptor = Descriptor.MessageTypes[92];
         internal__static_ProtoCmd_Service_ShuiHuPot_C__FieldAccessorTable = 
             new pb::FieldAccess.FieldAccessorTable<global::ProtoCmd.Service.ShuiHuPot_C, global::ProtoCmd.Service.ShuiHuPot_C.Builder>(internal__static_ProtoCmd_Service_ShuiHuPot_C__Descriptor,
                 new string[] { "Mod", "Type", "Value", });
-        internal__static_ProtoCmd_Service_ShuiHuPot_S__Descriptor = Descriptor.MessageTypes[88];
+        internal__static_ProtoCmd_Service_ShuiHuPot_S__Descriptor = Descriptor.MessageTypes[93];
         internal__static_ProtoCmd_Service_ShuiHuPot_S__FieldAccessorTable = 
             new pb::FieldAccess.FieldAccessorTable<global::ProtoCmd.Service.ShuiHuPot_S, global::ProtoCmd.Service.ShuiHuPot_S.Builder>(internal__static_ProtoCmd_Service_ShuiHuPot_S__Descriptor,
                 new string[] { "Suc", });
-        internal__static_ProtoCmd_Service_FruiteBigPot_C__Descriptor = Descriptor.MessageTypes[89];
+        internal__static_ProtoCmd_Service_FruiteBigPot_C__Descriptor = Descriptor.MessageTypes[94];
         internal__static_ProtoCmd_Service_FruiteBigPot_C__FieldAccessorTable = 
             new pb::FieldAccess.FieldAccessorTable<global::ProtoCmd.Service.FruiteBigPot_C, global::ProtoCmd.Service.FruiteBigPot_C.Builder>(internal__static_ProtoCmd_Service_FruiteBigPot_C__Descriptor,
                 new string[] { "Mod", "Type", "Value", });
-        internal__static_ProtoCmd_Service_FruiteBigPot_S__Descriptor = Descriptor.MessageTypes[90];
+        internal__static_ProtoCmd_Service_FruiteBigPot_S__Descriptor = Descriptor.MessageTypes[95];
         internal__static_ProtoCmd_Service_FruiteBigPot_S__FieldAccessorTable = 
             new pb::FieldAccess.FieldAccessorTable<global::ProtoCmd.Service.FruiteBigPot_S, global::ProtoCmd.Service.FruiteBigPot_S.Builder>(internal__static_ProtoCmd_Service_FruiteBigPot_S__Descriptor,
                 new string[] { "Suc", });
-        internal__static_ProtoCmd_Service_BGSetBaccaratPOTOpenReq__Descriptor = Descriptor.MessageTypes[91];
+        internal__static_ProtoCmd_Service_BGSetBaccaratPOTOpenReq__Descriptor = Descriptor.MessageTypes[96];
         internal__static_ProtoCmd_Service_BGSetBaccaratPOTOpenReq__FieldAccessorTable = 
             new pb::FieldAccess.FieldAccessorTable<global::ProtoCmd.Service.BGSetBaccaratPOTOpenReq, global::ProtoCmd.Service.BGSetBaccaratPOTOpenReq.Builder>(internal__static_ProtoCmd_Service_BGSetBaccaratPOTOpenReq__Descriptor,
                 new string[] { "IsOpen", });
-        internal__static_ProtoCmd_Service_BGSetBaccaratPOTOpenRes__Descriptor = Descriptor.MessageTypes[92];
+        internal__static_ProtoCmd_Service_BGSetBaccaratPOTOpenRes__Descriptor = Descriptor.MessageTypes[97];
         internal__static_ProtoCmd_Service_BGSetBaccaratPOTOpenRes__FieldAccessorTable = 
             new pb::FieldAccess.FieldAccessorTable<global::ProtoCmd.Service.BGSetBaccaratPOTOpenRes, global::ProtoCmd.Service.BGSetBaccaratPOTOpenRes.Builder>(internal__static_ProtoCmd_Service_BGSetBaccaratPOTOpenRes__Descriptor,
                 new string[] { "Suc", "CurrStatus", });
-        internal__static_ProtoCmd_Service_Baccarat_Select_S__Descriptor = Descriptor.MessageTypes[93];
+        internal__static_ProtoCmd_Service_Baccarat_Select_S__Descriptor = Descriptor.MessageTypes[98];
         internal__static_ProtoCmd_Service_Baccarat_Select_S__FieldAccessorTable = 
             new pb::FieldAccess.FieldAccessorTable<global::ProtoCmd.Service.Baccarat_Select_S, global::ProtoCmd.Service.Baccarat_Select_S.Builder>(internal__static_ProtoCmd_Service_Baccarat_Select_S__Descriptor,
                 new string[] { "ChipNum", });
-        internal__static_ProtoCmd_Service_Baccarat_Operator_C__Descriptor = Descriptor.MessageTypes[94];
+        internal__static_ProtoCmd_Service_Baccarat_Operator_C__Descriptor = Descriptor.MessageTypes[99];
         internal__static_ProtoCmd_Service_Baccarat_Operator_C__FieldAccessorTable = 
             new pb::FieldAccess.FieldAccessorTable<global::ProtoCmd.Service.Baccarat_Operator_C, global::ProtoCmd.Service.Baccarat_Operator_C.Builder>(internal__static_ProtoCmd_Service_Baccarat_Operator_C__Descriptor,
                 new string[] { "OpType", "OpValue", "StrContent", });
-        internal__static_ProtoCmd_Service_Baccarat_Operator_S__Descriptor = Descriptor.MessageTypes[95];
+        internal__static_ProtoCmd_Service_Baccarat_Operator_S__Descriptor = Descriptor.MessageTypes[100];
         internal__static_ProtoCmd_Service_Baccarat_Operator_S__FieldAccessorTable = 
             new pb::FieldAccess.FieldAccessorTable<global::ProtoCmd.Service.Baccarat_Operator_S, global::ProtoCmd.Service.Baccarat_Operator_S.Builder>(internal__static_ProtoCmd_Service_Baccarat_Operator_S__Descriptor,
                 new string[] { "OpType", "Suc", });
-        internal__static_ProtoCmd_Service_QueryRobotStatu__Descriptor = Descriptor.MessageTypes[96];
+        internal__static_ProtoCmd_Service_QueryRobotStatu__Descriptor = Descriptor.MessageTypes[101];
         internal__static_ProtoCmd_Service_QueryRobotStatu__FieldAccessorTable = 
             new pb::FieldAccess.FieldAccessorTable<global::ProtoCmd.Service.QueryRobotStatu, global::ProtoCmd.Service.QueryRobotStatu.Builder>(internal__static_ProtoCmd_Service_QueryRobotStatu__Descriptor,
                 new string[] { "ModuleType", });
-        internal__static_ProtoCmd_Service_ModifyRobotConfig__Descriptor = Descriptor.MessageTypes[97];
+        internal__static_ProtoCmd_Service_ModifyRobotConfig__Descriptor = Descriptor.MessageTypes[102];
         internal__static_ProtoCmd_Service_ModifyRobotConfig__FieldAccessorTable = 
             new pb::FieldAccess.FieldAccessorTable<global::ProtoCmd.Service.ModifyRobotConfig, global::ProtoCmd.Service.ModifyRobotConfig.Builder>(internal__static_ProtoCmd_Service_ModifyRobotConfig__Descriptor,
                 new string[] { "GameType", "Limit", "IsBet", });
-        internal__static_ProtoCmd_Service_LoginRequest__Descriptor = Descriptor.MessageTypes[98];
+        internal__static_ProtoCmd_Service_LoginRequest__Descriptor = Descriptor.MessageTypes[103];
         internal__static_ProtoCmd_Service_LoginRequest__FieldAccessorTable = 
             new pb::FieldAccess.FieldAccessorTable<global::ProtoCmd.Service.LoginRequest, global::ProtoCmd.Service.LoginRequest.Builder>(internal__static_ProtoCmd_Service_LoginRequest__Descriptor,
                 new string[] { "GameType", "LoginFrequency", "LoginCnt", "Strategy", });
-        internal__static_ProtoCmd_Service_GameStatu__Descriptor = Descriptor.MessageTypes[99];
+        internal__static_ProtoCmd_Service_GameStatu__Descriptor = Descriptor.MessageTypes[104];
         internal__static_ProtoCmd_Service_GameStatu__FieldAccessorTable = 
             new pb::FieldAccess.FieldAccessorTable<global::ProtoCmd.Service.GameStatu, global::ProtoCmd.Service.GameStatu.Builder>(internal__static_ProtoCmd_Service_GameStatu__Descriptor,
                 new string[] { "GameType", "PlayerCnt", "PlayerLimit", "IsBet", });
-        internal__static_ProtoCmd_Service_GameOverView__Descriptor = Descriptor.MessageTypes[100];
+        internal__static_ProtoCmd_Service_GameOverView__Descriptor = Descriptor.MessageTypes[105];
         internal__static_ProtoCmd_Service_GameOverView__FieldAccessorTable = 
             new pb::FieldAccess.FieldAccessorTable<global::ProtoCmd.Service.GameOverView, global::ProtoCmd.Service.GameOverView.Builder>(internal__static_ProtoCmd_Service_GameOverView__Descriptor,
                 new string[] { "PlayerCnt", });
-        internal__static_ProtoCmd_Service_SystemStatu__Descriptor = Descriptor.MessageTypes[101];
+        internal__static_ProtoCmd_Service_SystemStatu__Descriptor = Descriptor.MessageTypes[106];
         internal__static_ProtoCmd_Service_SystemStatu__FieldAccessorTable = 
             new pb::FieldAccess.FieldAccessorTable<global::ProtoCmd.Service.SystemStatu, global::ProtoCmd.Service.SystemStatu.Builder>(internal__static_ProtoCmd_Service_SystemStatu__Descriptor,
                 new string[] { "CpuPercent", "MemUsed", "MemTotal", "FlowRate", "ConnCnt", "ConnLimit", });
-        internal__static_ProtoCmd_Service_RobotStatus__Descriptor = Descriptor.MessageTypes[102];
+        internal__static_ProtoCmd_Service_RobotStatus__Descriptor = Descriptor.MessageTypes[107];
         internal__static_ProtoCmd_Service_RobotStatus__FieldAccessorTable = 
             new pb::FieldAccess.FieldAccessorTable<global::ProtoCmd.Service.RobotStatus, global::ProtoCmd.Service.RobotStatus.Builder>(internal__static_ProtoCmd_Service_RobotStatus__Descriptor,
                 new string[] { "ModuleType", "GameStatu", "GameOverview", "SystemStatu", });
-        internal__static_ProtoCmd_Service_ErrorMessage__Descriptor = Descriptor.MessageTypes[103];
+        internal__static_ProtoCmd_Service_ErrorMessage__Descriptor = Descriptor.MessageTypes[108];
         internal__static_ProtoCmd_Service_ErrorMessage__FieldAccessorTable = 
             new pb::FieldAccess.FieldAccessorTable<global::ProtoCmd.Service.ErrorMessage, global::ProtoCmd.Service.ErrorMessage.Builder>(internal__static_ProtoCmd_Service_ErrorMessage__Descriptor,
                 new string[] { "ErrorMessage_", });
-        internal__static_ProtoCmd_Service_UserStateReq__Descriptor = Descriptor.MessageTypes[104];
+        internal__static_ProtoCmd_Service_UserStateReq__Descriptor = Descriptor.MessageTypes[109];
         internal__static_ProtoCmd_Service_UserStateReq__FieldAccessorTable = 
             new pb::FieldAccess.FieldAccessorTable<global::ProtoCmd.Service.UserStateReq, global::ProtoCmd.Service.UserStateReq.Builder>(internal__static_ProtoCmd_Service_UserStateReq__Descriptor,
                 new string[] { "UserId", });
-        internal__static_ProtoCmd_Service_UserStateRes__Descriptor = Descriptor.MessageTypes[105];
+        internal__static_ProtoCmd_Service_UserStateRes__Descriptor = Descriptor.MessageTypes[110];
         internal__static_ProtoCmd_Service_UserStateRes__FieldAccessorTable = 
             new pb::FieldAccess.FieldAccessorTable<global::ProtoCmd.Service.UserStateRes, global::ProtoCmd.Service.UserStateRes.Builder>(internal__static_ProtoCmd_Service_UserStateRes__Descriptor,
                 new string[] { "UserId", "State", "RoomId", "RoomType", });
-        internal__static_ProtoCmd_Service_UserScoreAward__Descriptor = Descriptor.MessageTypes[106];
+        internal__static_ProtoCmd_Service_UserScoreAward__Descriptor = Descriptor.MessageTypes[111];
         internal__static_ProtoCmd_Service_UserScoreAward__FieldAccessorTable = 
             new pb::FieldAccess.FieldAccessorTable<global::ProtoCmd.Service.UserScoreAward, global::ProtoCmd.Service.UserScoreAward.Builder>(internal__static_ProtoCmd_Service_UserScoreAward__Descriptor,
                 new string[] { "TLastGetAwardTime", "TFinalGetScoreTime", "TLastGetScoreTime", "DwLastGetScore", "DwNowGetScore", });
-        internal__static_ProtoCmd_Service_UserSign__Descriptor = Descriptor.MessageTypes[107];
+        internal__static_ProtoCmd_Service_UserSign__Descriptor = Descriptor.MessageTypes[112];
         internal__static_ProtoCmd_Service_UserSign__FieldAccessorTable = 
             new pb::FieldAccess.FieldAccessorTable<global::ProtoCmd.Service.UserSign, global::ProtoCmd.Service.UserSign.Builder>(internal__static_ProtoCmd_Service_UserSign__Descriptor,
                 new string[] { "WConti", "TlastLoginTime", "TSignLuckTime", "TSignAwardTime", "ByStatus0", "ByStatus1", "ByStatus2", });
-        internal__static_ProtoCmd_Service_UserExData__Descriptor = Descriptor.MessageTypes[108];
+        internal__static_ProtoCmd_Service_UserExData__Descriptor = Descriptor.MessageTypes[113];
         internal__static_ProtoCmd_Service_UserExData__FieldAccessorTable = 
             new pb::FieldAccess.FieldAccessorTable<global::ProtoCmd.Service.UserExData, global::ProtoCmd.Service.UserExData.Builder>(internal__static_ProtoCmd_Service_UserExData__Descriptor,
                 new string[] { "WMaxFriend", "LastLoginTime", "LastMoneyTime", "FinalGetScoreTime", "LastMoney", "NowMoney", "MaxCard", "ListInfo", });
-        internal__static_ProtoCmd_Service_GameInfo__Descriptor = Descriptor.MessageTypes[109];
+        internal__static_ProtoCmd_Service_GameInfo__Descriptor = Descriptor.MessageTypes[114];
         internal__static_ProtoCmd_Service_GameInfo__FieldAccessorTable = 
             new pb::FieldAccess.FieldAccessorTable<global::ProtoCmd.Service.GameInfo, global::ProtoCmd.Service.GameInfo.Builder>(internal__static_ProtoCmd_Service_GameInfo__Descriptor,
                 new string[] { "GameID", "DwWin", "DwTotal", "MaxWinChip", });
-        internal__static_ProtoCmd_Service_SpellCardInfo__Descriptor = Descriptor.MessageTypes[110];
+        internal__static_ProtoCmd_Service_SpellCardInfo__Descriptor = Descriptor.MessageTypes[115];
         internal__static_ProtoCmd_Service_SpellCardInfo__FieldAccessorTable = 
             new pb::FieldAccess.FieldAccessorTable<global::ProtoCmd.Service.SpellCardInfo, global::ProtoCmd.Service.SpellCardInfo.Builder>(internal__static_ProtoCmd_Service_SpellCardInfo__Descriptor,
                 new string[] { "Time", "JoinTimes", "WinTimes", "RobTimes", "GetBox", });
-        internal__static_ProtoCmd_Service_toolsData__Descriptor = Descriptor.MessageTypes[111];
+        internal__static_ProtoCmd_Service_toolsData__Descriptor = Descriptor.MessageTypes[116];
         internal__static_ProtoCmd_Service_toolsData__FieldAccessorTable = 
             new pb::FieldAccess.FieldAccessorTable<global::ProtoCmd.Service.toolsData, global::ProtoCmd.Service.toolsData.Builder>(internal__static_ProtoCmd_Service_toolsData__Descriptor,
                 new string[] { "ToolsId", "Bmark", "GetTime", "LastTime", "UseTimes", "TotalTimes", });
-        internal__static_ProtoCmd_Service_ToolsInfo__Descriptor = Descriptor.MessageTypes[112];
+        internal__static_ProtoCmd_Service_ToolsInfo__Descriptor = Descriptor.MessageTypes[117];
         internal__static_ProtoCmd_Service_ToolsInfo__FieldAccessorTable = 
             new pb::FieldAccess.FieldAccessorTable<global::ProtoCmd.Service.ToolsInfo, global::ProtoCmd.Service.ToolsInfo.Builder>(internal__static_ProtoCmd_Service_ToolsInfo__Descriptor,
                 new string[] { "ListTools", });
-        internal__static_ProtoCmd_Service_VipInfo__Descriptor = Descriptor.MessageTypes[113];
+        internal__static_ProtoCmd_Service_VipInfo__Descriptor = Descriptor.MessageTypes[118];
         internal__static_ProtoCmd_Service_VipInfo__FieldAccessorTable = 
             new pb::FieldAccess.FieldAccessorTable<global::ProtoCmd.Service.VipInfo, global::ProtoCmd.Service.VipInfo.Builder>(internal__static_ProtoCmd_Service_VipInfo__Descriptor,
                 new string[] { "Grade", "Current", "LastGet", "LastLevelupAwardLevel", });
-        internal__static_ProtoCmd_Service_LevelInfo__Descriptor = Descriptor.MessageTypes[114];
+        internal__static_ProtoCmd_Service_LevelInfo__Descriptor = Descriptor.MessageTypes[119];
         internal__static_ProtoCmd_Service_LevelInfo__FieldAccessorTable = 
             new pb::FieldAccess.FieldAccessorTable<global::ProtoCmd.Service.LevelInfo, global::ProtoCmd.Service.LevelInfo.Builder>(internal__static_ProtoCmd_Service_LevelInfo__Descriptor,
                 new string[] { "Level", "Exp", "ReawardLevel", });
-        internal__static_ProtoCmd_Service_VipCard__Descriptor = Descriptor.MessageTypes[115];
+        internal__static_ProtoCmd_Service_VipCard__Descriptor = Descriptor.MessageTypes[120];
         internal__static_ProtoCmd_Service_VipCard__FieldAccessorTable = 
             new pb::FieldAccess.FieldAccessorTable<global::ProtoCmd.Service.VipCard, global::ProtoCmd.Service.VipCard.Builder>(internal__static_ProtoCmd_Service_VipCard__Descriptor,
                 new string[] { "TEndTime", });
-        internal__static_ProtoCmd_Service_BExtInfo__Descriptor = Descriptor.MessageTypes[116];
+        internal__static_ProtoCmd_Service_BExtInfo__Descriptor = Descriptor.MessageTypes[121];
         internal__static_ProtoCmd_Service_BExtInfo__FieldAccessorTable = 
             new pb::FieldAccess.FieldAccessorTable<global::ProtoCmd.Service.BExtInfo, global::ProtoCmd.Service.BExtInfo.Builder>(internal__static_ProtoCmd_Service_BExtInfo__Descriptor,
                 new string[] { "ScoreAward", "UserSign", "UserExData", "SpellCard", "ToolsInfo", "VipInfo", "LevelInfo", "VipCard", });
@@ -1044,6 +1082,8 @@ namespace ProtoCmd.Service {
     SC_SET_BACCARATPOT_OPEN = 69,
     SC_SELECT_BACCARAT_POT = 70,
     SC_OPERTOR_BACCARAT_POT = 71,
+    SC_OPERTOR_MINI_POT = 72,
+    SC_SELECT_MINI_POT = 73,
     SC_TOTAL = 200,
   }
   
@@ -1106,6 +1146,8 @@ namespace ProtoCmd.Service {
     CS_SET_BACCARART_OPEN = 69,
     CS_SELECT_BACCARAT_POT = 70,
     CS_OPERTOR_BACCARAT_POT = 71,
+    CS_OPERTOR_MINI_POT = 72,
+    CS_SELECT_MINI_POT = 73,
     CS_TOTAL = 100,
   }
   
@@ -27473,6 +27515,1567 @@ namespace ProtoCmd.Service {
       }
     }
     static MobileSwitchOperator_S() {
+      object.ReferenceEquals(global::ProtoCmd.Service.Service.Descriptor, null);
+    }
+  }
+  
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+  public sealed partial class MiniGameOpenReq_S : pb::GeneratedMessage<MiniGameOpenReq_S, MiniGameOpenReq_S.Builder> {
+    private MiniGameOpenReq_S() { }
+    private static readonly MiniGameOpenReq_S defaultInstance = new MiniGameOpenReq_S().MakeReadOnly();
+    private static readonly string[] _miniGameOpenReqSFieldNames = new string[] { "isOpen" };
+    private static readonly uint[] _miniGameOpenReqSFieldTags = new uint[] { 8 };
+    public static MiniGameOpenReq_S DefaultInstance {
+      get { return defaultInstance; }
+    }
+    
+    public override MiniGameOpenReq_S DefaultInstanceForType {
+      get { return DefaultInstance; }
+    }
+    
+    protected override MiniGameOpenReq_S ThisMessage {
+      get { return this; }
+    }
+    
+    public static pbd::MessageDescriptor Descriptor {
+      get { return global::ProtoCmd.Service.Service.internal__static_ProtoCmd_Service_MiniGameOpenReq_S__Descriptor; }
+    }
+    
+    protected override pb::FieldAccess.FieldAccessorTable<MiniGameOpenReq_S, MiniGameOpenReq_S.Builder> InternalFieldAccessors {
+      get { return global::ProtoCmd.Service.Service.internal__static_ProtoCmd_Service_MiniGameOpenReq_S__FieldAccessorTable; }
+    }
+    
+    public const int IsOpenFieldNumber = 1;
+    private bool hasIsOpen;
+    private int isOpen_;
+    public bool HasIsOpen {
+      get { return hasIsOpen; }
+    }
+    public int IsOpen {
+      get { return isOpen_; }
+    }
+    
+    public override bool IsInitialized {
+      get {
+        return true;
+      }
+    }
+    
+    public override void WriteTo(pb::ICodedOutputStream output) {
+      CalcSerializedSize();
+      string[] field_names = _miniGameOpenReqSFieldNames;
+      if (hasIsOpen) {
+        output.WriteInt32(1, field_names[0], IsOpen);
+      }
+      UnknownFields.WriteTo(output);
+    }
+    
+    private int memoizedSerializedSize = -1;
+    public override int SerializedSize {
+      get {
+        int size = memoizedSerializedSize;
+        if (size != -1) return size;
+        return CalcSerializedSize();
+      }
+    }
+    
+    private int CalcSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+      
+      size = 0;
+      if (hasIsOpen) {
+        size += pb::CodedOutputStream.ComputeInt32Size(1, IsOpen);
+      }
+      size += UnknownFields.SerializedSize;
+      memoizedSerializedSize = size;
+      return size;
+    }
+    public static MiniGameOpenReq_S ParseFrom(pb::ByteString data) {
+      return ((Builder) CreateBuilder().MergeFrom(data)).BuildParsed();
+    }
+    public static MiniGameOpenReq_S ParseFrom(pb::ByteString data, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(data, extensionRegistry)).BuildParsed();
+    }
+    public static MiniGameOpenReq_S ParseFrom(byte[] data) {
+      return ((Builder) CreateBuilder().MergeFrom(data)).BuildParsed();
+    }
+    public static MiniGameOpenReq_S ParseFrom(byte[] data, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(data, extensionRegistry)).BuildParsed();
+    }
+    public static MiniGameOpenReq_S ParseFrom(global::System.IO.Stream input) {
+      return ((Builder) CreateBuilder().MergeFrom(input)).BuildParsed();
+    }
+    public static MiniGameOpenReq_S ParseFrom(global::System.IO.Stream input, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(input, extensionRegistry)).BuildParsed();
+    }
+    public static MiniGameOpenReq_S ParseDelimitedFrom(global::System.IO.Stream input) {
+      return CreateBuilder().MergeDelimitedFrom(input).BuildParsed();
+    }
+    public static MiniGameOpenReq_S ParseDelimitedFrom(global::System.IO.Stream input, pb::ExtensionRegistry extensionRegistry) {
+      return CreateBuilder().MergeDelimitedFrom(input, extensionRegistry).BuildParsed();
+    }
+    public static MiniGameOpenReq_S ParseFrom(pb::ICodedInputStream input) {
+      return ((Builder) CreateBuilder().MergeFrom(input)).BuildParsed();
+    }
+    public static MiniGameOpenReq_S ParseFrom(pb::ICodedInputStream input, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(input, extensionRegistry)).BuildParsed();
+    }
+    private MiniGameOpenReq_S MakeReadOnly() {
+      return this;
+    }
+    
+    public static Builder CreateBuilder() { return new Builder(); }
+    public override Builder ToBuilder() { return CreateBuilder(this); }
+    public override Builder CreateBuilderForType() { return new Builder(); }
+    public static Builder CreateBuilder(MiniGameOpenReq_S prototype) {
+      return new Builder(prototype);
+    }
+    
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+    public sealed partial class Builder : pb::GeneratedBuilder<MiniGameOpenReq_S, Builder> {
+      protected override Builder ThisBuilder {
+        get { return this; }
+      }
+      public Builder() {
+        result = DefaultInstance;
+        resultIsReadOnly = true;
+      }
+      internal Builder(MiniGameOpenReq_S cloneFrom) {
+        result = cloneFrom;
+        resultIsReadOnly = true;
+      }
+      
+      private bool resultIsReadOnly;
+      private MiniGameOpenReq_S result;
+      
+      private MiniGameOpenReq_S PrepareBuilder() {
+        if (resultIsReadOnly) {
+          MiniGameOpenReq_S original = result;
+          result = new MiniGameOpenReq_S();
+          resultIsReadOnly = false;
+          MergeFrom(original);
+        }
+        return result;
+      }
+      
+      public override bool IsInitialized {
+        get { return result.IsInitialized; }
+      }
+      
+      protected override MiniGameOpenReq_S MessageBeingBuilt {
+        get { return PrepareBuilder(); }
+      }
+      
+      public override Builder Clear() {
+        result = DefaultInstance;
+        resultIsReadOnly = true;
+        return this;
+      }
+      
+      public override Builder Clone() {
+        if (resultIsReadOnly) {
+          return new Builder(result);
+        } else {
+          return new Builder().MergeFrom(result);
+        }
+      }
+      
+      public override pbd::MessageDescriptor DescriptorForType {
+        get { return global::ProtoCmd.Service.MiniGameOpenReq_S.Descriptor; }
+      }
+      
+      public override MiniGameOpenReq_S DefaultInstanceForType {
+        get { return global::ProtoCmd.Service.MiniGameOpenReq_S.DefaultInstance; }
+      }
+      
+      public override MiniGameOpenReq_S BuildPartial() {
+        if (resultIsReadOnly) {
+          return result;
+        }
+        resultIsReadOnly = true;
+        return result.MakeReadOnly();
+      }
+      
+      public override Builder MergeFrom(pb::IMessage other) {
+        if (other is MiniGameOpenReq_S) {
+          return MergeFrom((MiniGameOpenReq_S) other);
+        } else {
+          base.MergeFrom(other);
+          return this;
+        }
+      }
+      
+      public override Builder MergeFrom(MiniGameOpenReq_S other) {
+        if (other == global::ProtoCmd.Service.MiniGameOpenReq_S.DefaultInstance) return this;
+        PrepareBuilder();
+        if (other.HasIsOpen) {
+          IsOpen = other.IsOpen;
+        }
+        this.MergeUnknownFields(other.UnknownFields);
+        return this;
+      }
+      
+      public override Builder MergeFrom(pb::ICodedInputStream input) {
+        return MergeFrom(input, pb::ExtensionRegistry.Empty);
+      }
+      
+      public override Builder MergeFrom(pb::ICodedInputStream input, pb::ExtensionRegistry extensionRegistry) {
+        PrepareBuilder();
+        pb::UnknownFieldSet.Builder unknownFields = null;
+        uint tag;
+        string field_name;
+        while (input.ReadTag(out tag, out field_name)) {
+          if(tag == 0 && field_name != null) {
+            int field_ordinal = global::System.Array.BinarySearch(_miniGameOpenReqSFieldNames, field_name, global::System.StringComparer.Ordinal);
+            if(field_ordinal >= 0)
+              tag = _miniGameOpenReqSFieldTags[field_ordinal];
+            else {
+              if (unknownFields == null) {
+                unknownFields = pb::UnknownFieldSet.CreateBuilder(this.UnknownFields);
+              }
+              ParseUnknownField(input, unknownFields, extensionRegistry, tag, field_name);
+              continue;
+            }
+          }
+          switch (tag) {
+            case 0: {
+              throw pb::InvalidProtocolBufferException.InvalidTag();
+            }
+            default: {
+              if (pb::WireFormat.IsEndGroupTag(tag)) {
+                if (unknownFields != null) {
+                  this.UnknownFields = unknownFields.Build();
+                }
+                return this;
+              }
+              if (unknownFields == null) {
+                unknownFields = pb::UnknownFieldSet.CreateBuilder(this.UnknownFields);
+              }
+              ParseUnknownField(input, unknownFields, extensionRegistry, tag, field_name);
+              break;
+            }
+            case 8: {
+              result.hasIsOpen = input.ReadInt32(ref result.isOpen_);
+              break;
+            }
+          }
+        }
+        
+        if (unknownFields != null) {
+          this.UnknownFields = unknownFields.Build();
+        }
+        return this;
+      }
+      
+      
+      public bool HasIsOpen {
+        get { return result.hasIsOpen; }
+      }
+      public int IsOpen {
+        get { return result.IsOpen; }
+        set { SetIsOpen(value); }
+      }
+      public Builder SetIsOpen(int value) {
+        PrepareBuilder();
+        result.hasIsOpen = true;
+        result.isOpen_ = value;
+        return this;
+      }
+      public Builder ClearIsOpen() {
+        PrepareBuilder();
+        result.hasIsOpen = false;
+        result.isOpen_ = 0;
+        return this;
+      }
+    }
+    static MiniGameOpenReq_S() {
+      object.ReferenceEquals(global::ProtoCmd.Service.Service.Descriptor, null);
+    }
+  }
+  
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+  public sealed partial class MiniGameOpenReq_C : pb::GeneratedMessage<MiniGameOpenReq_C, MiniGameOpenReq_C.Builder> {
+    private MiniGameOpenReq_C() { }
+    private static readonly MiniGameOpenReq_C defaultInstance = new MiniGameOpenReq_C().MakeReadOnly();
+    private static readonly string[] _miniGameOpenReqCFieldNames = new string[] { "isOpen", "suc" };
+    private static readonly uint[] _miniGameOpenReqCFieldTags = new uint[] { 16, 8 };
+    public static MiniGameOpenReq_C DefaultInstance {
+      get { return defaultInstance; }
+    }
+    
+    public override MiniGameOpenReq_C DefaultInstanceForType {
+      get { return DefaultInstance; }
+    }
+    
+    protected override MiniGameOpenReq_C ThisMessage {
+      get { return this; }
+    }
+    
+    public static pbd::MessageDescriptor Descriptor {
+      get { return global::ProtoCmd.Service.Service.internal__static_ProtoCmd_Service_MiniGameOpenReq_C__Descriptor; }
+    }
+    
+    protected override pb::FieldAccess.FieldAccessorTable<MiniGameOpenReq_C, MiniGameOpenReq_C.Builder> InternalFieldAccessors {
+      get { return global::ProtoCmd.Service.Service.internal__static_ProtoCmd_Service_MiniGameOpenReq_C__FieldAccessorTable; }
+    }
+    
+    public const int SucFieldNumber = 1;
+    private bool hasSuc;
+    private int suc_;
+    public bool HasSuc {
+      get { return hasSuc; }
+    }
+    public int Suc {
+      get { return suc_; }
+    }
+    
+    public const int IsOpenFieldNumber = 2;
+    private bool hasIsOpen;
+    private int isOpen_;
+    public bool HasIsOpen {
+      get { return hasIsOpen; }
+    }
+    public int IsOpen {
+      get { return isOpen_; }
+    }
+    
+    public override bool IsInitialized {
+      get {
+        return true;
+      }
+    }
+    
+    public override void WriteTo(pb::ICodedOutputStream output) {
+      CalcSerializedSize();
+      string[] field_names = _miniGameOpenReqCFieldNames;
+      if (hasSuc) {
+        output.WriteInt32(1, field_names[1], Suc);
+      }
+      if (hasIsOpen) {
+        output.WriteInt32(2, field_names[0], IsOpen);
+      }
+      UnknownFields.WriteTo(output);
+    }
+    
+    private int memoizedSerializedSize = -1;
+    public override int SerializedSize {
+      get {
+        int size = memoizedSerializedSize;
+        if (size != -1) return size;
+        return CalcSerializedSize();
+      }
+    }
+    
+    private int CalcSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+      
+      size = 0;
+      if (hasSuc) {
+        size += pb::CodedOutputStream.ComputeInt32Size(1, Suc);
+      }
+      if (hasIsOpen) {
+        size += pb::CodedOutputStream.ComputeInt32Size(2, IsOpen);
+      }
+      size += UnknownFields.SerializedSize;
+      memoizedSerializedSize = size;
+      return size;
+    }
+    public static MiniGameOpenReq_C ParseFrom(pb::ByteString data) {
+      return ((Builder) CreateBuilder().MergeFrom(data)).BuildParsed();
+    }
+    public static MiniGameOpenReq_C ParseFrom(pb::ByteString data, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(data, extensionRegistry)).BuildParsed();
+    }
+    public static MiniGameOpenReq_C ParseFrom(byte[] data) {
+      return ((Builder) CreateBuilder().MergeFrom(data)).BuildParsed();
+    }
+    public static MiniGameOpenReq_C ParseFrom(byte[] data, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(data, extensionRegistry)).BuildParsed();
+    }
+    public static MiniGameOpenReq_C ParseFrom(global::System.IO.Stream input) {
+      return ((Builder) CreateBuilder().MergeFrom(input)).BuildParsed();
+    }
+    public static MiniGameOpenReq_C ParseFrom(global::System.IO.Stream input, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(input, extensionRegistry)).BuildParsed();
+    }
+    public static MiniGameOpenReq_C ParseDelimitedFrom(global::System.IO.Stream input) {
+      return CreateBuilder().MergeDelimitedFrom(input).BuildParsed();
+    }
+    public static MiniGameOpenReq_C ParseDelimitedFrom(global::System.IO.Stream input, pb::ExtensionRegistry extensionRegistry) {
+      return CreateBuilder().MergeDelimitedFrom(input, extensionRegistry).BuildParsed();
+    }
+    public static MiniGameOpenReq_C ParseFrom(pb::ICodedInputStream input) {
+      return ((Builder) CreateBuilder().MergeFrom(input)).BuildParsed();
+    }
+    public static MiniGameOpenReq_C ParseFrom(pb::ICodedInputStream input, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(input, extensionRegistry)).BuildParsed();
+    }
+    private MiniGameOpenReq_C MakeReadOnly() {
+      return this;
+    }
+    
+    public static Builder CreateBuilder() { return new Builder(); }
+    public override Builder ToBuilder() { return CreateBuilder(this); }
+    public override Builder CreateBuilderForType() { return new Builder(); }
+    public static Builder CreateBuilder(MiniGameOpenReq_C prototype) {
+      return new Builder(prototype);
+    }
+    
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+    public sealed partial class Builder : pb::GeneratedBuilder<MiniGameOpenReq_C, Builder> {
+      protected override Builder ThisBuilder {
+        get { return this; }
+      }
+      public Builder() {
+        result = DefaultInstance;
+        resultIsReadOnly = true;
+      }
+      internal Builder(MiniGameOpenReq_C cloneFrom) {
+        result = cloneFrom;
+        resultIsReadOnly = true;
+      }
+      
+      private bool resultIsReadOnly;
+      private MiniGameOpenReq_C result;
+      
+      private MiniGameOpenReq_C PrepareBuilder() {
+        if (resultIsReadOnly) {
+          MiniGameOpenReq_C original = result;
+          result = new MiniGameOpenReq_C();
+          resultIsReadOnly = false;
+          MergeFrom(original);
+        }
+        return result;
+      }
+      
+      public override bool IsInitialized {
+        get { return result.IsInitialized; }
+      }
+      
+      protected override MiniGameOpenReq_C MessageBeingBuilt {
+        get { return PrepareBuilder(); }
+      }
+      
+      public override Builder Clear() {
+        result = DefaultInstance;
+        resultIsReadOnly = true;
+        return this;
+      }
+      
+      public override Builder Clone() {
+        if (resultIsReadOnly) {
+          return new Builder(result);
+        } else {
+          return new Builder().MergeFrom(result);
+        }
+      }
+      
+      public override pbd::MessageDescriptor DescriptorForType {
+        get { return global::ProtoCmd.Service.MiniGameOpenReq_C.Descriptor; }
+      }
+      
+      public override MiniGameOpenReq_C DefaultInstanceForType {
+        get { return global::ProtoCmd.Service.MiniGameOpenReq_C.DefaultInstance; }
+      }
+      
+      public override MiniGameOpenReq_C BuildPartial() {
+        if (resultIsReadOnly) {
+          return result;
+        }
+        resultIsReadOnly = true;
+        return result.MakeReadOnly();
+      }
+      
+      public override Builder MergeFrom(pb::IMessage other) {
+        if (other is MiniGameOpenReq_C) {
+          return MergeFrom((MiniGameOpenReq_C) other);
+        } else {
+          base.MergeFrom(other);
+          return this;
+        }
+      }
+      
+      public override Builder MergeFrom(MiniGameOpenReq_C other) {
+        if (other == global::ProtoCmd.Service.MiniGameOpenReq_C.DefaultInstance) return this;
+        PrepareBuilder();
+        if (other.HasSuc) {
+          Suc = other.Suc;
+        }
+        if (other.HasIsOpen) {
+          IsOpen = other.IsOpen;
+        }
+        this.MergeUnknownFields(other.UnknownFields);
+        return this;
+      }
+      
+      public override Builder MergeFrom(pb::ICodedInputStream input) {
+        return MergeFrom(input, pb::ExtensionRegistry.Empty);
+      }
+      
+      public override Builder MergeFrom(pb::ICodedInputStream input, pb::ExtensionRegistry extensionRegistry) {
+        PrepareBuilder();
+        pb::UnknownFieldSet.Builder unknownFields = null;
+        uint tag;
+        string field_name;
+        while (input.ReadTag(out tag, out field_name)) {
+          if(tag == 0 && field_name != null) {
+            int field_ordinal = global::System.Array.BinarySearch(_miniGameOpenReqCFieldNames, field_name, global::System.StringComparer.Ordinal);
+            if(field_ordinal >= 0)
+              tag = _miniGameOpenReqCFieldTags[field_ordinal];
+            else {
+              if (unknownFields == null) {
+                unknownFields = pb::UnknownFieldSet.CreateBuilder(this.UnknownFields);
+              }
+              ParseUnknownField(input, unknownFields, extensionRegistry, tag, field_name);
+              continue;
+            }
+          }
+          switch (tag) {
+            case 0: {
+              throw pb::InvalidProtocolBufferException.InvalidTag();
+            }
+            default: {
+              if (pb::WireFormat.IsEndGroupTag(tag)) {
+                if (unknownFields != null) {
+                  this.UnknownFields = unknownFields.Build();
+                }
+                return this;
+              }
+              if (unknownFields == null) {
+                unknownFields = pb::UnknownFieldSet.CreateBuilder(this.UnknownFields);
+              }
+              ParseUnknownField(input, unknownFields, extensionRegistry, tag, field_name);
+              break;
+            }
+            case 8: {
+              result.hasSuc = input.ReadInt32(ref result.suc_);
+              break;
+            }
+            case 16: {
+              result.hasIsOpen = input.ReadInt32(ref result.isOpen_);
+              break;
+            }
+          }
+        }
+        
+        if (unknownFields != null) {
+          this.UnknownFields = unknownFields.Build();
+        }
+        return this;
+      }
+      
+      
+      public bool HasSuc {
+        get { return result.hasSuc; }
+      }
+      public int Suc {
+        get { return result.Suc; }
+        set { SetSuc(value); }
+      }
+      public Builder SetSuc(int value) {
+        PrepareBuilder();
+        result.hasSuc = true;
+        result.suc_ = value;
+        return this;
+      }
+      public Builder ClearSuc() {
+        PrepareBuilder();
+        result.hasSuc = false;
+        result.suc_ = 0;
+        return this;
+      }
+      
+      public bool HasIsOpen {
+        get { return result.hasIsOpen; }
+      }
+      public int IsOpen {
+        get { return result.IsOpen; }
+        set { SetIsOpen(value); }
+      }
+      public Builder SetIsOpen(int value) {
+        PrepareBuilder();
+        result.hasIsOpen = true;
+        result.isOpen_ = value;
+        return this;
+      }
+      public Builder ClearIsOpen() {
+        PrepareBuilder();
+        result.hasIsOpen = false;
+        result.isOpen_ = 0;
+        return this;
+      }
+    }
+    static MiniGameOpenReq_C() {
+      object.ReferenceEquals(global::ProtoCmd.Service.Service.Descriptor, null);
+    }
+  }
+  
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+  public sealed partial class MiniGamePot_Operator_C : pb::GeneratedMessage<MiniGamePot_Operator_C, MiniGamePot_Operator_C.Builder> {
+    private MiniGamePot_Operator_C() { }
+    private static readonly MiniGamePot_Operator_C defaultInstance = new MiniGamePot_Operator_C().MakeReadOnly();
+    private static readonly string[] _miniGamePotOperatorCFieldNames = new string[] { "opType", "opValue", "strContent" };
+    private static readonly uint[] _miniGamePotOperatorCFieldTags = new uint[] { 8, 16, 26 };
+    public static MiniGamePot_Operator_C DefaultInstance {
+      get { return defaultInstance; }
+    }
+    
+    public override MiniGamePot_Operator_C DefaultInstanceForType {
+      get { return DefaultInstance; }
+    }
+    
+    protected override MiniGamePot_Operator_C ThisMessage {
+      get { return this; }
+    }
+    
+    public static pbd::MessageDescriptor Descriptor {
+      get { return global::ProtoCmd.Service.Service.internal__static_ProtoCmd_Service_MiniGamePot_Operator_C__Descriptor; }
+    }
+    
+    protected override pb::FieldAccess.FieldAccessorTable<MiniGamePot_Operator_C, MiniGamePot_Operator_C.Builder> InternalFieldAccessors {
+      get { return global::ProtoCmd.Service.Service.internal__static_ProtoCmd_Service_MiniGamePot_Operator_C__FieldAccessorTable; }
+    }
+    
+    public const int OpTypeFieldNumber = 1;
+    private bool hasOpType;
+    private uint opType_;
+    public bool HasOpType {
+      get { return hasOpType; }
+    }
+    [global::System.CLSCompliant(false)]
+    public uint OpType {
+      get { return opType_; }
+    }
+    
+    public const int OpValueFieldNumber = 2;
+    private bool hasOpValue;
+    private ulong opValue_;
+    public bool HasOpValue {
+      get { return hasOpValue; }
+    }
+    [global::System.CLSCompliant(false)]
+    public ulong OpValue {
+      get { return opValue_; }
+    }
+    
+    public const int StrContentFieldNumber = 3;
+    private bool hasStrContent;
+    private string strContent_ = "";
+    public bool HasStrContent {
+      get { return hasStrContent; }
+    }
+    public string StrContent {
+      get { return strContent_; }
+    }
+    
+    public override bool IsInitialized {
+      get {
+        return true;
+      }
+    }
+    
+    public override void WriteTo(pb::ICodedOutputStream output) {
+      CalcSerializedSize();
+      string[] field_names = _miniGamePotOperatorCFieldNames;
+      if (hasOpType) {
+        output.WriteUInt32(1, field_names[0], OpType);
+      }
+      if (hasOpValue) {
+        output.WriteUInt64(2, field_names[1], OpValue);
+      }
+      if (hasStrContent) {
+        output.WriteString(3, field_names[2], StrContent);
+      }
+      UnknownFields.WriteTo(output);
+    }
+    
+    private int memoizedSerializedSize = -1;
+    public override int SerializedSize {
+      get {
+        int size = memoizedSerializedSize;
+        if (size != -1) return size;
+        return CalcSerializedSize();
+      }
+    }
+    
+    private int CalcSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+      
+      size = 0;
+      if (hasOpType) {
+        size += pb::CodedOutputStream.ComputeUInt32Size(1, OpType);
+      }
+      if (hasOpValue) {
+        size += pb::CodedOutputStream.ComputeUInt64Size(2, OpValue);
+      }
+      if (hasStrContent) {
+        size += pb::CodedOutputStream.ComputeStringSize(3, StrContent);
+      }
+      size += UnknownFields.SerializedSize;
+      memoizedSerializedSize = size;
+      return size;
+    }
+    public static MiniGamePot_Operator_C ParseFrom(pb::ByteString data) {
+      return ((Builder) CreateBuilder().MergeFrom(data)).BuildParsed();
+    }
+    public static MiniGamePot_Operator_C ParseFrom(pb::ByteString data, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(data, extensionRegistry)).BuildParsed();
+    }
+    public static MiniGamePot_Operator_C ParseFrom(byte[] data) {
+      return ((Builder) CreateBuilder().MergeFrom(data)).BuildParsed();
+    }
+    public static MiniGamePot_Operator_C ParseFrom(byte[] data, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(data, extensionRegistry)).BuildParsed();
+    }
+    public static MiniGamePot_Operator_C ParseFrom(global::System.IO.Stream input) {
+      return ((Builder) CreateBuilder().MergeFrom(input)).BuildParsed();
+    }
+    public static MiniGamePot_Operator_C ParseFrom(global::System.IO.Stream input, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(input, extensionRegistry)).BuildParsed();
+    }
+    public static MiniGamePot_Operator_C ParseDelimitedFrom(global::System.IO.Stream input) {
+      return CreateBuilder().MergeDelimitedFrom(input).BuildParsed();
+    }
+    public static MiniGamePot_Operator_C ParseDelimitedFrom(global::System.IO.Stream input, pb::ExtensionRegistry extensionRegistry) {
+      return CreateBuilder().MergeDelimitedFrom(input, extensionRegistry).BuildParsed();
+    }
+    public static MiniGamePot_Operator_C ParseFrom(pb::ICodedInputStream input) {
+      return ((Builder) CreateBuilder().MergeFrom(input)).BuildParsed();
+    }
+    public static MiniGamePot_Operator_C ParseFrom(pb::ICodedInputStream input, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(input, extensionRegistry)).BuildParsed();
+    }
+    private MiniGamePot_Operator_C MakeReadOnly() {
+      return this;
+    }
+    
+    public static Builder CreateBuilder() { return new Builder(); }
+    public override Builder ToBuilder() { return CreateBuilder(this); }
+    public override Builder CreateBuilderForType() { return new Builder(); }
+    public static Builder CreateBuilder(MiniGamePot_Operator_C prototype) {
+      return new Builder(prototype);
+    }
+    
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+    public sealed partial class Builder : pb::GeneratedBuilder<MiniGamePot_Operator_C, Builder> {
+      protected override Builder ThisBuilder {
+        get { return this; }
+      }
+      public Builder() {
+        result = DefaultInstance;
+        resultIsReadOnly = true;
+      }
+      internal Builder(MiniGamePot_Operator_C cloneFrom) {
+        result = cloneFrom;
+        resultIsReadOnly = true;
+      }
+      
+      private bool resultIsReadOnly;
+      private MiniGamePot_Operator_C result;
+      
+      private MiniGamePot_Operator_C PrepareBuilder() {
+        if (resultIsReadOnly) {
+          MiniGamePot_Operator_C original = result;
+          result = new MiniGamePot_Operator_C();
+          resultIsReadOnly = false;
+          MergeFrom(original);
+        }
+        return result;
+      }
+      
+      public override bool IsInitialized {
+        get { return result.IsInitialized; }
+      }
+      
+      protected override MiniGamePot_Operator_C MessageBeingBuilt {
+        get { return PrepareBuilder(); }
+      }
+      
+      public override Builder Clear() {
+        result = DefaultInstance;
+        resultIsReadOnly = true;
+        return this;
+      }
+      
+      public override Builder Clone() {
+        if (resultIsReadOnly) {
+          return new Builder(result);
+        } else {
+          return new Builder().MergeFrom(result);
+        }
+      }
+      
+      public override pbd::MessageDescriptor DescriptorForType {
+        get { return global::ProtoCmd.Service.MiniGamePot_Operator_C.Descriptor; }
+      }
+      
+      public override MiniGamePot_Operator_C DefaultInstanceForType {
+        get { return global::ProtoCmd.Service.MiniGamePot_Operator_C.DefaultInstance; }
+      }
+      
+      public override MiniGamePot_Operator_C BuildPartial() {
+        if (resultIsReadOnly) {
+          return result;
+        }
+        resultIsReadOnly = true;
+        return result.MakeReadOnly();
+      }
+      
+      public override Builder MergeFrom(pb::IMessage other) {
+        if (other is MiniGamePot_Operator_C) {
+          return MergeFrom((MiniGamePot_Operator_C) other);
+        } else {
+          base.MergeFrom(other);
+          return this;
+        }
+      }
+      
+      public override Builder MergeFrom(MiniGamePot_Operator_C other) {
+        if (other == global::ProtoCmd.Service.MiniGamePot_Operator_C.DefaultInstance) return this;
+        PrepareBuilder();
+        if (other.HasOpType) {
+          OpType = other.OpType;
+        }
+        if (other.HasOpValue) {
+          OpValue = other.OpValue;
+        }
+        if (other.HasStrContent) {
+          StrContent = other.StrContent;
+        }
+        this.MergeUnknownFields(other.UnknownFields);
+        return this;
+      }
+      
+      public override Builder MergeFrom(pb::ICodedInputStream input) {
+        return MergeFrom(input, pb::ExtensionRegistry.Empty);
+      }
+      
+      public override Builder MergeFrom(pb::ICodedInputStream input, pb::ExtensionRegistry extensionRegistry) {
+        PrepareBuilder();
+        pb::UnknownFieldSet.Builder unknownFields = null;
+        uint tag;
+        string field_name;
+        while (input.ReadTag(out tag, out field_name)) {
+          if(tag == 0 && field_name != null) {
+            int field_ordinal = global::System.Array.BinarySearch(_miniGamePotOperatorCFieldNames, field_name, global::System.StringComparer.Ordinal);
+            if(field_ordinal >= 0)
+              tag = _miniGamePotOperatorCFieldTags[field_ordinal];
+            else {
+              if (unknownFields == null) {
+                unknownFields = pb::UnknownFieldSet.CreateBuilder(this.UnknownFields);
+              }
+              ParseUnknownField(input, unknownFields, extensionRegistry, tag, field_name);
+              continue;
+            }
+          }
+          switch (tag) {
+            case 0: {
+              throw pb::InvalidProtocolBufferException.InvalidTag();
+            }
+            default: {
+              if (pb::WireFormat.IsEndGroupTag(tag)) {
+                if (unknownFields != null) {
+                  this.UnknownFields = unknownFields.Build();
+                }
+                return this;
+              }
+              if (unknownFields == null) {
+                unknownFields = pb::UnknownFieldSet.CreateBuilder(this.UnknownFields);
+              }
+              ParseUnknownField(input, unknownFields, extensionRegistry, tag, field_name);
+              break;
+            }
+            case 8: {
+              result.hasOpType = input.ReadUInt32(ref result.opType_);
+              break;
+            }
+            case 16: {
+              result.hasOpValue = input.ReadUInt64(ref result.opValue_);
+              break;
+            }
+            case 26: {
+              result.hasStrContent = input.ReadString(ref result.strContent_);
+              break;
+            }
+          }
+        }
+        
+        if (unknownFields != null) {
+          this.UnknownFields = unknownFields.Build();
+        }
+        return this;
+      }
+      
+      
+      public bool HasOpType {
+        get { return result.hasOpType; }
+      }
+      [global::System.CLSCompliant(false)]
+      public uint OpType {
+        get { return result.OpType; }
+        set { SetOpType(value); }
+      }
+      [global::System.CLSCompliant(false)]
+      public Builder SetOpType(uint value) {
+        PrepareBuilder();
+        result.hasOpType = true;
+        result.opType_ = value;
+        return this;
+      }
+      public Builder ClearOpType() {
+        PrepareBuilder();
+        result.hasOpType = false;
+        result.opType_ = 0;
+        return this;
+      }
+      
+      public bool HasOpValue {
+        get { return result.hasOpValue; }
+      }
+      [global::System.CLSCompliant(false)]
+      public ulong OpValue {
+        get { return result.OpValue; }
+        set { SetOpValue(value); }
+      }
+      [global::System.CLSCompliant(false)]
+      public Builder SetOpValue(ulong value) {
+        PrepareBuilder();
+        result.hasOpValue = true;
+        result.opValue_ = value;
+        return this;
+      }
+      public Builder ClearOpValue() {
+        PrepareBuilder();
+        result.hasOpValue = false;
+        result.opValue_ = 0UL;
+        return this;
+      }
+      
+      public bool HasStrContent {
+        get { return result.hasStrContent; }
+      }
+      public string StrContent {
+        get { return result.StrContent; }
+        set { SetStrContent(value); }
+      }
+      public Builder SetStrContent(string value) {
+        pb::ThrowHelper.ThrowIfNull(value, "value");
+        PrepareBuilder();
+        result.hasStrContent = true;
+        result.strContent_ = value;
+        return this;
+      }
+      public Builder ClearStrContent() {
+        PrepareBuilder();
+        result.hasStrContent = false;
+        result.strContent_ = "";
+        return this;
+      }
+    }
+    static MiniGamePot_Operator_C() {
+      object.ReferenceEquals(global::ProtoCmd.Service.Service.Descriptor, null);
+    }
+  }
+  
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+  public sealed partial class MiniGamePot_Operator_S : pb::GeneratedMessage<MiniGamePot_Operator_S, MiniGamePot_Operator_S.Builder> {
+    private MiniGamePot_Operator_S() { }
+    private static readonly MiniGamePot_Operator_S defaultInstance = new MiniGamePot_Operator_S().MakeReadOnly();
+    private static readonly string[] _miniGamePotOperatorSFieldNames = new string[] { "opType", "suc" };
+    private static readonly uint[] _miniGamePotOperatorSFieldTags = new uint[] { 8, 16 };
+    public static MiniGamePot_Operator_S DefaultInstance {
+      get { return defaultInstance; }
+    }
+    
+    public override MiniGamePot_Operator_S DefaultInstanceForType {
+      get { return DefaultInstance; }
+    }
+    
+    protected override MiniGamePot_Operator_S ThisMessage {
+      get { return this; }
+    }
+    
+    public static pbd::MessageDescriptor Descriptor {
+      get { return global::ProtoCmd.Service.Service.internal__static_ProtoCmd_Service_MiniGamePot_Operator_S__Descriptor; }
+    }
+    
+    protected override pb::FieldAccess.FieldAccessorTable<MiniGamePot_Operator_S, MiniGamePot_Operator_S.Builder> InternalFieldAccessors {
+      get { return global::ProtoCmd.Service.Service.internal__static_ProtoCmd_Service_MiniGamePot_Operator_S__FieldAccessorTable; }
+    }
+    
+    public const int OpTypeFieldNumber = 1;
+    private bool hasOpType;
+    private uint opType_;
+    public bool HasOpType {
+      get { return hasOpType; }
+    }
+    [global::System.CLSCompliant(false)]
+    public uint OpType {
+      get { return opType_; }
+    }
+    
+    public const int SucFieldNumber = 2;
+    private bool hasSuc;
+    private bool suc_;
+    public bool HasSuc {
+      get { return hasSuc; }
+    }
+    public bool Suc {
+      get { return suc_; }
+    }
+    
+    public override bool IsInitialized {
+      get {
+        return true;
+      }
+    }
+    
+    public override void WriteTo(pb::ICodedOutputStream output) {
+      CalcSerializedSize();
+      string[] field_names = _miniGamePotOperatorSFieldNames;
+      if (hasOpType) {
+        output.WriteUInt32(1, field_names[0], OpType);
+      }
+      if (hasSuc) {
+        output.WriteBool(2, field_names[1], Suc);
+      }
+      UnknownFields.WriteTo(output);
+    }
+    
+    private int memoizedSerializedSize = -1;
+    public override int SerializedSize {
+      get {
+        int size = memoizedSerializedSize;
+        if (size != -1) return size;
+        return CalcSerializedSize();
+      }
+    }
+    
+    private int CalcSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+      
+      size = 0;
+      if (hasOpType) {
+        size += pb::CodedOutputStream.ComputeUInt32Size(1, OpType);
+      }
+      if (hasSuc) {
+        size += pb::CodedOutputStream.ComputeBoolSize(2, Suc);
+      }
+      size += UnknownFields.SerializedSize;
+      memoizedSerializedSize = size;
+      return size;
+    }
+    public static MiniGamePot_Operator_S ParseFrom(pb::ByteString data) {
+      return ((Builder) CreateBuilder().MergeFrom(data)).BuildParsed();
+    }
+    public static MiniGamePot_Operator_S ParseFrom(pb::ByteString data, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(data, extensionRegistry)).BuildParsed();
+    }
+    public static MiniGamePot_Operator_S ParseFrom(byte[] data) {
+      return ((Builder) CreateBuilder().MergeFrom(data)).BuildParsed();
+    }
+    public static MiniGamePot_Operator_S ParseFrom(byte[] data, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(data, extensionRegistry)).BuildParsed();
+    }
+    public static MiniGamePot_Operator_S ParseFrom(global::System.IO.Stream input) {
+      return ((Builder) CreateBuilder().MergeFrom(input)).BuildParsed();
+    }
+    public static MiniGamePot_Operator_S ParseFrom(global::System.IO.Stream input, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(input, extensionRegistry)).BuildParsed();
+    }
+    public static MiniGamePot_Operator_S ParseDelimitedFrom(global::System.IO.Stream input) {
+      return CreateBuilder().MergeDelimitedFrom(input).BuildParsed();
+    }
+    public static MiniGamePot_Operator_S ParseDelimitedFrom(global::System.IO.Stream input, pb::ExtensionRegistry extensionRegistry) {
+      return CreateBuilder().MergeDelimitedFrom(input, extensionRegistry).BuildParsed();
+    }
+    public static MiniGamePot_Operator_S ParseFrom(pb::ICodedInputStream input) {
+      return ((Builder) CreateBuilder().MergeFrom(input)).BuildParsed();
+    }
+    public static MiniGamePot_Operator_S ParseFrom(pb::ICodedInputStream input, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(input, extensionRegistry)).BuildParsed();
+    }
+    private MiniGamePot_Operator_S MakeReadOnly() {
+      return this;
+    }
+    
+    public static Builder CreateBuilder() { return new Builder(); }
+    public override Builder ToBuilder() { return CreateBuilder(this); }
+    public override Builder CreateBuilderForType() { return new Builder(); }
+    public static Builder CreateBuilder(MiniGamePot_Operator_S prototype) {
+      return new Builder(prototype);
+    }
+    
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+    public sealed partial class Builder : pb::GeneratedBuilder<MiniGamePot_Operator_S, Builder> {
+      protected override Builder ThisBuilder {
+        get { return this; }
+      }
+      public Builder() {
+        result = DefaultInstance;
+        resultIsReadOnly = true;
+      }
+      internal Builder(MiniGamePot_Operator_S cloneFrom) {
+        result = cloneFrom;
+        resultIsReadOnly = true;
+      }
+      
+      private bool resultIsReadOnly;
+      private MiniGamePot_Operator_S result;
+      
+      private MiniGamePot_Operator_S PrepareBuilder() {
+        if (resultIsReadOnly) {
+          MiniGamePot_Operator_S original = result;
+          result = new MiniGamePot_Operator_S();
+          resultIsReadOnly = false;
+          MergeFrom(original);
+        }
+        return result;
+      }
+      
+      public override bool IsInitialized {
+        get { return result.IsInitialized; }
+      }
+      
+      protected override MiniGamePot_Operator_S MessageBeingBuilt {
+        get { return PrepareBuilder(); }
+      }
+      
+      public override Builder Clear() {
+        result = DefaultInstance;
+        resultIsReadOnly = true;
+        return this;
+      }
+      
+      public override Builder Clone() {
+        if (resultIsReadOnly) {
+          return new Builder(result);
+        } else {
+          return new Builder().MergeFrom(result);
+        }
+      }
+      
+      public override pbd::MessageDescriptor DescriptorForType {
+        get { return global::ProtoCmd.Service.MiniGamePot_Operator_S.Descriptor; }
+      }
+      
+      public override MiniGamePot_Operator_S DefaultInstanceForType {
+        get { return global::ProtoCmd.Service.MiniGamePot_Operator_S.DefaultInstance; }
+      }
+      
+      public override MiniGamePot_Operator_S BuildPartial() {
+        if (resultIsReadOnly) {
+          return result;
+        }
+        resultIsReadOnly = true;
+        return result.MakeReadOnly();
+      }
+      
+      public override Builder MergeFrom(pb::IMessage other) {
+        if (other is MiniGamePot_Operator_S) {
+          return MergeFrom((MiniGamePot_Operator_S) other);
+        } else {
+          base.MergeFrom(other);
+          return this;
+        }
+      }
+      
+      public override Builder MergeFrom(MiniGamePot_Operator_S other) {
+        if (other == global::ProtoCmd.Service.MiniGamePot_Operator_S.DefaultInstance) return this;
+        PrepareBuilder();
+        if (other.HasOpType) {
+          OpType = other.OpType;
+        }
+        if (other.HasSuc) {
+          Suc = other.Suc;
+        }
+        this.MergeUnknownFields(other.UnknownFields);
+        return this;
+      }
+      
+      public override Builder MergeFrom(pb::ICodedInputStream input) {
+        return MergeFrom(input, pb::ExtensionRegistry.Empty);
+      }
+      
+      public override Builder MergeFrom(pb::ICodedInputStream input, pb::ExtensionRegistry extensionRegistry) {
+        PrepareBuilder();
+        pb::UnknownFieldSet.Builder unknownFields = null;
+        uint tag;
+        string field_name;
+        while (input.ReadTag(out tag, out field_name)) {
+          if(tag == 0 && field_name != null) {
+            int field_ordinal = global::System.Array.BinarySearch(_miniGamePotOperatorSFieldNames, field_name, global::System.StringComparer.Ordinal);
+            if(field_ordinal >= 0)
+              tag = _miniGamePotOperatorSFieldTags[field_ordinal];
+            else {
+              if (unknownFields == null) {
+                unknownFields = pb::UnknownFieldSet.CreateBuilder(this.UnknownFields);
+              }
+              ParseUnknownField(input, unknownFields, extensionRegistry, tag, field_name);
+              continue;
+            }
+          }
+          switch (tag) {
+            case 0: {
+              throw pb::InvalidProtocolBufferException.InvalidTag();
+            }
+            default: {
+              if (pb::WireFormat.IsEndGroupTag(tag)) {
+                if (unknownFields != null) {
+                  this.UnknownFields = unknownFields.Build();
+                }
+                return this;
+              }
+              if (unknownFields == null) {
+                unknownFields = pb::UnknownFieldSet.CreateBuilder(this.UnknownFields);
+              }
+              ParseUnknownField(input, unknownFields, extensionRegistry, tag, field_name);
+              break;
+            }
+            case 8: {
+              result.hasOpType = input.ReadUInt32(ref result.opType_);
+              break;
+            }
+            case 16: {
+              result.hasSuc = input.ReadBool(ref result.suc_);
+              break;
+            }
+          }
+        }
+        
+        if (unknownFields != null) {
+          this.UnknownFields = unknownFields.Build();
+        }
+        return this;
+      }
+      
+      
+      public bool HasOpType {
+        get { return result.hasOpType; }
+      }
+      [global::System.CLSCompliant(false)]
+      public uint OpType {
+        get { return result.OpType; }
+        set { SetOpType(value); }
+      }
+      [global::System.CLSCompliant(false)]
+      public Builder SetOpType(uint value) {
+        PrepareBuilder();
+        result.hasOpType = true;
+        result.opType_ = value;
+        return this;
+      }
+      public Builder ClearOpType() {
+        PrepareBuilder();
+        result.hasOpType = false;
+        result.opType_ = 0;
+        return this;
+      }
+      
+      public bool HasSuc {
+        get { return result.hasSuc; }
+      }
+      public bool Suc {
+        get { return result.Suc; }
+        set { SetSuc(value); }
+      }
+      public Builder SetSuc(bool value) {
+        PrepareBuilder();
+        result.hasSuc = true;
+        result.suc_ = value;
+        return this;
+      }
+      public Builder ClearSuc() {
+        PrepareBuilder();
+        result.hasSuc = false;
+        result.suc_ = false;
+        return this;
+      }
+    }
+    static MiniGamePot_Operator_S() {
+      object.ReferenceEquals(global::ProtoCmd.Service.Service.Descriptor, null);
+    }
+  }
+  
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+  public sealed partial class MiniGamePot_Select_S : pb::GeneratedMessage<MiniGamePot_Select_S, MiniGamePot_Select_S.Builder> {
+    private MiniGamePot_Select_S() { }
+    private static readonly MiniGamePot_Select_S defaultInstance = new MiniGamePot_Select_S().MakeReadOnly();
+    private static readonly string[] _miniGamePotSelectSFieldNames = new string[] { "ChipNum" };
+    private static readonly uint[] _miniGamePotSelectSFieldTags = new uint[] { 8 };
+    public static MiniGamePot_Select_S DefaultInstance {
+      get { return defaultInstance; }
+    }
+    
+    public override MiniGamePot_Select_S DefaultInstanceForType {
+      get { return DefaultInstance; }
+    }
+    
+    protected override MiniGamePot_Select_S ThisMessage {
+      get { return this; }
+    }
+    
+    public static pbd::MessageDescriptor Descriptor {
+      get { return global::ProtoCmd.Service.Service.internal__static_ProtoCmd_Service_MiniGamePot_Select_S__Descriptor; }
+    }
+    
+    protected override pb::FieldAccess.FieldAccessorTable<MiniGamePot_Select_S, MiniGamePot_Select_S.Builder> InternalFieldAccessors {
+      get { return global::ProtoCmd.Service.Service.internal__static_ProtoCmd_Service_MiniGamePot_Select_S__FieldAccessorTable; }
+    }
+    
+    public const int ChipNumFieldNumber = 1;
+    private bool hasChipNum;
+    private ulong chipNum_;
+    public bool HasChipNum {
+      get { return hasChipNum; }
+    }
+    [global::System.CLSCompliant(false)]
+    public ulong ChipNum {
+      get { return chipNum_; }
+    }
+    
+    public override bool IsInitialized {
+      get {
+        if (!hasChipNum) return false;
+        return true;
+      }
+    }
+    
+    public override void WriteTo(pb::ICodedOutputStream output) {
+      CalcSerializedSize();
+      string[] field_names = _miniGamePotSelectSFieldNames;
+      if (hasChipNum) {
+        output.WriteUInt64(1, field_names[0], ChipNum);
+      }
+      UnknownFields.WriteTo(output);
+    }
+    
+    private int memoizedSerializedSize = -1;
+    public override int SerializedSize {
+      get {
+        int size = memoizedSerializedSize;
+        if (size != -1) return size;
+        return CalcSerializedSize();
+      }
+    }
+    
+    private int CalcSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+      
+      size = 0;
+      if (hasChipNum) {
+        size += pb::CodedOutputStream.ComputeUInt64Size(1, ChipNum);
+      }
+      size += UnknownFields.SerializedSize;
+      memoizedSerializedSize = size;
+      return size;
+    }
+    public static MiniGamePot_Select_S ParseFrom(pb::ByteString data) {
+      return ((Builder) CreateBuilder().MergeFrom(data)).BuildParsed();
+    }
+    public static MiniGamePot_Select_S ParseFrom(pb::ByteString data, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(data, extensionRegistry)).BuildParsed();
+    }
+    public static MiniGamePot_Select_S ParseFrom(byte[] data) {
+      return ((Builder) CreateBuilder().MergeFrom(data)).BuildParsed();
+    }
+    public static MiniGamePot_Select_S ParseFrom(byte[] data, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(data, extensionRegistry)).BuildParsed();
+    }
+    public static MiniGamePot_Select_S ParseFrom(global::System.IO.Stream input) {
+      return ((Builder) CreateBuilder().MergeFrom(input)).BuildParsed();
+    }
+    public static MiniGamePot_Select_S ParseFrom(global::System.IO.Stream input, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(input, extensionRegistry)).BuildParsed();
+    }
+    public static MiniGamePot_Select_S ParseDelimitedFrom(global::System.IO.Stream input) {
+      return CreateBuilder().MergeDelimitedFrom(input).BuildParsed();
+    }
+    public static MiniGamePot_Select_S ParseDelimitedFrom(global::System.IO.Stream input, pb::ExtensionRegistry extensionRegistry) {
+      return CreateBuilder().MergeDelimitedFrom(input, extensionRegistry).BuildParsed();
+    }
+    public static MiniGamePot_Select_S ParseFrom(pb::ICodedInputStream input) {
+      return ((Builder) CreateBuilder().MergeFrom(input)).BuildParsed();
+    }
+    public static MiniGamePot_Select_S ParseFrom(pb::ICodedInputStream input, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(input, extensionRegistry)).BuildParsed();
+    }
+    private MiniGamePot_Select_S MakeReadOnly() {
+      return this;
+    }
+    
+    public static Builder CreateBuilder() { return new Builder(); }
+    public override Builder ToBuilder() { return CreateBuilder(this); }
+    public override Builder CreateBuilderForType() { return new Builder(); }
+    public static Builder CreateBuilder(MiniGamePot_Select_S prototype) {
+      return new Builder(prototype);
+    }
+    
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+    public sealed partial class Builder : pb::GeneratedBuilder<MiniGamePot_Select_S, Builder> {
+      protected override Builder ThisBuilder {
+        get { return this; }
+      }
+      public Builder() {
+        result = DefaultInstance;
+        resultIsReadOnly = true;
+      }
+      internal Builder(MiniGamePot_Select_S cloneFrom) {
+        result = cloneFrom;
+        resultIsReadOnly = true;
+      }
+      
+      private bool resultIsReadOnly;
+      private MiniGamePot_Select_S result;
+      
+      private MiniGamePot_Select_S PrepareBuilder() {
+        if (resultIsReadOnly) {
+          MiniGamePot_Select_S original = result;
+          result = new MiniGamePot_Select_S();
+          resultIsReadOnly = false;
+          MergeFrom(original);
+        }
+        return result;
+      }
+      
+      public override bool IsInitialized {
+        get { return result.IsInitialized; }
+      }
+      
+      protected override MiniGamePot_Select_S MessageBeingBuilt {
+        get { return PrepareBuilder(); }
+      }
+      
+      public override Builder Clear() {
+        result = DefaultInstance;
+        resultIsReadOnly = true;
+        return this;
+      }
+      
+      public override Builder Clone() {
+        if (resultIsReadOnly) {
+          return new Builder(result);
+        } else {
+          return new Builder().MergeFrom(result);
+        }
+      }
+      
+      public override pbd::MessageDescriptor DescriptorForType {
+        get { return global::ProtoCmd.Service.MiniGamePot_Select_S.Descriptor; }
+      }
+      
+      public override MiniGamePot_Select_S DefaultInstanceForType {
+        get { return global::ProtoCmd.Service.MiniGamePot_Select_S.DefaultInstance; }
+      }
+      
+      public override MiniGamePot_Select_S BuildPartial() {
+        if (resultIsReadOnly) {
+          return result;
+        }
+        resultIsReadOnly = true;
+        return result.MakeReadOnly();
+      }
+      
+      public override Builder MergeFrom(pb::IMessage other) {
+        if (other is MiniGamePot_Select_S) {
+          return MergeFrom((MiniGamePot_Select_S) other);
+        } else {
+          base.MergeFrom(other);
+          return this;
+        }
+      }
+      
+      public override Builder MergeFrom(MiniGamePot_Select_S other) {
+        if (other == global::ProtoCmd.Service.MiniGamePot_Select_S.DefaultInstance) return this;
+        PrepareBuilder();
+        if (other.HasChipNum) {
+          ChipNum = other.ChipNum;
+        }
+        this.MergeUnknownFields(other.UnknownFields);
+        return this;
+      }
+      
+      public override Builder MergeFrom(pb::ICodedInputStream input) {
+        return MergeFrom(input, pb::ExtensionRegistry.Empty);
+      }
+      
+      public override Builder MergeFrom(pb::ICodedInputStream input, pb::ExtensionRegistry extensionRegistry) {
+        PrepareBuilder();
+        pb::UnknownFieldSet.Builder unknownFields = null;
+        uint tag;
+        string field_name;
+        while (input.ReadTag(out tag, out field_name)) {
+          if(tag == 0 && field_name != null) {
+            int field_ordinal = global::System.Array.BinarySearch(_miniGamePotSelectSFieldNames, field_name, global::System.StringComparer.Ordinal);
+            if(field_ordinal >= 0)
+              tag = _miniGamePotSelectSFieldTags[field_ordinal];
+            else {
+              if (unknownFields == null) {
+                unknownFields = pb::UnknownFieldSet.CreateBuilder(this.UnknownFields);
+              }
+              ParseUnknownField(input, unknownFields, extensionRegistry, tag, field_name);
+              continue;
+            }
+          }
+          switch (tag) {
+            case 0: {
+              throw pb::InvalidProtocolBufferException.InvalidTag();
+            }
+            default: {
+              if (pb::WireFormat.IsEndGroupTag(tag)) {
+                if (unknownFields != null) {
+                  this.UnknownFields = unknownFields.Build();
+                }
+                return this;
+              }
+              if (unknownFields == null) {
+                unknownFields = pb::UnknownFieldSet.CreateBuilder(this.UnknownFields);
+              }
+              ParseUnknownField(input, unknownFields, extensionRegistry, tag, field_name);
+              break;
+            }
+            case 8: {
+              result.hasChipNum = input.ReadUInt64(ref result.chipNum_);
+              break;
+            }
+          }
+        }
+        
+        if (unknownFields != null) {
+          this.UnknownFields = unknownFields.Build();
+        }
+        return this;
+      }
+      
+      
+      public bool HasChipNum {
+        get { return result.hasChipNum; }
+      }
+      [global::System.CLSCompliant(false)]
+      public ulong ChipNum {
+        get { return result.ChipNum; }
+        set { SetChipNum(value); }
+      }
+      [global::System.CLSCompliant(false)]
+      public Builder SetChipNum(ulong value) {
+        PrepareBuilder();
+        result.hasChipNum = true;
+        result.chipNum_ = value;
+        return this;
+      }
+      public Builder ClearChipNum() {
+        PrepareBuilder();
+        result.hasChipNum = false;
+        result.chipNum_ = 0UL;
+        return this;
+      }
+    }
+    static MiniGamePot_Select_S() {
       object.ReferenceEquals(global::ProtoCmd.Service.Service.Descriptor, null);
     }
   }

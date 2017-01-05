@@ -34,6 +34,15 @@ namespace GL.Data.BLL
 
         }
 
+        public static string GetRoleString(string userid) {
+            string names = "";
+            IEnumerable<AspNetUserRoles> rEnum = DAL.SUDAL.GetRoleString(userid);
+            foreach (var item in rEnum)
+            {
+                names += item.RoleName + ",";
+            }
+            return names.Trim(',');
+        }
 
         public static IEnumerable<Resource> GetResourceList(string roleId, int level)
         {
@@ -118,6 +127,12 @@ namespace GL.Data.BLL
             IEnumerable<Resource> res = DAL.SUDAL.GetAllResourceList();
             return res.ToList();
         }
+
+        public static List<Resource> GetNotButton(string userid) {
+            List<Resource> res = DAL.SUDAL.GetNotButton(userid);
+            return res.ToList();
+        }
+    
 
         public static List<Resource> GetAdminResourceList()
         {

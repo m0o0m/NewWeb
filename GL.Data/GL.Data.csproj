@@ -134,6 +134,7 @@
     <Compile Include="BLL\RechargeCheckBLL.cs" />
     <Compile Include="BLL\RobotBLL.cs" />
     <Compile Include="BLL\SpellCardBLL.cs" />
+    <Compile Include="BLL\StrongPushADBLL.cs" />
     <Compile Include="BLL\SystemPayBLL.cs" />
     <Compile Include="BLL\WaterMarginBLL.cs" />
     <Compile Include="DAL\ActiveDAL.cs" />
@@ -148,6 +149,7 @@
     <Compile Include="DAL\RechargeCheckDAL.cs" />
     <Compile Include="DAL\RobotDAL.cs" />
     <Compile Include="DAL\SpellCardDAL.cs" />
+    <Compile Include="DAL\StrongPushADDAL.cs" />
     <Compile Include="DAL\SystemPayDAL.cs" />
     <Compile Include="DAL\WaterMarginDAL.cs" />
     <Compile Include="enum\ActiveType.cs" />
@@ -198,6 +200,7 @@
     <Compile Include="Model\SimulatorRecharge.cs" />
     <Compile Include="Model\SpellCard.cs" />
     <Compile Include="Model\SSwitch.cs" />
+    <Compile Include="Model\StrongPushAD.cs" />
     <Compile Include="Model\SUpdate.cs" />
     <Compile Include="Model\SystemExpend.cs" />
     <Compile Include="Model\SystemPay.cs" />

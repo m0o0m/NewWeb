@@ -149,4 +149,17 @@ namespace GL.Data.Model
         public string IP { get; set; }
         public string Method { get; set; }
     }
+
+    public class RechargeOpen
+    {
+        public string CreateTime { get; set; }
+
+        public int RechargeID { get; set; }
+
+        public string RechargeName { get; set; }
+
+        public bool IsOpen { get; set; }
+
+    }
+
 }

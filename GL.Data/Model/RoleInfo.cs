@@ -209,6 +209,13 @@ namespace GL.Data.Model
         public string LastLoginIP {get; set;}
 
         /// <summary>
+        /// 扩展的字段  liguangxin
+        /// </summary>
+        public long tenDayYinkui { get; set; }
+        public long tenDayChanchu { get; set; }
+        public long tenDayXiaohao { get; set; }
+        public string RemarksName { get; set; }
+        /// <summary>
         /// 道具总数量
         /// </summary>
         public int ItemCount { get; set; }
@@ -260,6 +267,14 @@ namespace GL.Data.Model
         public gameID RoomType { get; set; }
 
         public string LoginAgent { get; set; }
+        /// <summary>
+        /// 发送邮件条数
+        /// </summary>
+        public int SendEmailCount { get; set; }
+        /// <summary>
+        /// 会员鱼缸
+        /// </summary>
+        public int FishCoutn { get; set; }
     }
 
     public enum IsOnLine {

@@ -13,7 +13,12 @@
     <form id="comment-form" class="smart-form" novalidate="novalidate">
         <div class="row">
             <div class="widget-body">
-
+                <section class="col col-1.2">
+                    <label class="label">会员ID/账户/昵称</label>
+                    <label class="input">
+                        @Html.TextBoxFor(m => m.UserList, new { @class = "span2", style = "border-radius:4px;width:120px" })
+                    </label>
+                </section>
                 <section class="col col-1">
                     <label class="label"> 牌局号</label>
                     <label class="input">

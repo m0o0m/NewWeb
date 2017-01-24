@@ -21,6 +21,8 @@ namespace Web.Pay
                 queryvalues = filterContext.RouteData.Values["queryvalues"].ToString();
             }
 
+
+
             Dictionary<string, string> queryvalueslist = Utils.GetDicFormUrl(queryvalues);
 
 

@@ -157,6 +157,17 @@ namespace GL.Data.Model
     }
 
 
+    public class RechargeOpen {
+        public string CreateTime { get; set; }
 
-  
+        public int RechargeID { get; set; }
+
+        public string RechargeName { get; set; }
+
+        public bool IsOpen { get; set; }
+
+    }
+
+
+
 }

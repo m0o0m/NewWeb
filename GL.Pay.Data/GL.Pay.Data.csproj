@@ -71,6 +71,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\GL.Data\BLL\QQZoneRechargeBLL.cs">
+      <Link>BLL\QQZoneRechargeBLL.cs</Link>
+    </Compile>
     <Compile Include="..\GL.Data\BLL\RechargeBLL.cs">
       <Link>BLL\RechargeBLL.cs</Link>
     </Compile>
@@ -80,6 +83,9 @@
     <Compile Include="..\GL.Data\BLL\RoleBLL.cs">
       <Link>BLL\RoleBLL.cs</Link>
     </Compile>
+    <Compile Include="..\GL.Data\DAL\QQZoneRechargeDAL.cs">
+      <Link>DAL\QQZoneRechargeDAL.cs</Link>
+    </Compile>
     <Compile Include="..\GL.Data\DAL\RechargeCheckDAL.cs">
       <Link>DAL\RechargeCheckDAL.cs</Link>
     </Compile>
@@ -88,6 +94,24 @@
     </Compile>
     <Compile Include="..\GL.Data\DAL\RoleDAL.cs">
       <Link>DAL\RoleDAL.cs</Link>
+    </Compile>
+    <Compile Include="..\GL.Data\enum\ActiveType.cs">
+      <Link>enum\ActiveType.cs</Link>
+    </Compile>
+    <Compile Include="..\GL.Data\enum\agentLv.cs">
+      <Link>enum\agentLv.cs</Link>
+    </Compile>
+    <Compile Include="..\GL.Data\enum\revenueModel.cs">
+      <Link>enum\revenueModel.cs</Link>
+    </Compile>
+    <Compile Include="..\GL.Data\enum\seachType.cs">
+      <Link>enum\seachType.cs</Link>
+    </Compile>
+    <Compile Include="..\GL.Data\Model\BaseDataInfo.cs">
+      <Link>Model\BaseDataInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\GL.Data\Model\Festival515.cs">
+      <Link>Model\Festival515.cs</Link>
     </Compile>
     <Compile Include="..\GL.Data\Model\QQZoneRecharge.cs">
       <Link>Model\QQZoneRecharge.cs</Link>

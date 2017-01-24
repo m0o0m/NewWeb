@@ -73,7 +73,7 @@
                                         }
                                         else
                                         {
-                                            zName = u.NickName;
+                                            zName = u.NickName + "(" + zID + ")";
                                         }
                                         //牌局结果：
                                         string[] Result = m.ResultCard.Split(' ');  //带有  庄  闲  这两个字
@@ -121,8 +121,8 @@
                                         string xShow = "";  //闲要显示的详细内容(文字显示结果)
                                         if (xSum==zSum)
                                         {
-                                            zShow = zScore[0] == zScore[1] ? "<font size='3' color='green'>庄：" + zSum.ToString() + "点 / 对子</font>" : "<font size='3' color='green'>庄：" + zSum.ToString() + "点 </font>"; 
-                                            xShow = xScore[0] == xScore[1] ? "<font size='3' bold  color='green'>闲：" + xSum.ToString() + "点 / 对子</font>" : "<font size='3' color='green'>闲：" + xSum.ToString() + "点 </font>";  
+                                            zShow = zScore[0] == zScore[1] ? "<font size='3' color='green'>庄：" + zSum.ToString() + "点 / 对子</font>" : "<font size='3' color='green'>庄：" + zSum.ToString() + "点 </font>";
+                                            xShow = xScore[0] == xScore[1] ? "<font size='3' bold  color='green'>闲：" + xSum.ToString() + "点 / 对子</font>" : "<font size='3' color='green'>闲：" + xSum.ToString() + "点 </font>";
                                         }
                                         else
                                         {
@@ -219,7 +219,7 @@
                                                             wName = u.NickName;
                                                         }
                                                         <tr>
-                                                            <td>@wName</td>
+                                                            <td>@wName （@wID）</td>
                                                             <td>@xd0</td>      @*下注(闲对)*@
                                                             <td>@x3</td>      @*下注(闲)*@
                                                             <td>@h1</td>      @*下注(和)*@

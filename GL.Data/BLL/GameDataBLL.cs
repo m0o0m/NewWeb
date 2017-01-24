@@ -10,7 +10,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Webdiyer.WebControls.Mvc;
 using System.Data;
-
+using MySql.Data.MySqlClient;
+using GL.Dapper;
 namespace GL.Data.BLL
 {
     public class GameDataBLL
@@ -33,13 +34,13 @@ namespace GL.Data.BLL
             if (Convert.ToInt64(model.Data) > 0)
             {
 
-                pq.RecordCount = DAL.PagedListDAL<BaccaratGameRecord>.GetRecordCount(string.Format(@"select count(0) from " + database3 + @".BG_BaccaratGameRecord where CreateTime between '{0}' and '{1}' and Round = '{2}'", model.StartDate, model.ExpirationDate, model.Data), sqlconnectionStringForRecord);
-                pq.Sql = string.Format(@"select * from " + database3 + @".BG_BaccaratGameRecord where CreateTime between '{2}' and '{3}' and Round = {4} order by CreateTime desc limit {0}, {1}", pq.StartRowNumber, pq.PageSize, model.StartDate, model.ExpirationDate, model.Data);
+                pq.RecordCount = DAL.PagedListDAL<BaccaratGameRecord>.GetRecordCount(string.Format(@"select count(0) from " + database3 + @".BG_BaccaratGameRecord where CreateTime between '{0}' and '{1}' and Round = '{2}' {3} ", model.StartDate, model.ExpirationDate, model.Data, model.SearchExt == "" ? "" : " and ( UserData like '" + model.SearchExt + @"%' or UserData like '%_" + model.SearchExt + @"%')"), sqlconnectionStringForRecord);
+                pq.Sql = string.Format(@"select * from " + database3 + @".BG_BaccaratGameRecord where CreateTime between '{2}' and '{3}' and Round = {4} {5} order by CreateTime desc limit {0}, {1}", pq.StartRowNumber, pq.PageSize, model.StartDate, model.ExpirationDate, model.Data, model.SearchExt == "" ? "" : " and ( UserData like '" + model.SearchExt + @"%' or UserData like '%_" + model.SearchExt + @"%')");
             }
             else
             {
-                pq.RecordCount = DAL.PagedListDAL<BaccaratGameRecord>.GetRecordCount(string.Format(@"select count(0) from " + database3 + @".BG_BaccaratGameRecord where CreateTime between '{0}' and '{1}' ", model.StartDate, model.ExpirationDate), sqlconnectionStringForRecord);
-                pq.Sql = string.Format(@"select * from " + database3 + @".BG_BaccaratGameRecord where CreateTime between '{2}' and '{3}' order by Round desc limit {0}, {1}", pq.StartRowNumber, pq.PageSize, model.StartDate, model.ExpirationDate);
+                pq.RecordCount = DAL.PagedListDAL<BaccaratGameRecord>.GetRecordCount(string.Format(@"select count(0) from " + database3 + @".BG_BaccaratGameRecord where CreateTime between '{0}' and '{1}' {2} ", model.StartDate, model.ExpirationDate, model.SearchExt == "" ? "" : " and ( UserData like '" + model.SearchExt + @"%' or UserData like '%_" + model.SearchExt + @"%')"), sqlconnectionStringForRecord);
+                pq.Sql = string.Format(@"select * from " + database3 + @".BG_BaccaratGameRecord where CreateTime between '{2}' and '{3}' {4} order by Round desc limit {0}, {1}", pq.StartRowNumber, pq.PageSize, model.StartDate, model.ExpirationDate, model.SearchExt == "" ? "" : " and ( UserData like '" + model.SearchExt + @"%' or UserData like '%_" + model.SearchExt + @"%')");
             }
             PagedList<BaccaratGameRecord> obj = new PagedList<BaccaratGameRecord>(DAL.PagedListDAL<BaccaratGameRecord>.GetListByPage(pq, sqlconnectionString), pq.CurrentPage, pq.PageSize, pq.RecordCount);
             return obj;
@@ -177,30 +178,30 @@ model.ExpirationDate.Replace("'", "")
             return obj;
         }
 
-        public static PagedList<ShuihuChangguiDataSum> GetListByPageForSerialChangguiDataSum(GameRecordView model)
+        public static PagedList<SerialChangguiDataSum> GetListByPageForSerialChangguiDataSum(GameRecordView model)
         {
             PagerQuery pq = new PagerQuery();
             pq.CurrentPage = model.Page;
             pq.PageSize = 10;
-            pq.RecordCount = DAL.PagedListDAL<ShuihuDataSum>.GetRecordCount(
-                string.Format(@"
+            string sqlcount = string.Format(@"
 select count(*) from (
 select * from clearing_serialchangguidatasum 
 where CreateTime>='{0}' and CreateTime<'{1}'
 GROUP BY CreateTime
 ) as a,
 (
-select Countdate,SUM(LNum) as LNum from Clearing_SerialGame 
-where Countdate>='{0}' and Countdate<'{1}'
-GROUP BY Countdate
+select CreateTime,SUM(PlayNum) as PlayNum from Clearing_SerialGame 
+where CreateTime>='{0}' and CreateTime<'{1}'
+GROUP BY CreateTime
 )
 as b
-where a.CreateTime = b.Countdate
+where a.CreateTime = b.CreateTime
 
 ",
 model.StartDate.Replace("'", ""),
 model.ExpirationDate.Replace("'", "")
-), sqlconnectionStringForRecord);
+);
+            pq.RecordCount = DAL.PagedListDAL<ShuihuDataSum>.GetRecordCount(sqlcount, sqlconnectionStringForRecord);
 
 
             pq.Sql = string.Format(@"
@@ -209,19 +210,19 @@ select
 a.CreateTime,
 a.YestPlayCount as YeatPlayCount,
 a.YestNowPlayCount as YeatNowPlayCount,
-b.LNum  as AllPlay
+b.PlayNum  as AllPlay
 from (
 select * from clearing_serialchangguidatasum 
 where CreateTime>='{2}' and CreateTime<'{3}'
 GROUP BY CreateTime
 ) as a,
 (
-select Countdate,SUM(LNum) as LNum from Clearing_SerialGame 
-where Countdate>='{2}' and Countdate<'{3}'
-GROUP BY Countdate
+select CreateTime,SUM(PlayNum) as PlayNum from Clearing_SerialGame 
+where CreateTime>='{2}' and CreateTime<'{3}'
+GROUP BY CreateTime
 )
 as b
-where a.CreateTime = b.Countdate
+where a.CreateTime = b.CreateTime
 ORDER BY a.CreateTime desc
 
 
@@ -233,7 +234,7 @@ model.StartDate.Replace("'", ""),
 model.ExpirationDate.Replace("'", "")
 );
 
-            PagedList<ShuihuChangguiDataSum> obj = new PagedList<ShuihuChangguiDataSum>(DAL.PagedListDAL<ShuihuChangguiDataSum>.GetListByPage(pq, sqlconnectionStringForRecord), pq.CurrentPage, pq.PageSize, pq.RecordCount);
+            PagedList<SerialChangguiDataSum> obj = new PagedList<SerialChangguiDataSum>(DAL.PagedListDAL<SerialChangguiDataSum>.GetListByPage(pq, sqlconnectionStringForRecord), pq.CurrentPage, pq.PageSize, pq.RecordCount);
             return obj;
         }
 
@@ -934,26 +935,22 @@ model.SearchExt == "" ? " " : " and  BoardNo = '" + model.SearchExt + "'");
             if (Convert.ToInt64(model.Data) > 0)
             {
 
-                pq.RecordCount = DAL.PagedListDAL<ScaleGameRecord>.GetRecordCount(string.Format(@"select count(0) from BG_ScaleGameRecord where CreateTime between '{0}' and '{1}' and Round = {2}", model.StartDate, model.ExpirationDate, model.Data), sqlconnectionStringForRecord);
+                pq.RecordCount = DAL.PagedListDAL<ScaleGameRecord>.GetRecordCount(string.Format(@"select count(0) from BG_ScaleGameRecord where CreateTime between '{0}' and '{1}' and Round = {2} {3}", model.StartDate, model.ExpirationDate, model.Data, model.SearchExt == "" ? "" : " and ( UserData like '" + model.SearchExt + @"%' or UserData like '%_" + model.SearchExt + @"%') "), sqlconnectionStringForRecord);
                 //  pq.Sql = string.Format(@"select BG_ScaleGameRecord.*,Role.Account from BG_ScaleGameRecord,gamedata.Role where BG_ScaleGameRecord.CreateTime between '{2}' and '{3}' and Round = {4} and BG_ScaleGameRecord.UserID =gamedata.Role.ID order by BG_TexasGameRecord.CreateTime desc limit {0}, {1}", pq.StartRowNumber, pq.PageSize, model.StartDate, model.ExpirationDate, model.Data);
 
-                pq.Sql = string.Format(@"select * from BG_ScaleGameRecord where CreateTime between '{2}' and '{3}' and Round = {4} order by CreateTime desc limit {0}, {1}", pq.StartRowNumber, pq.PageSize, model.StartDate, model.ExpirationDate, model.Data);
+                pq.Sql = string.Format(@"select * from BG_ScaleGameRecord where CreateTime between '{2}' and '{3}' and Round = {4} {5} order by CreateTime desc limit {0}, {1}", pq.StartRowNumber, pq.PageSize, model.StartDate, model.ExpirationDate, model.Data, model.SearchExt == "" ? "" : " and ( UserData like '" + model.SearchExt + @"%' or UserData like '%_" + model.SearchExt + @"%')");
 
-                //                pq.Sql = string.Format(@"select f.*, gamedata.Role.Account from (
-                //select *, LEFT(UserData, INSTR(UserData, ',') - 1) as UserID
-                //from BG_ScaleGameRecord where CreateTime between '{2}' and '{3}' and Round = {4} order by CreateTime desc limit {0}, {1}
-                //) f,gamedata.Role
-                //where f.UserID = gamedata.Role.ID",  pq.StartRowNumber, pq.PageSize, model.StartDate, model.ExpirationDate, model.Data);
+
 
 
             }
             else
             {
-                pq.RecordCount = DAL.PagedListDAL<ScaleGameRecord>.GetRecordCount(string.Format(@"select count(0) from BG_ScaleGameRecord where CreateTime between '{0}' and '{1}'", model.StartDate, model.ExpirationDate), sqlconnectionStringForRecord);
+                pq.RecordCount = DAL.PagedListDAL<ScaleGameRecord>.GetRecordCount(string.Format(@"select count(0) from BG_ScaleGameRecord where CreateTime between '{0}' and '{1}' {2}", model.StartDate, model.ExpirationDate, model.SearchExt == "" ? "" : " and ( UserData like '" + model.SearchExt + @"%' or UserData like '%_" + model.SearchExt + @"%')"), sqlconnectionStringForRecord);
                 //pq.Sql = string.Format(@"select BG_ScaleGameRecord.*,Role.Account from BG_ScaleGameRecord,gamedata.Role where BG_ScaleGameRecord.CreateTime between '{2}' and '{3}' and BG_ScaleGameRecord.UserID =gamedata.Role.ID order by BG_ScaleGameRecord.CreateTime desc limit {0}, {1}", pq.StartRowNumber, pq.PageSize, model.StartDate, model.ExpirationDate);
                 // pq.Sql = string.Format(@"select * from BG_ScaleGameRecord where CreateTime between '{2}' and '{3}'  order by CreateTime desc limit {0}, {1}", pq.StartRowNumber, pq.PageSize, model.StartDate, model.ExpirationDate);
 
-                pq.Sql = string.Format(@"select * from BG_ScaleGameRecord where CreateTime between '{2}' and '{3}' order by CreateTime desc limit {0}, {1}", pq.StartRowNumber, pq.PageSize, model.StartDate, model.ExpirationDate);
+                pq.Sql = string.Format(@"select * from BG_ScaleGameRecord where CreateTime between '{2}' and '{3}' {4}  order by CreateTime desc limit {0}, {1}", pq.StartRowNumber, pq.PageSize, model.StartDate, model.ExpirationDate, model.SearchExt == "" ? "" : " and ( UserData like '" + model.SearchExt + @"%' or UserData like '%_" + model.SearchExt + @"%')");
 
 
                 //                pq.Sql = string.Format(@"select f.*, gamedata.Role.Account from (
@@ -1070,10 +1067,10 @@ model.RoundID2 <= 0 ? "" : " and PlazeID=" + model.RoundID2,
             if (Convert.ToInt64(model.Data) > 0)
             {
 
-                pq.RecordCount = DAL.PagedListDAL<ScaleGameRecord>.GetRecordCount(string.Format(@"select count(0) from BG_TexProGameRecord where CreateTime between '{0}' and '{1}' and Round = {2}", model.StartDate, model.ExpirationDate, model.Data), sqlconnectionStringForRecord);
+                pq.RecordCount = DAL.PagedListDAL<ScaleGameRecord>.GetRecordCount(string.Format(@"select count(0) from BG_TexProGameRecord where CreateTime between '{0}' and '{1}' and Round = {2} {3}", model.StartDate, model.ExpirationDate, model.Data, model.SearchExt == "" ? "" : " and ( UserData like '" + model.SearchExt + @"%' or UserData like '%_" + model.SearchExt + @"%')"), sqlconnectionStringForRecord);
                 //  pq.Sql = string.Format(@"select BG_ScaleGameRecord.*,Role.Account from BG_ScaleGameRecord,gamedata.Role where BG_ScaleGameRecord.CreateTime between '{2}' and '{3}' and Round = {4} and BG_ScaleGameRecord.UserID =gamedata.Role.ID order by BG_TexasGameRecord.CreateTime desc limit {0}, {1}", pq.StartRowNumber, pq.PageSize, model.StartDate, model.ExpirationDate, model.Data);
 
-                pq.Sql = string.Format(@"select * from BG_TexProGameRecord where CreateTime between '{2}' and '{3}' and Round = {4} order by CreateTime desc limit {0}, {1}", pq.StartRowNumber, pq.PageSize, model.StartDate, model.ExpirationDate, model.Data);
+                pq.Sql = string.Format(@"select * from BG_TexProGameRecord where CreateTime between '{2}' and '{3}' and Round = {4} {5} order by CreateTime desc limit {0}, {1}", pq.StartRowNumber, pq.PageSize, model.StartDate, model.ExpirationDate, model.Data, model.SearchExt == "" ? "" : " and ( UserData like '" + model.SearchExt + @"%' or UserData like '%_" + model.SearchExt + @"%')");
 
                 //                pq.Sql = string.Format(@"select f.*, gamedata.Role.Account from (
                 //select *, LEFT(UserData, INSTR(UserData, ',') - 1) as UserID
@@ -1085,11 +1082,11 @@ model.RoundID2 <= 0 ? "" : " and PlazeID=" + model.RoundID2,
             }
             else
             {
-                pq.RecordCount = DAL.PagedListDAL<ScaleGameRecord>.GetRecordCount(string.Format(@"select count(0) from BG_TexProGameRecord where CreateTime between '{0}' and '{1}'", model.StartDate, model.ExpirationDate), sqlconnectionStringForRecord);
+                pq.RecordCount = DAL.PagedListDAL<ScaleGameRecord>.GetRecordCount(string.Format(@"select count(0) from BG_TexProGameRecord  where CreateTime between '{0}' and '{1}' {2}", model.StartDate, model.ExpirationDate, model.SearchExt == "" ? "" : " and ( UserData like '" + model.SearchExt + @"%' or UserData like '%_" + model.SearchExt + @"%')"), sqlconnectionStringForRecord);
                 //pq.Sql = string.Format(@"select BG_ScaleGameRecord.*,Role.Account from BG_ScaleGameRecord,gamedata.Role where BG_ScaleGameRecord.CreateTime between '{2}' and '{3}' and BG_ScaleGameRecord.UserID =gamedata.Role.ID order by BG_ScaleGameRecord.CreateTime desc limit {0}, {1}", pq.StartRowNumber, pq.PageSize, model.StartDate, model.ExpirationDate);
                 // pq.Sql = string.Format(@"select * from BG_ScaleGameRecord where CreateTime between '{2}' and '{3}'  order by CreateTime desc limit {0}, {1}", pq.StartRowNumber, pq.PageSize, model.StartDate, model.ExpirationDate);
 
-                pq.Sql = string.Format(@"select * from BG_TexProGameRecord where CreateTime between '{2}' and '{3}' order by CreateTime desc limit {0}, {1}", pq.StartRowNumber, pq.PageSize, model.StartDate, model.ExpirationDate);
+                pq.Sql = string.Format(@"select * from BG_TexProGameRecord where CreateTime between '{2}' and '{3}' {4} order by CreateTime desc limit {0}, {1}", pq.StartRowNumber, pq.PageSize, model.StartDate, model.ExpirationDate, model.SearchExt == "" ? "" : " and ( UserData like '" + model.SearchExt + @"%' or UserData like '%_" + model.SearchExt + @"%')");
 
 
                 //                pq.Sql = string.Format(@"select f.*, gamedata.Role.Account from (
@@ -1286,6 +1283,87 @@ model.RoundID2 <= 0 ? "" : " and PlazeID=" + model.RoundID2,
             return obj;
         }
 
+        /// <summary>
+        /// type-->1:下载的人数 2：点击下载次数 3：下载成功数   
+        /// PlatType-->2:IOS 3：Android
+        /// 澳门扑克打点统计
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
+        public static int GetDownCountForBaijiale(int type, int PlatType, DateTime time)
+        {
+
+            DateTime ExpirationDate = time.AddDays(1).Date;
+            int count = 0;
+            if (type == 1)
+            {
+                using (var cn = new MySqlConnection(sqlconnectionStringForRecord))
+                {
+                    cn.Open();
+                    count = cn.Query<int>(string.Format("select  count(*) from(select count(*) from BG_ClickRecord where ModeluID=32 and PlatType={0} and CreateTime between '{1}' and '{2}' GROUP BY UserID ) a", PlatType, time, ExpirationDate)).Single();
+                    cn.Close();
+                }
+            }
+            if (type == 2)
+            {
+                using (var cn = new MySqlConnection(sqlconnectionStringForRecord))
+                {
+                    cn.Open();
+                    count = cn.Query<int>(string.Format("select count(*) from BG_ClickRecord where ModeluID=32 and PlatType={0} and CreateTime between '{1}' and '{2}'", PlatType, time, ExpirationDate)).Single();
+                    cn.Close();
+                }
+            }
+            if (type == 3)
+            {
+                using (var cn = new MySqlConnection(sqlconnectionStringForRecord))
+                {
+                    cn.Open();
+                    count = cn.Query<int>(string.Format("select count(*) from BG_ClickRecord where ModeluID=33 and PlatType={0} and CreateTime between '{1}' and '{2}'", PlatType, time, ExpirationDate)).Single();
+                    cn.Close();
+                }
+
+            }
+            return count;
+        }
+
+        /// <summary>
+        /// 澳门扑克打点统计
+        /// </summary>
+        /// <param name="type"></param>1   进入百家乐游戏  2：打开百家乐彩池
+        /// <param name="PlatType"></param>1 web   2IOS  3Android
+        /// /// <param name="IsPcount"></param>   1统计人数(同ID去重)  2 统计次数
+        /// <param name="time"></param>
+        /// <returns></returns>
+        public static int GetLoginCountForBaijiale(int type, int PlatType, int IsPcount, DateTime time)
+        {
+
+            DateTime ExpirationDate = time.AddDays(1).Date;
+            int count = 0;
+            if (IsPcount == 2)//统计次数
+            {
+                using (var cn = new MySqlConnection(sqlconnectionStringForRecord))
+                {
+                    cn.Open();
+                    count = cn.Query<int>(string.Format("SELECT count(*) from BG_ClickRecord where ModeluID=31 and PlatType={0} and SiteID={3} and CreateTime between '{1}' and '{2}'", PlatType, time, ExpirationDate, type)).Single();
+                    cn.Close();
+                }
+            }
+            else
+            {
+                using (var cn = new MySqlConnection(sqlconnectionStringForRecord))
+                {
+                    cn.Open();
+                    count = cn.Query<int>(string.Format("select  count(*) from(select count(*) from BG_ClickRecord where ModeluID=31 and PlatType={0} and SiteID={3}  and CreateTime between '{1}' and '{2}' GROUP BY UserID ) a", PlatType, time, ExpirationDate, type)).Single();
+                    cn.Close();
+                }
+            }
+
+
+
+
+            return count;
+        }
+
         public static PagedList<ZodiacGameRecord> GetListByPageForZodiac(GameRecordView model)
         {
             PagerQuery pq = new PagerQuery();
@@ -1295,8 +1373,8 @@ model.RoundID2 <= 0 ? "" : " and PlazeID=" + model.RoundID2,
             if (Convert.ToInt64(model.Data) > 0)
             {
 
-                pq.RecordCount = DAL.PagedListDAL<ZodiacGameRecord>.GetRecordCount(string.Format(@"select count(0) from " + database3 + @".BG_ZodiacGameRecord where CreateTime between '{0}' and '{1}' and Round like '%{2}%'", model.StartDate, model.ExpirationDate, model.Data), sqlconnectionString);
-                pq.Sql = string.Format(@"select * from " + database3 + @".BG_ZodiacGameRecord where CreateTime between '{2}' and '{3}' and Round = {4} order by CreateTime desc limit {0}, {1}", pq.StartRowNumber, pq.PageSize, model.StartDate, model.ExpirationDate, model.Data);
+                pq.RecordCount = DAL.PagedListDAL<ZodiacGameRecord>.GetRecordCount(string.Format(@"select count(0) from " + database3 + @".BG_ZodiacGameRecord where CreateTime between '{0}' and '{1}' and Round like '%{2}%' {3}", model.StartDate, model.ExpirationDate, model.Data, model.SearchExt == "" ? "" : " and ( UserData like '" + model.SearchExt + @"%' or UserData like '%_" + model.SearchExt + @"%')"), sqlconnectionString);
+                pq.Sql = string.Format(@"select * from " + database3 + @".BG_ZodiacGameRecord where CreateTime between '{2}' and '{3}' and Round = {4} {5} order by CreateTime desc limit {0}, {1}", pq.StartRowNumber, pq.PageSize, model.StartDate, model.ExpirationDate, model.Data, model.SearchExt == "" ? "" : " and ( UserData like '" + model.SearchExt + @"%' or UserData like '%_" + model.SearchExt + @"%')");
 
 
                 //                pq.Sql = string.Format(@"select f.*, gamedata.Role.Account from (
@@ -1312,8 +1390,8 @@ model.RoundID2 <= 0 ? "" : " and PlazeID=" + model.RoundID2,
             else
             {
 
-                pq.RecordCount = DAL.PagedListDAL<ZodiacGameRecord>.GetRecordCount(string.Format(@"select count(0) from " + database3 + @".BG_ZodiacGameRecord where CreateTime between '{0}' and '{1}'", model.StartDate, model.ExpirationDate), sqlconnectionString);
-                pq.Sql = string.Format(@"select * from " + database3 + @".BG_ZodiacGameRecord where CreateTime between '{2}' and '{3}' order by CreateTime desc limit {0}, {1}", pq.StartRowNumber, pq.PageSize, model.StartDate, model.ExpirationDate);
+                pq.RecordCount = DAL.PagedListDAL<ZodiacGameRecord>.GetRecordCount(string.Format(@"select count(0) from " + database3 + @".BG_ZodiacGameRecord where CreateTime between '{0}' and '{1}' {2}", model.StartDate, model.ExpirationDate, model.SearchExt == "" ? "" : " and ( UserData like '" + model.SearchExt + @"%' or UserData like '%_" + model.SearchExt + @"%')"), sqlconnectionString);
+                pq.Sql = string.Format(@"select * from " + database3 + @".BG_ZodiacGameRecord where CreateTime between '{2}' and '{3}' {4} order by CreateTime desc limit {0}, {1}", pq.StartRowNumber, pq.PageSize, model.StartDate, model.ExpirationDate, model.SearchExt == "" ? "" : " and ( UserData like '" + model.SearchExt + @"%' or UserData like '%_" + model.SearchExt + @"%')");
 
 
                 //                pq.Sql = string.Format(@"select f.*, gamedata.Role.Account from (
@@ -1386,15 +1464,15 @@ model.RoundID2 <= 0 ? "" : " and PlazeID=" + model.RoundID2,
             if (Convert.ToInt64(model.Data) > 0)
             {
 
-                pq.RecordCount = DAL.PagedListDAL<CarGameRecord>.GetRecordCount(string.Format(@"select count(0) from " + database3 + @".BG_CarGameRecord where CreateTime between '{0}' and '{1}' and RoundID = '{2}'", model.StartDate, model.ExpirationDate, model.Data), sqlconnectionString);
-                pq.Sql = string.Format(@"select * from " + database3 + @".BG_CarGameRecord where CreateTime between '{2}' and '{3}' and RoundID = {4} order by CreateTime desc limit {0}, {1}", pq.StartRowNumber, pq.PageSize, model.StartDate, model.ExpirationDate, model.Data);
+                pq.RecordCount = DAL.PagedListDAL<CarGameRecord>.GetRecordCount(string.Format(@"select count(0) from " + database3 + @".BG_CarGameRecord where CreateTime between '{0}' and '{1}' and RoundID = '{2}' {3} ", model.StartDate, model.ExpirationDate, model.Data, model.SearchExt == "" ? "" : " and ( UserData like '" + model.SearchExt + @"%' or UserData like '%_" + model.SearchExt + @"%')"), sqlconnectionString);
+                pq.Sql = string.Format(@"select * from " + database3 + @".BG_CarGameRecord where CreateTime between '{2}' and '{3}' and RoundID = {4} {5} order by CreateTime desc limit {0}, {1}", pq.StartRowNumber, pq.PageSize, model.StartDate, model.ExpirationDate, model.Data, model.SearchExt == "" ? "" : " and ( UserData like '" + model.SearchExt + @"%' or UserData like '%_" + model.SearchExt + @"%')");
 
             }
             else
             {
 
-                pq.RecordCount = DAL.PagedListDAL<CarGameRecord>.GetRecordCount(string.Format(@"select count(0) from " + database3 + @".BG_CarGameRecord where CreateTime between '{0}' and '{1}'", model.StartDate, model.ExpirationDate), sqlconnectionString);
-                pq.Sql = string.Format(@"select * from " + database3 + @".BG_CarGameRecord where CreateTime between '{2}' and '{3}' order by CreateTime desc limit {0}, {1}", pq.StartRowNumber, pq.PageSize, model.StartDate, model.ExpirationDate);
+                pq.RecordCount = DAL.PagedListDAL<CarGameRecord>.GetRecordCount(string.Format(@"select count(0) from " + database3 + @".BG_CarGameRecord where CreateTime between '{0}' and '{1}' {2}", model.StartDate, model.ExpirationDate, model.SearchExt == "" ? "" : " and ( UserData like '" + model.SearchExt + @"%' or UserData like '%_" + model.SearchExt + @"%')"), sqlconnectionString);
+                pq.Sql = string.Format(@"select * from " + database3 + @".BG_CarGameRecord where CreateTime between '{2}' and '{3}' {4} order by CreateTime desc limit {0}, {1}", pq.StartRowNumber, pq.PageSize, model.StartDate, model.ExpirationDate, model.SearchExt == "" ? "" : " and ( UserData like '" + model.SearchExt + @"%' or UserData like '%_" + model.SearchExt + @"%')");
 
             }
 

@@ -300,7 +300,17 @@ namespace Web.Pay.Controllers
                 WxPayData res = new WxPayData();
                 try
                 {
+
+                    log.Info("ResultNotifyPageForWxPay微信回调notifyData.ToXml()" + notifyData.ToXml());
+
                     RechargeCheck rc = RechargeCheckBLL.GetModelBySerialNo(new RechargeCheck { SerialNo = notifyData.GetValue("out_trade_no").ToString() });
+
+
+                    //string _total_fee = notifyData.GetValue("total_fee").ToString();
+                    //log.Info(_total_fee);
+                    //total_fee
+                    // int _price = Convert.ToInt32(notifyData.GetValue("total_fee").ToString());
+
                     if (rc == null)
                     {
                         res.SetValue("return_code", "FAIL");
@@ -308,6 +318,15 @@ namespace Web.Pay.Controllers
                         log.Error(Utils.GetUrl() + " WxPay fail : " + res.ToXml());
                         return Content(res.ToXml(), "text/xml");
                     }
+
+                    //if (rc.Money != _price * 100)
+                    //{
+                    //    res.SetValue("return_code", "FAIL");
+                    //    res.SetValue("return_msg", string.Format("参数错误[{0}]", notifyData.GetValue("transaction_id")));
+                    //    log.Error(Utils.GetUrl() + " 参数错误 fail : " + res.ToXml());
+                    //    return Content(res.ToXml(), "text/xml");
+                    //}
+
                     Recharge rech = RechargeBLL.GetModelByBillNo(new Recharge { BillNo = notifyData.GetValue("transaction_id").ToString() });
                     if (rech != null)
                     {//说明此流水已经存在
@@ -316,7 +335,6 @@ namespace Web.Pay.Controllers
                         log.Error(Utils.GetUrl() + " WxPay fail : " + res.ToXml());
                         return Content(res.ToXml(), "text/xml");
                     }
-
 
 
 
@@ -436,19 +454,34 @@ namespace Web.Pay.Controllers
 
 
         [QueryValues]
-        public ActionResult ResultNotifyPageForAliPay(Dictionary<string, string> queryvalues, SortedDictionary<string, string> sPara)
+        public ActionResult ResultNotifyPageForAliPay2(Dictionary<string, string> queryvalues, SortedDictionary<string, string> sPara)
         {
+
+          
+            
+
+
+
             log.Info("###################ResultNotifyPageForAliPay易宝回调#####################");
-            log.Info("ResultNotifyPageForAliPay易宝回调 queryvalues: " + JsonConvert.SerializeObject(queryvalues));
+            log.Info("ResultNotifyPageForAliPay支付宝回调 queryvalues: " + JsonConvert.SerializeObject(queryvalues));
+
+
+            
+
             if (sPara.Count > 0)//判断是否有带返回参数
             {
                 string _notify_id = sPara.ContainsKey("notify_id") ? sPara["notify_id"] : string.Empty;
                 string _sign = sPara.ContainsKey("sign") ? sPara["sign"] : string.Empty;
 
+                //获取平台返回的充值金额
+                //double _price = sPara.ContainsKey("price") ? Convert.ToDouble(sPara["price"]) : 0;
+
+                //log.Info("平台的价格是:"+_price);
+
                 AliPayNotify aliNotify = new AliPayNotify();
                 bool verifyResult = aliNotify.Verify(sPara, _notify_id, _sign);
-
-                if (true)//验证成功
+                log.Info("verifyResult:"+ verifyResult);
+                if (verifyResult)//验证成功
                 {
                     /////////////////////////////////////////////////////////////////////////////////////////////////////////////
                     //请在这里加上商户的业务逻辑程序代码
@@ -544,9 +577,16 @@ namespace Web.Pay.Controllers
 
                             if (rc == null)
                             {
-                                log.Error(" ResultNotifyPageForAliPay易宝回调 订单[" + out_trade_no + "]不存在");
+                                log.Error(" ResultNotifyPageForAliPay支付宝回调 订单[" + out_trade_no + "]不存在");
                                 return Content("fail");
                             }
+                            //2017-1-9 支付宝刷单bug
+                            //if (rc.Money != Convert.ToInt32( _price * 100)) {
+                            //    log.Info("ResultNotifyPageForAliPay支付宝回调 支付宝充值，价格问题，我们的价格是" + rc.Money+",支付宝的价格是"+_price*100);
+                            //    return Content("fail");
+                            //}
+
+
                             Role user = RoleBLL.GetModelByID(new Role { ID = rc.UserID });
                             if (user == null)
                             {
@@ -862,8 +902,16 @@ namespace Web.Pay.Controllers
                         {
                             rmb = amt;
                         }
+                      
                         log.Error("ResultNotifyPageForQQ腾讯回调rmb：" + rmb);
-
+                        if (rmb <= 0)
+                        {
+                            return Json(new
+                            {
+                                ret = 4,
+                                msg = "失败" 
+                            }, JsonRequestBehavior.AllowGet);
+                        }
                         RechargeBLL.Add(new Recharge { Num= (int)num,BillNo = billno, OpenID = openid, UserID = user.ID, Money = (long)rmb, CreateTime = DateTime.Now, Chip = gold, Diamond = dia, ChipType = ct, IsFirst = iF, NickName = iap.productname, PayItem = iap.product_id, PF = raType.腾讯, UserAccount = user.NickName, ActualMoney = Convert.ToInt64(oldRmb), ProductNO = list.Trim(','),AgentID=rc.AgentID });
 
                         normal ServiceNormalS = normal.CreateBuilder()

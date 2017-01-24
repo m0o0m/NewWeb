@@ -15,6 +15,8 @@ using GL.Pay.AliPay;
 using Web.Pay.Models;
 using Newtonsoft.Json;
 using GL.Pay.MeiZu;
+using Aop.Api;
+using Aop.Api.Util;
 
 namespace Web.Pay.Controllers
 {
@@ -44,7 +46,13 @@ namespace Web.Pay.Controllers
             log.Info("##################Yeepay易宝支付生成订单号开始: #######################");
             log.Info("生成订单Yeepay: " + Utils.GetUrl());
 
-            return Content("请使用别的充值方式!");
+
+            bool IsRechargeOpen = QQZoneRechargeBLL.GetRechargeOpen((int)raType.易宝);
+            if (IsRechargeOpen == false) {
+                return Content("请使用别的充值方式!");
+            }
+
+         
 
             string _transtime = queryvalues.ContainsKey("transtime") ? queryvalues["transtime"] : string.Empty;
             string _productid = queryvalues.ContainsKey("productid") ? queryvalues["productid"] : string.Empty;
@@ -273,7 +281,14 @@ namespace Web.Pay.Controllers
         {
             log.Info("##################WxPay微信支付生成订单号开始: #######################" );
             log.Info("生成订单WxPay: " + Utils.GetUrl());
-          
+
+
+            bool IsRechargeOpen = QQZoneRechargeBLL.GetRechargeOpen((int)raType.微信);
+            if (IsRechargeOpen == false)
+            {
+                return Content("请使用别的充值方式!");
+            }
+
 
             string _transtime = queryvalues.ContainsKey("transtime") ? queryvalues["transtime"] : string.Empty;
             string _productid = queryvalues.ContainsKey("productid") ? queryvalues["productid"] : string.Empty;
@@ -376,7 +391,21 @@ namespace Web.Pay.Controllers
         {
             log.Info("##################AliPay支付宝生成订单号开始: #######################");
             log.Info("生成订单AliPay支付宝: " + Utils.GetUrl());
-         
+
+
+            //Dictionary<string, string> dics1 = AlipayOrder.BuildDic("aaaxxx");
+            //string sign1 = AlipayOrder.GetSign(dics1);
+            //string orderInfo1 = AlipayOrder.GetOrderParam(dics1) + "&sign=" + sign1;
+
+            //log.Info("生成订单AliPay支付宝加密信息: " + orderInfo1);
+
+            bool IsRechargeOpen = QQZoneRechargeBLL.GetRechargeOpen((int)raType.支付宝);
+            if (IsRechargeOpen == false)
+            {
+                return Content("请使用别的充值方式!");
+            }
+
+
 
             string _transtime = queryvalues.ContainsKey("transtime") ? queryvalues["transtime"] : string.Empty;
             string _productid = queryvalues.ContainsKey("productid") ? queryvalues["productid"] : string.Empty;
@@ -389,8 +418,7 @@ namespace Web.Pay.Controllers
             string Key = _key;
 
 
-            /*
-            */
+           
 
             string md5 = Utils.MD5(string.Concat(_transtime, _identityid, _othertype, _other, _productid, Key));
             if (!_customSign.Equals(md5))
@@ -434,22 +462,37 @@ namespace Web.Pay.Controllers
             string productname = iap.productname;
 
 
-            //AppPay appPay = new AppPay();
-            //appPay.total_fee = Convert.ToInt32(iap.price * 100);
-            //appPay.body = iap.productname;
-            //appPay.attach = (iap.goods + iap.attach_chip + iap.attach_5b).ToString();
-            //appPay.spbill_create_ip = Utils.GetIP();
-            //appPay.out_trade_no = Utils.GenerateOutTradeNo("WxPay");
-            //WxPayData unifiedOrderResult = appPay.GetUnifiedOrderResult();
-            //long transtimeL = Utils.GetTimeStampL();
+           
             RechargeCheckBLL.Add(new RechargeCheck { Money = amount, ProductID = _productid, SerialNo = orderid, UserID = _identityid, CreateTime = (ulong)transtimeL, AgentID=_agentID });
             RechargeCheckBLL.AddOrderIP(new UserIpInfo { UserID = _identityid, OrderID = orderid, CreateTime = DateTime.Now, ChargeType = (int)raType.支付宝, OrderIP = GetClientIp() });
 
+            /*=======================加密==============================*/
+
+
+
+
+
+
+
+            Dictionary<string, string> dics1 = AlipayOrder.BuildDic(orderid,iap.price,iap.product_id);
+            string sign1 = AlipayOrder.GetSign(dics1);
+            string orderInfo1 = AlipayOrder.GetOrderParamCode(dics1) + "&sign=" + AlipayOrder.UrlEncodeUper(sign1);
+
+            log.Info("生成订单AliPay支付宝加密信息: " + orderInfo1);
+
             return Json(new
             {
-                prepay_id = orderid,
-                notify_url = GL.Pay.AliPay.Config.Notify_url
-            }, JsonRequestBehavior.AllowGet);
+                orderInfo = orderInfo1,
+                prepay_id = orderid
+            }, "json", Encoding.UTF8, JsonRequestBehavior.AllowGet);
+
+
+
+
+
+            /*=======================结束加密==============================*/
+
+
 
 
         }
@@ -472,7 +515,13 @@ namespace Web.Pay.Controllers
 
             log.Info("##################BaiDuPay生成订单号开始: #######################");
             log.Info("BaiDuPay生成订单: " + Utils.GetUrl());
-         
+
+            bool IsRechargeOpen = QQZoneRechargeBLL.GetRechargeOpen((int)raType.百度);
+            if (IsRechargeOpen == false)
+            {
+                return Content("请使用别的充值方式!");
+            }
+
 
 
             string _transtime = queryvalues.ContainsKey("transtime") ? queryvalues["transtime"] : string.Empty;
@@ -576,6 +625,14 @@ namespace Web.Pay.Controllers
             log.Info("##################QQPay生成订单号开始: #######################");
 
             log.Info("QQPay生成订单: " + JsonConvert.SerializeObject(queryvalues));
+
+
+
+            bool IsRechargeOpen = QQZoneRechargeBLL.GetRechargeOpen((int)raType.腾讯);
+            if (IsRechargeOpen == false)
+            {
+                return Json(new { Ret = 5000, Msg = "请使用其他充值方式" }, JsonRequestBehavior.AllowGet);
+            }
 
 
             string _transtime = queryvalues.ContainsKey("transtime") ? queryvalues["transtime"] : string.Empty;
@@ -769,6 +826,14 @@ namespace Web.Pay.Controllers
             string _customSign = queryvalues.ContainsKey("customsign") ? queryvalues["customsign"] : string.Empty;
             int _agentID = queryvalues.ContainsKey("agentid") ? (string.IsNullOrEmpty(queryvalues["agentid"]) ? 0 : Convert.ToInt32(queryvalues["agentid"])) : 0;
 
+            bool IsRechargeOpen = QQZoneRechargeBLL.GetRechargeOpen((int)raType.应用汇);
+            if (IsRechargeOpen == false)
+            {
+                return Json(new { Ret = 5000, Msg = "请使用其他充值方式" }, JsonRequestBehavior.AllowGet);
+            }
+
+
+
 
             //公共参数
             string Key = _key;
@@ -864,7 +929,13 @@ namespace Web.Pay.Controllers
             log.Info("##################UnicomPay联通生成订单号开始: #######################");
             log.Info("UnicomPay联通生成订单: " + Utils.GetUrl());
 
-            return Json(new { Ret = 5000, Msg = "充值方式暂停" }, JsonRequestBehavior.AllowGet);
+            bool IsRechargeOpen = QQZoneRechargeBLL.GetRechargeOpen((int)raType.联通);
+            if (IsRechargeOpen == false)
+            {
+                return Json(new { Ret = 5000, Msg = "请使用其他充值方式" }, JsonRequestBehavior.AllowGet);
+            }
+
+          
 
             string _transtime = queryvalues.ContainsKey("transtime") ? queryvalues["transtime"] : string.Empty;
             string _productid = queryvalues.ContainsKey("productid") ? queryvalues["productid"] : string.Empty;
@@ -958,7 +1029,15 @@ namespace Web.Pay.Controllers
 
             log.Info("##################XYPay苹果助手生成订单号开始: #######################");
             log.Info("XYPay苹果助手生成订单: " + Utils.GetUrl());
-       
+
+
+            bool IsRechargeOpen = QQZoneRechargeBLL.GetRechargeOpen((int)raType.XY助手);
+            if (IsRechargeOpen == false)
+            {
+                return Json(new { Ret = 5000, Msg = "请使用其他充值方式" }, JsonRequestBehavior.AllowGet);
+            }
+
+
 
 
             string _transtime = queryvalues.ContainsKey("transtime") ? queryvalues["transtime"] : string.Empty;
@@ -1056,10 +1135,14 @@ namespace Web.Pay.Controllers
             log.Info("#############AppTreasure : 进入应用宝支付接口#########  ");
             log.Info("AppTreasure应用宝生成订单" + Utils.GetUrl());
 
+            bool IsRechargeOpen = QQZoneRechargeBLL.GetRechargeOpen((int)raType.应用宝);
+            if (IsRechargeOpen == false)
+            {
+                return Json(new { Ret = 5000, Msg = "请使用其他充值方式" }, JsonRequestBehavior.AllowGet);
+            }
 
 
 
-        
 
             string _transtime = queryvalues.ContainsKey("transtime") ? queryvalues["transtime"] : string.Empty;
             string _productid = queryvalues.ContainsKey("productid") ? queryvalues["productid"] : string.Empty;
@@ -1138,7 +1221,15 @@ namespace Web.Pay.Controllers
             log.Info("#############HippocampiPay :海马生成订单#########  ");
             log.Info("HippocampiPay海马生成订单" + Utils.GetUrl());
 
-            return Content("暂停使用!");
+
+
+            bool IsRechargeOpen = QQZoneRechargeBLL.GetRechargeOpen((int)raType.海马玩);
+            if (IsRechargeOpen == false)
+            {
+                return Content("请使用其他充值方式!");
+            }
+
+           
 
             string _transtime = queryvalues.ContainsKey("transtime") ? queryvalues["transtime"] : string.Empty;
             string _productid = queryvalues.ContainsKey("productid") ? queryvalues["productid"] : string.Empty;
@@ -1227,6 +1318,13 @@ namespace Web.Pay.Controllers
             */
             log.Info("##################移动进入支付接口##############  ");
             log.Info("移动生成订单" + Utils.GetUrl());
+
+
+            bool IsRechargeOpen = QQZoneRechargeBLL.GetRechargeOpen((int)raType.移动);
+            if (IsRechargeOpen == false)
+            {
+                return Json(new { Ret = 5000, Msg = "请使用其他充值方式" }, JsonRequestBehavior.AllowGet);
+            }
 
 
             string _transtime = queryvalues.ContainsKey("transtime") ? queryvalues["transtime"] : string.Empty;
@@ -1340,6 +1438,15 @@ namespace Web.Pay.Controllers
             int _agentID = queryvalues.ContainsKey("agentid") ? (string.IsNullOrEmpty(queryvalues["agentid"]) ? 0 : Convert.ToInt32(queryvalues["agentid"])) : 0;
 
 
+
+            bool IsRechargeOpen = QQZoneRechargeBLL.GetRechargeOpen((int)raType.卓悠);
+            if (IsRechargeOpen == false)
+            {
+                return Json(new { Ret = 5000, Msg = "请使用其他充值方式" }, JsonRequestBehavior.AllowGet);
+            }
+
+
+
             //公共参数
             string Key = _key;
             string md5 = Utils.MD5(string.Concat(_transtime, _identityid, _othertype, _other, _productid, Key));
@@ -1433,6 +1540,19 @@ namespace Web.Pay.Controllers
             int _identityid = queryvalues.ContainsKey("identityid") ? Convert.ToInt32(queryvalues["identityid"]) : 0;//魅族的id
             int _uid = queryvalues.ContainsKey("uid") ? Convert.ToInt32(queryvalues["uid"]) : 0;//我们的id
             int _agentID = queryvalues.ContainsKey("agentid") ? (string.IsNullOrEmpty(queryvalues["agentid"]) ? 0 : Convert.ToInt32(queryvalues["agentid"])) : 0;
+
+
+            bool IsRechargeOpen = QQZoneRechargeBLL.GetRechargeOpen((int)raType.魅族);
+            if (IsRechargeOpen == false)
+            {
+                return Json(new MeiZuRecModel
+                {
+                    code = 900000,
+                    message = "请使用其他充值方式",
+                    redirect = "",
+                    value = null
+                }, JsonRequestBehavior.AllowGet);
+            }
 
 
             ////公共参数
@@ -1556,6 +1676,15 @@ namespace Web.Pay.Controllers
             int _agentID = queryvalues.ContainsKey("agentid") ? (string.IsNullOrEmpty(queryvalues["agentid"]) ? 0 : Convert.ToInt32(queryvalues["agentid"])) : 0;
 
 
+
+
+            bool IsRechargeOpen = QQZoneRechargeBLL.GetRechargeOpen((int)raType.华为);
+            if (IsRechargeOpen == false)
+            {
+                return Json(new { Ret = 5000, Msg = "请使用其他充值方式" }, JsonRequestBehavior.AllowGet);
+            }
+
+
             //公共参数
             string Key = _key;
             string md5 = Utils.MD5(string.Concat(_transtime, _identityid, _othertype, _other, _productid, Key));
@@ -1599,7 +1728,6 @@ namespace Web.Pay.Controllers
                         notify_url = "",
                         ret = 0
                     }, JsonRequestBehavior.AllowGet);
-                    /* {"prepay_id":"ZYPay20160227165324223","notify_url":"","ret":0} */
                 }
                 else
                 {//首冲过
@@ -1609,7 +1737,6 @@ namespace Web.Pay.Controllers
                         notify_url = "",
                         ret = 1
                     }, JsonRequestBehavior.AllowGet);
-                    /* {"notify_url":"","ret":1} */
                 }
 
 

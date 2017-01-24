@@ -33,7 +33,8 @@ namespace GL.Data.Model
         ALL_IN = 4,
         弃牌 = 5,
         小盲 = 6,
-        大盲 = 7
+        大盲 = 7,
+        超时弃牌 = 105,
     }
 
     public enum CardType {

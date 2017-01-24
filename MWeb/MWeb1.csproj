@@ -244,6 +244,7 @@
     <Compile Include="Controllers\ManageApiController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\DuiHuanApiController.cs" />
+    <Compile Include="Controllers\MemberCenterController.cs" />
     <Compile Include="Controllers\MemberController.cs" />
     <Compile Include="Controllers\NoAuthController.cs" />
     <Compile Include="Controllers\RechargeController.cs" />
@@ -7844,6 +7845,15 @@
     <Content Include="Views\GameData\KuCunList.cshtml" />
     <Content Include="Views\GameData\KuCunList_PageList.cshtml" />
     <Content Include="Views\GameData\KucunListUpdate.cshtml" />
+    <Content Include="Views\MemberCenter\MemberManagementList.cshtml" />
+    <Content Include="Views\MemberCenter\MemberManagementListForStopIMEI.cshtml" />
+    <Content Include="Views\MemberCenter\MemberManagementListForStopIP.cshtml" />
+    <Content Include="Views\MemberCenter\MemberManagementListForStop_PageList.cshtml" />
+    <Content Include="Views\MemberCenter\MemberManagementForDetails.cshtml" />
+    <Content Include="Views\MemberCenter\GetDetailsDataForUser.cshtml" />
+    <Content Include="Views\MemberCenter\MemberUpdateForVIP.cshtml" />
+    <Content Include="Views\MemberCenter\UserProfit.cshtml" />
+    <Content Include="Views\System\RechargeOpen.cshtml" />
     <None Include="Web References\cn.org.nciic.ws\NciicServices.wsdl">
       <SubType>Designer</SubType>
     </None>

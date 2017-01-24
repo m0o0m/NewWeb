@@ -1,0 +1,110 @@
+﻿@using GL.Data.Model
+@using GL.Data.View
+@model ValueView
+@{
+    ViewBag.Title = "被封IMEI列表";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="content">
+    <form id="comment-form" class="smart-form" novalidate="novalidate" method="post">
+        <div class="row">
+
+            <div class="widget-body">
+
+                <section class="col col-1.1">
+                    <label class="label">IP</label>
+                    <label class="input">
+                        @Html.TextBoxFor(m => m.Value, new { @class = "span2", style = "border-radius:4px" })
+                    </label>
+                </section>
+
+
+
+                <section class="col col-1">
+                    <label class="label">&nbsp;</label>
+                    @*<button type="submit" class="btn btn-success btn-sm">查询</button>*@
+                    <input type="button" onclick="search()" class="btn btn-success btn-sm" value="查询" />
+                </section>
+
+            </div>
+
+
+        </div>
+    </form>
+
+
+    <div class="row-fluid">
+        <div class="widget-box" id="box">
+            @Html.Partial("MemberManagementListForStop_PageList", Model.DataList)
+
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    @{Html.RegisterMvcPagerScriptResource();}
+
+
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/select2.min.js"></script>
+    @Styles.Render("~/Style/bootstrap-datetimepicker")
+    @Scripts.Render("~/bundles/bootstrap-datetimepicker")
+
+
+   <script type="text/javascript">
+
+            $(document).ready(function () {
+                $('select').select2({
+                    allowClear: false,
+                    minimumResultsForSearch: -1
+                });
+                $('.datepicker').datetimepicker({
+                    minView: "month", //选择日期后，不会再跳转去选择时分秒
+                    format: "yyyy-mm-dd hh:ii:ss", //选择日期后，文本框显示的日期格式
+                    language: 'zh-CN', //汉化
+                    autoclose: true //选择日期后自动关闭
+                });
+
+            });
+
+            function btnunBan(obj) {
+                _this = $(obj).parent().parent();
+                if (confirm('确定将【' + $(_this).find("td").eq(0).html() + '】解封？')) {
+                    var _Value = $(_this).find("td").eq(0).html();
+                    $.ajax({
+                        url: "/Member/banMac/",
+                        type: "Post",
+                        dataType: "JSON",
+                        data: { "strIP": _Value, "strAccount": "false" },
+                        success: function (data) {
+                            switch (data.result) {
+                                case 0:
+                                    alert('已将【' + $(_this).find("td").eq(0).html() + '】解封');
+                                    location.reload();
+                                    break;
+                                case 1:
+                                    alert("解封失败，请稍后再试");
+                                    break;
+                                case 2:
+                                    alert("服务器未启动，请稍后再试");
+                                    break;
+                                default:
+                                    alert('未知错误');
+                                    break;
+                            }
+                        }
+                    }).fail(function (xhr, textStatus, err) {
+                        alert('服务器繁忙，请稍候再试');
+                    });
+
+                } else {
+                    return false;
+                }
+                return false;
+            }
+
+
+</script>
+
+}

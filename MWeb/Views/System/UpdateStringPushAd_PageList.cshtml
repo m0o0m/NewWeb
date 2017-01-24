@@ -58,13 +58,13 @@
                                                         string typeChange = "";
                                                         if (m.Type != m.NewType)
                                                         {
-                                                            typeChange = "类型" + " " + m.Type + "==>" + m.NewType;
+                                                            typeChange = "类型" + " " + (m.Type==-1?"":m.Type==1? "每次打开弹出" : "每天首次打开弹出") + "==>" + (m.NewType==-1?"":m.NewType==1? "每次打开弹出" : "每天首次打开弹出");
                                                         }
                                                     }
-                                                   @(m.Username+"在"+m.CreateTime+"修改了"+(m.Plat==1?"IOS":"Android")+"系统 "+
+                                                   @(m.Username+"在"+m.CreateTime+"修改了"+(m.Plat==1? "Android" : "IOS")+"系统 "+
 
                                                 AgentUserBLL.GetModel(m.Agent).AgentName+"  修改内容: "+ urlChange+" "+typeChange
-                                                          
+
                                                   )
                                                 </td>
                                               

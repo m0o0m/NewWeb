@@ -12,6 +12,7 @@ using GL.Protocol;
 using GL.Common;
 using GL.Data;
 using GL.Command.DBUtility;
+using Webdiyer.WebControls.Mvc;
 
 namespace MWeb.Controllers
 {
@@ -60,10 +61,11 @@ namespace MWeb.Controllers
             int _roundID2 = queryvalues.ContainsKey("RoundID2") ? string.IsNullOrWhiteSpace(queryvalues["RoundID2"]) ? 0 : Convert.ToInt32(queryvalues["RoundID2"]) : 0;
             int _RoundID3 = queryvalues.ContainsKey("RoundID3") ? string.IsNullOrWhiteSpace(queryvalues["RoundID3"]) ? 0 : Convert.ToInt32(queryvalues["RoundID3"]) : 0;
 
+            int _UserList = queryvalues.ContainsKey("UserList") ? string.IsNullOrWhiteSpace(queryvalues["UserList"]) ? 0 : Convert.ToInt32(queryvalues["UserList"]) : 0;
             //更新后报错的代码，2016-12-19 屏蔽,RoundID3= _RoundID3
             //GameRecordView grv = new GameRecordView { Gametype = Convert.ToInt32(_Gametype), Data = _data, UserID = _id, SearchExt = _SearchExt, StartDate = _StartDate, ExpirationDate = _ExpirationDate, Page = _page, SeachType = (seachType)_seachtype, RoundID = _roundID, RoundID2 = _roundID2 ,RoundID3= _RoundID3 };
 
-            GameRecordView grv = new GameRecordView { Gametype = Convert.ToInt32(_Gametype), Data = _data, UserID = _id, SearchExt = _SearchExt, StartDate = _StartDate, ExpirationDate = _ExpirationDate, Page = _page, SeachType = (seachType)_seachtype, RoundID = _roundID, RoundID2 = _roundID2 };
+            GameRecordView grv = new GameRecordView { Gametype = Convert.ToInt32(_Gametype), Data = _data, UserID = _id, SearchExt = _SearchExt, StartDate = _StartDate, ExpirationDate = _ExpirationDate, Page = _page, SeachType = (seachType)_seachtype, RoundID = _roundID, RoundID2 = _roundID2, UserList= _UserList.ToString() };
 
             string pageList = "";
             switch (_Gametype)
@@ -745,7 +747,6 @@ namespace MWeb.Controllers
             string _StartDate = queryvalues.ContainsKey("StartDate") ? queryvalues["StartDate"] : DateTime.Now.ToString("yyyy-MM-dd 00:00:00");
             string _ExpirationDate = queryvalues.ContainsKey("ExpirationDate") ? queryvalues["ExpirationDate"] : DateTime.Now.AddDays(1).ToString("yyyy-MM-dd 00:00:00");
             string _SearchExt = queryvalues.ContainsKey("SearchExt") ? queryvalues["SearchExt"] : "";
-
             int Channels = queryvalues.ContainsKey("Channels") ? string.IsNullOrWhiteSpace(queryvalues["Channels"]) ? 0 : Convert.ToInt32(queryvalues["Channels"]) : 0;
             //Channels
             GameRecordView grv = new GameRecordView { Channels = Channels, SearchExt = _SearchExt, StartDate = _StartDate, ExpirationDate = _ExpirationDate, Page = _page, SeachType = (seachType)_seachtype };
@@ -753,9 +754,7 @@ namespace MWeb.Controllers
             {
                 return PartialView("BaiJiaLePotDotSum_PageList", GameDataBLL.GetListByPageForDotSumForBaiJiaLe(grv));
             }
-
             grv.DataList = GameDataBLL.GetListByPageForDotSumForBaiJiaLe(grv);
-
             return View(grv);
         }
 
@@ -787,6 +786,33 @@ namespace MWeb.Controllers
 
             return View(grv);
         }
+
+        /// 水浒传数据统计
+        /// </summary>
+        /// <returns></returns>
+        [QueryValues]
+        public ActionResult SerialDataSum(Dictionary<string, string> queryvalues)
+        {
+            //ScalePot
+
+            //int _RoundID = queryvalues.ContainsKey("RoundID") ? string.IsNullOrWhiteSpace(queryvalues["RoundID"]) ? 0 : Convert.ToInt32(queryvalues["RoundID"]) : 0;
+            //int _page = queryvalues.ContainsKey("page") ? Convert.ToInt32(queryvalues["page"]) : 1;
+
+            //string _StartDate = queryvalues.ContainsKey("StartDate") ? queryvalues["StartDate"] : DateTime.Now.ToString("yyyy-MM-dd 00:00:00");
+            //string _ExpirationDate = queryvalues.ContainsKey("ExpirationDate") ? queryvalues["ExpirationDate"] : DateTime.Now.AddDays(1).ToString("yyyy-MM-dd 00:00:00");
+
+            //GameRecordView grv = new GameRecordView { RoundID = _RoundID, StartDate = _StartDate, ExpirationDate = _ExpirationDate, Page = _page };
+            //if (Request.IsAjaxRequest()) //ShuihuDataSum
+            //{
+            //    return PartialView("ShuihuDataSum_PageList", GameDataBLL.GetListByPageForShuihuDataSum(grv));
+            //}
+
+            //grv.DataList = GameDataBLL.GetListByPageForShuihuDataSum(grv);
+
+            //return View(grv);
+            return View();
+        }
+
 
 
         // 
@@ -1323,7 +1349,7 @@ namespace MWeb.Controllers
                                 {
                                     Content = model.Context,
                                     Time = DateTime.Now,
-                                    GameType = gameID.中发白,
+                                    GameType = gameID.翻翻乐,
                                     Type = ctrlType.增加,
                                     Value = model.ChipPot
 
@@ -1337,7 +1363,7 @@ namespace MWeb.Controllers
                                 {
                                     Content = model.Context,
                                     Time = DateTime.Now,
-                                    GameType = gameID.中发白,
+                                    GameType = gameID.翻翻乐,
                                     Type = ctrlType.减少,
                                     Value = model.ChipPot
 

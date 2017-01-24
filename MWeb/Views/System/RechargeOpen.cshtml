@@ -1,0 +1,111 @@
+﻿@using Webdiyer.WebControls.Mvc;
+@using GL.Data.Model;
+@using GL.Data.View
+@model IEnumerable<RechargeOpen>
+
+
+    @{
+        ViewBag.Title = "RechargeOpen";
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+
+<div id="content">
+    <section id="widget-grid" class="">
+        <div class="row">
+            <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-0" data-widget-editbutton="false" data-widget-colorbutton="false"
+                     data-widget-togglebutton="false"
+                     data-widget-deletebutton="false"
+                     data-widget-fullscreenbutton="false"
+                     data-widget-custombutton="false"
+                     data-widget-collapsed="false"
+                     data-widget-sortable="false">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                        <h2>充值开关</h2>
+                    </header>
+                    <!-- widget div-->
+                    <div>
+                        <!-- widget edit box -->
+                        <div class="jarviswidget-editbox">
+                            <!-- This area used as dropdown edit box -->
+                        </div>
+                        <!-- end widget edit box -->
+                        <!-- widget content -->
+                        <div class="widget-body no-padding">
+                            <div class="table-responsive">
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>充值方式</th>
+                                            <th>充值开关</th>
+                                            <th>基本操作</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (RechargeOpen item in Model)
+                                        {
+                                            <tr class="gradeA">
+                                                <td>@item.RechargeName</td>
+                                                <td>@(item.IsOpen==true?"开":"关")</td>
+                                                <td style="text-align:center">
+                                                    @if (item.IsOpen)
+                                                    {
+                                                        <input  type="button" value="关闭" class="btn btn-danger btn-mini" onclick="return SetOpen(0,@item.RechargeID,'@item.RechargeName');" />
+                                                    }
+                                                    else
+                                                    {
+                                                        <input  type="button" value="打开" class="btn btn-warning btn-mini" onclick="return SetOpen(1,@item.RechargeID,'@item.RechargeName');" />
+                                                    }
+
+
+                                                </td>
+                                            </tr>
+                                        }
+
+
+
+
+                                    </tbody>
+                                </table>
+                            </div>
+
+
+
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+</div>
+  
+
+
+    <script type="text/javascript">
+        function SetOpen(isopen, rechargeID, rechargeName) {
+            if (confirm('确定修改' + rechargeName + '充值开关？')) {
+              
+                $.ajax({
+                    url: "/System/SetRechargeOpen/",
+                    type: "Post",
+                    dataType: "JSON",
+                    data: { "IsOpen": isopen, "RechargeID": rechargeID },
+                    success: function (data) {
+                        if (data == 1) {
+                            alert("操作成功!");
+                           
+                        }
+
+
+                      
+                        location.reload();
+
+                    }
+                })
+
+            } else {
+                return false;
+            }
+        }
+    </script>

@@ -12,5 +12,12 @@ namespace GL.Data.BLL
         {
             return DAL.NoAuthDAL.AddSMS(userid,sign);
         }
+
+        public static int UpdateRechargeSum(int hour)
+        {
+            return DAL.NoAuthDAL.UpdateRechargeSum(hour);
+        }
+
+
     }
 }

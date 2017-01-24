@@ -1841,12 +1841,26 @@ namespace MWeb.Controllers
             int Platform = queryvalues.ContainsKey("Platform") ? Convert.ToInt32(queryvalues["Platform"]) : 1;//设备
             int Channels = queryvalues.ContainsKey("Channels") ? Convert.ToInt32(queryvalues["Channels"]) : 0;//设备
             int page = queryvalues.ContainsKey("page") ? Convert.ToInt32(queryvalues["page"]) : 1;//第几页
+        
+
 
 
             LoginRegisterDataView model = new LoginRegisterDataView();
-            model.Channels = 0;
-            model.Platform = 1;
+            model.Channels = Channels;
+            model.Platform = Platform;
             model.Page = page;
+
+            StrongPushAD enti = StrongPushADBLL.GetStrongPushAD(model);
+            if (enti == null)
+            {
+                model.Url = "";
+                model.Type = -1;
+            }
+            else {
+                model.Url = enti.Url;
+                model.Type = enti.Type;
+            }
+            
 
             PagedList<StrongPushADRecord> record = StrongPushADBLL.GetStrongPushADRecord( model);
 
@@ -1855,7 +1869,101 @@ namespace MWeb.Controllers
             return View(model);
         }
 
+        [QueryValues]
+        public ActionResult AddStringPushAd(Dictionary<string, string> queryvalues) {
+            int Platform = queryvalues.ContainsKey("Platform") ? Convert.ToInt32(queryvalues["Platform"]) : 1;//设备
+            int Channels = queryvalues.ContainsKey("Channels") ? Convert.ToInt32(queryvalues["Channels"]) : 0;//设备
+            int Type = queryvalues.ContainsKey("Type") ? Convert.ToInt32(queryvalues["Type"]) : 1;//设备
+            string url = queryvalues.ContainsKey("Url") ? queryvalues["Url"] : "";//
 
+         
+            LoginRegisterDataView model = new LoginRegisterDataView();
+            model.Channels = Channels;
+            model.Platform = Platform;
+            model.Url = url;
+            model.Type = Type;
+            StrongPushAD enti = StrongPushADBLL.GetStrongPushAD(model);
+
+            int res = StrongPushADBLL.UpdateStrongPushAD(model);
+            if (res >= 1) {
+                StrongPushADRecord rec = new StrongPushADRecord()
+                {
+                    Username = User.Identity.Name,
+                    Agent = model.Channels,
+                    App = 1,
+                    CreateTime = DateTime.Now.ToString(),
+                    NewType = model.Type,
+                    NewUrl = model.Url,
+                    Plat = model.Platform,
+
+
+                };
+             
+                if (enti == null)
+                {
+                    rec.Url = "";
+                    rec.Type = -1;
+                }
+                else {
+                    rec.Url = enti.Url;
+                    rec.Type = enti.Type;
+                }
+                StrongPushADBLL.AddStrongPushADRecord(rec);
+            }
+
+
+
+            return Content(res.ToString());
+
+        }
+        [QueryValues]
+        public ActionResult GetPushAdUrlAndType(Dictionary<string, string> queryvalues) {
+            int Platform = queryvalues.ContainsKey("Platform") ? Convert.ToInt32(queryvalues["Platform"]) : 1;//设备
+            int Channels = queryvalues.ContainsKey("Channels") ? Convert.ToInt32(queryvalues["Channels"]) : 0;//设备
+         
+
+            LoginRegisterDataView model = new LoginRegisterDataView();
+            model.Channels = Channels;
+            model.Platform = Platform;
+            string res = "";
+            StrongPushAD enti = StrongPushADBLL.GetStrongPushAD(model);
+
+            if (enti == null)
+            {
+                res = ",-1";
+            }
+            else
+            {
+                res = enti.Url+ "," + enti.Type; 
+              
+            }
+            return Content(res);
+        }
+
+        [QueryValues]
+        public ActionResult RechargeOpen(Dictionary<string, string> queryvalues) {
+
+            IEnumerable<RechargeOpen> recharges = QQZoneRechargeBLL.GetRechargeOpen();
+
+            return View(recharges);
+        }
+
+        [QueryValues]
+        public ActionResult SetRechargeOpen(Dictionary<string, string> queryvalues) {
+
+            int IsOpen = queryvalues.ContainsKey("IsOpen") ? Convert.ToInt32(queryvalues["IsOpen"]) : 0;//设备
+            int RechargeID = queryvalues.ContainsKey("RechargeID") ? Convert.ToInt32(queryvalues["RechargeID"]) : -1;//设备
+
+
+            int i = QQZoneRechargeBLL.SetRechargeOpen(new GL.Data.Model.RechargeOpen
+            {
+                IsOpen = IsOpen >= 1,
+                RechargeID = RechargeID
+            });
+
+
+            return Content(i.ToString());
+        }
     }
 
 }

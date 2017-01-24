@@ -99,13 +99,26 @@
                  double d = 0;
                  if (oper == "减少")
                  {
-                     string b = m.UpdateValue.Trim('_').Trim('+');
-                     d = Convert.ToDouble(b) * -1;
+                     try
+                     {
+                         string b = m.UpdateValue.Trim('_').Trim('+');
+                         d = Convert.ToDouble(b) * -1;
+                     }
+                     catch {
+                         d = 0;
+                     }
                  }
                  else
                  {
-                     string b = m.UpdateValue.Trim('_').Trim('+');
-                     d = Convert.ToDouble(b);
+                     try
+                     {
+                         string b = m.UpdateValue.Trim('_').Trim('+');
+                         d = Convert.ToDouble(b);
+                     }
+                     catch {
+                         d = 0;
+                     }
+
                  }
                  <span>值:@d</span>
              }

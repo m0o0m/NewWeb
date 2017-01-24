@@ -176,8 +176,8 @@ order by t.Group asc, t.OrderIndex  desc
 
                 cn.Open();
                 IEnumerable<Resource> i = cn.Query<Resource>(@"
-select Name from aspnetresource where Type=1 and mark not in (
-select c.mark from AspNetUserRoles as a ,aspnetauthority as b,aspnetresource as c
+select Name from AspNetResource where Type=1 and mark not in (
+select c.mark from AspNetUserRoles as a ,AspNetAuthority as b,AspNetResource as c
 where a.UserId = @userid and a.RoleId = b.Id and b.ResourceNo = c.`No` and c.mark !=''
 )
 

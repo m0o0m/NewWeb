@@ -24,6 +24,9 @@
     <File Include="bin/Antlr3.Runtime.pdb">
       <publishTime>09/19/2016 14:18:25</publishTime>
     </File>
+    <File Include="bin/AopSdk.dll">
+      <publishTime>01/09/2017 19:19:39</publishTime>
+    </File>
     <File Include="bin/App_Data/IAPProduct.xml">
       <publishTime>09/19/2016 14:15:33</publishTime>
     </File>
@@ -34,28 +37,28 @@
       <publishTime>09/19/2016 14:20:18</publishTime>
     </File>
     <File Include="bin/GL.Common.dll">
-      <publishTime>12/19/2016 16:20:36</publishTime>
+      <publishTime>01/16/2017 18:13:29</publishTime>
     </File>
     <File Include="bin/GL.Common.pdb">
-      <publishTime>11/09/2016 15:10:50</publishTime>
+      <publishTime>01/04/2017 15:44:14</publishTime>
     </File>
     <File Include="bin/GL.Dapper.dll">
-      <publishTime>12/19/2016 16:20:37</publishTime>
+      <publishTime>01/16/2017 18:13:29</publishTime>
     </File>
     <File Include="bin/GL.Dapper.pdb">
-      <publishTime>11/15/2016 10:27:42</publishTime>
+      <publishTime>01/04/2017 15:44:14</publishTime>
     </File>
     <File Include="bin/GL.Pay.Data.dll">
-      <publishTime>12/23/2016 11:19:23</publishTime>
+      <publishTime>01/19/2017 17:28:55</publishTime>
     </File>
     <File Include="bin/GL.Pay.Data.pdb">
-      <publishTime>11/18/2016 18:11:36</publishTime>
+      <publishTime>01/04/2017 15:44:16</publishTime>
     </File>
     <File Include="bin/GL.Pay.dll">
-      <publishTime>12/23/2016 11:19:22</publishTime>
+      <publishTime>01/19/2017 17:28:54</publishTime>
     </File>
     <File Include="bin/GL.Pay.pdb">
-      <publishTime>11/09/2016 15:10:52</publishTime>
+      <publishTime>01/10/2017 20:31:56</publishTime>
     </File>
     <File Include="bin/Google.ProtocolBuffers.dll">
       <publishTime>09/19/2016 14:18:50</publishTime>
@@ -100,25 +103,25 @@
       <publishTime>09/19/2016 14:19:10</publishTime>
     </File>
     <File Include="bin/Web.Pay.dll">
-      <publishTime>12/23/2016 12:23:44</publishTime>
+      <publishTime>01/19/2017 17:28:56</publishTime>
     </File>
     <File Include="bin/Web.Pay.pdb">
-      <publishTime>11/18/2016 18:11:38</publishTime>
+      <publishTime>01/10/2017 20:31:57</publishTime>
     </File>
     <File Include="bin/Webdiyer.MvcPager.dll">
-      <publishTime>12/20/2016 14:14:19</publishTime>
+      <publishTime>01/16/2017 18:13:29</publishTime>
     </File>
     <File Include="bin/Webdiyer.MvcPager.pdb">
-      <publishTime>11/10/2016 15:46:09</publishTime>
+      <publishTime>01/04/2017 15:44:14</publishTime>
     </File>
     <File Include="bin/WebGrease.dll">
       <publishTime>09/19/2016 14:20:11</publishTime>
     </File>
     <File Include="bin/zh-CHS/Webdiyer.MvcPager.resources.dll">
-      <publishTime>12/20/2016 14:14:19</publishTime>
+      <publishTime>01/16/2017 18:13:29</publishTime>
     </File>
     <File Include="bin/zh-CHT/Webdiyer.MvcPager.resources.dll">
-      <publishTime>12/20/2016 14:14:19</publishTime>
+      <publishTime>01/16/2017 18:13:29</publishTime>
     </File>
     <File Include="bin/zh-Hans/System.Web.Helpers.resources.dll">
       <publishTime>09/19/2016 14:19:10</publishTime>
@@ -307,7 +310,7 @@
       <publishTime>09/19/2016 14:15:36</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>11/30/2016 12:37:39</publishTime>
+      <publishTime>01/11/2017 15:46:40</publishTime>
     </File>
   </ItemGroup>
 </Project>

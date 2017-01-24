@@ -345,5 +345,69 @@ GROUP BY t1.CreateTime;
         }
 
 
+        public static IEnumerable<RechargeOpen> GetRechargeOpen()
+        {
+            using (var cn = new MySqlConnection(sqlconnectionString))
+            {
+                cn.Open();
+
+                StringBuilder str = new StringBuilder();
+
+                //str.Append("SELECT DATE_FORMAT(curdate(), '%Y-%m-%d') as date, a.count as count, b.count as activeuser FROM (SELECT count(0) as count FROM Role where Gold > 10) as a, (SELECT count(0) as count FROM Role where Gold <= 10) as b;");
+                str.AppendFormat(@" select * from "+database1+".RechargeOpen ");
+
+                IEnumerable<RechargeOpen> i = cn.Query<RechargeOpen>(str.ToString(), new { });
+
+
+                cn.Close();
+                return i;
+            }
+        }
+
+
+        public static int SetRechargeOpen(RechargeOpen model)
+        {
+            using (var cn = new MySqlConnection(sqlconnectionString))
+            {
+                cn.Open();
+
+                StringBuilder str = new StringBuilder();
+
+                //str.Append("SELECT DATE_FORMAT(curdate(), '%Y-%m-%d') as date, a.count as count, b.count as activeuser FROM (SELECT count(0) as count FROM Role where Gold > 10) as a, (SELECT count(0) as count FROM Role where Gold <= 10) as b;");
+                str.AppendFormat(@" update "+ database1 + ".RechargeOpen set IsOpen=@IsOpen  where RechargeID=@RechargeID  ");
+
+                int i = cn.Execute(str.ToString(), model);
+
+
+                cn.Close();
+                return i;
+            }
+        }
+
+
+        public static RechargeOpen GetRechargeOpen(int rechargeID)
+        {
+            using (var cn = new MySqlConnection(sqlconnectionString))
+            {
+                cn.Open();
+
+                StringBuilder str = new StringBuilder();
+
+                //str.Append("SELECT DATE_FORMAT(curdate(), '%Y-%m-%d') as date, a.count as count, b.count as activeuser FROM (SELECT count(0) as count FROM Role where Gold > 10) as a, (SELECT count(0) as count FROM Role where Gold <= 10) as b;");
+                str.AppendFormat(@" select * from  RechargeOpen where RechargeID=@RechargeID ");
+
+                IEnumerable<RechargeOpen> i = cn.Query<RechargeOpen>(str.ToString(), new { RechargeID = rechargeID });
+
+                cn.Close();
+
+              
+
+                return i.FirstOrDefault();
+            }
+        }
+
+
+
+
     }
 }

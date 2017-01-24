@@ -223,5 +223,26 @@ where " + myWhere + "{4} order by q.CreateTime desc limit {2}, {3}",
         }
 
 
+        public static IEnumerable<RechargeOpen> GetRechargeOpen() {
+            return DAL.QQZoneRechargeDAL.GetRechargeOpen();
+        }
+
+        public static int  SetRechargeOpen(RechargeOpen model)
+        {
+            return DAL.QQZoneRechargeDAL.SetRechargeOpen(model);
+        }
+
+
+        public static bool GetRechargeOpen(int rechargeID)
+        {
+            RechargeOpen model = DAL.QQZoneRechargeDAL.GetRechargeOpen(rechargeID);
+            if (model == null)
+            {
+                return false;
+            }
+            else {
+                return model.IsOpen;
+            }
+        }
     }
 }

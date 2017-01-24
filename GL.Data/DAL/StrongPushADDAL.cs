@@ -37,5 +37,86 @@ select * from "+database3+@".strongpushadrecord ORDER BY CreateTime DESC;
             }
         }
 
+        public static int UpdateStrongPushAD(LoginRegisterDataView model)
+        {
+            using (var cn = new MySqlConnection(sqlconnectionString))
+            {
+                cn.Open();
+
+                int i = cn.Execute(@"Update "+ database3 + @".strongpushad set Url = @Url,Type=@Type where Plat = @Plat and Agent = @Agent ", new
+                {
+                    Url = model.Url,
+                    Plat = model.Platform,
+                    Agent = model.Channels,
+                    Type = model.Type
+                });
+
+                cn.Close();
+
+                return i;
+            }
+        }
+        public static int AddStrongPushADRecord(StrongPushADRecord model)
+        {
+            using (var cn = new MySqlConnection(sqlconnectionString))
+            {
+                cn.Open();
+
+                int i = cn.Execute(@"insert into " + database3 + @".strongpushadrecord(Plat,Agent,Url,NewUrl,Type,NewType,CreateTime,Username) values (@Plat,@Agent,@Url,@NewUrl,@Type,@NewType,'" + DateTime.Now + @"',@Username)", new
+                {
+                    Plat = model.Plat,
+                    Agent = model.Agent,
+                    NewUrl = model.NewUrl,
+                    Url = model.Url,
+                      Type = model.Type,
+                      NewType = model.NewType,
+                    Username = model.Username
+                });
+
+                cn.Close();
+
+                return i;
+            }
+        }
+        public static int AddStrongPushAD(LoginRegisterDataView model)
+        {
+            using (var cn = new MySqlConnection(sqlconnectionString))
+            {
+                cn.Open();
+
+                int i = cn.Execute(@"insert into "+ database3 + @".strongpushad(Plat,Agent,Url,Type,CreateTime) values (@Plat,@Agent,@Url,@Type,'" + DateTime.Now + @"')", new {
+                    Plat = model.Platform,
+                    Agent = model.Channels,
+                    Url = model.Url,
+                    Type = model.Type
+                });
+
+                cn.Close();
+
+                return i;
+            }
+        }
+        public static StrongPushAD GetStrongPushAD(LoginRegisterDataView model)
+        {
+            using (var cn = new MySqlConnection(sqlconnectionString))
+            {
+                StringBuilder str = new StringBuilder();
+           
+                str.AppendFormat(@"
+select * from " + database3 + @".strongpushad 
+where Plat = @Plat and Agent = @Agent
+ORDER BY CreateTime DESC;
+                ");
+
+                IEnumerable<StrongPushAD> i = cn.Query<StrongPushAD>(str.ToString(), new {
+                    Plat = model.Platform,
+                    Agent = model.Channels
+                });
+                cn.Close();
+                return i.FirstOrDefault();
+            }
+        }
+
+
     }
 }

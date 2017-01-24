@@ -1308,8 +1308,6 @@ namespace MWeb.Controllers
             switch ((CenterCmd)tbind.header.CommandID)
             {
                 case CenterCmd.CS_FREEZE_USER:
-
-                 
                     Service_Freeze_S ServiceFreezeS = Service_Freeze_S.ParseFrom(tbind.body.ToBytes());
                     bool res = ServiceFreezeS.Suc;
 

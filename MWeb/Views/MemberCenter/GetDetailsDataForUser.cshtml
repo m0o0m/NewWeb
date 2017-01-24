@@ -1,0 +1,118 @@
+﻿@using Webdiyer.WebControls.Mvc;
+@using GL.Data.Model;
+@model UserRecord
+@{
+    ViewBag.Title = "GetDetailsDataForUser";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="content">
+    <form id="comment-form" class="smart-form" novalidate="novalidate">
+        <div class="row">
+            <section class="col col-1.2">
+                <label class="label">会员ID</label>
+                <label class="input">
+                    @Html.TextBox("Value", ViewData["Value"], new { @class = "span2", style = "border-radius:4px" })
+                </label>
+            </section>
+            <section class="col col-1">
+                <label class="label">&nbsp;</label>
+                <button type="submit" class="btn btn-success btn-sm">查询</button>
+            </section>
+
+        </div>
+    </form>
+    <div class="row">
+
+
+
+
+
+    </div>
+    <section id="widget-grid" class="">
+        <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-0"
+             data-widget-editbutton="false" data-widget-colorbutton="false" data-widget-togglebutton="false" data-widget-deletebutton="false"
+             data-widget-fullscreenbutton="false" data-widget-custombutton="false" data-widget-collapsed="false" data-widget-sortable="false"
+             style="">
+            @if (Model == null)
+            {
+                <header>
+                    <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                </header>
+                <table class="table table-bordered">
+                    <tr><td align="center">没有找到相关记录！</td></tr>
+                </table>
+            }
+
+            <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-0"
+                 data-widget-editbutton="false" data-widget-colorbutton="false" data-widget-togglebutton="false" data-widget-deletebutton="false"
+                 data-widget-fullscreenbutton="false" data-widget-custombutton="false" data-widget-collapsed="false" data-widget-sortable="false"
+                 style="">
+                <header role="heading">
+                    <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                    <h2>基础信息</h2>
+                </header>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>游戏</th>
+                            <th>盈利</th>
+                            <th>亏损</th>
+                            <th>做庄盈亏</th>
+                            <th>单机游戏统计</th>
+                            <th> 牌局查询</th>
+                            <th>综合</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>德州扑克</td>
+                            <td>@Model.TexasWin</td>
+                            <td>@Model.TexasLost</td>
+                            <td>@Model.TexasZyk</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>中发白</td>
+                            <td>@Model.ScaleWin</td>
+                            <td>@Model.ScaleLost</td>
+                            <td>@Model.ScaleZyk</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>十二生肖</td>
+                            <td>@Model.ZodiacWin</td>
+                            <td>@Model.ZodiacLost</td>
+                            <td>@Model.ZodiacZyk</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td> 奔驰宝马</td>
+                            <td>@Model.CarWin</td>
+                            <td>@Model.CarLost</td>
+                            <td>@Model.CarZyk</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>百人德州</td>
+                            <td>@Model.HundredWin</td>
+                            <td>@Model.HundredLost</td>
+                            <td>@Model.HundredZyk</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                      </tbody>
+                </table>
+            </div>
+
+        </div>
+    </section>
+</div>

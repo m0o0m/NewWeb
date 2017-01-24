@@ -142,6 +142,7 @@ else if (Model.SearchExt == "2")
                                             <th>昵称</th>
                                             <th>真实名字</th>
                                             <th>注册时间</th>
+                                            <th>渠道</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -157,11 +158,12 @@ else if (Model.SearchExt == "2")
                                         @foreach (Role r in bdl2)
                                         {
                                             <tr>
-                                                <td>@r.ID</td>
+                                                <td><a target="_blank" href="/Manage/MemberManage?Value=@r.ID">@r.ID</a></td>
                                                 <td>@r.Account</td>
                                                 <td>@r.NickName</td>
                                                 <td>@r.TrueName</td>
                                                 <td>@r.CreateTime</td>
+                                                <td>@r.AgentName</td>
                                             </tr>
                                         }
 

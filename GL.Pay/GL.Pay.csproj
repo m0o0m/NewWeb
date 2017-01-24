@@ -50,6 +50,10 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AopSdk, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Lib\AopSdk.dll</HintPath>
+    </Reference>
     <Reference Include="BouncyCastle.Crypto">
       <HintPath>..\packages\netjavarts\BouncyCastle.Crypto.dll</HintPath>
     </Reference>
@@ -121,6 +125,7 @@
     <Compile Include="AliPay\AlipayConfig.cs" />
     <Compile Include="AliPay\AlipayCore.cs" />
     <Compile Include="AliPay\AlipayNotify.cs" />
+    <Compile Include="AliPay\AlipayOrder.cs" />
     <Compile Include="AliPay\RSA.cs" />
     <Compile Include="AppStore\AppleHttpRequest.cs" />
     <Compile Include="AppStore\Converters\AppleDateTimeConverter.cs" />
@@ -208,7 +213,10 @@
       <Name>GL.Common</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Lib\AopSdk.dll" />
+    <Content Include="Lib\AopSdk.pdb" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

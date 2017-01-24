@@ -10,115 +10,127 @@
     <form id="comment-form" class="smart-form" novalidate="novalidate">
         <div class="row">
             <div class="widget-body">
-                <div class="row">
-                    <section class="col col-12" style="width:210px;padding-top:5px">
-                        <label>系统选择</label>
-                        <label class="select">
-                            @Html.DropDownListFor(m => m.Platform, new List<SelectListItem>
+                <section class="col col-12">
+                    <div class="row">
+                        <section class="col col-12" style="width:210px;padding-top:5px">
+                            <label>系统选择</label>
+                            <label class="select">
+                                @Html.DropDownListFor(m => m.Platform, new List<SelectListItem>
                             {
                                 new SelectListItem { Text= "Android", Value = "1" },
                                 new SelectListItem { Text= "IOS", Value = "2" }
                             })<i></i>
-                        </label>
-                    </section>
-                    <section class="col col-12" style="width:210px;padding-top:5px">
-                        <label>渠道</label>
-                        <label class="select">
-                            @Html.GetAllAgentGroupList("Channels", Model.Channels)
-                            <i></i>
-                        </label>
-                    </section>
+                            </label>
+                        </section>
+                        <section class="col col-12" style="width:210px;padding-top:5px">
+                            <label>渠道</label>
+                            <label class="select">
+                                @Html.GetAllAgentGroupList("Channels", Model.Channels)
+                                <i></i>
+                            </label>
+                        </section>
 
-                </div>
-             
+                    </div>
 
 
-                <div class="row">
-                    <section class="col col-12">
-                        <label class="label">当前URL地址</label>
-                        <label class="input">
-                            @Html.TextBox("Value", "", new { @class = "span2", style = "border-radius:4px" })
-                        </label>
-                    </section>
-                </div>
-              
-                <div class="row">
-                    <section class="col col-12">
-                        <label class="label">请输入新的URL地址</label>
-                        <label class="input">
-                            @Html.TextBox("Value", "", new { @class = "span2", style = "border-radius:4px" })
-                        </label>
-                    </section>
-                </div>
 
-               
-             
+                    <div class="row">
+                        <section class="col col-12">
+                            <label class="label">当前URL地址</label>
+                            <label class="input">
+                                @Html.TextBox("Value", Model.Url, new { @class = "span2", style = "border-radius:4px" })
+                            </label>
+                        </section>
+                    </div>
 
-                <section class="col col-1">
+                    <div class="row">
+                        <section class="col col-12">
+                            <label class="label">请输入新的URL地址</label>
+                            <label class="input">
+                                @Html.TextBox("Url", "", new { @class = "span2", style = "border-radius:4px" })
+                            </label>
+                        </section>
+                    </div>
+
+
+
+
+
+
+                    <div class="row">
+                        <div class="col col-1.5">
+                            @if (Model.Type == 1)
+                            {
+                                <label class="radio state-error"><input checked="checked" value="1" mark2="1" mark="0" type="radio" name="Type"><i></i>每次打开弹出</label>
+                            }
+                            else
+                            {
+                                <label class="radio state-error"><input  value="1" mark2="1" mark="0" type="radio" name="Type"><i></i>每次打开弹出</label>
+                            }
+                            @if (Model.Type == 2)
+                            {
+                                <label class="radio state-error"><input checked="checked" value="2" mark2="1" mark="0" type="radio" name="Type"><i></i>每天首次打开弹出</label>
+                            }
+                            else
+                            {
+                                <label class="radio state-error"><input value="2" mark2="1" mark="0" type="radio" name="Type"><i></i>每天首次打开弹出</label>
+                            }
+
+
+                          
+                        </div>
+
+                    </div>
+
+
+                    <section class="col col-1">
                         <label class="label">&nbsp;</label>
-                        <input type="button" onclick="search()" class="btn btn-success btn-sm" value="确定" />
+                        <input type="button" onclick="addData()" class="btn btn-success btn-sm" value="确定" />
+                    </section>
                 </section>
-            </div>
-        </div>
+             
+                            </div>
+                        </div>
 
-    </form>
+</form>
 
     @Html.Partial("UpdateStringPushAd_PageList", Model.Data)
 
 </div>
 
 
+
+
+
+@section scripts{
+    @{Html.RegisterMvcPagerScriptResource();}
+   
 <script type="text/javascript">
-    function changeJX() {
-        var pp = $("#PhoneBoard").val();
-        $.ajax({
-            url: "/System/GetModel/",
-            type: "POST",
-            data: { "id": pp },
-            success: function (data) {
-                $("#PhoneModels").empty();
-                $("#PhoneModels").append(data);
-            }
-        });
-    }
 
-    function btnDelete(id) {
-        $.ajax({
-            url: "/System/MobileLoginRegisterDelete/",
-            type: "POST",
-            data: { "id": id },
-            success: function (data) {
-                if (data == "1") {
-                    alert("删除成功!");
-
-                    location.reload();
-                } else {
-                    alert("删除失败，请重新尝试!");
-                }
-            }
-        });
-    }
     //平台，渠道，品牌，登录关闭类型，注册关闭类型，手机型号
-    function btnAdd(loginType,RegisterType) {
+    function addData(loginType, RegisterType) {
 
-        var device = $("#Platform").val();
-        var agent = $("#Channels").val();
-        var brand = $("#PhoneBoard").val();
-        var mobileModel = $("#PhoneModels").val();
-        if (agent <= 0) {
-            agent = -1;
+        var Platform = $("#Platform").val();
+        var Channels = $("#Channels").val();
+        var Url = $("#Url").val();
+        var $selectedvalue = $("input[name=Type]:checked").val();
+        if (Channels <= 0) {
+            return;
+        }
+        if ($selectedvalue <= 0) {
+            return;
         }
 
 
         $.ajax({
-            url: "/System/MobileLoginRegisterAdd/",
-            type: "POST",
-            data: { "device": device, "agent": agent, "brand": brand, "loginType": loginType, "RegisterType": RegisterType, "mobileModel": mobileModel },
+            url: "/System/AddStringPushAd/",
+            type: "GET",
+            data: { "Platform": Platform, "Channels": Channels, "Url": Url, "Type": $selectedvalue },
             success: function (data) {
                 if (data == "1") {
                     alert("操作成功!");
+                    window.location.href = "/System/UpdateStringPushAd?Channels=" + Channels + "&Platform=" + Platform;
 
-                    location.reload();
                 } else {
                     alert("操作失败，请重新尝试!");
                 }
@@ -126,5 +138,34 @@
         });
     }
 
+    $(function () {
+        $("#Platform").change(function () {
+           changeData();
+        });
+
+        $("#Channels").change(function () {
+            changeData();
+        });
+    })
+
+    function changeData() {
+        var Platform = $('#Platform option:selected').val()
+        var Channels = $('#Channels option:selected').val()
+    
+        window.location.href = "/System/UpdateStringPushAd?Channels=" + Channels + "&Platform=" + Platform;
+
+        //获取旧的url和旧的类型  GetPushAdUrlAndType
+
+        //$.ajax({
+        //    url: "/System/GetPushAdUrlAndType/",
+        //    type: "GET",
+        //    data: { "Platform": Platform, "Channels": Channels },
+        //    success: function (data) {
+        //        alert(data);
+        //    }
+        //});
+
+    }
 
 </script>
+}

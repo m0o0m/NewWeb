@@ -35,6 +35,18 @@ namespace GL.Data.Model
 
         public DateTime CreateTime { get; set; }
 
+        /// <summary>
+        /// 下载人数
+        /// </summary>
+        public int DownCount { get; set; }
+        /// <summary>
+        /// 点击下载次数
+        /// </summary>
+        public int ClickDown { get; set; }
+        /// <summary>
+        /// 下载成功次数
+        /// </summary>
+        public int SuccessDown { get; set; }
     }
 
     public enum ClientType {

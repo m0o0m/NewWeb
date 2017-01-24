@@ -22,7 +22,7 @@ using System.Web;
 using System.Web.Http;
 using System.Web.Mvc;
 using System.Net.Mail;
-
+ using Qcloud.Sms;
 namespace MWeb.Controllers
 {
     //localhost:24276/NoAuth/FreezeNo?dwUserID=1001&Reason=1
@@ -379,6 +379,64 @@ namespace MWeb.Controllers
         }
 
 
+        [QueryValues]
+        public ActionResult SendMobile_RechargeSum(Dictionary<string, string> queryvalues) {
+          
+            string Hour = queryvalues.ContainsKey("Hour") ? queryvalues["Hour"] : string.Empty;
+            string HourInter = queryvalues.ContainsKey("HourInter") ? queryvalues["HourInter"] : "10";
+            string Money = queryvalues.ContainsKey("Money") ? queryvalues["Money"] : "0";
+            string Limit = queryvalues.ContainsKey("Limit") ? queryvalues["Limit"] :"0";
+            // 请根据实际 appid 和 appkey 进行开发，以下只作为演示 sdk 使用
+
+            log.Info("充值统计接受参数Hour" + Hour + ",Money" + Money + ",Limit" + Limit);
+
+            int sdkappid = 1400023585;
+            string appkey = "aa51e0fe315f7873094779bda1d715b8";
+  
+         
+            int tmplId = 9048;
+            try
+            {
+                SmsSingleSender singleSender = new SmsSingleSender(sdkappid, appkey);
+
+                List<string> templParams = new List<string>();
+
+                SmsMultiSenderResult multiResult;
+                SmsMultiSender multiSender = new SmsMultiSender(sdkappid, appkey);
+                //List<string> phoneNumbers = new List<string>() {
+                //    "15918716259"
+                //};
+                List<string> phoneNumbers = new List<string>() {
+                    "13923666964","13760368110","13651452358","13058199330",
+                    "15019431331","13829601181","13651452358"
+                };
+                // 指定模板群发
+                // 假设短信模板内容为：测试短信，{1}，{2}，{3}，上学。
+                templParams.Clear();
+                templParams.Add(HourInter);
+                templParams.Add(Money);
+                templParams.Add(Limit);
+                multiResult = multiSender.SendWithParam("86", phoneNumbers, tmplId, templParams, "", "", "");
+
+                log.Info("multiResult:" + multiResult.result);
+
+
+               int res =  NoAuthBLL.UpdateRechargeSum( Convert.ToInt32(Hour));
+
+                log.Info("res:" + res);
+
+
+                return Content("1");
+            }
+            catch (Exception e)
+            {
+                log.Info("充值统计接口错误" + e.Message);
+                return Content("0");
+            }
+        
+        }
+
+
 
         [QueryValues] 
         public ActionResult ValidateNameNO(Dictionary<string, string> queryvalues)
@@ -663,6 +721,79 @@ select * from Clearing_Game where UserID = " + comdata.UserID + @" and CountDate
         {
 
             return View();
+
+        }
+
+
+        [QueryValues]
+        public ActionResult GetStrongPushAD(Dictionary<string, string> queryvalues) {
+
+            int Platform = queryvalues.ContainsKey("Platform") ? Convert.ToInt32(queryvalues["Platform"]) : 1;//设备
+            int Channels = queryvalues.ContainsKey("Channels") ? Convert.ToInt32(queryvalues["Channels"]) : 0;//设备
+
+            LoginRegisterDataView model = new LoginRegisterDataView();
+            model.Channels = Channels;
+            model.Platform = Platform;
+            bool Mark = false;
+            Bind tbind = Cmd.runClient(new Bind(ServiceCmd.SC_QUERY_SERVERSTATUS, new byte[0] { }));
+
+            switch ((CenterCmd)tbind.header.CommandID)
+            {
+                case CenterCmd.CS_QUERY_SERVERSTATUS:
+                    {
+                        Service_Query_ServerStatus_S ServiceQueryServerStatusS = Service_Query_ServerStatus_S.ParseFrom(tbind.body.ToBytes());
+
+                        if (ServiceQueryServerStatusS.Close == true) {
+                            Mark = true;
+                        }
+
+                    }
+                    break;
+                case CenterCmd.CS_CONNECT_ERROR:
+                    Mark = true;
+                    break;
+            }
+
+
+            if (Mark == true)
+            {
+                StrongPushAD enti = StrongPushADBLL.GetStrongPushAD(model);
+                if (enti == null)
+                {
+                    model.Url = "";
+                    model.Type = -1;
+
+                    return Json(new
+                    {
+                        ret = 0,
+                        Url = "",
+                        Type = -1,
+                    }, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    return Json(new
+                    {
+                        ret = 1,
+                        Url = enti.Url,
+                        Type = enti.Type,
+                    }, JsonRequestBehavior.AllowGet);
+
+                }
+
+            }
+            else {
+                return Json(new
+                {
+                    ret = 0,
+                    Url = "",
+                    Type = -1,
+                }, JsonRequestBehavior.AllowGet);
+            }
+
+
+
+
 
         }
 

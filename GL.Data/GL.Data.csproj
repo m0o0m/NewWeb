@@ -126,6 +126,7 @@
     <Compile Include="BLL\FruitGameBLL.cs" />
     <Compile Include="BLL\IPWhiteListBLL.cs" />
     <Compile Include="BLL\LoginRecordBLL.cs" />
+    <Compile Include="BLL\MemberCenterBLL.cs" />
     <Compile Include="BLL\NoAuthBLL.cs" />
     <Compile Include="BLL\OperLogBLL.cs" />
     <Compile Include="BLL\QQZoneBLL.cs" />
@@ -143,6 +144,7 @@
     <Compile Include="DAL\DaiLiDAL.cs" />
     <Compile Include="DAL\FruitGameDAL.cs" />
     <Compile Include="DAL\IPWhiteListDAL.cs" />
+    <Compile Include="DAL\MemberCenterDAL.cs" />
     <Compile Include="DAL\NoAuthDAL.cs" />
     <Compile Include="DAL\OperLogDAL.cs" />
     <Compile Include="DAL\QQZoneDAL.cs" />
@@ -209,6 +211,7 @@
     <Compile Include="Model\ThanksGiving.cs" />
     <Compile Include="Model\Time.cs" />
     <Compile Include="Model\UserLimit.cs" />
+    <Compile Include="Model\UserRecord.cs" />
     <Compile Include="Model\UserStock.cs" />
     <Compile Include="Model\VersionData.cs" />
     <Compile Include="Model\VersionSum.cs" />

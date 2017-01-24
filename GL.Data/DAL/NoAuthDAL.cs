@@ -31,5 +31,20 @@ namespace GL.Data.DAL
 
         }
 
+
+        public static int UpdateRechargeSum( int hour)
+        {
+            using (var cn = new MySqlConnection(sqlconnectionString))
+            {
+                cn.Open();
+                int i = cn.Execute(@"update RechargeSum set SendNum = 1 where `Hour` = @hour ",new  {
+                 
+                    hour = hour
+                });
+                cn.Close();
+                return i;
+            }
+        }
+
     }
 }

@@ -37,8 +37,8 @@ public static class TaskAction
 
 
 
-            Thread t2 = new Thread(new ThreadStart(TaskAction.SetContentShuihu));
-            t2.Start();
+            //Thread t2 = new Thread(new ThreadStart(TaskAction.SetContentShuihu));
+            //t2.Start();
 
 
         }
@@ -55,7 +55,7 @@ public static class TaskAction
     /// <param name="e"></param>
     public static void SetContent()
     {
-        //   ILog log = LogManager.GetLogger("TaskAction");
+         ILog log = LogManager.GetLogger("TaskAction");
         // log.Info("牌局解析:进入SetContent方法" + DateTime.Now.ToString());
 
 
@@ -68,26 +68,33 @@ public static class TaskAction
             try
             {
                 DateTime endTime = GetDataBaseTime();
-                // //德州扑克数据解析
-                TexasGameLog(endTime);
+                log.Info("开始德州扑克");
+                  // //德州扑克数据解析
+                  TexasGameLog(endTime);
+                log.Info("开始中发白");
                 // 中发白数据解析
                 ScaleGameLog(endTime);
+                log.Info("开始十二生肖数据解析");
                 //十二生肖数据解析
                 ZodiacGameLog(endTime);
+                log.Info("开始小马快跑数据解析");
                 //小马快跑数据解析
                 HorseGameLog(endTime);
+                log.Info("开始奔驰宝马数据解析");
                 //奔驰宝马数据解析
                 CarGameLog(endTime);
+                log.Info("开始百人德州扑克数据解析");
                 //百人德州扑克数据解析
                 TexProGameLog(endTime);
                 //水浒传数据解析
-                ShuihuGameLog(endTime);
+                //  ShuihuGameLog(endTime);
+                log.Info("开始百家乐数据解析");
                 //百家乐数据解析
                 BaiJiaLeGameLog(endTime);
                 //水果机数据解析
-                ShuiguojiGameLog(endTime);
+              //  ShuiguojiGameLog(endTime);
                 //连环夺宝
-                SerialGameLog(endTime);
+               // SerialGameLog(endTime);
             }
             catch
             {
@@ -110,6 +117,7 @@ public static class TaskAction
             //Thread.Sleep(j * 60 * 1000);
 
             //  log.Info("牌局解析:PaiJuAfter" + DateTime.Now.ToString());
+            log.Info("开始PaiJuAfter解析");
             SystemPayBLL.PaiJuAfter();
             //  log.Info("牌局解析:PaiJuAfter" + DateTime.Now.ToString());
 

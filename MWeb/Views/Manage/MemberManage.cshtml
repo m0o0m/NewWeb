@@ -269,7 +269,7 @@
                                 <th>过期礼物数量</th><th>@Model.GiftExpire</th>
                                 <th>道具数量</th><th>@Model.ItemCount <input type="button" style="float:right;" value="查询" onclick="return GotoUserItem(@Model.ID);" /></th>
                             </tr>
-                            <tr>
+                            @*<tr>
                                 <th>德州局数(胜负)</th><th>@Model.GameInfo15.dwWin/@{var re1 = Model.GameInfo15.dwTotal - Model.GameInfo15.dwWin;}@re1</th>
                                 <th>德州胜率</th>
                                 @if (Model.GameInfo15.dwTotal == 0){
@@ -278,8 +278,8 @@
                                     <th>@{var winRate = Model.GameInfo15.dwWin * 100 / Model.GameInfo15.dwTotal;}@winRate%</th>
                                 }                                    
                                 <th>德州一把最高赢取</th><th>@Model.GameInfo15.maxWinChip</th>
-                            </tr>
-                            <tr>
+                            </tr>*@
+                            @*<tr>
                                 <th>中发白局数(胜负)</th><th>@Model.GameInfo13.dwWin/@{var re2 = Model.GameInfo13.dwTotal - Model.GameInfo13.dwWin;}@re2</th>
                                 <th>中发白胜率</th>
                                 @if (Model.GameInfo13.dwTotal == 0){
@@ -298,7 +298,7 @@
                                     <th>@{var winRate = Model.GameInfo14.dwWin * 100 / Model.GameInfo14.dwTotal;}@winRate%</th>
                                 }
                                 <th>十二生肖一把最高赢取</th><th>@Model.GameInfo14.maxWinChip</th>
-                            </tr>
+                            </tr>*@
                     </table>
                 </div>
             }

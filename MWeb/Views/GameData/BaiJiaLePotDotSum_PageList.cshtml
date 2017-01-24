@@ -35,6 +35,9 @@
                                     <tr>
                                         <th>客户端</th>
                                         @*<th>每日活跃</th>*@
+                                        <th>点击下载人数</th>
+                                        <th>点击下载次数</th>
+                                        <th>下载成功次数</th>
                                         <th>进入澳门扑克人数</th>
                                         <th>进入澳门扑克次数</th>
                                         <th>打开澳门扑克人数</th>
@@ -44,26 +47,35 @@
                                 </thead>
                                 <tbody>
                                     @if (Model.Count == 0)
-            {
+                                    {
                                         <tr class="gradeX">
                                             <td class="colspan" align="center" colspan="0">
                                                 没有找到相关记录！
                                             </td>
                                         </tr>
                                     }
-                                    @foreach (DotSum m in Model)
-                                    {
-                                        <tr>
-                                            <td>@m.ClientType.ToString()</td>
-                                            @*<td>@m.Active</td>*@
-                                            <td>@m.ZFBNum</td>
-                                            <td>@m.ZFBCount</td>
-                                            <td>@m.ClickNum</td>
-                                            <td>@m.ClickCount</td>
-                                            <td>@m.CreateTime</td>
-                                        </tr>
 
+                                    @{
+                                        int i = 1;
+                                        foreach (DotSum m in Model)
+                                        {
+                                            int b = i % 3 == 0 ? 3 : i % 3;
+                                            <tr>
+                                                <td>@m.ClientType.ToString()</td>
+                                                @*<td>@m.Active</td>*@
+                                                <td>@GameDataBLL.GetDownCountForBaijiale(1, b, m.CreateTime)</td>
+                                                <td>@GameDataBLL.GetDownCountForBaijiale(2, b, m.CreateTime)</td>
+                                                <td>@GameDataBLL.GetDownCountForBaijiale(3, b, m.CreateTime)</td>
+                                                <td>@GameDataBLL.GetLoginCountForBaijiale(1, b, 1, m.CreateTime)</td>
+                                                <td>@GameDataBLL.GetLoginCountForBaijiale(1, b, 2, m.CreateTime)</td>
+                                                <td>@GameDataBLL.GetLoginCountForBaijiale(2, b, 1, m.CreateTime)</td>
+                                                <td>@GameDataBLL.GetLoginCountForBaijiale(2, b, 2, m.CreateTime)</td>
+                                                <td>@m.CreateTime</td>
+                                            </tr>
+                                            i++;
+                                        }
                                     }
+
                                 </tbody>
                             </table>
                         </div>

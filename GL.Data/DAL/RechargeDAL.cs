@@ -52,7 +52,7 @@ namespace GL.Data.DAL
             using (var cn = new MySqlConnection(sqlconnectionString))
             {
                 cn.Open();
-                int i = cn.Execute(@"replace into QQZoneRecharge(Num,BillNo,OpenID,PayItem,UserID,Money,Chip,ChipType,IsFirst,CreateTime,PF,VersionInfo,ActualMoney,ProductNO) values (@Num,@BillNo,@OpenID,@PayItem,@UserID,@Money,@Chip,@ChipType,@IsFirst,@CreateTime,@PF,'" + model.VersionInfo+ "',@ActualMoney,@ProductNO);", model);
+                int i = cn.Execute(@"replace into QQZoneRecharge(Num,BillNo,OpenID,PayItem,UserID,Money,Chip,ChipType,IsFirst,CreateTime,PF,VersionInfo,ActualMoney,ProductNO,AgentID) values (@Num,@BillNo,@OpenID,@PayItem,@UserID,@Money,@Chip,@ChipType,@IsFirst,@CreateTime,@PF,'" + model.VersionInfo+ "',@ActualMoney,@ProductNO,@AgentID);", model);
                 cn.Close();
                 return i;
             }

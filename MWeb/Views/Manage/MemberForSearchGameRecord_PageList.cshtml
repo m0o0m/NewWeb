@@ -212,6 +212,13 @@
                                                         DateTime eTime = new DateTime(eT.Year, eT.Month, eT.Day, 0, 0, 0);
                                                         <a  target="_blank" href="/GameData/GameLog?Gametype=5&SearchExt=&Data=@m.RoundID&StartDate=@sTime&ExpirationDate=@eTime">@m.RoundID</a>
                                                     }
+                                                    else if (operType == 232 || operType == 228 || operType == 227)//  澳门扑克
+                                                    {
+                                                        DateTime eT = m.CreateTime.AddDays(1);
+                                                        DateTime sTime = new DateTime(m.CreateTime.Year, m.CreateTime.Month, m.CreateTime.Day, 0, 0, 0);
+                                                        DateTime eTime = new DateTime(eT.Year, eT.Month, eT.Day, 0, 0, 0);
+                                                        <a target="_blank" href="/GameData/GameLog?Gametype=9&SearchExt=&Data=@m.RoundID&StartDate=@sTime&ExpirationDate=@eTime">@m.RoundID</a>
+                                                    }
                                                     else
                                                     {
                                                         @m.RoundID  <label>---</label>  @operType
